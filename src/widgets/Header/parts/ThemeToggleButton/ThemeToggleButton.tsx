@@ -4,10 +4,15 @@ import type { ThemeToggleButtonProps } from './types';
 
 const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = (props) => {
   const { toggleColorMode } = useColorMode();
+
+  const handleToggleTheme = () => {
+    toggleColorMode();
+  };
+
   return (
     <IconButton
       aria-label="Переключить тему"
-      onClick={toggleColorMode}
+      onClick={handleToggleTheme}
       variant="ghost"
       bg={useColorModeValue('blue.50', 'whiteAlpha.200')}
       color={useColorModeValue('gray.700', 'blue.300')}

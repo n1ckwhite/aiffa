@@ -1,0 +1,533 @@
+#  Функции
+
+##  1. Что такое функция?
+Функция в JavaScript — это блок кода, который можно вызывать по имени. Функции могут принимать параметры, возвращать значения и позволяют сделать код структурированным и повторно используемым.
+
+####  Пример функции:
+```javascript
+function greet(name) {
+    return `Привет, ${name}!`;
+}
+console.log(greet('Никита')); // Вывод: Привет, Никита!
+```
+
+---
+
+##  2. Аргументы функции
+**Аргументы** — это значения, которые передаются функции при вызове. Функция может принимать любое количество аргументов, даже если они не указаны явно.
+
+####  Пример:
+```javascript
+function add(a, b) {
+    return a + b;
+}
+console.log(add(5, 10)); // Вывод: 15
+console.log(add(5));    // Вывод: NaN (так как b не определен)
+```
+
+---
+
+##  3. Как определить функцию в JavaScript?
+В JavaScript есть несколько способов определить функцию, включая **обычные функции** и **стрелочные функции**. Рассмотрим их подробно.
+
+###  Обычные функции
+Обычные функции определяются с помощью ключевого слова `function`.
+
+1. **Объявление функции (Function Declaration):**
+```javascript
+function myFunction(a, b) {
+    return a + b;
+}
+console.log(myFunction(5, 10)); // Вывод: 15
+```
+
+2. **Функциональное выражение (Function Expression):**
+```javascript
+const myFunction = function(a, b) {
+    return a + b;
+};
+console.log(myFunction(5, 10)); // Вывод: 15
+```
+
+3. **Именованная функция:**
+```javascript
+function myFunction() {
+    console.log("Привет моя функция!");
+}
+myFunction(); // Вывод: Привет моя функция!
+```
+
+###  Стрелочные функции
+Стрелочные функции (введены в ES6) — это краткий способ записи функций с использованием нотации `=>`.
+
+1. **Стрелочная функция:**
+```javascript
+const myFunction = (a, b) => {
+    return a + b;
+};
+console.log(myFunction(40, 2)); // Вывод: 42
+```
+
+2. **Если параметр один, можно опустить круглые скобки:**
+```javascript
+const square = x => x * x;
+console.log(square(5)); // Вывод: 25
+```
+
+3. **Если функция возвращает одно выражение, можно опустить фигурные скобки и `return`:**
+```javascript
+const add = (a, b) => a + b;
+console.log(add(5, 10)); // Вывод: 15
+```
+
+---
+
+##  4. Различия между обычными и стрелочными функциями
+
+### 1.  `this`
+- В **обычных функциях** значение `this` определяется в момент вызова функции.
+- В **стрелочных функциях** значение `this` определяется лексически, то есть берется из контекста, в котором функция была создана.
+
+####  Пример (обычная функция):
+```javascript
+const obj = {
+    value: 42,
+    regularFunction: function() {
+        console.log(this.value);
+    }
+};
+obj.regularFunction(); // Вывод: 42
+```
+
+####  Пример (стрелочная функция):
+```javascript
+const obj = {
+    value: 42,
+    arrowFunction: () => {
+        console.log(this.value);
+    }
+};
+obj.arrowFunction(); // Вывод: undefined (this берется из глобального контекста)
+```
+
+### 2.  Использование в качестве конструктора
+- **Обычные функции** могут использоваться как конструкторы с помощью оператора `new`.
+- **Стрелочные функции** не могут быть конструкторами. Вызов с `new` вызовет ошибку.
+
+###  3. Объект `arguments`
+- **Обычные функции** имеют доступ к объекту `arguments`, содержащему все переданные аргументы.
+- **Стрелочные функции** не имеют объекта `arguments`. Для доступа к аргументам можно использовать оператор REST (`...args`).
+
+####  Пример:
+```javascript
+function regularFunction() {
+    console.log(arguments);
+}
+regularFunction(1, 2, 3); // Вывод: [1, 2, 3]
+
+const arrowFunction = (...args) => {
+    console.log(args);
+};
+arrowFunction(1, 2, 3); // Вывод: [1, 2, 3]
+```
+
+---
+
+##  5. Контекст `this` в функциях
+
+###  Обычные функции
+В обычных функциях значение `this` определяется в момент вызова.
+
+1.  **Метод объекта:**
+```javascript
+const obj = {
+    value: 42,
+    method: function() {
+        console.log(this.value);
+    }
+};
+obj.method(); // Вывод: 42
+```
+
+2.  **Простой вызов функции:**
+```javascript
+function regularFunction() {
+    console.log(this);
+}
+regularFunction(); // Вывод: глобальный объект (в строгом режиме — undefined)
+```
+
+3.  **Явное указание контекста:**
+```javascript
+function showValue() {
+    console.log(this.value);
+}
+const obj = { value: 100 };
+showValue.call(obj); // Вывод: 100
+```
+
+###  Стрелочные функции
+В стрелочных функциях значение `this` определяется в момент создания функции и остается неизменным.
+
+####  Лексическое связывание `this`:
+```javascript
+const obj = {
+    value: 42,
+    arrowFunction: () => {
+        console.log(this.value);
+    }
+};
+obj.arrowFunction(); // Вывод: undefined (this взят из глобального контекста)
+```
+
+####  Использование в методах:
+```javascript
+const obj = {
+    value: 42,
+    method: function() {
+        setTimeout(() => {
+            console.log(this.value); // this указывает на obj
+        }, 1000);
+    }
+};
+obj.method(); // Вывод: 42 (через 1 секунду)
+```
+
+---
+
+##  Итог
+
+- **Обычные функции**: Контекст `this` определяется в момент вызова. Подходят для большинства сценариев.
+- **Стрелочные функции**: Контекст `this` определяется лексически (в момент создания). Удобны для работы с колбэками или обработчиками событий.
+
+ Выбирайте тип функции в зависимости от конкретной задачи и необходимого поведения `this`.
+
+---
+
+##  ЗАДАЧИ
+Задачи для практики по теме `Функции`
+
+---
+
+###  Задача 1: Напишите функцию приветствия
+Создайте обычную функцию `greetUser`, которая:
+- Принимает имя пользователя.
+- Возвращает строку в формате: `Привет, [Имя]!`
+
+#### Пример:
+```javascript
+console.log(greetUser("Никита")); // Привет, Никита!
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function greetUser(name) {
+    return `Привет, ${name}!`;
+}
+console.log(greetUser("Никита")); // Привет, Никита!
+```
+
+</details>
+
+---
+
+###  Задача 2: Использование аргументов
+Создайте функцию `sum`, которая:
+- Принимает неограниченное количество чисел.
+- Возвращает их сумму.
+
+####  Пример:
+```javascript
+console.log(sum(1, 2, 3, 4)); // 10
+console.log(sum(5));          // 5
+console.log(sum());           // 0
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+console.log(sum(1, 2, 3, 4)); // 10
+console.log(sum(5));          // 5
+console.log(sum());           // 0
+```
+
+</details>
+
+---
+
+###  Задача 3: Сравнение обычной и стрелочной функции
+Исправьте ошибку в следующем коде так, чтобы метод `arrowFunction` корректно выводил значение `this.value`.
+
+```javascript
+const obj = {
+    value: 42,
+    arrowFunction: () => {
+        console.log(this.value);
+    }
+};
+obj.arrowFunction(); // undefined
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const obj = {
+    value: 42,
+    arrowFunction: function() {
+        console.log(this.value);
+    }
+};
+obj.arrowFunction(); // 42
+```
+
+</details>
+
+---
+
+###  Задача 4: Использование `arguments`
+Напишите обычную функцию `multiply`, которая:
+- Принимает любое количество чисел.
+- Возвращает их произведение.
+
+####  Пример:
+```javascript
+console.log(multiply(2, 3, 4)); // 24
+console.log(multiply(5));       // 5
+console.log(multiply());        // 1
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function multiply() {
+    if (arguments.length === 0) return 1;
+    let result = 1;
+    for (let i = 0; i < arguments.length; i++) {
+        result *= arguments[i];
+    }
+    return result;
+}
+console.log(multiply(2, 3, 4)); // 24
+console.log(multiply(5));       // 5
+console.log(multiply());        // 1
+```
+
+</details>
+
+---
+
+###  Задача 5: Работа со стрелочной функцией
+Создайте стрелочную функцию `square`, которая принимает число и возвращает его квадрат.
+
+####  Пример:
+```javascript
+console.log(square(5)); // 25
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const square = (x) => x * x;
+console.log(square(5)); // 25
+```
+
+</details>
+
+---
+
+###  Задача 6: Метод объекта и контекст `this`
+Создайте объект `calculator` с методами:
+- `add(a, b)`: возвращает сумму `a` и `b`.
+- `subtract(a, b)`: возвращает разность `a` и `b`.
+- `multiply(a, b)`: возвращает произведение `a` и `b`.
+- `divide(a, b)`: возвращает результат деления `a` на `b` (если `b` не равен 0).
+
+####  Пример:
+```javascript
+console.log(calculator.add(10, 5));      // 15
+console.log(calculator.subtract(10, 5)); // 5
+console.log(calculator.multiply(10, 5)); // 50
+console.log(calculator.divide(10, 5));   // 2
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const calculator = {
+    add(a, b) {
+        return a + b;
+    },
+    subtract(a, b) {
+        return a - b;
+    },
+    multiply(a, b) {
+        return a * b;
+    },
+    divide(a, b) {
+        return b !== 0 ? a / b : 'Error: Division by zero';
+    }
+};
+console.log(calculator.add(10, 5));      // 15
+console.log(calculator.subtract(10, 5)); // 5
+console.log(calculator.multiply(10, 5)); // 50
+console.log(calculator.divide(10, 5));   // 2
+```
+
+</details>
+
+---
+
+###  Задача 7: Контекст `this` в методах
+ Что выведет следующий код? Объясните результат.
+
+```javascript
+const obj = {
+    value: 42,
+    regularMethod: function() {
+        console.log(this.value);
+    },
+    arrowMethod: () => {
+        console.log(this.value);
+    }
+};
+
+obj.regularMethod(); // ?
+obj.arrowMethod();   // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// regularMethod вызывается как метод объекта, поэтому this ссылается на obj.
+obj.regularMethod(); // 42
+
+// arrowMethod не имеет собственного this, и this определяется в момент создания (глобальный объект или undefined в строгом режиме).
+obj.arrowMethod();   // undefined
+```
+
+</details>
+
+---
+
+###  Задача 8: Использование `call` и `bind`
+Напишите функцию `sayHello`, которая:
+- Выводит `Hello, [Имя]!`, где `[Имя]` — это значение свойства `name` из переданного объекта.
+
+####  Пример:
+```javascript
+function sayHello() {
+    console.log(`Hello, ${this.name}!`);
+}
+
+const user = { name: "Алекс" };
+
+sayHello.call(user); // Hello, Алекс!
+
+const boundSayHello = sayHello.bind(user);
+boundSayHello();     // Hello, Алекс!
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function sayHello() {
+    console.log(`Hello, ${this.name}!`);
+}
+
+const user = { name: "Алекс" };
+
+sayHello.call(user); // Hello, Алекс!
+
+const boundSayHello = sayHello.bind(user);
+boundSayHello();     // Hello, Алекс!
+```
+
+</details>
+
+---
+
+###  Задача 9: Функция-конструктор
+Создайте функцию-конструктор `Person`, которая:
+- Принимает имя и возраст.
+- Создает объект с этими свойствами.
+- Добавляет метод `introduce`, который выводит: `Привет, меня зовут [Имя], мне [Возраст] лет.`
+
+####  Пример:
+```javascript
+const person = new Person("Никита", 25);
+person.introduce(); // Привет, меня зовут Никита, мне 25 лет.
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.introduce = function() {
+        console.log(`Привет, меня зовут ${this.name}, мне ${this.age} лет.`);
+    };
+}
+
+const person = new Person("Никита", 25);
+person.introduce(); // Привет, меня зовут Никита, мне 25 лет.
+```
+
+</details>
+
+---
+
+###  Задача 10: Асинхронность и стрелочные функции
+Создайте объект `timer`, который:
+- Содержит метод `start(seconds)`.
+- Через `seconds` секунд выводит: `Таймер завершен!`.
+- Использует стрелочную функцию, чтобы сохранить правильный контекст `this`.
+
+####  Пример:
+```javascript
+const timer = {
+    start(seconds) {
+        setTimeout(() => {
+            console.log("Таймер завершен!");
+        }, seconds * 1000);
+    }
+};
+
+timer.start(3); // Через 3 секунды: Таймер завершен!
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const timer = {
+    start(seconds) {
+        setTimeout(() => {
+            console.log("Таймер завершен!");
+        }, seconds * 1000);
+    }
+};
+
+timer.start(3); // Через 3 секунды: Таймер завершен!
+```
+
+</details>
+
+---
+
+ Эти задачи помогут вам потренироваться в написании функций, работе с контекстом `this`, объектом `arguments`, стрелочными функциями и конструкторами.
+
+---

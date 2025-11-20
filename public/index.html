@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" data-next-head />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Universe"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Universe" />
+    <meta name="keywords" content="frontend, javascript, react, nodejs, обучение" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="preconnect" href="/" />
+    <link href="/static/css/main.css" as="style" />
+    <title>Universe</title>
+    <script>
+      (function() {
+        const theme = localStorage.getItem('chakra-ui-color-mode') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
+          document.documentElement.style.colorScheme = 'dark';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>

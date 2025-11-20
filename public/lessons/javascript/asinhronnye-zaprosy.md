@@ -1,0 +1,509 @@
+#  Асинхронные запросы
+
+JavaScript предоставляет несколько методов для выполнения асинхронных запросов, позволяющих взаимодействовать с сервером или выполнять длительные операции. Каждый метод имеет свои особенности и применимость.
+
+---
+
+##  1. **XMLHttpRequest**
+
+ Это старый, но всё ещё используемый способ выполнения запросов. Он предоставляет методы для отправки HTTP-запросов.
+
+#### Пример:
+```javascript
+const xhr = new XMLHttpRequest();
+
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts');
+xhr.onload = () => {
+    if (xhr.status === 200) {
+        console.log(JSON.parse(xhr.responseText));
+    } else {
+        console.error(`Ошибка: ${xhr.status}`);
+    }
+};
+xhr.onerror = () => {
+    console.error('Ошибка сети');
+};
+xhr.send();
+```
+
+### Особенности:
+- Полезен для работы в старых браузерах.
+- Код становится громоздким при сложной логике.
+
+---
+
+##  2. **Fetch API**
+
+Современный способ выполнения HTTP-запросов, основанный на промисах. Fetch API удобнее и проще, чем `XMLHttpRequest`.
+
+#### Пример:
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.error("Произошла ошибка:", error);
+    });
+```
+
+### Особенности:
+- Основан на промисах, что делает код более читаемым.
+- Не поддерживает автоматическую обработку таймаутов.
+
+---
+
+##  3. **Async/Await**
+
+`Async/Await` является синтаксическим сахаром над промисами, что делает асинхронный код линейным и читаемым.
+
+#### Пример:
+```javascript
+async function fetchData() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Произошла ошибка:", error);
+    }
+}
+
+fetchData();
+```
+
+### Особенности:
+- Упрощает обработку ошибок с помощью `try/catch`.
+- Делает код более последовательным.
+
+---
+
+##  4. **Axios**
+
+`Axios` — это популярная библиотека для работы с HTTP-запросами, основанная на промисах. Она предлагает более мощные возможности и удобный синтаксис.
+
+#### Пример:
+```javascript
+const axios = require('axios');
+
+axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => {
+        console.log(response.data);
+    })
+    .catch((error) => {
+        console.error("Произошла ошибка:", error);
+    });
+```
+
+### Особенности:
+- Поддерживает автоматические таймауты и обработку ошибок.
+- Удобен для работы с JSON и другими форматами.
+- Подходит для сложных приложений.
+
+---
+
+##  5. **WebSockets**
+
+Используется для установления постоянного соединения с сервером для передачи данных в реальном времени.
+
+#### Пример:
+```javascript
+const socket = new WebSocket('wss://example.com/socket');
+
+socket.onopen = () => {
+    console.log('Соединение установлено');
+    socket.send('Привет, сервер!');
+};
+
+socket.onmessage = (event) => {
+    console.log('Получено сообщение:', event.data);
+};
+
+socket.onerror = (error) => {
+    console.error('Ошибка:', error);
+};
+```
+
+### Особенности:
+- Подходит для чатов, игр и приложений с передачей данных в реальном времени.
+- Требует обработки событий открытия, сообщений и ошибок.
+
+---
+
+##  6. **EventSource (Server-Sent Events)**
+
+ Используется для однонаправленной передачи данных от сервера к клиенту в реальном времени.
+
+#### Пример:
+```javascript
+const eventSource = new EventSource('https://example.com/events');
+
+eventSource.onmessage = (event) => {
+    console.log('Новое сообщение:', event.data);
+};
+
+eventSource.onerror = () => {
+    console.error('Ошибка соединения');
+};
+```
+
+### Особенности:
+- Идеален для уведомлений и потоковых данных.
+- Поддерживает только однонаправленное соединение от сервера к клиенту.
+
+---
+
+##  Итог
+
+Методы для выполнения асинхронных запросов в JavaScript включают как стандартные (`XMLHttpRequest`, Fetch API), так и более современные подходы (`Axios`, WebSockets). Выбор зависит от задач и требований проекта:
+
+- Для простых запросов — `Fetch API`.
+- Для сложных приложений — `Axios`.
+- Для работы в реальном времени — `WebSockets` или `EventSource`.
+- Для поддержки старых браузеров — `XMLHttpRequest`.
+
+Освоение этих методов позволяет эффективно взаимодействовать с серверами и создавать современные приложения.
+
+---
+
+##  ЗАДАЧИ
+Задачи по теме `Асинхронные запросы`
+
+---
+
+###  Задача 1: Использование `XMLHttpRequest`
+ Что выведет следующий код?
+
+```javascript
+const xhr = new XMLHttpRequest();
+
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts');
+xhr.onload = () => {
+    if (xhr.status === 200) {
+        console.log(JSON.parse(xhr.responseText));
+    } else {
+        console.error(`Ошибка: ${xhr.status}`);
+    }
+};
+xhr.onerror = () => {
+    console.error('Ошибка сети');
+};
+xhr.send();
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+Если запрос успешен, в консоль выведется массив постов.
+Если статус ответа не 200, будет выведено сообщение с ошибкой.
+Если возникла ошибка сети, будет сообщение "Ошибка сети".
+```
+
+</details>
+
+---
+
+###  Задача 2: Перевод с `XMLHttpRequest` на `fetch`
+Перепишите пример с использованием `XMLHttpRequest` с предыдущей задачи, используя `fetch` вместо `XMLHttpRequest`. Убедитесь, что ошибка также обрабатывается.
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.error("Произошла ошибка:", error);
+    });
+```
+
+</details>
+
+---
+
+###  Задача 3: Преимущество `async/await`
+ Что выведет следующий код и почему?
+
+```javascript
+async function fetchData() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Произошла ошибка:", error);
+    }
+}
+
+fetchData();
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+В консоль выведется массив постов, если запрос успешен.
+Если возникнет ошибка (например, неверный статус ответа), будет выведено "Произошла ошибка: [описание ошибки]".
+```
+
+</details>
+
+---
+
+###  Задача 4: Работа с `Axios`
+ Что выведет следующий код?
+
+```javascript
+const axios = require('axios');
+
+axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => {
+        console.log(response.data);
+    })
+    .catch((error) => {
+        console.error("Произошла ошибка:", error);
+    });
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+В консоль выведется массив постов.
+Если возникнет ошибка (например, нет соединения), выведется сообщение "Произошла ошибка: [описание ошибки]".
+```
+
+</details>
+
+---
+
+###  Задача 5: WebSocket соединение
+ Что будет выведено на консоль при подключении к серверу через `WebSocket`? Предположим, сервер правильно настроен и отвечает на отправленные сообщения.
+
+```javascript
+const socket = new WebSocket('wss://example.com/socket');
+
+socket.onopen = () => {
+    console.log('Соединение установлено');
+    socket.send('Привет, сервер!');
+};
+
+socket.onmessage = (event) => {
+    console.log('Получено сообщение:', event.data);
+};
+
+socket.onerror = (error) => {
+    console.error('Ошибка:', error);
+};
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+Если соединение успешно:
+"Соединение установлено"
+Сервер может отправить сообщение в ответ, например: "Получено сообщение: Привет от сервера!".
+В случае ошибки WebSocket: "Ошибка: [описание ошибки]".
+```
+
+</details>
+
+---
+
+###  Задача 6: Использование `EventSource`
+ Как будет выглядеть работа следующего кода, если сервер отправляет данные через SSE (Server-Sent Events)?
+
+```javascript
+const eventSource = new EventSource('https://example.com/events');
+
+eventSource.onmessage = (event) => {
+    console.log('Новое сообщение:', event.data);
+};
+
+eventSource.onerror = () => {
+    console.error('Ошибка соединения');
+};
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+Вывод будет зависеть от отправленных сервером данных через SSE.
+"Новое сообщение:
+```
+
+```javascript
+{ message: 'Привет!' }
+```
+
+```
+В случае обрыва соединения: "Ошибка соединения".
+```
+
+</details>
+
+---
+
+###  Задача 7: Сравнение `Fetch` и `Axios`
+Преобразуйте следующий код с использованием `fetch` в код с использованием библиотеки `Axios`. Обратите внимание на обработку ошибок.
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.error("Произошла ошибка:", error);
+    });
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const axios = require('axios');
+
+axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => {
+        console.log(response.data);
+    })
+    .catch((error) => {
+        console.error("Произошла ошибка:", error);
+    });
+```
+
+</details>
+
+---
+
+###  Задача 8: Обработка ошибок в `fetch` и `Axios`
+ Как можно обработать ошибку в случае отказа от подключения (например, нет интернета) при использовании `fetch` и `Axios`? Напишите примеры.
+
+<details>
+<summary> Решение</summary>
+
+**Для fetch:**
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
+    .catch((error) => {
+        console.error("Произошла ошибка:", error.message);
+    });
+```
+
+**Для Axios:**
+
+```javascript
+const axios = require('axios');
+
+axios.get('https://jsonplaceholder.typicode.com/posts')
+    .catch((error) => {
+        if (error.response) {
+            console.error("Ошибка ответа сервера:", error.response.status);
+        } else if (error.request) {
+            console.error("Сервер не ответил. Проверьте соединение.");
+        } else {
+            console.error("Произошла ошибка:", error.message);
+        }
+    });
+```
+
+</details>
+
+---
+
+###  Задача 9: Обработка ошибок в `XMLHttpRequest`
+ Как можно обработать ошибку, если сервер вернул статус код 500 при использовании `XMLHttpRequest`?
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const xhr = new XMLHttpRequest();
+
+xhr.open('GET', 'https://example.com/api');
+xhr.onload = () => {
+    if (xhr.status === 500) {
+        console.error('Ошибка сервера: 500');
+    } else if (xhr.status === 200) {
+        console.log('Ответ сервера:', xhr.responseText);
+    }
+};
+xhr.onerror = () => {
+    console.error('Ошибка соединения');
+};
+xhr.send();
+```
+
+</details>
+
+---
+
+###  Задача 10: Разница между `XMLHttpRequest`, `fetch` и `Axios`
+ Опишите основные различия между `XMLHttpRequest`, `fetch` и `Axios`. Когда целесообразно использовать каждый из этих методов?
+
+<details>
+<summary> Ответ</summary>
+
+1. **`XMLHttpRequest`:**
+    - Более сложный синтаксис.
+    - Подходит для поддержки устаревших браузеров.
+    - Позволяет отслеживать состояние запроса.
+
+2. **`fetch`:**
+    - Современный стандарт.
+    - Возвращает `Promise`.
+    - Не обрабатывает ошибки сети по умолчанию (их нужно ловить вручную).
+
+3. **`Axios`:**
+    - Удобный синтаксис и функции (автоматическая обработка JSON, тайм-ауты).
+    - Хорошая обработка ошибок.
+    - Поддержка более сложных функций (например, токенов).
+
+**Когда использовать?**
+- `XMLHttpRequest` — для совместимости со старыми системами.
+- `fetch` — для простых запросов в современных браузерах.
+- `Axios` — для работы с большими проектами.
+
+</details>
+
+---
+
+ Эти задачи помогут вам закрепить знание различных методов выполнения асинхронных запросов в JavaScript и углубить понимание их особенностей.
+
+---

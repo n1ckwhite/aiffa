@@ -1,0 +1,509 @@
+#  Замыкания
+
+**Замыкание** — это функция, которая "запоминает" свое лексическое окружение, даже когда выполняется вне него. Это позволяет функции иметь доступ к переменным из внешней функции после завершения ее выполнения.
+
+---
+
+##  Что такое замыкание?
+
+**Замыкание** в JavaScript — это функция, которая имеет доступ к:
+1. Собственной области видимости.
+2. Области видимости родительской функции.
+3. Глобальной области видимости.
+
+Даже после завершения выполнения родительской функции, замыкание "удерживает" доступ к этим переменным. Это делает замыкания удобным инструментом для сохранения состояния и работы с приватными переменными.
+
+---
+
+##  Как работает замыкание?
+
+Когда функция создается в JavaScript, она "запоминает" область видимости, в которой была объявлена. Эта область включает все переменные, определенные в функции и в ее родительских функциях. Замыкание продолжает "жить", даже если внешняя функция завершила выполнение.
+
+####  Пример:
+```javascript
+function outerFunction() {
+    let outerVariable = 'Я снаружи!';
+    function innerFunction() {
+        console.log(outerVariable); // Доступ к переменной outerVariable
+    }
+    return innerFunction;
+}
+const closure = outerFunction(); // outerFunction возвращает innerFunction
+closure(); // 'Я снаружи!'
+```
+
+1. В `outerFunction` определяется переменная `outerVariable`.
+2. Внутри нее объявлена функция `innerFunction`, которая использует `outerVariable`.
+3. После вызова `outerFunction` она возвращает `innerFunction`.
+4. Замыкание сохраняет доступ к `outerVariable`, даже после завершения `outerFunction`.
+
+---
+
+##  Применение замыканий
+
+### 1.  **Создание приватных переменных**
+Замыкания позволяют скрывать переменные от внешнего кода, предоставляя интерфейс для управления ими.
+
+```javascript
+function createCounter() {
+    let count = 0; // Приватная переменная
+    return {
+        increment: function() {
+            count++;
+            return count;
+        },
+        decrement: function() {
+            count--;
+            return count;
+        },
+        getCount: function() {
+            return count;
+        }
+    };
+}
+const counter = createCounter();
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2
+console.log(counter.getCount());  // 2
+console.log(counter.decrement()); // 1
+```
+
+---
+
+### 2.  **Функции обратного вызова (Callback)**
+Замыкания позволяют передавать состояние в функцию обратного вызова.
+
+```javascript
+function makeCounter() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+const counter1 = makeCounter();
+const counter2 = makeCounter();
+
+console.log(counter1()); // 1
+console.log(counter1()); // 2
+console.log(counter2()); // 1
+```
+
+---
+
+###  3. **Модули**
+Замыкания используются для создания модулей, которые инкапсулируют внутренние данные.
+
+```javascript
+const myModule = (function() {
+    let privateVar = 'Я приватный!';
+    return {
+        getPrivateVar: function() {
+            return privateVar;
+        }
+    };
+})();
+console.log(myModule.getPrivateVar()); // 'Я приватный!'
+// console.log(myModule.privateVar); // undefined
+```
+
+---
+
+##  Итог
+
+**Замыкания** в JavaScript — это мощный инструмент для управления состоянием и инкапсуляции данных. Они позволяют создавать приватные переменные, сохранять данные между вызовами функций и использовать сложные конструкции, такие как модули или функции обратного вызова. Замыкания — это фундаментальная концепция, которая помогает решать широкий спектр задач в веб-разработке.
+
+
+---
+
+##  ЗАДАЧИ
+
+Ниже представлены задачи для закрепления знаний о `замыканиях`. Вы можете попытаться решить их самостоятельно. Если затрудняетесь, нажмите "Показать пример" под задачей, чтобы увидеть решение и объяснение.
+
+---
+
+###  Задача 1: Базовое замыкание
+
+** Что выведет следующий код? Объясните почему.**
+
+```javascript
+function outer() {
+    let count = 0;
+    return function() {
+        count++;
+        console.log(count);
+    };
+}
+
+const increment = outer();
+increment(); // ?
+increment(); // ?
+increment(); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// Функция increment() сохраняет доступ к переменной count через замыкание.
+// Каждый вызов increment() увеличивает значение count, сохраняемое в памяти.
+
+increment(); // 1
+increment(); // 2
+increment(); // 3
+```
+
+</details>
+
+---
+
+###  Задача 2: Несколько замыканий
+
+** Что выведется в консоль?**
+
+```javascript
+function createFunction() {
+    let value = 'Замыкание!';
+    return function() {
+        console.log(value);
+    };
+}
+
+const func1 = createFunction();
+const func2 = createFunction();
+
+func1(); // ?
+func2(); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// Каждый вызов createFunction() создает новую область замыкания с переменной value.
+// Поэтому func1 и func2 имеют независимые переменные value.
+
+func1(); // 'Замыкание!'
+func2(); // 'Замыкание!'
+```
+
+</details>
+
+---
+
+###  Задача 3: Приватные переменные
+
+Реализуйте функцию `createBankAccount`, которая создает объект банковского счета с приватным балансом.
+
+```javascript
+function createBankAccount(initialBalance) {
+    let balance = initialBalance;
+
+    return {
+        deposit(amount) {
+            balance += amount;
+        },
+        withdraw(amount) {
+            if (amount > balance) {
+                console.log('Недостаточно средств');
+            } else {
+                balance -= amount;
+            }
+        },
+        getBalance() {
+            return balance;
+        }
+    };
+}
+
+const myAccount = createBankAccount(100);
+console.log(myAccount.getBalance()); // 100
+myAccount.deposit(50);
+console.log(myAccount.getBalance()); // 150
+myAccount.withdraw(70);
+console.log(myAccount.getBalance()); // 80
+myAccount.withdraw(200); // Недостаточно средств
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function createBankAccount(initialBalance) {
+    let balance = initialBalance;
+
+    return {
+        deposit(amount) {
+            balance += amount;
+        },
+        withdraw(amount) {
+            if (amount > balance) {
+                console.log('Недостаточно средств');
+            } else {
+                balance -= amount;
+            }
+        },
+        getBalance() {
+            return balance;
+        }
+    };
+}
+
+const myAccount = createBankAccount(100);
+console.log(myAccount.getBalance()); // 100
+myAccount.deposit(50);
+console.log(myAccount.getBalance()); // 150
+myAccount.withdraw(70);
+console.log(myAccount.getBalance()); // 80
+myAccount.withdraw(200); // Недостаточно средств
+```
+
+</details>
+
+---
+
+###  Задача 4: Потеря контекста
+
+ Что произойдет в следующем коде? Как исправить его, чтобы код работал правильно?
+
+```javascript
+function makeTimer() {
+    let count = 0;
+    return function() {
+        count++;
+        console.log(`Таймер: ${count} секунд прошло`);
+    };
+}
+
+const timer = makeTimer();
+setTimeout(timer, 1000); // ?
+setTimeout(timer, 2000); // ?
+setTimeout(timer, 3000); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// Таймер работает корректно, так как функция timer сохраняет доступ к count через замыкание.
+// Значение count увеличивается при каждом вызове.
+
+setTimeout(timer, 1000); // Таймер: 1 секунд прошло
+setTimeout(timer, 2000); // Таймер: 2 секунд прошло
+setTimeout(timer, 3000); // Таймер: 3 секунд прошло
+```
+
+</details>
+
+---
+
+###  Задача 5: Замыкания и циклы
+
+ Объясните, почему следующий код работает не так, как ожидается, и исправьте его.
+
+```javascript
+function createButtons() {
+    for (var i = 0; i < 3; i++) {
+        setTimeout(function() {
+            console.log(`Нажата кнопка ${i}`);
+        }, i * 1000);
+    }
+}
+
+createButtons();
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+// Проблема: переменная i является глобальной из-за var. Все функции setTimeout используют одно и то же значение i.
+// Решение: заменить var на let для создания отдельной области замыкания для каждой итерации.
+
+function createButtons() {
+    for (let i = 0; i < 3; i++) {
+        setTimeout(function() {
+            console.log(`Нажата кнопка ${i}`);
+        }, i * 1000);
+    }
+}
+
+createButtons();
+// Вывод:
+// Нажата кнопка 0
+// Нажата кнопка 1
+// Нажата кнопка 2
+```
+
+</details>
+
+---
+
+###  Задача 6: Сохранение состояния
+
+Реализуйте функцию, которая будет возвращать функцию для вычисления суммы всех переданных ей чисел.
+
+```javascript
+function createSum() {
+    let total = 0;
+    return function(number) {
+        total += number;
+        return total;
+    };
+}
+
+const sum = createSum();
+console.log(sum(5));  // 5
+console.log(sum(3));  // 8
+console.log(sum(10)); // 18
+```
+<details>
+<summary> Решение</summary>
+
+```javascript
+function createSum() {
+    let total = 0;
+    return function(number) {
+        if (typeof number !== 'number') {
+            throw new Error('Аргумент должен быть числом');
+        }
+        total += number;
+        return total;
+    };
+}
+
+const sum = createSum();
+console.log(sum(5));  // 5
+console.log(sum(3));  // 8
+console.log(sum(10)); // 18
+console.log(sum('a')); // Ошибка: Аргумент должен быть числом
+```
+
+</details>
+
+---
+
+###  Задача 7: Модули и замыкания
+
+Реализуйте модуль для управления списком задач.
+
+```javascript
+const taskManager = (function() {
+    const tasks = [];
+
+    return {
+        addTask(task) {
+            tasks.push(task);
+        },
+        removeTask(task) {
+            const index = tasks.indexOf(task);
+            if (index !== -1) {
+                tasks.splice(index, 1);
+            }
+        },
+        getTasks() {
+            return tasks.slice();
+        }
+    };
+})();
+
+taskManager.addTask('Выучить замыкания');
+taskManager.addTask('Решить задачи');
+console.log(taskManager.getTasks()); // ['Выучить замыкания', 'Решить задачи']
+taskManager.removeTask('Выучить замыкания');
+console.log(taskManager.getTasks()); // ['Решить задачи']
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const taskManager = (function() {
+    const tasks = new Set(); // Используем Set для хранения уникальных задач
+
+    return {
+        addTask(task) {
+            if (typeof task !== 'string' || !task.trim()) {
+                console.log('Ошибка: задача должна быть непустой строкой');
+                return;
+            }
+            tasks.add(task);
+        },
+        removeTask(task) {
+            if (!tasks.has(task)) {
+                console.log(`Задача "${task}" не найдена`);
+                return;
+            }
+            tasks.delete(task);
+        },
+        getTasks() {
+            return [...tasks]; // Возвращаем копию массива задач
+        }
+    };
+})();
+
+taskManager.addTask('Выучить замыкания');
+taskManager.addTask('Решить задачи');
+taskManager.addTask('Выучить замыкания'); // Не добавится (уже есть)
+console.log(taskManager.getTasks()); // ['Выучить замыкания', 'Решить задачи']
+
+taskManager.removeTask('Выучить замыкания');
+console.log(taskManager.getTasks()); // ['Решить задачи']
+
+taskManager.removeTask('Прочитать книгу'); // Выведет "Задача 'Прочитать книгу' не найдена"
+
+```
+
+</details>
+
+---
+
+###  Задача 8: Глобальная переменная против замыкания
+
+ Определите, что выведет следующий код.
+
+```javascript
+let count = 0;
+
+function incrementGlobal() {
+    count++;
+    console.log(count);
+}
+
+function incrementClosure() {
+    let count = 0;
+    return function() {
+        count++;
+        console.log(count);
+    };
+}
+
+incrementGlobal(); // ?
+incrementGlobal(); // ?
+
+const incrementLocal = incrementClosure();
+incrementLocal(); // ?
+incrementLocal(); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// incrementGlobal() использует глобальную переменную count.
+incrementGlobal(); // 1
+incrementGlobal(); // 2
+
+// incrementLocal() использует переменную count, созданную в замыкании.
+// Каждый вызов incrementClosure() создает новую область замыкания.
+incrementLocal(); // 1
+incrementLocal(); // 2
+```
+
+</details>
+
+---
+
+ Эти задачи помогут лучше понять, как работают замыкания, их применение и как они могут быть использованы для решения практических задач.
+
+---

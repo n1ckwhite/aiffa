@@ -1,0 +1,521 @@
+#  Различия между `var`, `let` и `const`
+
+JavaScript предоставляет три способа объявления переменных: `var`, `let` и `const`. Каждый из них отличается поведением, областью видимости, возможностью переопределения и поднятием (hoisting). Давайте разберем их детально с примерами.
+
+---
+
+##  1. **`var`**
+
+### Особенности:
+- **Область видимости**: Переменные, объявленные с помощью `var`, имеют **функциональную область видимости**. Если переменная объявлена внутри функции, она доступна только в этой функции. Если переменная объявлена вне функции, она становится глобальной.
+- **Подъем (hoisting)**: Переменные `var` поднимаются в верхнюю часть своей области видимости и инициализируются значением `undefined`. Это позволяет обращаться к переменной до её фактического объявления.
+- **Переопределение**: Переменные `var` можно переопределять в пределах одной области видимости.
+
+####  Пример:
+
+```javascript
+function exampleVar() {
+    console.log(a); // undefined (переменная поднимается, но значение не присвоено)
+    var a = 10;
+    console.log(a); // 10
+}
+exampleVar();
+
+// Глобальная область
+var b = 20;
+console.log(b); // 20
+```
+
+---
+
+##  2. **`let`**
+
+### Особенности:
+- **Область видимости**: Переменные, объявленные с помощью `let`, имеют **блочную область видимости**. Это значит, что переменная доступна только в пределах блока `{}`, в котором она объявлена.
+- **Подъем (hoisting)**: Переменные `let` поднимаются, но находятся в **"временной мертвой зоне" (Temporal Dead Zone)** до момента их инициализации. Попытка доступа к переменной до её объявления вызывает ошибку `ReferenceError`.
+- **Переопределение**: Переменные `let` можно переопределять, но нельзя объявлять повторно в одной области видимости.
+
+####  Пример:
+
+```javascript
+function exampleLet() {
+    // console.log(x); // ReferenceError: Cannot access 'x' before initialization
+    let x = 10;
+    console.log(x); // 10
+}
+
+if (true) {
+    let y = 20;
+    console.log(y); // 20
+}
+// console.log(y); // ReferenceError: y is not defined (блочная область)
+```
+
+---
+
+##  3. **`const`**
+
+### Особенности:
+- **Область видимости**: Как и `let`, переменные `const` имеют **блочную область видимости**.
+- **Подъем (hoisting)**: Переменные `const` поднимаются, но также находятся в **"временной мертвой зоне"**. Попытка использовать переменную до её объявления вызывает `ReferenceError`.
+- **Изменяемость**: Переменная `const` должна быть инициализирована сразу при объявлении. После этого её значение нельзя изменить (переназначить). Однако, если переменная ссылается на объект или массив, их содержимое можно изменять.
+
+####  Пример:
+
+```javascript
+const a = 30;
+// a = 40; // TypeError: Assignment to constant variable.
+
+const obj = { name: "Alice" };
+obj.age = 25; // Допустимо, так как меняется содержимое объекта
+console.log(obj); // { name: "Alice", age: 25 }
+
+// obj = { name: "Bob" }; // TypeError: Assignment to constant variable.
+```
+
+---
+
+##   Область видимости (Scope)
+
+### Область видимости определяет, где переменные могут быть доступны в коде:
+
+| Ключевое слово | Область видимости | Подъем | Изменяемость |
+|----------------|-------------------|--------|--------------|
+| `var`          | Функциональная    | Да     | Да           |
+| `let`          | Блочная           | Да     | Да           |
+| `const`        | Блочная           | Да     | Нет          |
+
+---
+
+####  Пример сравнения
+
+```javascript
+function scopeComparison() {
+    if (true) {
+        var a = 10; // Доступна везде в функции
+        let b = 20; // Доступна только внутри блока
+        const c = 30; // Доступна только внутри блока
+    }
+    console.log(a); // 10
+    // console.log(b); // ReferenceError: b is not defined
+    // console.log(c); // ReferenceError: c is not defined
+}
+scopeComparison();
+```
+
+---
+
+##  Поведение при попытке переопределения
+
+### Переопределение значений:
+
+#### Для `var`:
+```javascript
+var x = 10;
+x = 20; // Допустимо
+console.log(x); // 20
+```
+
+#### Для `let`:
+```javascript
+let y = 10;
+y = 20; // Допустимо
+console.log(y); // 20
+```
+
+#### Для `const`:
+```javascript
+const z = 10;
+// z = 20; // TypeError: Assignment to constant variable
+console.log(z); // 10
+```
+
+---
+
+##  Изменение объектов:
+
+#### Для `const` объектов:
+```javascript
+const obj = { name: "Alice" };
+obj.name = "Bob"; // Допустимо, так как меняется содержимое объекта
+console.log(obj); // { name: "Bob" }
+
+// obj = { name: "Charlie" }; // TypeError: Assignment to constant variable
+```
+
+#### Заморозка объекта:
+Чтобы предотвратить изменения, используйте `Object.freeze()`:
+```javascript
+const frozenObj = Object.freeze({ name: "Alice" });
+frozenObj.name = "Bob"; // Игнорируется
+console.log(frozenObj); // { name: "Alice" }
+```
+
+---
+
+##  Ошибки с `let` и `const`
+
+#### Пример: "Временная мертвая зона"
+```javascript
+console.log(y); // ReferenceError: Cannot access 'y' before initialization
+let y = 5;
+```
+
+### Объяснение:
+1. **Подъем**: Переменная `y` поднимается, но она недоступна до момента инициализации.
+2. **Ошибка**: Попытка обратиться к переменной до её объявления вызывает `ReferenceError`.
+
+---
+
+##  Поведение внутри циклов
+
+```javascript
+for (let i = 0; i < 3; i++) {
+    console.log(i); // 0, 1, 2
+}
+// console.log(i); // ReferenceError: i is not defined
+```
+
+#### Для `const` в цикле:
+```javascript
+for (const j = 0; j < 3; j++) {
+    console.log(j); // Ошибка: Invalid left-hand side in assignment
+}
+```
+
+---
+
+##  Итог
+
+- **Используйте `var`** только в старом коде или если вам нужна функциональная область видимости.
+-  **Используйте `let`** для переменных, которые изменяются в пределах блока.
+- **Используйте `const`** для значений, которые не должны переназначаться, и объектов/массивов, где можно изменять только их содержимое.
+
+---
+
+##  ЗАДАЧИ
+Задачи для практики: `var`, `let`, `const`
+
+---
+
+###  **Задача 1: Поведение `var` внутри функций**
+ Что выведет следующий код? Объясните результат.
+
+```javascript
+function testVar() {
+    console.log(a); // ?
+    var a = 10;
+    console.log(a); // ?
+}
+testVar();
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+function testVar() {
+    var a; // Подъем (hoisting) переменной `a`
+    console.log(a); // undefined
+    a = 10; // Присвоение значения
+    console.log(a); // 10
+}
+testVar();
+```
+Переменные, объявленные с `var`, поднимаются, но без значения.
+</details>
+
+---
+
+###  **Задача 2: Подъем и "временная мертвая зона"**
+Исправьте ошибки в следующем коде:
+
+```javascript
+console.log(x); // ReferenceError
+let x = 5;
+
+console.log(y); // undefined
+var y = 10;
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+let x = 5; // Объявление переменной до использования
+console.log(x); // 5
+
+var y = 10; // Объявление и подъем `var`
+console.log(y); // 10
+```
+Переменные, объявленные с `let`, недоступны до их инициализации.
+</details>
+
+---
+
+###  **Задача 3: Область видимости переменных**
+ Что выведет следующий код? Объясните результат.
+
+```javascript
+function scopeTest() {
+    if (true) {
+        var a = 10;
+        let b = 20;
+        const c = 30;
+    }
+    console.log(a); // ?
+    console.log(b); // ?
+    console.log(c); // ?
+}
+scopeTest();
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+function scopeTest() {
+    if (true) {
+        var a = 10; // `var` доступен в функции
+        let b = 20; // `let` доступен только в блоке
+        const c = 30; // `const` доступен только в блоке
+    }
+    console.log(a); // 10
+    console.log(b); // ReferenceError
+    console.log(c); // ReferenceError
+}
+scopeTest();
+```
+`let` и `const` имеют блочную область видимости.
+</details>
+
+---
+
+###  **Задача 4: Модификация объектов и массивов**
+ Какие строки вызовут ошибку? Почему?
+
+```javascript
+const obj = { name: "Alice" };
+obj.age = 25; // ?
+obj.name = "Bob"; // ?
+obj = { name: "Charlie" }; // ?
+
+const arr = [1, 2, 3];
+arr.push(4); // ?
+arr = [5, 6, 7]; // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+const obj = { name: "Alice" };
+obj.age = 25; // Работает, объект можно изменять
+obj.name = "Bob"; // Работает, свойства можно изменять
+obj = { name: "Charlie" }; // Ошибка, нельзя переназначить `const`
+
+const arr = [1, 2, 3];
+arr.push(4); // Работает, массив можно изменять
+arr = [5, 6, 7]; // Ошибка, нельзя переназначить `const`
+```
+Ссылки на `const`-объекты нельзя менять, но их содержимое — можно.
+</details>
+
+---
+
+###  **Задача 5: Циклы и область видимости**
+
+#### С использованием `var`:
+```javascript
+for (var i = 0; i < 3; i++) {
+    setTimeout(() => {
+        console.log(i);
+    }, 1000);
+}
+```
+
+#### С использованием `let`:
+```javascript
+for (let i = 0; i < 3; i++) {
+    setTimeout(() => {
+        console.log(i);
+    }, 1000);
+}
+```
+
+<details>
+<summary> Вывод</summary>
+
+**`var` результат:**
+```
+3
+3
+3
+```
+Переменная `i` в цикле с `var` — глобальная, одна для всех итераций.
+
+**`let` результат:**
+```
+0
+1
+2
+```
+`let` создает отдельную копию переменной для каждой итерации.
+</details>
+
+---
+
+###  **Задача 6: Сравнение `let` и `const` в циклах**
+Почему следующий код вызывает ошибку? Исправьте его.
+
+```javascript
+for (const i = 0; i < 5; i++) {
+    console.log(i);
+}
+```
+
+<details>
+<summary> Решение</summary>
+
+**Ошибка:**
+`const` не позволяет изменять значение `i` в цикле.
+
+**Исправление:**
+```javascript
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+```
+</details>
+
+---
+
+###  **Задача 7: Использование `Object.freeze()`**
+ Что выведет следующий код? Почему?
+
+```javascript
+const obj = Object.freeze({ name: "Alice" });
+obj.name = "Bob";
+console.log(obj.name); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+Alice
+```
+`Object.freeze()` делает объект неизменяемым.
+</details>
+
+---
+
+###  **Задача 8: Подъем переменных**
+Расположите строки кода в правильном порядке, чтобы избежать ошибок.
+
+```javascript
+console.log(a);
+let a = 10;
+
+console.log(b);
+var b = 20;
+
+function test() {
+    console.log(c);
+    const c = 30;
+}
+test();
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+let a = 10;
+console.log(a);
+
+var b = 20;
+console.log(b);
+
+function test() {
+    const c = 30;
+    console.log(c);
+}
+test();
+```
+</details>
+
+---
+
+###  **Задача 9: Работа с функциями и областью видимости**
+Напишите функцию `createCounter`, которая:
+- Использует переменную `let` для хранения текущего значения счетчика.
+- Возвращает объект с методами `increment`, `decrement`, `getValue`.
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function createCounter() {
+    let count = 0;
+
+    return {
+        increment() {
+            count++;
+        },
+        decrement() {
+            count--;
+        },
+        getValue() {
+            return count;
+        }
+    };
+}
+
+const counter = createCounter();
+counter.increment();
+counter.increment();
+console.log(counter.getValue()); // 2
+counter.decrement();
+console.log(counter.getValue()); // 1
+```
+</details>
+
+---
+
+###  **Задача 10: Контекст и `this`**
+ Почему в следующем коде возникает ошибка? Как её исправить?
+
+```javascript
+const obj = {
+    value: 42,
+    getValue: () => {
+        console.log(this.value);
+    }
+};
+obj.getValue(); // undefined
+```
+
+<details>
+<summary> Решение</summary>
+
+**Ошибка:**
+Стрелочные функции не имеют своего `this`.
+
+**Исправление:**
+```javascript
+const obj = {
+    value: 42,
+    getValue() {
+        console.log(this.value);
+    }
+};
+obj.getValue(); // 42
+```
+</details>
+
+---
+
+ Эти задачи помогут закрепить понимание разницы между var, let и const, их особенностями, областью видимости, подъемом и поведением в различных контекстах.
+
+---

@@ -1,0 +1,512 @@
+# Обработка ошибок в асинхронном коде
+
+Асинхронный код в JavaScript может быть подвержен ошибкам, которые нужно грамотно обрабатывать, чтобы приложение оставалось устойчивым и предсказуемым. Ошибки можно обрабатывать с помощью механизма промисов (`Promise`) или синтаксиса `async/await`. Рассмотрим основные методы обработки ошибок и их особенности.
+
+---
+
+##  1. Обработка ошибок в промисах
+
+### Использование второго аргумента метода `.then()`
+
+Метод `.then()` принимает два аргумента:
+1. Функция, вызываемая при успешном выполнении промиса.
+2. Функция, вызываемая при отклонении промиса (ошибке).
+
+####  Пример:
+
+```javascript
+const fetchData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const success = Math.random() > 0.5;
+      success ? resolve("Данные успешно получены!") : reject("Ошибка получения данных.");
+    }, 1000);
+  });
+};
+
+fetchData().then(
+  result => console.log(result), // Обработка успеха
+  error => console.error(error)  // Обработка ошибки
+);
+```
+
+Этот способ полезен, если вам нужно явно разделить обработку успеха и ошибок в одном вызове метода `.then()`. Однако этот подход менее удобен в цепочках промисов.
+
+---
+
+### Использование метода `.catch()`
+
+Метод `.catch()` используется для обработки ошибок, возникших на любом этапе выполнения цепочки промисов. Он особенно удобен в случае сложных цепочек.
+
+####  Пример:
+
+```javascript
+fetchData()
+    .then(result => {
+        console.log(result); // Обработка успеха
+        return anotherAsyncOperation(); // Следующий промис
+    })
+    .catch(error => {
+        console.error("Произошла ошибка:", error); // Обработка любой ошибки
+    });
+```
+
+**Преимущества `catch`:**
+- Перехватывает ошибки на любом этапе цепочки.
+- Делает код более читаемым за счёт единого обработчика ошибок.
+
+---
+
+##  2. Обработка ошибок в `async/await`
+
+`async/await` предоставляет более синхронный способ написания асинхронного кода, что делает его понятным и лаконичным. Для обработки ошибок в таком подходе используется блок `try/catch`.
+
+####  Пример:
+
+```javascript
+const fetchData = async () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() > 0.5;
+            success ? resolve("Данные успешно получены!") : reject("Ошибка получения данных.");
+        }, 1000);
+    });
+};
+
+const getData = async () => {
+    try {
+        const data = await fetchData(); // Ожидание выполнения промиса
+        console.log(data); // Обработка успешного результата
+    } catch (error) {
+        console.error("Ошибка:", error); // Обработка ошибки
+    }
+};
+
+getData();
+```
+
+### Обработка нескольких ошибок
+
+При выполнении нескольких асинхронных операций можно обрабатывать ошибки для каждой из них отдельно или использовать общий `try/catch`.
+
+####  Пример:
+
+```javascript
+const processAllData = async () => {
+    try {
+        const result1 = await fetchData();
+        console.log(result1);
+
+        const result2 = await anotherAsyncOperation(); // Здесь может произойти ошибка
+        console.log(result2);
+    } catch (error) {
+        console.error("Ошибка во время выполнения операции:", error);
+    }
+};
+
+processAllData();
+```
+
+---
+
+##  3. Обработка ошибок в нескольких промисах
+
+Когда нужно обработать множество асинхронных операций, есть несколько подходов:
+
+### Метод `Promise.all`
+
+`Promise.all` запускает все промисы параллельно, но если хотя бы один промис отклоняется, весь вызов завершится ошибкой.
+####  Пример:
+
+```javascript
+const fetchAllData = async () => {
+    try {
+        const results = await Promise.all([fetchData(), anotherAsyncOperation()]);
+        console.log("Все данные:", results);
+    } catch (error) {
+        console.error("Ошибка в одном из промисов:", error);
+    }
+};
+
+fetchAllData();
+```
+
+### Метод `Promise.allSettled`
+
+Для обработки успеха и ошибок каждого промиса отдельно используется `Promise.allSettled`. Этот метод возвращает массив результатов с информацией о статусе (`fulfilled` или `rejected`) для каждого промиса.
+
+####  Пример:
+
+```javascript
+const fetchAllData = async () => {
+    const results = await Promise.allSettled([fetchData(), anotherAsyncOperation()]);
+
+    results.forEach((result, index) => {
+        if (result.status === "fulfilled") {
+            console.log(`Операция ${index + 1} завершилась успешно:`, result.value);
+        } else {
+            console.error(`Операция ${index + 1} завершилась ошибкой:`, result.reason);
+        }
+    });
+};
+
+fetchAllData();
+```
+
+---
+
+##  4. Советы по обработке ошибок
+
+1. **Используйте `try/catch` для изоляции проблемных участков кода:**  
+   Не обрабатывайте всю логику в одном общем блоке, чтобы избежать потери контекста ошибки.
+
+2. **Используйте `Promise.allSettled` для критически важных операций:**  
+   Если нужно выполнить все операции и собрать результаты, даже если некоторые из них завершатся ошибкой.
+
+3. **Не забывайте о глобальной обработке ошибок:**  
+   Используйте обработчики `window.onerror`, `window.unhandledrejection` или аналогичные механизмы для глобального мониторинга.
+
+---
+
+##  Итог
+
+Обработка ошибок — это ключевая часть работы с асинхронным кодом в JavaScript. Выбор метода зависит от контекста и сложности вашего приложения:
+- Для простых операций используйте `.catch()`.
+- В `async/await` используйте `try/catch`, чтобы поддерживать читаемость кода.
+- Для параллельных операций используйте `Promise.allSettled` или обработку ошибок в `Promise.all`.
+
+Грамотная обработка ошибок сделает ваш код устойчивым и обеспечит хорошее пользовательское впечатление.
+
+---
+
+##  ЗАДАЧИ
+Задачи по теме `Обработка ошибок в асинхронном коде`
+
+---
+
+###  Задача 1: Обработка ошибок с использованием `.then()` и `.catch()`
+
+ У вас есть следующий код. Что выведет консоль при его выполнении?
+
+```javascript
+const fetchData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const success = Math.random() > 0.5;
+      success ? resolve("Данные успешно получены!") : reject("Ошибка получения данных.");
+    }, 1000);
+  });
+};
+
+fetchData()
+  .then(result => console.log(result))  // Обработка успеха
+  .catch(error => console.error(error)); // Обработка ошибки
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+- "Данные успешно получены!" (если случайное значение больше 0.5)
+
+- "Ошибка получения данных." (если случайное значение меньше или равно 0.5)
+```
+
+</details>
+
+---
+
+###  Задача 2: Перевод с `.then()` на `async/await`
+
+Перепишите следующий код, использующий промисы с `.then()`, с использованием `async/await`.
+
+```javascript
+fetchData()
+    .then(result => {
+        console.log(result); // Обработка успеха
+        return anotherAsyncOperation(); // Следующий промис
+    })
+    .catch(error => {
+        console.error("Произошла ошибка:", error); // Обработка любой ошибки
+    });
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const processAsyncOperations = async () => {
+    try {
+        const result = await fetchData();
+        console.log(result);
+
+        const nextResult = await anotherAsyncOperation();
+        console.log(nextResult);
+    } catch (error) {
+        console.error("Произошла ошибка:", error);
+    }
+};
+
+processAsyncOperations();
+```
+
+</details>
+
+---
+
+###  Задача 3: Обработка нескольких ошибок с `async/await`
+
+ Что будет выведено на консоль, если одна из операций не удалась? Напишите код для обработки ошибок для каждой операции.
+
+```javascript
+const fetchData = async () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() > 0.5;
+            success ? resolve("Данные успешно получены!") : reject("Ошибка получения данных.");
+        }, 1000);
+    });
+};
+
+const anotherAsyncOperation = async () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() > 0.5;
+            success ? resolve("Еще одни данные!") : reject("Ошибка второй операции.");
+        }, 1000);
+    });
+};
+
+const processAllData = async () => {
+    try {
+        const result1 = await fetchData();
+        console.log(result1);
+
+        const result2 = await anotherAsyncOperation();
+        console.log(result2);
+    } catch (error) {
+        console.error("Ошибка во время выполнения операции:", error);
+    }
+};
+
+processAllData();
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+Если первая или вторая операция завершится ошибкой, консоль выведет:
+
+"Ошибка во время выполнения операции: [описание ошибки]"
+
+Если обе операции успешны, выведется их результат в порядке выполнения.
+```
+
+</details>
+
+---
+
+###  Задача 4: Пример с `Promise.all` и `catch`
+
+ Какой результат будет, если один из промисов в `Promise.all` завершится ошибкой? Напишите код с несколькими промисами, обрабатывающими ошибку.
+
+```javascript
+const fetchAllData = async () => {
+    try {
+        const results = await Promise.all([fetchData(), anotherAsyncOperation()]);
+        console.log("Все данные:", results);
+    } catch (error) {
+        console.error("Ошибка в одном из промисов:", error);
+    }
+};
+
+fetchAllData();
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+Если хотя бы один из промисов завершится с ошибкой, Promise.all сразу отклонится:
+
+"Ошибка в одном из промисов: [описание ошибки]"
+```
+
+</details>
+
+---
+
+###  Задача 5: Использование `Promise.allSettled`
+
+ Предположим, что первый запрос успешен, а второй завершился с ошибкой. Что выведет этот код?
+
+```javascript
+const fetchAllData = async () => {
+    const results = await Promise.allSettled([fetchData(), anotherAsyncOperation()]);
+
+    results.forEach((result, index) => {
+        if (result.status === "fulfilled") {
+            console.log(`Операция ${index + 1} завершилась успешно:`, result.value);
+        } else {
+            console.error(`Операция ${index + 1} завершилась ошибкой:`, result.reason);
+        }
+    });
+};
+
+fetchAllData();
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+Для успешного запроса:
+"Операция 1 завершилась успешно: Данные успешно получены!"
+
+Для завершившегося с ошибкой:
+"Операция 2 завершилась ошибкой: Ошибка второй операции."
+```
+
+</details>
+
+---
+
+###  Задача 6: Добавление глобальной обработки ошибок
+
+Добавьте глобальный обработчик ошибок для необработанных промисов и ошибок в окне браузера с использованием `window.onerror` и `window.unhandledrejection`.
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+window.onerror = (message, source, lineno, colno, error) => {
+    console.error("Глобальная ошибка:", message, "в", source, `(${lineno}:${colno})`, error);
+};
+
+window.onunhandledrejection = (event) => {
+    console.error("Необработанный промис:", event.reason);
+};
+
+// Пример ошибки:
+new Promise((resolve, reject) => reject("Пример необработанной ошибки"));
+```
+
+</details>
+
+---
+
+###  Задача 7: Использование `try/catch` в `async/await`
+
+ Что выведет следующий код и почему?
+
+```javascript
+const fetchData = async () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() > 0.5;
+            success ? resolve("Данные успешно получены!") : reject("Ошибка получения данных.");
+        }, 1000);
+    });
+};
+
+const getData = async () => {
+    try {
+        const data = await fetchData(); // Ожидание выполнения промиса
+        console.log(data); // Обработка успешного результата
+    } catch (error) {
+        console.error("Ошибка:", error); // Обработка ошибки
+    }
+};
+
+getData();
+```
+
+<details>
+<summary> Решение</summary>
+
+```
+Если случайное значение больше 0.5:
+"Данные успешно получены!"
+
+Если меньше или равно 0.5:
+"Ошибка: Ошибка получения данных."
+```
+
+</details>
+
+---
+
+###  Задача 8: Обработка ошибок в нескольких промисах с `catch`
+
+Перепишите код с `Promise.all` так, чтобы ошибки каждого промиса обрабатывались отдельно, используя `catch` для каждого промиса.
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const handleAllPromises = async () => {
+    const promise1 = fetchData().catch((error) => `Ошибка: ${error}`);
+    const promise2 = anotherAsyncOperation().catch((error) => `Ошибка: ${error}`);
+
+    const results = await Promise.all([promise1, promise2]);
+    console.log(results);
+};
+
+handleAllPromises();
+```
+
+</details>
+
+---
+
+###  Задача 9: Обработка ошибки в цепочке промисов
+
+ Что будет выведено, если один из промисов в цепочке завершится с ошибкой, а вы используете `.catch()` в конце?
+
+```javascript
+fetchData()
+    .then(result => {
+        console.log(result);
+        return anotherAsyncOperation();
+    })
+    .then(result => {
+        console.log(result);
+    })
+    .catch(error => {
+        console.error("Произошла ошибка:", error);
+    });
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+Если ошибка произойдет в любом из промисов, консоль выведет:
+"Произошла ошибка: [описание ошибки]"
+
+Если ошибок нет, оба результата будут выведены в порядке выполнения.
+```
+
+</details>
+
+---
+
+###  Задача 10: Преимущества использования `try/catch` в `async/await`
+
+Объясните, почему использование блока `try/catch` в `async/await` предпочтительнее для обработки ошибок в асинхронных операциях по сравнению с использованием `.catch()` с промисами.
+
+<details>
+<summary> Ответ</summary>
+
+- **Простота чтения и линейность кода**: Легче читать и понимать логику, особенно при последовательных операциях.
+- **Гибкость обработки**: Можно обрабатывать ошибки локально или пропускать их вверх по стеку.
+- **Универсальность**: Можно комбинировать с другими синхронными операциями.
+
+</details>
+
+---
+
+ Эти задачи помогут вам лучше понять и закрепить концепцию обработки ошибок в асинхронном коде JavaScript.
+
+---

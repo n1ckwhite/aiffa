@@ -1,0 +1,191 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #4a5568;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #718096;
+}
+
+header {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+@media (max-width: 767px) {
+  header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+html, body {
+  height: 100%;
+  min-height: 100%;
+  min-height: -webkit-fill-available;
+  overscroll-behavior-y: none;
+  background-color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #0f172a;
+  }
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+input:focus {
+  transition: all 0.2s ease-in-out;
+}
+
+.search-input {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.search-input:focus {
+  transform: scale(1.02);
+}
+
+.search-icon {
+  animation: none;
+}
+
+.clear-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.clear-button:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.mobile-menu {
+  animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.course-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.course-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-title {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-stats {
+  animation: fadeInScale 0.8s ease-out 0.2s both;
+}
+
+.course-card:nth-child(1) { animation: fadeInUp 0.6s ease-out 0.1s both; }
+.course-card:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.2s both; }
+.course-card:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.3s both; }
+.course-card:nth-child(4) { animation: fadeInUp 0.6s ease-out 0.4s both; }
+.course-card:nth-child(5) { animation: fadeInUp 0.6s ease-out 0.5s both; }
+.course-card:nth-child(6) { animation: fadeInUp 0.6s ease-out 0.6s both; }
+.course-card:nth-child(7) { animation: fadeInUp 0.6s ease-out 0.7s both; }
+.course-card:nth-child(8) { animation: fadeInUp 0.6s ease-out 0.8s both; }
+
+.hero-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.hero-gradient-dark {
+  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+}
+
+* {
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

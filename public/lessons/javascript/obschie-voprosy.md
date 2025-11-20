@@ -1,0 +1,593 @@
+#  Функции, Область Видимости, Замыкания, `this` и Асинхронность
+
+##  Как использовать функции, область видимости и замыкания для создания модулей?
+
+Модули в JavaScript — это способ структурирования кода, скрытия деталей реализации и избежания конфликтов имен. Функции, область видимости и замыкания играют ключевую роль в их создании.
+
+###  1. Использование функций для создания модулей
+
+С помощью функций можно инкапсулировать данные и методы, оставляя только нужные части доступными для внешнего использования.
+
+```javascript
+const MyModule = (function() {
+    // Приватные переменные
+    let privateVar = 'Приватное значение';
+
+    // Приватные функции
+    function privateFunction() {
+        console.log(privateVar);
+    }
+
+    // Публичные методы
+    return {
+        publicMethod: function() {
+            privateFunction();
+        }
+    };
+})();
+
+// Использование модуля
+MyModule.publicMethod(); // Приватное значение
+// MyModule.privateFunction(); // Ошибка: privateFunction недоступна
+```
+
+###  2. Область видимости
+
+Каждый модуль существует в своей области видимости. Переменные, объявленные внутри, не будут видны извне.
+
+```javascript
+const ModuleA = (function() {
+    let counter = 0;
+    return {
+        increment: function() {
+            counter++;
+            console.log(counter);
+        }
+    };
+})();
+
+const ModuleB = (function() {
+    let counter = 100;
+    return {
+        decrement: function() {
+            counter--;
+            console.log(counter);
+        }
+    };
+})();
+
+ModuleA.increment(); // 1
+ModuleB.decrement(); // 99
+```
+
+###  3. Замыкания
+
+Замыкания позволяют функциям "помнить" переменные из своей области видимости даже после завершения выполнения.
+
+```javascript
+const Counter = (function() {
+    let count = 0;
+    return {
+        increment: function() {
+            return ++count;
+        },
+        decrement: function() {
+            return --count;
+        },
+        getCount: function() {
+            return count;
+        }
+    };
+})();
+
+console.log(Counter.increment()); // 1
+console.log(Counter.getCount());  // 1
+console.log(Counter.decrement()); // 0
+```
+
+---
+
+##  Как работает ключевое слово `this`?
+
+`this` в JavaScript динамически определяет контекст выполнения функции. Его значение зависит от того, **как** функция вызвана.
+
+###  Поведение `this` в разных контекстах
+
+1. **Глобальный контекст**  
+   В глобальной области `this` ссылается на глобальный объект (`window` в браузерах).
+   ```javascript
+   console.log(this === window); // true
+   ```
+
+2. **В функциях**
+    - В обычных функциях `this` также указывает на глобальный объект (в строгом режиме — `undefined`).
+      ```javascript
+      'use strict';
+      function showThis() {
+          console.log(this); // undefined
+      }
+      showThis();
+      ```
+    - В методах объектов `this` ссылается на сам объект.
+      ```javascript
+      const obj = {
+          name: 'Alice',
+          greet: function() {
+              console.log(`Hello, ${this.name}`);
+          }
+      };
+      obj.greet(); // Hello, Alice
+      ```
+
+3. **В стрелочных функциях**  
+   Стрелочные функции захватывают значение `this` из внешнего контекста и не создают свой собственный.
+   ```javascript
+   const obj = {
+       name: 'Bob',
+       greet: function() {
+           const arrowFunc = () => {
+               console.log(`Hi, ${this.name}`);
+           };
+           arrowFunc();
+       }
+   };
+   obj.greet(); // Hi, Bob
+   ```
+
+4. **В конструкторах**  
+   В конструкторах `this` указывает на создаваемый экземпляр объекта.
+   ```javascript
+   function Person(name) {
+       this.name = name;
+   }
+   const person = new Person('Charlie');
+   console.log(person.name); // Charlie
+   ```
+
+###  Изменение контекста `this`
+
+Контекст `this` можно изменить с помощью `call`, `apply` или `bind`.
+
+```javascript
+function greet() {
+    console.log(`Hello, ${this.name}`);
+}
+const user = { name: 'David' };
+
+greet.call(user); // Hello, David
+greet.apply(user); // Hello, David
+const boundGreet = greet.bind(user);
+boundGreet(); // Hello, David
+```
+
+---
+
+##  Асинхронность в JavaScript
+
+Асинхронность позволяет выполнять длительные операции без блокировки основного потока. Однако она требует понимания событийного цикла, области видимости и порядка выполнения.
+
+###  1. Событийный цикл (Event Loop)
+
+JavaScript использует **однопоточный** событийный цикл. Асинхронные задачи (таймеры, HTTP-запросы) отправляются в очередь, а основной поток продолжает выполнение. После завершения текущего кода задачи из очереди обрабатываются.
+
+```javascript
+console.log('Start');
+setTimeout(() => console.log('Async'), 1000);
+console.log('End');
+
+// Вывод:
+// Start
+// End
+// Async
+```
+
+###  2. Замыкания в асинхронном коде
+
+Замыкания сохраняют доступ к переменным из внешнего контекста даже в асинхронных задачах.
+
+```javascript
+function delayedMessage(msg) {
+    setTimeout(() => console.log(msg), 1000);
+}
+delayedMessage('Hello, World!'); // Вывод: Hello, World!
+```
+
+###  3. Promise и async/await
+
+`Promise` позволяет работать с асинхронным кодом более удобно.  
+С помощью `async/await` можно писать асинхронный код так, будто он синхронный.
+
+```javascript
+function fetchData() {
+    return new Promise(resolve => {
+        setTimeout(() => resolve('Data loaded'), 1000);
+    });
+}
+
+// С использованием Promise
+fetchData().then(data => console.log(data)); // Data loaded
+
+// С использованием async/await
+async function loadData() {
+    const data = await fetchData();
+    console.log(data); // Data loaded
+}
+loadData();
+```
+
+---
+
+##  Итог
+
+**JavaScript** предоставляет мощные механизмы для работы с функциями, областью видимости, замыканиями, `this` и асинхронным кодом. Эти концепции помогают писать чистый, модульный и поддерживаемый код.
+
+Ключевые моменты:
+- Используйте замыкания и функции для инкапсуляции и создания модулей.
+- Понимайте поведение `this` в разных контекстах.
+- Работайте с асинхронным кодом через `Promise` и `async/await`.
+
+---
+
+##  ЗАДАЧИ
+Вот набор задач для закрепления материала:
+
+---
+
+###  Задача 1: Создание модуля с приватными переменными
+Реализуйте модуль `Calculator`, который:
+- Имеет приватную переменную `result`.
+- Обеспечивает методы:
+   - `add(x)`: добавляет `x` к результату.
+   - `subtract(x)`: вычитает `x` из результата.
+   - `getResult()`: возвращает текущее значение результата.
+
+```javascript
+const Calculator = (function() {
+    // Реализуйте модуль здесь
+})();
+
+Calculator.add(10);
+Calculator.subtract(5);
+console.log(Calculator.getResult()); // 5
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const Calculator = (function() {
+    let result = 0;
+
+    return {
+        add(x) {
+            result += x;
+        },
+        subtract(x) {
+            result -= x;
+        },
+        getResult() {
+            return result;
+        }
+    };
+})();
+
+Calculator.add(10);
+Calculator.subtract(5);
+console.log(Calculator.getResult()); // 5
+```
+
+</details>
+
+---
+
+###  Задача 2: Понимание `this`
+ Что выведет следующий код? Объясните, почему.
+
+```javascript
+const obj = {
+    value: 42,
+    showValue: function() {
+        console.log(this.value);
+    }
+};
+
+const extracted = obj.showValue;
+extracted(); // ?
+obj.showValue(); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// Решение:
+// extracted() вызывается без контекста, поэтому this === undefined в строгом режиме (или глобальный объект в нестрогом).
+// obj.showValue() вызывается в контексте obj, поэтому this ссылается на obj.
+
+extracted(); // undefined (или ошибка в строгом режиме)
+obj.showValue(); // 42
+```
+
+</details>
+
+---
+
+###  Задача 3: `this` в стрелочных функциях
+ Что выведет следующий код? Почему?
+
+```javascript
+const obj = {
+    name: 'Alice',
+    greet: function() {
+        const arrowFunc = () => {
+            console.log(`Hello, ${this.name}`);
+        };
+        arrowFunc();
+    }
+};
+
+obj.greet(); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// Решение:
+// Стрелочная функция не имеет своего this и использует this из окружающего контекста (greet).
+
+obj.greet(); // 'Hello, Alice'
+```
+
+</details>
+
+---
+
+###  Задача 4: Изменение контекста
+Используйте `call`, `apply` и `bind`, чтобы вызвать функцию `greet` с объектом `user`.
+
+```javascript
+function greet() {
+    console.log(`Hello, ${this.name}`);
+}
+
+const user = { name: 'David' };
+
+// Реализуйте вызов функции greet с использованием call, apply и bind
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+greet.call(user); // 'Hello, David'
+greet.apply(user); // 'Hello, David'
+const boundGreet = greet.bind(user);
+boundGreet(); // 'Hello, David'
+```
+
+</details>
+
+---
+
+###  Задача 5: Замыкание для счетчика
+Реализуйте функцию `createCounter`, которая возвращает функцию-счетчик. Каждый вызов увеличивает значение на 1 и возвращает его.
+
+```javascript
+function createCounter() {
+    // Реализуйте функцию
+}
+
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function createCounter() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3
+```
+
+</details>
+
+---
+
+###  Задача 6: Асинхронность с замыканием
+ Что выведет следующий код? Объясните порядок вывода.
+
+```javascript
+for (var i = 0; i < 3; i++) {
+    setTimeout(function() {
+        console.log(i);
+    }, 1000);
+}
+
+for (let j = 0; j < 3; j++) {
+    setTimeout(function() {
+        console.log(j);
+    }, 1000);
+}
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// Решение:
+// При использовании var, одна общая переменная i. Все setTimeout видят одно и то же значение.
+// При использовании let, у каждой итерации своя копия переменной j.
+
+for (var i = 0; i < 3; i++) {
+    setTimeout(function() {
+        console.log(i);
+    }, 1000); // 3, 3, 3
+}
+
+for (let j = 0; j < 3; j++) {
+    setTimeout(function() {
+        console.log(j);
+    }, 1000); // 0, 1, 2
+}
+```
+
+</details>
+
+---
+
+###  Задача 7: Работа с Promise
+Используйте `Promise` для реализации функции `fetchData`, которая возвращает данные через 2 секунды.
+
+```javascript
+function fetchData() {
+    // Реализуйте функцию
+}
+
+fetchData().then(data => console.log(data)); // "Data loaded"
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function fetchData() {
+    return new Promise(resolve => {
+        setTimeout(() => resolve('Data loaded'), 2000);
+    });
+}
+
+fetchData().then(data => console.log(data)); // "Data loaded"
+```
+
+</details>
+
+---
+
+###  Задача 8: Async/await
+Перепишите следующий код с использованием `async/await`:
+
+```javascript
+function fetchData() {
+    return new Promise(resolve => {
+        setTimeout(() => resolve('Data loaded'), 2000);
+    });
+}
+
+fetchData().then(data => console.log(data));
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+async function fetchData() {
+    return new Promise(resolve => {
+        setTimeout(() => resolve('Data loaded'), 2000);
+    });
+}
+
+(async function() {
+    const data = await fetchData();
+    console.log(data); // "Data loaded"
+})();
+```
+
+</details>
+
+---
+
+###  Задача 9: Модуль для хранения данных
+Реализуйте модуль `Storage`, который предоставляет методы:
+- `setItem(key, value)`: сохраняет значение.
+- `getItem(key)`: возвращает значение по ключу.
+- `removeItem(key)`: удаляет ключ.
+
+```javascript
+const Storage = (function() {
+    // Реализуйте модуль
+})();
+
+Storage.setItem('name', 'John');
+console.log(Storage.getItem('name')); // 'John'
+Storage.removeItem('name');
+console.log(Storage.getItem('name')); // undefined
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const Storage = (function() {
+    const store = {};
+
+    return {
+        setItem(key, value) {
+            store[key] = value;
+        },
+        getItem(key) {
+            return store[key];
+        },
+        removeItem(key) {
+            delete store[key];
+        }
+    };
+})();
+
+Storage.setItem('name', 'John');
+console.log(Storage.getItem('name')); // 'John'
+Storage.removeItem('name');
+console.log(Storage.getItem('name')); // undefined
+```
+
+</details>
+
+---
+
+###  Задача 10: Асинхронная обработка данных
+Реализуйте функцию `processData`, которая принимает массив данных и обрабатывает каждый элемент через 1 секунду. Используйте `async/await`.
+
+```javascript
+async function processData(data) {
+    // Реализуйте функцию
+}
+
+processData([1, 2, 3]); 
+// Через 1 секунду: "Processing: 1"
+// Через 2 секунды: "Processing: 2"
+// Через 3 секунды: "Processing: 3"
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+async function processData(data) {
+    for (const item of data) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        console.log(`Processing: ${item}`);
+    }
+}
+
+processData([1, 2, 3]);
+```
+
+</details>
+
+---
+
+ Эти задачи помогут вам глубже разобраться в создании модулей, работе с `this`, замыканиях и асинхронности.
+
+---

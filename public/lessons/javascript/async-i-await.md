@@ -1,0 +1,497 @@
+#  Что такое `async/await` и как их использовать?
+
+`async/await` — это современный способ работы с асинхронным кодом в JavaScript. Он построен на основе `Promise` и делает код более линейным и читаемым. Благодаря `async/await`, разработчики могут писать асинхронные операции так, как будто они синхронные, избегая сложных цепочек промисов.
+
+---
+
+## Основные понятия
+
+1. **`async`**:  
+   - Ключевое слово, которое перед объявлением функции делает её асинхронной. Такая функция всегда возвращает `Promise`. Если внутри функции возвращается обычное значение, оно автоматически оборачивается в `Promise.resolve()`. Если выбрасывается ошибка, промис отклоняется.
+
+2. **`await`**:  
+   - Ключевое слово, которое заставляет код "ждать" выполнения промиса. Оно может использоваться только внутри `async` функций. После выполнения промиса `await` возвращает его результат или выбрасывает ошибку, если промис отклонён.
+
+---
+
+##  Как использовать `async/await`
+
+#### Пример базового использования
+```javascript
+// Асинхронная функция, которая возвращает данные с задержкой
+const fetchData = (data) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (data) {
+        resolve(`Данные: ${data}`);
+      } else {
+        reject("Ошибка: Нет данных");
+      }
+    }, 1000);
+  });
+};
+
+// Использование async/await
+async function processData() {
+  try {
+    const result1 = await fetchData("Пример данных");
+    console.log(result1); // Данные: Пример данных
+
+    const result2 = await fetchData(); // Это вызовет ошибку
+    console.log(result2);
+  } catch (error) {
+    console.error(error); // Обработка ошибки: Ошибка: Нет данных
+  }
+}
+
+processData();
+```
+
+### Особенность обработки ошибок
+
+Ошибки в `async/await` легко обрабатываются с помощью блока `try/catch`. Это делает код более чистым и понятным по сравнению с использованием `.catch()` в цепочках промисов.
+
+---
+
+##  Параллельное выполнение асинхронных операций
+
+Если вам нужно выполнять несколько асинхронных операций одновременно, вместо последовательного вызова `await`, лучше использовать методы вроде `Promise.all`. Это позволяет избежать лишних задержек.
+
+#### Пример с `Promise.all`
+
+```javascript
+const fetchData1 = () => new Promise(resolve => setTimeout(() => resolve("Данные 1"), 1000));
+const fetchData2 = () => new Promise(resolve => setTimeout(() => resolve("Данные 2"), 1500));
+const fetchData3 = () => new Promise(resolve => setTimeout(() => resolve("Данные 3"), 2000));
+
+async function fetchAllData() {
+  try {
+    const results = await Promise.all([fetchData1(), fetchData2(), fetchData3()]);
+    console.log(results); // ["Данные 1", "Данные 2", "Данные 3"]
+  } catch (error) {
+    console.error("Ошибка при получении данных:", error);
+  }
+}
+
+fetchAllData();
+```
+
+---
+
+##  Преимущества `async/await`
+
+1. **Линейность кода**: Асинхронные операции выглядят как синхронные, что упрощает чтение и понимание.
+2. **Простая обработка ошибок**: Блок `try/catch` делает обработку ошибок естественной и лаконичной.
+3. **Сокращение вложенности**: Нет необходимости в громоздких цепочках `.then()`, что снижает уровень вложенности кода.
+
+---
+
+##  Ограничения `async/await`
+
+1. **Зависимость от `Promise`**: В основе `async/await` лежат промисы, поэтому необходимо понимать их работу.
+2. **Не подходит для параллельного выполнения**: При последовательном вызове `await` код выполняется медленнее, чем при использовании `Promise.all`.
+3. **Использование только внутри `async` функций**: `await` нельзя использовать вне асинхронной функции.
+
+---
+
+##  Итог
+
+`async/await` — это мощный инструмент для работы с асинхронным кодом в JavaScript. Он делает код более понятным, улучшает обработку ошибок и позволяет избежать излишней вложенности. При правильном использовании, особенно в сочетании с методами вроде `Promise.all`, `async/await` существенно упрощает написание и сопровождение сложных асинхронных операций.
+
+---
+
+##  ЗАДАЧИ
+Задачи по теме "Что такое `async/await` и как их использовать?"
+
+###  Задача 1: Простое использование `async/await`
+
+ Что выведет следующий код?
+
+```javascript
+const fetchData = (data) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (data) {
+        resolve(`Данные: ${data}`);
+      } else {
+        reject("Ошибка: Нет данных");
+      }
+    }, 1000);
+  });
+};
+
+async function processData() {
+  try {
+    const result = await fetchData("Пример данных");
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+processData();
+```
+
+<details>
+  <summary> Вывод</summary>
+
+  ```
+  Данные: Пример данных
+  ```
+
+Потому что функция `fetchData` срабатывает корректно, так как передан аргумент "Пример данных", который позволяет успешно завершить промис и вывести результат в консоль.
+</details>
+
+---
+
+###  Задача 2: Обработка ошибок с `async/await`
+
+Предположите, что будет выведено на консоль при выполнении следующего кода:
+
+```javascript
+async function fetchData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => reject("Ошибка при получении данных"), 500);
+  });
+}
+
+async function fetchDataHandler() {
+  try {
+    const result = await fetchData();
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+fetchDataHandler();
+```
+
+<details>
+  <summary> Вывод</summary>
+
+  ```
+  Ошибка при получении данных
+  ```
+
+Потому что промис внутри `fetchData` отклоняется с ошибкой, которая затем ловится в блоке `catch`.
+</details>
+
+---
+
+###  Задача 3: Параллельное выполнение с `Promise.all`
+
+ Что выведет следующий код? Как бы вы изменили код для последовательного выполнения?
+
+```javascript
+const fetchData1 = () => new Promise(resolve => setTimeout(() => resolve("Данные 1"), 1000));
+const fetchData2 = () => new Promise(resolve => setTimeout(() => resolve("Данные 2"), 1500));
+const fetchData3 = () => new Promise(resolve => setTimeout(() => resolve("Данные 3"), 2000));
+
+async function fetchAllData() {
+  try {
+    const results = await Promise.all([fetchData1(), fetchData2(), fetchData3()]);
+    console.log(results);
+  } catch (error) {
+    console.error("Ошибка при получении данных:", error);
+  }
+}
+
+fetchAllData();
+```
+
+<details>
+  <summary> Вывод</summary>
+
+  ```
+  ["Данные 1", "Данные 2", "Данные 3"]
+  ```
+
+Промисы выполняются параллельно, и `Promise.all` ожидает их завершения, после чего выводит результаты.
+
+Чтобы промисы выполнить их последовательно, нужно изменить код, используя `await` для каждого промиса:
+
+  ```javascript
+  async function fetchAllData() {
+    try {
+      const result1 = await fetchData1();
+      const result2 = await fetchData2();
+      const result3 = await fetchData3();
+      console.log([result1, result2, result3]);
+    } catch (error) {
+      console.error("Ошибка при получении данных:", error);
+    }
+  }
+  ```
+
+В этом случае данные будут выводиться по порядку, начиная с первого промиса.
+</details>
+
+---
+
+###  Задача 4: Понимание блокировки с `await`
+
+ Как изменится вывод, если вы замените `Promise.all` на последовательные вызовы `await`?
+
+```javascript
+async function fetchData1() {
+  return new Promise(resolve => setTimeout(() => resolve("Данные 1"), 1000));
+}
+async function fetchData2() {
+  return new Promise(resolve => setTimeout(() => resolve("Данные 2"), 1500));
+}
+async function fetchData3() {
+  return new Promise(resolve => setTimeout(() => resolve("Данные 3"), 2000));
+}
+
+async function fetchAllData() {
+  try {
+    const result1 = await fetchData1();
+    const result2 = await fetchData2();
+    const result3 = await fetchData3();
+    console.log([result1, result2, result3]);
+  } catch (error) {
+    console.error("Ошибка при получении данных:", error);
+  }
+}
+
+fetchAllData();
+```
+
+<details>
+  <summary> Вывод</summary>
+
+  ```
+  ["Данные 1", "Данные 2", "Данные 3"]
+  ```
+
+Однако вызовы данных будут последовательными, то есть второй запрос будет выполнен только после того, как завершится первый, и третий — после второго.
+
+Таким образом, общий период ожидания будет составлять 1 секунда + 1.5 секунды + 2 секунды = 4.5 секунды.
+</details>
+
+---
+
+###  Задача 5: Ошибки при использовании `await` вне `async` функции
+
+ Что выведет следующий код и почему?
+
+```javascript
+const fetchData = async () => {
+  return new Promise(resolve => setTimeout(() => resolve("Данные получены"), 1000));
+};
+
+const data = await fetchData();
+console.log(data);
+```
+
+<details>
+  <summary> Вывод</summary>
+
+  ```
+  Uncaught SyntaxError: await is only valid in async functions
+  ```
+
+Потому что `await` можно использовать только внутри асинхронной функции. В данном случае код использует `await` в глобальном контексте, что приводит к ошибке синтаксиса.
+</details>
+
+---
+
+###  Задача 6: Асинхронная обработка нескольких ошибок
+
+ Что будет выведено на консоль?
+
+```javascript
+const fetchData = (data) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (data) {
+        resolve(`Данные: ${data}`);
+      } else {
+        reject("Ошибка: Нет данных");
+      }
+    }, 1000);
+  });
+};
+
+async function processData() {
+  try {
+    const result1 = await fetchData("Данные 1");
+    console.log(result1);
+    const result2 = await fetchData();
+    console.log(result2);
+  } catch (error) {
+    console.error("Ошибка обработки:", error);
+  }
+}
+
+processData();
+```
+
+<details>
+  <summary> Вывод</summary>
+
+  ```
+  Данные: Данные 1
+  Ошибка обработки: Ошибка: Нет данных
+  ```
+
+Сначала первый вызов `fetchData` успешен, но второй вызывает ошибку, которая перехватывается в блоке `catch`.
+</details>
+
+---
+
+###  Задача 7: Преимущества использования `async/await`
+
+ Какие преимущества вы видите в использовании `async/await` вместо цепочек промисов `.then()` и `.catch()`? Напишите пример, сравнив оба подхода.
+
+<details>
+  <summary> Ответ</summary>
+
+Преимущества `async/await`:
+1. Более чистый и понятный код.
+2. Простота обработки ошибок с помощью `try/catch`.
+3. Избежание "пирамида отчаяния" при использовании цепочек промисов.
+
+Пример с использованием цепочек `.then()`:
+
+  ```javascript
+  fetchData()
+    .then(result => {
+      console.log(result);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  ```
+
+Пример с использованием `async/await`:
+
+  ```javascript
+  async function processData() {
+    try {
+      const result = await fetchData();
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  processData();
+  ```
+
+В примере с `async/await` код выглядит более линейно и легче читается, особенно когда мы обрабатываем несколько асинхронных операций.
+</details>
+
+---
+
+###  Задача 8: Возвращение значения из `async` функции
+
+ Что будет выведено на консоль?
+
+```javascript
+async function fetchData() {
+  return "Данные получены";
+}
+
+async function processData() {
+  const result = await fetchData();
+  console.log(result);
+}
+
+processData();
+```
+
+<details>
+<summary> Вывод</summary>
+
+
+  ```
+  Данные получены
+  ```
+
+Так как `async` функция всегда возвращает промис, возвращаемое значение будет обернуто в промис и распаковано с помощью `await`.
+</details>
+
+---
+
+###  Задача 9: Структура `try/catch` в `async/await`
+
+ Что будет выведено на консоль?
+
+```javascript
+async function fetchData() {
+  throw new Error("Ошибка при получении данных");
+}
+
+async function processData() {
+  try {
+    const result = await fetchData();
+    console.log(result);
+  } catch (error) {
+    console.log("Обработка ошибки:", error.message);
+  }
+}
+
+processData();
+```
+<details>
+<summary> Вывод</summary>
+
+```
+Обработка ошибки: Ошибка при получении данных
+```
+
+Функция `processData()` вызывается.
+
+Внутри `processData()` вызывается `await fetchData()`.
+
+`fetchData()` немедленно выбрасывает ошибку:
+
+```javascript
+throw new Error("Ошибка при получении данных");
+```
+Поскольку `await` используется, ошибка передаётся в `catch`.
+
+В `catch` ошибка обрабатывается, и в результате:
+```
+Обработка ошибки: Ошибка при получении данных
+```
+</details>
+
+---
+
+###  Задача 10: Задержка и выполнение операций
+Предположите, что вы получите в выводе на консоль при следующем коде:
+
+```javascript
+async function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function execute() {
+  await delay(1000);
+  console.log("Прошло 1 секунда");
+  
+  await delay(2000);
+  console.log("Прошло 3 секунды");
+}
+
+execute();
+```
+
+<details>
+<summary> Вывод</summary>
+
+```
+Прошло 1 секунда
+Прошло 3 секунды
+```
+
+Задержки между выводами составляют 1 секунду и 2 секунды, соответственно. Это происходит потому, что функция `delay` вызывает `setTimeout`, который создает задержку, и после этого `await` ожидает завершения задержки перед выводом следующего сообщения.
+</details>
+
+---
+
+ Эти задачи помогут вам лучше понять и отработать использование `async/await` в JavaScript, а также научиться эффективно обрабатывать асинхронные операции и ошибки.
+
+---

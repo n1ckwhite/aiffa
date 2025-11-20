@@ -1,0 +1,53 @@
+# Cache static assets for 1 year
+/static/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache JS under /js (dev/prod chunk outputs)
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache CSS under /css (dev/prod outputs)
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/static/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache JavaScript chunks
+/*.chunk.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache main bundle
+/main.*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fallback for any other top-level JS files
+/*.js
+  Cache-Control: public, max-age=31536000
+
+# Main CSS bundle
+/main.*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache HTML for 1 hour
+/*.html
+  Cache-Control: public, max-age=3600
+
+# Cache images for 1 month
+/images/*
+  Cache-Control: public, max-age=2592000
+
+# Cache fonts for 1 year
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Security headers
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+# Removed explicit CSS preload: CRA injects CSS and Lighthouse warns when not used quickly

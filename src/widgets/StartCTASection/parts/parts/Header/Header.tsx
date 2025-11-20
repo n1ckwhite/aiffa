@@ -1,0 +1,24 @@
+import React from 'react';
+import { VStack, Text } from '@chakra-ui/react';
+import { useStartCTAColors } from '../../../colors/useStartCTAColors';
+import type { HeaderProps } from './types/Header.types';
+
+const Header: React.FC<HeaderProps> = () => {
+  const { titleColor, textColor } = useStartCTAColors();
+  return (
+    <VStack spacing={3} maxW="760px">
+      <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="bold" color={titleColor}>
+        Готовы начать изучение?
+      </Text>
+      <Text fontSize={{ base: 'md', md: 'lg' }} color={textColor} lineHeight="1.6">
+        Все материалы бесплатны и доступны без регистрации. Поддержите звёздой или донатом —
+        это ускорит запуск сервера, бэкенда, личных страниц пользователей и системы достижений и рейтингов,
+        а также позволит выпускать больше новых материалов.
+      </Text>
+    </VStack>
+  );
+};
+
+export default Header;
+
+

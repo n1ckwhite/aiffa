@@ -1,0 +1,551 @@
+#  Область видимости и лексическое окружение
+
+Область видимости и лексическое окружение — ключевые концепции в JavaScript, которые помогают управлять доступностью переменных, функций и объектов. Эти понятия играют важную роль в написании эффективного, безопасного и модульного кода.
+
+---
+
+##  1. Лексическое окружение
+
+**Лексическое окружение** — это структура, которая управляет доступом к переменным и функциям в определенном контексте выполнения. Когда создается функция, создается и ее лексическое окружение, которое включает:
+- **Переменные и функции**, объявленные внутри данной функции.
+- **Ссылку на родительское окружение**, которая позволяет обращаться к переменным из внешнего контекста.
+
+####  Пример:
+```javascript
+function outerFunction() {
+    let outerVar = 'Я из внешней функции';
+    
+    function innerFunction() {
+        console.log(outerVar); // Доступ к переменной из внешнего окружения
+    }
+    
+    return innerFunction;
+}
+
+const inner = outerFunction();
+inner(); // Вывод: "Я из внешней функции"
+```
+
+###  Как это работает:
+1. `outerFunction` создает своё лексическое окружение с переменной `outerVar`.
+2. `innerFunction` "запоминает" лексическое окружение `outerFunction`, сохраняя доступ к `outerVar`.
+3. Когда `inner()` вызывается, движок JavaScript ищет `outerVar` сначала в своем лексическом окружении, затем в родительском.
+
+---
+
+##  2. Область видимости
+
+**Область видимости (scope)** — это контекст, в котором доступны переменные. В JavaScript существует три основные области видимости:
+- **Глобальная область видимости**.
+- **Функциональная (локальная) область видимости**.
+- **Блочная область видимости** (введена в ES6).
+
+###  2.1 Глобальная область видимости
+Переменные, объявленные вне функций или блоков, находятся в глобальной области видимости и доступны из любой части программы.
+
+####  Пример:
+```javascript
+var globalVar = 'Я глобальная переменная';
+
+function showGlobalVar() {
+    console.log(globalVar); // Доступно
+}
+
+showGlobalVar(); // "Я глобальная переменная"
+console.log(globalVar); // "Я глобальная переменная"
+```
+
+###  2.2 Локальная (функциональная) область видимости
+Переменные, объявленные внутри функции, доступны только в пределах этой функции.
+
+####  Пример:
+```javascript
+function myFunction() {
+    var localVar = 'Я локальная переменная';
+    console.log(localVar); // Доступно
+}
+
+myFunction();
+console.log(localVar); // Ошибка: localVar не определена
+```
+
+###  2.3 Блочная область видимости
+С ключевыми словами `let` и `const` можно создавать переменные, доступные только внутри конкретного блока кода `{}`.
+
+####  Пример:
+```javascript
+if (true) {
+    let blockVar = 'Я переменная блока';
+    console.log(blockVar); // "Я переменная блока"
+}
+
+console.log(blockVar); // Ошибка: blockVar не определена
+```
+
+---
+
+##  3. Замыкания
+
+**Замыкание (closure)** — это функция, которая "запоминает" своё лексическое окружение, даже если внешняя функция уже завершила выполнение.
+
+####  Пример:
+```javascript
+function counter() {
+    let count = 0;
+
+    return function () {
+        count++;
+        console.log(count);
+    };
+}
+
+const increment = counter();
+increment(); // 1
+increment(); // 2
+```
+
+###  Как это работает:
+- Функция `counter` возвращает другую функцию, которая сохраняет доступ к переменной `count` из своего лексического окружения.
+- При каждом вызове `increment` переменная `count` увеличивается.
+
+---
+
+##  4. Различия между `var`, `let` и `const`
+
+###  4.1 `var`
+- **Функциональная область видимости**: Переменные, объявленные через `var`, доступны в пределах функции.
+- **Подъем (hoisting)**: Переменные поднимаются вверх своей области видимости, но их значение до объявления равно `undefined`.
+
+####  Пример:
+```javascript
+function example() {
+    console.log(a); // undefined
+    var a = 10;
+    console.log(a); // 10
+}
+
+example();
+```
+
+---
+
+###  4.2 `let`
+- **Блочная область видимости**: Доступ к переменной есть только внутри блока `{}`.
+- **Подъем**: Переменные поднимаются, но нельзя использовать до их фактического объявления (временная мертвая зона).
+
+####  Пример:
+```javascript
+if (true) {
+    let b = 20;
+    console.log(b); // 20
+}
+
+// console.log(b); // Ошибка: b не определена
+```
+
+---
+
+###  4.3 `const`
+- **Блочная область видимости**: Как и `let`, `const` ограничивается блоком `{}`.
+- **Неизменяемость**: Переменные `const` нельзя переназначить, но можно изменять свойства объектов или элементов массивов.
+
+####  Пример:
+```javascript
+const numbers = [1, 2, 3];
+numbers.push(4);
+console.log(numbers); // [1, 2, 3, 4]
+
+// numbers = [5, 6]; // Ошибка: нельзя переназначить
+```
+
+---
+
+##  Итог
+
+1. **Лексическое окружение**:
+    - Структура, которая управляет доступом к переменным и функциям.
+    - Включает объект окружения и ссылку на родительское окружение.
+
+2. **Область видимости**:
+    - **Глобальная**: доступ из любой части программы.
+    - **Локальная**: доступ только внутри функции.
+    - **Блочная**: доступ только внутри блока `{}`.
+
+3. **Замыкания**:
+    - Позволяют функции запоминать лексическое окружение.
+
+4. **`var`, `let`, `const`**:
+    - Используйте `let` и `const` для лучшей читаемости и избежания ошибок.
+
+Правильное понимание области видимости и лексического окружения помогает писать более чистый, модульный и безопасный код.
+
+Вот улучшенный текст с примерами для решения задач, оформленный в формате Markdown:
+
+---
+
+##  ЗАДАЧИ
+
+Вот набор задач, чтобы лучше понять области видимости и лексическое окружение:
+
+---
+
+###  Задача 1: Глобальная область видимости
+Что выведет следующий код? Объясните почему.
+
+```javascript
+var globalVar = 'Я глобальная переменная';
+
+function showVar() {
+    console.log(globalVar);
+}
+
+function changeVar() {
+    globalVar = 'Я изменена!';
+}
+
+showVar();  // ?
+changeVar();
+showVar();  // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// Глобальная переменная globalVar доступна во всех функциях.
+// showVar() выводит текущее значение globalVar, а changeVar() изменяет его.
+
+showVar();  // 'Я глобальная переменная'
+changeVar();
+showVar();  // 'Я изменена!'
+```
+
+</details>
+
+---
+
+###  Задача 2: Локальная область видимости
+ Определите, что выведется в консоль. Почему?
+
+```javascript
+function localScope() {
+    let localVar = 'Я локальная переменная';
+    console.log(localVar);
+}
+
+localScope(); // ?
+console.log(localVar); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// Переменная localVar объявлена внутри функции localScope, и доступ к ней возможен только из этой функции.
+
+localScope(); // 'Я локальная переменная'
+console.log(localVar); // Ошибка: localVar не определена
+```
+
+</details>
+
+---
+
+###  Задача 3: Блочная область видимости
+ Что произойдет при выполнении следующего кода?
+
+```javascript
+if (true) {
+    var varVariable = 'Я var!';
+    let letVariable = 'Я let!';
+    const constVariable = 'Я const!';
+}
+
+console.log(varVariable);  // ?
+console.log(letVariable);  // ?
+console.log(constVariable); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// Переменная varVariable доступна за пределами блока, так как var игнорирует блочную область.
+// Переменные letVariable и constVariable ограничены блочной областью.
+
+console.log(varVariable);  // 'Я var!'
+console.log(letVariable);  // Ошибка: letVariable не определена
+console.log(constVariable); // Ошибка: constVariable не определена
+```
+
+</details>
+
+---
+
+###  Задача 4: Лексическое окружение
+ Что выведет следующий код? Объясните механизм работы.
+
+```javascript
+function outer() {
+    let outerVar = 'Внешняя переменная';
+
+    function inner() {
+        let innerVar = 'Внутренняя переменная';
+        console.log(outerVar);
+    }
+
+    return inner;
+}
+
+const myFunction = outer();
+myFunction(); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// inner() имеет доступ к outerVar благодаря лексическому окружению outer().
+
+myFunction(); // 'Внешняя переменная'
+```
+
+</details>
+
+---
+
+###  Задача 5: Замыкание и счетчик 
+Реализуйте функцию `createCounter`, которая возвращает объект с методами:
+- `increment` должен увеличивать внутренний счетчик на 1.
+- `getValue` должен возвращать текущее значение счетчика.
+
+```javascript
+function createCounter() {
+    // Реализуйте функцию
+}
+
+const counter = createCounter();
+counter.increment();
+counter.increment();
+console.log(counter.getValue()); // 2
+```
+
+<details>
+ <summary> Решение</summary>
+
+```javascript
+function createCounter() {
+    let count = 0;
+
+    return {
+        increment() {
+            count++;
+        },
+        getValue() {
+            return count;
+        }
+    };
+}
+
+const counter = createCounter();
+counter.increment();
+counter.increment();
+console.log(counter.getValue()); // 2
+```
+
+</details>
+
+---
+
+###  Задача 6: `var`, `let` и области видимости
+ Что выведет следующий код? Почему?
+
+```javascript
+for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 100);
+}
+
+for (let j = 0; j < 3; j++) {
+    setTimeout(() => console.log(j), 100);
+}
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// При использовании var, переменная i общая для всех итераций.
+// При использовании let, каждая итерация имеет свою область видимости.
+
+for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 100); // 3, 3, 3
+}
+
+for (let j = 0; j < 3; j++) {
+    setTimeout(() => console.log(j), 100); // 0, 1, 2
+}
+```
+
+</details>
+
+---
+
+###  Задача 7: Лексическое окружение и вложенные функции
+ Определите, что выведет следующий код.
+
+```javascript
+function outerFunction() {
+    let outerVar = 10;
+
+    function innerFunction1() {
+        console.log(outerVar);
+    }
+
+    function innerFunction2() {
+        let outerVar = 20;
+        innerFunction1();
+    }
+
+    innerFunction2();
+}
+
+outerFunction(); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// innerFunction1() замкнута на outerVar из outerFunction(), а не на outerVar из innerFunction2().
+
+outerFunction(); // 10
+```
+
+</details>
+
+---
+
+###  Задача 8: Приватные переменные
+Реализуйте функцию `createStorage`, которая позволяет сохранять ключи и значения, но обеспечивает доступ к данным только через методы.  
+Функция должна возвращать объект с методами:
+- `setItem(key, value)`: сохраняет значение.
+- `getItem(key)`: возвращает значение по ключу.
+- `removeItem(key)`: удаляет ключ.
+
+```javascript
+function createStorage() {
+    // Реализуйте функцию
+}
+
+const storage = createStorage();
+storage.setItem('name', 'John');
+console.log(storage.getItem('name')); // 'John'
+storage.removeItem('name');
+console.log(storage.getItem('name')); // undefined
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function createStorage() {
+    const store = {};
+
+    return {
+        setItem(key, value) {
+            store[key] = value;
+        },
+        getItem(key) {
+            return store[key];
+        },
+        removeItem(key) {
+            delete store[key];
+        }
+    };
+}
+
+const storage = createStorage();
+storage.setItem('name', 'John');
+console.log(storage.getItem('name')); // 'John'
+storage.removeItem('name');
+console.log(storage.getItem('name')); // undefined
+```
+
+</details>
+
+---
+
+###  Задача 9: Подъем (Hoisting)
+ Что произойдет при выполнении следующего кода?
+
+```javascript
+function hoistingExample() {
+    console.log(a); // ?
+    var a = 5;
+    console.log(a); // ?
+}
+
+hoistingExample();
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+// Переменная a поднимается, но ее значение остается undefined до строки с присваиванием.
+
+hoistingExample();
+// undefined
+// 5
+```
+
+</details>
+
+---
+
+###  Задача 10: Работа с объектами и замыканиями
+Реализуйте функцию `createPerson`, которая создает объект с приватной переменной `name` и методами:
+- `getName`: возвращает имя.
+- `setName`: задает новое имя.
+
+```javascript
+function createPerson(initialName) {
+    // Реализуйте функцию
+}
+
+const person = createPerson('Alice');
+console.log(person.getName()); // 'Alice'
+person.setName('Bob');
+console.log(person.getName()); // 'Bob'
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function createPerson(initialName) {
+    let name = initialName;
+
+    return {
+        getName() {
+            return name;
+        },
+        setName(newName) {
+            name = newName;
+        }
+    };
+}
+
+const person = createPerson('Alice');
+console.log(person.getName()); // 'Alice'
+person.setName('Bob');
+console.log(person.getName()); // 'Bob'
+```
+
+</details>
+
+---
+
+ Эти задачи помогут вам лучше понять области видимости, подъем, лексическое окружение и замыкания.
+
+---

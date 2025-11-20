@@ -1,0 +1,446 @@
+#  Примитивные типы данных
+
+**Примитивные типы данных** — это базовые типы, которые представляют одно значение, не имея методов и внутренней структуры. В JavaScript существует несколько примитивных типов:
+
+---
+
+###  1. **String** (строка)
+Этот тип данных представляет текстовые значения, состоящие из последовательности символов. Строки записываются в кавычках: одинарных (`' '`), двойных (`" "`), или обратных (`` ` ``) для шаблонных строк.  
+#### Пример:
+```javascript
+let name = "Alice";
+let greeting = `Привет, ${name}!`;
+```
+
+---
+
+###  2. **Number** (число)
+Числа в JavaScript включают как целые значения, так и числа с плавающей запятой. Этот тип охватывает весь диапазон чисел, от очень маленьких до очень больших.  
+Пример:
+```javascript
+let age = 30;        // Целое число
+let price = 19.99;   // Число с плавающей запятой
+```
+
+---
+
+###  3. **Boolean** (логический тип)
+Логический тип может принимать только два значения: `true` или `false`. Обычно используется для условий.  
+#### Пример:
+```javascript
+let isStudent = true;
+let isOver18 = false;
+```
+
+---
+
+###  4. **Undefined**
+Этот тип означает, что переменная была объявлена, но ей еще не присвоено значение.  
+#### Пример:
+```javascript
+let notAssigned;
+console.log(notAssigned); // undefined
+```
+
+---
+
+###  5. **Null**
+Специальное значение, обозначающее намеренное отсутствие объекта или значения.  
+#### Пример:
+```javascript
+let emptyValue = null;
+```
+
+---
+
+###  6. **Symbol**
+Уникальный неизменяемый тип, добавленный в ES6. Символы часто используются для создания уникальных идентификаторов свойств объектов.  
+#### Пример:
+```javascript
+const uniqueId = Symbol("id");
+```
+
+---
+
+###  7. **BigInt**
+Введенный в ES11, BigInt позволяет работать с целыми числами, которые выходят за пределы диапазона `Number`.  
+#### Пример:
+```javascript
+const bigNumber = BigInt("123456789012345678901234567890");
+```
+
+---
+
+##  Сложные типы данных: Объекты
+
+**Сложные типы данных** позволяют хранить более сложные структуры. В отличие от примитивов, сложные типы передаются по ссылке.
+
+---
+
+###  1. **Объекты**
+Объекты — это коллекции свойств, где каждое свойство состоит из имени (ключа) и значения.
+#### Пример:
+```javascript
+let person = {
+  name: "Alice",
+  age: 30,
+  isStudent: false,
+};
+```
+
+---
+
+###  2. **Массивы**
+Массивы — это упорядоченные коллекции значений, которые можно хранить под индексами.  
+#### Пример:
+```javascript
+let fruits = ["apple", "banana", "cherry"];
+```
+
+---
+
+###  3. **Функции**
+В JavaScript функции — это объекты, которые можно присваивать переменным, передавать как аргументы и возвращать из других функций.  
+#### Пример:
+```javascript
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+```
+
+---
+
+##  Важные различия между примитивами и объектами
+
+###  1. **Хранение данных**
+- **Примитивы:** Хранятся **по значению**. Копирование переменной с примитивом создает новую независимую копию значения.
+- **Объекты:** Хранятся **по ссылке**. Если переменная ссылается на объект, изменение через одну ссылку будет видно и через другую.
+
+#### Пример:
+```javascript
+let a = 10; // Примитивный тип
+let b = a;  // b копирует значение a
+b = 20;
+console.log(a); // 10 (не изменилось)
+console.log(b); // 20
+
+let obj1 = { key: "value" }; // Сложный тип
+let obj2 = obj1; // obj2 ссылается на тот же объект
+obj2.key = "new value";
+console.log(obj1.key); // "new value" (изменилось)
+```
+
+---
+
+###  2. **Изменяемость**
+- **Примитивы:** Неизменяемы. Изменение значения переменной создает новое значение.
+- **Объекты:** Изменяемы. Можно менять свойства объекта или элементы массива.
+
+---
+
+##  Итог
+
+JavaScript предлагает **примитивные** и **сложные** типы данных, чтобы работать как с простыми значениями, так и с более сложными структурами. Понимание их отличий и особенностей хранения помогает писать эффективный и безопасный код.
+
+---
+
+##  ЗАДАЧИ
+Задачи по теме `Примитивные типы данных`
+
+---
+
+###  Задача 1: Типы данных
+Определите тип данных каждой переменной.
+
+```javascript
+let a = "Hello, world!";
+let b = 42;
+let c = true;
+let d;
+let e = null;
+let f = Symbol("unique");
+let g = BigInt(9007199254740991);
+
+// Какие типы данных имеют переменные a, b, c, d, e, f и g?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+console.log(typeof a); // string
+console.log(typeof b); // number
+console.log(typeof c); // boolean
+console.log(typeof d); // undefined
+console.log(typeof e); // object (особенность языка JavaScript)
+console.log(typeof f); // symbol
+console.log(typeof g); // bigint
+```
+</details>
+
+---
+
+###  Задача 2: Хранение по значению и ссылке
+Определите результат выполнения следующего кода:
+
+```javascript
+let x = 10;
+let y = x;
+y = 20;
+
+let obj1 = { key: "value" };
+let obj2 = obj1;
+obj2.key = "new value";
+
+console.log(x);      // ?
+console.log(y);      // ?
+console.log(obj1.key); // ?
+console.log(obj2.key); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+console.log(x);      // 10 (примитивные типы копируются по значению)
+console.log(y);      // 20
+console.log(obj1.key); // "new value" (объекты копируются по ссылке)
+console.log(obj2.key); // "new value"
+```
+</details>
+
+---
+
+###  Задача 3: Работа с числами и BigInt
+Напишите код, который корректно выполняет следующие операции с числами и `BigInt`:
+1. Создайте число `bigNum` с использованием `BigInt`.
+2. Добавьте обычное число и `BigInt`. Объясните результат.
+3. Преобразуйте `BigInt` в обычное число и выполните операцию сложения.
+
+```javascript
+// Ваш код здесь
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const bigNum = BigInt(12345678901234567890n);
+
+// Попытка сложить обычное число и BigInt вызовет ошибку
+try {
+    console.log(bigNum + 10); // TypeError: Cannot mix BigInt and other types
+} catch (error) {
+    console.error(error.message);
+}
+
+// Преобразование BigInt в обычное число
+const normalNum = Number(bigNum);
+console.log(normalNum + 10); // Результат: 12345678901234567890 + 10
+```
+</details>
+
+---
+
+###  Задача 4: Логический тип
+ Какой результат будет у следующих выражений? Объясните, почему.
+
+```javascript
+console.log(Boolean(0));        // ?
+console.log(Boolean(""));       // ?
+console.log(Boolean("Hello"));  // ?
+console.log(Boolean([]));       // ?
+console.log(Boolean({}));       // ?
+console.log(Boolean(null));     // ?
+console.log(Boolean(undefined));// ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+console.log(Boolean(0));        // false (0 считается "ложным")
+console.log(Boolean(""));       // false (пустая строка считается "ложной")
+console.log(Boolean("Hello"));  // true (непустая строка "истинна")
+console.log(Boolean([]));       // true (пустой массив "истинный")
+console.log(Boolean({}));       // true (пустой объект "истинный")
+console.log(Boolean(null));     // false
+console.log(Boolean(undefined));// false
+```
+</details>
+
+---
+
+###  Задача 5: Undefined и Null
+ Чем отличаются `undefined` и `null`? Проверьте результат выполнения следующего кода.
+
+```javascript
+let a;
+let b = null;
+
+console.log(a == b);  // ?
+console.log(a === b); // ?
+console.log(typeof a); // ?
+console.log(typeof b); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+console.log(a == b);  // true (нестрогое равенство не различает null и undefined)
+console.log(a === b); // false (строгое равенство проверяет типы, а они разные)
+console.log(typeof a); // "undefined"
+console.log(typeof b); // "object" (особенность JavaScript)
+```
+</details>
+
+---
+
+###  Задача 6: Работа с Symbol
+Создайте уникальные идентификаторы для двух объектов с использованием `Symbol`.
+
+```javascript
+const obj1 = {};
+const obj2 = {};
+
+const id1 = Symbol("id");
+const id2 = Symbol("id");
+
+obj1[id1] = "Object 1";
+obj2[id2] = "Object 2";
+
+// Проверьте, равны ли id1 и id2.
+console.log(id1 === id2); // ?
+console.log(obj1[id1]);   // ?
+console.log(obj2[id2]);   // ?
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+console.log(id1 === id2); // false (Symbol всегда уникален)
+console.log(obj1[id1]);   // "Object 1"
+console.log(obj2[id2]);   // "Object 2"
+```
+</details>
+
+---
+
+###  Задача 7: Примитивы vs. Сложные типы
+ Объясните результат выполнения следующего кода:
+
+```javascript
+let arr1 = [1, 2, 3];
+let arr2 = arr1;
+
+arr2.push(4);
+
+console.log(arr1); // ?
+console.log(arr2); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+console.log(arr1); // [1, 2, 3, 4] (arr1 и arr2 ссылаются на один массив)
+console.log(arr2); // [1, 2, 3, 4]
+```
+</details>
+
+---
+
+###  Задача 8: Преобразование типов
+ Какие значения выведет следующий код?
+
+```javascript
+let a = 42;
+let b = "42";
+let c = true;
+
+console.log(String(a));  // ?
+console.log(Number(b));  // ?
+console.log(Boolean(c)); // ?
+```
+
+<details>
+<summary> Вывод</summary>
+
+```javascript
+console.log(String(a));  // "42"
+console.log(Number(b));  // 42
+console.log(Boolean(c)); // true
+```
+</details>
+
+---
+
+###  Задача 9: Создание объекта
+Создайте объект `user`, в котором хранятся данные:
+- Имя: "Alice".
+- Возраст: 25.
+- Логическое значение `isStudent`: false.
+
+Выведите все свойства объекта.
+
+```javascript
+// Ваш код здесь
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+const user = {
+    name: "Alice",
+    age: 25,
+    isStudent: false
+};
+
+console.log(user.name);     // Alice
+console.log(user.age);      // 25
+console.log(user.isStudent); // false
+```
+</details>
+
+---
+
+###  Задача 10: Проверка типов
+Напишите функцию `checkType`, которая принимает значение и возвращает его тип.
+
+```javascript
+function checkType(value) {
+    // Ваш код здесь
+}
+
+console.log(checkType("Hello"));  // "string"
+console.log(checkType(42));       // "number"
+console.log(checkType(null));     // "object"
+console.log(checkType(Symbol())); // "symbol"
+```
+
+<details>
+<summary> Решение</summary>
+
+```javascript
+function checkType(value) {
+    return typeof value;
+}
+
+// Примеры использования функции
+console.log(checkType("Hello"));  // "string"
+console.log(checkType(42));        // "number"
+console.log(checkType(null));      // "object"
+console.log(checkType(Symbol()));  // "symbol"
+
+```
+</details>
+
+---
+
+ Эти задачи помогут вам закрепить знания о примитивных типах данных и их особенностях в JavaScript.
+
+---
+

@@ -15,7 +15,7 @@ const HeroSection: React.FC = () => {
   const getDelay = useStaggeredDelay({ baseCols: 2, mdCols: 3, lgCols: 6 });
   useRotatingIndex(quotes.length, 6000);
 
-  const { bg, textColor, titleColor, iconBgTone, iconColorTone } = useHeroColors();
+  const { bg, textColor, titleColor, iconBgTone, iconColorTone, badgeColorText, badgeColorBg } = useHeroColors();
 
   return (
     <Box bg={bg} py={16} px={4}>
@@ -32,7 +32,8 @@ const HeroSection: React.FC = () => {
                 Добро пожаловать в Universe!
               </Text>
               <Badge
-                colorScheme="blue"
+                backgroundColor={badgeColorBg}
+                color={badgeColorText}
                 variant="subtle"
                 fontSize={{ base: 'xs', md: 'sm' }}
                 px={{ base: 2, md: 3 }}

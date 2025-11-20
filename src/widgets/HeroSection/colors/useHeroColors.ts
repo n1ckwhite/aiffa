@@ -5,12 +5,16 @@ export const useHeroColors = () => {
   const theme = useAppColors();
   const iconBgTone = useColorModeValue('50', '900');
   const iconColorTone = useColorModeValue('600', '200');
+  const badgeColorText = useColorModeValue('blue.600', 'blue.500');
+  const badgeColorBg = useColorModeValue('blue.50', 'blue.50');
   return {
     bg: 'transparent',
     textColor: theme.descColor,
     titleColor: theme.titleColor,
     iconBgTone,
     iconColorTone,
+    badgeColorText,
+    badgeColorBg,
   };
 };
 

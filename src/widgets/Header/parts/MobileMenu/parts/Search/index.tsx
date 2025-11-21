@@ -18,11 +18,23 @@ export const MobileSearch: React.FC<MobileSearchProps> = (props) => {
     const q = (query || '').trim();
     if (!q) return text;
     const parts = text.split(new RegExp(`(${q})`, 'ig'));
+    const markColor = mark === 'whiteAlpha.300' ? 'blue.100' : 'inherit';
     return (
       <>
         {parts.map((part, i) =>
           part.toLowerCase() === q.toLowerCase()
-            ? <Box as="mark" key={i} bg={mark} borderRadius="sm">{part}</Box>
+            ? (
+              <Box
+                as="mark"
+                key={i}
+                bg={mark}
+                color={markColor}
+                borderRadius="sm"
+                px={0.5}
+              >
+                {part}
+              </Box>
+            )
             : <React.Fragment key={i}>{part}</React.Fragment>
         )}
       </>

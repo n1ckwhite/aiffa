@@ -20,7 +20,23 @@ export const highlightText = (text: string, query: string, markBg: string) => {
     }
     out = next;
   }
-  return out.map((seg, i) => seg.mark ? (<Box as="mark" key={i} bg={markBg} color="inherit" px={0.5} borderRadius="sm">{seg.part}</Box>) : (<React.Fragment key={i}>{seg.part}</React.Fragment>));
+  const markColor = markBg === 'whiteAlpha.300' ? 'blue.100' : 'inherit';
+  return out.map((seg, i) =>
+    seg.mark
+      ? (
+        <Box
+          as="mark"
+          key={i}
+          bg={markBg}
+          color={markColor}
+          px={0.5}
+          borderRadius="sm"
+        >
+          {seg.part}
+        </Box>
+      )
+      : (<React.Fragment key={i}>{seg.part}</React.Fragment>)
+  );
 };
 
 

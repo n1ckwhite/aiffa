@@ -10,6 +10,7 @@ import WeeklyTasksGrid from '../TasksGrid/TasksGrid';
 import { useWeeklyTasksData } from '../TasksGrid/model/useWeeklyTasksData';
 import { useTierMeta } from '../../hooks/useTierMeta';
 import WeeklyTasksCountdown from '../Countdown/Countdown';
+import WeeklyTasksSkeleton from 'pages/WeeklyTasksPage/Skeleton';
 
 const WeeklyTasksScreen: React.FC = () => {
   const { profile } = useUserProfile();
@@ -18,17 +19,7 @@ const WeeklyTasksScreen: React.FC = () => {
   const { isReady, tasks } = useWeeklyTasksData();
 
   if (!isReady) {
-    return (
-      <Box position="relative" pb="32px">
-        <Box w="100%" maxW="1440px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
-          <VStack spacing={4} mb={6}>
-            <Box h="28px" w="200px" borderRadius="md" bg="blackAlpha.200" />
-            <Box h="18px" w="60%" borderRadius="md" bg="blackAlpha.200" />
-          </VStack>
-          <Box h="120px" borderRadius="2xl" borderWidth="1px" borderColor="blackAlpha.200" />
-        </Box>
-      </Box>
-    );
+    return <WeeklyTasksSkeleton />;
   }
 
   return (

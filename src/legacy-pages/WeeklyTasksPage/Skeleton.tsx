@@ -42,7 +42,7 @@ const WeeklyTasksSkeleton: React.FC = () => {
           </HStack>
           <HStack spacing={3} wrap="wrap" justify="center">
             <Skeleton h="14px" w={{ base: '260px', md: '340px' }} borderRadius="md" />
-            <HStack borderWidth="1px"  borderRadius="full" px={3} py={1}>
+            <HStack  borderRadius="full" px={3} py={1}>
               <Skeleton h="14px" w="28px" borderRadius="sm" />
               <Box as="span" w="6px" />
               <Skeleton h="14px" w="28px" borderRadius="sm" />
@@ -55,7 +55,7 @@ const WeeklyTasksSkeleton: React.FC = () => {
         </VStack>
         <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} spacing={{ base: 5, md: 7, lg: 8 }}>
           {Array.from({ length: 3 }).map((_, i) => (
-            <Box key={i} position="relative" borderWidth="1px" borderRadius="xl" p={4} overflow="hidden">
+            <Box key={i} position="relative" borderRadius="xl" p={4} overflow="hidden">
               <HStack mb={3} spacing={3}>
                 <Skeleton h="20px" w="64px" borderRadius="full" />
               </HStack>
@@ -72,7 +72,7 @@ const WeeklyTasksSkeleton: React.FC = () => {
         <VStack spacing={{ base: 6, md: 7 }} mt={{ base: 6, md: 8 }} align="stretch">
           <VStack align="stretch" spacing={3}>
             <Skeleton h="18px" w="260px" borderRadius="md" />
-            <Box borderWidth="1px" borderRadius="2xl" p={{ base: 3, md: 4 }}>
+            <Box borderRadius="2xl" p={{ base: 3, md: 4 }}>
               <VStack align="stretch" spacing={2}>
                 <Skeleton h="14px" w="80%" borderRadius="md" />
                 <Skeleton h="14px" w="82%" borderRadius="md" />
@@ -81,7 +81,7 @@ const WeeklyTasksSkeleton: React.FC = () => {
             </Box>
           </VStack>
 
-          <Box borderWidth="1px" borderRadius="2xl" p={{ base: 4, md: 5 }} boxShadow="sm">
+          <Box borderRadius="2xl" p={{ base: 4, md: 5 }} boxShadow="sm">
             <HStack spacing={4} align="flex-start">
               <SkeletonCircle boxSize={10} />
               <VStack align="stretch" spacing={3} w="100%">

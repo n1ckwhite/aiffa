@@ -48,7 +48,7 @@ export const MobileSearch: React.FC<MobileSearchProps> = (props) => {
           type="search"
           inputMode="search"
           className="search-input"
-          onFocus={() => searchQuery && setSearchOpen(true)}
+          onFocus={() => searchQuery.trim() && setSearchOpen(true)}
           onKeyDown={onInputKeyDown}
           _placeholder={{ color: searchPlaceholder, fontSize: 'sm' }}
           _focus={{ bg: searchFocusBg, boxShadow: `${ringShadow}, 0 4px 12px rgba(0, 0, 0, 0.15)`, outline: 'none' }}
@@ -71,7 +71,7 @@ export const MobileSearch: React.FC<MobileSearchProps> = (props) => {
           hoverBg={searchIconHoverBg}
           onClear={() => { setSearchOpen(false); setSearchQuery(''); }}
         />
-        {isOpen && searchOpen && searchQuery && (
+        {isOpen && searchOpen && searchQuery.trim() && (
           <>
             <Portal>
               <Box position="fixed" left={0} right={0} bottom={0} top={mobileDropdownTop} zIndex={90000} className="search-overlay" onClick={() => setSearchOpen(false)} />

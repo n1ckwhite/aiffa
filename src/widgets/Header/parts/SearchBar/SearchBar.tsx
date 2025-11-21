@@ -46,7 +46,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
           ml={{ base: 0, md: 4, lg: 6 }}
           fontSize="sm"
           className="search-input"
-          onFocus={() => { setIsSearchFocused(true); if (searchQuery) setSearchOpen(true); }}
+          onFocus={() => { setIsSearchFocused(true); if (searchQuery.trim()) setSearchOpen(true); }}
           onBlur={() => setIsSearchFocused(false)}
           onKeyDown={onInputKeyDown}
           _placeholder={{
@@ -108,7 +108,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
           <Box as="kbd" px={1.5} py={0.5} borderRadius="md" borderWidth="1px" borderColor={dropdownBorder} fontSize="10px">⌘</Box>
           <Box as="kbd" px={1.5} py={0.5} borderRadius="md" borderWidth="1px" borderColor={dropdownBorder} fontSize="10px">K</Box>
         </HStack>
-        {!isMobileMenuOpen && searchOpen && (
+        {!isMobileMenuOpen && searchOpen && searchQuery.trim() && (
           <Portal>
             <Box
               position="fixed"
@@ -124,7 +124,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
             />
           </Portal>
         )}
-        {!isMobileMenuOpen && searchOpen && searchQuery && (
+        {!isMobileMenuOpen && searchOpen && searchQuery.trim() && (
           <Portal>
             <Box
               position="fixed"

@@ -10,6 +10,7 @@ import HeaderSpacer from "./HeaderSpacer";
 import { HeaderFallback, MainFallback, FooterFallback } from "./Fallbacks";
 import Header from "widgets/Header";
 import Footer from "widgets/Footer";
+import FeedbackWidget from "widgets/FeedbackWidget";
 import GlobalBackground from "shared/ui/GlobalBackground";
 
 type MainLayoutProps = {
@@ -41,6 +42,8 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <React.Suspense fallback={<FooterFallback />}>
         <Footer />
       </React.Suspense>
+
+      <FeedbackWidget />
     </Box>
   );
 };

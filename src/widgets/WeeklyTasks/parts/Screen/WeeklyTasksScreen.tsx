@@ -19,7 +19,7 @@ const WeeklyTasksScreen: React.FC = () => {
 
   if (!isReady) {
     return (
-      <Box position="relative" pb="32px">
+      <Box position="relative" pb="32px" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
         <Box w="100%" maxW="1440px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
           <VStack spacing={4} mb={6}>
             <Box h="28px" w="200px" borderRadius="md" bg="blackAlpha.200" />

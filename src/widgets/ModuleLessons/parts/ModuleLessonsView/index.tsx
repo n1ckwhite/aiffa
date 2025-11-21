@@ -14,7 +14,7 @@ export const ModuleLessonsView: React.FC<ModuleLessonsViewProps> = ({ mod, profi
   if (!mod) return (<Box pb="32px" />);
 
   return (
-    <Box pb="32px">
+    <Box pb="32px" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
       <Box px={0}>
         <VStack align="stretch" gap={7} maxW={{ base: '100%', md: '900px' }} mx="auto">
           <Header mod={mod} colors={colors} />

@@ -10,8 +10,9 @@ import { useScrollToTop } from 'shared/hooks/useScrollToTop';
 
 export type CheckResult = { ok: boolean; msg: string } | null;
 
-export const useTaskDetail = () => {
-  const { taskId = '' } = useParams();
+export const useTaskDetail = (initialTaskId?: string) => {
+  const params = useParams();
+  const taskId = initialTaskId || (params as any)?.taskId || '';
   const navigate = useNavigate();
   const { profile, setWeeklyTask, updateProfile } = useUserProfile();
   const { isOpen, onOpen, onClose } = useDisclosure();

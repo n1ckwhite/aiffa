@@ -1,15 +1,14 @@
 "use client";
 
+import TaskDetailScreen from "@/widgets/WeeklyTaskDetail/parts/TaskDetailScreen";
 import React from "react";
-import TaskDetailScreen from "widgets/WeeklyTaskDetail/parts/TaskDetailScreen/TaskDetailScreen";
 
 type WeeklyTaskDetailPageClientProps = {
   taskId: string;
 };
 
-const WeeklyTaskDetailPageClient = (_props: WeeklyTaskDetailPageClientProps) => {
-  // taskId по-прежнему берётся из useParams внутри useTaskDetail через shim react-router-dom
-  return <TaskDetailScreen />;
+const WeeklyTaskDetailPageClient = ({ taskId }: WeeklyTaskDetailPageClientProps) => {
+  return <TaskDetailScreen taskId={taskId} />;
 };
 
 export default WeeklyTaskDetailPageClient;

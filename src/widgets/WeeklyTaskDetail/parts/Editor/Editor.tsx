@@ -8,12 +8,12 @@ const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onS
   const { border, titleBarBg, editorBg, overlayBg, startBg, startHoverBg, startActiveBg, strongBorder } = useEditorColors();
   return (
     <Box borderWidth="1px" borderColor={border} borderRadius="lg" position="relative">
-      <HStack h="30px" px={3} align="center" gap={2} bg={titleBarBg} borderBottomWidth="1px" borderColor={border}>
+      <HStack h="30px" px={3} align="center" gap={2} bg={titleBarBg} borderBottomWidth="1px" borderColor={border} borderTopRadius="lg">
         <Box w="12px" h="12px" borderRadius="full" bg="#ff5f56" boxShadow="0 0 0 1px rgba(0,0,0,0.2) inset" />
         <Box w="12px" h="12px" borderRadius="full" bg="#ffbd2e" boxShadow="0 0 0 1px rgba(0,0,0,0.2) inset" />
         <Box w="12px" h="12px" borderRadius="full" bg="#27c93f" boxShadow="0 0 0 1px rgba(0,0,0,0.2) inset" />
       </HStack>
-      <Box bg={editorBg} p={0} borderRadius="lg">
+      <Box bg={editorBg} p={0} borderBottomRadius="lg">
         <CodeEditor value={value} onChange={onChange} language={language} height={'clamp(240px, 60vh, 720px)'} enabled={!overlay} />
       </Box>
       {overlay && (

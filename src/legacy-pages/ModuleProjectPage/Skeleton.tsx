@@ -10,7 +10,7 @@ const ModuleProjectSkeleton: React.FC = () => {
           <Skeleton h="18px" w="40%" borderRadius="md" />
         </HStack>
 
-        <Box borderWidth="1px" borderRadius="xl" p={4}>
+        <Box borderRadius="xl" p={4}>
           <HStack spacing={3} mb={3} align="center">
             <SkeletonCircle boxSize="36px" />
             <VStack align="stretch" spacing={2} flex={1}>

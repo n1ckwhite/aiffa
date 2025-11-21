@@ -2,7 +2,7 @@
 
 import React from "react";
 import { VStack } from "@chakra-ui/react";
-import LessonPageSkeleton from "pages/LessonPage/Skeleton";
+import LessonTasksSkeleton from "pages/LessonTasksPage/Skeleton";
 import { useUserProfile } from "entities/user";
 import LessonFeedback from "widgets/Lessons/LessonFeedback";
 import { LessonTasksView } from "widgets/LessonTasksView";
@@ -23,7 +23,7 @@ const LessonTasksPageClient = ({ moduleId, lessonId }: LessonTasksPageClientProp
   if (loading || !lesson || !currentModule) {
     return (
       <VStack align="stretch" gap={6} pb="32px">
-        <LessonPageSkeleton />
+        <LessonTasksSkeleton />
       </VStack>
     );
   }

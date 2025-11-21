@@ -2,7 +2,7 @@ import React from 'react';
 import { VStack } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useUserProfile } from 'entities/user';
-import LessonPageSkeleton from 'pages/LessonPage/Skeleton';
+import LessonTasksSkeleton from './Skeleton';
 import LessonFeedback from 'widgets/Lessons/LessonFeedback';
 import { LessonTasksView } from 'widgets/LessonTasksView';
 import { useLessonTasksLoad } from 'widgets/LessonTasksView/hooks/useLessonTasksLoad';
@@ -16,7 +16,11 @@ const LessonTasksPage: React.FC = () => {
   const { markTaskSolved } = useUserProfile();
 
   if (loading || !lesson || !currentModule) {
-    return (<VStack align="stretch" gap={6} pb="32px"><LessonPageSkeleton /></VStack>);
+    return (
+      <VStack align="stretch" gap={6} pb="32px">
+        <LessonTasksSkeleton />
+      </VStack>
+    );
   }
 
   return (

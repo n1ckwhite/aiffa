@@ -6,6 +6,7 @@ import { useUserProfile } from "entities/user";
 import { ModuleLessonsView } from "widgets/ModuleLessons";
 import { useModuleLessonsLoad } from "widgets/ModuleLessons/hooks/useModuleLessonsLoad";
 import { useScrollTopOnChange } from "widgets/ModuleLessons/hooks/useScrollTopOnChange";
+import ModuleLessonsSkeleton from "pages/ModuleLessonsPage/Skeleton";
 
 type ModuleLessonsPageClientProps = {
   moduleId: string;
@@ -22,7 +23,7 @@ const ModuleLessonsPageClient = ({ moduleId }: ModuleLessonsPageClientProps) => 
   );
 
   if (loading || !mod) {
-    return <Box pb="32px" />;
+    return <ModuleLessonsSkeleton />;
   }
 
   return <ModuleLessonsView mod={mod} profileSolvedTaskIds={solvedMap} />;

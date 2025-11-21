@@ -3,7 +3,7 @@ import { Box, VStack, HStack, Skeleton, SkeletonCircle, SkeletonText } from '@ch
 
 const LessonTasksSkeleton: React.FC = () => {
   return (
-    <Box maxW={{ base: '100%', md: '900px' }} mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <Box px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
       <HStack spacing={3} mb={3} justify="space-between" align="center" flexWrap="wrap">
         <HStack spacing={3}>
           <SkeletonCircle boxSize="20px" />
@@ -20,7 +20,7 @@ const LessonTasksSkeleton: React.FC = () => {
 
       <VStack align="stretch" spacing={5}>
         {Array.from({ length: 2 }).map((_, i) => (
-          <Box key={i} borderWidth="1px" borderRadius="2xl" p={{ base: 4, md: 5 }}>
+          <Box key={i} borderRadius="2xl" p={{ base: 4, md: 5 }}>
             <HStack spacing={3} align="center" mb={2}>
               <SkeletonCircle boxSize="28px" />
               <VStack align="stretch" spacing={2} flex={1}>
@@ -54,7 +54,7 @@ const LessonTasksSkeleton: React.FC = () => {
         ))}
       </VStack>
 
-      <Box mt={{ base: 5, md: 8 }} borderWidth="1px" borderRadius="2xl" p={{ base: 4, md: 5 }}>
+      <Box mt={{ base: 5, md: 8 }} borderRadius="2xl" p={{ base: 4, md: 5 }}>
         <HStack spacing={3} mb={2}>
           <SkeletonCircle boxSize="18px" />
           <Skeleton h="14px" w="200px" borderRadius="md" />

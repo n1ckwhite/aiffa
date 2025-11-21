@@ -38,7 +38,7 @@ const ProfileScreen: React.FC = () => {
   const scrollTop = useScrollToTop();
 
   return (
-    <Box position="relative" overflow="hidden">
+    <Box position="relative" overflow="hidden" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
       <Box maxW={{ base: '100%', md: '900px', lg: '1100px' }} mx="auto">
         <Heading size="lg" mb={6} textAlign="center">Профиль</Heading>
         <Box>
@@ -100,7 +100,7 @@ const ProfileScreen: React.FC = () => {
         </Box>
       </Box>
 
-      <Box maxW="900px" mx="auto" px={{ base: 4, md: 6 }} pb={{ base: 8, md: 12 }}>
+      <Box maxW="900px" mx="auto">
         <Box>
           <AchievementsSection items={items} skeletonBg={skeletonBg} />
         </Box>

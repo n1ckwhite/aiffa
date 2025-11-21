@@ -20,7 +20,7 @@ export const ModuleProjectsView: React.FC<ModuleProjectsViewProps> = ({ mod }) =
   if (!mod) return (<Box pb="32px" />);
 
   return (
-    <Box pb="32px">
+    <Box pb="32px" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
       <Box px={0}>
         <VStack align="stretch" gap={7} maxW={{ base: '100%', md: '900px' }} mx="auto">
           <HeaderCard mod={mod} projectsCount={projectsCount} projectsLabel={projectsLabel} levelLabel={levelLabel} colors={colors as any} />

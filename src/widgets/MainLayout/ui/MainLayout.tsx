@@ -37,7 +37,6 @@ const MainLayout = ({ children }: MainLayoutProps) => {
             as="main"
             id="main-content"
             flex="1 0 auto"
-            px={{ base: 4, md: 6 }}
           >
             {children}
           </Box>

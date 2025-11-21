@@ -11,7 +11,7 @@ const ModuleLessonsSkeleton: React.FC = () => {
             <HStack align="center" spacing={{ base: 2, md: 3 }} mb={2}>
               <SkeletonCircle boxSize={{ base: '36px', md: '44px' }} />
               <Heading as="h1" size="lg">
-                Модуль
+                Материал
               </Heading>
             </HStack>
             <HStack gap={3} align="center" flexWrap="wrap" mb={3}>

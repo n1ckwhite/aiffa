@@ -10,10 +10,9 @@ export const useScrollToTop = (options: UseScrollToTopOptions = {}): (() => void
 
   const scrollTop = useCallback(() => {
     try {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     } catch {
       try {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         window.scrollTo(0, 0);
       } catch (error) {
         console.error('Failed to scroll to top:', error);
@@ -27,7 +26,6 @@ export const useScrollToTop = (options: UseScrollToTopOptions = {}): (() => void
     } catch {
       return String(Array.isArray(deps) ? deps.length : 0);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deps]);
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { SimpleGrid } from '@chakra-ui/react';
+import { useScrollToTop } from 'shared/hooks/useScrollToTop';
 import { usePagination } from '../../../../hooks/usePagination';
 import { useModuleLevel } from '../../../../hooks/useModuleLevel';
 import type { LessonsGridProps } from './types';
@@ -25,6 +26,19 @@ export const LessonsGrid: React.FC<LessonsGridProps> = ({ mod, colors, solvedMap
       : level === 'intermediate'
         ? colors.intermediateBorder
         : colors.advancedBorder;
+
+  const scrollTop = useScrollToTop({ immediate: false });
+
+  const handleSetPage = (next: number | ((p: number) => number)) => {
+    // оборачиваем setPage, чтобы при смене страницы скроллить наверх
+    setPage((prev) => {
+      const computed = typeof next === 'function' ? next(prev) : next;
+      if (computed !== prev) {
+        scrollTop();
+      }
+      return computed;
+    });
+  };
 
   return (
     <>
@@ -58,7 +72,7 @@ export const LessonsGrid: React.FC<LessonsGridProps> = ({ mod, colors, solvedMap
       {totalPages > 1 && (
         <PaginationBar
           page={page}
-          setPage={setPage}
+          setPage={handleSetPage}
           canPrev={canPrev}
           canNext={canNext}
           totalPages={totalPages}

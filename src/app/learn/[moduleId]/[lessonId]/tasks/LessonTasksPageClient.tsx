@@ -29,7 +29,7 @@ const LessonTasksPageClient = ({ moduleId, lessonId }: LessonTasksPageClientProp
   }
 
   return (
-    <VStack align="stretch" gap={6} pb="32px" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <VStack align="stretch" gap={6} pb="32px">
       <LessonTasksView
         mod={currentModule}
         lesson={lesson}

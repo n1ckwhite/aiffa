@@ -10,7 +10,7 @@ const ModulesPageClient = () => {
   const [category, setCategory] = useState<ModulesCategory>("base");
 
   return (
-    <Box pb="32px" pt={12} px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <Box pb="32px">
       <Box maxW="1200px" mx="auto">
         <ModulesHeader />
         <ModulesSegment value={category} onChange={(v) => setCategory(v)} />

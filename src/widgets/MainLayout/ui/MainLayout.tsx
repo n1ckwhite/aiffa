@@ -33,7 +33,12 @@ const MainLayout = ({ children }: MainLayoutProps) => {
 
       <LayoutErrorBoundary>
         <React.Suspense fallback={<MainFallback />}>
-          <Box as="main" id="main-content" flex="1 0 auto">
+          <Box
+            as="main"
+            id="main-content"
+            flex="1 0 auto"
+            px={{ base: 4, md: 6 }}
+          >
             {children}
           </Box>
         </React.Suspense>

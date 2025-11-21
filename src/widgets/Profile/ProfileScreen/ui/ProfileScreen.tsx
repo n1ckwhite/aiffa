@@ -39,7 +39,7 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <Box position="relative" overflow="hidden">
-      <Box maxW={{ base: '100%', md: '900px', lg: '1100px' }} mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+      <Box maxW={{ base: '100%', md: '900px', lg: '1100px' }} mx="auto">
         <Heading size="lg" mb={6} textAlign="center">Профиль</Heading>
         <Box>
           <VStack align="center" spacing={4}>

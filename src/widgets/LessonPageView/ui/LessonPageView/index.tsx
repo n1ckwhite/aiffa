@@ -20,7 +20,7 @@ export const LessonPageView: React.FC<LessonPageViewProps> = ({ lesson, mod, ini
   if (!md) return (<VStack align="stretch" gap={6} pb="32px"><Box /></VStack>);
 
   return (
-    <VStack align="stretch" gap={6} pb="32px" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <VStack align="stretch" gap={6} pb="32px">
       <HStack gap={6} align="flex-start">
         <MainColumn headerAnchorRef={headerAnchorRef} lesson={lesson} mod={mod} md={md} colors={colors} firstAuthor={firstAuthor} />
         <TocPanel

@@ -39,7 +39,7 @@ const ModuleProjectPageClient = ({ moduleId, projectId }: ModuleProjectPageClien
   }
 
   return (
-    <Box w="100%" maxW={{ base: "100%", md: "1100px" }} mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <Box w="100%" maxW={{ base: "100%", md: "1100px" }} mx="auto">
       <ProjectBreadcrumbHeader
         moduleId={mod?.id || moduleId}
         moduleTitle={mod?.title || ""}

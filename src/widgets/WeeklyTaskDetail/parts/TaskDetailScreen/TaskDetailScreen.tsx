@@ -21,7 +21,7 @@ const TaskDetailScreen: React.FC = () => {
 
   return (
     <>
-    <Box w="100%" maxW={{ base: '100%', md: '1100px', lg: '1280px' }} mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <Box w="100%" maxW={{ base: '100%', md: '1100px', lg: '1280px' }} mx="auto">
       <Button
         variant="outline"
         colorScheme="blue"

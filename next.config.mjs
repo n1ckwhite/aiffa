@@ -3,6 +3,8 @@ import path from "node:path";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Включаем карты исходников для продакшн-бандла, чтобы убрать предупреждение Lighthouse
+  productionBrowserSourceMaps: true,
   webpack: (config) => {
     config.resolve.alias["react-router-dom"] = path.resolve(
       process.cwd(),

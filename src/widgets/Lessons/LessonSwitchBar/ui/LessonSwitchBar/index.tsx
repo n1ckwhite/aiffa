@@ -16,7 +16,7 @@ const LessonSwitchBar: React.FC<LessonSwitchBarProps> = ({ moduleId, lessonId, i
   const menuButtonRef = React.useRef<HTMLButtonElement | null>(null);
   const menuListRef = React.useRef<HTMLDivElement | null>(null);
 
-  const { accent, countColor, itemHover, trackBg, pillBg } = useLessonSwitchBarColors();
+  const { accent, countColor, itemHover, trackBg, pillBg, borderColor } = useLessonSwitchBarColors();
   const { mod, currentIndex, prev, next, progress, goPrev, goNext, goTo } = useManifestNav(moduleId, lessonId);
 
   useKeyboardSwitch({ onPrev: () => { if (prev && mod?.id) goPrev(); }, onNext: () => { if (next && mod?.id) goNext(); } });
@@ -71,6 +71,7 @@ const LessonSwitchBar: React.FC<LessonSwitchBarProps> = ({ moduleId, lessonId, i
                       w={{ base: 'auto', md: 'auto' }}
                       py={inline ? 0.5 : 1}
                       px={1}
+                      borderColor={borderColor}
                       ref={menuListRef}
                       borderRadius="24px"
                       overflowX="hidden"

@@ -7,8 +7,12 @@ import { ChakraRootProvider } from "../providers/ChakraRootProvider";
 import MainLayout from "@/widgets/MainLayout";
 
 export const metadata: Metadata = {
-  title: "JavaScript Universe – Next",
-  description: "Next.js версия курса JavaScript Universe"
+  title: {
+    default: "Universe — платформа для роста разработчиков",
+    template: "%s — Universe"
+  },
+  description:
+    "Universe — практическая платформа для разработчиков: задачи, материалы и проекты по JavaScript, фронтенду и смежным направлениям."
 };
 
 type RootLayoutProps = {

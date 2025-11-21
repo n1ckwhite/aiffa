@@ -1,25 +1,34 @@
 import React from "react";
 import NextLink from "next/link";
-import { Box, Button, Heading, HStack, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  Stack,
+  Text,
+  VStack
+} from "@chakra-ui/react";
 
 const NotFound = () => {
   return (
     <Box
       as="section"
       aria-label="Страница не найдена"
-      py={{ base: 16, md: 24 }}
-      minH="60vh"
+      py={{ base: 12, md: 24 }}
+      px={{ base: 4, md: 0 }}
+      minH="100vh"
       display="flex"
       alignItems="center"
       justifyContent="center"
     >
       <Box
         position="relative"
-        maxW="640px"
+        maxW={{ base: "100%", sm: "540px", md: "640px" }}
         w="full"
         px={{ base: 5, md: 8 }}
         py={{ base: 7, md: 10 }}
-        borderRadius="2xl"
+        borderRadius={{ base: "xl", md: "2xl" }}
         bg="surface.elevated"
       >
         <VStack
@@ -30,20 +39,30 @@ const NotFound = () => {
           <HStack spacing={5} align="center" justify="center">
             <Heading
               as="h1"
-              fontSize={{ base: "3xl", md: "4xl" }}
+              fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
               fontWeight="extrabold"
-              lineHeight="1.1"
+              lineHeight={{ base: "1.15", md: "1.1" }}
             >
               404 — страница не найдена
             </Heading>
           </HStack>
 
-          <Text fontSize={{ base: "md", md: "lg" }} color="text.muted">
-            Похоже, вы попали на страницу, которой ещё нет в нашей вселенной.
+          <Text
+            fontSize={{ base: "md", md: "lg" }}
+            color="text.muted"
+            maxW="32rem"
+          >
+            Похоже, вы попали на страницу, которой ещё нет.
             Возможно, ссылка устарела или в адресе есть опечатка.
           </Text>
 
-          <HStack spacing={3} pt={2} flexWrap="wrap">
+          <Stack
+            direction={{ base: "column", sm: "row" }}
+            spacing={3}
+            pt={2}
+            w="full"
+            justify="center"
+          >
             <Button
               as={NextLink}
               href="/"
@@ -67,12 +86,13 @@ const NotFound = () => {
               size="lg"
               _light={{ _hover: { bg: "blackAlpha.50" } }}
               _dark={{ _hover: { bg: "whiteAlpha.100" } }}
+              w={{ base: "full", sm: "auto" }}
             >
               К материалам
             </Button>
-          </HStack>
+          </Stack>
 
-          <Text fontSize="sm" color="text.muted">
+          <Text fontSize="sm" color="text.muted" maxW="32rem">
             Если вы пришли по нашей ссылке, дайте знать в виджете обратной
             связи внизу — это поможет нам сделать Universe лучше.
           </Text>

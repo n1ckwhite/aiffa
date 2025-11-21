@@ -1,5 +1,6 @@
 import React from 'react';
 import { HStack, Input, Button } from '@chakra-ui/react';
+import { useColors } from './colors/useColors';
 
 export type FormProps = {
   value: string;
@@ -10,11 +11,13 @@ export type FormProps = {
 };
 
 const Form: React.FC<FormProps> = ({ value, onChange, onImport, isImporting, prefix }) => {
+  const { borderColor } = useColors()
   return (
     <HStack>
       <Input
         id="profile-github"
         name="githubUrl"
+        borderColor={borderColor}
         autoComplete="url"
         value={value}
         onChange={(e) => {

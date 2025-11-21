@@ -28,39 +28,23 @@ const LessonPageSkeleton: React.FC = () => {
                 </VStack>
               </HStack>
 
-              {/* TLDR / краткое содержание */}
-              <Skeleton h="18px" w="80px" borderRadius="md" mb={3} />
-              <Box
-                borderRadius="lg"
-                overflow="hidden"
-                mb={8}
-              >
-                <HStack
-                  spacing={4}
-                  px={4}
-                  py={3}
-                >
-                  <Skeleton h="12px" w="120px" borderRadius="md" />
-                  <Skeleton h="12px" w="200px" borderRadius="md" />
-                </HStack>
-                {Array.from({ length: 3 }).map((_, i) => (
-                  <HStack
+              {/* Вводный блок / TLDR без явной таблицы */}
+              <Skeleton h="18px" w="110px" borderRadius="md" mb={3} />
+              <VStack align="stretch" spacing={2} mb={6}>
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <Skeleton
                     key={i}
-                    spacing={4}
-                    px={4}
-                    py={3}
-                  >
-                    <Skeleton h="12px" w="120px" borderRadius="md" />
-                    <Skeleton h="12px" w="70%" borderRadius="md" />
-                  </HStack>
+                    h="14px"
+                    w={i % 2 === 0 ? "92%" : "80%"}
+                    borderRadius="md"
+                  />
                 ))}
-              </Box>
+              </VStack>
 
               {/* Основной текст урока */}
               <VStack align="stretch" spacing={3} mb={8}>
                 {Array.from({ length: 6 }).map((_, i) => (
                   <Skeleton
-                    // eslint-disable-next-line react/no-array-index-key
                     key={i}
                     h="14px"
                     w={i % 3 === 0 ? "96%" : i % 3 === 1 ? "88%" : "76%"}

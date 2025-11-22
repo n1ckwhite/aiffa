@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box, HStack, Input, IconButton, Portal, Text, List, ListItem, Badge, useColorMode } from '@chakra-ui/react';
+import { Box, HStack, Input, IconButton, Portal, Text, List, ListItem } from '@chakra-ui/react';
 import { CloseIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { popIn } from '../../animations/popIn';
 import { highlightText } from '../../lib/highlight';
 import { moduleLevelById } from '../../model/levels';
-import { getChipColors } from '../../lib/chips';
 import type { SearchBarProps } from './types';
 import { useSearchBarColors } from './colors/useSearchBarColors';
+import PillBadge from 'shared/ui/PillBadge';
 
 const SearchBar: React.FC<SearchBarProps> = (props) => {
   const {
@@ -17,7 +17,6 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
     emptyStateColor, chevronColor, chevronHoverColor, moduleChipOpacity, markBg, isMobileMenuOpen,
   } = props;
 
-  const { colorMode } = useColorMode();
   const {
     paletteTopBg,
     resultActiveBg,
@@ -182,7 +181,13 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
                   </ListItem>
                 )}
                 {results.map((r, idx) => {
-                  const colors = getChipColors(colorMode, moduleLevelById[r.moduleId] || 'beginner');
+                  const level = moduleLevelById[r.moduleId] || 'beginner';
+                  const levelScheme =
+                    (level === 'beginner'
+                      ? 'green'
+                      : level === 'intermediate'
+                      ? 'yellow'
+                      : 'red') as 'green' | 'yellow' | 'red';
                   return (
                     <ListItem
                       key={`${r.moduleId}/${r.lessonId}`}
@@ -210,19 +215,12 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
                         <Box flex={1} minW={0}>
                           <Text noOfLines={2} fontWeight="semibold">{highlightText(r.lessonTitle, searchQuery, markBg)}</Text>
                           <HStack mt={1} spacing={2}>
-                            <Badge
-                              bg={colors.bg}
-                              borderColor={colors.border}
-                              borderWidth="1px"
-                              color={colors.text}
-                              borderRadius="full"
-                              opacity={moduleChipOpacity}
-                              px={2}
-                              fontWeight="semibold"
-                              fontSize={{ base: '10px', md: 'xs' }}
+                            <PillBadge
+                              colorScheme={levelScheme}
+                              variant="outline"
                             >
-                              {r.moduleTitle.toUpperCase()}
-                            </Badge>
+                              {r.moduleTitle}
+                            </PillBadge>
                           </HStack>
                         </Box>
                         <Box

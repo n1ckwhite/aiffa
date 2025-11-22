@@ -24,8 +24,8 @@ const PillBadge: React.FC<PillBadgeProps> = ({
       py={0.5}
       spacing={1}
       fontSize="xs"
-      borderWidth="1px"
-      borderColor={palette.border}
+      borderWidth={variant === "solid" ? "0" : "1px"}
+      borderColor={variant === "solid" ? "transparent" : palette.border}
       bg={palette.bg}
       color={palette.color}
       alignItems="center"

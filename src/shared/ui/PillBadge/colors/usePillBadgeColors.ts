@@ -8,9 +8,35 @@ const resolveScheme = (scheme?: PillBadgeColor): PillBadgeColor => {
 
 const buildLightPalette = (scheme: PillBadgeColor, variant: PillBadgeVariant): PillBadgePalette => {
   if (variant === "solid") {
+    // Более контрастные сочетания для solid‑бейджей, особенно для жёлтого уровня
+    if (scheme === "yellow") {
+      return {
+        bg: "yellow.300",
+        border: "yellow.300",
+        color: "gray.900",
+      };
+    }
+
+    if (scheme === "green") {
+      // Более тёмный зелёный для достаточного контраста с белым текстом
+      return {
+        bg: "green.800",
+        border: "green.800",
+        color: "white",
+      };
+    }
+
+    if (scheme === "red") {
+      return {
+        bg: "red.700",
+        border: "red.700",
+        color: "white",
+      };
+    }
+
     return {
-      bg: `${scheme}.500`,
-      border: `${scheme}.500`,
+      bg: `${scheme}.600`,
+      border: `${scheme}.600`,
       color: "white",
     };
   }
@@ -32,6 +58,30 @@ const buildLightPalette = (scheme: PillBadgeColor, variant: PillBadgeVariant): P
 
 const buildDarkPalette = (scheme: PillBadgeColor, variant: PillBadgeVariant): PillBadgePalette => {
   if (variant === "solid") {
+    if (scheme === "yellow") {
+      return {
+        bg: "yellow.300",
+        border: "yellow.300",
+        color: "gray.900",
+      };
+    }
+
+    if (scheme === "green") {
+      return {
+        bg: "green.600",
+        border: "green.600",
+        color: "white",
+      };
+    }
+
+    if (scheme === "red") {
+      return {
+        bg: "red.600",
+        border: "red.600",
+        color: "white",
+      };
+    }
+
     return {
       bg: `${scheme}.500`,
       border: `${scheme}.500`,

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Box, VStack, Text, Badge, Icon, SimpleGrid } from '@chakra-ui/react';
+import { Box, VStack, Text, Icon, SimpleGrid } from '@chakra-ui/react';
 import { useHeroColors } from '../colors/useHeroColors';
 import { pulse } from '../animations/pulse';
 import { fadeInUp } from '../animations/fadeInUp';
 import { quotes } from '../data/quotes';
 import { highlights } from '../data/highlights';
 import { highlightColors } from '../data/constants';
+import PillBadge from 'shared/ui/PillBadge';
 import { useStaggeredDelay } from '../hooks/useStaggeredDelay';
 import { useRotatingIndex } from '../hooks/useRotatingIndex';
 import { useStatsVisibility } from '../hooks/useStatsVisibility';
@@ -15,7 +16,7 @@ const HeroSection: React.FC = () => {
   const getDelay = useStaggeredDelay({ baseCols: 2, mdCols: 3, lgCols: 6 });
   useRotatingIndex(quotes.length, 6000);
 
-  const { bg, textColor, titleColor, iconBgTone, iconColorTone, badgeColorText, badgeColorBg } = useHeroColors();
+  const { bg, textColor, titleColor, iconBgTone, iconColorTone } = useHeroColors();
 
   return (
     <Box bg={bg} py={16} px={4}>
@@ -31,17 +32,9 @@ const HeroSection: React.FC = () => {
               >
                 Добро пожаловать в Universe!
               </Text>
-              <Badge
-                backgroundColor={badgeColorBg}
-                color={badgeColorText}
-                variant="subtle"
-                fontSize={{ base: 'xs', md: 'sm' }}
-                px={{ base: 2, md: 3 }}
-                py={{ base: 0.5, md: 1 }}
-                borderRadius="full"
-              >
+              <PillBadge colorScheme="blue" variant="outline">
                 Новая экосистема IT
-              </Badge>
+              </PillBadge>
             </VStack>
             
             <Text

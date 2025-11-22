@@ -16,6 +16,7 @@ export type PillBadgeProps = {
   children: React.ReactNode;
   uppercase?: boolean;
   variant?: PillBadgeVariant;
+  withBorder?: boolean;
 };
 
 

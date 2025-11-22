@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, HStack, ListItem, Text, Badge } from '@chakra-ui/react';
+import { Box, HStack, ListItem, Text } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import type { ResultItemProps } from './types';
+import PillBadge from 'shared/ui/PillBadge';
 
 export const ResultItem: React.FC<ResultItemProps> = ({
   result,
@@ -20,6 +21,10 @@ export const ResultItem: React.FC<ResultItemProps> = ({
   highlightText,
 }) => {
   const colors = getChipColors(result.moduleId);
+  const token = colors.text || 'gray.700';
+  const prefix = token.split('.')[0] as 'green' | 'yellow' | 'red' | 'gray';
+  const scheme: 'green' | 'yellow' | 'red' | 'gray' =
+    prefix === 'green' || prefix === 'yellow' || prefix === 'red' ? prefix : 'gray';
   return (
     <ListItem
       role="option"
@@ -43,9 +48,11 @@ export const ResultItem: React.FC<ResultItemProps> = ({
             {highlightText(result.lessonTitle, searchQuery, markBg)}
           </Text>
           <HStack mt={1} spacing={2}>
-            <Badge bg={colors.bg} borderColor={colors.border} borderWidth="1px" color={colors.text} opacity={moduleChipOpacity} borderRadius="full" px={2} fontSize={{ base: '10px', md: 'xs' }}>
-              {result.moduleTitle.toUpperCase()}
-            </Badge>
+            <Box opacity={moduleChipOpacity}>
+              <PillBadge colorScheme={scheme} variant="outline">
+                {result.moduleTitle}
+              </PillBadge>
+            </Box>
           </HStack>
         </Box>
         <Box as={ChevronRightIcon} color={isActive ? chevronHoverColor : chevronColor} transition="transform 200ms ease, color 180ms ease" className="result-chevron" />

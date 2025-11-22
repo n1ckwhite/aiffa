@@ -1,11 +1,11 @@
 import React from 'react';
-import { Badge } from '@chakra-ui/react';
+import PillBadge from 'shared/ui/PillBadge';
 
 export const TagBadge: React.FC<{ tag: string; colorScheme?: string }> = ({ tag, colorScheme }) => {
   return (
-    <Badge borderRadius="full" px={2} py={0.5} variant="subtle" colorScheme={colorScheme || 'blue'}>
+    <PillBadge colorScheme={(colorScheme as any) || 'blue'} variant="outline">
       {tag}
-    </Badge>
+    </PillBadge>
   );
 };
 

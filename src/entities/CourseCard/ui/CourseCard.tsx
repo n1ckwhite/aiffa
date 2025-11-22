@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Text, VStack, HStack, useColorModeValue, Badge } from '@chakra-ui/react';
+import { Box, Text, VStack, HStack, useColorModeValue } from '@chakra-ui/react';
 import { type CourseCardProps } from './types/CourseCard.types';
 import { getLevelColor } from '../model';
 import { fadeInUp } from '../animations';
 import { HeaderIcon, LessonsPill, StudyTimePill, CTAArrow } from './parts';
+import PillBadge from 'shared/ui/PillBadge';
 import { useCourseCardColors } from './colors/useCourseCardColors';
 
 const CourseCard: React.FC<CourseCardProps> = React.memo(({
@@ -115,22 +116,19 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
               {title}
             </Text>
             {level && (
-              <Badge
-                colorScheme={getLevelColor(level)}
-                borderRadius="full"
-                fontSize="xs"
-                px={4}
-                py={1.5}
-                textTransform="uppercase"
-                fontWeight="800"
-                letterSpacing="0.08em"
-                boxShadow={`0 4px 12px ${badgeShadow}`}
+              <Box
+                as="span"
+                display="inline-flex"
                 alignSelf="flex-start"
+                boxShadow={`0 4px 12px ${badgeShadow}`}
+                borderRadius="full"
                 transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
                 _hover={{ transform: 'scale(1.05)', boxShadow: `0 6px 16px ${badgeShadow}` }}
               >
-                {level}
-              </Badge>
+                <PillBadge colorScheme={getLevelColor(level) as any} variant="solid">
+                  {level}
+                </PillBadge>
+              </Box>
             )}
             <Text
               fontSize="sm"

@@ -49,7 +49,7 @@ const Card: React.FC<CardProps> = ({
     >
       <HStack spacing={3} justify="center" align="center">
         <Box w="10px" h="10px" borderRadius="full" bg={dotColor} boxShadow={dotShadow} />
-        <PillBadge colorScheme={badgeScheme as any}>
+        <PillBadge colorScheme={badgeScheme as any} variant="solid">
           {badgeText}
         </PillBadge>
       </HStack>

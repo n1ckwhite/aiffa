@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box, HStack, Heading, Badge, Text, Stack, Button } from '@chakra-ui/react';
+import { Box, HStack, Heading, Text, Stack, Button } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { moduleIconById } from '../constants';
 import type { HeaderCardProps } from './types/types';
 import { getModuleProjectsDescription } from '../../data';
+import PillBadge from 'shared/ui/PillBadge';
 
 export const HeaderCard: React.FC<HeaderCardProps> = ({ mod, projectsCount, projectsLabel, levelLabel, colors }) => {
   return (
@@ -15,9 +16,23 @@ export const HeaderCard: React.FC<HeaderCardProps> = ({ mod, projectsCount, proj
         <Heading as="h1" color={colors.titleColor} letterSpacing="-0.02em" fontSize={{ base: '20px', sm: 'xl', md: '2xl' }}>{mod.title}</Heading>
       </HStack>
       <HStack gap={3} align="center" flexWrap="wrap" mt={1}>
-        <Badge colorScheme="purple" borderRadius="full" px={3} py={1} fontWeight="semibold" fontSize="xs">{projectsCount > 0 ? `${projectsCount} ${projectsLabel}` : 'Проекты'}</Badge>
-        <Badge colorScheme={levelLabel === 'Начальный' ? 'green' : levelLabel === 'Средний' ? 'yellow' : 'red'} borderRadius="full" px={3} py={1} fontWeight="semibold" fontSize="xs">{levelLabel}</Badge>
-        <Badge colorScheme="purple" variant="outline" borderRadius="full" px={3} py={1} fontWeight="semibold" fontSize="xs">Практика</Badge>
+        <PillBadge colorScheme="purple">
+          {projectsCount > 0 ? `${projectsCount} ${projectsLabel}` : 'Проекты'}
+        </PillBadge>
+        <PillBadge
+          colorScheme={
+            (levelLabel === 'Начальный'
+              ? 'green'
+              : levelLabel === 'Средний'
+              ? 'yellow'
+              : 'red') as any
+          }
+        >
+          {levelLabel}
+        </PillBadge>
+        <PillBadge colorScheme="purple" variant="outline">
+          Практика
+        </PillBadge>
       </HStack>
       <Text
         mt={3}

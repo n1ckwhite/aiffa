@@ -8,7 +8,7 @@ import { useTaskColors } from './colors/useTaskColors';
 import { useTaskRenderer } from './hooks/useTaskRenderer';
 
 export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onSolvedChange, onValidated }) => {
-  const { terminalBg, terminalPlaceholder } = useTaskColors();
+  const { terminalBg, terminalPlaceholder, border } = useTaskColors();
   const {
     value,
     checked,
@@ -86,7 +86,7 @@ export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onS
         >
           <Stack direction="column" spacing={2}>
             {task.mcq?.options.map((o: any) => (
-              <Radio key={o.id} value={o.id} name={`task-${task.id || 'mcq'}-option`}>{o.label}</Radio>
+              <Radio borderColor={border} key={o.id} value={o.id} name={`task-${task.id || 'mcq'}-option`}>{o.label}</Radio>
             ))}
           </Stack>
         </RadioGroup>
@@ -121,6 +121,7 @@ export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onS
               isChecked={!!checked[o.id]}
               onChange={(event) => handleCheckboxToggle(o.id, event.target.checked)}
               isDisabled={ok === true}
+              borderColor={border}
             >
               {o.label}
             </Checkbox>

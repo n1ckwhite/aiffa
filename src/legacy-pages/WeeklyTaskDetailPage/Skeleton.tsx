@@ -9,9 +9,6 @@ const WeeklyTaskDetailSkeleton: React.FC = () => {
   const faint = theme.cardHoverBg;
   return (
     <Box w="100%" maxW={{ base: '100%', md: '1100px', lg: '1280px' }} mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
-      {/* Back button placeholder */}
-      <Box h="36px" w="180px" borderRadius="full" bg={bg} mb={4} />
-
       <Box borderWidth={0} borderColor={border} borderRadius="xl" p={{ base: 0, md: 0 }}>
         {/* Tag / status */}
         <HStack spacing={3} mb={2} align="center">
@@ -24,7 +21,10 @@ const WeeklyTaskDetailSkeleton: React.FC = () => {
           <Box h="24px" w="60%" borderRadius="md" bg={bg} />
         </Heading>
         {/* Description */}
-        <Box h="12px" w="80%" mb={3} borderRadius="md" bg={bg} />
+        <Box h="12px" w="80%" mb={2} borderRadius="md" bg={bg} />
+
+        {/* Back button under title */}
+        <Box h="36px" w="200px" borderRadius="full" bg={bg} mb={4} />
 
         {/* Author row */}
         <HStack spacing={3} mb={3}>
@@ -62,17 +62,25 @@ const WeeklyTaskDetailSkeleton: React.FC = () => {
           </HStack>
         </VStack>
 
-        {/* Support block placeholder */}
-        <Box mt={6} borderWidth="1px" borderColor={border} borderRadius="2xl" p={{ base: 4, md: 5 }} bg={faint}>
-          <Box h="16px" w="50%" borderRadius="md" bg={bg} mb={2} />
-          <Box h="10px" w="90%" borderRadius="md" bg={bg} mb={1} />
-          <Box h="10px" w="80%" borderRadius="md" bg={bg} mb={3} />
-          <HStack spacing={3}>
-            <Box h="36px" w="180px" borderRadius="full" bg={bg} />
-            <Box h="36px" w="200px" borderRadius="full" bg={bg} />
-            <Box h="36px" w="140px" borderRadius="full" bg={bg} />
-          </HStack>
-        </Box>
+      </Box>
+
+      {/* Support block placeholder (как отдельный нижний блок) */}
+      <Box
+        mt={6}
+        borderWidth="1px"
+        borderColor={border}
+        borderRadius="2xl"
+        p={{ base: 4, md: 5 }}
+        bg={faint}
+      >
+        <Box h="16px" w="50%" borderRadius="md" bg={bg} mb={2} />
+        <Box h="10px" w="90%" borderRadius="md" bg={bg} mb={1} />
+        <Box h="10px" w="80%" borderRadius="md" bg={bg} mb={3} />
+        <HStack spacing={3}>
+          <Box h="36px" w="180px" borderRadius="full" bg={bg} />
+          <Box h="36px" w="200px" borderRadius="full" bg={bg} />
+          <Box h="36px" w="140px" borderRadius="full" bg={bg} />
+        </HStack>
       </Box>
     </Box>
   );

@@ -9,6 +9,7 @@ import EditorBlock from '../Editor/Editor';
 import ActionsBar from '../Actions/Actions';
 import TaskCompletionModal from 'features/TaskCompletionModal';
 import SupportBlock from 'widgets/SupportBlock';
+import WeeklyTaskDetailSkeleton from 'pages/WeeklyTaskDetailPage/Skeleton';
 
 type TaskDetailScreenProps = {
   taskId?: string;
@@ -37,6 +38,10 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
     onClose,
     externalLinks
   } = useTaskDetail(initialTaskId);
+
+  if (!mdMeta) {
+    return <WeeklyTaskDetailSkeleton />;
+  }
 
   return (
     <>

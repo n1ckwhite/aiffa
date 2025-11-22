@@ -122,10 +122,12 @@ export const useTaskDetail = (initialTaskId?: string) => {
     author, authorHref, authorAvatar, authorNote,
     input, setInput,
     result, checking, congratsAll,
-    showVsOverlay, openVSCode,
+    showVsOverlay,
+    openVSCode,
     onCheck,
-    isOpen, onClose,
-    externalLinks,
+    isOpen,
+    onClose,
+    externalLinks
   };
 };
 

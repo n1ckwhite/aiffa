@@ -4,7 +4,7 @@ import PillBadge from 'shared/ui/PillBadge';
 
 export const LevelBadge: React.FC<LevelBadgeProps> = ({ levelLabel, levelScheme }) => {
   return (
-    <PillBadge colorScheme={levelScheme as any}>
+    <PillBadge colorScheme={levelScheme as any} variant="outline">
       {levelLabel}
     </PillBadge>
   );

@@ -27,6 +27,7 @@ export const HeaderCard: React.FC<HeaderCardProps> = ({ mod, projectsCount, proj
               ? 'yellow'
               : 'red') as any
           }
+          variant="outline"
         >
           {levelLabel}
         </PillBadge>

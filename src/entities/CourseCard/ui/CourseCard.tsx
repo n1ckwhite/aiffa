@@ -125,7 +125,7 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
                 transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
                 _hover={{ transform: 'scale(1.05)', boxShadow: `0 6px 16px ${badgeShadow}` }}
               >
-                <PillBadge colorScheme={getLevelColor(level) as any} variant="solid">
+                <PillBadge colorScheme={getLevelColor(level) as any} variant="outline">
                   {level}
                 </PillBadge>
               </Box>

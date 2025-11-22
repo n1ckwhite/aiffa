@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, Button, VStack } from '@chakra-ui/react';
+import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { Link as RouterLink } from 'react-router-dom';
 import StageBreadcrumb from 'shared/ui/StageBreadcrumb';
 import TaskCompletionModal from 'features/TaskCompletionModal';
 import type { LessonTasksViewProps } from '../../types';
@@ -30,16 +32,6 @@ export const LessonTasksView: React.FC<LessonTasksViewProps> = ({ mod, lesson, o
         <StageBreadcrumb moduleId={mod.id} moduleTitle={mod.title} lessonId={lesson.id} lessonTitle={lesson.title} current="tasks" />
 
         <Box bg={colors.cardBg} borderWidth={0} borderRadius="xl" px={0} position="relative" boxShadow="none" _after={{ content: '""', position: 'absolute', left: 6, right: 6, bottom: 0, height: { base: '0px', md: '4px' }, bg: `linear-gradient(90deg, ${colors.accent}, ${colors.headerGlow})`, borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' }}>
-          {taskAuthors.map((author) => (
-            <Box key={`${author.username}-${author.name}`}>
-              <AuthorCard
-                author={author}
-                borderColor={colors.authorBorder}
-                descColor={colors.descColor}
-                linkColor={colors.linkColor}
-              />
-            </Box>
-          ))}
           <TasksHeader
             hasTasks={hasTasks}
             solvedCount={solvedCount}
@@ -53,7 +45,16 @@ export const LessonTasksView: React.FC<LessonTasksViewProps> = ({ mod, lesson, o
             moduleId={mod.id}
             lessonId={lesson.id}
           />
-
+          {taskAuthors.map((author) => (
+            <Box key={`${author.username}-${author.name}`}>
+              <AuthorCard
+                author={author}
+                borderColor={colors.authorBorder}
+                descColor={colors.descColor}
+                linkColor={colors.linkColor}
+              />
+            </Box>
+          ))}
           <TasksList
             moduleId={mod.id}
             lesson={lesson}
@@ -79,6 +80,33 @@ export const LessonTasksView: React.FC<LessonTasksViewProps> = ({ mod, lesson, o
           onContinue={handleContinueAfterModal}
         />
       )}
+
+      {/* Кнопка "К уроку" перед блоком FAQ / поддержки */}
+      <Box px={0}>
+        <VStack
+          align="stretch"
+          maxW={{ base: '100%', md: '900px' }}
+          mx="auto"
+        >
+          <Button
+            as={RouterLink}
+            to={`/learn/${mod.id}/${lesson.id}`}
+            size="sm"
+            variant="outline"
+            colorScheme="blue"
+            leftIcon={<ChevronLeftIcon />}
+            borderRadius="full"
+            w={{ base: '100%', md: 'auto' }}
+            alignSelf={{ base: 'stretch', md: 'flex-start' }}
+            borderColor={colors.backBtnHoverBg}
+            bg="transparent"
+            _hover={{ bg: colors.backBtnHoverBg }}
+            _active={{ bg: colors.backBtnActiveBg }}
+          >
+            К уроку
+          </Button>
+        </VStack>
+      </Box>
 
       <Box px={0}>
         <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto">

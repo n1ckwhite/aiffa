@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Heading, VStack } from '@chakra-ui/react';
 import { useUserProfile } from 'entities/user';
-import { useNavigate } from 'react-router-dom';
 import ProfileHeader from '../../Header/ui/Header';
 import GitHubConnect from '../../GitHubConnect/ui/GitHubConnect';
 import XPCard from '../../XPCard/ui/XPCard';
@@ -14,11 +13,9 @@ import { useXpBursts } from '../../hooks/useXpBursts';
 import { useProfileScreenColors } from '../colors/useProfileScreenColors';
 import { useProfileEditing } from '../hooks/useProfileEditing';
 import { useAchievementsData } from '../hooks/useAchievementsData';
-import { useScrollToTop } from '../hooks/useScrollToTop';
 
 const ProfileScreen: React.FC = () => {
   const { profile } = useUserProfile();
-  const navigate = useNavigate();
   const {
     resetHoverBg, resetActiveBg, resetColor,
     ringTrack, ringColor, dividerColor, hintColor, skeletonBg, skeletonRingBorder, skeletonRingTop
@@ -34,8 +31,6 @@ const ProfileScreen: React.FC = () => {
   const xpBursts = useXpBursts(xp, tierProgressPct);
   const { isManifestLoaded, studyProgressPct } = useStudyProgress(profile);
   const { items } = useAchievementsData(profile as any);
-
-  const scrollTop = useScrollToTop();
 
   return (
     <Box position="relative" overflow="hidden" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
@@ -91,7 +86,6 @@ const ProfileScreen: React.FC = () => {
                     skeletonRingTop={skeletonRingTop}
                     dividerColor={dividerColor}
                     hintColor={hintColor}
-                    onOpenMaterials={() => { navigate('/learn'); scrollTop(); }}
                   />
                 </Box>
               </VStack>

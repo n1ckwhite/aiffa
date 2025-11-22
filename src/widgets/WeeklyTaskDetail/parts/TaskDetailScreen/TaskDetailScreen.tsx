@@ -39,6 +39,8 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
     externalLinks
   } = useTaskDetail(initialTaskId);
 
+  const [isEditorReady, setIsEditorReady] = React.useState(false);
+
   if (!mdMeta) {
     return <WeeklyTaskDetailSkeleton />;
   }
@@ -121,13 +123,14 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
             }
             overlay={showVsOverlay}
             onStart={openVSCode}
+            onReady={() => setIsEditorReady(true)}
           />
           <ActionsBar
             onCheck={onCheck}
             checking={checking}
             done={!!task.done}
             externalLinks={externalLinks}
-            isEditorReady={!showVsOverlay}
+            isEditorReady={isEditorReady}
           />
           {result && !result.ok && (
             <Box

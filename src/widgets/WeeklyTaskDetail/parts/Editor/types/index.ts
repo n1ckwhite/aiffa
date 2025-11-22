@@ -5,4 +5,5 @@ export type EditorProps = {
     overlay: boolean;
     onStart: () => void;
     toolbarTitle?: string;
+    onReady?: () => void;
   };

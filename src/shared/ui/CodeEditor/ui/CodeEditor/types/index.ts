@@ -6,6 +6,7 @@ export type CodeEditorProps = {
   placeholder?: string;
   preferNative?: boolean;
   enabled?: boolean;
+  onReady?: () => void;
 };
 
 

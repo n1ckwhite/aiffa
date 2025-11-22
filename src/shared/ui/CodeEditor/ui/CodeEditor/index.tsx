@@ -5,6 +5,7 @@ import type { CodeEditorProps } from './types';
 import { useMonacoLoader } from '../../model/useMonacoLoader';
 import { useMonacoEditor } from '../../model/useMonacoEditor';
 import { usePointerCoarse } from '../../model/usePointerCoarse';
+import { useCodeEditorReady } from '../../model/useCodeEditorReady';
 import { NativeTextarea, MonacoPlaceholder } from '../parts';
 
 export const CodeEditor: React.FC<CodeEditorProps> = ({
@@ -15,6 +16,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   placeholder,
   preferNative,
   enabled = true,
+  onReady,
 }) => {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const { isDark, placeholderColor } = useCodeEditorColors();
@@ -22,6 +24,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   const inputName = React.useMemo(() => `code-editor-input`, []);
   const isCoarse = usePointerCoarse();
   const isReady = useMonacoLoader(!(preferNative || !enabled) && enabled);
+  useCodeEditorReady({ enabled, preferNative, isReady, onReady });
   useMonacoEditor({
     isReady,
     containerRef,

@@ -4,7 +4,7 @@ import { useEditorColors } from '../../colors/useEditorColors';
 import { CodeEditor } from 'shared/ui/CodeEditor';
 import { EditorProps } from './types';
 
-const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onStart }) => {
+const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onStart, onReady }) => {
   const { border, titleBarBg, editorBg, overlayBg, startBg, startHoverBg, startActiveBg, strongBorder } = useEditorColors();
   return (
     <Box borderWidth="1px" borderColor={border} borderRadius="lg" position="relative">
@@ -14,7 +14,14 @@ const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onS
         <Box w="12px" h="12px" borderRadius="full" bg="#27c93f" boxShadow="0 0 0 1px rgba(0,0,0,0.2) inset" />
       </HStack>
       <Box bg={editorBg} p={0} borderBottomRadius="lg">
-        <CodeEditor value={value} onChange={onChange} language={language} height={'clamp(240px, 60vh, 720px)'} enabled={!overlay} />
+        <CodeEditor
+          value={value}
+          onChange={onChange}
+          language={language}
+          height={'clamp(240px, 60vh, 720px)'}
+          enabled={!overlay}
+          onReady={onReady}
+        />
       </Box>
       {overlay && (
         <Box position="absolute" inset={0} zIndex={3} display="flex" alignItems="center" justifyContent="center" bg={overlayBg} borderRadius="lg">

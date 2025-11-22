@@ -34,9 +34,10 @@ export const CodeBlock: React.FC<CodeBlockProps> = (nodeProps) => {
         fontSize="0.8em"
         lineHeight="1.1"
         verticalAlign="baseline"
-        whiteSpace="normal"
-        wordBreak="break-word"
+        whiteSpace="nowrap"
+        wordBreak="normal"
         maxW="100%"
+        overflowX="auto"
         sx={{ boxShadow: '0 1px 0 rgba(0,0,0,0.04)' }}
         {...props}
       >

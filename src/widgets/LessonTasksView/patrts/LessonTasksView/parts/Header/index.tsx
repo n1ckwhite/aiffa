@@ -73,10 +73,9 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
           _hover={{ bg: colors.backBtnHoverBg, transform: "translateY(-1px)" }}
           _active={{ bg: colors.backBtnActiveBg }}
         >
-          К уроку
+          К материалу
         </Button>
       </HStack>
-      {/* Мобильная кнопка "К уроку" — под заголовком, на всю ширину */}
       <Button
         as={RouterLink}
         to={`/learn/${moduleId}/${lessonId}`}
@@ -86,7 +85,6 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
         leftIcon={<ChevronLeftIcon />}
         borderRadius="full"
         w="100%"
-        mt={1}
         mb={3}
         display={{ base: "flex", md: "none" }}
         justifyContent="center"
@@ -95,7 +93,7 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
         _hover={{ bg: colors.backBtnHoverBg }}
         _active={{ bg: colors.backBtnActiveBg }}
       >
-        К уроку
+        К материалу
       </Button>
     </>
   );

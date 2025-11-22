@@ -81,33 +81,6 @@ export const LessonTasksView: React.FC<LessonTasksViewProps> = ({ mod, lesson, o
         />
       )}
 
-      {/* Кнопка "К уроку" перед блоком FAQ / поддержки */}
-      <Box px={0}>
-        <VStack
-          align="stretch"
-          maxW={{ base: '100%', md: '900px' }}
-          mx="auto"
-        >
-          <Button
-            as={RouterLink}
-            to={`/learn/${mod.id}/${lesson.id}`}
-            size="sm"
-            variant="outline"
-            colorScheme="blue"
-            leftIcon={<ChevronLeftIcon />}
-            borderRadius="full"
-            w={{ base: '100%', md: 'auto' }}
-            alignSelf={{ base: 'stretch', md: 'flex-start' }}
-            borderColor={colors.backBtnHoverBg}
-            bg="transparent"
-            _hover={{ bg: colors.backBtnHoverBg }}
-            _active={{ bg: colors.backBtnActiveBg }}
-          >
-            К уроку
-          </Button>
-        </VStack>
-      </Box>
-
       <Box px={0}>
         <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto">
           <ModulesFAQ variant="tasks" />

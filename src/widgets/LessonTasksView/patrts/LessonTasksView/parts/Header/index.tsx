@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, Heading, HStack } from '@chakra-ui/react';
-import { ChevronLeftIcon, EditIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, EditIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
 import type { TasksHeaderProps } from './types';
 
@@ -65,7 +65,7 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
           colorScheme="blue"
           mt={2}
           mb={4}
-          leftIcon={<ChevronLeftIcon />}
+          leftIcon={<ArrowBackIcon />}
           borderRadius="full"
           px={5}
           py={2}
@@ -82,13 +82,15 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
         to={`/learn/${moduleId}/${lessonId}`}
         variant="outline"
         colorScheme="blue"
-        leftIcon={<ChevronLeftIcon />}
+        leftIcon={<ArrowBackIcon />}
         borderRadius="full"
         px={5}
         py={2}
         fontWeight="bold"
         mt={2}
         mb={4}
+        maxWidth="170px"
+        w="auto"
         display={{ base: "flex", md: "none" }}
         alignSelf="flex-start"
         transition="background-color 0.15s ease, transform 0.1s ease"

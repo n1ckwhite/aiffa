@@ -19,7 +19,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           as={RouterLink as any}
           to="/learn"
           aria-label="Материалы"
-          onClick={() => { setIsMobileMenuOpen(false); scrollTop(); }}
+          onClick={() => { setIsMobileMenuOpen(false); }}
           _hover={{ bg: hoverBg }}
           px={2}
           py={1.5}

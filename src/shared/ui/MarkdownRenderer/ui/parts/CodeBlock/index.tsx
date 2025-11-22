@@ -23,7 +23,6 @@ export const CodeBlock: React.FC<CodeBlockProps> = (nodeProps) => {
     return (
       <Code
         className={className}
-        display="inline-block"
         px={1}
         py={0}
         borderRadius="md"
@@ -31,9 +30,9 @@ export const CodeBlock: React.FC<CodeBlockProps> = (nodeProps) => {
         color={colors.inlineColor}
         borderWidth="1px"
         borderColor={colors.inlineBorderColor}
-        fontSize="0.8em"
-        lineHeight="1.1"
-        verticalAlign="baseline"
+        fontSize="inherit"
+        lineHeight="inherit"
+        verticalAlign="middle"
         whiteSpace="nowrap"
         wordBreak="normal"
         maxW="100%"

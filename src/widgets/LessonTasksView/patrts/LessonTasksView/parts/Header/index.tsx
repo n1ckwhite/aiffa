@@ -57,21 +57,22 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
             </Box>
           )}
         </HStack>
-        {/* Десктопная кнопка "К уроку" */}
+        {/* Десктопная кнопка "К материалу" — стили как у "К задачам недели" */}
         <Button
           as={RouterLink}
           to={`/learn/${moduleId}/${lessonId}`}
-          size="sm"
           variant="outline"
           colorScheme="blue"
+          mt={2}
+          mb={4}
           leftIcon={<ChevronLeftIcon />}
           borderRadius="full"
-          px={4}
+          px={5}
+          py={2}
+          fontWeight="bold"
+          alignSelf="flex-start"
+          transition="background-color 0.15s ease, transform 0.1s ease"
           display={{ base: "none", md: "inline-flex" }}
-          borderColor={colors.backBtnHoverBg}
-          bg="transparent"
-          _hover={{ bg: colors.backBtnHoverBg, transform: "translateY(-1px)" }}
-          _active={{ bg: colors.backBtnActiveBg }}
         >
           К материалу
         </Button>
@@ -79,7 +80,6 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
       <Button
         as={RouterLink}
         to={`/learn/${moduleId}/${lessonId}`}
-        size="md"
         variant="outline"
         colorScheme="blue"
         leftIcon={<ChevronLeftIcon />}
@@ -87,15 +87,11 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
         px={5}
         py={2}
         fontWeight="bold"
-        w="auto"
-        maxWidth="220px"
-        mb={3}
+        mt={2}
+        mb={4}
         display={{ base: "flex", md: "none" }}
-        justifyContent="center"
-        borderColor={colors.backBtnHoverBg}
-        bg="transparent"
-        _hover={{ bg: colors.backBtnHoverBg }}
-        _active={{ bg: colors.backBtnActiveBg }}
+        alignSelf="flex-start"
+        transition="background-color 0.15s ease, transform 0.1s ease"
       >
         К материалу
       </Button>

@@ -9,6 +9,7 @@ export const useCourseCardColors = () => {
   const focusRing = useColorModeValue('0 0 0 3px rgba(66, 153, 225, 0.45)', '0 0 0 3px rgba(66, 153, 225, 0.45)');
   const topGradientEnd = useColorModeValue('blue.300', 'blue.500');
   const arrowHoverColor = useColorModeValue('blue.600', 'blue.300');
+  const badgeShadow = useColorModeValue('gray.200', 'gray.600');
 
   return {
     borderColor,
@@ -22,6 +23,7 @@ export const useCourseCardColors = () => {
     titleColor: theme.titleColor,
     descColor: theme.descColor,
     accentColor: theme.blue.accent,
+    badgeShadow
   };
 };
 

@@ -30,13 +30,13 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
     topGradientEnd,
     arrowHoverColor,
     cardBg,
+    badgeShadow,
     cardHoverBg,
     titleColor,
     descColor: textColor,
     accentColor,
   } = useCourseCardColors();
 
-  const badgeShadow = useColorModeValue('gray.200', 'gray.600');
 
   return (
     <Box

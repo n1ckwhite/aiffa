@@ -7,8 +7,7 @@ import type { ItemProps } from '../../../types';
 const Item: React.FC<ItemProps> = ({ value: v, children }) => {
   const { value, setValue, size } = useSegmentCtx();
   const isActive = value === v;
-  const { itemInactiveColor } = useSegmentColors();
-  const color = isActive ? 'white' : itemInactiveColor;
+  const { itemInactiveColor, indicatorBg } = useSegmentColors();
   const paddings = {
     xs: { px: 3, py: 2 },
     sm: { px: 4, py: 2.5 },
@@ -34,9 +33,9 @@ const Item: React.FC<ItemProps> = ({ value: v, children }) => {
       justifyContent="center"
       lineHeight="1"
       _hover={{ opacity: 0.95 }}
-      color={color}
-      bg="transparent"
-      transition="color 120ms ease"
+      color={isActive ? 'white' : itemInactiveColor}
+      bg={isActive ? indicatorBg : 'transparent'}
+      transition="color 120ms ease, background-color 120ms ease"
     >
       {children}
     </Box>

@@ -63,7 +63,8 @@ export const MobileSearch: React.FC<MobileSearchProps> = (props) => {
           onFocus={() => searchQuery.trim() && setSearchOpen(true)}
           onKeyDown={onInputKeyDown}
           _placeholder={{ color: searchPlaceholder, fontSize: 'sm' }}
-          _focus={{ bg: searchFocusBg, boxShadow: `${ringShadow}, 0 4px 12px rgba(0, 0, 0, 0.15)`, outline: 'none' }}
+          _focus={{ bg: searchBg, outline: 'none', boxShadow: 'none' }}
+          _focusVisible={{ bg: searchBg, outline: 'none', boxShadow: 'none' }}
           _hover={{ bg: searchHoverBg }}
           transition="all 0.2s ease-in-out"
           sx={{

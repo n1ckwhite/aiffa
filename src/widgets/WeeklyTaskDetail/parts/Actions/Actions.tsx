@@ -3,9 +3,7 @@ import { HStack, Stack, Button, Icon, Link as ChakraLink } from '@chakra-ui/reac
 import { FaUpRightFromSquare } from 'react-icons/fa6';
 import { ActionsProps } from './types';
 
-
-
-const Actions: React.FC<ActionsProps> = ({ onCheck, checking, done, externalLinks }) => {
+const Actions: React.FC<ActionsProps> = ({ onCheck, checking, done, externalLinks, isEditorReady }) => {
   return (
     <Stack
       direction={{ base: 'column', md: 'row' }}
@@ -13,7 +11,15 @@ const Actions: React.FC<ActionsProps> = ({ onCheck, checking, done, externalLink
       align={{ base: 'stretch', md: 'center' }}
       mt={{ base: 3, md: 4 }}
     >
-      <Button colorScheme="blue" onClick={onCheck} isLoading={checking} loadingText="Проверка" isDisabled={!!done} w={{ base: '100%', md: 'auto' }}>
+      <Button
+        colorScheme="blue"
+        onClick={onCheck}
+        isLoading={checking}
+        loadingText="Проверка"
+        isDisabled={!!done || !isEditorReady}
+        cursor={!isEditorReady ? 'not-allowed' : undefined}
+        w={{ base: '100%', md: 'auto' }}
+      >
         Проверить
       </Button>
       {externalLinks.length > 0 && (

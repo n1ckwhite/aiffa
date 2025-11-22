@@ -120,6 +120,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
             checking={checking}
             done={!!task.done}
             externalLinks={externalLinks}
+            isEditorReady={!showVsOverlay}
           />
           {result && !result.ok && (
             <Box

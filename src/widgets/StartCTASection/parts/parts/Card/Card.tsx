@@ -1,8 +1,9 @@
 import React from 'react';
-import { VStack, HStack, Box, Badge, Text, Link } from '@chakra-ui/react';
+import { VStack, HStack, Box, Text, Link } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { useStartCTAColors } from '../../../colors/useStartCTAColors';
 import type { CardProps } from './types';
+import PillBadge from 'shared/ui/PillBadge';
 
 const Card: React.FC<CardProps> = ({
   dotColor,
@@ -48,7 +49,9 @@ const Card: React.FC<CardProps> = ({
     >
       <HStack spacing={3} justify="center" align="center">
         <Box w="10px" h="10px" borderRadius="full" bg={dotColor} boxShadow={dotShadow} />
-        <Badge colorScheme={badgeScheme} variant="subtle">{badgeText}</Badge>
+        <PillBadge colorScheme={badgeScheme as any}>
+          {badgeText}
+        </PillBadge>
       </HStack>
       <Text fontWeight="semibold" color={titleColor} fontSize="lg">{title}</Text>
       <Text fontSize="sm" color={textColor}>{description}</Text>

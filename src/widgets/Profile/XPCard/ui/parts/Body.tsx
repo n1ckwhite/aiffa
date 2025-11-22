@@ -1,7 +1,8 @@
 import React from 'react';
-import { VStack, Text, Box, HStack, Badge, Icon } from '@chakra-ui/react';
+import { VStack, Text, Box, HStack } from '@chakra-ui/react';
 import { burst } from '../../animations/burst';
 import type { XPCardProps } from '../../types/XPCard.types';
+import PillBadge from 'shared/ui/PillBadge';
 
 const Body: React.FC<Pick<XPCardProps, 'xp' | 'tier' | 'tierBadge' | 'nextTierBadge' | 'progressPct' | 'xpBursts'>> = ({ xp, tier, tierBadge, nextTierBadge, progressPct, xpBursts }) => {
   return (
@@ -14,13 +15,19 @@ const Body: React.FC<Pick<XPCardProps, 'xp' | 'tier' | 'tierBadge' | 'nextTierBa
         ))}
       </Box>
       <HStack w="100%" justify={nextTierBadge ? 'space-between' : 'flex-start'} spacing={2}>
-        <Badge variant="outline" colorScheme={tierBadge.colorScheme as any} borderRadius="full" px={2.5} py={0.5} display="inline-flex" alignItems="center" gap={1} fontSize="xs">
-          <Icon as={tierBadge.icon as unknown as React.ElementType} /> {tier}
-        </Badge>
+        <PillBadge
+          colorScheme={tierBadge.colorScheme as any}
+          icon={tierBadge.icon as unknown as React.ElementType}
+        >
+          {tier}
+        </PillBadge>
         {nextTierBadge && (
-          <Badge variant="outline" colorScheme={nextTierBadge.colorScheme as any} borderRadius="full" px={2.5} py={0.5} display="inline-flex" alignItems="center" gap={1} fontSize="xs">
-            <Icon as={nextTierBadge.icon as unknown as React.ElementType} /> {nextTierBadge.label}
-          </Badge>
+          <PillBadge
+            colorScheme={nextTierBadge.colorScheme as any}
+            icon={nextTierBadge.icon as unknown as React.ElementType}
+          >
+            {nextTierBadge.label}
+          </PillBadge>
         )}
       </HStack>
     </VStack>

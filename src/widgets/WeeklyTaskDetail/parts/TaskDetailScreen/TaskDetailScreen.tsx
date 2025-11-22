@@ -47,20 +47,6 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
         px={{ base: 4, md: 6 }}
         py={{ base: 8, md: 10 }}
       >
-        <Button
-          variant="outline"
-          colorScheme="blue"
-          mb={4}
-          onClick={() => navigate("/weekly")}
-          leftIcon={<ArrowBackIcon />}
-          borderRadius="full"
-          px={5}
-          py={2}
-          fontWeight="bold"
-          transition="background-color 0.15s ease, transform 0.1s ease"
-        >
-          К задачам недели
-        </Button>
         <Box
           borderWidth={0}
           borderRadius="xl"
@@ -77,6 +63,22 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
             description={mdMeta?.description || task.description}
             done={!!task.done}
           />
+          <Button
+            variant="outline"
+            colorScheme="blue"
+            mt={2}
+            mb={4}
+            onClick={() => navigate("/weekly")}
+            leftIcon={<ArrowBackIcon />}
+            borderRadius="full"
+            px={5}
+            py={2}
+            fontWeight="bold"
+            alignSelf="flex-start"
+            transition="background-color 0.15s ease, transform 0.1s ease"
+          >
+            К задачам недели
+          </Button>
           <HStack spacing={0} my={4}>
             <Divider />
           </HStack>

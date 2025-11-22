@@ -22,14 +22,12 @@ export const CodeBlock: React.FC<CodeBlockProps> = (nodeProps) => {
   if (isInline) {
     return (
       <Code
+        display="inline"
         className={className}
-        px={1}
-        py={0}
-        borderRadius="md"
+        px={0.5}
+        py={0.5}
         bg={colors.inlineBg}
         color={colors.inlineColor}
-        borderWidth="1px"
-        borderColor={colors.inlineBorderColor}
         fontSize="inherit"
         lineHeight="inherit"
         verticalAlign="middle"

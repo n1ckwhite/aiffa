@@ -53,8 +53,17 @@ const Form: React.FC<FormProps> = ({ value, onChange, onImport, isImporting, pre
         borderRadius="full"
         px={5}
       />
-      <Button onClick={onImport} isLoading={isImporting} loadingText="Импорт" colorScheme="blue" borderRadius="full" px={6}>
-        Импорт
+      <Button
+        onClick={onImport}
+        isLoading={isImporting}
+        colorScheme="blue"
+        borderRadius="full"
+        px={6}
+        minWidth="100px"
+        maxWidth="100px"
+        aria-label="Импортировать данные из GitHub"
+      >
+        {!isImporting && 'Импорт'}
       </Button>
     </HStack>
   );

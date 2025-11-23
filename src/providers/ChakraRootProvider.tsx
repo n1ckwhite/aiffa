@@ -8,15 +8,18 @@ import {
 } from "@chakra-ui/react";
 import theme from "shared/theme/theme";
 import { UserProfileProvider } from "entities/user";
+import type { UserProfile } from "entities/user/model/types";
 
 type ChakraRootProviderProps = {
   children: React.ReactNode;
   cookies: string;
+  initialProfile: UserProfile;
 };
 
 export const ChakraRootProvider = ({
   children,
-  cookies
+  cookies,
+  initialProfile
 }: ChakraRootProviderProps) => {
   const colorModeManager = cookieStorageManagerSSR(cookies ?? "");
 
@@ -27,7 +30,9 @@ export const ChakraRootProvider = ({
         cssVarsRoot="body"
         colorModeManager={colorModeManager}
       >
-        <UserProfileProvider>{children}</UserProfileProvider>
+        <UserProfileProvider initialProfile={initialProfile}>
+          {children}
+        </UserProfileProvider>
       </ChakraProvider>
     </CacheProvider>
   );

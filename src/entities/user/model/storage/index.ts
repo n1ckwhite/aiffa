@@ -10,7 +10,7 @@ const safeParse = (raw: string | null): unknown => {
   }
 };
 
-const sanitizeProfile = (data: unknown): UserProfile => {
+export const sanitizeProfileFromUnknown = (data: unknown): UserProfile => {
   const parsed = data as any;
   if (!parsed || typeof parsed !== 'object') return DEFAULT_PROFILE;
   return {
@@ -37,7 +37,7 @@ export const loadProfileFromStorage = (): UserProfile => {
   try {
     const raw = typeof localStorage !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
     const data = safeParse(raw);
-    return sanitizeProfile(data);
+    return sanitizeProfileFromUnknown(data);
   } catch {
     return DEFAULT_PROFILE;
   }

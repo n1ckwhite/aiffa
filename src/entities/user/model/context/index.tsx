@@ -1,6 +1,7 @@
 import React from 'react';
 import type { UserProfile, WeeklyTask, UserProfileContextValue } from '../types';
 import { loadProfileFromStorage, saveProfileToStorage, clearProfileStorage } from '../storage';
+import { DEFAULT_PROFILE, PROFILE_COOKIE_KEY } from '../constants';
 import {
   updateProfileState,
   resetProfileState,
@@ -11,13 +12,36 @@ import {
 
 const UserProfileContext = React.createContext<UserProfileContextValue | undefined>(undefined);
 
-export const UserProfileProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [profile, setProfile] = React.useState<UserProfile>(() => {
-    return loadProfileFromStorage();
-  });
+type UserProfileProviderProps = React.PropsWithChildren<{
+  initialProfile?: UserProfile;
+}>;
+
+export const UserProfileProvider: React.FC<UserProfileProviderProps> = ({
+  children,
+  initialProfile,
+}) => {
+  const [profile, setProfile] = React.useState<UserProfile>(initialProfile ?? DEFAULT_PROFILE);
+
+  React.useEffect(() => {
+    if (initialProfile) return;
+    // На клиенте, если нет профиля из куки, подменяем данными из localStorage
+    try {
+      const stored = loadProfileFromStorage();
+      setProfile(stored);
+    } catch {
+      // игнорируем ошибки чтения и остаёмся на профиле по умолчанию
+    }
+  }, [initialProfile]);
 
   React.useEffect(() => {
     saveProfileToStorage(profile);
+    try {
+      if (typeof document === 'undefined') return;
+      const encoded = encodeURIComponent(JSON.stringify(profile));
+      document.cookie = `${PROFILE_COOKIE_KEY}=${encoded}; path=/; max-age=31536000; samesite=lax`;
+    } catch {
+      // игнорируем ошибки записи куки
+    }
   }, [profile]);
 
   const updateProfile = React.useCallback((updates: Partial<UserProfile>) => {

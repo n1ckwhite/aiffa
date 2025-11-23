@@ -1,12 +1,13 @@
 import React from 'react';
-import { useDisclosure, useToast } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { useUserProfile } from 'entities/user';
+import { useSingletonToast } from 'shared/hooks/useSingletonToast';
 import { GH_PREFIX, parseGithubUsername } from './useGithubHelpers';
 
 export const useProfileEditing = () => {
   const { profile, updateProfile } = useUserProfile();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
+  const showToast = useSingletonToast();
 
   const [name, setName] = React.useState(profile.name);
   const [bio, setBio] = React.useState(profile.bio);
@@ -31,9 +32,9 @@ export const useProfileEditing = () => {
     setBio(nextBio);
     setGithubUrl(nextGithub);
     updateProfile({ name: nextName, bio: nextBio, githubUrl: nextGithub });
-    toast({ title: 'Профиль сохранён', status: 'success', duration: 1800, isClosable: true });
+    showToast({ title: 'Профиль сохранён', status: 'success', duration: 1800, isClosable: true });
     onClose();
-  }, [editName, editBio, editGithubUrl, updateProfile, toast, onClose]);
+  }, [editName, editBio, editGithubUrl, updateProfile, showToast, onClose]);
 
   const onReset = React.useCallback(() => {
     const nextName = 'Пользователь';
@@ -42,21 +43,21 @@ export const useProfileEditing = () => {
     setBio(nextBio);
     setGithubUrl('');
     updateProfile({ name: nextName, bio: nextBio, githubUrl: '', githubUsername: '', avatarUrl: '' });
-    toast({ title: 'Имя и описание сброшены', status: 'info', duration: 1800, isClosable: true });
+    showToast({ title: 'Имя и описание сброшены', status: 'info', duration: 1800, isClosable: true });
     setEditGithubUrl(GH_PREFIX);
-  }, [updateProfile, toast]);
+  }, [updateProfile, showToast]);
 
   const importFromGithub = React.useCallback(async () => {
     try {
       const url = (editGithubUrl || '').trim();
       if (!url) {
-        toast({ title: 'Введите ссылку на GitHub', status: 'warning', duration: 1800, isClosable: true });
+        showToast({ title: 'Введите ссылку на GitHub', status: 'warning', duration: 1800, isClosable: true });
         return;
       }
       const m = url.match(/github\.com\/(?:users\/)?([A-Za-z0-9-_.]+)/i);
       const username = m?.[1];
       if (!username) {
-        toast({ title: 'Не удалось определить имя пользователя', status: 'error', duration: 2000, isClosable: true });
+        showToast({ title: 'Не удалось определить имя пользователя', status: 'error', duration: 2000, isClosable: true });
         return;
       }
       setIsImporting(true);
@@ -73,13 +74,13 @@ export const useProfileEditing = () => {
       setName(ghName);
       setBio(ghBio);
       setGithubUrl(url);
-      toast({ title: 'Импортировано из GitHub', status: 'success', duration: 1800, isClosable: true });
+      showToast({ title: 'Импортировано из GitHub', status: 'success', duration: 1800, isClosable: true });
     } catch {
-      toast({ title: 'Не удалось импортировать с GitHub', status: 'error', duration: 2000, isClosable: true });
+      showToast({ title: 'Не удалось импортировать с GitHub', status: 'error', duration: 2000, isClosable: true });
     } finally {
       setIsImporting(false);
     }
-  }, [editGithubUrl, updateProfile, toast]);
+  }, [editGithubUrl, updateProfile, showToast]);
 
   const githubUsername = (profile as any).githubUsername || parseGithubUsername(githubUrl);
 

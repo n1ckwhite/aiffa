@@ -1,5 +1,5 @@
 import React from 'react';
-import { useToast, useColorMode } from '@chakra-ui/react';
+import { useColorMode } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useDesktopSearchOverlayLock } from '../../../hooks/useDesktopSearchOverlayLock';
 import { useMobileMenuLock } from '../../../hooks/useMobileMenuLock';
@@ -8,11 +8,12 @@ import { useSearchHotkeys } from '../../../hooks/useSearchHotkeys';
 import { useSearchOutsideClick } from '../../../hooks/useSearchOutsideClick';
 import { useBroadcastMobileMenu } from '../../../hooks/useBroadcastMobileMenu';
 import { useDebouncedLessonsSearch } from '../../../hooks/useDebouncedLessonsSearch';
+import { useSingletonToast } from 'shared/hooks/useSingletonToast';
 
 export const useHeaderController = () => {
   const navigate = useNavigate();
   const { toggleColorMode } = useColorMode();
-  const toast = useToast();
+  const toast = useSingletonToast();
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [searchOpen, setSearchOpen] = React.useState(false);

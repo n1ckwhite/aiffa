@@ -15,7 +15,7 @@ const Content: React.FC<ContentProps> = ({ completed = true, onClose, onContinue
           {completed ? 'Отлично! Все задачи выполнены' : 'Задача выполнена'}
         </Heading>
         <Text mt={2} color={descColor}>
-          {completed ? 'Можно переходить к следующему этапу или повторить упражнения.' : 'Продолжай — награда зачислена, двигаемся дальше.'}
+          {completed ? 'Можно переходить к следующему материалу или повторить упражнения.' : 'Продолжай — награда зачислена, двигаемся дальше.'}
         </Text>
         <Button mt={6} colorScheme="blue" size="lg" onClick={onContinue || onClose}>Продолжить</Button>
       </Box>

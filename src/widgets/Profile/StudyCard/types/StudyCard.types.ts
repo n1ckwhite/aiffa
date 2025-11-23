@@ -8,6 +8,7 @@ export type StudyCardProps = {
   skeletonRingTop: string;
   dividerColor: string;
   hintColor: string;
+  onOpenMaterials?: () => void;
 };
 
 

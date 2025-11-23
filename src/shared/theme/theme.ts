@@ -160,18 +160,6 @@ const theme: Theme = {
         boxShadow: "soft"
       }
     },
-    Modal: {
-      ...(baseTheme.components?.Modal as any),
-      baseStyle: {
-        ...((baseTheme.components?.Modal as any)?.baseStyle ?? {}),
-        dialog: {
-          ...((baseTheme.components?.Modal as any)?.baseStyle?.dialog ?? {}),
-          bg: "surface.elevated",
-          boxShadow: "softLg",
-          backdropFilter: "saturate(1.05) blur(8px)"
-        }
-      }
-    },
     Badge: {
       ...(baseTheme.components?.Badge as any),
       baseStyle: {

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, VStack, FormControl, FormLabel, Input, Textarea, Button, HStack } from '@chakra-ui/react';
 import type { EditModalProps } from '../types/EditModal.types';
+import { useEditModalColors } from './colors/useEditModalColors';
 
 const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, editName, editBio, setEditName, setEditBio, onSave, resetColor, resetHoverBg, resetActiveBg }) => {
+  const { borderColor } = useEditModalColors()
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset="scale" blockScrollOnMount={true} scrollBehavior="inside">
       <ModalOverlay />
@@ -13,11 +15,11 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, editName, editBi
           <VStack spacing={{ base: 3, md: 4 }} align="stretch">
             <FormControl>
               <FormLabel htmlFor="profile-name">Имя</FormLabel>
-              <Input id="profile-name" name="name" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Пользователь" autoFocus borderRadius="md" />
+              <Input borderColor={borderColor} id="profile-name" name="name" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Пользователь" autoFocus borderRadius="md" />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="profile-bio">Описание</FormLabel>
-              <Textarea id="profile-bio" name="bio" value={editBio} onChange={(e) => setEditBio(e.target.value)} placeholder="Описание" resize="vertical" minH={{ base: '80px', md: '100px' }} />
+              <Textarea borderColor={borderColor} id="profile-bio" name="bio" value={editBio} onChange={(e) => setEditBio(e.target.value)} placeholder="Описание" resize="vertical" minH={{ base: '80px', md: '100px' }} />
             </FormControl>
           </VStack>
         </ModalBody>
@@ -35,5 +37,3 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, editName, editBi
 };
 
 export default EditModal;
-
-

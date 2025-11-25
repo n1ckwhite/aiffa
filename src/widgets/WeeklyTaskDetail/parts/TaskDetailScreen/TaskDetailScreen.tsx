@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, Divider, HStack, Text } from '@chakra-ui/react';
-import { ArrowBackIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, WarningTwoIcon } from '@chakra-ui/icons';
 import { useTaskDetail } from './hooks/useTaskDetail';
 import MetaHeader from '../MetaHeader/MetaHeader';
 import AuthorNote from '../Author/AuthorNote';
@@ -140,13 +140,27 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
           {result && !result.ok && (
             <Box
               role="alert"
-              mt={3}
-              borderRadius="md"
-              bg="yellow.100"
-              color="black"
-              p={3}
+              mt={4}
+              borderRadius="lg"
+              bg="yellow.50"
+              borderWidth="1px"
+              borderColor="yellow.300"
+              boxShadow="0 8px 24px rgba(0, 0, 0, 0.08)"
+              p={4}
             >
-              {result.msg}
+              <HStack align="flex-start" spacing={3}>
+                <Box mt={1}>
+                  <WarningTwoIcon boxSize={5} color="yellow.500" />
+                </Box>
+                <Box>
+                  <Text fontWeight="semibold" color="yellow.900">
+                    Проверка не прошла
+                  </Text>
+                  <Text mt={1} fontSize="sm" color="yellow.900">
+                    {result.msg}
+                  </Text>
+                </Box>
+              </HStack>
             </Box>
           )}
           {isOpen && (

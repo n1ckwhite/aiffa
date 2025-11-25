@@ -41,6 +41,11 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
 
   const [isEditorReady, setIsEditorReady] = React.useState(false);
 
+  const handleContinueAfterCompletion = React.useCallback(() => {
+    onClose();
+    navigate('/weekly');
+  }, [navigate, onClose]);
+
   if (!mdMeta) {
     return <WeeklyTaskDetailSkeleton />;
   }
@@ -147,8 +152,9 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
           {isOpen && (
             <TaskCompletionModal
               completed={congratsAll}
+              context="weekly"
               onClose={onClose}
-              onContinue={onClose}
+              onContinue={handleContinueAfterCompletion}
             />
           )}
         </Box>

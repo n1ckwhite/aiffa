@@ -1,11 +1,14 @@
 import React from 'react';
-import { Box, Button, HStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Spinner, Text } from '@chakra-ui/react';
 import { useEditorColors } from '../../colors/useEditorColors';
 import { CodeEditor } from 'shared/ui/CodeEditor';
 import { EditorProps } from './types';
+import { useEditorStart } from './hooks/useEditorStart';
 
 const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onStart, onReady }) => {
   const { border, titleBarBg, editorBg, overlayBg, startBg, startHoverBg, startActiveBg, strongBorder } = useEditorColors();
+  const { isStarting, handleStartClick } = useEditorStart({ onStart });
+
   return (
     <Box borderWidth="1px" borderColor={border} borderRadius="lg" position="relative">
       <HStack h="30px" px={3} align="center" gap={2} bg={titleBarBg} borderBottomWidth="1px" borderColor={border} borderTopRadius="lg">
@@ -25,9 +28,26 @@ const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onS
       </Box>
       {overlay && (
         <Box position="absolute" inset={0} zIndex={3} display="flex" alignItems="center" justifyContent="center" bg={overlayBg} borderRadius="lg">
-          <Button colorScheme="blue" size="lg" borderRadius="full" onClick={onStart} bg={startBg} _hover={{ bg: startHoverBg }} _active={{ bg: startActiveBg }}>
-            Начать
-          </Button>
+          {isStarting ? (
+            <HStack spacing={3}>
+              <Spinner color="blue.300" thickness="3px" />
+              <Text fontSize="lg" fontWeight="semibold" color="whiteAlpha.900">
+                Загрузка Vscode
+              </Text>
+            </HStack>
+          ) : (
+            <Button
+              colorScheme="blue"
+              size="lg"
+              borderRadius="full"
+              onClick={handleStartClick}
+              bg={startBg}
+              _hover={{ bg: startHoverBg }}
+              _active={{ bg: startActiveBg }}
+            >
+              Начать
+            </Button>
+          )}
         </Box>
       )}
       <Box position="absolute" inset={0} borderRadius="lg" borderWidth="2px" borderColor={strongBorder} pointerEvents="none" zIndex={2} />

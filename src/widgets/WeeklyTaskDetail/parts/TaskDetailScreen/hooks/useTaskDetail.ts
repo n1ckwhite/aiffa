@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDisclosure } from '@chakra-ui/react';
+import { useDisclosure, useToast } from '@chakra-ui/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUserProfile } from 'entities/user';
 import { useLoadMdMeta } from '../../../hooks/useLoadMdMeta';
@@ -16,6 +16,7 @@ export const useTaskDetail = (initialTaskId?: string) => {
   const navigate = useNavigate();
   const { profile, setWeeklyTask, updateProfile } = useUserProfile();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
   useScrollToTop();
 
   const task = React.useMemo(() => {
@@ -89,7 +90,16 @@ export const useTaskDetail = (initialTaskId?: string) => {
         const res = mdMeta.validator(input);
         ok = typeof res === 'boolean' ? res : !!(res as any).ok;
         if (!ok && res && typeof res === 'object' && 'msg' in (res as any)) {
-          setResult({ ok: false, msg: String((res as any).msg || 'Пока не совсем. Попробуйте ещё раз.') });
+          const msg = String((res as any).msg || 'Пока не совсем. Попробуйте ещё раз.');
+          setResult({ ok: false, msg });
+          toast({
+            status: 'error',
+            title: 'Пока не совсем',
+            description: msg,
+            isClosable: true,
+            duration: 6000,
+            position: 'top',
+          });
           return;
         }
       } else {
@@ -106,12 +116,21 @@ export const useTaskDetail = (initialTaskId?: string) => {
         setResult(null);
         onOpen();
       } else {
-        setResult({ ok: false, msg: 'Пока не совсем. Попробуйте ещё раз.' });
+        const msg = 'Пока не совсем. Попробуйте ещё раз.';
+        setResult({ ok: false, msg });
+        toast({
+          status: 'error',
+          title: 'Пока не совсем',
+          description: msg,
+          isClosable: true,
+          duration: 6000,
+          position: 'top',
+        });
       }
     } finally {
       setChecking(false);
     }
-  }, [task, mdMeta, input, profile, meta, setWeeklyTask, updateProfile, onOpen]);
+  }, [task, mdMeta, input, profile, meta, setWeeklyTask, updateProfile, onOpen, toast]);
 
   return {
     navigate,

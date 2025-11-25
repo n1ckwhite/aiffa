@@ -155,7 +155,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
                     Проверка не прошла
                   </Text>
                   <Text mt={1} fontSize="sm" color={errorTextColor}>
-                    {result.msg}
+              {result.msg}
                   </Text>
                 </Box>
               </HStack>

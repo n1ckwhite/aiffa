@@ -71,8 +71,8 @@ export const useTaskDetail = (initialTaskId?: string) => {
         if (monacoEl) {
           monacoEl.focus?.();
         } else {
-          const nativeTextarea = document.querySelector('textarea[name="code-editor-input"]') as HTMLTextAreaElement | null;
-          nativeTextarea?.focus?.();
+        const nativeTextarea = document.querySelector('textarea[name="code-editor-input"]') as HTMLTextAreaElement | null;
+        nativeTextarea?.focus?.();
         }
         setShowVsOverlay(false);
       }, 400);

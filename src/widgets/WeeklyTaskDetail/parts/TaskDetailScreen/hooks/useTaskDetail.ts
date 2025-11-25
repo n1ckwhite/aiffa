@@ -65,15 +65,20 @@ export const useTaskDetail = (initialTaskId?: string) => {
   const [showVsOverlay, setShowVsOverlay] = React.useState<boolean>(true);
 
   const openVSCode = React.useCallback(() => {
-    setShowVsOverlay(false);
     try {
       setTimeout(() => {
         const monacoEl = document.querySelector('[class*="monaco-editor"]') as HTMLElement | null;
-        if (monacoEl) { monacoEl.focus?.(); return; }
-        const nativeTextarea = document.querySelector('textarea[name="code-editor-input"]') as HTMLTextAreaElement | null;
-        nativeTextarea?.focus?.();
-      }, 0);
-    } catch {}
+        if (monacoEl) {
+          monacoEl.focus?.();
+        } else {
+          const nativeTextarea = document.querySelector('textarea[name="code-editor-input"]') as HTMLTextAreaElement | null;
+          nativeTextarea?.focus?.();
+        }
+        setShowVsOverlay(false);
+      }, 400);
+    } catch {
+      setShowVsOverlay(false);
+    }
   }, []);
 
   

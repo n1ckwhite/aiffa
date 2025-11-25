@@ -27,7 +27,16 @@ const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onS
         />
       </Box>
       {overlay && (
-        <Box position="absolute" inset={0} zIndex={3} display="flex" alignItems="center" justifyContent="center" bg={overlayBg} borderRadius="lg">
+        <Box
+          position="absolute"
+          inset={0}
+          zIndex={3}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          bg={overlayBg}
+          borderRadius="lg"
+        >
           {isStarting ? (
             <HStack spacing={3}>
               <Spinner color="blue.300" thickness="3px" />

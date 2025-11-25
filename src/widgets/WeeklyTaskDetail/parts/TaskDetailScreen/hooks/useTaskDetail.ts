@@ -132,6 +132,11 @@ export const useTaskDetail = (initialTaskId?: string) => {
     }
   }, [task, mdMeta, input, profile, meta, setWeeklyTask, updateProfile, onOpen, toast]);
 
+  const handleContinueAfterCompletion = React.useCallback(() => {
+    onClose();
+    navigate('/weekly');
+  }, [navigate, onClose]);
+
   return {
     navigate,
     taskId,
@@ -146,7 +151,8 @@ export const useTaskDetail = (initialTaskId?: string) => {
     onCheck,
     isOpen,
     onClose,
-    externalLinks
+    externalLinks,
+    handleContinueAfterCompletion,
   };
 };
 

@@ -10,6 +10,7 @@ import ActionsBar from '../Actions/Actions';
 import TaskCompletionModal from 'features/TaskCompletionModal';
 import SupportBlock from 'widgets/SupportBlock';
 import WeeklyTaskDetailSkeleton from 'pages/WeeklyTaskDetailPage/Skeleton';
+import { useTaskDetailColors } from './colors/useTaskDetailColors';
 
 type TaskDetailScreenProps = {
   taskId?: string;
@@ -36,15 +37,12 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
     onCheck,
     isOpen,
     onClose,
-    externalLinks
+    externalLinks,
+    handleContinueAfterCompletion,
   } = useTaskDetail(initialTaskId);
 
   const [isEditorReady, setIsEditorReady] = React.useState(false);
-
-  const handleContinueAfterCompletion = React.useCallback(() => {
-    onClose();
-    navigate('/weekly');
-  }, [navigate, onClose]);
+  const { errorBg, errorBorder, errorTitleColor, errorTextColor, errorIconColor } = useTaskDetailColors();
 
   if (!mdMeta) {
     return <WeeklyTaskDetailSkeleton />;
@@ -141,22 +139,22 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
             <Box
               role="alert"
               mt={4}
-              borderRadius="lg"
-              bg="yellow.50"
+              borderRadius="md"
+              bg={errorBg}
               borderWidth="1px"
-              borderColor="yellow.300"
-              boxShadow="0 8px 24px rgba(0, 0, 0, 0.08)"
+              borderColor={errorBorder}
+              boxShadow="0 6px 18px rgba(0, 0, 0, 0.18)"
               p={4}
             >
               <HStack align="flex-start" spacing={3}>
                 <Box mt={1}>
-                  <WarningTwoIcon boxSize={5} color="yellow.500" />
+                  <WarningTwoIcon boxSize={5} color={errorIconColor} />
                 </Box>
                 <Box>
-                  <Text fontWeight="semibold" color="yellow.900">
+                  <Text fontWeight="semibold" color={errorTitleColor}>
                     Проверка не прошла
                   </Text>
-                  <Text mt={1} fontSize="sm" color="yellow.900">
+                  <Text mt={1} fontSize="sm" color={errorTextColor}>
                     {result.msg}
                   </Text>
                 </Box>

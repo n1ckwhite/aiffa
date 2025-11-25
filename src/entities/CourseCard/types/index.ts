@@ -1,4 +1,5 @@
 export interface CourseCardProps {
+  moduleId: string;
   title: string;
   description: string;
   lessonsCount: number;

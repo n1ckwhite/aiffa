@@ -24,6 +24,7 @@ const CourseGrid: React.FC<CourseGridProps> = ({ category = 'all', showHeader = 
             {filtered.map((course, index) => (
               <Box key={course.id} data-index={index} sx={{ animation: 'none' }}>
                 <CourseCard
+                  moduleId={course.moduleId}
                   title={course.title}
                   description={course.description}
                   lessonsCount={course.lessonsCount}

@@ -7,8 +7,10 @@ import { fadeInUp } from '../animations';
 import { HeaderIcon, LessonsPill, StudyTimePill, CTAArrow } from './parts';
 import PillBadge from 'shared/ui/PillBadge';
 import { useCourseCardColors } from './colors/useCourseCardColors';
+import { useCourseProgress } from './hooks/useCourseProgress';
 
 const CourseCard: React.FC<CourseCardProps> = React.memo(({
+  moduleId,
   title,
   description,
   lessonsCount,
@@ -36,6 +38,8 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
     descColor: textColor,
     accentColor,
   } = useCourseCardColors();
+
+  const { solvedLessonsCount } = useCourseProgress({ moduleId, lessonsCount });
 
 
   return (
@@ -146,7 +150,12 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
         </HStack>
 
         <VStack spacing={3} align="start" pt={3} pr={14}>
-          <LessonsPill lessonsCount={lessonsCount} accentColor={accentColor} isActive={isActive} />
+          <LessonsPill
+            lessonsCount={lessonsCount}
+            accentColor={accentColor}
+            isActive={isActive}
+            solvedLessonsCount={solvedLessonsCount}
+          />
           <StudyTimePill studyTime={studyTime} />
         </VStack>
 

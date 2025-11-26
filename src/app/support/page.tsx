@@ -12,10 +12,7 @@ const SupportPage = () => {
   const mutedTextColor = useColorModeValue("gray.600", "gray.300");
 
   const heroAsideBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.85)");
-  const overviewBg = useColorModeValue(
-    "linear(to-b, whiteAlpha.900, rgba(59,130,246,0.06))",
-    "linear(to-r, rgba(37, 99, 235, 0.18), surface.elevated)"
-  );
+
   const overviewAsideBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.9)");
   const surfaceCardBg = useColorModeValue("whiteAlpha.900", "surface.elevated");
 
@@ -52,8 +49,6 @@ const SupportPage = () => {
         <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
           {/* Hero-блок */}
           <Box
-            borderRadius="2xl"
-            p={{ base: 5, md: 7 }}
             transition="none"
           >
             <Stack
@@ -84,7 +79,7 @@ const SupportPage = () => {
                     colorScheme="blue"
                     borderRadius="full"
                   >
-                    Обсудить партнёрство в Telegram
+                    Написать в Telegram
                   </Button>
                   <Button
                     as={Link}
@@ -92,7 +87,7 @@ const SupportPage = () => {
                     variant="outline"
                     borderRadius="full"
                   >
-                    Запросить медиакит по email
+                    Написать на email
                   </Button>
                 </HStack>
               </VStack>
@@ -144,8 +139,6 @@ const SupportPage = () => {
           {/* Кому и зачем подходит спонсорство */}
           <Box
             position="relative"
-            borderRadius="2xl"
-            p={{ base: 5, md: 6 }}
             overflow="hidden"
             transition="none"
           >

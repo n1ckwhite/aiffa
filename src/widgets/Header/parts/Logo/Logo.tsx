@@ -17,7 +17,7 @@ const Logo: React.FC<LogoProps> = () => {
       <Image
         src="/aiffa.svg"
         alt="Логотип AIFFA"
-        boxSize={{ base: 8, md: 9, lg: 10 }}
+        boxSize={8}
         flexShrink={0}
         pointerEvents="none"
       />

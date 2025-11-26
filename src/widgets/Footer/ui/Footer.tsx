@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Container, SimpleGrid } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react';
 import { useFooterColors } from './colors/useFooterColors';
-import { Branding, Support, Community, Navigation } from './parts';
+import { Branding, Sections, Support, Community } from './parts';
 import { emailHref, telegramHref, githubHref, habrHref, habrCareerHref } from '../model/links';
 import { handleDonate as donateHelper } from '../../../utils/donate';
 
@@ -17,6 +17,7 @@ const Footer: React.FC = () => {
       <Container maxW="1200px" pt={6} pb={3}>
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6}>
           <Branding />
+          <Sections />
           <Support onDonate={handleDonate} />
           <Community
             telegramHref={telegramHref}
@@ -25,7 +26,6 @@ const Footer: React.FC = () => {
             habrHref={habrHref}
             habrCareerHref={habrCareerHref}
           />
-          <Navigation />
         </SimpleGrid>
       </Container>
     </Box>

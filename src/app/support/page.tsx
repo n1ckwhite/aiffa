@@ -2,11 +2,9 @@
 
 import React from "react";
 import { Box, Button, Heading, HStack, Link, Stack, Text, VStack, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
-import PillBadge from "shared/ui/PillBadge";
-import { TelegramIcon } from "@/widgets/Footer/icons/Telegram";
-import { MailIcon } from "@/widgets/Footer/icons/Mail";
+import PillBadge from "@/shared/ui/PillBadge";
 
-const PartnersPage = () => {
+const SupportPage = () => {
   const formatShadow = useColorModeValue(
     "0 18px 45px rgba(15, 23, 42, 0.12)",
     "0 18px 45px rgba(15, 23, 42, 0.7)"
@@ -90,9 +88,6 @@ const PartnersPage = () => {
                     isExternal
                     colorScheme="blue"
                     borderRadius="full"
-                    px={{ base: 6, md: 7 }}
-                    fontWeight="semibold"
-                    leftIcon={<TelegramIcon />}
                   >
                     Написать в Telegram
                   </Button>
@@ -101,9 +96,6 @@ const PartnersPage = () => {
                     href="mailto:bbycinka@yandex.ru?subject=Запрос медиакита AIFFA"
                     variant="outline"
                     borderRadius="full"
-                    px={{ base: 6, md: 7 }}
-                    fontWeight="semibold"
-                    leftIcon={<MailIcon />}
                   >
                     Написать на email
                   </Button>
@@ -762,4 +754,4 @@ const PartnersPage = () => {
   );
 };
 
-export default PartnersPage;
+export default SupportPage;

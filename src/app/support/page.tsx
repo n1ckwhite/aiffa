@@ -145,7 +145,6 @@ const SupportPage = () => {
           <Box
             position="relative"
             borderRadius="2xl"
-            bgGradient={overviewBg}
             p={{ base: 5, md: 6 }}
             overflow="hidden"
             transition="none"
@@ -742,63 +741,6 @@ const SupportPage = () => {
             </VStack>
           </Box>
 
-          {/* Как начать сотрудничество / контакты */}
-          <VStack align="flex-start" spacing={4}>
-            <Heading as="h2" size="md" letterSpacing="-0.02em">
-              Как начать сотрудничество
-            </Heading>
-            <Text fontSize="sm" color={mutedTextColor}>
-              Напишите нам — обсудим формат, предложим идеи задач и подготовим медиакит под
-              ваши цели.
-            </Text>
-            <Stack
-              direction={{ base: "column", md: "row" }}
-              spacing={{ base: 4, md: 6 }}
-              align={{ base: "stretch", md: "flex-start" }}
-            >
-              <Box flex={1} borderRadius="2xl" bg={surfaceCardBg} p={{ base: 4, md: 5 }}>
-                <VStack align="flex-start" spacing={3}>
-                  <HStack spacing={2}>
-                    <Text fontSize="lg">📩</Text>
-                    <Text fontWeight="semibold">Email</Text>
-                  </HStack>
-                  <Text fontSize="sm" color={mutedTextColor}>
-                    Для подробных запросов, медиакита и описания возможных форматов
-                    сотрудничества.
-                  </Text>
-                  <Link
-                    href="mailto:bbycinka@yandex.ru"
-                    fontWeight="semibold"
-                    color="blue.500"
-                  >
-                    bbycinka@yandex.ru
-                  </Link>
-                </VStack>
-              </Box>
-
-              <Box flex={1} borderRadius="2xl" bg={surfaceCardBg} p={{ base: 4, md: 5 }}>
-                <VStack align="flex-start" spacing={3}>
-                  <HStack spacing={2}>
-                    <Text fontSize="lg">🟦</Text>
-                    <Text fontWeight="semibold">Telegram</Text>
-                  </HStack>
-                  <Text fontSize="sm" color={mutedTextColor}>
-                    Быстрый канал для обсуждения идей, форматов партнёрства и оперативных
-                    вопросов.
-                  </Text>
-                  <Button
-                    as={Link}
-                    href="https://t.me/iamceob1tch"
-                    isExternal
-                    colorScheme="blue"
-                    borderRadius="full"
-                  >
-                    Написать в Telegram
-                  </Button>
-                </VStack>
-              </Box>
-            </Stack>
-          </VStack>
         </VStack>
       </Box>
     </Box>

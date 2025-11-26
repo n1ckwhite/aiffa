@@ -11,11 +11,11 @@ import { sanitizeProfileFromUnknown } from "@/entities/user/model/storage";
 
 export const metadata: Metadata = {
   title: {
-    default: "Universe — платформа для роста разработчиков",
-    template: "%s — Universe"
+    default: "AIFFA — платформа для роста разработчиков",
+    template: "%s — AIFFA"
   },
   description:
-    "Universe — практическая платформа для разработчиков: задачи, материалы и проекты по JavaScript, фронтенду и смежным направлениям."
+    "AIFFA — практическая платформа для разработчиков: задачи, материалы и проекты по JavaScript, фронтенду и смежным направлениям."
 };
 
 type RootLayoutProps = {

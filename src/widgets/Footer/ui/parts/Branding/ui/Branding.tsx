@@ -9,11 +9,11 @@ export const Branding: React.FC<BrandingProps> = () => {
     <VStack align="start" spacing={3}>
       <HStack spacing={2}>
         <Text fontSize="lg" fontWeight="bold" color={colors.titleColor}>
-          Universe
+          AIFFA
         </Text>
       </HStack>
       <Text fontSize="sm" color={colors.textColor}>
-        Copyright © 2025 Universe
+        Copyright © 2025 AIFFA
       </Text>
     </VStack>
   );

@@ -1,40 +1,56 @@
 'use client';
 
 import React from "react";
-import {
-  Box,
-  Button,
-  Heading,
-  HStack,
-  Link,
-  Stack,
-  Text,
-  VStack,
-  Badge,
-  SimpleGrid
-} from "@chakra-ui/react";
+import { Box, Button, Heading, HStack, Link, Stack, Text, VStack, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
+import PillBadge from "shared/ui/PillBadge";
 
 const SupportPage = () => {
+  const formatShadow = useColorModeValue(
+    "0 18px 45px rgba(15, 23, 42, 0.12)",
+    "0 18px 45px rgba(15, 23, 42, 0.7)"
+  );
+
+  const hackathonBg = useColorModeValue(
+    "linear(to-b, rgba(34,197,94,0.03), whiteAlpha.900)",
+    "linear(to-b, rgba(34,197,94,0.18), surface.elevated)"
+  );
+  const weeklyBg = useColorModeValue(
+    "linear(to-b, rgba(59,130,246,0.03), whiteAlpha.900)",
+    "linear(to-b, rgba(59,130,246,0.18), surface.elevated)"
+  );
+  const materialsBg = useColorModeValue(
+    "linear(to-b, rgba(168,85,247,0.03), whiteAlpha.900)",
+    "linear(to-b, rgba(168,85,247,0.16), surface.elevated)"
+  );
+  const articlesBg = useColorModeValue(
+    "linear(to-b, rgba(249,115,22,0.03), whiteAlpha.900)",
+    "linear(to-b, rgba(249,115,22,0.16), surface.elevated)"
+  );
+  const grantsBg = useColorModeValue(
+    "linear(to-b, rgba(236,72,153,0.03), whiteAlpha.900)",
+    "linear(to-b, rgba(236,72,153,0.16), surface.elevated)"
+  );
+
   return (
     <Box
       as="section"
-      aria-label="Партнёрство и спонсорство Universe"
+      aria-label="Партнёрство и спонсорство AIFFA"
       py={{ base: 12, md: 20 }}
       px={{ base: 4, md: 0 }}
+      transition="none"
     >
       <Box maxW={{ base: "100%", md: "960px" }} mx="auto">
         <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
           {/* Hero-блок */}
           <Box
             borderRadius="2xl"
-            borderWidth="1px"
-            borderColor="border.subtle"
             bgGradient={{
               base: "linear(to-b, surface.elevated, rgba(59,130,246,0.08))",
               md: "linear(to-r, surface.elevated, rgba(59,130,246,0.08))"
             }}
             p={{ base: 5, md: 7 }}
             boxShadow="0 22px 60px rgba(15, 23, 42, 0.5)"
+            transition="none"
           >
             <Stack
               direction={{ base: "column", md: "row" }}
@@ -42,25 +58,14 @@ const SupportPage = () => {
               align={{ base: "flex-start", md: "center" }}
             >
               <VStack align="flex-start" spacing={4} flex={3}>
-                <Badge
-                  colorScheme="blue"
-                  borderRadius="full"
-                  px={3}
-                  py={1}
-                  fontSize="xs"
-                  textTransform="none"
-                >
+                <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
                   Партнёрство для компаний
-                </Badge>
-                <Heading
-                  as="h1"
-                  fontSize={{ base: "2xl", md: "3xl" }}
-                  letterSpacing="-0.03em"
-                >
-                  Стать партнёром Universe
+                </PillBadge>
+                <Heading as="h1" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.03em">
+                  Стать партнёром AIFFA
                 </Heading>
                 <Text fontSize={{ base: "md", md: "lg" }} color="text.muted">
-                  Universe — открытая практическая платформа для разработчиков: Weekly-задачи,
+                  AIFFA — открытая практическая платформа для разработчиков: Weekly‑задачи,
                   хакатоны, живое комьюнити и современные материалы.
                 </Text>
                 <Text fontSize="sm" color="text.muted">
@@ -79,7 +84,7 @@ const SupportPage = () => {
                   </Button>
                   <Button
                     as={Link}
-                    href="mailto:bbycinka@yandex.ru?subject=Запрос медиакита Universe"
+                    href="mailto:bbycinka@yandex.ru?subject=Запрос медиакита AIFFA"
                     variant="outline"
                     borderRadius="full"
                   >
@@ -88,18 +93,9 @@ const SupportPage = () => {
                 </HStack>
               </VStack>
 
-              <VStack
-                align="flex-start"
-                spacing={3}
-                flex={2}
-                borderRadius="xl"
-                borderWidth="1px"
-                borderColor="rgba(148, 163, 184, 0.4)"
-                bg="rgba(15, 23, 42, 0.85)"
-                p={4}
-              >
+              <VStack align="flex-start" spacing={3} flex={2} borderRadius="xl" bg="rgba(15, 23, 42, 0.85)" p={4}>
                 <Text fontSize="xs" textTransform="uppercase" color="blue.300">
-                  Кратко о Universe
+                  Кратко об AIFFA
                 </Text>
                 <VStack align="flex-start" spacing={2} fontSize="sm" color="text.muted">
                   <HStack spacing={2}>
@@ -138,43 +134,26 @@ const SupportPage = () => {
           <Box
             position="relative"
             borderRadius="2xl"
-            borderWidth="1px"
-            borderColor="rgba(148, 163, 184, 0.7)"
             bgGradient="linear(to-r, rgba(37, 99, 235, 0.18), surface.elevated)"
             p={{ base: 5, md: 6 }}
             overflow="hidden"
-            _before={{
-              content: '""',
-              position: "absolute",
-              insetY: 4,
-              left: 0,
-              width: "3px",
-              borderRadius: "full",
-              bgGradient: "linear(to-b, teal.300, blue.400)"
-            }}
+            transition="none"
           >
             <HStack align="flex-start" spacing={{ base: 4, md: 8 }}>
               <VStack align="flex-start" spacing={4} flex={3}>
                 <HStack spacing={3}>
-                  <Badge
-                    colorScheme="blue"
-                    borderRadius="full"
-                    px={3}
-                    py={1}
-                    fontSize="xs"
-                    textTransform="none"
-                  >
+                  <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
                     Задачи бренда
-                  </Badge>
+                  </PillBadge>
                   <Text fontSize="xs" color="text.muted">
-                    Кому подойдёт партнёрство с Universe
+                    Кому подойдёт партнёрство с AIFFA
                   </Text>
                 </HStack>
                 <Heading as="h2" size="md" letterSpacing="-0.02em">
                   Кому и зачем подходит спонсорство
                 </Heading>
                 <Text fontSize="sm" color="text.muted">
-                  Спонсорство Universe подходит компаниям, которые хотят:
+                  Спонсорство AIFFA подходит компаниям, которые хотят:
                 </Text>
                 <SimpleGrid
                   columns={{ base: 1, md: 2 }}
@@ -213,8 +192,6 @@ const SupportPage = () => {
                 spacing={3}
                 flex={2}
                 borderRadius="xl"
-                borderWidth="1px"
-                borderColor="rgba(148, 163, 184, 0.45)"
                 bg="rgba(15, 23, 42, 0.9)"
                 p={4}
               >
@@ -241,32 +218,71 @@ const SupportPage = () => {
             </Text>
 
             <VStack spacing={4} align="stretch">
-              {/* Спонсорство хакатонов */}
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 4, md: 5 }}>
                 {/* Спонсорство хакатонов */}
                 <Box
                   borderRadius="2xl"
-                  borderWidth="1px"
-                  borderColor="border.subtle"
-                  bg="surface.elevated"
+                  bgGradient={hackathonBg}
                   p={{ base: 4, md: 5 }}
-                  _hover={{
-                    borderColor: "blue.500",
-                    transform: "translateY(-2px)",
-                    boxShadow: "0 18px 45px rgba(15, 23, 42, 0.6)"
-                  }}
-                  transition="all 0.2s ease-out"
+                  boxShadow={formatShadow}
                 >
                   <VStack align="flex-start" spacing={3}>
-                    <HStack spacing={2}>
-                      <Text fontSize="lg">🧩</Text>
-                      <Heading as="h3" size="sm">
-                        Спонсорство хакатонов
-                      </Heading>
+                    <HStack spacing={3} align="center">
+                      <Box
+                        as="span"
+                        boxSize={9}
+                        borderRadius="full"
+                        bg="rgba(34,197,94,0.16)"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        color="green.300"
+                      >
+                        <Box
+                          as="svg"
+                          viewBox="0 0 24 24"
+                          boxSize={5}
+                          aria-hidden="true"
+                        >
+                          <rect
+                            x="4"
+                            y="4"
+                            width="16"
+                            height="16"
+                            rx="4"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M9 9h2.5a1.5 1.5 0 0 1 0 3H11v1h1.5a1.5 1.5 0 0 1 0 3H9"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M13 9h2"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </Box>
+                      </Box>
+                      <VStack align="flex-start" spacing={1}>
+                        <Heading as="h3" size="sm">
+                          Спонсорство хакатонов
+                        </Heading>
+                        <PillBadge colorScheme="green" variant="solid" uppercase={false}>
+                          Хакатоны и интенсивы
+                        </PillBadge>
+                      </VStack>
                     </HStack>
                     <Text fontSize="sm" color="text.muted">
-                      Формат для глубокого вовлечения разработчиков и работы с реальными
-                      задачами от компании.
+                      Глубокий формат, в котором команды решают реальную задачу от компании и
+                      знакомятся с вашими технологиями.
                     </Text>
                     <Text fontWeight="semibold" fontSize="sm">
                       Входит:
@@ -298,33 +314,90 @@ const SupportPage = () => {
                       <Text as="li">пиара и укрепления бренда;</Text>
                       <Text as="li">продвижения технологий и инструментов.</Text>
                     </VStack>
+                    <HStack spacing={2} pt={2}>
+                      <PillBadge colorScheme="green" variant="solid" uppercase={false}>
+                        HR
+                      </PillBadge>
+                      <PillBadge colorScheme="green" variant="solid" uppercase={false}>
+                        Brand
+                      </PillBadge>
+                      <PillBadge colorScheme="green" variant="solid" uppercase={false}>
+                        Tech
+                      </PillBadge>
+                    </HStack>
                   </VStack>
                 </Box>
 
                 {/* Совместные челленджи / Weekly */}
                 <Box
                   borderRadius="2xl"
-                  borderWidth="1px"
-                  borderColor="border.subtle"
-                  bg="surface.elevated"
+                  bgGradient={weeklyBg}
                   p={{ base: 4, md: 5 }}
-                  _hover={{
-                    borderColor: "blue.500",
-                    transform: "translateY(-2px)",
-                    boxShadow: "0 18px 45px rgba(15, 23, 42, 0.6)"
-                  }}
-                  transition="all 0.2s ease-out"
+                  boxShadow={formatShadow}
                 >
                   <VStack align="flex-start" spacing={3}>
-                    <HStack spacing={2}>
-                      <Text fontSize="lg">🧪</Text>
-                      <Heading as="h3" size="sm">
-                        Совместные челленджи и Weekly-задачи
-                      </Heading>
+                    <HStack spacing={3} align="center">
+                      <Box
+                        as="span"
+                        boxSize={9}
+                        borderRadius="full"
+                        bg="rgba(59,130,246,0.16)"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        color="blue.300"
+                      >
+                        <Box
+                          as="svg"
+                          viewBox="0 0 24 24"
+                          boxSize={5}
+                          aria-hidden="true"
+                        >
+                          <rect
+                            x="4"
+                            y="3"
+                            width="16"
+                            height="18"
+                            rx="4"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M10 7h4"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M9 11c1 .5 2 .5 3 .5s2 0 3-.5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M9 14.5c1 .5 2 .5 3 .5s2 0 3-.5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </Box>
+                      </Box>
+                      <VStack align="flex-start" spacing={1}>
+                        <Heading as="h3" size="sm">
+                          Совместные челленджи и Weekly-задачи
+                        </Heading>
+                        <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
+                          Weekly и челленджи
+                        </PillBadge>
+                      </VStack>
                     </HStack>
                     <Text fontSize="sm" color="text.muted">
-                      Формат регулярных задач недели с брендингом компании и ссылками на
-                      продукт.
+                      Регулярные задачи недели с вашим брендингом: продукт появляется в
+                      контексте практики и решений участников.
                     </Text>
                     <Text fontWeight="semibold" fontSize="sm">
                       Входит:
@@ -341,32 +414,87 @@ const SupportPage = () => {
                       <Text as="li">ссылка на продукт;</Text>
                       <Text as="li">обзор решений и лучшие разборы.</Text>
                     </VStack>
+                    <HStack spacing={2} pt={2}>
+                      <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
+                        Engagement
+                      </PillBadge>
+                      <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
+                        Product
+                      </PillBadge>
+                    </HStack>
                   </VStack>
                 </Box>
 
                 {/* Интеграции в материалы */}
                 <Box
                   borderRadius="2xl"
-                  borderWidth="1px"
-                  borderColor="border.subtle"
-                  bg="surface.elevated"
+                  bgGradient={materialsBg}
                   p={{ base: 4, md: 5 }}
-                  _hover={{
-                    borderColor: "blue.500",
-                    transform: "translateY(-2px)",
-                    boxShadow: "0 18px 45px rgba(15, 23, 42, 0.6)"
-                  }}
-                  transition="all 0.2s ease-out"
+                  boxShadow={formatShadow}
                 >
                   <VStack align="flex-start" spacing={3}>
-                    <HStack spacing={2}>
-                      <Text fontSize="lg">📘</Text>
-                      <Heading as="h3" size="sm">
-                        Интеграции в материалы
-                      </Heading>
+                    <HStack spacing={3} align="center">
+                      <Box
+                        as="span"
+                        boxSize={9}
+                        borderRadius="full"
+                        bg="rgba(168,85,247,0.18)"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        color="purple.300"
+                      >
+                        <Box
+                          as="svg"
+                          viewBox="0 0 24 24"
+                          boxSize={5}
+                          aria-hidden="true"
+                        >
+                          <rect
+                            x="5"
+                            y="4"
+                            width="14"
+                            height="16"
+                            rx="2"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M9 8h6"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M9 11h6"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M9 14h3"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </Box>
+                      </Box>
+                      <VStack align="flex-start" spacing={1}>
+                        <Heading as="h3" size="sm">
+                          Интеграции в материалы
+                        </Heading>
+                        <PillBadge colorScheme="purple" variant="solid" uppercase={false}>
+                          Уроки и гайды
+                        </PillBadge>
+                      </VStack>
                     </HStack>
                     <Text fontSize="sm" color="text.muted">
-                      Нативные интеграции в уроки, гайды и практические материалы.
+                      Нативные интеграции в уроки, гайды и практические материалы: продукт
+                      становится частью примеров и решений.
                     </Text>
                     <VStack
                       as="ul"
@@ -399,23 +527,69 @@ const SupportPage = () => {
                 {/* Партнёрские статьи и блог */}
                 <Box
                   borderRadius="2xl"
-                  borderWidth="1px"
-                  borderColor="border.subtle"
-                  bg="surface.elevated"
+                  bgGradient={articlesBg}
                   p={{ base: 4, md: 5 }}
-                  _hover={{
-                    borderColor: "blue.500",
-                    transform: "translateY(-2px)",
-                    boxShadow: "0 18px 45px rgba(15, 23, 42, 0.6)"
-                  }}
-                  transition="all 0.2s ease-out"
+                  boxShadow={formatShadow}
                 >
                   <VStack align="flex-start" spacing={3}>
-                    <HStack spacing={2}>
-                      <Text fontSize="lg">📰</Text>
-                      <Heading as="h3" size="sm">
-                        Партнёрские статьи и блог
-                      </Heading>
+                    <HStack spacing={3} align="center">
+                      <Box
+                        as="span"
+                        boxSize={9}
+                        borderRadius="full"
+                        bg="rgba(249,115,22,0.18)"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        color="orange.300"
+                      >
+                        <Box
+                          as="svg"
+                          viewBox="0 0 24 24"
+                          boxSize={5}
+                          aria-hidden="true"
+                        >
+                          <rect
+                            x="4"
+                            y="5"
+                            width="16"
+                            height="14"
+                            rx="2"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M8 9h8"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M8 12h8"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M8 15h4"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </Box>
+                      </Box>
+                      <VStack align="flex-start" spacing={1}>
+                        <Heading as="h3" size="sm">
+                          Партнёрские статьи и блог
+                        </Heading>
+                      <PillBadge colorScheme="yellow" variant="solid" uppercase={false}>
+                          Медиа и контент
+                        </PillBadge>
+                      </VStack>
                     </HStack>
                     <VStack
                       as="ul"
@@ -435,23 +609,61 @@ const SupportPage = () => {
                 {/* Поддержка авторов и гранты */}
                 <Box
                   borderRadius="2xl"
-                  borderWidth="1px"
-                  borderColor="border.subtle"
-                  bg="surface.elevated"
+                  bgGradient={grantsBg}
                   p={{ base: 4, md: 5 }}
-                  _hover={{
-                    borderColor: "blue.500",
-                    transform: "translateY(-2px)",
-                    boxShadow: "0 18px 45px rgba(15, 23, 42, 0.6)"
-                  }}
-                  transition="all 0.2s ease-out"
+                  boxShadow={formatShadow}
                 >
                   <VStack align="flex-start" spacing={3}>
-                    <HStack spacing={2}>
-                      <Text fontSize="lg">🧑‍🎓</Text>
-                      <Heading as="h3" size="sm">
-                        Поддержка авторов и гранты
-                      </Heading>
+                    <HStack spacing={3} align="center">
+                      <Box
+                        as="span"
+                        boxSize={9}
+                        borderRadius="full"
+                        bg="rgba(236,72,153,0.2)"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        color="pink.300"
+                      >
+                        <Box
+                          as="svg"
+                          viewBox="0 0 24 24"
+                          boxSize={5}
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M4 9l8-4 8 4-8 4-8-4Z"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M6 11v4c2 1.5 4 2.25 6 2.25s4-.75 6-2.25v-4"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M18 13.5V17"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </Box>
+                      </Box>
+                      <VStack align="flex-start" spacing={1}>
+                        <Heading as="h3" size="sm">
+                          Поддержка авторов и гранты
+                        </Heading>
+                      <PillBadge colorScheme="red" variant="solid" uppercase={false}>
+                          Гранты и авторы
+                        </PillBadge>
+                      </VStack>
                     </HStack>
                     <Text fontSize="sm" color="text.muted">
                       Формат для поддержки авторов, задач и образовательных серий.
@@ -474,16 +686,10 @@ const SupportPage = () => {
           </VStack>
 
           {/* Преимущества платформы */}
-          <Box
-            borderRadius="2xl"
-            borderWidth="1px"
-            borderColor="border.subtle"
-            bg="surface.elevated"
-            p={{ base: 4, md: 6 }}
-          >
+          <Box borderRadius="2xl" bg="surface.elevated" p={{ base: 4, md: 6 }}>
             <VStack align="flex-start" spacing={4}>
               <Heading as="h2" size="md" letterSpacing="-0.02em">
-                Почему Universe
+                Почему AIFFA
               </Heading>
               <VStack
                 as="ul"
@@ -507,24 +713,11 @@ const SupportPage = () => {
           </Box>
 
           {/* Статистика / ранний запуск */}
-          <Box
-            borderRadius="2xl"
-            borderWidth="1px"
-            borderColor="border.subtle"
-            bg="surface.elevated"
-            p={{ base: 4, md: 5 }}
-          >
+          <Box borderRadius="2xl" bg="surface.elevated" p={{ base: 4, md: 5 }}>
             <VStack align="flex-start" spacing={3}>
-              <Badge
-                colorScheme="purple"
-                borderRadius="full"
-                px={3}
-                py={1}
-                fontSize="xs"
-                textTransform="none"
-              >
+              <PillBadge colorScheme="purple" variant="solid" uppercase={false}>
                 Ранний запуск
-              </Badge>
+              </PillBadge>
               <Text fontSize="sm" color="text.muted">
                 Платформа находится в стадии раннего запуска. Идёт набор первых партнёров,
                 которые готовы расти вместе с проектом. Для первых участников — индивидуальные
@@ -547,14 +740,7 @@ const SupportPage = () => {
               spacing={{ base: 4, md: 6 }}
               align={{ base: "stretch", md: "flex-start" }}
             >
-              <Box
-                flex={1}
-                borderRadius="2xl"
-                borderWidth="1px"
-                borderColor="border.subtle"
-                bg="surface.elevated"
-                p={{ base: 4, md: 5 }}
-              >
+              <Box flex={1} borderRadius="2xl" bg="surface.elevated" p={{ base: 4, md: 5 }}>
                 <VStack align="flex-start" spacing={3}>
                   <HStack spacing={2}>
                     <Text fontSize="lg">📩</Text>
@@ -574,14 +760,7 @@ const SupportPage = () => {
                 </VStack>
               </Box>
 
-              <Box
-                flex={1}
-                borderRadius="2xl"
-                borderWidth="1px"
-                borderColor="border.subtle"
-                bg="surface.elevated"
-                p={{ base: 4, md: 5 }}
-              >
+              <Box flex={1} borderRadius="2xl" bg="surface.elevated" p={{ base: 4, md: 5 }}>
                 <VStack align="flex-start" spacing={3}>
                   <HStack spacing={2}>
                     <Text fontSize="lg">🟦</Text>

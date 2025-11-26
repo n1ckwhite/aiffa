@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import ProfilePageClient from "./ProfilePageClient";
 
 export const metadata: Metadata = {
-  title: "Профиль — JavaScript Universe",
-  description: "Ваш прогресс и достижения в курсе JavaScript Universe"
+  title: "Профиль — AIFFA",
+  description: "Ваш прогресс и достижения в рамках AIFFA"
 };
 
 const ProfileRoute = () => {

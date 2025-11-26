@@ -4,8 +4,8 @@ import { loadManifest } from "shared/lessons/api";
 import ModulesPageClient from "./ModulesPageClient";
 
 export const metadata: Metadata = {
-  title: "Материалы — модули",
-  description: "Список модулей курса JavaScript Universe"
+  title: "Материалы",
+  description: "Список модулей платформы AIFFA"
 };
 
 const LearnRootRoute = async () => {

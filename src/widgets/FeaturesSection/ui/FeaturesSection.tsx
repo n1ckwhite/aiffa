@@ -11,8 +11,8 @@ const FeaturesSection: React.FC = () => {
       <Container maxW="1200px">
         <VStack spacing={12} align="center">
           <HeaderBlock
-            title="Почему выбирают Universe?"
-            description="Universe — открытая экосистема без paywall: задачи, понятные примеры и практика.
+            title="Почему выбирают AIFFA?"
+            description="AIFFA — открытая экосистема без paywall: задачи, понятные примеры и практика.
 Мы растём вместе с сообществом: обратная связь, вклад участников и ваша поддержка
 превращаются в новые материалы, проекты и улучшения платформы."
           />

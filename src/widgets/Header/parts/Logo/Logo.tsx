@@ -15,7 +15,7 @@ const Logo: React.FC<LogoProps> = () => {
       letterSpacing="tight"
       _hover={{ textDecoration: 'none', opacity: 0.9 }}
     >
-      Universe
+      AIFFA
     </Text>
   );
 };

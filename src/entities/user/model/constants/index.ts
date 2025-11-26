@@ -1,7 +1,7 @@
 import type { UserProfile } from '../types';
 
-export const STORAGE_KEY = 'universe:userProfile';
-export const PROFILE_COOKIE_KEY = 'universe_profile';
+export const STORAGE_KEY = 'aiffa:userProfile';
+export const PROFILE_COOKIE_KEY = 'aiffa_profile';
 
 export const DEFAULT_PROFILE: UserProfile = {
   name: 'Пользователь',

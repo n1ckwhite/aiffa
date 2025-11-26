@@ -9,11 +9,8 @@ const SupportPage = () => {
     "0 18px 45px rgba(15, 23, 42, 0.12)",
     "0 18px 45px rgba(15, 23, 42, 0.7)"
   );
+  const mutedTextColor = useColorModeValue("gray.600", "gray.300");
 
-  const heroBg = useColorModeValue(
-    "linear(to-b, whiteAlpha.900, rgba(59,130,246,0.06))",
-    "linear(to-r, surface.elevated, rgba(59,130,246,0.08))"
-  );
   const heroAsideBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.85)");
   const overviewBg = useColorModeValue(
     "linear(to-b, whiteAlpha.900, rgba(59,130,246,0.06))",
@@ -57,7 +54,6 @@ const SupportPage = () => {
           <Box
             borderRadius="2xl"
             p={{ base: 5, md: 7 }}
-            boxShadow="0 22px 60px rgba(15, 23, 42, 0.5)"
             transition="none"
           >
             <Stack
@@ -72,11 +68,11 @@ const SupportPage = () => {
                 <Heading as="h1"  fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.03em">
                   Стать партнёром AIFFA
                 </Heading>
-                <Text fontSize={{ base: "md", md: "lg" }} color="text.muted">
+                <Text fontSize={{ base: "md", md: "lg" }} color={mutedTextColor}>
                   AIFFA — открытая практическая платформа для разработчиков: Weekly‑задачи,
                   хакатоны, живое комьюнити и современные материалы.
                 </Text>
-                <Text fontSize="sm" color="text.muted">
+                <Text fontSize="sm" color={mutedTextColor}>
                   Эффективные активности с IT-аудиторией: хакатоны, челленджи, интеграции в
                   материалы и совместные проекты под задачи бренда.
                 </Text>
@@ -112,7 +108,7 @@ const SupportPage = () => {
                 <Text fontSize="xs" textTransform="uppercase" color="blue.300">
                   Кратко об AIFFA
                 </Text>
-                <VStack align="flex-start" spacing={2} fontSize="sm" color="text.muted">
+                <VStack align="flex-start" spacing={2} fontSize="sm" color={mutedTextColor}>
                   <HStack spacing={2}>
                     <Box
                       as="span"
@@ -160,14 +156,14 @@ const SupportPage = () => {
                   <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
                     Задачи бренда
                   </PillBadge>
-                  <Text fontSize="xs" color="text.muted">
+                  <Text fontSize="xs" color={mutedTextColor}>
                     Кому подойдёт партнёрство с AIFFA
                   </Text>
                 </HStack>
                 <Heading as="h2" size="md" letterSpacing="-0.02em">
                   Кому и зачем подходит спонсорство
                 </Heading>
-                <Text fontSize="sm" color="text.muted">
+                <Text fontSize="sm" color={mutedTextColor}>
                   Спонсорство AIFFA подходит компаниям, которые хотят:
                 </Text>
                 <SimpleGrid
@@ -176,7 +172,7 @@ const SupportPage = () => {
                   spacingY={2}
                   as="ul"
                   fontSize="sm"
-                  color="text.muted"
+                  color={mutedTextColor}
                 >
                   <HStack as="li" spacing={2} align="flex-start">
                     <Box as="span" mt={1} boxSize={1.5} borderRadius="full" bg="blue.300" />
@@ -213,7 +209,7 @@ const SupportPage = () => {
                 <Text fontSize="xs" textTransform="uppercase" color="blue.200">
                   Какие эффекты даёт партнёрство
                 </Text>
-                <VStack align="flex-start" spacing={2} fontSize="sm" color="text.muted">
+                <VStack align="flex-start" spacing={2} fontSize="sm" color={mutedTextColor}>
                   <Text>Бренд присутствует в практических задачах и решениях.</Text>
                   <Text>Разработчики знакомятся с технологиями на реальных сценариях.</Text>
                   <Text>Формируется долгосрочная ассоциация бренда с ростом и обучением.</Text>
@@ -227,7 +223,7 @@ const SupportPage = () => {
             <Heading as="h2" size="md" letterSpacing="-0.02em">
               Форматы партнёрства
             </Heading>
-            <Text fontSize="sm" color="text.muted">
+            <Text fontSize="sm" color={mutedTextColor}>
               Мы подбираем формат под задачи компании: от HR и бренда до продвижения
               технологий и инструментов.
             </Text>
@@ -296,7 +292,7 @@ const SupportPage = () => {
                         </PillBadge>
                       </VStack>
                     </HStack>
-                    <Text fontSize="sm" color="text.muted">
+                    <Text fontSize="sm" color={mutedTextColor}>
                       Глубокий формат, в котором команды решают реальную задачу от компании и
                       знакомятся с вашими технологиями.
                     </Text>
@@ -308,7 +304,7 @@ const SupportPage = () => {
                       align="flex-start"
                       spacing={1}
                       fontSize="sm"
-                      color="text.muted"
+                      color={mutedTextColor}
                     >
                       <Text as="li">брендирование хакатона;</Text>
                       <Text as="li">задача от компании;</Text>
@@ -324,7 +320,7 @@ const SupportPage = () => {
                       align="flex-start"
                       spacing={1}
                       fontSize="sm"
-                      color="text.muted"
+                      color={mutedTextColor}
                     >
                       <Text as="li">HR-задач и найма;</Text>
                       <Text as="li">пиара и укрепления бренда;</Text>
@@ -412,7 +408,7 @@ const SupportPage = () => {
                         </PillBadge>
                       </VStack>
                     </HStack>
-                    <Text fontSize="sm" color="text.muted">
+                    <Text fontSize="sm" color={mutedTextColor}>
                       Регулярные задачи недели с вашим брендингом: продукт появляется в
                       контексте практики и решений участников.
                     </Text>
@@ -424,7 +420,7 @@ const SupportPage = () => {
                       align="flex-start"
                       spacing={1}
                       fontSize="sm"
-                      color="text.muted"
+                      color={mutedTextColor}
                     >
                       <Text as="li">задача недели с логотипом компании;</Text>
                       <Text as="li">упоминание в Weekly-диджесте;</Text>
@@ -510,7 +506,7 @@ const SupportPage = () => {
                         </PillBadge>
                       </VStack>
                     </HStack>
-                    <Text fontSize="sm" color="text.muted">
+                    <Text fontSize="sm" color={mutedTextColor}>
                       Нативные интеграции в уроки, гайды и практические материалы: продукт
                       становится частью примеров и решений.
                     </Text>
@@ -519,7 +515,7 @@ const SupportPage = () => {
                       align="flex-start"
                       spacing={1}
                       fontSize="sm"
-                      color="text.muted"
+                      color={mutedTextColor}
                     >
                       <Text as="li">блок «Материал совместно с …»;</Text>
                       <Text as="li">добавление ссылки на продукт;</Text>
@@ -533,7 +529,7 @@ const SupportPage = () => {
                       align="flex-start"
                       spacing={1}
                       fontSize="sm"
-                      color="text.muted"
+                      color={mutedTextColor}
                     >
                       <Text as="li">библиотек;</Text>
                       <Text as="li">сервисов;</Text>
@@ -685,7 +681,7 @@ const SupportPage = () => {
                         </PillBadge>
                       </VStack>
                     </HStack>
-                    <Text fontSize="sm" color="text.muted">
+                    <Text fontSize="sm" color={mutedTextColor}>
                       Формат для поддержки авторов, задач и образовательных серий.
                     </Text>
                     <VStack
@@ -693,7 +689,7 @@ const SupportPage = () => {
                       align="flex-start"
                       spacing={1}
                       fontSize="sm"
-                      color="text.muted"
+                      color={mutedTextColor}
                     >
                       <Text as="li">спонсировать выпуск серии материалов;</Text>
                       <Text as="li">выделить грант авторам или участникам;</Text>
@@ -716,7 +712,7 @@ const SupportPage = () => {
                 align="flex-start"
                 spacing={2}
                 fontSize="sm"
-                color="text.muted"
+                color={mutedTextColor}
               >
                 <Text as="li">активная аудитория разработчиков с фокусом на практику;</Text>
                 <Text as="li">
@@ -738,7 +734,7 @@ const SupportPage = () => {
               <PillBadge colorScheme="purple" variant="solid" uppercase={false}>
                 Ранний запуск
               </PillBadge>
-              <Text fontSize="sm" color="text.muted">
+              <Text fontSize="sm" color={mutedTextColor}>
                 Платформа находится в стадии раннего запуска. Идёт набор первых партнёров,
                 которые готовы расти вместе с проектом. Для первых участников — индивидуальные
                 условия и гибкий формат интеграций.
@@ -751,7 +747,7 @@ const SupportPage = () => {
             <Heading as="h2" size="md" letterSpacing="-0.02em">
               Как начать сотрудничество
             </Heading>
-            <Text fontSize="sm" color="text.muted">
+            <Text fontSize="sm" color={mutedTextColor}>
               Напишите нам — обсудим формат, предложим идеи задач и подготовим медиакит под
               ваши цели.
             </Text>
@@ -766,7 +762,7 @@ const SupportPage = () => {
                     <Text fontSize="lg">📩</Text>
                     <Text fontWeight="semibold">Email</Text>
                   </HStack>
-                  <Text fontSize="sm" color="text.muted">
+                  <Text fontSize="sm" color={mutedTextColor}>
                     Для подробных запросов, медиакита и описания возможных форматов
                     сотрудничества.
                   </Text>
@@ -786,7 +782,7 @@ const SupportPage = () => {
                     <Text fontSize="lg">🟦</Text>
                     <Text fontWeight="semibold">Telegram</Text>
                   </HStack>
-                  <Text fontSize="sm" color="text.muted">
+                  <Text fontSize="sm" color={mutedTextColor}>
                     Быстрый канал для обсуждения идей, форматов партнёрства и оперативных
                     вопросов.
                   </Text>

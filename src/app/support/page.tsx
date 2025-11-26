@@ -64,8 +64,8 @@ const SupportPage = () => {
                   Стать партнёром AIFFA
                 </Heading>
                 <Text fontSize={{ base: "md", md: "lg" }} color={mutedTextColor}>
-                  AIFFA — открытая практическая платформа для разработчиков: Weekly‑задачи,
-                  хакатоны, живое комьюнити и современные материалы.
+                  Коммерческое партнёрство с AIFFA: платные интеграции, Weekly‑задачи и
+                  хакатоны под задачи вашего бренда.
                 </Text>
                 <Text fontSize="sm" color={mutedTextColor}>
                   Эффективные активности с IT-аудиторией: хакатоны, челленджи, интеграции в
@@ -142,7 +142,11 @@ const SupportPage = () => {
             overflow="hidden"
             transition="none"
           >
-            <HStack align="flex-start" spacing={{ base: 4, md: 8 }}>
+            <Stack
+              direction={{ base: "column", md: "row" }}
+              align="flex-start"
+              spacing={{ base: 4, md: 8 }}
+            >
               <VStack align="flex-start" spacing={4} flex={3}>
                 <HStack spacing={3}>
                   <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
@@ -207,7 +211,7 @@ const SupportPage = () => {
                   <Text>Формируется долгосрочная ассоциация бренда с ростом и обучением.</Text>
                 </VStack>
               </VStack>
-            </HStack>
+            </Stack>
           </Box>
 
           {/* Форматы партнёрства */}

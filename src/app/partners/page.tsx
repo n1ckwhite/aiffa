@@ -4,12 +4,13 @@ import React from "react";
 import { Box, Button, Heading, HStack, Link, Stack, Text, VStack, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
 import PillBadge from "shared/ui/PillBadge";
 
-const SupportPage = () => {
+const PartnersPage = () => {
   const formatShadow = useColorModeValue(
     "0 18px 45px rgba(15, 23, 42, 0.12)",
     "0 18px 45px rgba(15, 23, 42, 0.7)"
   );
   const mutedTextColor = useColorModeValue("gray.600", "gray.300");
+  const asideLabelColor = useColorModeValue("blue.700", "blue.200");
 
   const heroAsideBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.85)");
 
@@ -109,7 +110,7 @@ const SupportPage = () => {
                 bg={heroAsideBg}
                 p={4}
               >
-                <Text fontSize="xs" textTransform="uppercase" color="blue.300">
+                <Text fontSize="xs" textTransform="uppercase" color={asideLabelColor}>
                   Кратко об AIFFA
                 </Text>
                 <VStack align="flex-start" spacing={2} fontSize="sm" color={mutedTextColor}>
@@ -211,7 +212,7 @@ const SupportPage = () => {
                 bg={overviewAsideBg}
                 p={4}
               >
-                <Text fontSize="xs" textTransform="uppercase" color="blue.200">
+                <Text fontSize="xs" textTransform="uppercase" color={asideLabelColor}>
                   Какие эффекты даёт партнёрство
                 </Text>
                 <VStack align="flex-start" spacing={2} fontSize="sm" color={mutedTextColor}>
@@ -753,4 +754,4 @@ const SupportPage = () => {
   );
 };
 
-export default SupportPage;
+export default PartnersPage;

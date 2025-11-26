@@ -34,6 +34,17 @@ export const Navigation: React.FC = () => {
         >
           Материалы
         </Link>
+        <Link
+          as={RouterLink as any}
+          to="/partners"
+          fontSize="sm"
+          color={colors.textColor}
+          _hover={{ color: colors.linkHover }}
+          transition="color 0.2s"
+          textAlign="left"
+        >
+          Партнёрство
+        </Link>
       </VStack>
     </VStack>
   );

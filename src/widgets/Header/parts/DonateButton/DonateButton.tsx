@@ -15,12 +15,10 @@ const DonateButton: React.FC<DonateButtonProps> = ({ onClick, size = 'sm' }) => 
       onClick={onClick}
       _hover={{ 
         bg: hoverBg, 
-        transform: "translateY(-1px)",
-        boxShadow: "0 4px 12px rgba(59, 130, 246, 0.4)"
+        transform: "translateY(-1px)"
       }}
       _active={{
-        transform: "translateY(0px)",
-        boxShadow: "0 2px 6px rgba(59, 130, 246, 0.3)"
+        transform: "translateY(0px)"
       }}
       borderRadius="full"
       px={{ md: 3, lg: 4 }}

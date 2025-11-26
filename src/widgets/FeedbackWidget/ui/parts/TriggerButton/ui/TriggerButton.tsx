@@ -18,14 +18,11 @@ export const TriggerButton: React.FC<TriggerButtonProps> = ({ onClick }) => {
       _hover={{
         bg: colors.primaryHoverBg,
         transform: 'scale(1.1)',
-        boxShadow: '0 6px 20px rgba(59, 130, 246, 0.6)',
       }}
       _active={{
         transform: 'scale(0.95)',
-        boxShadow: '0 2px 8px rgba(59, 130, 246, 0.4)',
       }}
       transition="all 0.2s ease-in-out"
-      boxShadow="0 4px 12px rgba(59, 130, 246, 0.4)"
       display={{ base: 'none', md: 'inline-flex' }}
     />
   );

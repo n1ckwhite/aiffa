@@ -21,7 +21,6 @@ const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = (props) => {
       _hover={{ 
         bg: useColorModeValue('blue.100', 'whiteAlpha.300'),
         transform: "scale(1.05)",
-        boxShadow: useColorModeValue("0 4px 12px rgba(0, 0, 0, 0.1)", "0 4px 12px rgba(59, 130, 246, 0.3)")
       }}
       _active={{
         transform: "scale(0.95)"

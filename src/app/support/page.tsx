@@ -47,6 +47,16 @@ const SupportPage = () => {
     >
       <Box maxW={{ base: "100%", md: "960px" }} mx="auto">
         <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
+          <VStack align="center" spacing={3} textAlign="center">
+            <Heading as="h1" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.03em">
+              Партнёрство и спонсорство AIFFA
+            </Heading>
+            <Text fontSize={{ base: "md", md: "lg" }} color={mutedTextColor}>
+              Коммерческое партнёрство для брендов: платные интеграции, Weekly‑задачи и
+              хакатоны c разработчиками на платформе AIFFA.
+            </Text>
+          </VStack>
+
           {/* Hero-блок */}
           <Box
             transition="none"
@@ -60,16 +70,15 @@ const SupportPage = () => {
                 <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
                   Партнёрство для компаний
                 </PillBadge>
-                <Heading as="h1"  fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.03em">
+                <Heading as="h2"  fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.03em">
                   Стать партнёром AIFFA
                 </Heading>
                 <Text fontSize={{ base: "md", md: "lg" }} color={mutedTextColor}>
-                  Коммерческое партнёрство с AIFFA: платные интеграции, Weekly‑задачи и
-                  хакатоны под задачи вашего бренда.
+                  Подбираем формат под ваши цели: найм, бренд, продвижение продукта или технологий.
                 </Text>
                 <Text fontSize="sm" color={mutedTextColor}>
-                  Эффективные активности с IT-аудиторией: хакатоны, челленджи, интеграции в
-                  материалы и совместные проекты под задачи бренда.
+                  AIFFA берёт на себя продакшн: упаковку задач, проведение хакатонов, челленджей
+                  и интеграций в материалы — вы получаете понятные результаты по IT-аудитории.
                 </Text>
                 <HStack spacing={4} flexWrap="wrap">
                   <Button

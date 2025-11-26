@@ -10,6 +10,18 @@ const SupportPage = () => {
     "0 18px 45px rgba(15, 23, 42, 0.7)"
   );
 
+  const heroBg = useColorModeValue(
+    "linear(to-b, whiteAlpha.900, rgba(59,130,246,0.06))",
+    "linear(to-r, surface.elevated, rgba(59,130,246,0.08))"
+  );
+  const heroAsideBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.85)");
+  const overviewBg = useColorModeValue(
+    "linear(to-b, whiteAlpha.900, rgba(59,130,246,0.06))",
+    "linear(to-r, rgba(37, 99, 235, 0.18), surface.elevated)"
+  );
+  const overviewAsideBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.9)");
+  const surfaceCardBg = useColorModeValue("whiteAlpha.900", "surface.elevated");
+
   const hackathonBg = useColorModeValue(
     "linear(to-b, rgba(34,197,94,0.03), whiteAlpha.900)",
     "linear(to-b, rgba(34,197,94,0.18), surface.elevated)"
@@ -44,10 +56,6 @@ const SupportPage = () => {
           {/* Hero-блок */}
           <Box
             borderRadius="2xl"
-            bgGradient={{
-              base: "linear(to-b, surface.elevated, rgba(59,130,246,0.08))",
-              md: "linear(to-r, surface.elevated, rgba(59,130,246,0.08))"
-            }}
             p={{ base: 5, md: 7 }}
             boxShadow="0 22px 60px rgba(15, 23, 42, 0.5)"
             transition="none"
@@ -93,7 +101,14 @@ const SupportPage = () => {
                 </HStack>
               </VStack>
 
-              <VStack align="flex-start" spacing={3} flex={2} borderRadius="xl" bg="rgba(15, 23, 42, 0.85)" p={4}>
+              <VStack
+                align="flex-start"
+                spacing={3}
+                flex={2}
+                borderRadius="xl"
+                bg={heroAsideBg}
+                p={4}
+              >
                 <Text fontSize="xs" textTransform="uppercase" color="blue.300">
                   Кратко об AIFFA
                 </Text>
@@ -134,7 +149,7 @@ const SupportPage = () => {
           <Box
             position="relative"
             borderRadius="2xl"
-            bgGradient="linear(to-r, rgba(37, 99, 235, 0.18), surface.elevated)"
+            bgGradient={overviewBg}
             p={{ base: 5, md: 6 }}
             overflow="hidden"
             transition="none"
@@ -192,7 +207,7 @@ const SupportPage = () => {
                 spacing={3}
                 flex={2}
                 borderRadius="xl"
-                bg="rgba(15, 23, 42, 0.9)"
+                bg={overviewAsideBg}
                 p={4}
               >
                 <Text fontSize="xs" textTransform="uppercase" color="blue.200">
@@ -225,6 +240,7 @@ const SupportPage = () => {
                   bgGradient={hackathonBg}
                   p={{ base: 4, md: 5 }}
                   boxShadow={formatShadow}
+                  transition="none"
                 >
                   <VStack align="flex-start" spacing={3}>
                     <HStack spacing={3} align="center">
@@ -334,6 +350,7 @@ const SupportPage = () => {
                   bgGradient={weeklyBg}
                   p={{ base: 4, md: 5 }}
                   boxShadow={formatShadow}
+                  transition="none"
                 >
                   <VStack align="flex-start" spacing={3}>
                     <HStack spacing={3} align="center">
@@ -431,6 +448,7 @@ const SupportPage = () => {
                   bgGradient={materialsBg}
                   p={{ base: 4, md: 5 }}
                   boxShadow={formatShadow}
+                  transition="none"
                 >
                   <VStack align="flex-start" spacing={3}>
                     <HStack spacing={3} align="center">
@@ -530,6 +548,7 @@ const SupportPage = () => {
                   bgGradient={articlesBg}
                   p={{ base: 4, md: 5 }}
                   boxShadow={formatShadow}
+                  transition="none"
                 >
                   <VStack align="flex-start" spacing={3}>
                     <HStack spacing={3} align="center">
@@ -612,6 +631,7 @@ const SupportPage = () => {
                   bgGradient={grantsBg}
                   p={{ base: 4, md: 5 }}
                   boxShadow={formatShadow}
+                  transition="none"
                 >
                   <VStack align="flex-start" spacing={3}>
                     <HStack spacing={3} align="center">
@@ -686,7 +706,7 @@ const SupportPage = () => {
           </VStack>
 
           {/* Преимущества платформы */}
-          <Box borderRadius="2xl" bg="surface.elevated" p={{ base: 4, md: 6 }}>
+          <Box borderRadius="2xl" bg={surfaceCardBg} p={{ base: 4, md: 6 }}>
             <VStack align="flex-start" spacing={4}>
               <Heading as="h2" size="md" letterSpacing="-0.02em">
                 Почему AIFFA
@@ -713,7 +733,7 @@ const SupportPage = () => {
           </Box>
 
           {/* Статистика / ранний запуск */}
-          <Box borderRadius="2xl" bg="surface.elevated" p={{ base: 4, md: 5 }}>
+          <Box borderRadius="2xl" bg={surfaceCardBg} p={{ base: 4, md: 5 }}>
             <VStack align="flex-start" spacing={3}>
               <PillBadge colorScheme="purple" variant="solid" uppercase={false}>
                 Ранний запуск
@@ -740,7 +760,7 @@ const SupportPage = () => {
               spacing={{ base: 4, md: 6 }}
               align={{ base: "stretch", md: "flex-start" }}
             >
-              <Box flex={1} borderRadius="2xl" bg="surface.elevated" p={{ base: 4, md: 5 }}>
+              <Box flex={1} borderRadius="2xl" bg={surfaceCardBg} p={{ base: 4, md: 5 }}>
                 <VStack align="flex-start" spacing={3}>
                   <HStack spacing={2}>
                     <Text fontSize="lg">📩</Text>
@@ -760,7 +780,7 @@ const SupportPage = () => {
                 </VStack>
               </Box>
 
-              <Box flex={1} borderRadius="2xl" bg="surface.elevated" p={{ base: 4, md: 5 }}>
+              <Box flex={1} borderRadius="2xl" bg={surfaceCardBg} p={{ base: 4, md: 5 }}>
                 <VStack align="flex-start" spacing={3}>
                   <HStack spacing={2}>
                     <Text fontSize="lg">🟦</Text>

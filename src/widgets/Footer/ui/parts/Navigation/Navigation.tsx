@@ -2,9 +2,8 @@ import React from 'react';
 import { VStack, Text, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useFooterColors } from '../../colors/useFooterColors';
-import type { NavigationProps } from './types/Navigation.types';
 
-export const Navigation: React.FC<NavigationProps> = () => {
+export const Navigation: React.FC = () => {
   const colors = useFooterColors();
 
   return (

@@ -69,7 +69,7 @@ const SupportPage = () => {
                 <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
                   Партнёрство для компаний
                 </PillBadge>
-                <Heading as="h1" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.03em">
+                <Heading as="h1"  fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.03em">
                   Стать партнёром AIFFA
                 </Heading>
                 <Text fontSize={{ base: "md", md: "lg" }} color="text.muted">

@@ -1,26 +1,27 @@
 import React from 'react';
-import { Text, useColorModeValue } from '@chakra-ui/react';
+import { HStack, Image, Text, useColorModeValue } from '@chakra-ui/react';
 import type { LogoProps } from './types';
 
 const Logo: React.FC<LogoProps> = () => {
-  const color = useColorModeValue('blue.600', 'blue.200');
+  const textColor = useColorModeValue('blue.700', 'blue.200');
+
   return (
-    <Text
+    <HStack
       as="a"
       href="/"
-      fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
-      fontWeight="bold"
-      color={color}
-      transition="color 0.2s ease-in-out"
-      letterSpacing="tight"
+      spacing={2}
+      align="center"
       _hover={{ textDecoration: 'none', opacity: 0.9 }}
     >
-      AIFFA
-    </Text>
+      <Image
+        src="/aiffa.svg"
+        alt="Логотип AIFFA"
+        boxSize={{ base: 7, md: 8 }}
+        pointerEvents="none"
+      />
+    </HStack>
   );
 };
 
 export default Logo;
-
-
 

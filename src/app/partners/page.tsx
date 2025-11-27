@@ -44,33 +44,47 @@ const PartnersPage = () => {
     <Box
       as="section"
       aria-label="Партнёрство и спонсорство AIFFA"
-      py={{ base: 12, md: 20 }}
-      px={{ base: 4, md: 0 }}
+      py={{ base: 16, md: 20 }}
+      px={4}
       transition="none"
     >
-      <Box maxW={{ base: "100%", md: "1100px" }} mx="auto">
+      <Box maxW="1200px" mx="auto">
         <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
           {/* Hero-блок */}
           <Box transition="none">
             <VStack
-              align={{ base: "flex-start", md: "center" }}
-              spacing={4}
-              textAlign={{ base: "left", md: "center" }}
+              align="center"
+              spacing={{ base: 4, md: 5 }}
+              textAlign="center"
+              maxW={{ base: "100%", md: "720px", lg: "820px" }}
+              mx="auto"
             >
-                <Heading as="h2"  fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.03em">
-                  Стать партнёром AIFFA
-                </Heading>
-                <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
-                  Партнёрство для компаний
-                </PillBadge>
+              <Heading
+                as="h2"
+                fontSize={{ base: "3xl", md: "4xl" }}
+                letterSpacing="-0.03em"
+              >
+                Стать партнёром AIFFA
+              </Heading>
+              <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
+                Партнёрство для компаний
+              </PillBadge>
 
-                <Text fontSize={{ base: "md", md: "lg" }} color={mutedTextColor}>
-                  Подбираем формат под ваши цели: найм, бренд, продвижение продукта или технологий.
-                </Text>
-                <Text fontSize="sm" color={mutedTextColor}>
-                  AIFFA берёт на себя продакшн: упаковку задач, проведение хакатонов, челленджей
-                  и интеграций в материалы — вы получаете понятные результаты по IT-аудитории.
-                </Text>
+              <Text
+                fontSize={{ base: "lg", md: "xl" }}
+                color={mutedTextColor}
+                lineHeight="1.5"
+              >
+                Подбираем формат под ваши цели: найм, бренд, продвижение продукта или технологий.
+              </Text>
+              <Text
+                fontSize={{ base: "sm", md: "md" }}
+                color={mutedTextColor}
+                lineHeight="1.6"
+              >
+                AIFFA берёт на себя продакшн: упаковку задач, проведение хакатонов, челленджей
+                и интеграций в материалы — вы получаете понятные результаты по IT-аудитории.
+              </Text>
                 <HStack spacing={4} flexWrap="wrap" justify="center">
                   <Button
                     as={Link}
@@ -166,15 +180,18 @@ const PartnersPage = () => {
               align="flex-start"
               spacing={{ base: 4, md: 8 }}
             >
-              <VStack align="flex-start" spacing={4} flex={3}>
-                <HStack spacing={3}>
-                  <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
-                    Задачи бренда
-                  </PillBadge>
-                  <Text fontSize="xs" color={mutedTextColor}>
-                    Кому подойдёт партнёрство с AIFFA
-                  </Text>
-                </HStack>
+              <VStack
+                align="flex-start"
+                spacing={3}
+                flex={3}
+                textAlign="left"
+              >
+                <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
+                  Задачи бренда
+                </PillBadge>
+                <Text fontSize="xs" color={mutedTextColor}>
+                  Кому подойдёт партнёрство с AIFFA
+                </Text>
                 <Heading as="h2" size="md" letterSpacing="-0.02em">
                   Кому и зачем подходит спонсорство
                 </Heading>

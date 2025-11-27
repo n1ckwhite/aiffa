@@ -71,7 +71,7 @@ const PartnersPage = () => {
                   AIFFA берёт на себя продакшн: упаковку задач, проведение хакатонов, челленджей
                   и интеграций в материалы — вы получаете понятные результаты по IT-аудитории.
                 </Text>
-                <HStack spacing={4} flexWrap="wrap">
+                <HStack spacing={4} flexWrap="wrap" justify="center">
                   <Button
                     as={Link}
                     href="https://t.me/iamceob1tch"
@@ -80,6 +80,8 @@ const PartnersPage = () => {
                     borderRadius="full"
                     px={{ base: 6, md: 7 }}
                     fontWeight="semibold"
+                    w={{ base: "100%", sm: "auto", md: "260px" }}
+                    justifyContent="center"
                     leftIcon={<TelegramIcon />}
                   >
                     Написать в Telegram
@@ -91,6 +93,8 @@ const PartnersPage = () => {
                     borderRadius="full"
                     px={{ base: 6, md: 7 }}
                     fontWeight="semibold"
+                    w={{ base: "100%", sm: "auto", md: "260px" }}
+                    justifyContent="center"
                     leftIcon={<MailIcon />}
                   >
                     Написать на email
@@ -99,42 +103,56 @@ const PartnersPage = () => {
             </VStack>
           </Box>
 
-          {/* Кратко об AIFFA — компактный обзор в одном блоке */}
+          {/* Партнёрство для компаний — обзор преимуществ в одном блоке */}
           <Box mt={{ base: 8, md: 10 }}>
-            <VStack
-              align="stretch"
-              spacing={4}
+            <Box
               borderRadius="2xl"
               bg={heroAsideBg}
               p={{ base: 4, md: 6 }}
             >
-            <PillBadge variant="solid" uppercase={false}>
-                  Партнёрство для компаний
-            </PillBadge>
-              <Text fontSize="sm" color={mutedTextColor}>
-                Платформа для практики и роста разработчиков: задачи недели, хакатоны и живое
-                сообщество вместо пассивного обучения.
-              </Text>
-              <SimpleGrid
-                columns={{ base: 1, sm: 3 }}
-                spacing={{ base: 3, md: 6 }}
-                fontSize="sm"
-                color={mutedTextColor}
+              <Stack
+                direction={{ base: "column", md: "row" }}
+                spacing={{ base: 4, md: 8 }}
+                align="flex-start"
               >
-                <HStack align="flex-start" spacing={3}>
-                  <Box as="span" boxSize={2} borderRadius="full" bg="green.400" mt={1} />
-                  <Text>Практика: Weekly-задачи, проекты и хакатоны.</Text>
-                </HStack>
-                <HStack align="flex-start" spacing={3}>
-                  <Box as="span" boxSize={2} borderRadius="full" bg="blue.400" mt={1} />
-                  <Text>Редактор кода в браузере с VSCode-опытом.</Text>
-                </HStack>
-                <HStack align="flex-start" spacing={3}>
-                  <Box as="span" boxSize={2} borderRadius="full" bg="purple.400" mt={1} />
-                  <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
-                </HStack>
-              </SimpleGrid>
-            </VStack>
+                <VStack
+                  align={{ base: "center", md: "flex-start" }}
+                  spacing={3}
+                  flex={{ base: "none", md: 2 }}
+                  textAlign={{ base: "center", md: "left" }}
+                  maxW={{ base: "100%", md: "420px" }}
+                >
+                  <PillBadge variant="solid" uppercase={false}>
+                    Партнёрство для компаний
+                  </PillBadge>
+                  <Text fontSize="sm" color={mutedTextColor}>
+                    Платформа для практики и роста разработчиков: задачи недели, хакатоны и живое
+                    сообщество вместо пассивного обучения.
+                  </Text>
+                </VStack>
+
+                <SimpleGrid
+                  columns={{ base: 1, sm: 3 }}
+                  spacing={{ base: 3, md: 6 }}
+                  flex={{ base: "none", md: 3 }}
+                  fontSize="sm"
+                  color={mutedTextColor}
+                >
+                  <HStack align="flex-start" spacing={3}>
+                    <Box as="span" boxSize={2} borderRadius="full" bg="green.400" mt={1} />
+                    <Text>Практика: Weekly-задачи, проекты и хакатоны.</Text>
+                  </HStack>
+                  <HStack align="flex-start" spacing={3}>
+                    <Box as="span" boxSize={2} borderRadius="full" bg="blue.400" mt={1} />
+                    <Text>Редактор кода в браузере с VSCode-опытом.</Text>
+                  </HStack>
+                  <HStack align="flex-start" spacing={3}>
+                    <Box as="span" boxSize={2} borderRadius="full" bg="purple.400" mt={1} />
+                    <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
+                  </HStack>
+                </SimpleGrid>
+              </Stack>
+            </Box>
           </Box>
 
           {/* Кому и зачем подходит спонсорство */}

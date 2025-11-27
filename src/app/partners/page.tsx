@@ -19,6 +19,13 @@ const PartnersPage = () => {
   const overviewAsideBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.9)");
   const surfaceCardBg = useColorModeValue("whiteAlpha.900", "surface.elevated");
 
+  const partnershipBorderColor = useColorModeValue("gray.200", "whiteAlpha.200");
+  const partnershipBgGradient = useColorModeValue(
+    "linear(to-r, blue.50, purple.50)",
+    "linear(to-r, whiteAlpha.100, whiteAlpha.50)"
+  );
+  const partnershipBoxShadow = "md";
+
   const hackathonBg = useColorModeValue(
     "linear(to-b, rgba(34,197,94,0.03), whiteAlpha.900)",
     "linear(to-b, rgba(34,197,94,0.18), surface.elevated)"
@@ -121,17 +128,23 @@ const PartnersPage = () => {
           <Box mt={{ base: 8, md: 10 }}>
             <Box
               borderRadius="2xl"
+              borderWidth="1px"
+              borderColor={partnershipBorderColor}
+              p={{ base: 5, md: 6 }}
+              w="100%"
+              mx="auto"
               bg={heroAsideBg}
-              p={{ base: 4, md: 6 }}
+              bgGradient={partnershipBgGradient}
+              boxShadow={partnershipBoxShadow}
             >
               <Stack
                 direction={{ base: "column", md: "row" }}
                 spacing={{ base: 4, md: 8 }}
-                align="flex-start"
+                align={{ base: "flex-start", md: "flex-end" }}
               >
                 <VStack
                   align={{ base: "center", md: "flex-start" }}
-                  spacing={3}
+                  spacing={4}
                   flex={{ base: "none", md: 2 }}
                   textAlign={{ base: "center", md: "left" }}
                   maxW={{ base: "100%", md: "420px" }}
@@ -139,24 +152,79 @@ const PartnersPage = () => {
                   <PillBadge variant="solid" uppercase={false}>
                     Партнёрство для компаний
                   </PillBadge>
-                  <Text fontSize="sm" color={mutedTextColor}>
-                    Платформа для практики и роста разработчиков: задачи недели, хакатоны и живое
-                    сообщество вместо пассивного обучения.
+                  <Heading as="h3" size="sm" letterSpacing="-0.02em">
+                    Платформа для практики и роста разработчиков
+                  </Heading>
+                  <Text fontSize="sm" color={mutedTextColor} lineHeight="1.6">
+                    Помогаем компаниям работать с IT-аудиторией через практику, а не пассивное обучение.
                   </Text>
                 </VStack>
 
-                <SimpleGrid
-                  columns={{ base: 1, sm: 3 }}
-                  spacing={{ base: 3, md: 6 }}
+                <VStack
+                  as="ul"
+                  align="flex-start"
+                  spacing={3}
                   flex={{ base: "none", md: 3 }}
                   fontSize="sm"
                   color={mutedTextColor}
                 >
-                  <Text>Практика: Weekly-задачи, проекты и хакатоны.</Text>
-                  <Text>Редактор кода в браузере с VSCode-опытом.</Text>
-                  <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
-                </SimpleGrid>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={1}
+                      boxSize={2}
+                      borderRadius="full"
+                      bg="blue.400"
+                      flexShrink={0}
+                    />
+                    <Text>Weekly-задачи, проекты и хакатоны.</Text>
+                  </HStack>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={1}
+                      boxSize={2}
+                      borderRadius="full"
+                      bg="blue.400"
+                      flexShrink={0}
+                    />
+                    <Text>Редактор кода в браузере с VSCode-опытом.</Text>
+                  </HStack>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={1}
+                      boxSize={2}
+                      borderRadius="full"
+                      bg="blue.400"
+                      flexShrink={0}
+                    />
+                    <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
+                  </HStack>
+                </VStack>
               </Stack>
+
+              <HStack
+                mt={{ base: 4, md: 5 }}
+                spacing={3}
+                justify={{ base: "center", md: "space-between" }}
+                flexWrap="wrap"
+              >
+                <Text fontSize="xs" color={mutedTextColor} textAlign={{ base: "center", md: "left" }}>
+                  Открыты к пилотам и спецформатам — подберём формат под HR-задачи, бренд и продуктовые кейсы.
+                </Text>
+                <HStack spacing={2}>
+                  <PillBadge colorScheme="green" variant="outline" uppercase={false}>
+                    HR-задачи
+                  </PillBadge>
+                  <PillBadge colorScheme="purple" variant="outline" uppercase={false}>
+                    Бренд
+                  </PillBadge>
+                  <PillBadge colorScheme="yellow" variant="outline" uppercase={false}>
+                    Продукт
+                  </PillBadge>
+                </HStack>
+              </HStack>
             </Box>
           </Box>
 

@@ -17,7 +17,6 @@ const NotFound = () => {
       aria-label="Страница не найдена"
       py={{ base: 12, md: 24 }}
       px={{ base: 4, md: 0 }}
-      minH="100vh"
       display="flex"
       alignItems="center"
       justifyContent="center"
@@ -37,7 +36,7 @@ const NotFound = () => {
             mb={2}
             borderRadius="full"
             boxSize={{ base: 20, md: 24 }}
-            bgGradient="linear(to-br, blue.400, purple.500)"
+            backgroundColor={"blue.600"}
             display="flex"
             alignItems="center"
             justifyContent="center"

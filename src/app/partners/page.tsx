@@ -48,34 +48,22 @@ const PartnersPage = () => {
       px={{ base: 4, md: 0 }}
       transition="none"
     >
-      <Box maxW={{ base: "100%", md: "960px" }} mx="auto">
+      <Box maxW={{ base: "100%", md: "1100px" }} mx="auto">
         <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
-          <VStack align="center" spacing={3} textAlign="center">
-            <Heading as="h1" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.03em">
-              Партнёрство и спонсорство AIFFA
-            </Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} color={mutedTextColor}>
-              Коммерческое партнёрство для брендов: платные интеграции, Weekly‑задачи и
-              хакатоны c разработчиками на платформе AIFFA.
-            </Text>
-          </VStack>
-
           {/* Hero-блок */}
-          <Box
-            transition="none"
-          >
-            <Stack
-              direction={{ base: "column", md: "row" }}
-              spacing={{ base: 6, md: 10 }}
+          <Box transition="none">
+            <VStack
               align={{ base: "flex-start", md: "center" }}
+              spacing={4}
+              textAlign={{ base: "left", md: "center" }}
             >
-              <VStack align="flex-start" spacing={4} flex={3}>
-                <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
-                  Партнёрство для компаний
-                </PillBadge>
                 <Heading as="h2"  fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.03em">
                   Стать партнёром AIFFA
                 </Heading>
+                <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
+                  Партнёрство для компаний
+                </PillBadge>
+
                 <Text fontSize={{ base: "md", md: "lg" }} color={mutedTextColor}>
                   Подбираем формат под ваши цели: найм, бренд, продвижение продукта или технологий.
                 </Text>
@@ -108,50 +96,45 @@ const PartnersPage = () => {
                     Написать на email
                   </Button>
                 </HStack>
-              </VStack>
+            </VStack>
+          </Box>
 
-              <VStack
-                align="flex-start"
-                spacing={3}
-                flex={2}
-                borderRadius="xl"
-                bg={heroAsideBg}
-                p={4}
+          {/* Кратко об AIFFA — компактный обзор в одном блоке */}
+          <Box mt={{ base: 8, md: 10 }}>
+            <VStack
+              align="stretch"
+              spacing={4}
+              borderRadius="2xl"
+              bg={heroAsideBg}
+              p={{ base: 4, md: 6 }}
+            >
+            <PillBadge variant="solid" uppercase={false}>
+                  Партнёрство для компаний
+            </PillBadge>
+              <Text fontSize="sm" color={mutedTextColor}>
+                Платформа для практики и роста разработчиков: задачи недели, хакатоны и живое
+                сообщество вместо пассивного обучения.
+              </Text>
+              <SimpleGrid
+                columns={{ base: 1, sm: 3 }}
+                spacing={{ base: 3, md: 6 }}
+                fontSize="sm"
+                color={mutedTextColor}
               >
-                <Text fontSize="xs" textTransform="uppercase" color={asideLabelColor}>
-                  Кратко об AIFFA
-                </Text>
-                <VStack align="flex-start" spacing={2} fontSize="sm" color={mutedTextColor}>
-                  <HStack spacing={2}>
-                    <Box
-                      as="span"
-                      boxSize={1.5}
-                      borderRadius="full"
-                      bg="green.400"
-                    />
-                    <Text>Практика: Weekly-задачи, проекты и хакатоны.</Text>
-                  </HStack>
-                  <HStack spacing={2}>
-                    <Box
-                      as="span"
-                      boxSize={1.5}
-                      borderRadius="full"
-                      bg="blue.400"
-                    />
-                    <Text>VSCode-подобный редактор прямо в браузере.</Text>
-                  </HStack>
-                  <HStack spacing={2}>
-                    <Box
-                      as="span"
-                      boxSize={1.5}
-                      borderRadius="full"
-                      bg="purple.400"
-                    />
-                    <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
-                  </HStack>
-                </VStack>
-              </VStack>
-            </Stack>
+                <HStack align="flex-start" spacing={3}>
+                  <Box as="span" boxSize={2} borderRadius="full" bg="green.400" mt={1} />
+                  <Text>Практика: Weekly-задачи, проекты и хакатоны.</Text>
+                </HStack>
+                <HStack align="flex-start" spacing={3}>
+                  <Box as="span" boxSize={2} borderRadius="full" bg="blue.400" mt={1} />
+                  <Text>Редактор кода в браузере с VSCode-опытом.</Text>
+                </HStack>
+                <HStack align="flex-start" spacing={3}>
+                  <Box as="span" boxSize={2} borderRadius="full" bg="purple.400" mt={1} />
+                  <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
+                </HStack>
+              </SimpleGrid>
+            </VStack>
           </Box>
 
           {/* Кому и зачем подходит спонсорство */}

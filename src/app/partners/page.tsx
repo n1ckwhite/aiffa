@@ -152,18 +152,9 @@ const PartnersPage = () => {
                   fontSize="sm"
                   color={mutedTextColor}
                 >
-                  <HStack align="flex-start" spacing={3}>
-                    <Box as="span" boxSize={2} borderRadius="full" bg="green.400" mt={1} />
-                    <Text>Практика: Weekly-задачи, проекты и хакатоны.</Text>
-                  </HStack>
-                  <HStack align="flex-start" spacing={3}>
-                    <Box as="span" boxSize={2} borderRadius="full" bg="blue.400" mt={1} />
-                    <Text>Редактор кода в браузере с VSCode-опытом.</Text>
-                  </HStack>
-                  <HStack align="flex-start" spacing={3}>
-                    <Box as="span" boxSize={2} borderRadius="full" bg="purple.400" mt={1} />
-                    <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
-                  </HStack>
+                  <Text>Практика: Weekly-задачи, проекты и хакатоны.</Text>
+                  <Text>Редактор кода в браузере с VSCode-опытом.</Text>
+                  <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
                 </SimpleGrid>
               </Stack>
             </Box>
@@ -205,27 +196,24 @@ const PartnersPage = () => {
                   as="ul"
                   fontSize="sm"
                   color={mutedTextColor}
+                  listStyleType="none"
+                  pl={0}
                 >
-                  <HStack as="li" spacing={2} align="flex-start">
-                    <Box as="span" mt={1} boxSize={1.5} borderRadius="full" bg="blue.300" />
-                    <Text>привлекать разработчиков и работать с IT-аудиторией;</Text>
-                  </HStack>
-                  <HStack as="li" spacing={2} align="flex-start">
-                    <Box as="span" mt={1} boxSize={1.5} borderRadius="full" bg="blue.300" />
-                    <Text>продвигать свои инструменты, технологии и platform-инфраструктуру;</Text>
-                  </HStack>
-                  <HStack as="li" spacing={2} align="flex-start">
-                    <Box as="span" mt={1} boxSize={1.5} borderRadius="full" bg="blue.300" />
-                    <Text>находить талантливых разработчиков через реальные задачи;</Text>
-                  </HStack>
-                  <HStack as="li" spacing={2} align="flex-start">
-                    <Box as="span" mt={1} boxSize={1.5} borderRadius="full" bg="blue.300" />
-                    <Text>повышать узнаваемость бренда в профессиональной среде;</Text>
-                  </HStack>
-                  <HStack as="li" spacing={2} align="flex-start">
-                    <Box as="span" mt={1} boxSize={1.5} borderRadius="full" bg="blue.300" />
-                    <Text>строить долгосрочное отношение через комьюнити и формат практики.</Text>
-                  </HStack>
+                  <Text as="li">
+                    привлекать разработчиков и работать с IT-аудиторией;
+                  </Text>
+                  <Text as="li">
+                    продвигать свои инструменты, технологии и platform-инфраструктуру;
+                  </Text>
+                  <Text as="li">
+                    находить талантливых разработчиков через реальные задачи;
+                  </Text>
+                  <Text as="li">
+                    повышать узнаваемость бренда в профессиональной среде;
+                  </Text>
+                  <Text as="li">
+                    строить долгосрочное отношение через комьюнити и формат практики.
+                  </Text>
                 </SimpleGrid>
               </VStack>
 
@@ -238,11 +226,12 @@ const PartnersPage = () => {
                 bg={overviewAsideBg}
                 p={{ base: 4, md: 5 }}
                 boxShadow={formatShadow}
+                maxW={{ base: "100%", md: "460px" }}
               >
                 <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
                   Какие эффекты даёт партнёрство
                 </PillBadge>
-                <Text fontSize="sm" color={mutedTextColor}>
+                <Text fontSize="sm" color={mutedTextColor} lineHeight="1.6">
                   Что получает бренд, когда партнёрится с AIFFA на уровне задач и хакатонов.
                 </Text>
                 <SimpleGrid
@@ -252,18 +241,15 @@ const PartnersPage = () => {
                   color={mutedTextColor}
                   w="full"
                 >
-                  <HStack align="flex-start" spacing={3}>
-                    <Box as="span" boxSize={2} borderRadius="full" bg="green.400" mt={1} />
-                    <Text>Бренд присутствует в практических задачах и решениях.</Text>
-                  </HStack>
-                  <HStack align="flex-start" spacing={3}>
-                    <Box as="span" boxSize={2} borderRadius="full" bg="blue.400" mt={1} />
-                    <Text>Разработчики знакомятся с технологиями на реальных сценариях.</Text>
-                  </HStack>
-                  <HStack align="flex-start" spacing={3}>
-                    <Box as="span" boxSize={2} borderRadius="full" bg="purple.400" mt={1} />
-                    <Text>Формируется долгосрочная ассоциация бренда с ростом и обучением.</Text>
-                  </HStack>
+                  <Text lineHeight="1.5">
+                    Бренд присутствует в практических задачах и решениях.
+                  </Text>
+                  <Text lineHeight="1.5">
+                    Разработчики знакомятся с технологиями на реальных сценариях.
+                  </Text>
+                  <Text lineHeight="1.5">
+                    Формируется долгосрочная ассоциация бренда с ростом и обучением.
+                  </Text>
                 </SimpleGrid>
               </VStack>
             </Stack>

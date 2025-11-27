@@ -15,7 +15,7 @@ const NotFound = () => {
     <Box
       as="section"
       aria-label="Страница не найдена"
-      py={{ base: 12, md: 24 }}
+      py={{ base: 8, md: 24 }}
       px={{ base: 4, md: 0 }}
       display="flex"
       alignItems="center"

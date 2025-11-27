@@ -58,8 +58,8 @@ const PartnersPage = () => {
     <Box
       as="section"
       aria-label="Партнёрство и спонсорство AIFFA"
-      py={{ base: 16, md: 20 }}
-      px={4}
+      py={{ base: 8, md: 10 }}
+      px={{ base: 4, md: 6 }}
       transition="none"
     >
       <Box maxW="1200px" mx="auto">
@@ -73,13 +73,27 @@ const PartnersPage = () => {
               maxW={{ base: "100%", md: "720px", lg: "820px" }}
               mx="auto"
             >
-              <Heading
-                as="h2"
-                fontSize={{ base: "3xl", md: "4xl" }}
-                letterSpacing="-0.03em"
+              <Stack
+                direction={{ base: "column", sm: "row" }}
+                justify="center"
+                align="center"
+                spacing={{ base: 2, sm: 3 }}
               >
-                Стать партнёром AIFFA
-              </Heading>
+                <Icon
+                  as={FaHandshake}
+                  aria-hidden="true"
+                  boxSize={{ base: 7, md: 8 }}
+                  color={useColorModeValue("blue.500", "blue.300")}
+                />
+                <Heading
+                  as="h2"
+                  fontSize={{ base: "2xl", md: "4xl" }}
+                  letterSpacing="-0.03em"
+                  textAlign="center"
+                >
+                  Стать партнёром AIFFA
+                </Heading>
+              </Stack>
               <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
                 Партнёрство для компаний
               </PillBadge>

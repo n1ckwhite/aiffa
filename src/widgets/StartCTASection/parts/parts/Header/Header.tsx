@@ -1,12 +1,16 @@
 import React from 'react';
-import { VStack, Text } from '@chakra-ui/react';
+import { VStack, Text, Box } from '@chakra-ui/react';
 import { useStartCTAColors } from '../../../colors/useStartCTAColors';
 import type { HeaderProps } from './types/Header.types';
+import PersonLottieIcon from 'shared/test/PersonLottieIcon';
 
 const Header: React.FC<HeaderProps> = () => {
   const { titleColor, textColor } = useStartCTAColors();
   return (
-    <VStack spacing={3} maxW="760px">
+    <VStack spacing={4} maxW="760px">
+      <Box>
+        <PersonLottieIcon />
+      </Box>
       <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="bold" color={titleColor}>
         Готовы начать изучение?
       </Text>

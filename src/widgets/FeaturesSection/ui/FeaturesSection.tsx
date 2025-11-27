@@ -3,11 +3,13 @@ import { Box, Container, VStack, SimpleGrid } from '@chakra-ui/react';
 import { useFeaturesSectionColors } from './colors/useFeaturesSectionColors';
 import { HeaderBlock, FeatureItem } from './parts';
 import { features } from '../model/data';
+import PeopleLottieIcon from '@/shared/test/PeopleLottieIcon';
 
 const FeaturesSection: React.FC = () => {
   const colors = useFeaturesSectionColors();
   return (
-    <Box bg={colors.bg} py={16} px={0}>
+    <Box bg={colors.bg} pb={16} px={0}>
+        <PeopleLottieIcon />
       <Container maxW="1200px">
         <VStack spacing={12} align="center">
           <HeaderBlock

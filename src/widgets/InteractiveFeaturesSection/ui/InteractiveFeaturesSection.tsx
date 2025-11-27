@@ -3,16 +3,18 @@ import { Box, Container, VStack, Text, SimpleGrid } from '@chakra-ui/react';
 import { useInteractiveColors } from '../colors/useInteractiveColors';
 import { colorRgbMap } from '../data/colors';
 import { features } from '../data/features';
+import LottieHeroIcon from 'shared/test/LottieHeroIcon';
 
 const InteractiveFeaturesSection: React.FC = () => {
   const { cardBg, textColor, titleColor, spotlightAlpha } = useInteractiveColors();
 
   return (
-    <Box py={16} px={0}>
+    <Box px={0}>
+      <LottieHeroIcon />
       <Container maxW="1200px">
         <VStack spacing={12} align="center">
           <VStack
-            spacing={4}
+            spacing={5}
             textAlign="center"
             maxW="600px"
             data-index={0}
@@ -36,6 +38,7 @@ const InteractiveFeaturesSection: React.FC = () => {
               хакатоны и проекты. Ваш вклад виден (GitHub-профиль) и ценится. Обучаясь и помогая другим,
               вы развиваетесь быстрее.
             </Text>
+
           </VStack>
 
           <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} w="full" alignItems="stretch">

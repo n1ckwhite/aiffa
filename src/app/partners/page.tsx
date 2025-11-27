@@ -232,20 +232,39 @@ const PartnersPage = () => {
               <VStack
                 display={{ base: "none", md: "flex" }}
                 align="flex-start"
-                spacing={3}
+                spacing={4}
                 flex={2}
-                borderRadius="xl"
+                borderRadius="2xl"
                 bg={overviewAsideBg}
-                p={4}
+                p={{ base: 4, md: 5 }}
+                boxShadow={formatShadow}
               >
-                <Text fontSize="xs" textTransform="uppercase" color={asideLabelColor}>
+                <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
                   Какие эффекты даёт партнёрство
+                </PillBadge>
+                <Text fontSize="sm" color={mutedTextColor}>
+                  Что получает бренд, когда партнёрится с AIFFA на уровне задач и хакатонов.
                 </Text>
-                <VStack align="flex-start" spacing={2} fontSize="sm" color={mutedTextColor}>
-                  <Text>Бренд присутствует в практических задачах и решениях.</Text>
-                  <Text>Разработчики знакомятся с технологиями на реальных сценариях.</Text>
-                  <Text>Формируется долгосрочная ассоциация бренда с ростом и обучением.</Text>
-                </VStack>
+                <SimpleGrid
+                  columns={{ base: 1, md: 1 }}
+                  spacing={3}
+                  fontSize="sm"
+                  color={mutedTextColor}
+                  w="full"
+                >
+                  <HStack align="flex-start" spacing={3}>
+                    <Box as="span" boxSize={2} borderRadius="full" bg="green.400" mt={1} />
+                    <Text>Бренд присутствует в практических задачах и решениях.</Text>
+                  </HStack>
+                  <HStack align="flex-start" spacing={3}>
+                    <Box as="span" boxSize={2} borderRadius="full" bg="blue.400" mt={1} />
+                    <Text>Разработчики знакомятся с технологиями на реальных сценариях.</Text>
+                  </HStack>
+                  <HStack align="flex-start" spacing={3}>
+                    <Box as="span" boxSize={2} borderRadius="full" bg="purple.400" mt={1} />
+                    <Text>Формируется долгосрочная ассоциация бренда с ростом и обучением.</Text>
+                  </HStack>
+                </SimpleGrid>
               </VStack>
             </Stack>
           </Box>

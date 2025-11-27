@@ -62,7 +62,6 @@ export const useTaskDetail = (initialTaskId?: string) => {
   const [result, setResult] = React.useState<CheckResult>(null);
   const [checking, setChecking] = React.useState(false);
   const [congratsAll, setCongratsAll] = React.useState(false);
-  const [showVsOverlay, setShowVsOverlay] = React.useState<boolean>(true);
 
   const openVSCode = React.useCallback(() => {
     try {
@@ -71,13 +70,14 @@ export const useTaskDetail = (initialTaskId?: string) => {
         if (monacoEl) {
           monacoEl.focus?.();
         } else {
-        const nativeTextarea = document.querySelector('textarea[name="code-editor-input"]') as HTMLTextAreaElement | null;
-        nativeTextarea?.focus?.();
+          const nativeTextarea = document.querySelector(
+            'textarea[name="code-editor-input"]'
+          ) as HTMLTextAreaElement | null;
+          nativeTextarea?.focus?.();
         }
-        setShowVsOverlay(false);
       }, 400);
-    } catch {
-      setShowVsOverlay(false);
+    } catch (error) {
+      console.error(error);
     }
   }, []);
 
@@ -151,7 +151,6 @@ export const useTaskDetail = (initialTaskId?: string) => {
     author, authorHref, authorAvatar, authorNote,
     input, setInput,
     result, checking, congratsAll,
-    showVsOverlay,
     openVSCode,
     onCheck,
     isOpen,

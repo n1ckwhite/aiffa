@@ -80,7 +80,7 @@ export const modulesFaqConfig: Record<ModulesFaqVariant, ModulesFaqConfig> = {
     items: tasksFaqItems,
   },
   xp: {
-    title: 'Частые вопросы про опыт и уровни',
+    title: 'Частые вопросы про задачи',
     items: xpFaqItems,
   },
 };

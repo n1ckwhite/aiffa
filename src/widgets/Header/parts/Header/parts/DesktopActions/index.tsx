@@ -38,7 +38,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           as={RouterLink as any}
           to="/weekly"
           aria-label="Задачи"
-          onClick={() => { setIsMobileMenuOpen(false); scrollTop(); }}
+          onClick={() => { setIsMobileMenuOpen(false); }}
           _hover={{ bg: hoverBg }}
           px={2}
           py={1.5}
@@ -57,7 +57,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           as={RouterLink as any}
           to="/profile"
           aria-label="Профиль"
-          onClick={() => { setIsMobileMenuOpen(false); scrollTop(); }}
+          onClick={() => { setIsMobileMenuOpen(false); }}
           _hover={{ bg: hoverBg }}
           px={2}
           py={1.5}

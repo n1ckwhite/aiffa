@@ -32,7 +32,6 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
     result,
     checking,
     congratsAll,
-    showVsOverlay,
     openVSCode,
     onCheck,
     isOpen,
@@ -124,7 +123,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
                 ? "go"
                 : "shell")
             }
-            overlay={showVsOverlay}
+            overlay
             onStart={openVSCode}
             onReady={() => setIsEditorReady(true)}
           />

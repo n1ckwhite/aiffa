@@ -8,6 +8,12 @@ import { useEditorStart } from './hooks/useEditorStart';
 const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onStart, onReady }) => {
   const { border, titleBarBg, editorBg, overlayBg, startBg, startHoverBg, startActiveBg, strongBorder } = useEditorColors();
   const { isStarting, handleStartClick } = useEditorStart({ onStart });
+  const [isEditorReady, setIsEditorReady] = React.useState(false);
+
+  const handleEditorReady = React.useCallback(() => {
+    setIsEditorReady(true);
+    onReady?.();
+  }, [onReady]);
 
   return (
     <Box borderWidth="1px" borderColor={border} borderRadius="lg" position="relative">
@@ -22,11 +28,11 @@ const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onS
           onChange={onChange}
           language={language}
           height={'clamp(240px, 60vh, 720px)'}
-          enabled={!overlay}
-          onReady={onReady}
+          enabled={isStarting}
+          onReady={handleEditorReady}
         />
       </Box>
-      {overlay && (
+      {overlay && !isEditorReady && (
         <Box
           position="absolute"
           inset={0}

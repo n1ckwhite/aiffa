@@ -7,6 +7,7 @@ import { quotes } from '../data/quotes';
 import { highlights } from '../data/highlights';
 import { highlightColors } from '../data/constants';
 import PillBadge from 'shared/ui/PillBadge';
+import LottieHeroIcon from 'shared/test/LottieHeroIcon';
 import { useStaggeredDelay } from '../hooks/useStaggeredDelay';
 import { useRotatingIndex } from '../hooks/useRotatingIndex';
 import { useStatsVisibility } from '../hooks/useStatsVisibility';
@@ -52,6 +53,8 @@ const HeroSection: React.FC = () => {
 
 Всё открыто и бесплатно. Чем больше твой вклад, тем выше уровень, шире сеть контактов и сильнее становится AIFFA. 
             </Text>
+
+            <LottieHeroIcon />
           </VStack>
           <SimpleGrid 
             columns={{ base: 2, md: 3, lg: 6 }} 

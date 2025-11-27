@@ -85,14 +85,14 @@ const PartnersPage = () => {
                   boxSize={{ base: 7, md: 8 }}
                   color={useColorModeValue("blue.500", "blue.300")}
                 />
-                <Heading
-                  as="h2"
+              <Heading
+                as="h2"
                   fontSize={{ base: "2xl", md: "4xl" }}
-                  letterSpacing="-0.03em"
+                letterSpacing="-0.03em"
                   textAlign="center"
-                >
-                  Стать партнёром AIFFA
-                </Heading>
+              >
+                Стать партнёром AIFFA
+              </Heading>
               </Stack>
               <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
                 Партнёрство для компаний
@@ -289,7 +289,7 @@ const PartnersPage = () => {
                         />
                       </Box>
                     </Box>
-                    <Text>Редактор кода в браузере с VSCode-опытом.</Text>
+                  <Text>Редактор кода в браузере с VSCode-опытом.</Text>
                   </HStack>
                   <HStack as="li" align="flex-start" spacing={3}>
                     <Box
@@ -315,7 +315,7 @@ const PartnersPage = () => {
                         />
                       </Box>
                     </Box>
-                    <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
+                  <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
                   </HStack>
                 </VStack>
               </Stack>

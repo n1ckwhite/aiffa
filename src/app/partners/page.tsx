@@ -1,10 +1,11 @@
 'use client';
 
 import React from "react";
-import { Box, Button, Heading, HStack, Link, Stack, Text, VStack, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Heading, HStack, Link, Stack, Text, VStack, SimpleGrid, useColorModeValue, Icon } from "@chakra-ui/react";
 import PillBadge from "shared/ui/PillBadge";
 import { TelegramIcon } from "@/widgets/Footer/icons/Telegram";
 import { MailIcon } from "@/widgets/Footer/icons/Mail";
+import { FaHandshake, FaListCheck, FaCode, FaStar } from "react-icons/fa6";
 
 const PartnersPage = () => {
   const formatShadow = useColorModeValue(
@@ -25,6 +26,12 @@ const PartnersPage = () => {
     "linear(to-r, whiteAlpha.100, whiteAlpha.50)"
   );
   const partnershipBoxShadow = "md";
+  const partnershipIconColor = useColorModeValue("blue.300", "whiteAlpha.500");
+  const partnershipIconInnerColor = useColorModeValue("blue.100", "whiteAlpha.300");
+  const partnershipIconBgGradient = useColorModeValue(
+    "linear(to-br, whiteAlpha.800, transparent)",
+    "linear(to-br, whiteAlpha.300, transparent)"
+  );
 
   const hackathonBg = useColorModeValue(
     "linear(to-b, rgba(34,197,94,0.03), whiteAlpha.900)",
@@ -136,7 +143,33 @@ const PartnersPage = () => {
               bg={heroAsideBg}
               bgGradient={partnershipBgGradient}
               boxShadow={partnershipBoxShadow}
+              position="relative"
+              overflow="hidden"
             >
+              <Box
+                as="span"
+                aria-hidden="true"
+                position="absolute"
+                right={{ base: -12, md: -4 }}
+                top={{ base: -10, md: -8 }}
+                boxSize={{ base: 40, md: 52 }}
+                opacity={0.26}
+              >
+                <Box
+                  boxSize="100%"
+                  borderRadius="full"
+                  bgGradient={partnershipIconBgGradient}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Icon
+                    as={FaHandshake}
+                    boxSize={{ base: "55%", md: "60%" }}
+                    color={partnershipIconColor}
+                  />
+                </Box>
+              </Box>
               <Stack
                 direction={{ base: "column", md: "row" }}
                 spacing={{ base: 4, md: 8 }}
@@ -181,26 +214,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <rect
-                          x="4"
-                          y="4"
-                          width="16"
-                          height="16"
-                          rx="4"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M8.5 12.5 11 15l4.5-5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaListCheck} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>Weekly-задачи, проекты и хакатоны.</Text>
                   </HStack>
@@ -217,34 +231,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <rect
-                          x="4"
-                          y="4"
-                          width="16"
-                          height="16"
-                          rx="4"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M9 9.5 11.5 12 9 14.5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M15 9.5 12.5 12 15 14.5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaCode} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>Редактор кода в браузере с VSCode-опытом.</Text>
                   </HStack>
@@ -261,16 +248,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <path
-                          d="M12 4.5 13.9 9l4.6.4-3.5 3 1 4.6L12 14.8 8 17l1-4.6-3.5-3L10 9l2-4.5Z"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaStar} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
                   </HStack>

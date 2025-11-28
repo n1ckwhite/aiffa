@@ -25,7 +25,7 @@ export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onS
 
   if (task.type === 'terminal') {
     return (
-      <VStack align="stretch" spacing={2}>
+      <VStack align="stretch" spacing={{ base: 4, md: 3 }}>
         <Box bg={terminalBg} borderWidth={0} borderRadius="12px" boxShadow="none" transition="outline 0.2s ease">
           <Box display="flex" gap={2} p={2}>
             <Box w="10px" h="10px" borderRadius="full" bg="#ef4444" />
@@ -58,7 +58,7 @@ export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onS
         <Button
           key={wrongAnimKey}
           alignSelf="flex-start"
-          mt={2}
+          mt={{ base: 5, md: 3 }}
           size="sm"
           variant="solid"
           bg="blue.600"
@@ -84,7 +84,7 @@ export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onS
           value={value}
           isDisabled={ok === true}
         >
-          <Stack direction="column" spacing={2}>
+          <Stack direction="column" spacing={{ base: 3, md: 2 }}>
             {task.mcq?.options.map((o: any) => (
               <Radio borderColor={border} key={o.id} value={o.id} name={`task-${task.id || 'mcq'}-option`}>{o.label}</Radio>
             ))}
@@ -92,7 +92,7 @@ export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onS
         </RadioGroup>
         <Button
           key={wrongAnimKey}
-          mt={3}
+          mt={{ base: 5, md: 3 }}
           size="sm"
           variant="solid"
           bg="blue.600"
@@ -113,7 +113,7 @@ export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onS
     const options = task.checkbox?.options || [];
     return (
       <Box bg="transparent" borderWidth={0} borderRadius="xl" p={0} boxShadow="none">
-        <VStack align="stretch" spacing={2}>
+        <VStack align="stretch" spacing={{ base: 4, md: 3 }}>
           {options.map((o: any) => (
             <Checkbox
               key={o.id}
@@ -129,7 +129,7 @@ export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onS
         </VStack>
         <Button
           key={wrongAnimKey}
-          mt={3}
+          mt={{ base: 5, md: 3 }}
           size="sm"
           variant="solid"
           bg="blue.600"
@@ -148,7 +148,7 @@ export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onS
 
   if (task.type === 'text') {
     return (
-      <VStack align="stretch" spacing={2}>
+      <VStack align="stretch" spacing={{ base: 4, md: 3 }}>
         <Box bg={terminalBg} borderWidth={0} borderRadius="12px" boxShadow="none" transition="outline 0.2s ease">
           <Box display="flex" gap={2} p={2}>
             <Box w="10px" h="10px" borderRadius="full" bg="#ef4444" />
@@ -181,7 +181,7 @@ export const TaskRenderer: React.FC<TaskRendererProps> = ({ task, descColor, onS
         <Button
           key={wrongAnimKey}
           alignSelf="flex-start"
-          mt={2}
+          mt={{ base: 5, md: 3 }}
           size="sm"
           variant="solid"
           bg="blue.600"

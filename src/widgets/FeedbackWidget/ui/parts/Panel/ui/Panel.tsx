@@ -46,7 +46,7 @@ export const Panel: React.FC<PanelProps> = ({ isOpen, onClose, onSubmit, panelRe
               </HStack>
 
               <Text fontSize="sm" color={colors.textColor} textAlign="left">
-                Напишите мне в Telegram для обратной связи и предложений!
+                Напишите в Telegram для обратной связи и предложений!
               </Text>
 
               <Link

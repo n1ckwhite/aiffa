@@ -3,18 +3,17 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import Lottie from "lottie-react";
-import legoAnimation from '@/shared/icons/json-icons/people.json';
+import codingAnimation from '@/shared/icons/json-icons/coding.json';
 
-const PeopleLottieIcon: React.FC = () => {
+const CodingIcon: React.FC = () => {
   return (
     <Box
       aria-hidden="true"
       w={{ base: "250px", md: "350px" }}
       mx="auto"
-      mb={4}
     >
       <Lottie
-        animationData={legoAnimation}
+        animationData={codingAnimation}
         loop
         autoplay
         style={{ width: "100%", height: "auto" }}
@@ -23,6 +22,6 @@ const PeopleLottieIcon: React.FC = () => {
   );
 };
 
-export default PeopleLottieIcon;
+export default CodingIcon;
 
 

@@ -1,0 +1,9 @@
+export { default as BusinessAnalystIcon } from './BusinessAnalystIcon';
+export { default as BusinessAnatyticsIcon } from './BusinessAnatyticsIcon';
+export { default as BusinessManRocketIcon } from './BusinessManRocketIcon';
+export { default as CodingIcon } from './CodingIcon';
+export { default as DeveloperSkillsIcon } from './DeveloperSkillsIcon';
+export { default as StudentIcon } from './StudentIcon';
+export { default as LottieHeroIcon } from './LottieHeroIcon';
+export { default as PeopleLottieIcon } from './PeopleLottieIcon';
+export { default as PersonLottieIcon } from './PersonLottieIcon';

@@ -3,7 +3,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import Lottie from "lottie-react";
-import legoAnimation from "shared/icons/lottie.json";
+import lottieAnimation from '@/shared/icons/json-icons/lottie.json';
 
 const LottieHeroIcon: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const LottieHeroIcon: React.FC = () => {
       mx="auto"
     >
       <Lottie
-        animationData={legoAnimation}
+        animationData={lottieAnimation}
         loop
         autoplay
         style={{ width: "100%", height: "auto" }}

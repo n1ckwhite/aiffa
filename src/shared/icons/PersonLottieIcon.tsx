@@ -3,7 +3,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import Lottie from "lottie-react";
-import legoAnimation from "shared/icons/person.json";
+import legoAnimation from '@/shared/icons/json-icons/person.json';
 
 const PersonLottieIcon: React.FC = () => {
   return (

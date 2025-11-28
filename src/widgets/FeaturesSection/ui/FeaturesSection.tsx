@@ -3,7 +3,7 @@ import { Box, Container, VStack, SimpleGrid } from '@chakra-ui/react';
 import { useFeaturesSectionColors } from './colors/useFeaturesSectionColors';
 import { HeaderBlock, FeatureItem } from './parts';
 import { features } from '../model/data';
-import PeopleLottieIcon from '@/shared/icons/PeopleLottieIcon';
+import { PeopleLottieIcon } from '@/shared/icons';
 
 const FeaturesSection: React.FC = () => {
   const colors = useFeaturesSectionColors();

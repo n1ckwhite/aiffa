@@ -7,3 +7,4 @@ export { default as StudentIcon } from './StudentIcon';
 export { default as LottieHeroIcon } from './LottieHeroIcon';
 export { default as PeopleLottieIcon } from './PeopleLottieIcon';
 export { default as PersonLottieIcon } from './PersonLottieIcon';
+export { default as ErrorIcon } from './ErrorIcon';

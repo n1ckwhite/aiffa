@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box, HStack, VStack } from '@chakra-ui/react';
+import { Box, VStack } from '@chakra-ui/react';
 import { useUserProfile } from 'entities/user';
 import { ModulesFAQ } from 'widgets/Modules';
 import SupportBlock from 'widgets/SupportBlock';
 import WeeklyTasksHeader from '../Header/Header';
 import WeeklyTasksPromo from '../Promo/Promo';
-import WeeklyTasksTierBadge from '../TierBadge/parts/TierBadge/TierBadge';
 import WeeklyTasksGrid from '../TasksGrid/TasksGrid';
+import DeveloperSkillsIcon from '@/shared/icons/DeveloperSkillsIcon';
 import { useWeeklyTasksData } from '../TasksGrid/model/useWeeklyTasksData';
 import { useTierMeta } from '../../hooks/useTierMeta';
 import WeeklyTasksCountdown from '../Countdown/Countdown';
@@ -27,12 +27,8 @@ const WeeklyTasksScreen: React.FC = () => {
       <Box w="100%" maxW="1440px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
         <WeeklyTasksHeader />
         <WeeklyTasksPromo />
-        <VStack spacing={3} mb={6}>
-          <HStack spacing={4} wrap="wrap" justify="center" mt={1}>
-            <WeeklyTasksTierBadge label={tierLabel} />
-          </HStack>
-          <WeeklyTasksCountdown />
-        </VStack>
+        <DeveloperSkillsIcon />
+        <WeeklyTasksCountdown />
         <WeeklyTasksGrid tasks={tasks as any} tierLabel={tierLabel as any} />
       </Box>
       <Box px={{ base: 4, md: 6 }} mt={6}>

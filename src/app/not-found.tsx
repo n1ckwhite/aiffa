@@ -9,6 +9,7 @@ import {
   Text,
   VStack
 } from "@chakra-ui/react";
+import { ErrorIcon } from "@/shared/icons";
 
 const NotFound = () => {
   return (
@@ -32,33 +33,7 @@ const NotFound = () => {
           align="center"
           textAlign="center"
         >
-          <Box
-            mb={2}
-            borderRadius="full"
-            boxSize={{ base: 20, md: 24 }}
-            backgroundColor={"blue.600"}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            boxShadow="0 18px 45px rgba(15, 23, 42, 0.45)"
-          >
-            <Box
-              as="svg"
-              viewBox="0 0 24 24"
-              boxSize={{ base: 10, md: 12 }}
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="2" />
-              <path
-                d="M9 9h.01M15 9h.01M9 15c.8-1 1.9-1.5 3-1.5s2.2.5 3 1.5"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-            </Box>
-          </Box>
+          <ErrorIcon />
           <HStack spacing={5} align="center" justify="center">
             <Heading
               as="h1"

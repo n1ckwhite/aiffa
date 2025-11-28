@@ -16,7 +16,6 @@ const Promo: React.FC<WeeklyTasksPromoProps> = () => {
       w="100%"
       mx="auto"
       mt={{ base: 3, md: 4 }}
-      mb={{ base: 6, md: 8 }}
       bgGradient={promoBgGradient}
       boxShadow={promoBoxShadow}
     >

@@ -9,7 +9,7 @@ const BusinessAnalystIcon: React.FC = () => {
   return (
     <Box
       aria-hidden="true"
-      w={{ base: "250px", md: "350px" }}
+      w={{ base: "250px", md: "250px" }}
       mx="auto"
     >
       <Lottie

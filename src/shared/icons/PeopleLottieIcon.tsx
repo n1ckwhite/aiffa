@@ -1,28 +1,17 @@
 "use client";
 
 import React from "react";
-import { Box } from "@chakra-ui/react";
-import Lottie from "lottie-react";
-import legoAnimation from '@/shared/icons/json-icons/people.json';
+import LazyLottieIcon from "@/shared/icons/LazyLottieIcon";
+import legoAnimation from "@/shared/icons/json-icons/people.json";
 
 const PeopleLottieIcon: React.FC = () => {
   return (
-    <Box
-      aria-hidden="true"
-      w={{ base: "250px", md: "350px" }}
-      mx="auto"
-      mb={4}
-    >
-      <Lottie
-        animationData={legoAnimation}
-        loop
-        autoplay
-        style={{ width: "100%", height: "auto" }}
-      />
-    </Box>
+    <LazyLottieIcon
+      animationData={legoAnimation}
+      boxProps={{ w: { base: "250px", md: "350px" }, mx: "auto", mb: 4 }}
+    />
   );
 };
 
 export default PeopleLottieIcon;
-
 

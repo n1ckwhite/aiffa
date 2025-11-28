@@ -6,6 +6,7 @@ import PillBadge from "shared/ui/PillBadge";
 import { TelegramIcon } from "@/widgets/Footer/icons/Telegram";
 import { MailIcon } from "@/widgets/Footer/icons/Mail";
 import { FaHandshake } from "react-icons/fa6";
+import { BusinessAnalystIcon } from "@/shared/icons";
 
 const PartnersPage = () => {
   const formatShadow = useColorModeValue(
@@ -13,7 +14,6 @@ const PartnersPage = () => {
     "0 18px 45px rgba(15, 23, 42, 0.7)"
   );
   const mutedTextColor = useColorModeValue("gray.600", "gray.300");
-  const asideLabelColor = useColorModeValue("blue.700", "blue.200");
 
   const heroAsideBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.85)");
 
@@ -27,11 +27,6 @@ const PartnersPage = () => {
   );
   const partnershipBoxShadow = "md";
   const partnershipIconColor = useColorModeValue("blue.300", "whiteAlpha.500");
-  const partnershipIconInnerColor = useColorModeValue("blue.100", "whiteAlpha.300");
-  const partnershipIconBgGradient = useColorModeValue(
-    "linear(to-br, whiteAlpha.800, transparent)",
-    "linear(to-br, whiteAlpha.300, transparent)"
-  );
 
   const hackathonBg = useColorModeValue(
     "linear(to-b, rgba(34,197,94,0.03), whiteAlpha.900)",
@@ -113,6 +108,7 @@ const PartnersPage = () => {
                 AIFFA берёт на себя продакшн: упаковку задач, проведение хакатонов, челленджей
                 и интеграций в материалы — вы получаете понятные результаты по IT-аудитории.
               </Text>
+            <BusinessAnalystIcon />
                 <HStack spacing={4} flexWrap="wrap" justify="center">
                   <Button
                     as={Link}
@@ -146,7 +142,7 @@ const PartnersPage = () => {
           </Box>
 
           {/* Партнёрство для компаний — обзор преимуществ в одном блоке */}
-          <Box mt={{ base: 8, md: 10 }}>
+          <Box>
             <Box
               borderRadius="2xl"
               borderWidth="1px"

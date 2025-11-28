@@ -10,8 +10,7 @@ const Countdown: React.FC<WeeklyTasksCountdownProps> = () => {
   const { days, hours, minutes, seconds } = useWeeklyResetCountdown();
 
   return (
-      
-      <HStack spacing={3} wrap="wrap" justify="center" mb={4}>
+    <HStack spacing={3} wrap="wrap" justify="center">
       <Label color={labelColor} />
       <Time borderColor={borderColor} textColor={textColor} d={days} h={hours} m={minutes} s={seconds} />
     </HStack>

@@ -8,7 +8,7 @@ const LottieHeroIcon: React.FC = () => {
   return (
     <LazyLottieIcon
       animationData={lottieAnimation}
-      boxProps={{ w: { base: "120px", md: "120px" }, mx: "auto" }}
+      boxProps={{ w: { base: "100px", md: "100px" }, mx: "auto" }}
     />
   );
 };

@@ -30,6 +30,10 @@ export const sanitizeProfileFromUnknown = (data: unknown): UserProfile => {
           }))
           .filter((t: WeeklyTask) => t.id))
       : [],
+    weeklySolvedTotal:
+      typeof parsed.weeklySolvedTotal === 'number' && isFinite(parsed.weeklySolvedTotal) && parsed.weeklySolvedTotal >= 0
+        ? parsed.weeklySolvedTotal
+        : 0,
   } as UserProfile;
 };
 

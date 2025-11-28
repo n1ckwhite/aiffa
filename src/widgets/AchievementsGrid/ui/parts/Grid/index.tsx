@@ -7,8 +7,8 @@ export const AchievementsGridList: React.FC<AchievementsGridListProps> = ({ item
   return (
     <SimpleGrid
       columns={{ base: 3, sm: 4, md: 5, lg: 6 }}
-      columnGap={{ base: '12px', sm: '16px', md: '18px' }}
-      rowGap={{ base: '14px', sm: '16px', md: '18px' }}
+      columnGap={{ base: '14px', sm: '18px', md: '20px' }}
+      rowGap={{ base: '18px', sm: '20px', md: '22px' }}
       justifyItems="center"
       alignItems="start"
       position="relative"

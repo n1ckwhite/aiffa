@@ -13,6 +13,7 @@ export const DEFAULT_PROFILE: UserProfile = {
   xp: 0,
   rating: 0,
   weeklyTasks: [],
+  weeklySolvedTotal: 0,
 };
 
 

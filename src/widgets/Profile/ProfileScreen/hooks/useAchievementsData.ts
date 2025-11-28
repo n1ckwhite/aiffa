@@ -18,15 +18,18 @@ import type { IconType } from 'react-icons';
 
 export const useAchievementsData = (profile: any) => {
   const solved = React.useMemo(() => profile?.solvedTaskIds ?? {}, [profile]);
-  const weeklyDoneCount = React.useMemo(() => {
-    const tasks = Array.isArray(profile?.weeklyTasks) ? profile.weeklyTasks : [];
-    return tasks.reduce((n: number, t: any) => n + (t?.done ? 1 : 0), 0);
+  const weeklySolvedTotal = React.useMemo(() => {
+    const raw = profile?.weeklySolvedTotal;
+    if (typeof raw !== 'number' || !Number.isFinite(raw) || raw < 0) {
+      return 0;
+    }
+    return raw;
   }, [profile]);
 
-  const weeklyCompleted = weeklyDoneCount > 0;
+  const weeklyCompleted = weeklySolvedTotal > 0;
   const totalSolvedCount = React.useMemo(
-    () => Object.keys(solved).length + weeklyDoneCount,
-    [solved, weeklyDoneCount],
+    () => Object.keys(solved).length + weeklySolvedTotal,
+    [solved, weeklySolvedTotal],
   );
 
   const items = React.useMemo(() => {

@@ -33,13 +33,29 @@ export const setWeeklyTaskState = (
 ): UserProfile => {
   const current = Array.isArray(prev.weeklyTasks) ? prev.weeklyTasks : [];
   const idx = current.findIndex((t) => t.id === id);
-  let next: WeeklyTask[];
+  const prevDone = idx >= 0 ? !!current[idx].done : false;
+  const nextDone = typeof updates.done === 'boolean' ? updates.done : prevDone;
+
+  let nextTasks: WeeklyTask[];
   if (idx >= 0) {
-    next = current.map((t, i) => (i === idx ? { id: t.id, done: updates.done ?? t.done } : t));
+    nextTasks = current.map((t, i) => (i === idx ? { id: t.id, done: nextDone } : t));
   } else {
-    next = [...current, { id, done: !!updates.done }];
+    nextTasks = [...current, { id, done: nextDone }];
   }
-  return { ...prev, weeklyTasks: next } as UserProfile;
+
+  const safeTotal =
+    typeof prev.weeklySolvedTotal === 'number' && isFinite(prev.weeklySolvedTotal) && prev.weeklySolvedTotal >= 0
+      ? prev.weeklySolvedTotal
+      : 0;
+  let weeklySolvedTotal = safeTotal;
+
+  if (!prevDone && nextDone) {
+    weeklySolvedTotal += 1;
+  } else if (prevDone && !nextDone && weeklySolvedTotal > 0) {
+    weeklySolvedTotal -= 1;
+  }
+
+  return { ...prev, weeklyTasks: nextTasks, weeklySolvedTotal } as UserProfile;
 };
 
 export const resetWeeklyTasksState = (prev: UserProfile): UserProfile => {

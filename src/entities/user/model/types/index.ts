@@ -13,6 +13,7 @@ export type UserProfile = {
   xp?: number;
   rating?: number;
   weeklyTasks?: WeeklyTask[];
+  weeklySolvedTotal?: number;
 };
 
 export type UserProfileContextValue = {

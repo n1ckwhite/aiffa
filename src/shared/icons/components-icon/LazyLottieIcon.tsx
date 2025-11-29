@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, type CSSProperties } from "react";
 import { Box, type BoxProps } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 
@@ -12,6 +12,7 @@ type LazyLottieIconProps = {
   autoplay?: boolean;
   boxProps?: BoxProps;
   fallback?: React.ReactNode;
+  lottieStyle?: CSSProperties;
 };
 
 const LazyLottieIcon: React.FC<LazyLottieIconProps> = ({
@@ -20,6 +21,7 @@ const LazyLottieIcon: React.FC<LazyLottieIconProps> = ({
   autoplay = true,
   boxProps,
   fallback,
+  lottieStyle,
 }) => {
   const [isLottieVisible, setIsLottieVisible] = useState(false);
 
@@ -65,6 +67,7 @@ const LazyLottieIcon: React.FC<LazyLottieIconProps> = ({
             height: "100%",
             opacity: isLottieVisible ? 1 : 0,
             transition: "opacity 260ms ease-out",
+            ...lottieStyle,
           }}
         />
       </Box>

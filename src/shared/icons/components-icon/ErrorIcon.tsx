@@ -13,17 +13,22 @@ const ErrorIcon: React.FC = () => {
     (raw && typeof raw.src === "string" && raw.src) ||
     (raw && typeof raw.default === "string" && raw.default) ||
     "";
-
   return (
     <LazyLottieIcon
       animationData={errorAnimation}
-      boxProps={{ w: { base: "250px", md: "350px" }, mx: "auto", mb: 4 }}
+      boxProps={{
+        w: { base: "250px", md: "350px" },
+        aspectRatio: 591 / 420,
+        mx: "auto",
+        mb: 4,
+      }}
       fallback={
         <Image
           src={staticSrc}
           alt="Иконка ошибки"
           w="100%"
-          h="auto"
+          h="100%"
+          objectFit="contain"
           loading="lazy"
           aria-hidden="true"
         />

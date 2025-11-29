@@ -13,17 +13,21 @@ const PersonLottieIcon: React.FC = () => {
     (raw && typeof raw.src === "string" && raw.src) ||
     (raw && typeof raw.default === "string" && raw.default) ||
     "";
-
   return (
     <LazyLottieIcon
       animationData={personAnimation}
-      boxProps={{ w: { base: "250px", md: "350px" }, mx: "auto" }}
+      boxProps={{
+        w: { base: "250px", md: "350px" },
+        aspectRatio: 1330 / 920,
+        mx: "auto",
+      }}
       fallback={
         <Image
           src={staticSrc}
           alt="Иконка человека"
           w="100%"
-          h="auto"
+          h="100%"
+          objectFit="contain"
           loading="lazy"
         />
       }

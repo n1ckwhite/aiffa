@@ -13,17 +13,21 @@ const BusinessAnalystIcon: React.FC = () => {
     (raw && typeof raw.src === "string" && raw.src) ||
     (raw && typeof raw.default === "string" && raw.default) ||
     "";
-
   return (
     <LazyLottieIcon
       animationData={businessAnalystAnimation}
-      boxProps={{ w: { base: "250px", md: "250px" }, mx: "auto" }}
+      boxProps={{
+        w: { base: "250px", md: "250px" },
+        aspectRatio: 1080 / 720,
+        mx: "auto",
+      }}
       fallback={
         <Image
           src={staticSrc}
           alt="Иконка бизнес-аналитика"
           w="100%"
-          h="auto"
+          h="100%"
+          objectFit="contain"
           loading="lazy"
           aria-hidden="true"
         />

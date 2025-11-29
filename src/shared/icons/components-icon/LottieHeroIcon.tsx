@@ -13,17 +13,21 @@ const LottieHeroIcon: React.FC = () => {
     (raw && typeof raw.src === "string" && raw.src) ||
     (raw && typeof raw.default === "string" && raw.default) ||
     "";
-
   return (
     <LazyLottieIcon
       animationData={lottieAnimation}
-      boxProps={{ w: { base: "100px", md: "100px" }, mx: "auto" }}
+      boxProps={{
+        w: { base: "100px", md: "100px" },
+        aspectRatio: 1,
+        mx: "auto",
+      }}
       fallback={
         <Image
           src={staticSrc}
           alt="Декоративная иллюстрация AIFFA"
           w="100%"
-          h="auto"
+          h="100%"
+          objectFit="contain"
           loading="lazy"
         />
       }

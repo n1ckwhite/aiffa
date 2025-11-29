@@ -13,17 +13,21 @@ const StudentIcon: React.FC = () => {
     (raw && typeof raw.src === "string" && raw.src) ||
     (raw && typeof raw.default === "string" && raw.default) ||
     "";
-
   return (
     <LazyLottieIcon
       animationData={studentAnimation}
-      boxProps={{ w: { base: "150px", md: "150px" }, mx: "auto" }}
+      boxProps={{
+        w: { base: "150px", md: "150px" },
+        aspectRatio: 1080 / 950,
+        mx: "auto",
+      }}
       fallback={
         <Image
           src={staticSrc}
           alt="Иконка студента"
           w="100%"
-          h="auto"
+          h="100%"
+          objectFit="contain"
           loading="lazy"
         />
       }

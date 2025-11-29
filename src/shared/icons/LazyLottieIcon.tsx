@@ -11,6 +11,7 @@ type LazyLottieIconProps = {
   loop?: boolean;
   autoplay?: boolean;
   boxProps?: BoxProps;
+  fallback?: React.ReactNode;
 };
 
 const LazyLottieIcon: React.FC<LazyLottieIconProps> = ({
@@ -18,6 +19,7 @@ const LazyLottieIcon: React.FC<LazyLottieIconProps> = ({
   loop = true,
   autoplay = true,
   boxProps,
+  fallback,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -49,6 +51,7 @@ const LazyLottieIcon: React.FC<LazyLottieIconProps> = ({
       aria-hidden="true"
       {...boxProps}
     >
+      {!isVisible && fallback}
       {isVisible && (
         <Lottie
           animationData={animationData}

@@ -1,24 +1,34 @@
 "use client";
 
 import React from "react";
-import { Box } from "@chakra-ui/react";
-import Lottie from "lottie-react";
-import businessAnalystAnimation from '@/shared/icons/json-icons/business-analyst.json';
+import { Image } from "@chakra-ui/react";
+import LazyLottieIcon from "@/shared/icons/LazyLottieIcon";
+import businessAnalystIcon from "@/shared/icons/business-analyst-icon.svg";
+import businessAnalystAnimation from "@/shared/icons/json-icons/business-analyst.json";
 
 const BusinessAnalystIcon: React.FC = () => {
+  const raw = businessAnalystIcon as any;
+  const staticSrc: string =
+    (typeof raw === "string" && raw) ||
+    (raw && typeof raw.src === "string" && raw.src) ||
+    (raw && typeof raw.default === "string" && raw.default) ||
+    "";
+
   return (
-    <Box
-      aria-hidden="true"
-      w={{ base: "250px", md: "250px" }}
-      mx="auto"
-    >
-      <Lottie
-        animationData={businessAnalystAnimation}
-        loop
-        autoplay
-        style={{ width: "100%", height: "auto" }}
-      />
-    </Box>
+    <LazyLottieIcon
+      animationData={businessAnalystAnimation}
+      boxProps={{ w: { base: "250px", md: "250px" }, mx: "auto" }}
+      fallback={
+        <Image
+          src={staticSrc}
+          alt="Иконка бизнес-аналитика"
+          w="100%"
+          h="auto"
+          loading="lazy"
+          aria-hidden="true"
+        />
+      }
+    />
   );
 };
 

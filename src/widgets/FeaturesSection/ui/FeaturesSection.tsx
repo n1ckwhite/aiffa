@@ -9,10 +9,10 @@ const FeaturesSection: React.FC = () => {
   const colors = useFeaturesSectionColors();
   return (
     <Box bg={colors.bg} pb={16} px={0}>
-        <PeopleLottieIcon />
       <Container maxW="1200px">
         <VStack spacing={12} align="center">
           <HeaderBlock
+            icon={<PeopleLottieIcon />}
             title="Почему выбирают AIFFA?"
             description="AIFFA — открытая экосистема без paywall: задачи, понятные примеры и практика.
 Мы растём вместе с сообществом: обратная связь, вклад участников и ваша поддержка

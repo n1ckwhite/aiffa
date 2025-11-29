@@ -3,7 +3,7 @@
 import React from "react";
 import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
-import businessAnalystIcon from "@/shared/icons/business-analyst-icon.svg";
+import businessAnalystIcon from "@/shared/icons/svg-icons/business-analyst-icon.svg";
 import businessAnalystAnimation from "@/shared/icons/json-icons/business-analyst.json";
 
 const BusinessAnalystIcon: React.FC = () => {

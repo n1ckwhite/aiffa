@@ -3,7 +3,7 @@
 import React from "react";
 import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
-import personIcon from "@/shared/icons/person-icon.svg";
+import personIcon from "@/shared/icons/svg-icons/person-icon.svg";
 import personAnimation from "@/shared/icons/json-icons/person.json";
 
 const PersonLottieIcon: React.FC = () => {

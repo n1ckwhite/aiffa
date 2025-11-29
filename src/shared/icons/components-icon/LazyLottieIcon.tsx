@@ -24,11 +24,11 @@ const LazyLottieIcon: React.FC<LazyLottieIconProps> = ({
   const [isLottieVisible, setIsLottieVisible] = useState(false);
 
   useEffect(() => {
-    const timeoutId = window.setTimeout(() => {
+    const fallbackTimeoutId = window.setTimeout(() => {
       setIsLottieVisible(true);
-    }, 80);
+    }, 600);
 
-    return () => window.clearTimeout(timeoutId);
+    return () => window.clearTimeout(fallbackTimeoutId);
   }, []);
 
   const mergedBoxProps: BoxProps = {
@@ -59,6 +59,7 @@ const LazyLottieIcon: React.FC<LazyLottieIconProps> = ({
           animationData={animationData}
           loop={loop}
           autoplay={autoplay}
+          onDOMLoaded={() => setIsLottieVisible(true)}
           style={{
             width: "100%",
             height: "100%",

@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/react";
 import CourseGrid from "widgets/CourseGrid";
 import { ModulesHeader, ModulesSegment, ModulesFAQ } from "widgets/Modules";
 import type { ModulesCategory } from "widgets/Modules/Segment/types/ModulesSegment.types";
-import { StudentIcon } from "@/shared/icons";
+import { StudentIcon } from "@/shared/icons/components-icon";
 
 const ModulesPageClient = () => {
   const [category, setCategory] = useState<ModulesCategory>("base");

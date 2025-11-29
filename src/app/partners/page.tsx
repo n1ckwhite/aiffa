@@ -6,7 +6,7 @@ import PillBadge from "shared/ui/PillBadge";
 import { TelegramIcon } from "@/widgets/Footer/icons/Telegram";
 import { MailIcon } from "@/widgets/Footer/icons/Mail";
 import { FaHandshake } from "react-icons/fa6";
-import { BusinessAnalystIcon } from "@/shared/icons";
+import { BusinessAnalystIcon } from "@/shared/icons/components-icon";
 
 const PartnersPage = () => {
   const formatShadow = useColorModeValue(

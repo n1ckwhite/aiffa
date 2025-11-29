@@ -2,7 +2,7 @@ import React from 'react';
 import { VStack, Text, Box } from '@chakra-ui/react';
 import { useStartCTAColors } from '../../../colors/useStartCTAColors';
 import type { HeaderProps } from './types/Header.types';
-import { PersonLottieIcon } from '@/shared/icons';
+import { PersonLottieIcon } from '@/shared/icons/components-icon';
 
 const Header: React.FC<HeaderProps> = () => {
   const { titleColor, textColor } = useStartCTAColors();

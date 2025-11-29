@@ -2,12 +2,12 @@
 
 import React from "react";
 import { Image } from "@chakra-ui/react";
-import LazyLottieIcon from "@/shared/icons/LazyLottieIcon";
-import peopleIcon from "@/shared/icons/people-icon.svg";
-import peopleAnimation from "@/shared/icons/json-icons/people.json";
+import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
+import errorIcon from "@/shared/icons/error-icon.svg";
+import errorAnimation from "@/shared/icons/json-icons/404.json";
 
-const PeopleLottieIcon: React.FC = () => {
-  const raw = peopleIcon as any;
+const ErrorIcon: React.FC = () => {
+  const raw = errorIcon as any;
   const staticSrc: string =
     (typeof raw === "string" && raw) ||
     (raw && typeof raw.src === "string" && raw.src) ||
@@ -16,12 +16,12 @@ const PeopleLottieIcon: React.FC = () => {
 
   return (
     <LazyLottieIcon
-      animationData={peopleAnimation}
+      animationData={errorAnimation}
       boxProps={{ w: { base: "250px", md: "350px" }, mx: "auto", mb: 4 }}
       fallback={
         <Image
           src={staticSrc}
-          alt="Иконка людей"
+          alt="Иконка ошибки"
           w="100%"
           h="auto"
           loading="lazy"
@@ -32,5 +32,5 @@ const PeopleLottieIcon: React.FC = () => {
   );
 };
 
-export default PeopleLottieIcon;
+export default ErrorIcon;
 

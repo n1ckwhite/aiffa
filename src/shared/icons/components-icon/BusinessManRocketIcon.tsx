@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import LazyLottieIcon from "@/shared/icons/LazyLottieIcon";
+import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import businessManRocketAnimation from "@/shared/icons/json-icons/businessman-rocket.json";
 
 const BusinessManRocketIcon: React.FC = () => {

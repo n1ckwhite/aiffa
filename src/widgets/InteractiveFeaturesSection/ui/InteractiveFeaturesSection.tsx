@@ -3,7 +3,7 @@ import { Box, Container, VStack, Text, SimpleGrid } from '@chakra-ui/react';
 import { useInteractiveColors } from '../colors/useInteractiveColors';
 import { colorRgbMap } from '../data/colors';
 import { features } from '../data/features';
-import { LottieHeroIcon } from '@/shared/icons';
+import { LottieHeroIcon } from '@/shared/icons/components-icon';
 
 const InteractiveFeaturesSection: React.FC = () => {
   const { cardBg, textColor, titleColor, spotlightAlpha } = useInteractiveColors();

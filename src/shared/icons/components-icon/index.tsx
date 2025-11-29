@@ -1,4 +1,4 @@
-export { default as BusinessAnalystIcon } from './BusinessAnalystIcon';
+export { default as BusinessAnalystIcon } from './components-icon/BusinessAnalystIcon';
 export { default as BusinessAnatyticsIcon } from './BusinessAnatyticsIcon';
 export { default as BusinessManRocketIcon } from './BusinessManRocketIcon';
 export { default as CodingIcon } from './CodingIcon';

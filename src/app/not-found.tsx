@@ -9,7 +9,7 @@ import {
   Text,
   VStack
 } from "@chakra-ui/react";
-import { ErrorIcon } from "@/shared/icons";
+import { ErrorIcon } from "@/shared/icons/components-icon";
 
 const NotFound = () => {
   return (

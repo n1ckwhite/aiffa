@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import LazyLottieIcon from "@/shared/icons/LazyLottieIcon";
+import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import codingAnimation from "@/shared/icons/json-icons/coding.json";
 
 const CodingIcon: React.FC = () => {

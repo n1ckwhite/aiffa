@@ -33,9 +33,11 @@ export const generateMetadata = async ({ params }: LessonTasksRouteParams): Prom
   };
 };
 
-const LessonTasksRoutePage = ({ params }: LessonTasksRouteParams) => {
+const LessonTasksRoutePage = async ({ params }: LessonTasksRouteParams) => {
   const { moduleId, lessonId } = params;
   const url = `${SITE_URL}/learn/${moduleId}/${lessonId}/tasks`;
+  const lesson = await loadLesson(moduleId, lessonId);
+  const lessonAny = lesson as any;
 
   return (
     <>
@@ -45,9 +47,50 @@ const LessonTasksRoutePage = ({ params }: LessonTasksRouteParams) => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ExerciseAction",
-            name: "Задачи по уроку",
+            name: lessonAny ? `${lessonAny.title} — задачи` : "Задачи по уроку",
             url,
             inLanguage: "ru-RU",
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Главная",
+                item: SITE_URL,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Материалы",
+                item: `${SITE_URL}/learn`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: lessonAny?.moduleTitle ?? moduleId,
+                item: `${SITE_URL}/learn/${moduleId}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 4,
+                name: lessonAny?.title ?? lessonId,
+                item: `${SITE_URL}/learn/${moduleId}/${lessonId}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 5,
+                name: "Задачи",
+                item: url,
+              },
+            ],
           }),
         }}
       />

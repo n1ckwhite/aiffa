@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import path from "node:path";
 import { promises as fs } from "node:fs";
-import { loadLesson } from "shared/lessons/api";
+import { loadLesson, loadManifest } from "shared/lessons/api";
 import LessonPageClient from "./LessonPageClient";
 
 type LessonRouteParams = {
@@ -53,6 +53,10 @@ const LessonRoutePage = async ({ params }: LessonRouteParams) => {
   const initialMarkdown = await readLessonMarkdown(lesson?.mdPath);
   const lessonAny = lesson as any;
   const url = `${SITE_URL}/learn/${moduleId}/${lessonId}`;
+  const manifest = await loadManifest();
+  const moduleAny = (manifest.modules || []).find(
+    (mod: any) => mod.id === moduleId
+  ) as any;
 
   return (
     <>
@@ -70,6 +74,41 @@ const LessonRoutePage = async ({ params }: LessonRouteParams) => {
               "@type": "Person",
               name: author.name ?? author.username,
             })),
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Главная",
+                item: SITE_URL,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Материалы",
+                item: `${SITE_URL}/learn`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: moduleAny?.title ?? moduleId,
+                item: `${SITE_URL}/learn/${moduleId}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 4,
+                name: lessonAny?.title ?? lessonId,
+                item: url,
+              },
+            ],
           }),
         }}
       />

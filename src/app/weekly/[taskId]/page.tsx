@@ -57,7 +57,6 @@ const WeeklyTaskDetailRoutePage = ({ params }: WeeklyTaskRouteParams) => {
     <>
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -67,6 +66,35 @@ const WeeklyTaskDetailRoutePage = ({ params }: WeeklyTaskRouteParams) => {
               "Практическая задача недели для прокачки навыков фронтенда и JavaScript.",
             url,
             inLanguage: "ru-RU",
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Главная",
+                item: SITE_URL,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Задачи недели",
+                item: `${SITE_URL}/weekly`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "Задача недели",
+                item: url,
+              },
+            ],
           }),
         }}
       />

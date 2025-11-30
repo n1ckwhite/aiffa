@@ -25,7 +25,8 @@ const ErrorIcon: React.FC = () => {
           w="100%"
           h="100%"
           objectFit="contain"
-          loading="lazy"
+          loading="eager"
+          fetchPriority="high"
           aria-hidden="true"
         />
       }

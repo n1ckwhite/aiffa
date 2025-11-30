@@ -9,13 +9,35 @@ type ModuleLessonsRouteParams = {
   };
 };
 
-export const generateMetadata = async ({ params }: ModuleLessonsRouteParams): Promise<Metadata> => {
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
+
+export const generateMetadata = async ({
+  params,
+}: ModuleLessonsRouteParams): Promise<Metadata> => {
   const manifest = await loadManifest();
   const moduleAny = manifest.modules.find((m) => m.id === params.moduleId) as any;
 
+  const baseTitle = moduleAny?.title ?? "Модуль";
+  const title = moduleAny ? `${moduleAny.title} — уроки` : "Модуль";
+  const description =
+    moduleAny?.description ??
+    `Уроки модуля «${baseTitle}» на платформе AIFFA: практические задания и материалы для разработчиков.`;
+
+  const url = `${SITE_URL}/learn/${params.moduleId}`;
+
   return {
-    title: moduleAny ? `${moduleAny.title} — уроки` : "Модуль",
-    description: moduleAny?.description ?? undefined
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      url,
+      title,
+      description,
+      type: "website",
+    },
   };
 };
 

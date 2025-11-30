@@ -28,11 +28,31 @@ const EditModal: React.FC<EditModalProps> = ({
           <VStack spacing={{ base: 3, md: 4 }} align="stretch">
             <FormControl>
               <FormLabel htmlFor="profile-name">Имя</FormLabel>
-              <Input borderColor={borderColor} id="profile-name" name="name" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Пользователь" autoFocus borderRadius="md" />
+              <Input
+                borderColor={borderColor}
+                id="profile-name"
+                name="name"
+                autoComplete="name"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+                placeholder="Пользователь"
+                autoFocus
+                borderRadius="md"
+              />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="profile-bio">Описание</FormLabel>
-              <Textarea borderColor={borderColor} id="profile-bio" name="bio" value={editBio} onChange={(e) => setEditBio(e.target.value)} placeholder="Описание" resize="vertical" minH={{ base: '80px', md: '100px' }} />
+              <Textarea
+                borderColor={borderColor}
+                id="profile-bio"
+                name="bio"
+                autoComplete="off"
+                value={editBio}
+                onChange={(e) => setEditBio(e.target.value)}
+                placeholder="Описание"
+                resize="vertical"
+                minH={{ base: '80px', md: '100px' }}
+              />
             </FormControl>
           </VStack>
         </ModalBody>

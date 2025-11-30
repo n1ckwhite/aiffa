@@ -9,13 +9,35 @@ import { PROFILE_COOKIE_KEY, DEFAULT_PROFILE } from "@/entities/user/model/const
 import type { UserProfile } from "@/entities/user/model/types";
 import { sanitizeProfileFromUnknown } from "@/entities/user/model/storage";
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "AIFFA — платформа для роста разработчиков",
     template: "%s — AIFFA"
   },
   description:
-    "AIFFA — практическая платформа для разработчиков: задачи, материалы и проекты по JavaScript, фронтенду и смежным направлениям."
+    "AIFFA — практическая платформа для разработчиков: задачи, материалы и проекты по JavaScript, фронтенду и смежным направлениям.",
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: "AIFFA",
+    title: "AIFFA — платформа для роста разработчиков",
+    description:
+      "Практические задачи, материалы и проекты для фронтенд‑разработчиков и JavaScript‑инженеров.",
+    locale: "ru_RU"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AIFFA — платформа для роста разработчиков",
+    description:
+      "Практическая платформа для развития навыков JavaScript и фронтенда.",
+  },
+  alternates: {
+    canonical: SITE_URL
+  }
 };
 
 type RootLayoutProps = {
@@ -45,6 +67,36 @@ const RootLayout = ({ children }: RootLayoutProps) => {
     <html lang="ru" suppressHydrationWarning>
       <head>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              url: SITE_URL,
+              name: "AIFFA — платформа для роста разработчиков",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: `${SITE_URL}/search?q={search_term_string}`,
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              url: SITE_URL,
+              name: "AIFFA",
+              logo: `${SITE_URL}/logo512.png`
+            })
+          }}
+        />
       </head>
       <body>
         <ChakraRootProvider cookies={cookieString} initialProfile={initialProfile}>

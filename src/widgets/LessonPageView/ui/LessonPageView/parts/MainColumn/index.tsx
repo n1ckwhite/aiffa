@@ -16,11 +16,21 @@ export const MainColumn: React.FC<MainColumnProps> = ({
   firstAuthor,
 }) => {
   return (
-    <Box flex="1 1 auto" minW={0} pr={0}>
+    <Box as="article" flex="1 1 auto" minW={0} pr={0}>
       <Box w="100%" maxW="840px" mx="auto">
         <Box ref={headerAnchorRef} aria-hidden height={0} />
-        <BreadcrumbHeader moduleId={mod.id} moduleTitle={mod.title} lessonId={lesson.id} lessonTitle={lesson.title} />
-        <AuthorCard author={firstAuthor} borderColor={colors.authorBorderColor} descColor={colors.descColor} linkColor={colors.linkColor} />
+        <BreadcrumbHeader
+          moduleId={mod.id}
+          moduleTitle={mod.title}
+          lessonId={lesson.id}
+          lessonTitle={lesson.title}
+        />
+        <AuthorCard
+          author={firstAuthor}
+          borderColor={colors.authorBorderColor}
+          descColor={colors.descColor}
+          linkColor={colors.linkColor}
+        />
         <MarkdownRenderer content={md} />
         <ActionsBar moduleId={mod.id} lessonId={lesson.id} />
         <FeedbackSection moduleId={mod.id} lessonId={lesson.id} />

@@ -19,12 +19,14 @@ const HeroSection: React.FC = () => {
   const { bg, textColor, titleColor, iconBgTone, iconColorTone } = useHeroColors();
 
   return (
-    <Box bg={bg} py={16} px={4}>
+    <Box as="section" bg={bg} py={16} px={4} aria-labelledby="homepage-hero-title">
       <Box maxW="1200px" mx="auto">
         <VStack spacing={12} align="center">
           <VStack spacing={6} textAlign="center" maxW="full">
-            <VStack align="center" spacing={1}>
+            <VStack as="header" align="center" spacing={1}>
               <Text
+                as="h1"
+                id="homepage-hero-title"
                 fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
                 fontWeight="bold"
                 color={titleColor}

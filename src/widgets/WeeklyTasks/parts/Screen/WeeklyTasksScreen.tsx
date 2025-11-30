@@ -23,9 +23,11 @@ const WeeklyTasksScreen: React.FC = () => {
   }
 
   return (
-    <Box position="relative" pb="32px">
+    <Box as="section" position="relative" pb="32px" aria-labelledby="weekly-tasks-title">
       <Box w="100%" maxW="1440px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
-        <WeeklyTasksHeader />
+        <Box as="header">
+          <WeeklyTasksHeader />
+        </Box>
         <WeeklyTasksPromo />
         <VStack spacing={3} mb={6}>
           <WeeklyTasksCountdown />

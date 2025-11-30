@@ -3,7 +3,20 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, Modal
 import type { EditModalProps } from '../types/EditModal.types';
 import { useEditModalColors } from './colors/useEditModalColors';
 
-const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, editName, editBio, setEditName, setEditBio, onSave, resetColor, resetHoverBg, resetActiveBg }) => {
+const EditModal: React.FC<EditModalProps> = ({
+  isOpen,
+  onClose,
+  editName,
+  editBio,
+  setEditName,
+  setEditBio,
+  onSave,
+  resetColor,
+  resetHoverBg,
+  resetActiveBg,
+  resetHoverBgDark,
+  resetActiveBgDark,
+}) => {
   const { borderColor } = useEditModalColors()
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset="scale" blockScrollOnMount={true} scrollBehavior="inside">
@@ -31,7 +44,7 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, editName, editBi
               onClick={onClose}
               color={resetColor}
               _light={{ _hover: { bg: resetHoverBg }, _active: { bg: resetActiveBg } }}
-              _dark={{ _hover: { bg: 'whiteAlpha.200' }, _active: { bg: 'whiteAlpha.300' } }}
+              _dark={{ _hover: { bg: resetHoverBgDark }, _active: { bg: resetActiveBgDark } }}
             >
               Отменить
             </Button>

@@ -191,7 +191,7 @@ const PartnersPage = () => {
                   textAlign={{ base: "center", md: "left" }}
                   maxW={{ base: "100%", md: "420px" }}
                 >
-                  <PillBadge variant="solid" uppercase={false}>
+                  <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
                     Партнёрство для компаний
                   </PillBadge>
                   <Heading as="h3" size="sm" letterSpacing="-0.02em">

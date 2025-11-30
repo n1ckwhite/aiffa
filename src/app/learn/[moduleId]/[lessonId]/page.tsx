@@ -20,16 +20,21 @@ export const generateMetadata = async ({ params }: LessonRouteParams): Promise<M
   const lessonAny = lesson as any;
   const url = `${SITE_URL}/learn/${params.moduleId}/${params.lessonId}`;
 
+  const baseTitle = lessonAny?.title ?? "Материал";
+  const description =
+    lessonAny?.description ??
+    `Материал «${baseTitle}» на платформе AIFFA: практические задания и материалы для разработчиков.`;
+
   return {
-    title: lessonAny?.title ?? "Урок",
-    description: lessonAny?.description ?? undefined,
+    title: baseTitle,
+    description,
     alternates: {
       canonical: url,
     },
     openGraph: {
       url,
-      title: lessonAny?.title ?? "Урок",
-      description: lessonAny?.description ?? undefined,
+      title: baseTitle,
+      description,
       type: "article",
     },
   };

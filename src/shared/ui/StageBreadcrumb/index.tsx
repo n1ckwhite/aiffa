@@ -1,6 +1,6 @@
 import React from 'react';
+import NextLink from "next/link";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Text } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import HorizontalScroll from 'shared/ui/HorizontalScroll';
 import { useAppColors } from 'shared/theme/colors';
@@ -18,8 +18,8 @@ const StageBreadcrumb: React.FC<StageBreadcrumbProps> = ({ moduleId, moduleTitle
         <Breadcrumb separator={<ChevronRightIcon boxSize={3.5} />}>
           <BreadcrumbItem>
             <BreadcrumbLink
-              as={RouterLink}
-              to={rootCrumb?.to ?? `/learn/${moduleId}`}
+              as={NextLink}
+              href={rootCrumb?.to ?? `/learn/${moduleId}`}
               fontSize={{ base: 'sm', md: 'sm' }}
               textTransform="uppercase"
               letterSpacing="wider"
@@ -45,8 +45,8 @@ const StageBreadcrumb: React.FC<StageBreadcrumbProps> = ({ moduleId, moduleTitle
           {middleCrumb && (
             <BreadcrumbItem>
               <BreadcrumbLink
-                as={RouterLink}
-                to={middleCrumb.to}
+                as={NextLink}
+                href={middleCrumb.to}
                 fontSize="xs"
                 color={breadcrumbColor}
                 whiteSpace="nowrap"
@@ -59,9 +59,24 @@ const StageBreadcrumb: React.FC<StageBreadcrumbProps> = ({ moduleId, moduleTitle
           )}
           <BreadcrumbItem isCurrentPage={current === 'lesson'}>
             {current === 'lesson' ? (
-              <Text as="span" fontSize="xs" color={breadcrumbColor} whiteSpace="nowrap">{lessonTitle}</Text>
+              <Text
+                as="span"
+                fontSize="xs"
+                color={breadcrumbColor}
+                whiteSpace="nowrap"
+              >
+                {lessonTitle}
+              </Text>
             ) : (
-              <BreadcrumbLink as={RouterLink} to={`/learn/${moduleId}/${lessonId}`} fontSize="xs" color={breadcrumbColor} whiteSpace="nowrap" _hover={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+              <BreadcrumbLink
+                as={NextLink}
+                href={`/learn/${moduleId}/${lessonId}`}
+                fontSize="xs"
+                color={breadcrumbColor}
+                whiteSpace="nowrap"
+                _hover={{ textDecoration: 'none' }}
+                _focus={{ boxShadow: 'none' }}
+              >
                 {lessonTitle}
               </BreadcrumbLink>
             )}

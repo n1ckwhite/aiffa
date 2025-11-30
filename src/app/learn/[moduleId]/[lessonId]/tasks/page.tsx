@@ -18,16 +18,21 @@ export const generateMetadata = async ({ params }: LessonTasksRouteParams): Prom
   const lessonAny = lesson as any;
   const url = `${SITE_URL}/learn/${params.moduleId}/${params.lessonId}/tasks`;
 
+  const baseTitle = lessonAny?.title ?? "Материал";
+  const description =
+    lessonAny?.description ??
+    `Задачи по материалу «${baseTitle}» на платформе AIFFA: практическая отработка материала.`;
+
   return {
-    title: lessonAny ? `${lessonAny.title} — задачи` : "Задачи по уроку",
-    description: lessonAny?.description ?? undefined,
+    title: lessonAny ? `${lessonAny.title} — задачи` : "Задачи по материалу",
+    description,
     alternates: {
       canonical: url,
     },
     openGraph: {
       url,
-      title: lessonAny ? `${lessonAny.title} — задачи` : "Задачи по уроку",
-      description: lessonAny?.description ?? undefined,
+      title: lessonAny ? `${lessonAny.title} — задачи` : "Задачи по материалу",
+      description,
       type: "article",
     },
   };
@@ -47,7 +52,7 @@ const LessonTasksRoutePage = async ({ params }: LessonTasksRouteParams) => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ExerciseAction",
-            name: lessonAny ? `${lessonAny.title} — задачи` : "Задачи по уроку",
+            name: lessonAny ? `${lessonAny.title} — задачи` : "Задачи по материалу",
             url,
             inLanguage: "ru-RU",
           }),

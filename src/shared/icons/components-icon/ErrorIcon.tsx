@@ -5,14 +5,10 @@ import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import errorIcon from "@/shared/icons/svg-icons/error-icon.svg";
 import errorAnimation from "@/shared/icons/json-icons/404.json";
+import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 
 const ErrorIcon: React.FC = () => {
-  const raw = errorIcon as any;
-  const staticSrc: string =
-    (typeof raw === "string" && raw) ||
-    (raw && typeof raw.src === "string" && raw.src) ||
-    (raw && typeof raw.default === "string" && raw.default) ||
-    "";
+  const staticSrc = getStaticSrcFromModule(errorIcon as any);
   return (
     <LazyLottieIcon
       animationData={errorAnimation}

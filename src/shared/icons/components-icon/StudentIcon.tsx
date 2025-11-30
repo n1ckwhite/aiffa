@@ -5,14 +5,10 @@ import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import studentIcon from "@/shared/icons/svg-icons/student-icon.svg";
 import studentAnimation from "@/shared/icons/json-icons/student.json";
+import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 
 const StudentIcon: React.FC = () => {
-  const raw = studentIcon as any;
-  const staticSrc: string =
-    (typeof raw === "string" && raw) ||
-    (raw && typeof raw.src === "string" && raw.src) ||
-    (raw && typeof raw.default === "string" && raw.default) ||
-    "";
+  const staticSrc = getStaticSrcFromModule(studentIcon as any);
   return (
     <LazyLottieIcon
       animationData={studentAnimation}

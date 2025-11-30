@@ -5,14 +5,10 @@ import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import businessAnalystIcon from "@/shared/icons/svg-icons/business-analyst-icon.svg";
 import businessAnalystAnimation from "@/shared/icons/json-icons/business-analyst.json";
+import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 
 const BusinessAnalystIcon: React.FC = () => {
-  const raw = businessAnalystIcon as any;
-  const staticSrc: string =
-    (typeof raw === "string" && raw) ||
-    (raw && typeof raw.src === "string" && raw.src) ||
-    (raw && typeof raw.default === "string" && raw.default) ||
-    "";
+  const staticSrc = getStaticSrcFromModule(businessAnalystIcon as any);
   return (
     <LazyLottieIcon
       animationData={businessAnalystAnimation}

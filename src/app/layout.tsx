@@ -34,9 +34,6 @@ export const metadata: Metadata = {
     title: "AIFFA — платформа для роста разработчиков",
     description:
       "Практическая платформа для развития навыков JavaScript и фронтенда.",
-  },
-  alternates: {
-    canonical: SITE_URL
   }
 };
 

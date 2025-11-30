@@ -10,7 +10,8 @@ export const NativeTextarea: FC<NativeTextareaProps> = ({ id, name, value, onCha
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      borderBottomRadius="lg"
+      border="none"
+      borderRadius="lg"
       aria-label={placeholder || 'Редактор контента'}
       resize="none"
       height="100%"

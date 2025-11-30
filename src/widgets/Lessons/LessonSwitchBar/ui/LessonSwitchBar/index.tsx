@@ -42,7 +42,7 @@ const LessonSwitchBar: React.FC<LessonSwitchBarProps> = ({ moduleId, lessonId, i
         <Flex align="center" gap={{ base: 1, md: 4 }}>
           <IconButton aria-label="Предыдущий урок" icon={<ArrowBackIcon />} size="sm" variant="ghost" color={accent} isDisabled={!prev || !mod?.id} onClick={goPrev} _hover={{ bg: itemHover }} display={{ base: 'none', md: 'inline-flex' }} />
           <Box flex="1">
-            <Menu autoSelect={false} matchWidth placement="top" strategy="fixed" isOpen={menu.isOpen} onOpen={menu.onOpen} onClose={menu.onClose}>
+            <Menu autoSelect={false} placement="top" strategy="fixed" isOpen={menu.isOpen} onOpen={menu.onOpen} onClose={menu.onClose}>
               {({ isOpen }) => (
                 <>
                   <MenuButton ref={menuButtonRef} as={Button} variant="ghost" w="100%" maxW="100%" px={{ base: 2, md: 3 }} py={{ base: inline ? 1 : 1.5, md: inline ? 1.5 : 2 }} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} borderRadius="lg">
@@ -64,11 +64,11 @@ const LessonSwitchBar: React.FC<LessonSwitchBarProps> = ({ moduleId, lessonId, i
                   <Portal>
                     <MenuList
                       zIndex={860}
-                      maxH={{ base: 'min(40vh, 220px)', sm: 'min(48vh, 260px)', md: '60vh' }}
+                      maxH={{ base: 'min(42vh, 220px)', sm: 'min(45vh, 240px)', md: 'min(45vh, 260px)' }}
                       overflowY="auto"
-                      minW={{ base: 'unset', md: inline ? '720px' : '600px' }}
-                      maxW={{ base: '96vw', md: 'unset' }}
-                      w={{ base: 'auto', md: 'auto' }}
+                      minW={{ base: 'min(92vw, 360px)', md: inline ? '600px' : '520px' }}
+                      maxW={{ base: 'min(92vw, 520px)', md: inline ? '640px' : '520px' }}
+                      w="auto"
                       py={inline ? 0.5 : 1}
                       px={1}
                       borderColor={borderColor}

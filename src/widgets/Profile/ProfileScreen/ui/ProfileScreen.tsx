@@ -17,7 +17,7 @@ import { useAchievementsData } from '../hooks/useAchievementsData';
 const ProfileScreen: React.FC = () => {
   const { profile } = useUserProfile();
   const {
-    resetHoverBg, resetActiveBg, resetColor,
+    resetHoverBg, resetActiveBg, resetHoverBgDark, resetActiveBgDark, resetColor,
     ringTrack, ringColor, dividerColor, hintColor, skeletonBg, skeletonRingBorder, skeletonRingTop
   } = useProfileScreenColors();
   const {
@@ -63,6 +63,8 @@ const ProfileScreen: React.FC = () => {
               resetColor={resetColor}
               resetHoverBg={resetHoverBg}
               resetActiveBg={resetActiveBg}
+              resetHoverBgDark={resetHoverBgDark}
+              resetActiveBgDark={resetActiveBgDark}
             />
 
             <GitHubConnect
@@ -127,6 +129,8 @@ const ProfileScreen: React.FC = () => {
         resetColor={resetColor}
         resetHoverBg={resetHoverBg}
         resetActiveBg={resetActiveBg}
+        resetHoverBgDark={resetHoverBgDark}
+        resetActiveBgDark={resetActiveBgDark}
       />
     </Box>
   );

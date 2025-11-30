@@ -6,6 +6,8 @@ export const useProfileScreenColors = () => {
   return {
     resetHoverBg: theme.cardHoverBg,
     resetActiveBg: theme.cardHoverBg,
+    resetHoverBgDark: 'whiteAlpha.200',
+    resetActiveBgDark: 'whiteAlpha.300',
     resetColor: theme.titleColor,
     ringTrack: theme.borderColor,
     ringColor: 'green.400' as const,

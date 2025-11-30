@@ -26,7 +26,13 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, editName, editBi
         <ModalFooter pt={{ base: 2, md: 3 }}>
           <HStack spacing={{ base: 2, md: 3 }} w="100%" justify="flex-end">
             <Button colorScheme="blue" onClick={onSave}>Сохранить</Button>
-            <Button variant="ghost" onClick={onClose} color={resetColor} _hover={{ bg: resetHoverBg }} _active={{ bg: resetActiveBg }}>
+            <Button
+              variant="ghost"
+              onClick={onClose}
+              color={resetColor}
+              _light={{ _hover: { bg: resetHoverBg }, _active: { bg: resetActiveBg } }}
+              _dark={{ _hover: { bg: 'whiteAlpha.200' }, _active: { bg: 'whiteAlpha.300' } }}
+            >
               Отменить
             </Button>
           </HStack>

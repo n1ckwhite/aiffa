@@ -7,6 +7,8 @@ export type ProfileHeaderProps = {
   resetColor: string;
   resetHoverBg: string;
   resetActiveBg: string;
+  resetHoverBgDark: string;
+  resetActiveBgDark: string;
 };
 
 

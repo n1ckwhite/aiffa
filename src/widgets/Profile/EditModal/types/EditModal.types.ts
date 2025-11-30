@@ -9,6 +9,8 @@ export type EditModalProps = {
   resetColor: string;
   resetHoverBg: string;
   resetActiveBg: string;
+  resetHoverBgDark: string;
+  resetActiveBgDark: string;
 };
 
 

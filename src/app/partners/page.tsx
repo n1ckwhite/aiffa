@@ -92,7 +92,7 @@ const PartnersPage = () => {
                 Стать партнёром AIFFA
               </Heading>
               </Stack>
-              <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
+              <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
                 Партнёрство для компаний
               </PillBadge>
 
@@ -191,10 +191,15 @@ const PartnersPage = () => {
                   textAlign={{ base: "center", md: "left" }}
                   maxW={{ base: "100%", md: "420px" }}
                 >
-                  <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
+                  <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
                     Партнёрство для компаний
                   </PillBadge>
-                  <Heading as="h3" size="sm" letterSpacing="-0.02em">
+                  <Heading
+                    as="h2"
+                    size="md"
+                    letterSpacing="-0.02em"
+                    color={useColorModeValue("gray.900", "white")}
+                  >
                     Платформа для практики и роста разработчиков
                   </Heading>
                   <Text fontSize="sm" color={mutedTextColor} lineHeight="1.6">

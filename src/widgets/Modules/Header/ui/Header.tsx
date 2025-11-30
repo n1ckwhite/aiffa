@@ -8,8 +8,20 @@ const Header: React.FC<ModulesHeaderProps> = () => {
   const titleColor = theme.titleColor;
   const subtitleColor = theme.descColor;
   return (
-    <VStack spacing={3} align="center" textAlign="center" pb="32px">
-      <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="bold" color={titleColor}>
+    <VStack
+      as="header"
+      spacing={3}
+      align="center"
+      textAlign="center"
+      pb="32px"
+    >
+      <Text
+        as="h1"
+        id="learn-modules-title"
+        fontSize={{ base: '2xl', md: '3xl' }}
+        fontWeight="bold"
+        color={titleColor}
+      >
         Материалы для разработчиков
       </Text>
       <Text fontSize="lg" color={subtitleColor} maxW="820px" mx="auto">

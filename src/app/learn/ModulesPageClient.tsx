@@ -11,9 +11,18 @@ const ModulesPageClient = () => {
   const [category, setCategory] = useState<ModulesCategory>("base");
 
   return (
-    <Box pb="32px" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <Box
+      as="main"
+      role="main"
+      pb="32px"
+      px={{ base: 4, md: 6 }}
+      py={{ base: 8, md: 10 }}
+      aria-labelledby="learn-modules-title"
+    >
       <Box maxW="1200px" mx="auto">
-        <ModulesHeader />
+        <Box as="header">
+          <ModulesHeader />
+        </Box>
         <StudentIcon />
         <ModulesSegment value={category} onChange={(v) => setCategory(v)} />
       </Box>

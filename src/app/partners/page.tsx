@@ -51,7 +51,8 @@ const PartnersPage = () => {
 
   return (
     <Box
-      as="section"
+      as="main"
+      role="main"
       aria-label="Партнёрство и спонсорство AIFFA"
       py={{ base: 8, md: 10 }}
       px={{ base: 4, md: 6 }}
@@ -60,7 +61,7 @@ const PartnersPage = () => {
       <Box maxW="1200px" mx="auto">
         <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
           {/* Hero-блок */}
-          <Box transition="none">
+          <Box as="section" transition="none" aria-labelledby="partners-hero-title">
             <VStack
               align="center"
               spacing={{ base: 4, md: 5 }}
@@ -69,6 +70,7 @@ const PartnersPage = () => {
               mx="auto"
             >
               <Stack
+                as="header"
                 direction={{ base: "column", sm: "row" }}
                 justify="center"
                 align="center"
@@ -81,10 +83,11 @@ const PartnersPage = () => {
                   color={useColorModeValue("blue.500", "blue.300")}
                 />
               <Heading
-                as="h2"
-                  fontSize={{ base: "2xl", md: "4xl" }}
+                as="h1"
+                id="partners-hero-title"
+                fontSize={{ base: "2xl", md: "4xl" }}
                 letterSpacing="-0.03em"
-                  textAlign="center"
+                textAlign="center"
               >
                 Стать партнёром AIFFA
               </Heading>

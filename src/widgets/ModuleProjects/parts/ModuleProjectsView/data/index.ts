@@ -3,7 +3,7 @@ import { moduleDescriptions } from 'widgets/ModuleLessons/parts/ModuleLessonsVie
 export const getModuleProjectsDescription = (moduleId: string): string => {
   return (
     moduleDescriptions[moduleId] ||
-    'Практичный модуль: разрабатываем и улучшаем проекты, закрепляя материал и набирая опыт на реальных задачах.'
+    'Практичный материал: разрабатываем и улучшаем проекты, закрепляя материал и набирая опыт на реальных задачах.'
   );
 };
 

@@ -32,6 +32,23 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
         priority: 0.7,
       };
 
+      const projectRoutes: MetadataRoute.Sitemap = module.project
+        ? [
+            {
+              url: `${SITE_URL}/learn/${module.id}/projects`,
+              lastModified: now,
+              changeFrequency: "monthly" as const,
+              priority: 0.6,
+            },
+            {
+              url: `${SITE_URL}/learn/${module.id}/projects/${module.project.id}`,
+              lastModified: now,
+              changeFrequency: "monthly" as const,
+              priority: 0.6,
+            },
+          ]
+        : [];
+
       const lessonUrls: MetadataRoute.Sitemap = (module.lessons || []).flatMap(
         (lesson: any) => {
           const baseLessonUrl = `${SITE_URL}/learn/${module.id}/${lesson.id}`;
@@ -53,7 +70,7 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
         }
       );
 
-      return [moduleUrl, ...lessonUrls];
+      return [moduleUrl, ...projectRoutes, ...lessonUrls];
     }
   );
 

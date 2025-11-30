@@ -9,7 +9,7 @@ export const achievementDescriptions: Record<string, string> = {
   'streak': 'Решайте задачи несколько дней подряд',
   'streak-7': 'Серия из 7 дней',
   'streak-30': 'Серия из 30 дней',
-  'reader': 'Изучите один модуль',
+  'reader': 'Изучите один материал',
   'feedback': 'Оставьте отзыв об экосистеме',
   'supporter': 'Поддержите проект',
 };

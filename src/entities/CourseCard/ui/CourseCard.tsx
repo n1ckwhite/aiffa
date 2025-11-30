@@ -101,7 +101,7 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
       as={to ? (RouterLink as any) : 'div'}
       to={to as any}
       style={{ textDecoration: 'none' }}
-      aria-label={to ? `Открыть модуль: ${title}` : undefined}
+      aria-label={to ? `Открыть материал: ${title}` : undefined}
     >
       <VStack align="stretch" spacing={4} h="full" justify="space-between">
         <HStack align="start" spacing={4}>

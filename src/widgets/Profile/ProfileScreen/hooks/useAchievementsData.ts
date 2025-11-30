@@ -124,7 +124,7 @@ export const useAchievementsData = (profile: any) => {
       },
       {
         id: 'reader',
-        label: 'Изучил модуль',
+        label: 'Изучил материал',
         achieved: false,
         color: '#38bdf8',
         icon: FaBookOpen,

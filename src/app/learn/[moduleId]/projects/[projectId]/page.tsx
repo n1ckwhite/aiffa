@@ -20,7 +20,7 @@ export const generateMetadata = async ({
   const modAny = manifest.modules.find((m) => m.id === params.moduleId) as any;
   const project = modAny?.projects?.find((p: any) => p.id === params.projectId) as any;
 
-  const moduleTitle = modAny?.title ?? "Модуль";
+  const moduleTitle = modAny?.title ?? "Материал";
   const projectTitle = project?.title ?? "Проект";
   const title = project ? `${projectTitle} — проект` : "Проект";
   const description =

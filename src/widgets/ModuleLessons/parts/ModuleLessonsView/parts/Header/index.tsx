@@ -40,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({ mod, colors }) => {
         <Text fontSize="sm" color={colors.descColor}>Выберите материал, чтобы начать</Text>
       </HStack>
       <Text mt={3} fontSize={{ base: 'sm', md: 'md' }} lineHeight={1.7} color={colors.descColor} maxW={{ base: '100%', md: '80%' }}>
-        {moduleDescriptions[mod.id] || 'Короткий модуль с объяснениями и практикой по теме.'}
+        {moduleDescriptions[mod.id] || 'Короткий материал с объяснениями и практикой по теме.'}
       </Text>
       <Stack
         direction={{ base: 'column', sm: 'row' }}

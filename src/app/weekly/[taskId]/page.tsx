@@ -12,10 +12,14 @@ type WeeklyTaskRouteParams = {
   };
 };
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
+
 export const generateMetadata = async ({ params }: WeeklyTaskRouteParams): Promise<Metadata> => {
   const info = getWeeklyInfoById(params.taskId);
   let title = "Задача недели";
   let description: string | undefined;
+  const url = `${SITE_URL}/weekly/${params.taskId}`;
 
   if (info?.mdPath) {
     try {
@@ -32,13 +36,43 @@ export const generateMetadata = async ({ params }: WeeklyTaskRouteParams): Promi
 
   return {
     title,
-    description
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      url,
+      title,
+      description,
+      type: "article",
+    },
   };
 };
 
 const WeeklyTaskDetailRoutePage = ({ params }: WeeklyTaskRouteParams) => {
   // Пока сам TaskDetailScreen использует useParams из shim, поэтому просто монтируем client-компонент
-  return <WeeklyTaskDetailPageClient taskId={params.taskId} />;
+  const url = `${SITE_URL}/weekly/${params.taskId}`;
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: "Задача недели",
+            description:
+              "Практическая задача недели для прокачки навыков фронтенда и JavaScript.",
+            url,
+            inLanguage: "ru-RU",
+          }),
+        }}
+      />
+      <WeeklyTaskDetailPageClient taskId={params.taskId} />
+    </>
+  );
 };
 
 export default WeeklyTaskDetailRoutePage;

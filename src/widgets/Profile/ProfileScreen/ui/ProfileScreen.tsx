@@ -33,9 +33,25 @@ const ProfileScreen: React.FC = () => {
   const { items } = useAchievementsData(profile as any);
 
   return (
-    <Box position="relative" overflow="hidden" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <Box
+      as="main"
+      role="main"
+      position="relative"
+      overflow="hidden"
+      px={{ base: 4, md: 6 }}
+      py={{ base: 8, md: 10 }}
+      aria-labelledby="profile-page-title"
+    >
       <Box maxW={{ base: '100%', md: '900px', lg: '1100px' }} mx="auto">
-        <Heading size="lg" mb={6} textAlign="center">Профиль</Heading>
+        <Heading
+          as="h1"
+          id="profile-page-title"
+          size="lg"
+          mb={6}
+          textAlign="center"
+        >
+          Профиль
+        </Heading>
         <Box>
           <VStack align="center" spacing={4}>
             <ProfileHeader

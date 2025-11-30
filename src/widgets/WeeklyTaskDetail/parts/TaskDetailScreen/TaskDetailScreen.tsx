@@ -50,11 +50,13 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
   return (
     <>
       <Box
+        as="article"
         w="100%"
         maxW={{ base: "100%", md: "1100px", lg: "1280px" }}
         mx="auto"
         px={{ base: 4, md: 6 }}
         py={{ base: 8, md: 10 }}
+        aria-label={mdMeta?.title || task.label}
       >
         <Box
           borderWidth={0}

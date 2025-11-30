@@ -10,14 +10,37 @@ type ModuleProjectRouteParams = {
   };
 };
 
-export const generateMetadata = async ({ params }: ModuleProjectRouteParams): Promise<Metadata> => {
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
+
+export const generateMetadata = async ({
+  params,
+}: ModuleProjectRouteParams): Promise<Metadata> => {
   const manifest = await loadManifest();
   const modAny = manifest.modules.find((m) => m.id === params.moduleId) as any;
-  const project = modAny?.projects?.find((p: any) => p.id === params.projectId);
+  const project = modAny?.projects?.find((p: any) => p.id === params.projectId) as any;
+
+  const moduleTitle = modAny?.title ?? "Модуль";
+  const projectTitle = project?.title ?? "Проект";
+  const title = project ? `${projectTitle} — проект` : "Проект";
+  const description =
+    project?.description ??
+    `Практический проект «${projectTitle}» из материала «${moduleTitle}» на платформе AIFFA.`;
+
+  const url = `${SITE_URL}/learn/${params.moduleId}/projects/${params.projectId}`;
 
   return {
-    title: project ? `${project.title} — проект` : "Проект",
-    description: (project as any)?.description ?? undefined
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      url,
+      title,
+      description,
+      type: "article",
+    },
   };
 };
 

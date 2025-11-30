@@ -9,13 +9,35 @@ type ModuleProjectsRouteParams = {
   };
 };
 
-export const generateMetadata = async ({ params }: ModuleProjectsRouteParams): Promise<Metadata> => {
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
+
+export const generateMetadata = async ({
+  params,
+}: ModuleProjectsRouteParams): Promise<Metadata> => {
   const manifest = await loadManifest();
   const moduleAny = manifest.modules.find((m) => m.id === params.moduleId) as any;
 
+  const baseTitle = moduleAny?.title ?? "Модуль";
+  const title = moduleAny ? `${moduleAny.title} — проекты` : "Проекты материла";
+  const description =
+    moduleAny?.description ??
+    `Проекты материла «${baseTitle}» на платформе AIFFA: практические мини‑проекты для закрепления материала.`;
+
+  const url = `${SITE_URL}/learn/${params.moduleId}/projects`;
+
   return {
-    title: moduleAny ? `${moduleAny.title} — проекты` : "Проекты модуля",
-    description: moduleAny?.description ?? undefined
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      url,
+      title,
+      description,
+      type: "website",
+    },
   };
 };
 

@@ -18,11 +18,11 @@ export const generateMetadata = async ({
   const manifest = await loadManifest();
   const moduleAny = manifest.modules.find((m) => m.id === params.moduleId) as any;
 
-  const baseTitle = moduleAny?.title ?? "Модуль";
-  const title = moduleAny ? `${moduleAny.title} — уроки` : "Модуль";
+  const baseTitle = moduleAny?.title ?? "Материал";
+  const title = moduleAny ? `${moduleAny.title} — уроки` : "Материал";
   const description =
     moduleAny?.description ??
-    `Уроки модуля «${baseTitle}» на платформе AIFFA: практические задания и материалы для разработчиков.`;
+    `Уроки материала «${baseTitle}» на платформе AIFFA: практические задания и материалы для разработчиков.`;
 
   const url = `${SITE_URL}/learn/${params.moduleId}`;
 

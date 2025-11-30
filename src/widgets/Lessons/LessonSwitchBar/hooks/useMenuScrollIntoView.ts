@@ -8,12 +8,6 @@ export const useMenuScrollIntoView = (
 ) => {
   React.useEffect(() => {
     if (!isOpen) return;
-    const btn = menuButtonRef.current;
-    if (btn && typeof (btn as any).scrollIntoView === 'function') {
-      requestAnimationFrame(() => {
-        try { btn.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'smooth' }); } catch {}
-      });
-    }
     const list = menuListRef.current;
     if (!list) return;
     const active = list.querySelector(`[data-lesson-index="${currentIndex}"]`) as HTMLElement | null;

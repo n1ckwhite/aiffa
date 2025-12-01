@@ -1,7 +1,9 @@
 /* eslint-disable no-restricted-globals */
 
 const CACHE_NAME = "aiffa-pwa-v1";
-const APP_SHELL = ["/", "/logo192.png", "/logo512.png", "/manifest.json"];
+// Кэшируем только статические ассеты, без HTML,
+// чтобы сервер всегда видел актуальные куки (в том числе тему).
+const APP_SHELL = ["/logo192.png", "/logo512.png", "/manifest.json"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -31,6 +33,9 @@ self.addEventListener("fetch", (event) => {
   const { request } = event;
 
   if (request.method !== "GET") return;
+
+  // Для навигаций всегда идём в сеть, чтобы SSR учитывал куки (цветовую тему и пр.).
+  if (request.mode === "navigate") return;
 
   event.respondWith(
     caches.match(request).then((cached) => {

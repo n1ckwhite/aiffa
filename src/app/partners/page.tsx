@@ -77,6 +77,8 @@ const PartnersPage = () => {
   const stepLineColor = useColorModeValue("gray.200", "whiteAlpha.300");
   const stepNumberBg = useColorModeValue("blue.50", "whiteAlpha.200");
   const stepNumberColor = useColorModeValue("blue.600", "blue.300");
+  const stepCardBg = useColorModeValue("whiteAlpha.50", "whiteAlpha.200");
+  const stepCardBorder = useColorModeValue("whiteAlpha.200", "whiteAlpha.300");
   const socialProofBadgeBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.100");
   const socialProofBadgeBorder = useColorModeValue("gray.200", "whiteAlpha.300");
 
@@ -923,7 +925,7 @@ const PartnersPage = () => {
               {/* Desktop / tablet steps (горизонтально) */}
               <HStack
                 spacing={6}
-                align="flex-start"
+                align="stretch"
                 w="full"
                 display={{ base: "none", md: "flex" }}
               >
@@ -933,28 +935,41 @@ const PartnersPage = () => {
                   "Запускаем хакатон / Weekly / интеграцию",
                   "Вы получаете отчёт, решения и метрики",
                 ].map((title, index) => (
-                  <VStack key={title} align="flex-start" spacing={2} flex={1}>
-                    <HStack spacing={3} align="center">
-                      <Box
-                        boxSize={9}
-                        borderRadius="full"
-                        bg={stepNumberBg}
-                        borderWidth="1px"
-                        borderColor={stepLineColor}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        color={stepNumberColor}
-                        fontWeight="semibold"
-                        fontSize="sm"
-                        flexShrink={0}
-                      >
-                        {index + 1}
-                      </Box>
-                      <Text fontWeight="semibold" fontSize="sm">
+                  <VStack
+                    key={title}
+                    align="center"
+                    spacing={3}
+                    flex={1}
+                  >
+                    <Box
+                      boxSize={9}
+                      borderRadius="full"
+                      bg={stepNumberBg}
+                      borderWidth="1px"
+                      borderColor={stepLineColor}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      color={stepNumberColor}
+                      fontWeight="semibold"
+                      fontSize="sm"
+                      flexShrink={0}
+                    >
+                      {index + 1}
+                    </Box>
+                    <Box
+                      w="full"
+                      borderRadius="xl"
+                      borderWidth="1px"
+                      borderColor={stepCardBorder}
+                      bg={stepCardBg}
+                      px={3}
+                      py={2}
+                    >
+                      <Text fontWeight="semibold" fontSize="sm" textAlign="center">
                         {title}
                       </Text>
-                    </HStack>
+                    </Box>
                   </VStack>
                 ))}
               </HStack>

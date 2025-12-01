@@ -74,6 +74,9 @@ const PartnersPage = () => {
   const materialsBulletColor = useColorModeValue("purple.400", "purple.300");
   const articlesBulletColor = useColorModeValue("orange.400", "orange.300");
   const grantsBulletColor = useColorModeValue("pink.400", "pink.300");
+  const stepLineColor = useColorModeValue("gray.200", "whiteAlpha.300");
+  const stepNumberBg = useColorModeValue("blue.50", "whiteAlpha.200");
+  const stepNumberColor = useColorModeValue("blue.600", "blue.300");
 
   return (
     <Box
@@ -124,18 +127,20 @@ const PartnersPage = () => {
 
               <Text
                 fontSize={{ base: "lg", md: "xl" }}
+                fontWeight="semibold"
                 color={mutedTextColor}
                 lineHeight="1.5"
               >
-                Подбираем формат под ваши цели: найм, бренд, продвижение продукта или технологий.
+                Помогаем компаниям работать с IT‑аудиторией через практику, а не пассивное обучение:
+                от хакатонов до Weekly‑челленджей.
               </Text>
               <Text
                 fontSize={{ base: "sm", md: "md" }}
                 color={mutedTextColor}
                 lineHeight="1.6"
               >
-                AIFFA берёт на себя продакшн: упаковку задач, проведение хакатонов, челленджей
-                и интеграций в материалы — вы получаете понятные результаты по IT-аудитории.
+                Если вам нужны бренд, найм или продвижение технологий среди разработчиков — здесь вы
+                получаете понятные результаты, а мы берём на себя весь продакшн.
               </Text>
             <BusinessAnalystIcon />
                 <HStack spacing={4} flexWrap="wrap" justify="center">
@@ -167,6 +172,184 @@ const PartnersPage = () => {
                     Написать на email
                   </Button>
                 </HStack>
+            </VStack>
+          </Box>
+
+          {/* Примеры кейсов: как это работает в жизни */}
+          <Box as="section" aria-label="Примеры кейсов партнёрства">
+            <VStack align="center" spacing={{ base: 4, md: 5 }}>
+              <Heading as="h2" size="md" letterSpacing="-0.02em">
+                Как это выглядит в реальных кейсах
+              </Heading>
+              <Text textAlign="center" fontSize="sm" color={mutedTextColor} maxW={{ base: "100%", md: "720px" }}>
+                Ниже — несколько форматов, которые партнёры запускают с нами. На старте можем
+                собрать похожий пилот под ваши задачи.
+              </Text>
+              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 4, md: 5 }} w="full">
+                <VStack
+                  align="flex-start"
+                  spacing={2}
+                  borderRadius="xl"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("green.200", "green.500")}
+                  bg={surfaceCardBg}
+                  p={{ base: 4, md: 4 }}
+                  boxShadow={{ base: "sm", md: "md" }}
+                >
+                  <PillBadge colorScheme="green" variant="outline" uppercase={false}>
+                    Weekly‑задачи
+                  </PillBadge>
+                  <Text fontWeight="semibold" fontSize="sm">
+                    Задачи недели для кандидатов в стажировку
+                  </Text>
+                  <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                    Серия задач недели по стеку компании: кандидаты решают задачи в формате
+                    «мини‑хакатона», а вы видите решения и мотивацию в живой среде.
+                  </Text>
+                </VStack>
+
+                <VStack
+                  align="flex-start"
+                  spacing={2}
+                  borderRadius="xl"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("blue.200", "blue.500")}
+                  bg={surfaceCardBg}
+                  p={{ base: 4, md: 4 }}
+                  boxShadow={{ base: "sm", md: "md" }}
+                >
+                  <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
+                    Хакатон
+                  </PillBadge>
+                  <Text fontWeight="semibold" fontSize="sm">
+                    Хакатон по внедрению DevOps‑инструмента
+                  </Text>
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Команды берут текущие пайплайны и встраивают ваш DevOps‑продукт: всего за
+                      неделю получаются рабочие прототипы и список интеграционных фидбеков.
+                    </Text>
+                </VStack>
+
+                <VStack
+                  align="flex-start"
+                  spacing={2}
+                  borderRadius="xl"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("purple.200", "purple.500")}
+                  bg={surfaceCardBg}
+                  p={{ base: 4, md: 4 }}
+                  boxShadow={{ base: "sm", md: "md" }}
+                >
+                  <PillBadge colorScheme="purple" variant="outline" uppercase={false}>
+                    Интеграция в материалы
+                  </PillBadge>
+                  <Text fontWeight="semibold" fontSize="sm">
+                    Интеграция продукта в материал по CI/CD
+                  </Text>
+                  <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                    Материал по CI/CD, где разработчики на практике настраивают пайплайн с вашим
+                    сервисом: продукт становится частью примеров, а не рекламным баннером.
+                  </Text>
+                </VStack>
+              </SimpleGrid>
+            </VStack>
+          </Box>
+
+          {/* Как проходит партнёрство */}
+          <Box as="section" aria-label="Как проходит партнёрство">
+            <VStack align="center" spacing={{ base: 4, md: 5 }}>
+              <Heading as="h2" size="md" letterSpacing="-0.02em">
+                Как проходит партнёрство
+              </Heading>
+              <Text textAlign="center" fontSize="sm" color={mutedTextColor} maxW={{ base: "100%", md: "720px" }}>
+                Делаем процесс прозрачным: на старте вы формулируете задачу, на финише — получаете
+                отчёт с результатами и следующими шагами.
+              </Text>
+
+              {/* Desktop / tablet steps (горизонтально) */}
+              <HStack
+                spacing={6}
+                align="flex-start"
+                w="full"
+                display={{ base: "none", md: "flex" }}
+              >
+                {[
+                  "Вы рассказываете задачу и продукт",
+                  "Мы собираем формат под ваши цели",
+                  "Запускаем хакатон / Weekly / интеграцию",
+                  "Вы получаете отчёт, решения и метрики",
+                ].map((title, index) => (
+                  <VStack key={title} align="flex-start" spacing={2} flex={1}>
+                    <HStack spacing={3} align="center">
+                      <Box
+                        boxSize={9}
+                        borderRadius="full"
+                        bg={stepNumberBg}
+                        borderWidth="1px"
+                        borderColor={stepLineColor}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        color={stepNumberColor}
+                        fontWeight="semibold"
+                        fontSize="sm"
+                        flexShrink={0}
+                      >
+                        {index + 1}
+                      </Box>
+                      <Text fontWeight="semibold" fontSize="sm">
+                        {title}
+                      </Text>
+                    </HStack>
+                  </VStack>
+                ))}
+              </HStack>
+
+              {/* Mobile steps (вертикально) */}
+              <VStack
+                align="flex-start"
+                spacing={3}
+                w="full"
+                display={{ base: "flex", md: "none" }}
+              >
+                {[
+                  "Вы рассказываете задачу и продукт",
+                  "Мы собираем формат под ваши цели",
+                  "Запускаем хакатон / Weekly / интеграцию",
+                  "Вы получаете отчёт, решения и метрики",
+                ].map((title, index) => (
+                  <HStack key={title} align="flex-start" spacing={3} w="full">
+                    <VStack spacing={1} align="center">
+                      <Box
+                        boxSize={8}
+                        borderRadius="full"
+                        bg={stepNumberBg}
+                        borderWidth="1px"
+                        borderColor={stepLineColor}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        color={stepNumberColor}
+                        fontWeight="semibold"
+                        fontSize="xs"
+                        flexShrink={0}
+                      >
+                        {index + 1}
+                      </Box>
+                      {index < 3 && (
+                        <Box
+                          w="2px"
+                          flex={1}
+                          bg={stepLineColor}
+                        />
+                      )}
+                    </VStack>
+                    <Text fontSize="sm" color={mutedTextColor}>
+                      {title}
+                    </Text>
+                  </HStack>
+                ))}
+              </VStack>
             </VStack>
           </Box>
 
@@ -1041,20 +1224,6 @@ const PartnersPage = () => {
               </SimpleGrid>
             </VStack>
           </VStack>
-          {/* Статистика / ранний запуск */}
-          <Box borderRadius="2xl" zIndex="100">
-            <VStack align="center" spacing={3}>
-              <PillBadge colorScheme="purple" variant="outline" uppercase={false}>
-                Ранний запуск
-              </PillBadge>
-              <Text align="center" fontSize="sm" color={useColorModeValue("gray.900", "white")}>
-                Платформа находится в стадии раннего запуска. Идёт набор первых партнёров,
-                которые готовы расти вместе с проектом. Для первых участников — индивидуальные
-                условия и гибкий формат интеграций.
-              </Text>
-            </VStack>
-          </Box>
-
         </VStack>
       </Box>
     </Box>

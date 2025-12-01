@@ -34,7 +34,12 @@ export const metadata: Metadata = {
     title: "AIFFA — платформа для роста разработчиков",
     description:
       "Практическая платформа для развития навыков JavaScript и фронтенда.",
-  }
+  },
+  manifest: "/manifest.json",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f9fafb" },
+    { media: "(prefers-color-scheme: dark)", color: "#020617" }
+  ]
 };
 
 type RootLayoutProps = {

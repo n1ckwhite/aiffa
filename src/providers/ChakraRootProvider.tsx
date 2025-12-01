@@ -23,6 +23,22 @@ export const ChakraRootProvider = ({
 }: ChakraRootProviderProps) => {
   const colorModeManager = cookieStorageManagerSSR(cookies ?? "");
 
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!("serviceWorker" in navigator)) return;
+    if (process.env.NODE_ENV !== "production") return;
+
+    const register = async () => {
+      try {
+        await navigator.serviceWorker.register("/sw.js");
+      } catch {
+        // silent fail – PWA не критична для основного функционала
+      }
+    };
+
+    register();
+  }, []);
+
   return (
     <CacheProvider>
       <ChakraProvider

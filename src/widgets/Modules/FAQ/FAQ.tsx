@@ -20,12 +20,22 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
     <Box>
       <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto" zIndex={100}>
         <HStack mb={2} spacing={3} color={faqHeadingColor} align="center">
-          <Icon as={QuestionOutlineIcon} />
-          <Heading as="h2" size="md" letterSpacing="wider">
+          <Icon as={QuestionOutlineIcon} boxSize={{ base: 4, md: 5 }} />
+          <Heading
+            as="h2"
+            fontSize={{ base: 'lg', md: 'xl' }}
+            letterSpacing="wider"
+          >
             {heading}
           </Heading>
         </HStack>
-        <Box borderWidth="1px" borderColor={faqBorderColor} borderRadius="2xl" p={{ base: 3, md: 4 }} bg="transparent">
+        <Box
+          borderWidth="1px"
+          borderColor={faqBorderColor}
+          borderRadius="2xl"
+          p={{ base: 3, md: 4, lg: 5 }}
+          bg="transparent"
+        >
           <Accordion allowToggle>
             {list.map((it, idx) => (
               <AccordionItem key={idx} border="none">
@@ -34,7 +44,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
                     <h2>
                       <AccordionButton
                         px={0}
-                        py={3}
+                        py={{ base: 2.5, md: 3 }}
                         borderRadius="xl"
                         borderBottomRadius={isExpanded ? 0 : 'xl'}
                         borderWidth={0}
@@ -45,7 +55,12 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
                         justifyContent="space-between"
                       >
                         <HStack flex="1" spacing={3}>
-                          <Box as="span" fontWeight="semibold" fontSize="md" textAlign="left">
+                          <Box
+                            as="span"
+                            fontWeight="semibold"
+                            fontSize={{ base: 'md', md: 'lg' }}
+                            textAlign="left"
+                          >
                             {it.title}
                           </Box>
                         </HStack>

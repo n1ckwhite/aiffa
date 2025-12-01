@@ -17,7 +17,7 @@ const OverviewSection: React.FC = () => {
   const partnershipBoxShadow = "md";
 
   return (
-    <Box>
+    <Box as="section" aria-labelledby="partners-overview-heading">
       <Box
         borderRadius="2xl"
         borderWidth="1px"
@@ -68,6 +68,7 @@ const OverviewSection: React.FC = () => {
             </PillBadge>
             <Heading
               as="h2"
+              id="partners-overview-heading"
               size="md"
               letterSpacing="-0.02em"
             >

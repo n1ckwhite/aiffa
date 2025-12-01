@@ -14,6 +14,8 @@ const BrandFitSection: React.FC = () => {
 
   return (
     <Box
+      as="section"
+      aria-labelledby="partners-brandfit-heading"
       position="relative"
       overflow="hidden"
       transition="none"
@@ -40,6 +42,7 @@ const BrandFitSection: React.FC = () => {
             </PillBadge>
             <Heading
               as="h2"
+              id="partners-brandfit-heading"
               size="md"
               letterSpacing="-0.02em"
               mt={2}

@@ -24,9 +24,9 @@ const FormatsSection: React.FC = () => {
   } = usePartnersColors();
 
   return (
-    <VStack align="center" spacing={4}>
+    <VStack as="section" aria-labelledby="partners-formats-heading" align="center" spacing={4}>
       <PartnersLottieIcon />
-      <Heading as="h2" size="md" letterSpacing="-0.02em">
+      <Heading as="h2" id="partners-formats-heading" size="md" letterSpacing="-0.02em">
         Форматы партнёрства
       </Heading>
       <Text fontSize="sm" color={mutedTextColor}>
@@ -304,7 +304,7 @@ const FormatsSection: React.FC = () => {
               h="100%"
             >
               <PillBadge colorScheme="purple" variant="outline" uppercase={false}>
-                Full — проект + менторы + пиар
+                Full — проект + менторы
               </PillBadge>
               <Text mt={2} fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
                 Долгий формат: проект или серия задач с вашими менторами, интеграцией в

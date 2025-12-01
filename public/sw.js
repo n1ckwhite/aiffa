@@ -34,8 +34,14 @@ self.addEventListener("fetch", (event) => {
 
   event.respondWith(
     caches.match(request).then((cached) => {
-      if (cached) return cached;
-      return fetch(request).catch(() => cached);
+      if (cached) {
+        return cached;
+      }
+
+      // Если в кэше ничего нет, просто идём в сеть.
+      // В случае сетевой ошибки браузер сам вернёт корректный Response ошибку,
+      // что предотвращает TypeError: Failed to convert value to 'Response'.
+      return fetch(request);
     })
   );
 });

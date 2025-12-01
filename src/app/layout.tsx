@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import React from "react";
 import { cookies } from "next/headers";
 import { ColorModeScript } from "@chakra-ui/react";
@@ -36,10 +36,13 @@ export const metadata: Metadata = {
       "Практическая платформа для развития навыков JavaScript и фронтенда.",
   },
   manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f9fafb" },
-    { media: "(prefers-color-scheme: dark)", color: "#020617" }
-  ]
+    { media: "(prefers-color-scheme: dark)", color: "#020617" },
+  ],
 };
 
 type RootLayoutProps = {

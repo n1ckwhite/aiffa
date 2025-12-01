@@ -316,6 +316,10 @@ const PartnersPage = () => {
             position="relative"
             overflow="hidden"
             transition="none"
+            borderRadius={{ base: "2xl", md: "0" }}
+            bg={{ base: surfaceCardBg, md: "transparent" }}
+            boxShadow={{ base: formatShadow, md: "none" }}
+            p={{ base: 5, md: 0 }}
           >
             <Stack
               direction={{ base: "column", md: "row" }}
@@ -339,7 +343,7 @@ const PartnersPage = () => {
                     letterSpacing="-0.02em"
                     mt={2}
                   >
-                    Кому и зачем подходит спонсорство
+                    Кому и зачем подходит спонсорство?
                   </Heading>
                 </Box>
                 <Text fontSize="sm" color={mutedTextColor}>

@@ -8,7 +8,7 @@ import errorAnimation from "@/shared/icons/json-icons/404.json";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 
 const ErrorIcon: React.FC = () => {
-  const staticSrc = getStaticSrcFromModule(errorIcon as any);
+  const staticSrc = getStaticSrcFromModule(errorIcon);
   return (
     <LazyLottieIcon
       animationData={errorAnimation}

@@ -3,24 +3,23 @@
 import React from "react";
 import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
-import businessAnalystIcon from "@/shared/icons/svg-icons/business-analyst-icon.svg";
-import businessAnalystAnimation from "@/shared/icons/json-icons/business-analyst.json";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
-
-const BusinessAnalystIcon: React.FC = () => {
-  const staticSrc = getStaticSrcFromModule(businessAnalystIcon as any);
+import partnersAnimation from "@/shared/icons/json-icons/partners.json";
+import partnersIcon from "@/shared/icons/svg-icons/partners-icon.svg";
+const PartnersLottieIcon: React.FC = () => {
+  const staticSrc = getStaticSrcFromModule(partnersIcon as any);
   return (
     <LazyLottieIcon
-      animationData={businessAnalystAnimation}
+      animationData={partnersAnimation}
       boxProps={{
-        w: { base: "250px", md: "350px" },
-        aspectRatio: 1080 / 720,
+        w: { base: "270px", md: "350px" },
+        aspectRatio: 2475 / 1650,
         mx: "auto",
       }}
       fallback={
         <Image
           src={staticSrc}
-          alt="Иконка бизнес-аналитика"
+          alt="Иконка партнеров"
           w="100%"
           h="100%"
           objectFit="contain"
@@ -33,6 +32,6 @@ const BusinessAnalystIcon: React.FC = () => {
   );
 };
 
-export default BusinessAnalystIcon;
+export default PartnersLottieIcon;
 
 

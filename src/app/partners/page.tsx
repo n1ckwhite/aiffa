@@ -7,7 +7,7 @@ import { TelegramIcon } from "@/widgets/Footer/icons/Telegram";
 import { MailIcon } from "@/widgets/Footer/icons/Mail";
 import { FaHandshake } from "react-icons/fa6";
 import { FaUsers, FaCode, FaGraduationCap, FaStar, FaHeart, FaPuzzlePiece, FaRocket, FaInfinity } from "react-icons/fa";
-import { BusinessAnalystIcon } from "@/shared/icons/components-icon";
+import { BusinessAnalystIcon, PartnersLottieIcon } from "@/shared/icons/components-icon";
 
 const PartnersPage = () => {
   const formatShadow = useColorModeValue(
@@ -546,6 +546,7 @@ const PartnersPage = () => {
 
           {/* Форматы партнёрства */}
           <VStack align="flex-start" spacing={4}>
+            <PartnersLottieIcon />
             <Heading as="h2" size="md" letterSpacing="-0.02em">
               Форматы партнёрства
             </Heading>

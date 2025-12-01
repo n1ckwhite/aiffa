@@ -293,7 +293,33 @@ const PartnersPage = () => {
                         />
                       </Box>
                     </Box>
-                  <Text>Редактор кода в браузере с VSCode-опытом.</Text>
+                    <Text>Редактор кода в браузере с VSCode-опытом.</Text>
+                  </HStack>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={0.5}
+                      boxSize={6}
+                      borderRadius="full"
+                      bg="orange.500"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                      color="white"
+                    >
+                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
+                        <path
+                          d="M4 7h16M6 11h12M8 15h8"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </Box>
+                    </Box>
+                    <Text>Мероприятия: консультации, знакомства, встречи и Q&amp;A-сессии.</Text>
                   </HStack>
                   <HStack as="li" align="flex-start" spacing={3}>
                     <Box
@@ -365,7 +391,7 @@ const PartnersPage = () => {
                 flex={3}
                 textAlign="left"
               >
-                <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
+                <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
                   Задачи бренда
                 </PillBadge>
                 <Text fontSize="xs" color={mutedTextColor}>
@@ -380,28 +406,177 @@ const PartnersPage = () => {
                 <SimpleGrid
                   columns={{ base: 1, md: 2 }}
                   spacingX={{ base: 0, md: 8 }}
-                  spacingY={2}
+                  spacingY={3}
                   as="ul"
                   fontSize="sm"
                   color={mutedTextColor}
                   listStyleType="none"
                   pl={0}
                 >
-                  <Text as="li">
-                    привлекать разработчиков и работать с IT-аудиторией;
-                  </Text>
-                  <Text as="li">
-                    продвигать свои инструменты, технологии и platform-инфраструктуру;
-                  </Text>
-                  <Text as="li">
-                    находить талантливых разработчиков через реальные задачи;
-                  </Text>
-                  <Text as="li">
-                    повышать узнаваемость бренда в профессиональной среде;
-                  </Text>
-                  <Text as="li">
-                    строить долгосрочное отношение через комьюнити и формат практики.
-                  </Text>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={0.5}
+                      boxSize={6}
+                      borderRadius="full"
+                      bg="cyan.500"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                      color="white"
+                    >
+                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="6"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        />
+                        <circle cx="12" cy="12" r="2" fill="currentColor" />
+                        <path
+                          d="M12 4V3M4 12H3M21 12h-1M12 21v-1"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </Box>
+                    </Box>
+                    <Text>
+                      привлекать разработчиков и работать с IT-аудиторией;
+                    </Text>
+                  </HStack>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={0.5}
+                      boxSize={6}
+                      borderRadius="full"
+                      bg="purple.500"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                      color="white"
+                    >
+                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
+                        <path
+                          d="M6 16 11 11 14 13 18 7"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </Box>
+                    </Box>
+                    <Text>
+                      продвигать свои инструменты, технологии и platform-инфраструктуру;
+                    </Text>
+                  </HStack>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={0.5}
+                      boxSize={6}
+                      borderRadius="full"
+                      bg="teal.500"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                      color="white"
+                    >
+                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
+                        <circle
+                          cx="8"
+                          cy="10"
+                          r="2.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        />
+                        <circle
+                          cx="16"
+                          cy="10"
+                          r="2.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        />
+                        <path
+                          d="M5.5 17a3.5 3.5 0 0 1 7 0M11.5 17a3.5 3.5 0 0 1 7 0"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </Box>
+                    </Box>
+                    <Text>
+                      находить талантливых разработчиков через реальные задачи;
+                    </Text>
+                  </HStack>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={0.5}
+                      boxSize={6}
+                      borderRadius="full"
+                      bg="pink.500"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                      color="white"
+                    >
+                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
+                        <path
+                          d="M12 5.5 13.9 9l3.6.4-2.7 2.4.8 3.7L12 14.3 8.4 15.5l.8-3.7L6.5 9.4 10.1 9 12 5.5Z"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </Box>
+                    </Box>
+                    <Text>
+                      повышать узнаваемость бренда в профессиональной среде;
+                    </Text>
+                  </HStack>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={0.5}
+                      boxSize={6}
+                      borderRadius="full"
+                      bg="orange.500"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                      color="white"
+                    >
+                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
+                        <path
+                          d="M7 15l3-4 3 2 4-6"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </Box>
+                    </Box>
+                    <Text>
+                      строить долгосрочное отношение через комьюнити и формат практики.
+                    </Text>
+                  </HStack>
                 </SimpleGrid>
               </VStack>
 
@@ -413,31 +588,107 @@ const PartnersPage = () => {
                 borderRadius="2xl"
                 bg={overviewAsideBg}
                 p={{ base: 4, md: 5 }}
-                boxShadow={formatShadow}
+                boxShadow="none"
                 maxW={{ base: "100%", md: "460px" }}
               >
-                <PillBadge colorScheme="blue" variant="solid" uppercase={false}>
+                <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
                   Какие эффекты даёт партнёрство
                 </PillBadge>
                 <Text fontSize="sm" color={mutedTextColor} lineHeight="1.6">
                   Что получает бренд, когда партнёрится с AIFFA на уровне задач и хакатонов.
                 </Text>
                 <SimpleGrid
+                  as="ul"
                   columns={{ base: 1, md: 1 }}
                   spacing={3}
                   fontSize="sm"
                   color={mutedTextColor}
                   w="full"
                 >
-                  <Text lineHeight="1.5">
-                    Бренд присутствует в практических задачах и решениях.
-                  </Text>
-                  <Text lineHeight="1.5">
-                    Разработчики знакомятся с технологиями на реальных сценариях.
-                  </Text>
-                  <Text lineHeight="1.5">
-                    Формируется долгосрочная ассоциация бренда с ростом и обучением.
-                  </Text>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={0.5}
+                      boxSize={6}
+                      borderRadius="full"
+                      bg="blue.500"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                      color="white"
+                    >
+                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
+                        <path
+                          d="M5 8h14M7 12h10M9 16h6"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </Box>
+                    </Box>
+                    <Text lineHeight="1.5">
+                      Бренд присутствует в практических задачах и решениях.
+                    </Text>
+                  </HStack>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={0.5}
+                      boxSize={6}
+                      borderRadius="full"
+                      bg="green.500"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                      color="white"
+                    >
+                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
+                        <path
+                          d="M5 11 10 16 19 7"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </Box>
+                    </Box>
+                    <Text lineHeight="1.5">
+                      Разработчики знакомятся с технологиями на реальных сценариях.
+                    </Text>
+                  </HStack>
+                  <HStack as="li" align="flex-start" spacing={3}>
+                    <Box
+                      as="span"
+                      mt={0.5}
+                      boxSize={6}
+                      borderRadius="full"
+                      bg="red.500"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                      color="white"
+                    >
+                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
+                        <path
+                          d="M6 9.5C6 7.6 7.6 6 9.5 6c1 0 2 .5 2.5 1.3C12.5 6.5 13.5 6 14.5 6 16.4 6 18 7.6 18 9.5 18 13 12 16 12 16s-6-3-6-6.5Z"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </Box>
+                    </Box>
+                    <Text lineHeight="1.5">
+                      Формируется долгосрочная ассоциация бренда с ростом и обучением.
+                    </Text>
+                  </HStack>
                 </SimpleGrid>
               </VStack>
             </Stack>

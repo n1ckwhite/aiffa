@@ -53,6 +53,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
                         _focus={{ boxShadow: 'none' }}
                         mb={isExpanded ? 0 : 2}
                         justifyContent="space-between"
+                        alignItems="flex-start"
                       >
                         <HStack flex="1" spacing={3}>
                           <Box
@@ -65,17 +66,18 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
                           </Box>
                         </HStack>
                         <Box
-                          w="24px"
-                          h="24px"
-                          borderRadius="full"
+                          w="22px"
+                          h="22px"
                           display="flex"
                           alignItems="center"
                           justifyContent="center"
                           flexShrink={0}
+                          ml={{ base: 2, md: 3 }}
+                          mt={{ base: 1, md: 1.5 }}
                           transform={isExpanded ? 'rotate(45deg)' : 'rotate(0deg)'}
                           transition="transform 180ms ease"
                         >
-                          <AddIcon boxSize={3} color={faqTitleColor} />
+                          <AddIcon boxSize={{ base: 2.5, md: 3 }} color={faqTitleColor} />
                         </Box>
                       </AccordionButton>
                     </h2>

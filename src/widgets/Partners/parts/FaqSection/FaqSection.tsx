@@ -8,7 +8,7 @@ const FaqSection: React.FC = () => {
       as="section"
       aria-labelledby="partners-faq-heading"
       pt={{ base: 4, md: 6 }}
-      zIndex={1000}
+      zIndex={100}
     >
       <FAQ
         title="Частые вопросы о партнёрстве"

@@ -8,3 +8,4 @@ export { default as PeopleLottieIcon } from './PeopleLottieIcon';
 export { default as PersonLottieIcon } from './PersonLottieIcon';
 export { default as ErrorIcon } from './ErrorIcon';
 export { default as PartnersLottieIcon } from './PartnersLottieIcon';
+export { default as BusinessWorkshopIcon } from './BusinessWorkshopIcon';

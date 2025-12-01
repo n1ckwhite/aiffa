@@ -20,7 +20,7 @@ import {
   FaNewspaper,
   FaHandsHelping,
 } from "react-icons/fa";
-import { BusinessAnalystIcon, PartnersLottieIcon } from "@/shared/icons/components-icon";
+import { BusinessAnalystIcon, PartnersLottieIcon, BusinessWorkshopIcon } from "@/shared/icons/components-icon";
 
 const PartnersPage = () => {
   const formatShadow = useColorModeValue(
@@ -32,7 +32,7 @@ const PartnersPage = () => {
   const heroAsideBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.85)");
 
   const overviewAsideBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.9)");
-  const surfaceCardBg = useColorModeValue("whiteAlpha.900", "surface.elevated");
+  const surfaceCardBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)");
 
   const partnershipBorderColor = useColorModeValue("gray.200", "whiteAlpha.200");
   const partnershipBgGradient = useColorModeValue(
@@ -44,23 +44,23 @@ const PartnersPage = () => {
 
   const hackathonBg = useColorModeValue(
     "linear(to-b, rgba(34,197,94,0.03), whiteAlpha.900)",
-    "linear(to-b, rgba(34,197,94,0.18), surface.elevated)"
+    "linear(to-b, rgba(34,197,94,0.18), rgba(15, 23, 42, 1))"
   );
   const weeklyBg = useColorModeValue(
     "linear(to-b, rgba(59,130,246,0.03), whiteAlpha.900)",
-    "linear(to-b, rgba(59,130,246,0.18), surface.elevated)"
+    "linear(to-b, rgba(59,130,246,0.18), rgba(15, 23, 42, 1))"
   );
   const materialsBg = useColorModeValue(
     "linear(to-b, rgba(168,85,247,0.03), whiteAlpha.900)",
-    "linear(to-b, rgba(168,85,247,0.16), surface.elevated)"
+    "linear(to-b, rgba(168,85,247,0.16), rgba(15, 23, 42, 1))"
   );
   const articlesBg = useColorModeValue(
     "linear(to-b, rgba(249,115,22,0.03), whiteAlpha.900)",
-    "linear(to-b, rgba(249,115,22,0.16), surface.elevated)"
+    "linear(to-b, rgba(249,115,22,0.16), rgba(15, 23, 42, 1))"
   );
   const grantsBg = useColorModeValue(
     "linear(to-b, rgba(236,72,153,0.03), whiteAlpha.900)",
-    "linear(to-b, rgba(236,72,153,0.16), surface.elevated)"
+    "linear(to-b, rgba(236,72,153,0.16), rgba(15, 23, 42, 1))"
   );
 
   const hackathonBorder = useColorModeValue("green.200", "green.500");
@@ -77,6 +77,8 @@ const PartnersPage = () => {
   const stepLineColor = useColorModeValue("gray.200", "whiteAlpha.300");
   const stepNumberBg = useColorModeValue("blue.50", "whiteAlpha.200");
   const stepNumberColor = useColorModeValue("blue.600", "blue.300");
+  const socialProofBadgeBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.100");
+  const socialProofBadgeBorder = useColorModeValue("gray.200", "whiteAlpha.300");
 
   return (
     <Box
@@ -142,213 +144,65 @@ const PartnersPage = () => {
                 Если вам нужны бренд, найм или продвижение технологий среди разработчиков — здесь вы
                 получаете понятные результаты, а мы берём на себя весь продакшн.
               </Text>
-            <BusinessAnalystIcon />
-                <HStack spacing={4} flexWrap="wrap" justify="center">
-                  <Button
-                    as={Link}
-                    href="https://t.me/iamceob1tch"
-                    isExternal
-                    colorScheme="blue"
-                    borderRadius="full"
-                    px={{ base: 6, md: 7 }}
-                    fontWeight="semibold"
-                    w={{ base: "100%", sm: "auto", md: "260px" }}
-                    justifyContent="center"
-                    leftIcon={<TelegramIcon />}
-                  >
-                    Написать в Telegram
-                  </Button>
-                  <Button
-                    as={Link}
-                    href="mailto:bbycinka@yandex.ru?subject=Запрос медиакита AIFFA"
-                    variant="outline"
-                    borderRadius="full"
-                    px={{ base: 6, md: 7 }}
-                    fontWeight="semibold"
-                    w={{ base: "100%", sm: "auto", md: "260px" }}
-                    justifyContent="center"
-                    leftIcon={<MailIcon />}
-                  >
-                    Написать на email
-                  </Button>
-                </HStack>
-            </VStack>
-          </Box>
-
-          {/* Примеры кейсов: как это работает в жизни */}
-          <Box as="section" aria-label="Примеры кейсов партнёрства">
-            <VStack align="center" spacing={{ base: 4, md: 5 }}>
-              <Heading as="h2" size="md" letterSpacing="-0.02em">
-                Как это выглядит в реальных кейсах
-              </Heading>
-              <Text textAlign="center" fontSize="sm" color={mutedTextColor} maxW={{ base: "100%", md: "720px" }}>
-                Ниже — несколько форматов, которые партнёры запускают с нами. На старте можем
-                собрать похожий пилот под ваши задачи.
-              </Text>
-              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 4, md: 5 }} w="full">
-                <VStack
-                  align="flex-start"
-                  spacing={2}
-                  borderRadius="xl"
-                  borderWidth="1px"
-                  borderColor={useColorModeValue("green.200", "green.500")}
-                  bg={surfaceCardBg}
-                  p={{ base: 4, md: 4 }}
-                  boxShadow={{ base: "sm", md: "md" }}
+              <BusinessAnalystIcon />
+              <HStack spacing={4} flexWrap="wrap" justify="center">
+                <Button
+                  as={Link}
+                  href="https://t.me/iamceob1tch"
+                  isExternal
+                  colorScheme="blue"
+                  borderRadius="full"
+                  px={{ base: 6, md: 7 }}
+                  fontWeight="semibold"
+                  w={{ base: "100%", sm: "auto", md: "260px" }}
+                  justifyContent="center"
+                  leftIcon={<TelegramIcon />}
                 >
-                  <PillBadge colorScheme="green" variant="outline" uppercase={false}>
-                    Weekly‑задачи
-                  </PillBadge>
-                  <Text fontWeight="semibold" fontSize="sm">
-                    Задачи недели для кандидатов в стажировку
-                  </Text>
-                  <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
-                    Серия задач недели по стеку компании: кандидаты решают задачи в формате
-                    «мини‑хакатона», а вы видите решения и мотивацию в живой среде.
-                  </Text>
-                </VStack>
-
-                <VStack
-                  align="flex-start"
-                  spacing={2}
-                  borderRadius="xl"
-                  borderWidth="1px"
-                  borderColor={useColorModeValue("blue.200", "blue.500")}
-                  bg={surfaceCardBg}
-                  p={{ base: 4, md: 4 }}
-                  boxShadow={{ base: "sm", md: "md" }}
+                  Написать в Telegram
+                </Button>
+                <Button
+                  as={Link}
+                  href="mailto:bbycinka@yandex.ru?subject=Запрос медиакита AIFFA"
+                  variant="outline"
+                  borderRadius="full"
+                  px={{ base: 6, md: 7 }}
+                  fontWeight="semibold"
+                  w={{ base: "100%", sm: "auto", md: "260px" }}
+                  justifyContent="center"
+                  leftIcon={<MailIcon />}
                 >
-                  <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
-                    Хакатон
-                  </PillBadge>
-                  <Text fontWeight="semibold" fontSize="sm">
-                    Хакатон по внедрению DevOps‑инструмента
-                  </Text>
-                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
-                      Команды берут текущие пайплайны и встраивают ваш DevOps‑продукт: всего за
-                      неделю получаются рабочие прототипы и список интеграционных фидбеков.
-                    </Text>
-                </VStack>
-
-                <VStack
-                  align="flex-start"
-                  spacing={2}
-                  borderRadius="xl"
-                  borderWidth="1px"
-                  borderColor={useColorModeValue("purple.200", "purple.500")}
-                  bg={surfaceCardBg}
-                  p={{ base: 4, md: 4 }}
-                  boxShadow={{ base: "sm", md: "md" }}
-                >
-                  <PillBadge colorScheme="purple" variant="outline" uppercase={false}>
-                    Интеграция в материалы
-                  </PillBadge>
-                  <Text fontWeight="semibold" fontSize="sm">
-                    Интеграция продукта в материал по CI/CD
-                  </Text>
-                  <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
-                    Материал по CI/CD, где разработчики на практике настраивают пайплайн с вашим
-                    сервисом: продукт становится частью примеров, а не рекламным баннером.
-                  </Text>
-                </VStack>
-              </SimpleGrid>
-            </VStack>
-          </Box>
-
-          {/* Как проходит партнёрство */}
-          <Box as="section" aria-label="Как проходит партнёрство">
-            <VStack align="center" spacing={{ base: 4, md: 5 }}>
-              <Heading as="h2" size="md" letterSpacing="-0.02em">
-                Как проходит партнёрство
-              </Heading>
-              <Text textAlign="center" fontSize="sm" color={mutedTextColor} maxW={{ base: "100%", md: "720px" }}>
-                Делаем процесс прозрачным: на старте вы формулируете задачу, на финише — получаете
-                отчёт с результатами и следующими шагами.
-              </Text>
-
-              {/* Desktop / tablet steps (горизонтально) */}
-              <HStack
-                spacing={6}
-                align="flex-start"
-                w="full"
-                display={{ base: "none", md: "flex" }}
-              >
-                {[
-                  "Вы рассказываете задачу и продукт",
-                  "Мы собираем формат под ваши цели",
-                  "Запускаем хакатон / Weekly / интеграцию",
-                  "Вы получаете отчёт, решения и метрики",
-                ].map((title, index) => (
-                  <VStack key={title} align="flex-start" spacing={2} flex={1}>
-                    <HStack spacing={3} align="center">
-                      <Box
-                        boxSize={9}
-                        borderRadius="full"
-                        bg={stepNumberBg}
-                        borderWidth="1px"
-                        borderColor={stepLineColor}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        color={stepNumberColor}
-                        fontWeight="semibold"
-                        fontSize="sm"
-                        flexShrink={0}
-                      >
-                        {index + 1}
-                      </Box>
-                      <Text fontWeight="semibold" fontSize="sm">
-                        {title}
-                      </Text>
-                    </HStack>
-                  </VStack>
-                ))}
+                  Написать на email
+                </Button>
               </HStack>
-
-              {/* Mobile steps (вертикально) */}
-              <VStack
-                align="flex-start"
-                spacing={3}
-                w="full"
-                display={{ base: "flex", md: "none" }}
-              >
-                {[
-                  "Вы рассказываете задачу и продукт",
-                  "Мы собираем формат под ваши цели",
-                  "Запускаем хакатон / Weekly / интеграцию",
-                  "Вы получаете отчёт, решения и метрики",
-                ].map((title, index) => (
-                  <HStack key={title} align="flex-start" spacing={3} w="full">
-                    <VStack spacing={1} align="center">
-                      <Box
-                        boxSize={8}
-                        borderRadius="full"
-                        bg={stepNumberBg}
-                        borderWidth="1px"
-                        borderColor={stepLineColor}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        color={stepNumberColor}
-                        fontWeight="semibold"
-                        fontSize="xs"
-                        flexShrink={0}
-                      >
-                        {index + 1}
-                      </Box>
-                      {index < 3 && (
-                        <Box
-                          w="2px"
-                          flex={1}
-                          bg={stepLineColor}
-                        />
-                      )}
-                    </VStack>
-                    <Text fontSize="sm" color={mutedTextColor}>
-                      {title}
-                    </Text>
-                  </HStack>
-                ))}
+              <VStack spacing={2} pt={3}>
+                <Text fontSize="xs" color={mutedTextColor} textAlign="center">
+                  Платформа подходит для компаний уровня:
+                </Text>
+                <HStack spacing={2} flexWrap="wrap" justify="center">
+                  {["Яндекс", "VK", "Avito", "Tinkoff", "Skyeng", "JetBrains"].map((company) => (
+                    <Box
+                      key={company}
+                      as="span"
+                      borderRadius="full"
+                      px={3}
+                      py={1}
+                      bg={socialProofBadgeBg}
+                      borderWidth="1px"
+                      borderColor={socialProofBadgeBorder}
+                      boxShadow="sm"
+                    >
+                      <Text fontSize="xs" fontWeight="medium">
+                        {company}
+                      </Text>
+                    </Box>
+                  ))}
+                </HStack>
+                <Text fontSize="xs" color={mutedTextColor} textAlign="center">
+                  Работаем и с крупными компаниями, и с небольшими командами, стартапами и личными брендами.
+                </Text>
+                <Text fontSize="xs" color={mutedTextColor} textAlign="center">
+                  Важно не сколько у вас людей, а какая у вас задача: найм, бренд или продвижение продукта.
+                </Text>
               </VStack>
             </VStack>
           </Box>
@@ -753,7 +607,7 @@ const PartnersPage = () => {
           </Box>
 
           {/* Форматы партнёрства */}
-          <VStack align="flex-start" spacing={4}>
+          <VStack align="center" spacing={4}>
             <PartnersLottieIcon />
             <Heading as="h2" size="md" letterSpacing="-0.02em">
               Форматы партнёрства
@@ -768,31 +622,23 @@ const PartnersPage = () => {
                 {/* Спонсорство хакатонов */}
                 <Box
                   borderRadius="2xl"
-                  borderWidth="2px"
+                  borderWidth="1px"
                   borderColor={hackathonBorder}
-                  p={{ base: 4, md: 5 }}
+                  bg={useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)")}
+                  p={{ base: 5, md: 6 }}
                   boxShadow={formatShadow}
-                  transition="none"
-                  position="relative"
-                  overflow="hidden"
-                  _before={{
-                    content: '""',
-                    position: "absolute",
-                    inset: 0,
-                    pointerEvents: "none",
-                  }}
                 >
-                  <VStack align="flex-start" spacing={3} position="relative" zIndex={1}>
+                  <VStack align="flex-start" spacing={3}>
                     <HStack spacing={3} align="center">
                       <Box
                         as="span"
                         boxSize={9}
                         borderRadius="full"
-                        bg="rgba(34,197,94,0.16)"
+                        bg="rgba(34,197,94,0.12)"
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
-                        color="green.300"
+                        color="green.400"
                       >
                         <Icon as={FaRocket} boxSize={5} aria-hidden="true" />
                       </Box>
@@ -805,205 +651,75 @@ const PartnersPage = () => {
                         </PillBadge>
                       </VStack>
                     </HStack>
-                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.7}>
-                      Глубокий формат, в котором команды решают реальную задачу от компании и
-                      знакомятся с вашими технологиями.
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Команды за ограниченное время решают вашу реальную задачу и знакомятся с
+                      продуктом в боевых условиях.
                     </Text>
-                    <Text
-                      fontWeight="semibold"
-                      fontSize="sm"
-                      mt={2}
-                    >
-                      Входит:
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Вы получаете решения, фидбек и внимание сильных разработчиков к вашему стеку.
                     </Text>
-                    <VStack
-                      as="ul"
-                      align="flex-start"
-                      spacing={1.5}
-                      fontSize="sm"
-                      color={mutedTextColor}
-                      pl={1}
-                    >
-                      {[
-                        "брендирование хакатона;",
-                        "задача от компании;",
-                        "обзор решений и публичные разборы;",
-                        "логотип и ссылки на всех ключевых материалах;",
-                        "прямое взаимодействие с участниками.",
-                      ].map((text) => (
-                        <HStack as="li" key={text} align="center" spacing={2}>
-                          <Box
-                            boxSize="6px"
-                            borderRadius="full"
-                            bg={hackathonBulletColor}
-                            flexShrink={0}
-                          />
-                          <Text>{text}</Text>
-                        </HStack>
-                      ))}
-                    </VStack>
-                    <Box
-                      borderTopWidth="1px"
-                      borderTopColor={useColorModeValue("gray.100", "whiteAlpha.200")}
-                      pt={3}
-                      mt={1}
-                      w="full"
-                    >
-                      <Text fontWeight="semibold" fontSize="sm">
-                        Подходит для:
-                      </Text>
-                    </Box>
-                    <VStack
-                      as="ul"
-                      align="flex-start"
-                      spacing={1.5}
-                      fontSize="sm"
-                      color={mutedTextColor}
-                      pl={1}
-                    >
-                      {[
-                        "HR-задач и найма;",
-                        "пиара и укрепления бренда;",
-                        "продвижения технологий и инструментов.",
-                      ].map((text) => (
-                        <HStack as="li" key={text} align="center" spacing={2}>
-                          <Box
-                            boxSize="6px"
-                            borderRadius="full"
-                            bg={hackathonBulletColor}
-                            flexShrink={0}
-                          />
-                          <Text>{text}</Text>
-                        </HStack>
-                      ))}
-                    </VStack>
-                    <HStack spacing={2} pt={2}>
-                      <PillBadge colorScheme="green" variant="outline" uppercase={false}>
-                      HR
-                      </PillBadge>
-                      <PillBadge colorScheme="green" variant="outline" uppercase={false}>
-                        Бренд
-                      </PillBadge>
-                      <PillBadge colorScheme="green" variant="outline" uppercase={false}>
-                        Технологии
-                      </PillBadge>
-                    </HStack>
                   </VStack>
                 </Box>
 
                 {/* Совместные челленджи / Weekly */}
                 <Box
                   borderRadius="2xl"
-                  bg={surfaceCardBg}
-                  borderWidth="2px"
+                  borderWidth="1px"
                   borderColor={weeklyBorder}
-                  p={{ base: 4, md: 5 }}
+                  bg={useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)")}
+                  p={{ base: 5, md: 6 }}
                   boxShadow={formatShadow}
-                  transition="none"
-                  position="relative"
-                  overflow="hidden"
-                  _before={{
-                    content: '""',
-                    position: "absolute",
-                    inset: 0,
-                    bgGradient: weeklyBg,
-                    opacity: cardOverlayOpacity,
-                    pointerEvents: "none",
-                  }}
                 >
-                  <VStack align="flex-start" spacing={3} position="relative" zIndex={1}>
+                  <VStack align="flex-start" spacing={3}>
                     <HStack spacing={3} align="center">
                       <Box
                         as="span"
                         boxSize={9}
                         borderRadius="full"
-                        bg="rgba(59,130,246,0.16)"
+                        bg="rgba(59,130,246,0.12)"
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
-                        color="blue.300"
+                        color="blue.400"
                       >
                         <Icon as={FaCalendarAlt} boxSize={5} aria-hidden="true" />
                       </Box>
                       <VStack align="flex-start" spacing={1}>
                         <Heading as="h3" size="sm">
-                          Совместные челленджи и Weekly-задачи
+                          Совместные челленджи и Weekly‑задачи
                         </Heading>
                         <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
                           Weekly и челленджи
                         </PillBadge>
                       </VStack>
                     </HStack>
-                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.7}>
-                      Регулярные задачи недели с вашим брендингом: продукт появляется в
-                      контексте практики и решений участников.
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Регулярные задачи недели с вашим брендингом: продукт появляется в реальных
+                      решениях участников, а не в баннерах.
                     </Text>
-                    <Text fontWeight="semibold" fontSize="sm" mt={2}>
-                      Входит:
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Формат подходит, когда важно постоянное присутствие и вовлечение, а не один
+                      большой ивент.
                     </Text>
-                    <VStack
-                      as="ul"
-                      align="flex-start"
-                      spacing={1.5}
-                      fontSize="sm"
-                      color={mutedTextColor}
-                      pl={1}
-                    >
-                      {[
-                        "задача недели с логотипом компании;",
-                        "упоминание в Weekly-диджесте;",
-                        "ссылка на продукт;",
-                        "обзор решений и лучшие разборы.",
-                      ].map((text) => (
-                        <HStack as="li" key={text} align="center" spacing={2}>
-                          <Box
-                            boxSize="6px"
-                            borderRadius="full"
-                            bg={weeklyBulletColor}
-                            flexShrink={0}
-                          />
-                          <Text>{text}</Text>
-                        </HStack>
-                      ))}
-                    </VStack>
-                    <HStack spacing={2} pt={2}>
-                      <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
-                        Engagement
-                      </PillBadge>
-                      <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
-                        Product
-                      </PillBadge>
-                    </HStack>
                   </VStack>
                 </Box>
 
                 {/* Интеграции в материалы */}
                 <Box
                   borderRadius="2xl"
-                  bg={surfaceCardBg}
-                  borderWidth="2px"
+                  borderWidth="1px"
                   borderColor={materialsBorder}
-                  p={{ base: 4, md: 5 }}
+                  bg={useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)")}
+                  p={{ base: 5, md: 6 }}
                   boxShadow={formatShadow}
-                  transition="none"
-                  position="relative"
-                  overflow="hidden"
-                  _before={{
-                    content: '""',
-                    position: "absolute",
-                    inset: 0,
-                    bgGradient: materialsBg,
-                    opacity: cardOverlayOpacity,
-                    pointerEvents: "none",
-                  }}
                 >
-                  <VStack align="flex-start" spacing={3} position="relative" zIndex={1}>
+                  <VStack align="flex-start" spacing={3}>
                     <HStack spacing={3} align="center">
                       <Box
                         as="span"
                         boxSize={9}
                         borderRadius="full"
-                        bg="rgba(168,85,247,0.18)"
+                        bg="rgba(168,85,247,0.12)"
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
@@ -1020,91 +736,33 @@ const PartnersPage = () => {
                         </PillBadge>
                       </VStack>
                     </HStack>
-                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.7}>
-                      Нативные интеграции в уроки, гайды и практические материалы: продукт
-                      становится частью примеров и решений.
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Уроки, гайды и практические материалы, где продукт встроен в код и примеры, а
+                      не стоит отдельным рекламным блоком.
                     </Text>
-                    <VStack
-                      as="ul"
-                      align="flex-start"
-                      spacing={1.5}
-                      fontSize="sm"
-                      color={mutedTextColor}
-                      pl={1}
-                    >
-                      {[
-                        "блок «Материал совместно с …»;",
-                        "добавление ссылки на продукт;",
-                        "демонстрация продукта в примерах и гайдах.",
-                      ].map((text) => (
-                        <HStack as="li" key={text} align="center" spacing={2}>
-                          <Box
-                            boxSize="6px"
-                            borderRadius="full"
-                            bg={materialsBulletColor}
-                            flexShrink={0}
-                          />
-                          <Text>{text}</Text>
-                        </HStack>
-                      ))}
-                    </VStack>
-                    <Text fontWeight="semibold" fontSize="sm" mt={2}>
-                      Эффективно для:
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Подходит для библиотек, сервисов и dev‑tools, которым важно показать «как это
+                      работает» на реальном сценарии.
                     </Text>
-                    <VStack
-                      as="ul"
-                      align="flex-start"
-                      spacing={1.5}
-                      fontSize="sm"
-                      color={mutedTextColor}
-                      pl={1}
-                    >
-                      {[
-                        "библиотек;",
-                        "сервисов;",
-                        "dev-tools и инфраструктурных инструментов.",
-                      ].map((text) => (
-                        <HStack as="li" key={text} align="center" spacing={2}>
-                          <Box
-                            boxSize="6px"
-                            borderRadius="full"
-                            bg={materialsBulletColor}
-                            flexShrink={0}
-                          />
-                          <Text>{text}</Text>
-                        </HStack>
-                      ))}
-                    </VStack>
                   </VStack>
                 </Box>
 
                 {/* Партнёрские статьи и блог */}
                 <Box
                   borderRadius="2xl"
-                  bg={surfaceCardBg}
-                  borderWidth="2px"
+                  borderWidth="1px"
                   borderColor={articlesBorder}
-                  p={{ base: 4, md: 5 }}
+                  bg={useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)")}
+                  p={{ base: 5, md: 6 }}
                   boxShadow={formatShadow}
-                  transition="none"
-                  position="relative"
-                  overflow="hidden"
-                  _before={{
-                    content: '""',
-                    position: "absolute",
-                    inset: 0,
-                    bgGradient: articlesBg,
-                    opacity: cardOverlayOpacity,
-                    pointerEvents: "none",
-                  }}
                 >
-                  <VStack align="flex-start" spacing={3} position="relative" zIndex={1}>
+                  <VStack align="flex-start" spacing={3}>
                     <HStack spacing={3} align="center">
                       <Box
                         as="span"
                         boxSize={9}
                         borderRadius="full"
-                        bg="rgba(249,115,22,0.18)"
+                        bg="rgba(249,115,22,0.12)"
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
@@ -1116,66 +774,38 @@ const PartnersPage = () => {
                         <Heading as="h3" size="sm">
                           Партнёрские статьи и блог
                         </Heading>
-                      <PillBadge colorScheme="yellow" variant="outline" uppercase={false}>
+                        <PillBadge colorScheme="yellow" variant="outline" uppercase={false}>
                           Медиа и контент
                         </PillBadge>
                       </VStack>
                     </HStack>
-                    <VStack
-                      as="ul"
-                      align="flex-start"
-                      spacing={1.5}
-                      fontSize="sm"
-                      color={mutedTextColor}
-                      pl={1}
-                    >
-                      {[
-                        "публикация статьи и обзор технологий;",
-                        "брендирование поста;",
-                        "реакции и звёздочки от комьюнити;",
-                        "кросс-постинг в соцсетях.",
-                      ].map((text) => (
-                        <HStack as="li" key={text} align="center" spacing={2}>
-                          <Box
-                            boxSize="6px"
-                            borderRadius="full"
-                            bg={articlesBulletColor}
-                            flexShrink={0}
-                          />
-                          <Text>{text}</Text>
-                        </HStack>
-                      ))}
-                    </VStack>
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Статья или обзор технологий на AIFFA с вашим брендингом, примерами и живыми
+                      реакциями от сообщества.
+                    </Text>
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Подходит, когда важно объяснить продукт словами, показать экспертизу и собрать
+                      социальное доказательство.
+                    </Text>
                   </VStack>
                 </Box>
 
                 {/* Поддержка авторов и гранты */}
                 <Box
                   borderRadius="2xl"
-                  bg={surfaceCardBg}
-                  borderWidth="2px"
+                  borderWidth="1px"
                   borderColor={grantsBorder}
-                  p={{ base: 4, md: 5 }}
+                  bg={useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)")}
+                  p={{ base: 5, md: 6 }}
                   boxShadow={formatShadow}
-                  transition="none"
-                  position="relative"
-                  overflow="hidden"
-                  _before={{
-                    content: '""',
-                    position: "absolute",
-                    inset: 0,
-                    bgGradient: grantsBg,
-                    opacity: cardOverlayOpacity,
-                    pointerEvents: "none",
-                  }}
                 >
-                  <VStack align="flex-start" spacing={3} position="relative" zIndex={1}>
+                  <VStack align="flex-start" spacing={3}>
                     <HStack spacing={3} align="center">
                       <Box
                         as="span"
                         boxSize={9}
                         borderRadius="full"
-                        bg="rgba(236,72,153,0.2)"
+                        bg="rgba(236,72,153,0.12)"
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
@@ -1187,43 +817,196 @@ const PartnersPage = () => {
                         <Heading as="h3" size="sm">
                           Поддержка авторов и гранты
                         </Heading>
-                      <PillBadge colorScheme="red" variant="outline" uppercase={false}>
+                        <PillBadge colorScheme="red" variant="outline" uppercase={false}>
                           Гранты и авторы
                         </PillBadge>
                       </VStack>
                     </HStack>
-                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.7}>
-                      Формат для поддержки авторов, задач и образовательных серий.
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Формат, в котором вы поддерживаете авторов, образовательные серии и задачи,
+                      помогая развивать экосистему вокруг продукта.
                     </Text>
-                    <VStack
-                      as="ul"
-                      align="flex-start"
-                      spacing={1.5}
-                      fontSize="sm"
-                      color={mutedTextColor}
-                      pl={1}
-                    >
-                      {[
-                        "спонсировать выпуск серии материалов;",
-                        "выделить грант авторам или участникам;",
-                        "выступить ментором серии задач или челленджа.",
-                      ].map((text) => (
-                        <HStack as="li" key={text} align="center" spacing={2}>
-                          <Box
-                            boxSize="6px"
-                            borderRadius="full"
-                            bg={grantsBulletColor}
-                            flexShrink={0}
-                          />
-                          <Text>{text}</Text>
-                        </HStack>
-                      ))}
-                    </VStack>
+                    <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Можно финансировать выпуски, выделять гранты и подключать менторов со своей
+                      стороны.
+                    </Text>
                   </VStack>
                 </Box>
               </SimpleGrid>
+
+              {/* Пакеты по уровню вовлечения */}
+              <Box
+                w="full"
+                zIndex={100}
+                textAlign="center"
+              >
+                <BusinessWorkshopIcon />
+                <Heading as="h3" size="sm" letterSpacing="-0.02em">
+                  Пакеты по уровню вовлечения
+                </Heading>
+                <Text fontSize="xs" color={mutedTextColor} mt={1}>
+                  Примеры форматов: финальный scope и стоимость обсуждаем индивидуально под вашу задачу.
+                </Text>
+                <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, md: 4 }} mt={3}>
+                  <Box
+                    borderRadius="xl"
+                    borderWidth="1px"
+                    borderColor={useColorModeValue("blue.200", "blue.500")}
+                    bg={surfaceCardBg}
+                    p={{ base: 3, md: 4 }}
+                    boxShadow={{ base: "sm", md: "md" }}
+                    h="100%"
+                  >
+                    <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
+                      Lite — задачи недели
+                    </PillBadge>
+                    <Text mt={2} fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Серия Weekly‑задач с вашим логотипом и продуктом в контексте практики. Хорошо
+                      подходит для пилота и проверки гипотезы.
+                    </Text>
+                  </Box>
+
+                  <Box
+                    borderRadius="xl"
+                    borderWidth="1px"
+                    borderColor={useColorModeValue("green.200", "green.500")}
+                    bg={surfaceCardBg}
+                    p={{ base: 3, md: 4 }}
+                    boxShadow={{ base: "sm", md: "md" }}
+                    h="100%"
+                  >
+                    <PillBadge colorScheme="green" variant="outline" uppercase={false}>
+                      Pro — хакатон
+                    </PillBadge>
+                    <Text mt={2} fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Онлайн‑ или офлайн‑хакатон под вашу задачу: команды собирают решения,
+                      а вы получаете прототипы, фидбек и пул кандидатов.
+                    </Text>
+                  </Box>
+
+                  <Box
+                    borderRadius="xl"
+                    borderWidth="1px"
+                    borderColor={useColorModeValue("purple.200", "purple.500")}
+                    bg={surfaceCardBg}
+                    p={{ base: 3, md: 4 }}
+                    boxShadow={{ base: "sm", md: "md" }}
+                    h="100%"
+                  >
+                    <PillBadge colorScheme="purple" variant="outline" uppercase={false}>
+                      Full — проект + менторы + пиар
+                    </PillBadge>
+                    <Text mt={2} fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+                      Долгий формат: проект или серия задач с вашими менторами, интеграцией в
+                      материалы и освещением в комьюнити и соцсетях.
+                    </Text>
+                  </Box>
+                </SimpleGrid>
+                <Text fontSize="xs" color={mutedTextColor} mt={{ base: 3, md: 4 }}>
+                  Цены формируются индивидуально и зависят от масштаба, формата и задач партнёрства.
+                </Text>
+              </Box>
             </VStack>
           </VStack>
+
+          {/* Как проходит партнёрство */}
+          <Box as="section" aria-label="Как проходит партнёрство" zIndex={100}>
+            <VStack align="center" spacing={{ base: 4, md: 5 }}>
+              <Heading as="h2" size="md" letterSpacing="-0.02em">
+                Как проходит партнёрство
+              </Heading>
+              <Text align="center" fontSize="sm" color={mutedTextColor} maxW={{ base: "100%", md: "720px" }}>
+                Делаем процесс прозрачным: на старте вы формулируете задачу, на финише — получаете
+                отчёт с результатами и следующими шагами.
+              </Text>
+
+              {/* Desktop / tablet steps (горизонтально) */}
+              <HStack
+                spacing={6}
+                align="flex-start"
+                w="full"
+                display={{ base: "none", md: "flex" }}
+              >
+                {[
+                  "Вы рассказываете задачу и продукт",
+                  "Мы собираем формат под ваши цели",
+                  "Запускаем хакатон / Weekly / интеграцию",
+                  "Вы получаете отчёт, решения и метрики",
+                ].map((title, index) => (
+                  <VStack key={title} align="flex-start" spacing={2} flex={1}>
+                    <HStack spacing={3} align="center">
+                      <Box
+                        boxSize={9}
+                        borderRadius="full"
+                        bg={stepNumberBg}
+                        borderWidth="1px"
+                        borderColor={stepLineColor}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        color={stepNumberColor}
+                        fontWeight="semibold"
+                        fontSize="sm"
+                        flexShrink={0}
+                      >
+                        {index + 1}
+                      </Box>
+                      <Text fontWeight="semibold" fontSize="sm">
+                        {title}
+                      </Text>
+                    </HStack>
+                  </VStack>
+                ))}
+              </HStack>
+
+              {/* Mobile steps (вертикально) */}
+              <VStack
+                align="flex-start"
+                spacing={3}
+                w="full"
+                display={{ base: "flex", md: "none" }}
+              >
+                {[
+                  "Вы рассказываете задачу и продукт",
+                  "Мы собираем формат под ваши цели",
+                  "Запускаем хакатон / Weekly / интеграцию",
+                  "Вы получаете отчёт, решения и метрики",
+                ].map((title, index) => (
+                  <HStack key={title} align="flex-start" spacing={3} w="full">
+                    <VStack spacing={1} align="center">
+                      <Box
+                        boxSize={8}
+                        borderRadius="full"
+                        bg={stepNumberBg}
+                        borderWidth="1px"
+                        borderColor={stepLineColor}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        color={stepNumberColor}
+                        fontWeight="semibold"
+                        fontSize="xs"
+                        flexShrink={0}
+                      >
+                        {index + 1}
+                      </Box>
+                      {index < 3 && (
+                        <Box
+                          w="2px"
+                          flex={1}
+                          bg={stepLineColor}
+                        />
+                      )}
+                    </VStack>
+                    <Text fontSize="sm" color={mutedTextColor}>
+                      {title}
+                    </Text>
+                  </HStack>
+                ))}
+              </VStack>
+            </VStack>
+          </Box>
+
         </VStack>
       </Box>
     </Box>

@@ -6,6 +6,7 @@ import EarlyAccessSection from "../EarlyAccessSection/EarlyAccessSection";
 import BrandFitSection from "../BrandFitSection/BrandFitSection";
 import FormatsSection from "../FormatsSection/FormatsSection";
 import HowItWorksSection from "../HowItWorksSection/HowItWorksSection";
+import FaqSection from "../FaqSection/FaqSection";
 
 const PartnersScreen: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const PartnersScreen: React.FC = () => {
           <BrandFitSection />
           <FormatsSection />
           <HowItWorksSection />
+          <FaqSection />
         </VStack>
       </Box>
     </Box>

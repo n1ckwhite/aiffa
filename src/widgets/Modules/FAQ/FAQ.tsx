@@ -18,7 +18,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
 
   return (
     <Box>
-      <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto">
+      <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto" zIndex={100}>
         <HStack mb={2} spacing={3} color={faqHeadingColor} align="center">
           <Icon as={QuestionOutlineIcon} />
           <Heading as="h2" size="md" letterSpacing="wider">

@@ -35,6 +35,11 @@ export const metadata: Metadata = {
     description:
       "Практическая платформа для развития навыков JavaScript и фронтенда.",
   },
+  icons: {
+    icon: "/icons/icon.svg",
+    shortcut: "/icons/favicon.ico",
+    apple: "/icons/apple-touch-icon.png",
+  },
   manifest: "/manifest.json",
 };
 
@@ -101,7 +106,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
               "@type": "Organization",
               url: SITE_URL,
               name: "AIFFA",
-              logo: `${SITE_URL}/logo512.png`
+              logo: `${SITE_URL}/icons/icon.svg`
             })
           }}
         />

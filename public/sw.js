@@ -3,7 +3,13 @@
 const CACHE_NAME = "aiffa-pwa-v1";
 // Кэшируем только статические ассеты, без HTML,
 // чтобы сервер всегда видел актуальные куки (в том числе тему).
-const APP_SHELL = ["/logo192.png", "/logo512.png", "/manifest.json"];
+const APP_SHELL = [
+  "/manifest.json",
+  "/icons/android-chrome-192x192.png",
+  "/icons/android-chrome-512x512.png",
+  "/icons/apple-touch-icon.png",
+  "/icons/icon.svg"
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

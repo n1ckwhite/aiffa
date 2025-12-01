@@ -1,6 +1,6 @@
 import type React from "react";
 
-export type PillBadgeColor = "blue" | "purple" | "yellow" | "green" | "red" | "gray";
+export type PillBadgeColor = "blue" | "purple" | "yellow" | "green" | "red" | "gray" | "orange";
 
 export type PillBadgeVariant = "outline" | "solid";
 

@@ -6,6 +6,7 @@ import PillBadge from "shared/ui/PillBadge";
 import { TelegramIcon } from "@/widgets/Footer/icons/Telegram";
 import { MailIcon } from "@/widgets/Footer/icons/Mail";
 import { FaHandshake } from "react-icons/fa6";
+import { FaUsers, FaCode, FaGraduationCap, FaStar, FaHeart, FaPuzzlePiece, FaRocket, FaInfinity } from "react-icons/fa";
 import { BusinessAnalystIcon } from "@/shared/icons/components-icon";
 
 const PartnersPage = () => {
@@ -228,26 +229,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <rect
-                          x="4"
-                          y="4"
-                          width="16"
-                          height="16"
-                          rx="4"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M8.5 12.5 11 15l4.5-5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaRocket} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>Weekly-задачи, проекты и хакатоны.</Text>
                   </HStack>
@@ -264,34 +246,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <rect
-                          x="4"
-                          y="4"
-                          width="16"
-                          height="16"
-                          rx="4"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M9 9.5 11.5 12 9 14.5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M15 9.5 12.5 12 15 14.5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaCode} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>Редактор кода в браузере с VSCode-опытом.</Text>
                   </HStack>
@@ -308,16 +263,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <path
-                          d="M4 7h16M6 11h12M8 15h8"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaUsers} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>Мероприятия: консультации, знакомства, встречи и Q&amp;A-сессии.</Text>
                   </HStack>
@@ -334,16 +280,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <path
-                          d="M12 4.5 13.9 9l4.6.4-3.5 3 1 4.6L12 14.8 8 17l1-4.6-3.5-3L10 9l2-4.5Z"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaStar} boxSize={3.5} aria-hidden="true" />
                     </Box>
                   <Text>Честные реакции: звёзды без дизлайков и токсичности.</Text>
                   </HStack>
@@ -394,9 +331,6 @@ const PartnersPage = () => {
                 <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
                   Задачи бренда
                 </PillBadge>
-                <Text fontSize="xs" color={mutedTextColor}>
-                  Кому подойдёт партнёрство с AIFFA
-                </Text>
                 <Heading as="h2" size="md" letterSpacing="-0.02em">
                   Кому и зачем подходит спонсорство
                 </Heading>
@@ -426,24 +360,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="6"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <circle cx="12" cy="12" r="2" fill="currentColor" />
-                        <path
-                          d="M12 4V3M4 12H3M21 12h-1M12 21v-1"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </Box>
+                      <Icon as={FaUsers} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>
                       привлекать разработчиков и работать с IT-аудиторией;
@@ -462,16 +379,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <path
-                          d="M6 16 11 11 14 13 18 7"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaCode} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>
                       продвигать свои инструменты, технологии и platform-инфраструктуру;
@@ -490,32 +398,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <circle
-                          cx="8"
-                          cy="10"
-                          r="2.5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <circle
-                          cx="16"
-                          cy="10"
-                          r="2.5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M5.5 17a3.5 3.5 0 0 1 7 0M11.5 17a3.5 3.5 0 0 1 7 0"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaGraduationCap} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>
                       находить талантливых разработчиков через реальные задачи;
@@ -534,16 +417,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <path
-                          d="M12 5.5 13.9 9l3.6.4-2.7 2.4.8 3.7L12 14.3 8.4 15.5l.8-3.7L6.5 9.4 10.1 9 12 5.5Z"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaStar} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>
                       повышать узнаваемость бренда в профессиональной среде;
@@ -562,16 +436,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <path
-                          d="M7 15l3-4 3 2 4-6"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaHeart} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text>
                       строить долгосрочное отношение через комьюнити и формат практики.
@@ -611,23 +476,14 @@ const PartnersPage = () => {
                       mt={0.5}
                       boxSize={6}
                       borderRadius="full"
-                      bg="blue.500"
+                      bg="cyan.500"
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <path
-                          d="M5 8h14M7 12h10M9 16h6"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaPuzzlePiece} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text lineHeight="1.5">
                       Бренд присутствует в практических задачах и решениях.
@@ -646,16 +502,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <path
-                          d="M5 11 10 16 19 7"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaRocket} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text lineHeight="1.5">
                       Разработчики знакомятся с технологиями на реальных сценариях.
@@ -674,16 +521,7 @@ const PartnersPage = () => {
                       flexShrink={0}
                       color="white"
                     >
-                      <Box as="svg" viewBox="0 0 24 24" boxSize={3.5} aria-hidden="true">
-                        <path
-                          d="M6 9.5C6 7.6 7.6 6 9.5 6c1 0 2 .5 2.5 1.3C12.5 6.5 13.5 6 14.5 6 16.4 6 18 7.6 18 9.5 18 13 12 16 12 16s-6-3-6-6.5Z"
-                          fill="currentColor"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </Box>
+                      <Icon as={FaInfinity} boxSize={3.5} aria-hidden="true" />
                     </Box>
                     <Text lineHeight="1.5">
                       Формируется долгосрочная ассоциация бренда с ростом и обучением.
@@ -1176,34 +1014,6 @@ const PartnersPage = () => {
               </SimpleGrid>
             </VStack>
           </VStack>
-
-          {/* Преимущества платформы */}
-          <Box borderRadius="2xl" bg={surfaceCardBg} p={{ base: 4, md: 6 }}>
-            <VStack align="flex-start" spacing={4}>
-              <Heading as="h2" size="md" letterSpacing="-0.02em">
-                Почему AIFFA
-              </Heading>
-              <VStack
-                as="ul"
-                align="flex-start"
-                spacing={2}
-                fontSize="sm"
-                color={mutedTextColor}
-              >
-                <Text as="li">активная аудитория разработчиков с фокусом на практику;</Text>
-                <Text as="li">
-                  честный и прозрачный формат: реакции в виде звёзд, без токсичных дизлайков;
-                </Text>
-                <Text as="li">открытые материалы и живое комьюнити;</Text>
-                <Text as="li">уникальный формат Weekly-задач и практических челленджей;</Text>
-                <Text as="li">
-                  встроенный редактор кода / VSCode-опыт прямо в браузере;
-                </Text>
-                <Text as="li">современный tech-стек и удобная инфраструктура для партнёров.</Text>
-              </VStack>
-            </VStack>
-          </Box>
-
           {/* Статистика / ранний запуск */}
           <Box borderRadius="2xl" bg={surfaceCardBg} p={{ base: 4, md: 5 }}>
             <VStack align="flex-start" spacing={3}>

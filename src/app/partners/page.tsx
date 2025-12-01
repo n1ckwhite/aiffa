@@ -319,21 +319,29 @@ const PartnersPage = () => {
           >
             <Stack
               direction={{ base: "column", md: "row" }}
-              align="flex-start"
+              align={{ base: "stretch", md: "flex-start" }}
               spacing={{ base: 4, md: 8 }}
             >
               <VStack
                 align="flex-start"
                 spacing={3}
                 flex={3}
+                w="full"
                 textAlign="left"
               >
-                <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
-                  Задачи бренда
-                </PillBadge>
-                <Heading as="h2" size="md" letterSpacing="-0.02em">
-                  Кому и зачем подходит спонсорство
-                </Heading>
+                <Box w="full" textAlign={{ base: "center", md: "left" }}>
+                  <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
+                    Задачи бренда
+                  </PillBadge>
+                  <Heading
+                    as="h2"
+                    size="md"
+                    letterSpacing="-0.02em"
+                    mt={2}
+                  >
+                    Кому и зачем подходит спонсорство
+                  </Heading>
+                </Box>
                 <Text fontSize="sm" color={mutedTextColor}>
                   Спонсорство AIFFA подходит компаниям, которые хотят:
                 </Text>

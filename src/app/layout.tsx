@@ -71,7 +71,10 @@ const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="ru" suppressHydrationWarning>
       <head>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <ColorModeScript
+          type="cookie"
+          initialColorMode={theme.config.initialColorMode}
+        />
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger

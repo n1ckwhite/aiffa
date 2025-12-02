@@ -5,108 +5,194 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
+import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
+import PillBadge from "@/shared/ui/PillBadge";
+
+const communityGlow = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.45);
+  }
+  60% {
+    box-shadow: 0 0 0 18px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+`;
+
+const communityCardFloat = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
 
 const HackathonsCommunityGrowthSection: React.FC = () => {
   const { sectionCardBg, cardBorderColor, mutedTextColor } = useHackathonsColors();
+  const communityBgGradient = useColorModeValue(
+    "linear(to-br, blue.50, purple.50)",
+    "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.95))"
+  );
 
   return (
     <Box
       as="section"
       aria-labelledby="hackathons-community-growth-title"
     >
-      <Stack spacing={{ base: 4, md: 6 }}>
-        <Box>
-          <Heading
-            id="hackathons-community-growth-title"
-            as="h2"
-            size="lg"
-          >
-            Рост коммьюнити AIFFA
-          </Heading>
-          <Text
-            mt={3}
-            fontSize={{ base: "md", md: "lg" }}
-            color={mutedTextColor}
-          >
-            Живое сообщество и регулярная активность создают среду, в которой
-            хочется расти и возвращаться к задачам и хакатонам.
-          </Text>
-        </Box>
-
-        <SimpleGrid
-          columns={{ base: 1, sm: 3 }}
-          spacing={{ base: 4, md: 6 }}
-          mt={{ base: 2, md: 4 }}
+      <Box
+        position="relative"
+        overflow="hidden"
+        bgGradient={communityBgGradient}
+        borderRadius="3xl"
+        borderWidth="1px"
+        borderColor={cardBorderColor}
+        px={{ base: 4, md: 8 }}
+        py={{ base: 5, md: 8 }}
+        animation={`${communityGlow} 7s ease-out infinite`}
+      >
+        <Box
+          position="absolute"
+          inset="-40px"
+          opacity={0.55}
+          filter="blur(42px)"
+          pointerEvents="none"
+          zIndex={0}
         >
           <Box
-            bg={sectionCardBg}
-            borderRadius="2xl"
-            borderWidth="1px"
-            borderColor={cardBorderColor}
-            p={{ base: 4, md: 5 }}
-          >
-            <Text
-              fontSize={{ base: "2xl", md: "3xl" }}
-              fontWeight="bold"
+            position="absolute"
+            top="-10%"
+            left="-6%"
+            w={{ base: "220px", md: "260px" }}
+            h={{ base: "220px", md: "260px" }}
+            bgGradient="radial(teal.300, transparent)"
+          />
+          <Box
+            position="absolute"
+            bottom="-14%"
+            right="-8%"
+            w={{ base: "260px", md: "320px" }}
+            h={{ base: "260px", md: "320px" }}
+            bgGradient="radial(blue.500, transparent)"
+          />
+        </Box>
+
+        <Stack
+          spacing={{ base: 4, md: 6 }}
+          align="center"
+          position="relative"
+          zIndex={1}
+        >
+          <Box textAlign="center" maxW={{ base: "full", md: "640px" }}>
+            <Box mb={3}>
+              <PillBadge colorScheme="blue" variant="outline" uppercase>
+                Рост коммьюнити
+              </PillBadge>
+            </Box>
+            <Heading
+              id="hackathons-community-growth-title"
+              as="h2"
+              fontSize={{ base: "xl", md: "2xl" }}
             >
-              120+
-            </Text>
+              Рост коммьюнити AIFFA
+            </Heading>
             <Text
-              mt={1}
-              fontSize={{ base: "sm", md: "md" }}
+              mt={3}
+              fontSize={{ base: "md", md: "lg" }}
               color={mutedTextColor}
             >
-              активных участников платформы
+              Живое сообщество и регулярная активность создают среду, в
+              которой хочется расти и возвращаться к задачам и хакатонам.
             </Text>
           </Box>
 
-          <Box
-            bg={sectionCardBg}
-            borderRadius="2xl"
-            borderWidth="1px"
-            borderColor={cardBorderColor}
-            p={{ base: 4, md: 5 }}
+          <SimpleGrid
+            columns={{ base: 1, sm: 3 }}
+            spacing={{ base: 4, md: 6 }}
+            mt={{ base: 2, md: 4 }}
+            w="full"
           >
-            <Text
-              fontSize={{ base: "2xl", md: "3xl" }}
-              fontWeight="bold"
+            <Box
+              bg={sectionCardBg}
+              borderRadius="2xl"
+              borderWidth="1px"
+              borderColor={cardBorderColor}
+              p={{ base: 4, md: 5 }}
+              textAlign="center"
+              animation={`${communityCardFloat} 18s ease-in-out infinite`}
             >
-              40+
-            </Text>
-            <Text
-              mt={1}
-              fontSize={{ base: "sm", md: "md" }}
-              color={mutedTextColor}
-            >
-              решений задач недели
-            </Text>
-          </Box>
+              <Text
+                fontSize={{ base: "2xl", md: "3xl" }}
+                fontWeight="bold"
+              >
+                120+
+              </Text>
+              <Text
+                mt={1}
+                fontSize={{ base: "sm", md: "md" }}
+                color={mutedTextColor}
+              >
+                активных участников платформы
+              </Text>
+            </Box>
 
-          <Box
-            bg={sectionCardBg}
-            borderRadius="2xl"
-            borderWidth="1px"
-            borderColor={cardBorderColor}
-            p={{ base: 4, md: 5 }}
-          >
-            <Text
-              fontSize={{ base: "2xl", md: "3xl" }}
-              fontWeight="bold"
+            <Box
+              bg={sectionCardBg}
+              borderRadius="2xl"
+              borderWidth="1px"
+              borderColor={cardBorderColor}
+              p={{ base: 4, md: 5 }}
+              textAlign="center"
+              animation={`${communityCardFloat} 20s ease-in-out infinite`}
             >
-              50+
-            </Text>
-            <Text
-              mt={1}
-              fontSize={{ base: "sm", md: "md" }}
-              color={mutedTextColor}
+              <Text
+                fontSize={{ base: "2xl", md: "3xl" }}
+                fontWeight="bold"
+              >
+                40+
+              </Text>
+              <Text
+                mt={1}
+                fontSize={{ base: "sm", md: "md" }}
+                color={mutedTextColor}
+              >
+                решений задач недели
+              </Text>
+            </Box>
+
+            <Box
+              bg={sectionCardBg}
+              borderRadius="2xl"
+              borderWidth="1px"
+              borderColor={cardBorderColor}
+              p={{ base: 4, md: 5 }}
+              textAlign="center"
+              animation={`${communityCardFloat} 22s ease-in-out infinite`}
             >
-              оплаченных поддержек проекта
-            </Text>
-          </Box>
-        </SimpleGrid>
-      </Stack>
+              <Text
+                fontSize={{ base: "2xl", md: "3xl" }}
+                fontWeight="bold"
+              >
+                50+
+              </Text>
+              <Text
+                mt={1}
+                fontSize={{ base: "sm", md: "md" }}
+                color={mutedTextColor}
+              >
+                оплаченных поддержек проекта
+              </Text>
+            </Box>
+          </SimpleGrid>
+        </Stack>
+      </Box>
     </Box>
   );
 };

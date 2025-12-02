@@ -130,7 +130,11 @@ const HackathonsHeroSection: React.FC = () => {
             mt={{ base: 4, md: 8 }}
             align="flex-start"
           >
-            <Box position="relative" display="inline-flex" w={{ base: "100%", md: "auto" }}>
+            <Box
+              position="relative"
+              display="inline-flex"
+              w={{ base: "100%", md: "360px" }}
+            >
               <Box
                 position="absolute"
                 insetX={-4}
@@ -151,15 +155,27 @@ const HackathonsHeroSection: React.FC = () => {
                 href="https://trello.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                colorScheme="blue"
                 size="md"
                 fontSize={{ base: "sm", sm: "md" }}
+                fontWeight="semibold"
                 px={{ base: 4, md: 6 }}
                 py={{ base: 2.5, md: 3 }}
-                w={{ base: "100%", md: "auto" }}
-                maxW={{ base: "100%", md: "360px" }}
+                w={{ base: "100%", md: "360px" }}
                 position="relative"
                 zIndex={1}
+                bgGradient="linear(to-r, blue.600, blue.700)"
+                color="white"
+                transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                _hover={{
+                  bgGradient: "linear(to-r, blue.700, blue.800)",
+                  transform: { base: "none", md: "translateY(-1px)" },
+                  boxShadow: "lg",
+                }}
+                _active={{
+                  bgGradient: "linear(to-r, blue.800, blue.900)",
+                  transform: { base: "none", md: "translateY(0)" },
+                  boxShadow: "md",
+                }}
               >
                 Участвовать в хакатонах
               </Button>
@@ -172,8 +188,7 @@ const HackathonsHeroSection: React.FC = () => {
               fontSize={{ base: "sm", sm: "md" }}
               px={{ base: 4, md: 6 }}
               py={{ base: 2.5, md: 3 }}
-              w={{ base: "100%", md: "auto" }}
-              maxW={{ base: "100%", md: "360px" }}
+              w={{ base: "100%", md: "360px" }}
             >
               Оформить партнёрство
             </Button>

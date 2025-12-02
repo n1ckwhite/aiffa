@@ -35,6 +35,21 @@ const communityCardFloat = keyframes`
   }
 `;
 
+const communityMetricPulse = keyframes`
+  0% {
+    transform: translateY(0) scale(1);
+    text-shadow: 0 0 0 rgba(56, 189, 248, 0.0);
+  }
+  50% {
+    transform: translateY(-1px) scale(1.04);
+    text-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    text-shadow: 0 0 0 rgba(56, 189, 248, 0.0);
+  }
+`;
+
 const HackathonsCommunityGrowthSection: React.FC = () => {
   const { sectionCardBg, cardBorderColor, mutedTextColor } = useHackathonsColors();
   const communityBgGradient = useColorModeValue(
@@ -131,6 +146,10 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
               <Text
                 fontSize={{ base: "2xl", md: "3xl" }}
                 fontWeight="bold"
+                bgGradient="linear(to-r, teal.300, blue.400)"
+                _dark={{ bgGradient: "linear(to-r, teal.200, blue.300)" }}
+                bgClip="text"
+                animation={`${communityMetricPulse} 7s ease-in-out infinite`}
               >
                 120+
               </Text>
@@ -155,6 +174,10 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
               <Text
                 fontSize={{ base: "2xl", md: "3xl" }}
                 fontWeight="bold"
+                bgGradient="linear(to-r, teal.300, blue.400)"
+                _dark={{ bgGradient: "linear(to-r, teal.200, blue.300)" }}
+                bgClip="text"
+                animation={`${communityMetricPulse} 7s ease-in-out infinite`}
               >
                 40+
               </Text>
@@ -179,6 +202,10 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
               <Text
                 fontSize={{ base: "2xl", md: "3xl" }}
                 fontWeight="bold"
+                bgGradient="linear(to-r, teal.300, blue.400)"
+                _dark={{ bgGradient: "linear(to-r, teal.200, blue.300)" }}
+                bgClip="text"
+                animation={`${communityMetricPulse} 7s ease-in-out infinite`}
               >
                 50+
               </Text>

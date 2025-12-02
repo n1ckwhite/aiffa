@@ -3,6 +3,8 @@ import {
   Box,
   Button,
   Heading,
+  HStack,
+  Icon,
   Stack,
   Text,
   useColorModeValue,
@@ -182,11 +184,71 @@ const HackathonsHeroSection: React.FC = () => {
           >
             На хакатонах AIFFA вы:
           </Text>
-          <Stack spacing={2} fontSize={{ base: "sm", md: "md" }}>
-            <Text>— решаете реальные продуктовые задачи;</Text>
-            <Text>— работаете в команде с другими разработчиками;</Text>
-            <Text>— получаете фидбек от менторов и экспертов;</Text>
-            <Text>— добавляете мощный кейс в портфолио.</Text>
+          <Stack spacing={2.5} fontSize={{ base: "sm", md: "md" }}>
+            <HStack align="flex-start" spacing={2.5}>
+              <Icon
+                viewBox="0 0 16 16"
+                boxSize={4}
+                color="green.400"
+                mt={0.5}
+              >
+                <path
+                  fill="currentColor"
+                  d="M6.5 11.4 3.6 8.5l1.1-1.1 1.8 1.8 4.8-4.8 1.1 1.1-5.9 5.9Z"
+                />
+              </Icon>
+              <Text flex="1">
+                решаете реальные продуктовые задачи;
+              </Text>
+            </HStack>
+            <HStack align="flex-start" spacing={2.5}>
+              <Icon
+                viewBox="0 0 16 16"
+                boxSize={4}
+                color="green.400"
+                mt={0.5}
+              >
+                <path
+                  fill="currentColor"
+                  d="M6.5 11.4 3.6 8.5l1.1-1.1 1.8 1.8 4.8-4.8 1.1 1.1-5.9 5.9Z"
+                />
+              </Icon>
+              <Text flex="1">
+                работаете в команде с другими разработчиками;
+              </Text>
+            </HStack>
+            <HStack align="flex-start" spacing={2.5}>
+              <Icon
+                viewBox="0 0 16 16"
+                boxSize={4}
+                color="green.400"
+                mt={0.5}
+              >
+                <path
+                  fill="currentColor"
+                  d="M6.5 11.4 3.6 8.5l1.1-1.1 1.8 1.8 4.8-4.8 1.1 1.1-5.9 5.9Z"
+                />
+              </Icon>
+              <Text flex="1">
+                получаете фидбек от менторов и экспертов;
+              </Text>
+            </HStack>
+            <HStack align="flex-start" spacing={2.5}>
+              <Icon
+                viewBox="0 0 16 16"
+                boxSize={4}
+                color="green.400"
+                mt={0.5}
+              >
+                <path
+                  fill="currentColor"
+                  d="M6.5 11.4 3.6 8.5l1.1-1.1 1.8 1.8 4.8-4.8 1.1 1.1-5.9 5.9Z"
+                />
+              </Icon>
+              <Text flex="1">
+                добавляете мощный кейс в портфолио.
+              </Text>
+            </HStack>
           </Stack>
         </Box>
       </Stack>

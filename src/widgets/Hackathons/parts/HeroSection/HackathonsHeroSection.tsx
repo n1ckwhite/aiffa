@@ -94,7 +94,11 @@ const HackathonsHeroSection: React.FC = () => {
         position="relative"
         zIndex={1}
       >
-        <Box flex="1" maxW={{ base: "full", md: "60%" }}>
+        <Box
+          flex="1"
+          maxW={{ base: "full", md: "60%" }}
+          textAlign={{ base: "center", md: "left" }}
+        >
           <Box mb={3}>
             <PillBadge colorScheme="blue" variant="solid" uppercase>
               Прокачка в реальных задачах

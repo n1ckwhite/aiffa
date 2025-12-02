@@ -8,6 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
+import BusinessAnalyticsIcon from "@/shared/icons/components-icon/BusinessAnatyticsIcon";
 
 const HackathonsHowItWorksSection: React.FC = () => {
   const {
@@ -68,6 +69,7 @@ const HackathonsHowItWorksSection: React.FC = () => {
       as="section"
       aria-label="Как проходит хакатон AIFFA"
     >
+      <BusinessAnalyticsIcon/>
       <Stack spacing={{ base: 4, md: 6 }} align="center">
         <Box maxW={{ base: "full", md: "720px" }} textAlign="center">
           <Heading as="h2" size="lg">

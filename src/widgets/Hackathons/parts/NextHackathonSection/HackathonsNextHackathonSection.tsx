@@ -53,6 +53,30 @@ const shimmer = keyframes`
   }
 `;
 
+const floatBlobA = keyframes`
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(12px, -18px, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+`;
+
+const floatBlobB = keyframes`
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-16px, 12px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+`;
+
 const getCountdownState = (): CountdownState => {
   const now = new Date().getTime();
   const diff = HACKATHON_START.getTime() - now;
@@ -119,6 +143,34 @@ const HackathonsNextHackathonSection: React.FC = () => {
       >
         <Box
           position="absolute"
+          inset="-40px"
+          opacity={0.65}
+          filter="blur(48px)"
+          pointerEvents="none"
+          zIndex={0}
+        >
+          <Box
+            position="absolute"
+            top={{ base: "45%", md: "20%" }}
+            left="-5%"
+            w={{ base: "220px", md: "260px" }}
+            h={{ base: "220px", md: "260px" }}
+            bgGradient="radial(blue.400, transparent)"
+            animation={`${floatBlobA} 18s ease-in-out infinite`}
+          />
+          <Box
+            position="absolute"
+            bottom="-10%"
+            right="-5%"
+            w={{ base: "260px", md: "320px" }}
+            h={{ base: "260px", md: "320px" }}
+            bgGradient="radial(purple.400, transparent)"
+            animation={`${floatBlobB} 22s ease-in-out infinite`}
+          />
+        </Box>
+
+        <Box
+          position="absolute"
           top="0"
           left="-40%"
           h="3px"
@@ -126,90 +178,108 @@ const HackathonsNextHackathonSection: React.FC = () => {
           bgGradient="linear(to-r, transparent, whiteAlpha.800, transparent)"
           opacity={0.8}
           animation={`${shimmer} 6s ease-in-out infinite`}
+          zIndex={1}
         />
         <Stack
-          spacing={{ base: 4, md: 5 }}
-          align="flex-start"
+          direction={{ base: "column", md: "row" }}
+          spacing={{ base: 6, md: 8 }}
+          align={{ base: "flex-start", md: "center" }}
+          position="relative"
+          zIndex={2}
         >
-          <SuccessStoriesLottieIcon />
-          <Box>
-            <Text
-              fontSize="sm"
-              textTransform="uppercase"
-              letterSpacing="0.08em"
-              color={mutedTextColor}
-              mb={1}
-            >
-              Ближайший хакатон
-            </Text>
-            <Heading
-              id="hackathons-next-title"
-              as="h2"
-              size={isMobile ? "md" : "lg"}
-            >
-              AIFFA Hackathon #1 — Задача старта
-            </Heading>
-          </Box>
-
           <Stack
-            spacing={2}
-            fontSize={{ base: "sm", md: "md" }}
-            color={mutedTextColor}
+            spacing={{ base: 4, md: 5 }}
+            align="flex-start"
+            flex="1"
           >
-            <Stack direction="row" align="center" spacing={2}>
-              <Box as={CalendarIcon} color="blue.400" boxSize={4} />
-              <Text as="span" fontStyle="italic">
-                Май 2025
+            <Box>
+              <Text
+                fontSize="sm"
+                textTransform="uppercase"
+                letterSpacing="0.08em"
+                color={mutedTextColor}
+                mb={1}
+              >
+                Ближайший хакатон
               </Text>
+              <Heading
+                id="hackathons-next-title"
+                as="h2"
+                size={isMobile ? "md" : "lg"}
+              >
+                AIFFA Hackathon #1 — Задача старта
+              </Heading>
+            </Box>
+
+            <Stack
+              spacing={2}
+              fontSize={{ base: "sm", md: "md" }}
+              color={mutedTextColor}
+            >
+              <Stack direction="row" align="center" spacing={2}>
+                <Box as={CalendarIcon} color="blue.400" boxSize={4} />
+                <Text as="span" fontStyle="italic">
+                  Май 2025
+                </Text>
+              </Stack>
+              <Stack direction="row" align="center" spacing={2}>
+                <Box as={StarIcon} color="yellow.400" boxSize={4} />
+                <Text as="span" fontStyle="italic">
+                  Призовой фонд: 100&nbsp;000&nbsp;₽
+                </Text>
+              </Stack>
+              <Stack direction="row" align="center" spacing={2}>
+                <Box as={QuestionOutlineIcon} color="purple.300" boxSize={4} />
+                <Text as="span" fontStyle="italic">
+                  Тема: будет объявлена позже
+                </Text>
+              </Stack>
             </Stack>
-            <Stack direction="row" align="center" spacing={2}>
-              <Box as={StarIcon} color="yellow.400" boxSize={4} />
-              <Text as="span" fontStyle="italic">
-                Призовой фонд: 100&nbsp;000&nbsp;₽
-              </Text>
-            </Stack>
-            <Stack direction="row" align="center" spacing={2}>
-              <Box as={QuestionOutlineIcon} color="purple.300" boxSize={4} />
-              <Text as="span" fontStyle="italic">
-                Тема: будет объявлена позже
-              </Text>
-            </Stack>
+
+            <Box mt={{ base: 3, md: 4 }}>
+              {countdown.isStarted ? (
+                <Text
+                  fontSize={{ base: "sm", md: "md" }}
+                  color={mutedTextColor}
+                >
+                  Хакатон уже стартовал — присоединяйтесь к сообществу, чтобы не пропустить
+                  следующий анонс.
+                </Text>
+              ) : (
+                <Text
+                  fontSize={{ base: "sm", md: "md" }}
+                  color={mutedTextColor}
+                >
+                  До старта осталось:{" "}
+                  <Text as="span" fontWeight="semibold">
+                    {countdown.days} д {countdown.hours} ч {countdown.minutes} мин
+                  </Text>
+                  .
+                </Text>
+              )}
+            </Box>
+
+            <Button
+              as="a"
+              href={telegramHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              colorScheme="blue"
+              size="lg"
+              mt={{ base: 4, md: 5 }}
+            >
+              Участвовать
+            </Button>
           </Stack>
 
-          <Box mt={{ base: 3, md: 4 }}>
-            {countdown.isStarted ? (
-              <Text
-                fontSize={{ base: "sm", md: "md" }}
-                color={mutedTextColor}
-              >
-                Хакатон уже стартовал — присоединяйтесь к сообществу, чтобы не пропустить
-                следующий анонс.
-              </Text>
-            ) : (
-              <Text
-                fontSize={{ base: "sm", md: "md" }}
-                color={mutedTextColor}
-              >
-                До старта осталось:{" "}
-                <Text as="span" fontWeight="semibold">
-                  {countdown.days} д {countdown.hours} ч {countdown.minutes} мин
-                </Text>
-                .
-              </Text>
-            )}
-          </Box>
-
-          <Button
-            as="a"
-            href={telegramHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            colorScheme="blue"
-            size="lg"
-            mt={{ base: 4, md: 5 }}
+          <Box
+            flexShrink={0}
+            w={{ base: "100%", md: "260px" }}
+            display="flex"
+            justifyContent={{ base: "center", md: "flex-end" }}
           >
-            Участвовать
-          </Button>
+            <SuccessStoriesLottieIcon />
+          </Box>
         </Stack>
       </Box>
     </Box>

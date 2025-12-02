@@ -14,6 +14,7 @@ const SuccessStoriesLottieIcon: React.FC = () => {
       animationData={sucessStoriesAnimation}
       boxProps={{
         w: { base: "250px", md: "250px" },
+        aspectRatio: 2210 / 1232,
         mx: "auto",
       }}
       fallback={

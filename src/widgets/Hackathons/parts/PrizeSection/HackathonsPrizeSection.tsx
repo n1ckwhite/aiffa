@@ -8,8 +8,62 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
+import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import { FinanceLottieIcon } from "@/shared/icons/components-icon";
+
+const prizeGlow = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(236, 72, 153, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
+  }
+`;
+
+const prizeBlobA = keyframes`
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(18px, -14px, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+`;
+
+const prizeBlobB = keyframes`
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-16px, 18px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+`;
+
+const prizeShimmer = keyframes`
+  0% {
+    transform: translateX(-40%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(150%);
+    opacity: 0;
+  }
+`;
 
 const HackathonsPrizeSection: React.FC = () => {
   const { sectionCardBg, cardBorderColor, mutedTextColor } = useHackathonsColors();
@@ -19,43 +73,102 @@ const HackathonsPrizeSection: React.FC = () => {
       as="section"
       aria-labelledby="hackathons-prize-title"
     >
-        <FinanceLottieIcon />
-      <Stack spacing={{ base: 4, md: 6 }} align="center">
-        <Box textAlign="center">
-          <Badge
-            colorScheme="pink"
-            variant="subtle"
-            borderRadius="full"
-            px={3}
-            py={1}
-            mb={3}
-          >
-            Призовой фонд
-          </Badge>
-          <Heading
-            id="hackathons-prize-title"
-            as="h2"
-            size="lg"
-          >
-            100&nbsp;000&nbsp;₽ — призы для трёх сильнейших команд
-          </Heading>
-          <Text
-            mt={3}
-            fontSize={{ base: "md", md: "lg" }}
-            color={mutedTextColor}
-          >
-            Мы хотим, чтобы участие было не только про опыт и портфолио, но и
-            про заметную награду для команд, которые выложились по максимуму.
-            Помимо денежного приза, победители и призёры получают мерч AIFFA —
-            чтобы хакатон остался с вами не только в резюме, но и в вещах.
-          </Text>
+      <Box
+        position="relative"
+        overflow="hidden"
+        bgGradient="linear(to-br, purple.50, pink.50)"
+        _dark={{
+          bgGradient: "linear(to-br, rgba(76, 29, 149, 0.7), rgba(15, 23, 42, 0.98))",
+        }}
+        borderRadius="3xl"
+        borderWidth="1px"
+        borderColor={cardBorderColor}
+        px={{ base: 5, md: 8 }}
+        py={{ base: 6, md: 8 }}
+        animation={`${prizeGlow} 5s ease-out infinite`}
+      >
+        <Box
+          position="absolute"
+          inset="-40px"
+          opacity={0.6}
+          filter="blur(44px)"
+          pointerEvents="none"
+          zIndex={0}
+        >
+          <Box
+            position="absolute"
+            top={{ base: "55%", md: "25%" }}
+            left="-8%"
+            w={{ base: "220px", md: "260px" }}
+            h={{ base: "220px", md: "260px" }}
+            bgGradient="radial(pink.400, transparent)"
+            animation={`${prizeBlobA} 20s ease-in-out infinite`}
+          />
+          <Box
+            position="absolute"
+            bottom="-12%"
+            right="-6%"
+            w={{ base: "260px", md: "320px" }}
+            h={{ base: "260px", md: "320px" }}
+            bgGradient="radial(purple.500, transparent)"
+            animation={`${prizeBlobB} 24s ease-in-out infinite`}
+          />
         </Box>
 
-        <SimpleGrid
-          columns={{ base: 1, md: 3 }}
+        <Box
+          position="absolute"
+          top="0"
+          left="-40%"
+          h="3px"
+          w="40%"
+          bgGradient="linear(to-r, transparent, whiteAlpha.900, transparent)"
+          opacity={0.9}
+          animation={`${prizeShimmer} 7s ease-in-out infinite`}
+          zIndex={1}
+        />
+
+        <Stack
           spacing={{ base: 4, md: 6 }}
-          mt={{ base: 2, md: 4 }}
+          align="center"
+          position="relative"
+          zIndex={2}
         >
+          <FinanceLottieIcon />
+          <Box textAlign="center">
+            <Badge
+              colorScheme="pink"
+              variant="subtle"
+              borderRadius="full"
+              px={3}
+              py={1}
+              mb={3}
+            >
+              Призовой фонд
+            </Badge>
+            <Heading
+              id="hackathons-prize-title"
+              as="h2"
+              size="lg"
+            >
+              100&nbsp;000&nbsp;₽ — призы для трёх сильнейших команд
+            </Heading>
+            <Text
+              mt={3}
+              fontSize={{ base: "md", md: "lg" }}
+              color={mutedTextColor}
+            >
+              Мы хотим, чтобы участие было не только про опыт и портфолио, но и
+              про заметную награду для команд, которые выложились по максимуму.
+              Помимо денежного приза, победители и призёры получают мерч AIFFA —
+              чтобы хакатон остался с вами не только в резюме, но и в вещах.
+            </Text>
+          </Box>
+
+          <SimpleGrid
+            columns={{ base: 1, md: 3 }}
+            spacing={{ base: 4, md: 6 }}
+            mt={{ base: 2, md: 4 }}
+          >
           <Box
             bg={sectionCardBg}
             borderRadius="2xl"
@@ -163,7 +276,8 @@ const HackathonsPrizeSection: React.FC = () => {
             </Text>
           </Box>
         </SimpleGrid>
-      </Stack>
+        </Stack>
+      </Box>
     </Box>
   );
 };

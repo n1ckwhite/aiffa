@@ -5,7 +5,6 @@ import {
   Heading,
   Stack,
   Text,
-  useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
@@ -38,7 +37,6 @@ const heroAsideFloat = keyframes`
 
 const HackathonsHeroSection: React.FC = () => {
   const { heroAsideBg, mutedTextColor, cardBorderColor } = useHackathonsColors();
-  const isMobile = useBreakpointValue({ base: true, md: false });
   const heroBgGradient = useColorModeValue(
     "linear(to-br, blue.50, whiteAlpha.900)",
     "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.9))"
@@ -104,7 +102,7 @@ const HackathonsHeroSection: React.FC = () => {
           <Heading
             id="hackathons-hero-title"
             as="h1"
-            size={isMobile ? "lg" : "xl"}
+            fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
             lineHeight="short"
           >
             Хакатоны AIFFA: несколько дней, которые меняют карьеру разработчика

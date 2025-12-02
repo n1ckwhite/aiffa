@@ -10,7 +10,12 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { CalendarIcon, StarIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
+import {
+  CalendarIcon,
+  StarIcon,
+  QuestionOutlineIcon,
+  ArrowForwardIcon,
+} from "@chakra-ui/icons";
 import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import { telegramHref } from "../../../Footer/model/links";
@@ -262,17 +267,39 @@ const HackathonsNextHackathonSection: React.FC = () => {
               )}
             </Box>
 
-            <Button
-              as="a"
-              href={telegramHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              colorScheme="blue"
-              size="lg"
+            <Box
+              w="full"
+              display="flex"
+              justifyContent="start"
               mt={{ base: 4, md: 5 }}
             >
-              Участвовать
-            </Button>
+              <Box position="relative" display="inline-flex">
+                <Box
+                  position="absolute"
+                  insetX={-4}
+                  top="50%"
+                  transform="translateY(-50%)"
+                  h="56px"
+                  bgGradient="radial(circle at 50% 50%, rgba(59,130,246,0.65), transparent 65%)"
+                  filter="blur(16px)"
+                  opacity={0.8}
+                  pointerEvents="none"
+                />
+                <Button
+                  as="a"
+                  href={telegramHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="brand"
+                  size="lg"
+                  rightIcon={<ArrowForwardIcon />}
+                  position="relative"
+                  zIndex={1}
+                >
+                  Участвовать в хакатоне
+                </Button>
+              </Box>
+            </Box>
           </Stack>
 
           <Box

@@ -25,7 +25,8 @@ const submissionGlow = keyframes`
 `;
 
 const HackathonsSubmissionSection: React.FC = () => {
-  const { mutedTextColor, sectionCardBg, cardBorderColor } = useHackathonsColors();
+  const { mutedTextColor, sectionCardBg, cardBorderColor, accentBorderColor } =
+    useHackathonsColors();
   const submissionBgGradient = useColorModeValue(
     "linear(to-br, blue.50, purple.50)",
     "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.95))"
@@ -262,18 +263,30 @@ const HackathonsSubmissionSection: React.FC = () => {
             bg={sectionCardBg}
             borderRadius="2xl"
             borderWidth="1px"
-            borderColor={cardBorderColor}
+            borderColor={accentBorderColor}
             p={{ base: 4, md: 5 }}
             w="full"
+            boxShadow="0 0 0 1px rgba(59,130,246,0.35)"
           >
-            <Text
-              fontSize={{ base: "sm", md: "md" }}
-              color={mutedTextColor}
-            >
-              После окончания срока приёма решений мы закрепляем итоговый проект в
-              командной доске Trello: так у вас остаётся наглядный след участия и
-              удобная точка, чтобы вернуться к проекту позже.
-            </Text>
+            <Stack spacing={2}>
+              <Text
+                fontSize="xs"
+                fontWeight="semibold"
+                textTransform="uppercase"
+                letterSpacing="0.12em"
+                color={useColorModeValue("blue.600", "blue.200")}
+              >
+                Важно для участников
+              </Text>
+              <Text
+                fontSize={{ base: "sm", md: "md" }}
+                color={mutedTextColor}
+              >
+                После окончания срока приёма решений мы закрепляем итоговый проект в
+                командной доске Trello: так у вас остаётся наглядный след участия и
+                удобная точка, чтобы вернуться к проекту позже.
+              </Text>
+            </Stack>
           </Box>
         </Stack>
       </Box>

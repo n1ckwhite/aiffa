@@ -13,7 +13,7 @@ const FinanceLottieIcon: React.FC = () => {
     <LazyLottieIcon
       animationData={partnersAnimation}
       boxProps={{
-        w: { base: "270px", md: "420px" },
+        w: { base: "270px", md: "350px" },
         aspectRatio: 1,
         mx: "auto",
       }}

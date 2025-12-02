@@ -79,7 +79,7 @@ const HackathonsPrizeSection: React.FC = () => {
         borderWidth="1px"
         borderColor={cardBorderColor}
         px={{ base: 5, md: 8 }}
-        pt={{ base: 0, md: 0 }}
+        pt={{ base: 6, md: 8 }}
         pb={{ base: 6, md: 8 }}
         animation={`${prizeGlow} 5s ease-out infinite`}
       >
@@ -124,12 +124,11 @@ const HackathonsPrizeSection: React.FC = () => {
         />
 
         <Stack
-          spacing={{ base: 4, md: 6 }}
+          spacing={0}
           align="center"
           position="relative"
           zIndex={2}
         >
-          <FinanceLottieIcon />
           <Box textAlign="center">
             <PillBadge colorScheme="purple" variant="solid">
               Призовой фонд
@@ -153,10 +152,11 @@ const HackathonsPrizeSection: React.FC = () => {
             </Text>
           </Box>
 
+          <FinanceLottieIcon />
+
           <SimpleGrid
             columns={{ base: 1, md: 3 }}
             spacing={{ base: 4, md: 6 }}
-            mt={{ base: 2, md: 4 }}
           >
           <Box
             bg={sectionCardBg}

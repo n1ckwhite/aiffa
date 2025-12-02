@@ -31,6 +31,10 @@ const HackathonsSubmissionSection: React.FC = () => {
     "linear(to-br, blue.50, purple.50)",
     "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.95))"
   );
+  const requirementsCircleBg = useColorModeValue("teal.500", "teal.400");
+  const githubCircleBg = useColorModeValue("blue.500", "blue.400");
+  const readmeCircleBg = useColorModeValue("purple.500", "purple.400");
+  const demoCircleBg = useColorModeValue("green.500", "green.400");
 
   return (
     <Box
@@ -125,8 +129,7 @@ const HackathonsSubmissionSection: React.FC = () => {
                 <Stack direction="row" align="center" spacing={3}>
                   <Box
                     borderRadius="full"
-                    bg="teal.500"
-                    _dark={{ bg: "teal.400" }}
+                    bg={requirementsCircleBg}
                     boxSize={8}
                     display="flex"
                     alignItems="center"
@@ -162,8 +165,7 @@ const HackathonsSubmissionSection: React.FC = () => {
                 <Stack direction="row" align="center" spacing={3}>
                   <Box
                     borderRadius="full"
-                    bg="blue.500"
-                    _dark={{ bg: "blue.400" }}
+                    bg={githubCircleBg}
                     boxSize={8}
                     display="flex"
                     alignItems="center"
@@ -200,8 +202,7 @@ const HackathonsSubmissionSection: React.FC = () => {
                 <Stack direction="row" align="center" spacing={3}>
                   <Box
                     borderRadius="full"
-                    bg="purple.500"
-                    _dark={{ bg: "purple.400" }}
+                    bg={readmeCircleBg}
                     boxSize={8}
                     display="flex"
                     alignItems="center"
@@ -238,8 +239,7 @@ const HackathonsSubmissionSection: React.FC = () => {
                 <Stack direction="row" align="center" spacing={3}>
                   <Box
                     borderRadius="full"
-                    bg="green.500"
-                    _dark={{ bg: "green.400" }}
+                    bg={demoCircleBg}
                     boxSize={8}
                     display="flex"
                     alignItems="center"

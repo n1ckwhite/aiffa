@@ -30,6 +30,7 @@ const overviewCardFloat = keyframes`
 const HackathonsOverviewSection: React.FC = () => {
   const { sectionCardBg, cardBorderColor, mutedTextColor, accentBorderColor } =
     useHackathonsColors();
+  const iconCircleBg = useColorModeValue("whiteAlpha.800", "whiteAlpha.200");
 
   return (
     <Box
@@ -84,8 +85,7 @@ const HackathonsOverviewSection: React.FC = () => {
             <HStack align="flex-start" spacing={3} mb={2.5}>
               <Box
                 borderRadius="full"
-                bg="whiteAlpha.800"
-                _dark={{ bg: "whiteAlpha.200" }}
+                bg={iconCircleBg}
                 boxSize={8}
                 flexShrink={0}
                 display="flex"
@@ -122,8 +122,7 @@ const HackathonsOverviewSection: React.FC = () => {
             <HStack align="flex-start" spacing={3} mb={2.5}>
               <Box
                 borderRadius="full"
-                bg="whiteAlpha.800"
-                _dark={{ bg: "whiteAlpha.200" }}
+                bg={iconCircleBg}
                 boxSize={8}
                 display="flex"
                 alignItems="center"
@@ -159,8 +158,7 @@ const HackathonsOverviewSection: React.FC = () => {
             <HStack align="flex-start" spacing={3} mb={2.5}>
               <Box
                 borderRadius="full"
-                bg="whiteAlpha.800"
-                _dark={{ bg: "whiteAlpha.200" }}
+                bg={iconCircleBg}
                 boxSize={8}
                 display="flex"
                 alignItems="center"

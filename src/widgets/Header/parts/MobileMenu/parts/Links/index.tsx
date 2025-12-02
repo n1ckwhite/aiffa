@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button, HStack, Icon, Link, Text, VStack } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import type { MenuLinksProps } from './types';
-import { FaCode } from 'react-icons/fa';
+import { FaBookOpen, FaClipboardList, FaCode, FaUserCircle } from 'react-icons/fa';
 import { FaHandshake } from 'react-icons/fa6';
 
 export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg, donateHoverBg, onDonate }) => {
@@ -11,9 +11,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/learn" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Box as="svg" w={4} h={4} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </Box>
+            <Icon as={FaBookOpen} boxSize={4} aria-hidden="true" />
             <Text>Материалы</Text>
           </HStack>
         </Link>
@@ -22,9 +20,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/weekly" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Box as="svg" w={4} h={4} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V5m8 2V5M5 9h14M7 12h5m-5 4h10M5 5a2 2 0 012-2h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5z" />
-            </Box>
+            <Icon as={FaClipboardList} boxSize={4} aria-hidden="true" />
             <Text>Задачи</Text>
           </HStack>
         </Link>
@@ -33,20 +29,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/profile" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Box
-              as="svg"
-              boxSize={4}
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              focusable="false"
-              style={{ verticalAlign: 'middle' }}
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </Box>
+            <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" />
             <Text>Профиль</Text>
           </HStack>
         </Link>

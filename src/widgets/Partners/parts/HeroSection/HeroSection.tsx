@@ -37,12 +37,6 @@ const HeroSection: React.FC = () => {
           align="center"
           spacing={{ base: 2, sm: 3 }}
         >
-          <Icon
-            as={FaHandshake}
-            aria-hidden="true"
-            boxSize={{ base: 7, md: 8 }}
-            color={useColorModeValue("blue.500", "blue.300")}
-          />
           <Heading
             as="h1"
             id="partners-hero-title"

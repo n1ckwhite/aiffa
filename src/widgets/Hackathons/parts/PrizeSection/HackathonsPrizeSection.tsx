@@ -3,7 +3,7 @@ import { Box, Heading, SimpleGrid, Stack, Text, useColorModeValue } from "@chakr
 import { StarIcon } from "@chakra-ui/icons";
 import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
-import { FinanceLottieIcon } from "@/shared/icons/components-icon";
+import { BusinessTeamLottieIcon } from "@/shared/icons/components-icon";
 import PillBadge from "@/shared/ui/PillBadge";
 
 const prizeGlow = keyframes`
@@ -152,7 +152,7 @@ const HackathonsPrizeSection: React.FC = () => {
             </Text>
           </Box>
 
-          <FinanceLottieIcon />
+          <BusinessTeamLottieIcon />
 
           <SimpleGrid
             columns={{ base: 1, md: 3 }}

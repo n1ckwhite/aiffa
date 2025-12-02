@@ -4,17 +4,17 @@ import React from "react";
 import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
-import sucessStoriesAnimation from "@/shared/icons/json-icons/success-stories.json";
-import successStoriesIcon from "@/shared/icons/svg-icons/success-stories-icon.svg";
+import rewardsAnimation from "@/shared/icons/json-icons/rewards.json";
+import rewardsIcon from "@/shared/icons/svg-icons/rewards-icon.svg";
 
 const SuccessStoriesLottieIcon: React.FC = () => {
-  const staticSrc = getStaticSrcFromModule(successStoriesIcon);
+  const staticSrc = getStaticSrcFromModule(rewardsIcon);
   return (
     <LazyLottieIcon
-      animationData={sucessStoriesAnimation}
+      animationData={rewardsAnimation}
       boxProps={{
         w: { base: "250px", md: "250px" },
-        aspectRatio: 2210 / 1232,
+        aspectRatio: 1,
         mx: "auto",
       }}
       fallback={

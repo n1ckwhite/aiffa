@@ -11,7 +11,7 @@ import {
 import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import { telegramHref } from "../../../Footer/model/links";
-import { SuccessStoriesLottieIcon } from "@/shared/icons/components-icon";
+import { RewardsLottieIcon } from "@/shared/icons/components-icon";
 
 type CountdownState = {
   days: number;
@@ -142,10 +142,11 @@ const HackathonsNextHackathonSection: React.FC = () => {
           spacing={{ base: 1, sm: 2 }}
         >
           <Heading
-            as="h2"
+            as="h1"
+            id="partners-hero-title"
+            fontSize={{ base: "2xl", md: "4xl" }}
+            letterSpacing="-0.03em"
             textAlign="center"
-            aria-label="Хакатоны с понятным стартом и таймлайном"
-            fontSize={{ base: "lg", md: "xl" }}
           >
             Хакатоны с понятным стартом и таймлайном
           </Heading>
@@ -342,7 +343,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
             justifyContent={{ base: "center", md: "flex-end" }}
             mx={{ base: "auto", md: 0 }}
           >
-            <SuccessStoriesLottieIcon />
+            <RewardsLottieIcon />
           </Box>
         </Stack>
       </Box>

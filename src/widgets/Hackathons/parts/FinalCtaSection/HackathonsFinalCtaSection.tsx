@@ -75,7 +75,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
               size="lg"
               w={{ base: "full", sm: "auto" }}
             >
-              Стать партнёром / предложить задачу
+              Стать партнёром
             </Button>
           </Stack>
         </Stack>

@@ -11,3 +11,4 @@ export { default as PartnersLottieIcon } from './PartnersLottieIcon';
 export { default as BusinessWorkshopIcon } from './BusinessWorkshopIcon';
 export { default as ErrorRobotLottieIcon } from './ErrorRobotLottieIcon';
 export { default as SuccessStoriesLottieIcon } from './SuccessStoriesLottieIcon';
+export { default as FinanceLottieIcon } from './FinanceLottieIcon';

@@ -5,6 +5,7 @@ import HackathonsOverviewSection from "../OverviewSection/HackathonsOverviewSect
 import HackathonsNextHackathonSection from "../NextHackathonSection/HackathonsNextHackathonSection";
 import HackathonsCommunityGrowthSection from "../CommunityGrowthSection/HackathonsCommunityGrowthSection";
 import HackathonsHowItWorksSection from "../HowItWorksSection/HackathonsHowItWorksSection";
+import HackathonsPrizeSection from "../PrizeSection/HackathonsPrizeSection";
 import HackathonsFaqSection from "../FaqSection/HackathonsFaqSection";
 import HackathonsSubmissionSection from "../SubmissionSection/HackathonsSubmissionSection";
 import HackathonsRulesSection from "../RulesSection/HackathonsRulesSection";
@@ -23,6 +24,7 @@ const HackathonsScreen: React.FC = () => {
       <Box maxW="1200px" mx="auto">
         <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
           <HackathonsNextHackathonSection />
+          <HackathonsPrizeSection />
           <HackathonsHeroSection />
           <HackathonsOverviewSection />
           <HackathonsCommunityGrowthSection />

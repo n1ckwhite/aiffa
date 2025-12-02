@@ -136,8 +136,8 @@ const HackathonsNextHackathonSection: React.FC = () => {
         borderRadius="3xl"
         borderWidth="1px"
         borderColor={cardBorderColor}
-        px={{ base: 3, md: 8 }}
-        py={{ base: 4, md: 8 }}
+        px={{ base: 6, md: 8 }}
+        py={{ base: 5, md: 8 }}
         animation={`${cardGlow} 4s ease-out infinite`}
       >
         <Box

@@ -1,17 +1,19 @@
 import React from 'react';
-import { Box, HStack, Link, Text, Tooltip, Icon } from '@chakra-ui/react';
+import { HStack, Link, Text, Tooltip, Icon } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { FaBookOpen, FaClipboardList, FaUserCircle } from 'react-icons/fa';
-import HackathonsLink from '../../../HackathonsLink';
+import { FaBookOpen, FaClipboardList, FaUserCircle, FaCode } from 'react-icons/fa';
 import DonateButton from '../../../DonateButton';
 import ThemeToggleButton from '../../../ThemeToggleButton';
 import type { DesktopActionsProps } from './types';
+import { useDesktopActionsColors } from './colors/useDeskopActionsColors';
 
 export const DesktopActions: React.FC<DesktopActionsProps> = ({
   hoverBg,
   onDonate,
   setIsMobileMenuOpen,
 }) => {
+  const { fillIcon } = useDesktopActionsColors();
+
   return (
     <HStack gap={{ base: 1, md: 1, xl: 2 }}>
       <Tooltip label="Материалы" openDelay={250} hasArrow>
@@ -27,7 +29,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           display="inline-flex"
           alignItems="center"
         >
-          <Icon as={FaBookOpen} boxSize={4} aria-hidden="true" />
+          <Icon as={FaBookOpen} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text ml={2} display={{ base: 'none', '2xl': 'inline' }} fontSize="sm" fontWeight="semibold">Материалы</Text>
         </Link>
       </Tooltip>
@@ -44,7 +46,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           display="inline-flex"
           alignItems="center"
         >
-          <Icon as={FaClipboardList} boxSize={4} aria-hidden="true" />
+          <Icon as={FaClipboardList} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text ml={2} display={{ base: 'none', '2xl': 'inline' }} fontSize="sm" fontWeight="semibold">Задачи</Text>
         </Link>
       </Tooltip>
@@ -61,15 +63,27 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           display="inline-flex"
           alignItems="center"
         >
-          <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" />
+          <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text ml={2} display={{ base: 'none', '2xl': 'inline' }} fontSize="sm" fontWeight="semibold">Профиль</Text>
         </Link>
       </Tooltip>
       
       <Tooltip label="Хакатоны" openDelay={250} hasArrow>
-        <Box>
-          <HackathonsLink hoverBg={hoverBg} />
-        </Box>
+        <Link
+          as={RouterLink as any}
+          to="/hackathons"
+          aria-label="Хакатоны"
+          onClick={() => { setIsMobileMenuOpen(false); }}
+          _hover={{ bg: hoverBg }}
+          px={2}
+          py={1.5}
+          borderRadius="md"
+          display="inline-flex"
+          alignItems="center"
+        >
+          <Icon as={FaCode} boxSize={4} aria-hidden="true" color={fillIcon} />
+          <Text ml={2} display={{ base: 'none', '2xl': 'inline' }} fontSize="sm" fontWeight="semibold">Хакатоны</Text>
+        </Link>
       </Tooltip>
       
       <DonateButton onClick={onDonate} />

@@ -1,17 +1,19 @@
 import React from 'react';
-import { Box, Button, HStack, Icon, Link, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Icon, Link, Text, VStack, useColorModeValue } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import type { MenuLinksProps } from './types';
 import { FaBookOpen, FaClipboardList, FaCode, FaUserCircle } from 'react-icons/fa';
 import { FaHandshake } from 'react-icons/fa6';
+import { useDesktopActionsColors } from '../../../Header/parts/DesktopActions/colors/useDeskopActionsColors';
 
 export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg, donateHoverBg, onDonate }) => {
+  const { fillIcon } = useDesktopActionsColors()
   return (
     <VStack gap={2} align="stretch">
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/learn" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Icon as={FaBookOpen} boxSize={4} aria-hidden="true" />
+            <Icon as={FaBookOpen} boxSize={4} aria-hidden="true" color={fillIcon} />
             <Text>Материалы</Text>
           </HStack>
         </Link>
@@ -20,7 +22,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/weekly" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Icon as={FaClipboardList} boxSize={4} aria-hidden="true" />
+            <Icon as={FaClipboardList} boxSize={4} aria-hidden="true" color={fillIcon} />
             <Text>Задачи</Text>
           </HStack>
         </Link>
@@ -29,7 +31,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/profile" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" />
+            <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" color={fillIcon} />
             <Text>Профиль</Text>
           </HStack>
         </Link>
@@ -38,7 +40,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/hackathons" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Icon as={FaCode} boxSize={4} aria-hidden="true" />
+            <Icon as={FaCode} boxSize={4} aria-hidden="true" color={fillIcon} />
             <Text>Хакатоны</Text>
           </HStack>
         </Link>
@@ -47,7 +49,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/partners" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Icon as={FaHandshake} boxSize={4} aria-hidden="true" />
+            <Icon as={FaHandshake} boxSize={4} aria-hidden="true" color={fillIcon} />
             <Text>Партнёрство</Text>
           </HStack>
         </Link>

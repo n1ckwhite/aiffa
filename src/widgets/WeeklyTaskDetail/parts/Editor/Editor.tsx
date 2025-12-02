@@ -20,7 +20,17 @@ const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onS
     resizeHandleHoverBg,
   } = useEditorColors();
   const { isStarting, handleStartClick } = useEditorStart({ onStart });
-  const { editorHeight, editorContainerRef, handleResizeStart } = useResizableEditorHeight();
+  const {
+    editorHeight,
+    editorContainerRef,
+    handleResizeStart,
+    handleKeyboardResize,
+    minHeight,
+    maxHeight,
+  } = useResizableEditorHeight();
+
+  const numericEditorHeight =
+    typeof editorHeight === 'number' ? editorHeight : minHeight;
   const { isEditorReady, handleEditorReady } = useEditorReady({ onReady });
 
   return (
@@ -42,6 +52,10 @@ const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onS
         <Box
           role="separator"
           aria-orientation="horizontal"
+          aria-label="Изменить высоту редактора"
+          aria-valuemin={minHeight}
+          aria-valuemax={maxHeight}
+          aria-valuenow={numericEditorHeight}
           tabIndex={0}
           h="16px"
           mt={1}
@@ -51,6 +65,7 @@ const Editor: React.FC<EditorProps> = ({ value, onChange, language, overlay, onS
           cursor="ns-resize"
           onMouseDown={handleResizeStart}
           onTouchStart={handleResizeStart}
+          onKeyDown={handleKeyboardResize}
         >
           <Box
             w="40px"

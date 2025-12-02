@@ -68,10 +68,42 @@ export const useResizableEditorHeight = (options?: UseResizableEditorHeightOptio
     event.preventDefault();
   }, [maxHeight, minHeight]);
 
+  const handleKeyboardResize = React.useCallback((
+    event: React.KeyboardEvent<HTMLDivElement>,
+  ) => {
+    const { key } = event;
+    if (key !== 'ArrowUp' && key !== 'ArrowDown' && key !== 'Home' && key !== 'End') {
+      return;
+    }
+
+    event.preventDefault();
+
+    const containerElement = editorContainerRef.current;
+    const currentHeight = containerElement?.getBoundingClientRect().height || Number(minHeight);
+    const step = 32;
+
+    let nextHeight = currentHeight;
+
+    if (key === 'ArrowUp') {
+      nextHeight = Math.max(minHeight, currentHeight - step);
+    } else if (key === 'ArrowDown') {
+      nextHeight = Math.min(maxHeight, currentHeight + step);
+    } else if (key === 'Home') {
+      nextHeight = minHeight;
+    } else if (key === 'End') {
+      nextHeight = maxHeight;
+    }
+
+    setEditorHeight(nextHeight);
+  }, [maxHeight, minHeight]);
+
   return {
     editorHeight,
     editorContainerRef,
     handleResizeStart,
+    handleKeyboardResize,
+    minHeight,
+    maxHeight,
   };
 };
 

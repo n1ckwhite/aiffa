@@ -35,6 +35,9 @@ const HackathonsFinalCtaSection: React.FC = () => {
     <Box
       as="section"
       aria-labelledby="hackathons-final-cta-title"
+      display="flex"
+      justifyContent="center"
+      px={{ base: 3, md: 4 }}
     >
       <Box
         position="relative"
@@ -43,8 +46,10 @@ const HackathonsFinalCtaSection: React.FC = () => {
         borderRadius="3xl"
         borderWidth="1px"
         borderColor={accentBorderColor}
-        px={{ base: 5, md: 8 }}
-        py={{ base: 6, md: 8 }}
+        px={{ base: 3, sm: 4, md: 8 }}
+        py={{ base: 5, md: 8 }}
+        maxW="1200px"
+        mx="auto"
         animation={`${finalCtaGlow} 14s ease-out infinite`}
       >
         <Box
@@ -74,16 +79,16 @@ const HackathonsFinalCtaSection: React.FC = () => {
         </Box>
 
         <Stack
-          direction={{ base: "column", md: "row" }}
-          spacing={{ base: 6, md: 8 }}
-          align={{ base: "flex-start", md: "center" }}
-          justify="space-between"
+          direction="column"
+          spacing={{ base: 5, md: 6 }}
+          align="center"
+          justify="center"
           position="relative"
           zIndex={1}
         >
           <Box
-            maxW={{ base: "full", md: "60%" }}
-            textAlign={{ base: "center", md: "left" }}
+            textAlign={{ base: "center", md: "center" }}
+            mx={{ base: "auto", md: 0 }}
           >
             <Box mb={3}>
               <PillBadge colorScheme="blue" variant="outline" uppercase>
@@ -93,7 +98,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
             <Heading
               id="hackathons-final-cta-title"
               as="h2"
-              size="lg"
+              fontSize={{ base: "xl", md: "2xl", lg: "3xl" }}
             >
               Готовы попробовать себя в хакатоне или прийти как партнёр?
             </Heading>
@@ -115,6 +120,8 @@ const HackathonsFinalCtaSection: React.FC = () => {
             w={{ base: "full", md: "auto" }}
             justify={{ base: "center", md: "flex-end" }}
             align={{ base: "stretch", sm: "center" }}
+            maxW={{ base: "480px", md: "unset" }}
+            mx={{ base: "auto", md: 0 }}
           >
             <Button
               as="a"

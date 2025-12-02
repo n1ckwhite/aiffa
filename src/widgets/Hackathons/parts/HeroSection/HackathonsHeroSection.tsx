@@ -190,7 +190,7 @@ const HackathonsHeroSection: React.FC = () => {
               py={{ base: 2.5, md: 3 }}
               w={{ base: "100%", md: "360px" }}
             >
-              Оформить партнёрство
+              Стать партнёром
             </Button>
           </Stack>
         </Box>

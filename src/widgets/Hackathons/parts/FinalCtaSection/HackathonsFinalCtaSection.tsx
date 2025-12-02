@@ -125,7 +125,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
           >
             <Button
               as="a"
-              href="https://trello.com"
+              href="https://t.me/nickwhite_web"
               target="_blank"
               rel="noopener noreferrer"
               size="lg"

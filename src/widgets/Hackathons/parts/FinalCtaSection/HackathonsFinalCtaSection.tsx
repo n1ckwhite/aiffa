@@ -35,8 +35,6 @@ const HackathonsFinalCtaSection: React.FC = () => {
     <Box
       as="section"
       aria-labelledby="hackathons-final-cta-title"
-      pt={{ base: 4, md: 8 }}
-      pb={{ base: 2, md: 4 }}
     >
       <Box
         position="relative"

@@ -9,8 +9,11 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { CalendarIcon, StarIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
+import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import { telegramHref } from "../../../Footer/model/links";
+import { SuccessStoriesLottieIcon } from "@/shared/icons/components-icon";
 
 type CountdownState = {
   days: number;
@@ -20,6 +23,35 @@ type CountdownState = {
 };
 
 const HACKATHON_START = new Date("2025-05-15T18:00:00+03:00");
+
+const cardGlow = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+`;
+
+const shimmer = keyframes`
+  0% {
+    transform: translateX(-40%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+`;
 
 const getCountdownState = (): CountdownState => {
   const now = new Date().getTime();
@@ -72,17 +104,34 @@ const HackathonsNextHackathonSection: React.FC = () => {
       aria-labelledby="hackathons-next-title"
     >
       <Box
-        bg={sectionCardBg}
+        position="relative"
+        overflow="hidden"
+        bgGradient="linear(to-br, blue.50, whiteAlpha.900)"
+        _dark={{
+          bgGradient: "linear(to-br, rgba(37, 99, 235, 0.35), rgba(15, 23, 42, 0.98))",
+        }}
         borderRadius="3xl"
         borderWidth="1px"
         borderColor={cardBorderColor}
         px={{ base: 5, md: 8 }}
         py={{ base: 6, md: 8 }}
+        animation={`${cardGlow} 4s ease-out infinite`}
       >
+        <Box
+          position="absolute"
+          top="0"
+          left="-40%"
+          h="3px"
+          w="40%"
+          bgGradient="linear(to-r, transparent, whiteAlpha.800, transparent)"
+          opacity={0.8}
+          animation={`${shimmer} 6s ease-in-out infinite`}
+        />
         <Stack
           spacing={{ base: 4, md: 5 }}
           align="flex-start"
         >
+          <SuccessStoriesLottieIcon />
           <Box>
             <Text
               fontSize="sm"
@@ -103,19 +152,28 @@ const HackathonsNextHackathonSection: React.FC = () => {
           </Box>
 
           <Stack
-            spacing={1}
+            spacing={2}
             fontSize={{ base: "sm", md: "md" }}
             color={mutedTextColor}
           >
-            <Text>
-              📅 <Text as="span" fontStyle="italic">Май 2025</Text>
-            </Text>
-            <Text>
-              💰 <Text as="span" fontStyle="italic">Призовой фонд: 100&nbsp;000&nbsp;₽</Text>
-            </Text>
-            <Text>
-              🎯 <Text as="span" fontStyle="italic">Тема: будет объявлена позже</Text>
-            </Text>
+            <Stack direction="row" align="center" spacing={2}>
+              <Box as={CalendarIcon} color="blue.400" boxSize={4} />
+              <Text as="span" fontStyle="italic">
+                Май 2025
+              </Text>
+            </Stack>
+            <Stack direction="row" align="center" spacing={2}>
+              <Box as={StarIcon} color="yellow.400" boxSize={4} />
+              <Text as="span" fontStyle="italic">
+                Призовой фонд: 100&nbsp;000&nbsp;₽
+              </Text>
+            </Stack>
+            <Stack direction="row" align="center" spacing={2}>
+              <Box as={QuestionOutlineIcon} color="purple.300" boxSize={4} />
+              <Text as="span" fontStyle="italic">
+                Тема: будет объявлена позже
+              </Text>
+            </Stack>
           </Stack>
 
           <Box mt={{ base: 3, md: 4 }}>

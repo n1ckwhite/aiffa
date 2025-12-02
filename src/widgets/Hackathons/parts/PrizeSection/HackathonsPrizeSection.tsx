@@ -1,16 +1,10 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  SimpleGrid,
-  Stack,
-  Text,
-  Badge,
-} from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import { FinanceLottieIcon } from "@/shared/icons/components-icon";
+import PillBadge from "@/shared/ui/PillBadge";
 
 const prizeGlow = keyframes`
   0% {
@@ -67,6 +61,10 @@ const prizeShimmer = keyframes`
 
 const HackathonsPrizeSection: React.FC = () => {
   const { sectionCardBg, cardBorderColor, mutedTextColor } = useHackathonsColors();
+  const prizeBgGradient = useColorModeValue(
+    "linear(to-br, purple.50, pink.50)",
+    "linear(to-br, rgba(15, 23, 42, 1), rgba(76, 29, 149, 0.9))"
+  );
 
   return (
     <Box
@@ -76,10 +74,7 @@ const HackathonsPrizeSection: React.FC = () => {
       <Box
         position="relative"
         overflow="hidden"
-        bgGradient="linear(to-br, purple.50, pink.50)"
-        _dark={{
-          bgGradient: "linear(to-br, rgba(15, 23, 42, 1), rgba(76, 29, 149, 0.9))",
-        }}
+        bgGradient={prizeBgGradient}
         borderRadius="3xl"
         borderWidth="1px"
         borderColor={cardBorderColor}
@@ -136,16 +131,9 @@ const HackathonsPrizeSection: React.FC = () => {
         >
           <FinanceLottieIcon />
           <Box textAlign="center">
-            <Badge
-              colorScheme="pink"
-              variant="subtle"
-              borderRadius="full"
-              px={3}
-              py={1}
-              mb={3}
-            >
+            <PillBadge colorScheme="purple" variant="solid">
               Призовой фонд
-            </Badge>
+            </PillBadge>
             <Heading
               id="hackathons-prize-title"
               as="h2"

@@ -14,6 +14,11 @@ export const useHackathonsColors = () => {
   const stepNumberColor = useColorModeValue("blue.600", "blue.300");
   const stepCardBg = useColorModeValue("whiteAlpha.50", "whiteAlpha.200");
 
+  const prizeBgGradient = useColorModeValue(
+    "linear(to-br, purple.50, pink.50)",
+    "linear(to-br, rgba(15, 23, 42, 1), rgba(76, 29, 149, 0.9))"
+  );
+
   return {
     mutedTextColor,
     heroAsideBg,
@@ -24,6 +29,7 @@ export const useHackathonsColors = () => {
     stepNumberBg,
     stepNumberColor,
     stepCardBg,
+    prizeBgGradient,
   };
 };
 

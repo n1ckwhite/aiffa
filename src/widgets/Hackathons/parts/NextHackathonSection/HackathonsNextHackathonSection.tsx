@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
   useBreakpointValue,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { CalendarIcon, StarIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
 import { keyframes } from "@emotion/react";
@@ -108,6 +109,11 @@ const HackathonsNextHackathonSection: React.FC = () => {
   const [countdown, setCountdown] = useState<CountdownState>(() => getCountdownState());
   const isMobile = useBreakpointValue({ base: true, md: false });
 
+  const cardBgGradient = useColorModeValue(
+    "linear(to-br, blue.50, whiteAlpha.900)",
+    "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.9))"
+  );
+
   useEffect(() => {
     const handleTick = () => {
       setCountdown(getCountdownState());
@@ -130,10 +136,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
       <Box
         position="relative"
         overflow="hidden"
-        bgGradient="linear(to-br, blue.50, whiteAlpha.900)"
-        _dark={{
-          bgGradient: "linear(to-br, rgba(37, 99, 235, 0.35), rgba(15, 23, 42, 0.98))",
-        }}
+        bgGradient={cardBgGradient}
         borderRadius="3xl"
         borderWidth="1px"
         borderColor={cardBorderColor}

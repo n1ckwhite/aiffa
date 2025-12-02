@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  Badge,
-  Box,
-  Button,
-  Heading,
-  Stack,
-  Text,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Box, Button, Heading, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
+import PillBadge from "@/shared/ui/PillBadge";
 
 const HackathonsHeroSection: React.FC = () => {
   const { heroAsideBg, mutedTextColor } = useHackathonsColors();
@@ -26,16 +19,11 @@ const HackathonsHeroSection: React.FC = () => {
         align={{ base: "flex-start", md: "center" }}
       >
         <Box flex="1" maxW={{ base: "full", md: "60%" }}>
-          <Badge
-            colorScheme="blue"
-            variant="subtle"
-            borderRadius="full"
-            px={3}
-            py={1}
-            mb={4}
-          >
-            Форматы для прокачки в реальных задачах
-          </Badge>
+          <Box mb={3}>
+            <PillBadge colorScheme="blue" variant="solid" uppercase>
+             Прокачка в реальных задачах
+            </PillBadge>
+          </Box>
 
           <Heading
             id="hackathons-hero-title"

@@ -100,7 +100,7 @@ const HackathonsHeroSection: React.FC = () => {
           textAlign={{ base: "center", md: "left" }}
         >
           <Box mb={3}>
-            <PillBadge colorScheme="blue" variant="solid" uppercase>
+            <PillBadge colorScheme="blue" variant="outline" uppercase>
               Прокачка в реальных задачах
             </PillBadge>
           </Box>

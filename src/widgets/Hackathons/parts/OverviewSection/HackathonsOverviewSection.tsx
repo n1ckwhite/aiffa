@@ -13,6 +13,7 @@ import { StarIcon, ChatIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import PillBadge from "@/shared/ui/PillBadge";
+import { LevelLottieIcon } from "@/shared/icons/components-icon";
 
 const overviewCardFloat = keyframes`
   0% {
@@ -29,16 +30,13 @@ const overviewCardFloat = keyframes`
 const HackathonsOverviewSection: React.FC = () => {
   const { sectionCardBg, cardBorderColor, mutedTextColor, accentBorderColor } =
     useHackathonsColors();
-  const highlightBg = useColorModeValue(
-    "linear(to-br, rgba(250,245,255,0.98), rgba(219,234,254,0.94))",
-    "linear(to-br, rgba(15,23,42,0.98), rgba(88,28,135,0.9))"
-  );
 
   return (
     <Box
       as="section"
       aria-labelledby="hackathons-overview-title"
     >
+      <LevelLottieIcon />
       <Stack spacing={{ base: 4, md: 6 }} align="center">
         <Box maxW={{ base: "full", md: "720px" }} textAlign="center">
           <Box mb={3}>

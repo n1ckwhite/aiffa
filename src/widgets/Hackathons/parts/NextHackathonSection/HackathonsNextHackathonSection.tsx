@@ -129,6 +129,39 @@ const HackathonsNextHackathonSection: React.FC = () => {
       as="section"
       aria-labelledby="hackathons-next-title"
     >
+      <Stack
+        mb={{ base: 4, md: 6 }}
+        spacing={2}
+        align="center"
+      >
+        <Box maxW={{ base: "full", md: "720px" }} textAlign="center">
+          <Text
+            fontSize={{ base: "xs", md: "sm" }}
+            textTransform="uppercase"
+            letterSpacing="0.12em"
+            color={mutedTextColor}
+          >
+            Хакатоны AIFFA
+          </Text>
+          <Heading
+            as="h2"
+            fontSize={{ base: "lg", md: "xl" }}
+            mt={1}
+          >
+            Хакатоны с понятным стартом и таймлайном
+          </Heading>
+          <Text
+            mt={2}
+            fontSize={{ base: "sm", md: "md" }}
+            color={mutedTextColor}
+          >
+            В течение весны мы запускаем серию хакатонов AIFFA. Первый старт — в мае 2025:
+            анонс, регистрация, формирование команд и старт задач происходят по чёткому,
+            прозрачному таймлайну, чтобы вы заранее понимали, когда подключаться.
+          </Text>
+        </Box>
+      </Stack>
+
       <Box
         position="relative"
         overflow="hidden"

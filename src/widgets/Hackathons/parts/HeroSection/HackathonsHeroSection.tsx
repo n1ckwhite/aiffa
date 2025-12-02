@@ -111,7 +111,7 @@ const HackathonsHeroSection: React.FC = () => {
             fontSize={{ base: "xl", sm: "2xl", md: "3xl", lg: "4xl" }}
             lineHeight="short"
           >
-            Хакатоны AIFFA: несколько дней, которые меняют карьеру разработчика
+            Хакатоны AIFFA: интенсивный формат, который меняет карьеру разработчика
           </Heading>
 
           <Text

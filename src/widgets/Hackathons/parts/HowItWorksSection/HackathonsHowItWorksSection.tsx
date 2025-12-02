@@ -68,18 +68,21 @@ const HackathonsHowItWorksSection: React.FC = () => {
       as="section"
       aria-label="Как проходит хакатон AIFFA"
     >
-      <Stack spacing={{ base: 4, md: 6 }}>
-        <Heading as="h2" size="lg">
-          Как проходят хакатоны AIFFA
-        </Heading>
-        <Text
-          fontSize={{ base: "md", md: "lg" }}
-          color={mutedTextColor}
-        >
-          Мы стараемся, чтобы формат был одновременно интенсивным и
-          поддерживающим: с понятными ожиданиями, прозрачными критериями и
-          вниманием к участникам.
-        </Text>
+      <Stack spacing={{ base: 4, md: 6 }} align="center">
+        <Box maxW={{ base: "full", md: "720px" }} textAlign="center">
+          <Heading as="h2" size="lg">
+            Как проходят хакатоны AIFFA
+          </Heading>
+          <Text
+            mt={3}
+            fontSize={{ base: "md", md: "lg" }}
+            color={mutedTextColor}
+          >
+            Мы стараемся, чтобы формат был одновременно интенсивным и
+            поддерживающим: с понятными ожиданиями, прозрачными критериями и
+            вниманием к участникам.
+          </Text>
+        </Box>
 
         <SimpleGrid
           columns={{ base: 1, md: 2 }}
@@ -95,7 +98,6 @@ const HackathonsHowItWorksSection: React.FC = () => {
             >
               <Box
                 position="relative"
-                pt={1}
               >
                 <Circle
                   size="32px"
@@ -106,16 +108,6 @@ const HackathonsHowItWorksSection: React.FC = () => {
                 >
                   {step.number}
                 </Circle>
-                <Box
-                  position="absolute"
-                  top="32px"
-                  left="50%"
-                  transform="translateX(-50%)"
-                  w="2px"
-                  h="calc(100% - 32px)"
-                  bg={stepLineColor}
-                  display={{ base: "none", md: "block" }}
-                />
               </Box>
 
               <Box

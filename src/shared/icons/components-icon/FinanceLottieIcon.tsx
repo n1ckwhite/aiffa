@@ -14,7 +14,7 @@ const FinanceLottieIcon: React.FC = () => {
       animationData={partnersAnimation}
       boxProps={{
         w: { base: "270px", md: "350px" },
-        aspectRatio: 1920 / 1080,
+        aspectRatio: 4 / 3,
         mx: "auto",
       }}
       fallback={

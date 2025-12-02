@@ -302,9 +302,10 @@ const HackathonsNextHackathonSection: React.FC = () => {
 
           <Box
             flexShrink={0}
-            w={{ base: "70%", sm: "65%", md: "260px" }}
+            w={{ base: "100%", sm: "75%", md: "260px" }}
             display="flex"
             justifyContent={{ base: "center", md: "flex-end" }}
+            mx={{ base: "auto", md: 0 }}
           >
             <SuccessStoriesLottieIcon />
           </Box>

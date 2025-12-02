@@ -143,6 +143,8 @@ const HackathonsNextHackathonSection: React.FC = () => {
         >
           <Heading
             as="h2"
+            textAlign="center"
+            aria-label="Хакатоны с понятным стартом и таймлайном"
             fontSize={{ base: "lg", md: "xl" }}
           >
             Хакатоны с понятным стартом и таймлайном
@@ -249,19 +251,19 @@ const HackathonsNextHackathonSection: React.FC = () => {
             >
               <Stack direction="row" align="center" spacing={2}>
                 <Box as={CalendarIcon} color="blue.400" boxSize={{ base: 3, md: 4 }} />
-                <Text as="span" fontStyle="italic">
+                <Text as="span" fontStyle="italic" fontWeight="semibold" color={useColorModeValue("blue.700", "blue.200")}>
                   Май 2025
                 </Text>
               </Stack>
               <Stack direction="row" align="center" spacing={2}>
                 <Box as={StarIcon} color="yellow.400" boxSize={{ base: 3, md: 4 }} />
-                <Text as="span" fontStyle="italic">
+                <Text as="span" fontStyle="italic" fontWeight="semibold" color={useColorModeValue("yellow.700", "yellow.200")}>
                   Призовой фонд: 100&nbsp;000&nbsp;₽
                 </Text>
               </Stack>
               <Stack direction="row" align="center" spacing={2}>
                 <Box as={QuestionOutlineIcon} color="purple.300" boxSize={{ base: 3, md: 4 }} />
-                <Text as="span" fontStyle="italic">
+                <Text as="span" fontStyle="italic" fontWeight="semibold" color={useColorModeValue("purple.600", "purple.200")}>
                   Тема: будет объявлена позже
                 </Text>
               </Stack>
@@ -271,7 +273,8 @@ const HackathonsNextHackathonSection: React.FC = () => {
               {countdown.isStarted ? (
                 <Text
                   fontSize={{ base: "xs", md: "sm" }}
-                  color={mutedTextColor}
+                  color={useColorModeValue("blue.800", "blue.100")}
+                  fontWeight="semibold"
                 >
                   Хакатон стартует в мае — присоединяйтесь к сообществу, чтобы не пропустить
                   анонс и вовремя попасть в команду.

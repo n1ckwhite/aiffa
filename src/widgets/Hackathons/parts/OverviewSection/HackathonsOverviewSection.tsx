@@ -13,7 +13,7 @@ import { StarIcon, ChatIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import PillBadge from "@/shared/ui/PillBadge";
-import { LevelLottieIcon } from "@/shared/icons/components-icon";
+import PersonLottieIcon from "@/shared/icons/components-icon/PersonLottieIcon";
 
 const overviewCardFloat = keyframes`
   0% {
@@ -36,7 +36,7 @@ const HackathonsOverviewSection: React.FC = () => {
       as="section"
       aria-labelledby="hackathons-overview-title"
     >
-      <LevelLottieIcon />
+      <PersonLottieIcon />
       <Stack spacing={{ base: 4, md: 6 }} align="center">
         <Box maxW={{ base: "full", md: "720px" }} textAlign="center">
           <Box mb={3}>

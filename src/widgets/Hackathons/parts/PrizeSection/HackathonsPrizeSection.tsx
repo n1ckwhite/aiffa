@@ -78,13 +78,14 @@ const HackathonsPrizeSection: React.FC = () => {
         overflow="hidden"
         bgGradient="linear(to-br, purple.50, pink.50)"
         _dark={{
-          bgGradient: "linear(to-br, rgba(76, 29, 149, 0.7), rgba(15, 23, 42, 0.98))",
+          bgGradient: "linear(to-br, rgba(15, 23, 42, 1), rgba(76, 29, 149, 0.9))",
         }}
         borderRadius="3xl"
         borderWidth="1px"
         borderColor={cardBorderColor}
         px={{ base: 5, md: 8 }}
-        py={{ base: 6, md: 8 }}
+        pt={{ base: 0, md: 0 }}
+        pb={{ base: 6, md: 8 }}
         animation={`${prizeGlow} 5s ease-out infinite`}
       >
         <Box

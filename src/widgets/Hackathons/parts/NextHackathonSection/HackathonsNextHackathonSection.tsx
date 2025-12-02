@@ -136,8 +136,8 @@ const HackathonsNextHackathonSection: React.FC = () => {
         borderRadius="3xl"
         borderWidth="1px"
         borderColor={cardBorderColor}
-        px={{ base: 5, md: 8 }}
-        py={{ base: 6, md: 8 }}
+        px={{ base: 3, md: 8 }}
+        py={{ base: 4, md: 8 }}
         animation={`${cardGlow} 4s ease-out infinite`}
       >
         <Box
@@ -181,19 +181,19 @@ const HackathonsNextHackathonSection: React.FC = () => {
         />
         <Stack
           direction={{ base: "column", md: "row" }}
-          spacing={{ base: 6, md: 8 }}
+          spacing={{ base: 4, md: 8 }}
           align={{ base: "flex-start", md: "center" }}
           position="relative"
           zIndex={2}
         >
           <Stack
-            spacing={{ base: 4, md: 5 }}
+            spacing={{ base: 3, md: 5 }}
             align="flex-start"
             flex="1"
           >
             <Box>
               <Text
-                fontSize="sm"
+                fontSize={{ base: "xs", md: "sm" }}
                 textTransform="uppercase"
                 letterSpacing="0.08em"
                 color={mutedTextColor}
@@ -204,7 +204,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
               <Heading
                 id="hackathons-next-title"
                 as="h2"
-                fontSize={{ base: "xl", md: "2xl" }}
+                fontSize={{ base: "lg", sm: "xl", md: "2xl" }}
               >
                 AIFFA Hackathon #1 — Задача старта
               </Heading>
@@ -212,33 +212,33 @@ const HackathonsNextHackathonSection: React.FC = () => {
 
             <Stack
               spacing={2}
-              fontSize={{ base: "sm", md: "md" }}
+              fontSize={{ base: "xs", md: "sm" }}
               color={mutedTextColor}
             >
               <Stack direction="row" align="center" spacing={2}>
-                <Box as={CalendarIcon} color="blue.400" boxSize={4} />
+                <Box as={CalendarIcon} color="blue.400" boxSize={{ base: 3, md: 4 }} />
                 <Text as="span" fontStyle="italic">
                   Май 2025
                 </Text>
               </Stack>
               <Stack direction="row" align="center" spacing={2}>
-                <Box as={StarIcon} color="yellow.400" boxSize={4} />
+                <Box as={StarIcon} color="yellow.400" boxSize={{ base: 3, md: 4 }} />
                 <Text as="span" fontStyle="italic">
                   Призовой фонд: 100&nbsp;000&nbsp;₽
                 </Text>
               </Stack>
               <Stack direction="row" align="center" spacing={2}>
-                <Box as={QuestionOutlineIcon} color="purple.300" boxSize={4} />
+                <Box as={QuestionOutlineIcon} color="purple.300" boxSize={{ base: 3, md: 4 }} />
                 <Text as="span" fontStyle="italic">
                   Тема: будет объявлена позже
                 </Text>
               </Stack>
             </Stack>
 
-            <Box mt={{ base: 3, md: 4 }}>
+            <Box mt={{ base: 2, md: 4 }}>
               {countdown.isStarted ? (
                 <Text
-                  fontSize={{ base: "sm", md: "md" }}
+                  fontSize={{ base: "xs", md: "sm" }}
                   color={mutedTextColor}
                 >
                   Хакатон стартует в мае — присоединяйтесь к сообществу, чтобы не пропустить
@@ -246,7 +246,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
                 </Text>
               ) : (
                 <Text
-                  fontSize={{ base: "sm", md: "md" }}
+                  fontSize={{ base: "xs", md: "sm" }}
                   color={mutedTextColor}
                 >
                   До старта осталось:{" "}
@@ -261,8 +261,8 @@ const HackathonsNextHackathonSection: React.FC = () => {
             <Box
               w="full"
               display="flex"
-              justifyContent="start"
-              mt={{ base: 4, md: 5 }}
+              justifyContent={{ base: "center", md: "flex-start" }}
+              mt={{ base: 3, md: 5 }}
             >
               <Box position="relative" display="inline-flex">
                 <Box
@@ -285,7 +285,10 @@ const HackathonsNextHackathonSection: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="brand"
-                  size="lg"
+                  size="md"
+                  fontSize={{ base: "sm", sm: "md" }}
+                  px={{ base: 4, sm: 6, md: 7 }}
+                  py={{ base: 2.5, sm: 3 }}
                   rightIcon={<ArrowForwardIcon />}
                   position="relative"
                   zIndex={1}
@@ -299,7 +302,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
 
           <Box
             flexShrink={0}
-            w={{ base: "100%", md: "260px" }}
+            w={{ base: "70%", sm: "65%", md: "260px" }}
             display="flex"
             justifyContent={{ base: "center", md: "flex-end" }}
           >

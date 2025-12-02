@@ -57,8 +57,8 @@ const HackathonsHeroSection: React.FC = () => {
         borderRadius="3xl"
         borderWidth="1px"
         borderColor={cardBorderColor}
-        px={{ base: 5, md: 8 }}
-        py={{ base: 6, md: 8 }}
+        px={{ base: 3, md: 8 }}
+        py={{ base: 4, md: 8 }}
         animation={`${heroCardGlow} 16s ease-out infinite`}
       >
         <Box
@@ -89,7 +89,7 @@ const HackathonsHeroSection: React.FC = () => {
 
       <Stack
         direction={{ base: "column", md: "row" }}
-        spacing={{ base: 8, md: 10 }}
+        spacing={{ base: 4, md: 10 }}
         align={{ base: "flex-start", md: "center" }}
         position="relative"
         zIndex={1}
@@ -104,7 +104,7 @@ const HackathonsHeroSection: React.FC = () => {
           <Heading
             id="hackathons-hero-title"
             as="h1"
-            fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
+            fontSize={{ base: "xl", sm: "2xl", md: "3xl", lg: "4xl" }}
             lineHeight="short"
           >
             Хакатоны AIFFA: несколько дней, которые меняют карьеру разработчика
@@ -112,7 +112,7 @@ const HackathonsHeroSection: React.FC = () => {
 
           <Text
             mt={4}
-            fontSize={{ base: "md", md: "lg" }}
+            fontSize={{ base: "sm", md: "lg" }}
             color={mutedTextColor}
           >
             Работайте над живыми задачами от компаний, собирайте портфолио и
@@ -121,11 +121,12 @@ const HackathonsHeroSection: React.FC = () => {
           </Text>
 
           <Stack
-            direction={{ base: "column", sm: "row" }}
-            spacing={4}
-            mt={{ base: 6, md: 8 }}
+            direction="column"
+            spacing={{ base: 3, md: 4 }}
+            mt={{ base: 4, md: 8 }}
+            align="flex-start"
           >
-            <Box position="relative" display="inline-flex">
+            <Box position="relative" display="inline-flex" w={{ base: "100%", md: "auto" }}>
               <Box
                 position="absolute"
                 insetX={-4}
@@ -147,7 +148,12 @@ const HackathonsHeroSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 colorScheme="blue"
-                size="lg"
+                size="md"
+                fontSize={{ base: "sm", sm: "md" }}
+                px={{ base: 4, md: 6 }}
+                py={{ base: 2.5, md: 3 }}
+                w={{ base: "100%", md: "auto" }}
+                maxW={{ base: "100%", md: "360px" }}
                 position="relative"
                 zIndex={1}
               >
@@ -158,7 +164,12 @@ const HackathonsHeroSection: React.FC = () => {
               as="a"
               href="/partners"
               variant="outline"
-              size="lg"
+              size="md"
+              fontSize={{ base: "sm", sm: "md" }}
+              px={{ base: 4, md: 6 }}
+              py={{ base: 2.5, md: 3 }}
+              w={{ base: "100%", md: "auto" }}
+              maxW={{ base: "100%", md: "360px" }}
             >
               Оформить партнёрство
             </Button>
@@ -166,7 +177,8 @@ const HackathonsHeroSection: React.FC = () => {
         </Box>
 
         <Box
-          flex="1"
+          flex={{ base: "none", md: 1 }}
+          w={{ base: "100%", md: "auto" }}
           maxW={{ base: "full", md: "40%" }}
           bg={heroAsideBg}
           borderRadius="2xl"

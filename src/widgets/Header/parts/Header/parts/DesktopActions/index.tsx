@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, HStack, Link, Text, Tooltip } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import GitHubLink from '../../../GitHubLink';
+import HackathonsLink from '../../../HackathonsLink';
 import DonateButton from '../../../DonateButton';
 import ThemeToggleButton from '../../../ThemeToggleButton';
 import type { DesktopActionsProps } from './types';
@@ -83,7 +83,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
         </Link>
       </Tooltip>
       
-      <GitHubLink hoverBg={hoverBg} />
+      <HackathonsLink hoverBg={hoverBg} />
       
       <DonateButton onClick={onDonate} />
 

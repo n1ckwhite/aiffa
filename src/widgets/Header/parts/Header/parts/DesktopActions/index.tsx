@@ -83,7 +83,11 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
         </Link>
       </Tooltip>
       
-      <HackathonsLink hoverBg={hoverBg} />
+      <Tooltip label="Хакатоны" openDelay={250} hasArrow>
+        <Box>
+          <HackathonsLink hoverBg={hoverBg} />
+        </Box>
+      </Tooltip>
       
       <DonateButton onClick={onDonate} />
 

@@ -70,17 +70,16 @@ const HackathonsOverviewSection: React.FC = () => {
           mt={{ base: 4, md: 6 }}
         >
           <Box
-            bg={highlightBg}
+            bg={sectionCardBg}
             borderRadius="2xl"
             borderWidth="1px"
-            borderColor={accentBorderColor}
+            borderColor={cardBorderColor}
             p={{ base: 4, md: 5 }}
             animation={`${overviewCardFloat} 18s ease-in-out infinite`}
-            boxShadow="xl"
             transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
             _hover={{
               transform: "translateY(-6px)",
-              boxShadow: "2xl",
+              boxShadow: "xl",
               borderColor: accentBorderColor,
             }}
           >

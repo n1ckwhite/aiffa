@@ -3,7 +3,7 @@ export type ModulesFaqItem = {
   content: string;
 };
 
-export type ModulesFaqVariant = 'materials' | 'tasks' | 'xp' | 'partners';
+export type ModulesFaqVariant = 'materials' | 'tasks' | 'xp' | 'partners' | 'hackathons';
 
 export type ModulesFAQProps = {
   title?: string;

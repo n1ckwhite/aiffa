@@ -36,6 +36,17 @@ export const Sections: React.FC = () => {
         </Link>
         <Link
           as={RouterLink as any}
+          to="/hackathons"
+          fontSize="sm"
+          color={colors.textColor}
+          _hover={{ color: colors.linkHover }}
+          transition="color 0.2s"
+          textAlign="left"
+        >
+          Хакатоны
+        </Link>
+        <Link
+          as={RouterLink as any}
           to="/partners"
           fontSize="sm"
           color={colors.textColor}

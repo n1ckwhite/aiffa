@@ -17,8 +17,8 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
   const heading = title || defaultHeading;
 
   return (
-    <Box>
-      <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto" zIndex={100}>
+    <Box zIndex={100} >
+      <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto" >
         <HStack mb={2} spacing={3} color={faqHeadingColor} align="center">
           <Icon as={QuestionOutlineIcon} boxSize={{ base: 4, md: 5 }} />
           <Heading
@@ -34,7 +34,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
           borderColor={faqBorderColor}
           borderRadius="2xl"
           p={{ base: 3, md: 4, lg: 5 }}
-          bg="transparent"
+          bg={theme.cardBgFAQ}
         >
           <Accordion allowToggle>
             {list.map((it, idx) => (

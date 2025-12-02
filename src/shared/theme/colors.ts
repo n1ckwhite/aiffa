@@ -4,6 +4,7 @@ export type ColorToken = { light: string; dark: string };
 
 export const colors = {
   cardBg: { light: 'white', dark: 'gray.800' },
+  cardBgFAQ: { light: 'transparent', dark: 'gray.800' },
   cardHoverBg: { light: 'gray.50', dark: 'gray.750' },
   borderColor: { light: 'blackAlpha.200', dark: 'whiteAlpha.200' },
   titleColor: { light: 'gray.900', dark: 'white' },
@@ -30,6 +31,7 @@ export const colors = {
 export const useAppColors = () => {
   const usePick = (pair: ColorToken) => useColorModeValue(pair.light, pair.dark);
   return {
+    cardBgFAQ: usePick(colors.cardBgFAQ),
     cardBg: usePick(colors.cardBg),
     cardHoverBg: usePick(colors.cardHoverBg),
     borderColor: usePick(colors.borderColor),

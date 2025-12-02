@@ -1,15 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Heading,
-  Stack,
-  Text,
-  useBreakpointValue,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Button, Heading, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import {
   CalendarIcon,
   StarIcon,
@@ -112,7 +104,6 @@ const getCountdownState = (): CountdownState => {
 const HackathonsNextHackathonSection: React.FC = () => {
   const { sectionCardBg, cardBorderColor, mutedTextColor } = useHackathonsColors();
   const [countdown, setCountdown] = useState<CountdownState>(() => getCountdownState());
-  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const cardBgGradient = useColorModeValue(
     "linear(to-br, blue.50, whiteAlpha.900)",
@@ -213,7 +204,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
               <Heading
                 id="hackathons-next-title"
                 as="h2"
-                size={isMobile ? "md" : "lg"}
+                fontSize={{ base: "xl", md: "2xl" }}
               >
                 AIFFA Hackathon #1 — Задача старта
               </Heading>

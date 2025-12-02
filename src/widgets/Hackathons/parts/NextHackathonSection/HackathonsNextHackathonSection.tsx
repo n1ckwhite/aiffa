@@ -280,9 +280,12 @@ const HackathonsNextHackathonSection: React.FC = () => {
                   top="50%"
                   transform="translateY(-50%)"
                   h="56px"
-                  bgGradient="radial(circle at 50% 50%, rgba(59,130,246,0.65), transparent 65%)"
+                  bgGradient={useColorModeValue(
+                    "radial(circle at 50% 50%, rgba(59,130,246,0.25), transparent 65%)",
+                    "radial(circle at 50% 50%, rgba(59,130,246,0.65), transparent 65%)"
+                  )}
                   filter="blur(16px)"
-                  opacity={0.8}
+                  opacity={0.9}
                   pointerEvents="none"
                 />
                 <Button
@@ -295,6 +298,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
                   rightIcon={<ArrowForwardIcon />}
                   position="relative"
                   zIndex={1}
+                  color={useColorModeValue("gray.900", "white")}
                 >
                   Участвовать в хакатоне
                 </Button>

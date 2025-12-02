@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Icon, Text } from '@chakra-ui/react';
-import { CalendarIcon } from '@chakra-ui/icons';
+import { FaCode } from 'react-icons/fa';
 import type { HackathonsLinkProps } from './types';
 
 const HackathonsLink: React.FC<HackathonsLinkProps> = ({ hoverBg, showTextFrom = '2xl' }) => {
@@ -15,7 +15,7 @@ const HackathonsLink: React.FC<HackathonsLinkProps> = ({ hoverBg, showTextFrom =
       borderRadius="md"
       _hover={{ bg: hoverBg }}
     >
-      <Icon as={CalendarIcon} boxSize={4} aria-hidden="true" />
+      <Icon as={FaCode} boxSize={4} aria-hidden="true" />
       <Text
         ml={2}
         display={{ base: "none", [showTextFrom]: "inline" }}

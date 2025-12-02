@@ -1,7 +1,9 @@
 import React from 'react';
-import { Box, Button, HStack, Link, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Icon, Link, Text, VStack } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import type { MenuLinksProps } from './types';
+import { FaCode } from 'react-icons/fa';
+import { FaHandshake } from 'react-icons/fa6';
 
 export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg, donateHoverBg, onDonate }) => {
   return (
@@ -53,9 +55,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/hackathons" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Box as="svg" w={4} h={4} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V5m8 2V5M5 9h14M7 12h5m-5 4h10M5 5a2 2 0 012-2h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5z" />
-            </Box>
+            <Icon as={FaCode} boxSize={4} aria-hidden="true" />
             <Text>Хакатоны</Text>
           </HStack>
         </Link>
@@ -64,9 +64,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/partners" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Box as="svg" w={4} h={4} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 11c1.657 0 3-1.567 3-3.5S13.657 4 12 4 9 5.567 9 7.5 10.343 11 12 11zM6 20a6 6 0 0112 0" />
-            </Box>
+            <Icon as={FaHandshake} boxSize={4} aria-hidden="true" />
             <Text>Партнёрство</Text>
           </HStack>
         </Link>

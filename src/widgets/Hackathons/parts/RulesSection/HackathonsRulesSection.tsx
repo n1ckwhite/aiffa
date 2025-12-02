@@ -7,11 +7,25 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
+import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import { BusinessWorkshopIcon } from "@/shared/icons/components-icon";
 
+const rulesCardFloat = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
 const HackathonsRulesSection: React.FC = () => {
-  const { mutedTextColor, sectionCardBg, cardBorderColor } = useHackathonsColors();
+  const { mutedTextColor, sectionCardBg, cardBorderColor, accentBorderColor } =
+    useHackathonsColors();
 
   return (
     <Box
@@ -49,6 +63,13 @@ const HackathonsRulesSection: React.FC = () => {
             borderWidth="1px"
             borderColor={cardBorderColor}
             p={{ base: 4, md: 5 }}
+            animation={`${rulesCardFloat} 20s ease-in-out infinite`}
+            transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
+            _hover={{
+              transform: "translateY(-6px)",
+              boxShadow: "xl",
+              borderColor: accentBorderColor,
+            }}
           >
             <Stack spacing={2}>
               <Stack direction="row" align="center" spacing={3}>
@@ -79,6 +100,13 @@ const HackathonsRulesSection: React.FC = () => {
             borderWidth="1px"
             borderColor={cardBorderColor}
             p={{ base: 4, md: 5 }}
+            animation={`${rulesCardFloat} 22s ease-in-out infinite`}
+            transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
+            _hover={{
+              transform: "translateY(-6px)",
+              boxShadow: "xl",
+              borderColor: accentBorderColor,
+            }}
           >
             <Stack spacing={2}>
               <Stack direction="row" align="center" spacing={3}>
@@ -109,6 +137,13 @@ const HackathonsRulesSection: React.FC = () => {
             borderWidth="1px"
             borderColor={cardBorderColor}
             p={{ base: 4, md: 5 }}
+            animation={`${rulesCardFloat} 24s ease-in-out infinite`}
+            transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
+            _hover={{
+              transform: "translateY(-6px)",
+              boxShadow: "xl",
+              borderColor: accentBorderColor,
+            }}
           >
             <Stack spacing={2}>
               <Stack direction="row" align="center" spacing={3}>
@@ -140,6 +175,13 @@ const HackathonsRulesSection: React.FC = () => {
             borderWidth="1px"
             borderColor={cardBorderColor}
             p={{ base: 4, md: 5 }}
+            animation={`${rulesCardFloat} 26s ease-in-out infinite`}
+            transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
+            _hover={{
+              transform: "translateY(-6px)",
+              boxShadow: "xl",
+              borderColor: accentBorderColor,
+            }}
           >
             <Stack spacing={2}>
               <Stack direction="row" align="center" spacing={3}>

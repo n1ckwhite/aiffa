@@ -5,18 +5,19 @@ import {
   Heading,
   Stack,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
-import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import PillBadge from "@/shared/ui/PillBadge";
+import { useHackathonsFinalCtaSectionColors } from "./colors/useHackathonsFinalCtaSectionColors";
 
 const HackathonsFinalCtaSection: React.FC = () => {
-  const { mutedTextColor, accentBorderColor } =
-    useHackathonsColors();
-  const finalCtaBgGradient = useColorModeValue(
-    "linear(to-br, blue.50, purple.50)",
-    "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.9))"
-  );
+  const {
+    mutedTextColor,
+    accentBorderColor,
+    finalCtaBgGradient,
+    partnerBorderColor,
+    partnerBg,
+    partnerHoverBg,
+  } = useHackathonsFinalCtaSectionColors();
 
   return (
     <Box
@@ -72,6 +73,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
           zIndex={1}
         >
           <Box
+            as="header"
             textAlign={{ base: "center", md: "center" }}
             mx={{ base: "auto", md: 0 }}
           >
@@ -88,6 +90,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
               Готовы попробовать себя в хакатоне или прийти как партнёр?
             </Heading>
             <Text
+              id="hackathons-final-cta-description"
               mt={3}
               fontSize={{ base: "md", md: "lg" }}
               color={mutedTextColor}
@@ -133,6 +136,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
                 boxShadow: "md",
               }}
               borderRadius="full"
+              aria-describedby="hackathons-final-cta-description"
             >
               Участвовать в хакатоне
             </Button>
@@ -146,13 +150,15 @@ const HackathonsFinalCtaSection: React.FC = () => {
               py={{ base: 3, md: 3.5 }}
               w={{ base: "100%", sm: "auto" }}
               minW={{ sm: "220px" }}
-              borderColor={useColorModeValue("whiteAlpha.800", "whiteAlpha.700")}
-              bg={useColorModeValue("whiteAlpha.900", "rgba(15,23,42,0.9)")}
+              borderColor={partnerBorderColor}
+              bg={partnerBg}
               _hover={{
-                bg: useColorModeValue("white", "rgba(15,23,42,0.98)"),
+                bg: partnerHoverBg,
                 borderColor: accentBorderColor,
               }}
-              borderRadius="full">
+              borderRadius="full"
+              aria-describedby="hackathons-final-cta-description"
+            >
               Стать партнёром
             </Button>
           </Stack>

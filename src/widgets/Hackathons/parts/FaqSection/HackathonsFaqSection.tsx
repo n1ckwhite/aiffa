@@ -6,7 +6,7 @@ const HackathonsFaqSection: React.FC = () => {
   return (
     <Box
       as="section"
-      aria-labelledby="hackathons-faq-heading"
+      aria-label="Частые вопросы о хакатонах"
       pt={{ base: 4, md: 6 }}
       zIndex={100}
     >

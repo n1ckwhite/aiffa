@@ -66,6 +66,8 @@ const HackathonsOverviewSection: React.FC = () => {
         <SimpleGrid
           as="ul"
           role="list"
+          listStyleType="none"
+          pl={0}
           columns={{ base: 1, md: 3 }}
           spacing={{ base: 4, md: 6 }}
           mt={{ base: 4, md: 6 }}

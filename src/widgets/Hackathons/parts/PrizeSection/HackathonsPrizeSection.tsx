@@ -1,70 +1,16 @@
 import React from "react";
-import { Box, Heading, SimpleGrid, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
-import { keyframes } from "@emotion/react";
-import { useHackathonsColors } from "../../colors/useHackathonsColors";
+import { useHackathonsPrizeSectionColors } from "./colors/useHackathonsPrizeSectionColors";
+import { prizeBlobA, prizeBlobB, prizeGlow, prizeShimmer } from "./animations";
+import { useHackathonsPrizeTiers } from "./data";
 import { BusinessTeamLottieIcon } from "@/shared/icons/components-icon";
 import PillBadge from "@/shared/ui/PillBadge";
 
-const prizeGlow = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.45);
-  }
-  70% {
-    box-shadow: 0 0 0 20px rgba(236, 72, 153, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
-  }
-`;
-
-const prizeBlobA = keyframes`
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(18px, -14px, 0) scale(1.06);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-`;
-
-const prizeBlobB = keyframes`
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(-16px, 18px, 0) scale(1.08);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-`;
-
-const prizeShimmer = keyframes`
-  0% {
-    transform: translateX(-40%);
-    opacity: 0;
-  }
-  30% {
-    opacity: 1;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(150%);
-    opacity: 0;
-  }
-`;
-
 const HackathonsPrizeSection: React.FC = () => {
-  const { sectionCardBg, cardBorderColor, mutedTextColor } = useHackathonsColors();
-  const prizeBgGradient = useColorModeValue(
-    "linear(to-br, purple.50, pink.50)",
-    "linear(to-br, rgba(15, 23, 42, 1), rgba(76, 29, 149, 0.9))"
-  );
+  const { sectionCardBg, cardBorderColor, mutedTextColor, prizeBgGradient } =
+    useHackathonsPrizeSectionColors();
+  const prizeTiers = useHackathonsPrizeTiers();
 
   return (
     <Box
@@ -152,119 +98,62 @@ const HackathonsPrizeSection: React.FC = () => {
             </Text>
           </Box>
 
-          <BusinessTeamLottieIcon />
+          <Box aria-hidden="true">
+            <BusinessTeamLottieIcon />
+          </Box>
 
           <SimpleGrid
+            as="ul"
+            role="list"
             columns={{ base: 1, md: 3 }}
             spacing={{ base: 4, md: 6 }}
           >
-          <Box
-            bg={sectionCardBg}
-            borderRadius="2xl"
-            borderWidth="1px"
-            borderColor={cardBorderColor}
-            p={{ base: 4, md: 5 }}
-            textAlign="center"
-          >
-            <Stack direction="row" align="center" justify="center" spacing={2} mb={2}>
-              <StarIcon color="yellow.400" />
-              <Text
-                as="span"
-                fontSize="sm"
-                fontWeight="semibold"
-                textTransform="uppercase"
-                letterSpacing="0.08em"
+            {prizeTiers.map((tier) => (
+              <Box
+                key={tier.id}
+                as="li"
+                role="listitem"
+                bg={sectionCardBg}
+                borderRadius="2xl"
+                borderWidth="1px"
+                borderColor={cardBorderColor}
+                p={{ base: 4, md: 5 }}
+                textAlign="center"
               >
-                1 место
-              </Text>
-            </Stack>
-            <Text
-              fontSize={{ base: "2xl", md: "3xl" }}
-              fontWeight="bold"
-            >
-              50&nbsp;000&nbsp;₽
-            </Text>
-            <Text
-              mt={2}
-              fontSize="sm"
-              color={mutedTextColor}
-            >
-              Для команды, которая лучше всех раскрыла задачу и собрала
-              сильное демо.
-            </Text>
-          </Box>
-
-          <Box
-            bg={sectionCardBg}
-            borderRadius="2xl"
-            borderWidth="1px"
-            borderColor={cardBorderColor}
-            p={{ base: 4, md: 5 }}
-            textAlign="center"
-          >
-            <Stack direction="row" align="center" justify="center" spacing={2} mb={2}>
-              <StarIcon color="purple.300" />
-              <Text
-                as="span"
-                fontSize="sm"
-                fontWeight="semibold"
-                textTransform="uppercase"
-                letterSpacing="0.08em"
-              >
-                2 место
-              </Text>
-            </Stack>
-            <Text
-              fontSize={{ base: "2xl", md: "3xl" }}
-              fontWeight="bold"
-            >
-              30&nbsp;000&nbsp;₽
-            </Text>
-            <Text
-              mt={2}
-              fontSize="sm"
-              color={mutedTextColor}
-            >
-              Для команды с сильным решением и качественной подачей проекта.
-            </Text>
-          </Box>
-
-          <Box
-            bg={sectionCardBg}
-            borderRadius="2xl"
-            borderWidth="1px"
-            borderColor={cardBorderColor}
-            p={{ base: 4, md: 5 }}
-            textAlign="center"
-          >
-            <Stack direction="row" align="center" justify="center" spacing={2} mb={2}>
-              <StarIcon color="blue.300" />
-              <Text
-                as="span"
-                fontSize="sm"
-                fontWeight="semibold"
-                textTransform="uppercase"
-                letterSpacing="0.08em"
-              >
-                3 место
-              </Text>
-            </Stack>
-            <Text
-              fontSize={{ base: "2xl", md: "3xl" }}
-              fontWeight="bold"
-            >
-              20&nbsp;000&nbsp;₽
-            </Text>
-            <Text
-              mt={2}
-              fontSize="sm"
-              color={mutedTextColor}
-            >
-              Для команды, которая показала классный прогресс и интересный
-              подход к задаче.
-            </Text>
-          </Box>
-        </SimpleGrid>
+                <Stack
+                  direction="row"
+                  align="center"
+                  justify="center"
+                  spacing={2}
+                  mb={2}
+                >
+                  <StarIcon color={tier.accentColor} />
+                  <Heading
+                    as="h3"
+                    fontSize="sm"
+                    fontWeight="semibold"
+                    textTransform="uppercase"
+                    letterSpacing="0.08em"
+                  >
+                    {tier.placeLabel}
+                  </Heading>
+                </Stack>
+                <Text
+                  fontSize={{ base: "2xl", md: "3xl" }}
+                  fontWeight="bold"
+                >
+                  {tier.amountLabel}
+                </Text>
+                <Text
+                  mt={2}
+                  fontSize="sm"
+                  color={mutedTextColor}
+                >
+                  {tier.description}
+                </Text>
+              </Box>
+            ))}
+          </SimpleGrid>
         </Stack>
       </Box>
     </Box>

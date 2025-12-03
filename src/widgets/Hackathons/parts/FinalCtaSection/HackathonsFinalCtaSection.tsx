@@ -24,7 +24,6 @@ const HackathonsFinalCtaSection: React.FC = () => {
       aria-labelledby="hackathons-final-cta-title"
       display="flex"
       justifyContent="center"
-      px={{ base: 3, md: 4 }}
     >
       <Box
         position="relative"

@@ -9,28 +9,13 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { keyframes } from "@emotion/react";
-import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import PillBadge from "@/shared/ui/PillBadge";
-
-const heroAsideFloat = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-`;
+import { heroAsideFloat } from "./animations";
+import { useHackathonsHeroSectionColors } from "./colors/useHackathonsHeroSectionColors";
 
 const HackathonsHeroSection: React.FC = () => {
-  const { heroAsideBg, mutedTextColor, cardBorderColor } = useHackathonsColors();
-  const heroBgGradient = useColorModeValue(
-    "linear(to-br, blue.50, whiteAlpha.900)",
-    "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.9))"
-  );
+  const { heroAsideBg, mutedTextColor, cardBorderColor, heroBgGradient } =
+    useHackathonsHeroSectionColors();
 
   return (
     <Box
@@ -82,6 +67,7 @@ const HackathonsHeroSection: React.FC = () => {
         zIndex={1}
       >
         <Box
+          as="header"
           flex="1"
           maxW={{ base: "full", md: "60%" }}
           textAlign={{ base: "center", md: "left" }}
@@ -102,6 +88,7 @@ const HackathonsHeroSection: React.FC = () => {
           </Heading>
 
           <Text
+            id="hackathons-hero-description"
             mt={4}
             fontSize={{ base: "sm", md: "lg" }}
             color={mutedTextColor}
@@ -164,6 +151,7 @@ const HackathonsHeroSection: React.FC = () => {
                   boxShadow: "md",
                 }}
                 borderRadius="full"
+                aria-describedby="hackathons-hero-description"
               >
                 Участвовать в хакатонах
               </Button>
@@ -177,13 +165,16 @@ const HackathonsHeroSection: React.FC = () => {
               px={{ base: 4, md: 6 }}
               py={{ base: 2.5, md: 3 }}
               w={{ base: "100%", md: "360px" }}
-              borderRadius="full">
+              borderRadius="full"
+              aria-describedby="hackathons-hero-description"
+            >
               Стать партнёром
             </Button>
           </Stack>
         </Box>
 
         <Box
+          as="aside"
           flex={{ base: "none", md: 1 }}
           w={{ base: "100%", md: "auto" }}
           maxW={{ base: "full", md: "40%" }}
@@ -195,21 +186,35 @@ const HackathonsHeroSection: React.FC = () => {
           py={{ base: 4, md: 6 }}
           boxShadow="lg"
           animation={`${heroAsideFloat} 18s ease-in-out infinite`}
+          aria-labelledby="hackathons-hero-benefits-title"
         >
           <Text
+            as="h2"
+            id="hackathons-hero-benefits-title"
             fontSize={{ base: "sm", md: "md" }}
             color={mutedTextColor}
             mb={3}
           >
             На хакатонах AIFFA вы:
           </Text>
-          <Stack spacing={2.5} fontSize={{ base: "sm", md: "md" }}>
-            <HStack align="flex-start" spacing={2.5}>
+          <Stack
+            as="ul"
+            role="list"
+            spacing={2.5}
+            fontSize={{ base: "sm", md: "md" }}
+          >
+            <HStack
+              as="li"
+              role="listitem"
+              align="flex-start"
+              spacing={2.5}
+            >
               <Icon
                 viewBox="0 0 16 16"
                 boxSize={4}
                 color="green.400"
                 mt={0.5}
+                aria-hidden="true"
               >
                 <path
                   fill="currentColor"
@@ -220,12 +225,18 @@ const HackathonsHeroSection: React.FC = () => {
                 решаете реальные продуктовые задачи;
               </Text>
             </HStack>
-            <HStack align="flex-start" spacing={2.5}>
+            <HStack
+              as="li"
+              role="listitem"
+              align="flex-start"
+              spacing={2.5}
+            >
               <Icon
                 viewBox="0 0 16 16"
                 boxSize={4}
                 color="green.400"
                 mt={0.5}
+                aria-hidden="true"
               >
                 <path
                   fill="currentColor"
@@ -236,12 +247,18 @@ const HackathonsHeroSection: React.FC = () => {
                 работаете в команде с другими разработчиками;
               </Text>
             </HStack>
-            <HStack align="flex-start" spacing={2.5}>
+            <HStack
+              as="li"
+              role="listitem"
+              align="flex-start"
+              spacing={2.5}
+            >
               <Icon
                 viewBox="0 0 16 16"
                 boxSize={4}
                 color="green.400"
                 mt={0.5}
+                aria-hidden="true"
               >
                 <path
                   fill="currentColor"
@@ -252,12 +269,18 @@ const HackathonsHeroSection: React.FC = () => {
                 получаете фидбек от менторов и экспертов;
               </Text>
             </HStack>
-            <HStack align="flex-start" spacing={2.5}>
+            <HStack
+              as="li"
+              role="listitem"
+              align="flex-start"
+              spacing={2.5}
+            >
               <Icon
                 viewBox="0 0 16 16"
                 boxSize={4}
                 color="green.400"
                 mt={0.5}
+                aria-hidden="true"
               >
                 <path
                   fill="currentColor"

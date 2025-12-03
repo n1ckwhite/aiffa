@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, Button, Heading, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import {
   CalendarIcon,
@@ -8,126 +8,20 @@ import {
   QuestionOutlineIcon,
   ArrowForwardIcon,
 } from "@chakra-ui/icons";
-import { keyframes } from "@emotion/react";
-import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import { telegramHref } from "../../../Footer/model/links";
 import { RewardsLottieIcon } from "@/shared/icons/components-icon";
-
-type CountdownState = {
-  days: number;
-  hours: number;
-  minutes: number;
-  isStarted: boolean;
-};
-
-const HACKATHON_START = new Date("2025-05-15T18:00:00+03:00");
-
-const cardGlow = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.55);
-  }
-  70% {
-    box-shadow: 0 0 0 18px rgba(59, 130, 246, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-  }
-`;
-
-const shimmer = keyframes`
-  0% {
-    transform: translateX(-40%);
-    opacity: 0;
-  }
-  30% {
-    opacity: 1;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(140%);
-    opacity: 0;
-  }
-`;
-
-const floatBlobA = keyframes`
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(12px, -18px, 0) scale(1.05);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-`;
-
-const floatBlobB = keyframes`
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(-16px, 12px, 0) scale(1.08);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-`;
-
-const getCountdownState = (): CountdownState => {
-  const now = new Date().getTime();
-  const diff = HACKATHON_START.getTime() - now;
-
-  if (diff <= 0) {
-    return {
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      isStarted: true,
-    };
-  }
-
-  const totalMinutes = Math.floor(diff / (1000 * 60));
-  const days = Math.floor(totalMinutes / (60 * 24));
-  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
-  const minutes = totalMinutes % 60;
-
-  return {
-    days,
-    hours,
-    minutes,
-    isStarted: false,
-  };
-};
+import { cardGlow, floatBlobA, floatBlobB, shimmer } from "./animations";
+import { useNextHackathonCountdown } from "./hooks";
+import { useNextHackathonSectionColors } from "./colors/useHackathonsNextHackathonSectionColors";
 
 const HackathonsNextHackathonSection: React.FC = () => {
-  const { sectionCardBg, cardBorderColor, mutedTextColor } = useHackathonsColors();
-  const [countdown, setCountdown] = useState<CountdownState>(() => getCountdownState());
-
-  const cardBgGradient = useColorModeValue(
-    "linear(to-br, blue.50, whiteAlpha.900)",
-    "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.9))"
-  );
-
-  useEffect(() => {
-    const handleTick = () => {
-      setCountdown(getCountdownState());
-    };
-
-    handleTick();
-
-    const intervalId = window.setInterval(handleTick, 60_000);
-
-    return () => {
-      window.clearInterval(intervalId);
-    };
-  }, []);
+  const { cardBorderColor, mutedTextColor, cardBgGradient } = useNextHackathonSectionColors();
+  const countdown = useNextHackathonCountdown();
 
   return (
     <Box
       as="section"
-      aria-labelledby="hackathons-next-title"
+      aria-labelledby="hackathons-next-section-title"
     >
       <Stack
         mb={{ base: 4, md: 6 }}
@@ -142,8 +36,8 @@ const HackathonsNextHackathonSection: React.FC = () => {
           spacing={{ base: 1, sm: 2 }}
         >
           <Heading
-            as="h1"
-            id="partners-hero-title"
+            as="h2"
+            id="hackathons-next-section-title"
             fontSize={{ base: "2xl", md: "4xl" }}
             letterSpacing="-0.03em"
             textAlign="center"
@@ -238,7 +132,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
               </Text>
               <Heading
                 id="hackathons-next-title"
-                as="h2"
+                as="h3"
                 fontSize={{ base: "lg", sm: "xl", md: "2xl" }}
               >
                 AIFFA Hackathon #1 — Задача старта
@@ -246,23 +140,31 @@ const HackathonsNextHackathonSection: React.FC = () => {
             </Box>
 
             <Stack
+              as="ul"
+              role="list"
               spacing={2}
               fontSize={{ base: "xs", md: "sm" }}
               color={mutedTextColor}
             >
-              <Stack direction="row" align="center" spacing={2}>
+              <Stack as="li" role="listitem" direction="row" align="center" spacing={2}>
                 <Box as={CalendarIcon} color="blue.400" boxSize={{ base: 3, md: 4 }} />
-                <Text as="span" fontStyle="italic" fontWeight="semibold" color={useColorModeValue("blue.700", "blue.200")}>
+                <Text
+                  as="time"
+                  dateTime="2025-05"
+                  fontStyle="italic"
+                  fontWeight="semibold"
+                  color={useColorModeValue("blue.700", "blue.200")}
+                >
                   Май 2025
                 </Text>
               </Stack>
-              <Stack direction="row" align="center" spacing={2}>
+              <Stack as="li" role="listitem" direction="row" align="center" spacing={2}>
                 <Box as={StarIcon} color="yellow.400" boxSize={{ base: 3, md: 4 }} />
                 <Text as="span" fontStyle="italic" fontWeight="semibold" color={useColorModeValue("yellow.700", "yellow.200")}>
                   Призовой фонд: 100&nbsp;000&nbsp;₽
                 </Text>
               </Stack>
-              <Stack direction="row" align="center" spacing={2}>
+              <Stack as="li" role="listitem" direction="row" align="center" spacing={2}>
                 <Box as={QuestionOutlineIcon} color="purple.300" boxSize={{ base: 3, md: 4 }} />
                 <Text as="span" fontStyle="italic" fontWeight="semibold" color={useColorModeValue("purple.600", "purple.200")}>
                   Тема: будет объявлена позже
@@ -270,7 +172,12 @@ const HackathonsNextHackathonSection: React.FC = () => {
               </Stack>
             </Stack>
 
-            <Box mt={{ base: 2, md: 4 }}>
+            <Box
+              mt={{ base: 2, md: 4 }}
+              role="status"
+              aria-live="polite"
+              id="hackathons-next-countdown"
+            >
               {countdown.isStarted ? (
                 <Text
                   fontSize={{ base: "xs", md: "sm" }}
@@ -329,6 +236,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
                   position="relative"
                   zIndex={1}
                   color={useColorModeValue("gray.900", "white")}
+                  aria-describedby="hackathons-next-countdown"
                 >
                   Участвовать в хакатоне
                 </Button>

@@ -5,23 +5,26 @@ import {
   SimpleGrid,
   Stack,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { CheckCircleIcon, EditIcon, ExternalLinkIcon, ViewIcon } from "@chakra-ui/icons";
-import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import PillBadge from "@/shared/ui/PillBadge";
+import { useHackathonsSubmissionSectionColors } from "./colors/useHackathonsSubmissionSectionColors";
+import { useHackathonsSubmissionCards } from "./data";
 
 const HackathonsSubmissionSection: React.FC = () => {
-  const { mutedTextColor, sectionCardBg, cardBorderColor, accentBorderColor } =
-    useHackathonsColors();
-  const submissionBgGradient = useColorModeValue(
-    "linear(to-br, blue.50, purple.50)",
-    "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.95))"
-  );
-  const requirementsCircleBg = useColorModeValue("teal.500", "teal.400");
-  const githubCircleBg = useColorModeValue("blue.500", "blue.400");
-  const readmeCircleBg = useColorModeValue("purple.500", "purple.400");
-  const demoCircleBg = useColorModeValue("green.500", "green.400");
+  const {
+    mutedTextColor,
+    sectionCardBg,
+    cardBorderColor,
+    accentBorderColor,
+    submissionBgGradient,
+    requirementsCircleBg,
+    githubCircleBg,
+    readmeCircleBg,
+    demoCircleBg,
+    descriptionColor,
+  } = useHackathonsSubmissionSectionColors();
+  const cards = useHackathonsSubmissionCards();
 
   return (
     <Box
@@ -70,7 +73,11 @@ const HackathonsSubmissionSection: React.FC = () => {
           position="relative"
           zIndex={1}
         >
-          <Box maxW={{ base: "full", md: "720px" }} textAlign="center">
+          <Box
+            as="header"
+            maxW={{ base: "full", md: "720px" }}
+            textAlign="center"
+          >
             <Box mb={3}>
               <PillBadge colorScheme="blue" variant="outline" uppercase>
                 Формат решения
@@ -84,6 +91,7 @@ const HackathonsSubmissionSection: React.FC = () => {
               Как подать решение
             </Heading>
             <Text
+              id="hackathons-submit-description"
               mt={3}
               fontSize={{ base: "md", md: "lg" }}
               color={mutedTextColor}
@@ -94,155 +102,70 @@ const HackathonsSubmissionSection: React.FC = () => {
           </Box>
 
           <SimpleGrid
+            as="ul"
+            role="list"
+            listStyleType="none"
+            pl={0}
             columns={{ base: 1, md: 2 }}
             spacing={{ base: 4, md: 6 }}
             w="full"
           >
-            <Box
-              bg={sectionCardBg}
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={cardBorderColor}
-              p={{ base: 4, md: 5 }}
-              transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
-              _hover={{
-                transform: "translateY(-4px)",
-                boxShadow: "xl",
-                borderColor: "blue.400",
-              }}
-            >
-              <Stack spacing={2}>
-                <Stack direction="row" align="center" spacing={3}>
-                  <Box
-                    borderRadius="full"
-                    bg={requirementsCircleBg}
-                    boxSize={8}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <CheckCircleIcon color="white" boxSize={4} />
-                  </Box>
-                  <Text fontWeight="semibold">
-                    Требования
-                  </Text>
-                </Stack>
-                <Text fontSize={{ base: "sm", md: "md" }} color={mutedTextColor}>
-                  Кратко опишите, что именно вы реализовали и какие критерии задачи
-                  закрыли. Это помогает жюри быстро понять, на чём вы сфокусировались.
-                </Text>
-              </Stack>
-            </Box>
+            {cards.map((card) => {
+              let circleBg = requirementsCircleBg;
+              let iconNode: React.ReactNode = <CheckCircleIcon color="white" boxSize={4} />;
 
-            <Box
-              bg={sectionCardBg}
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={cardBorderColor}
-              p={{ base: 4, md: 5 }}
-              transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
-              _hover={{
-                transform: "translateY(-4px)",
-                boxShadow: "xl",
-                borderColor: "blue.400",
-              }}
-            >
-              <Stack spacing={2}>
-                <Stack direction="row" align="center" spacing={3}>
-                  <Box
-                    borderRadius="full"
-                    bg={githubCircleBg}
-                    boxSize={8}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <ExternalLinkIcon color="white" boxSize={4} />
-                  </Box>
-                  <Text fontWeight="semibold">
-                    GitHub
-                  </Text>
-                </Stack>
-                <Text fontSize={{ base: "sm", md: "md" }} color={mutedTextColor}>
-                  Репозиторий с кодом и понятной структурой: отдельные директории,
-                  аккуратные коммиты и доступ для чтения. Это главный источник правды
-                  по вашему решению.
-                </Text>
-              </Stack>
-            </Box>
+              if (card.id === "github") {
+                circleBg = githubCircleBg;
+                iconNode = <ExternalLinkIcon color="white" boxSize={4} />;
+              } else if (card.id === "readme") {
+                circleBg = readmeCircleBg;
+                iconNode = <EditIcon color="white" boxSize={4} />;
+              } else if (card.id === "demo") {
+                circleBg = demoCircleBg;
+                iconNode = <ViewIcon color="white" boxSize={4} />;
+              }
 
-            <Box
-              bg={sectionCardBg}
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={cardBorderColor}
-              p={{ base: 4, md: 5 }}
-              transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
-              _hover={{
-                transform: "translateY(-4px)",
-                boxShadow: "xl",
-                borderColor: "blue.400",
-              }}
-            >
-              <Stack spacing={2}>
-                <Stack direction="row" align="center" spacing={3}>
-                  <Box
-                    borderRadius="full"
-                    bg={readmeCircleBg}
-                    boxSize={8}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <EditIcon color="white" boxSize={4} />
-                  </Box>
-                  <Text fontWeight="semibold">
-                    README
-                  </Text>
-                </Stack>
-                <Text fontSize={{ base: "sm", md: "md" }} color={mutedTextColor}>
-                  Несколько абзацев о запуске проекта, стеке, архитектуре и том, как вы
-                  распределили роли в команде. Хороший README — это мини-презентация
-                  вашего решения.
-                </Text>
-              </Stack>
-            </Box>
-
-            <Box
-              bg={sectionCardBg}
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={cardBorderColor}
-              p={{ base: 4, md: 5 }}
-              transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
-              _hover={{
-                transform: "translateY(-4px)",
-                boxShadow: "xl",
-                borderColor: "blue.400",
-              }}
-            >
-              <Stack spacing={2}>
-                <Stack direction="row" align="center" spacing={3}>
-                  <Box
-                    borderRadius="full"
-                    bg={demoCircleBg}
-                    boxSize={8}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <ViewIcon color="white" boxSize={4} />
-                  </Box>
-                  <Text fontWeight="semibold">
-                    Демо
-                  </Text>
-                </Stack>
-                <Text fontSize={{ base: "sm", md: "md" }} color={mutedTextColor}>
-                  Ссылка на развернутый прототип или запись демонстрации, если деплой
-                  невозможен. Так жюри и партнёрам проще увидеть решение в действии.
-                </Text>
-              </Stack>
-            </Box>
+              return (
+                <Box
+                  key={card.id}
+                  as="li"
+                  role="listitem"
+                  bg={sectionCardBg}
+                  borderRadius="2xl"
+                  borderWidth="1px"
+                  borderColor={cardBorderColor}
+                  p={{ base: 4, md: 5 }}
+                  transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
+                  _hover={{
+                    transform: "translateY(-4px)",
+                    boxShadow: "xl",
+                    borderColor: "blue.400",
+                  }}
+                >
+                  <Stack spacing={2}>
+                    <Stack direction="row" align="center" spacing={3}>
+                      <Box
+                        borderRadius="full"
+                        bg={circleBg}
+                        boxSize={8}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        aria-hidden="true"
+                      >
+                        {iconNode}
+                      </Box>
+                      <Text fontWeight="semibold">
+                        {card.title}
+                      </Text>
+                    </Stack>
+                    <Text fontSize={{ base: "sm", md: "md" }} color={mutedTextColor}>
+                      {card.description}
+                    </Text>
+                  </Stack>
+                </Box>
+              );
+            })}
           </SimpleGrid>
 
           <Box
@@ -260,7 +183,7 @@ const HackathonsSubmissionSection: React.FC = () => {
                 fontWeight="semibold"
                 textTransform="uppercase"
                 letterSpacing="0.12em"
-                color={useColorModeValue("blue.600", "blue.200")}
+                color={descriptionColor}
               >
                 Важно для участников
               </Text>

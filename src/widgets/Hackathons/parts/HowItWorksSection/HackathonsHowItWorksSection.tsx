@@ -7,8 +7,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import BusinessAnalyticsIcon from "@/shared/icons/components-icon/BusinessAnatyticsIcon";
+import { useHackathonsHowItWorksSectionColors } from "./colors/useHackathonsHowItWorksSectionColors";
+import { useHackathonsHowItWorksSteps } from "./data";
 
 const HackathonsHowItWorksSection: React.FC = () => {
   const {
@@ -17,65 +18,32 @@ const HackathonsHowItWorksSection: React.FC = () => {
     stepNumberColor,
     stepCardBg,
     mutedTextColor,
-  } = useHackathonsColors();
-
-  const steps = [
-    {
-      number: "1",
-      title: "Анонс и открытие регистрации",
-      description:
-        "Мы публикуем анонс хакатона, описываем тематику, примерные задачи, сроки и базовые требования. В этот момент открывается регистрация для участников и команд.",
-    },
-    {
-      number: "2",
-      title: "Формирование команд",
-      description:
-        "Участники знакомятся в сообществе, собирают команды минимум по два человека, распределяют роли и договариваются о времени. Если вы пришли один, мы помогаем найти команду по интересам и стеку.",
-    },
-    {
-      number: "3",
-      title: "Выдача задачи",
-      description:
-        "Вы получаете бриф с задачей: она может приходить от партнёрской компании или быть подготовлена командой AIFFA. В брифе — цели, ограничения, критерии оценки и технические детали.",
-    },
-    {
-      number: "4",
-      title: "Работа над проектом",
-      description:
-        "Команда проектирует решение, делит задачи, пишет код и регулярно синхронизируется. Менторы помогают с выбором подхода, архитектуры и приоритетов, чтобы вы успели собрать рабочий прототип.",
-    },
-    {
-      number: "5",
-      title: "Отправка решения",
-      description:
-        "К дедлайну вы отправляете решение в простом и понятном формате: GitHub‑репозиторий, README с описанием и ссылка на демо. Это делает процесс прозрачным и привычным для индустрии.",
-    },
-    {
-      number: "6",
-      title: "Публичный разбор",
-      description:
-        "Из всех работ мы отбираем до 10 финальных команд: они показывают презентацию и демо, а эксперты разбирают решения — что получилось хорошо, где можно усилить архитектуру, UX или процесс разработки.",
-    },
-    {
-      number: "7",
-      title: "Награждение победителей",
-      description:
-        "Среди финалистов выбираем 1‑е, 2‑е и 3‑е место. Помимо призов вы получаете публичное признание, кейс в портфолио и отметку об участии в хакатоне.",
-    },
-  ];
+  } = useHackathonsHowItWorksSectionColors();
+  const steps = useHackathonsHowItWorksSteps();
 
   return (
     <Box
       as="section"
-      aria-label="Как проходит хакатон AIFFA"
+      aria-labelledby="hackathons-how-title"
     >
-      <BusinessAnalyticsIcon/>
+      <Box aria-hidden="true">
+        <BusinessAnalyticsIcon />
+      </Box>
       <Stack spacing={{ base: 4, md: 6 }} align="center">
-        <Box maxW={{ base: "full", md: "720px" }} textAlign="center">
-          <Heading as="h2" size="lg">
+        <Box
+          as="header"
+          maxW={{ base: "full", md: "720px" }}
+          textAlign="center"
+        >
+          <Heading
+            id="hackathons-how-title"
+            as="h2"
+            size="lg"
+          >
             Как проходят хакатоны AIFFA
           </Heading>
           <Text
+            id="hackathons-how-description"
             mt={3}
             fontSize={{ base: "md", md: "lg" }}
             color={mutedTextColor}
@@ -87,13 +55,19 @@ const HackathonsHowItWorksSection: React.FC = () => {
         </Box>
 
         <SimpleGrid
+          as="ol"
+          role="list"
+          listStyleType="none"
+          pl={0}
           columns={{ base: 1, md: 2 }}
           spacing={{ base: 4, md: 6 }}
           mt={{ base: 4, md: 6 }}
         >
           {steps.map((step) => (
             <Stack
-              key={step.number}
+              key={step.id}
+              as="li"
+              role="listitem"
               direction="row"
               spacing={4}
               align="flex-start"
@@ -107,6 +81,7 @@ const HackathonsHowItWorksSection: React.FC = () => {
                   color={stepNumberColor}
                   fontWeight="semibold"
                   fontSize="sm"
+                  aria-hidden="true"
                 >
                   {step.number}
                 </Circle>

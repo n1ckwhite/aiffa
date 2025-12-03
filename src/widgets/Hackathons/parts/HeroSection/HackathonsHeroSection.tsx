@@ -200,6 +200,8 @@ const HackathonsHeroSection: React.FC = () => {
           <Stack
             as="ul"
             role="list"
+            listStyleType="none"
+            pl={0}
             spacing={2.5}
             fontSize={{ base: "sm", md: "md" }}
           >

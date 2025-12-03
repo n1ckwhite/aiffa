@@ -5,45 +5,20 @@ import {
   SimpleGrid,
   Stack,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
-import { keyframes } from "@emotion/react";
-import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import PillBadge from "@/shared/ui/PillBadge";
-
-const communityCardFloat = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-`;
-
-const communityMetricPulse = keyframes`
-  0% {
-    transform: translateY(0) scale(1);
-    text-shadow: 0 0 0 rgba(56, 189, 248, 0.0);
-  }
-  50% {
-    transform: translateY(-1px) scale(1.04);
-    text-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-    text-shadow: 0 0 0 rgba(56, 189, 248, 0.0);
-  }
-`;
+import { communityCardFloat, communityMetricPulse } from "./animations";
+import { useHackathonsCommunityGrowthSectionColors } from "./colors/useHackathonsCommunityGrowthSectionColors";
+import { useHackathonsCommunityMetrics } from "./data";
 
 const HackathonsCommunityGrowthSection: React.FC = () => {
-  const { sectionCardBg, cardBorderColor, mutedTextColor } = useHackathonsColors();
-  const communityBgGradient = useColorModeValue(
-    "linear(to-br, blue.50, purple.50)",
-    "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.95))"
-  );
+  const {
+    sectionCardBg,
+    cardBorderColor,
+    mutedTextColor,
+    communityBgGradient,
+  } = useHackathonsCommunityGrowthSectionColors();
+  const metrics = useHackathonsCommunityMetrics();
 
   return (
     <Box
@@ -67,6 +42,7 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
           filter="blur(42px)"
           pointerEvents="none"
           zIndex={0}
+          aria-hidden="true"
         >
           <Box
             position="absolute"
@@ -92,7 +68,11 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
           position="relative"
           zIndex={1}
         >
-          <Box textAlign="center" maxW={{ base: "full", md: "640px" }}>
+          <Box
+            as="header"
+            textAlign="center"
+            maxW={{ base: "full", md: "640px" }}
+          >
             <Box mb={3}>
               <PillBadge colorScheme="blue" variant="outline" uppercase>
                 Рост коммьюнити
@@ -106,6 +86,7 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
               Рост коммьюнити AIFFA
             </Heading>
             <Text
+              id="hackathons-community-growth-description"
               mt={3}
               fontSize={{ base: "md", md: "lg" }}
               color={mutedTextColor}
@@ -116,94 +97,52 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
           </Box>
 
           <SimpleGrid
+            as="ul"
+            role="list"
+            listStyleType="none"
+            pl={0}
             columns={{ base: 1, sm: 3 }}
             spacing={{ base: 4, md: 6 }}
             mt={{ base: 2, md: 4 }}
             w="full"
           >
-            <Box
-              bg={sectionCardBg}
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={cardBorderColor}
-              p={{ base: 4, md: 5 }}
-              textAlign="center"
-              animation={`${communityCardFloat} 18s ease-in-out infinite`}
-            >
-              <Text
-                fontSize={{ base: "2xl", md: "3xl" }}
-                fontWeight="bold"
-                bgGradient="linear(to-r, teal.300, blue.400)"
-                _dark={{ bgGradient: "linear(to-r, teal.200, blue.300)" }}
-                bgClip="text"
-                animation={`${communityMetricPulse} 7s ease-in-out infinite`}
-              >
-                120+
-              </Text>
-              <Text
-                mt={1}
-                fontSize={{ base: "sm", md: "md" }}
-                color={mutedTextColor}
-              >
-                активных участников платформы
-              </Text>
-            </Box>
+            {metrics.map((metric, index) => {
+              const animationDurationSeconds = 18 + index * 2;
 
-            <Box
-              bg={sectionCardBg}
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={cardBorderColor}
-              p={{ base: 4, md: 5 }}
-              textAlign="center"
-              animation={`${communityCardFloat} 20s ease-in-out infinite`}
-            >
-              <Text
-                fontSize={{ base: "2xl", md: "3xl" }}
-                fontWeight="bold"
-                bgGradient="linear(to-r, teal.300, blue.400)"
-                _dark={{ bgGradient: "linear(to-r, teal.200, blue.300)" }}
-                bgClip="text"
-                animation={`${communityMetricPulse} 7s ease-in-out infinite`}
-              >
-                40+
-              </Text>
-              <Text
-                mt={1}
-                fontSize={{ base: "sm", md: "md" }}
-                color={mutedTextColor}
-              >
-                решений задач недели
-              </Text>
-            </Box>
-
-            <Box
-              bg={sectionCardBg}
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={cardBorderColor}
-              p={{ base: 4, md: 5 }}
-              textAlign="center"
-              animation={`${communityCardFloat} 22s ease-in-out infinite`}
-            >
-              <Text
-                fontSize={{ base: "2xl", md: "3xl" }}
-                fontWeight="bold"
-                bgGradient="linear(to-r, teal.300, blue.400)"
-                _dark={{ bgGradient: "linear(to-r, teal.200, blue.300)" }}
-                bgClip="text"
-                animation={`${communityMetricPulse} 7s ease-in-out infinite`}
-              >
-                50+
-              </Text>
-              <Text
-                mt={1}
-                fontSize={{ base: "sm", md: "md" }}
-                color={mutedTextColor}
-              >
-                оплаченных поддержек проекта
-              </Text>
-            </Box>
+              return (
+                <Box
+                  key={metric.id}
+                  as="li"
+                  role="listitem"
+                  bg={sectionCardBg}
+                  borderRadius="2xl"
+                  borderWidth="1px"
+                  borderColor={cardBorderColor}
+                  p={{ base: 4, md: 5 }}
+                  textAlign="center"
+                  animation={`${communityCardFloat} ${animationDurationSeconds}s ease-in-out infinite`}
+                  aria-describedby="hackathons-community-growth-description"
+                >
+                  <Text
+                    fontSize={{ base: "2xl", md: "3xl" }}
+                    fontWeight="bold"
+                    bgGradient="linear(to-r, teal.300, blue.400)"
+                    _dark={{ bgGradient: "linear(to-r, teal.200, blue.300)" }}
+                    bgClip="text"
+                    animation={`${communityMetricPulse} 7s ease-in-out infinite`}
+                  >
+                    {metric.valueLabel}
+                  </Text>
+                  <Text
+                    mt={1}
+                    fontSize={{ base: "sm", md: "md" }}
+                    color={mutedTextColor}
+                  >
+                    {metric.description}
+                  </Text>
+                </Box>
+              );
+            })}
           </SimpleGrid>
         </Stack>
       </Box>

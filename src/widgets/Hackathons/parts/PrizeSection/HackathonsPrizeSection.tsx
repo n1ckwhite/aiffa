@@ -76,9 +76,11 @@ const HackathonsPrizeSection: React.FC = () => {
           zIndex={2}
         >
           <Box textAlign="center">
-            <PillBadge colorScheme="purple" variant="solid">
+            <Box mb={3}>
+            <PillBadge colorScheme="purple" variant="outline">
               Призовой фонд
             </PillBadge>
+            </Box>
             <Heading
               id="hackathons-prize-title"
               as="h2"

@@ -13,18 +13,6 @@ import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import PillBadge from "@/shared/ui/PillBadge";
 
-const heroCardGlow = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.38);
-  }
-  60% {
-    box-shadow: 0 0 0 22px rgba(59, 130, 246, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-  }
-`;
-
 const heroAsideFloat = keyframes`
   0% {
     transform: translateY(0);
@@ -59,7 +47,6 @@ const HackathonsHeroSection: React.FC = () => {
         borderColor={cardBorderColor}
         px={{ base: 6, md: 8 }}
         py={{ base: 5, md: 8 }}
-        animation={`${heroCardGlow} 16s ease-out infinite`}
       >
         <Box
           position="absolute"
@@ -176,6 +163,7 @@ const HackathonsHeroSection: React.FC = () => {
                   transform: { base: "none", md: "translateY(0)" },
                   boxShadow: "md",
                 }}
+                borderRadius="full"
               >
                 Участвовать в хакатонах
               </Button>
@@ -189,7 +177,7 @@ const HackathonsHeroSection: React.FC = () => {
               px={{ base: 4, md: 6 }}
               py={{ base: 2.5, md: 3 }}
               w={{ base: "100%", md: "360px" }}
-            >
+              borderRadius="full">
               Стать партнёром
             </Button>
           </Stack>

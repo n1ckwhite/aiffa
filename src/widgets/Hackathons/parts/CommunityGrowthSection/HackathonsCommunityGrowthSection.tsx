@@ -11,18 +11,6 @@ import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import PillBadge from "@/shared/ui/PillBadge";
 
-const communityGlow = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.45);
-  }
-  60% {
-    box-shadow: 0 0 0 18px rgba(59, 130, 246, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-  }
-`;
-
 const communityCardFloat = keyframes`
   0% {
     transform: translateY(0);
@@ -71,7 +59,6 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
         borderColor={cardBorderColor}
         px={{ base: 4, md: 8 }}
         py={{ base: 5, md: 8 }}
-        animation={`${communityGlow} 7s ease-out infinite`}
       >
         <Box
           position="absolute"

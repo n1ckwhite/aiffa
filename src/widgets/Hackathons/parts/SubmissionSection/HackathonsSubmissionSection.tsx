@@ -9,20 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { CheckCircleIcon, EditIcon, ExternalLinkIcon, ViewIcon } from "@chakra-ui/icons";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
-import { keyframes } from "@emotion/react";
 import PillBadge from "@/shared/ui/PillBadge";
-
-const submissionGlow = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.32);
-  }
-  60% {
-    box-shadow: 0 0 0 20px rgba(59, 130, 246, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-  }
-`;
 
 const HackathonsSubmissionSection: React.FC = () => {
   const { mutedTextColor, sectionCardBg, cardBorderColor, accentBorderColor } =
@@ -50,7 +37,6 @@ const HackathonsSubmissionSection: React.FC = () => {
         borderColor={cardBorderColor}
         px={{ base: 4, md: 8 }}
         py={{ base: 5, md: 8 }}
-        animation={`${submissionGlow} 14s ease-out infinite`}
       >
         <Box
           position="absolute"

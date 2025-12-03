@@ -7,24 +7,11 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { keyframes } from "@emotion/react";
 import { useHackathonsColors } from "../../colors/useHackathonsColors";
 import PillBadge from "@/shared/ui/PillBadge";
 
-const finalCtaGlow = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.35);
-  }
-  60% {
-    box-shadow: 0 0 0 22px rgba(59, 130, 246, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-  }
-`;
-
 const HackathonsFinalCtaSection: React.FC = () => {
-  const { sectionCardBg, cardBorderColor, mutedTextColor, accentBorderColor } =
+  const { mutedTextColor, accentBorderColor } =
     useHackathonsColors();
   const finalCtaBgGradient = useColorModeValue(
     "linear(to-br, blue.50, purple.50)",
@@ -50,7 +37,6 @@ const HackathonsFinalCtaSection: React.FC = () => {
         py={{ base: 5, md: 8 }}
         maxW="1200px"
         mx="auto"
-        animation={`${finalCtaGlow} 14s ease-out infinite`}
       >
         <Box
           position="absolute"
@@ -147,6 +133,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
                 transform: { base: "none", md: "translateY(0)" },
                 boxShadow: "md",
               }}
+              borderRadius="full"
             >
               Участвовать в хакатоне
             </Button>
@@ -166,7 +153,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
                 bg: useColorModeValue("white", "rgba(15,23,42,0.98)"),
                 borderColor: accentBorderColor,
               }}
-            >
+              borderRadius="full">
               Стать партнёром
             </Button>
           </Stack>

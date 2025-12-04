@@ -3,24 +3,24 @@
 import React from "react";
 import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
-import sessionsIcon from "@/shared/icons/svg-icons/sessions-icon.svg";
-import sessionsAnimation from "@/shared/icons/json-icons/sessions.json";
+import forSessionsIcon from "@/shared/icons/svg-icons/for-sessions-icon.svg";
+import forSessionsAnimation from "shared/icons/json-icons/for-sessions.json";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 
-const SessionsLottieIcon: React.FC = () => {
-  const staticSrc = getStaticSrcFromModule(sessionsIcon);
+const ForSessionsLottieIcon: React.FC = () => {
+  const staticSrc = getStaticSrcFromModule(forSessionsIcon);
   return (
     <LazyLottieIcon
-      animationData={sessionsAnimation}
+      animationData={forSessionsAnimation}
       boxProps={{
         w: { base: "250px", md: "350px" },
-        aspectRatio: 750 / 500,
+        aspectRatio: 600 / 500,
         mx: "auto",
       }}
       fallback={
         <Image
           src={staticSrc}
-          alt="Иконка сессий"
+          alt="Иконка форм сессий"
           w="100%"
           h="100%"
           objectFit="contain"
@@ -33,6 +33,6 @@ const SessionsLottieIcon: React.FC = () => {
   );
 };
 
-export default SessionsLottieIcon;
+export default ForSessionsLottieIcon;
 
 

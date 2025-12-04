@@ -11,6 +11,7 @@ import {
   HStack,
   Icon,
 } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 import { keyframes } from "@emotion/react";
 import {
   FaComments,
@@ -23,19 +24,19 @@ import {
   FaTelegramPlane,
 } from "react-icons/fa";
 import { SiGooglemeet } from "react-icons/si";
-import { SessionsLottieIcon } from "@/shared/icons/components-icon";
+import { SessionsLottieIcon, ForSessionsLottieIcon } from "@/shared/icons/components-icon";
 
 const sessionHighlightGlow = keyframes`
   0% {
-    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.45);
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.35);
     transform: translateY(0);
   }
-  70% {
-    box-shadow: 0 0 0 20px rgba(236, 72, 153, 0);
+  60% {
+    box-shadow: 0 0 0 18px rgba(56, 189, 248, 0);
     transform: translateY(-1px);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
     transform: translateY(0);
   }
 `;
@@ -61,13 +62,13 @@ const SessionsScreen: React.FC = () => {
   const iconColor = useColorModeValue("blue.600", "whiteAlpha.900");
   const highlightCardBorder = useColorModeValue("blue.100", "blue.500");
   const metaTextColor = useColorModeValue("gray.700", "gray.300");
-  const eventBlockBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)");
-  const eventBlockBorderColor = useColorModeValue("blue.100", "whiteAlpha.300");
+  const eventBlockBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.96)");
+  const eventBlockBorderColor = useColorModeValue("teal.100", "teal.500");
   const firstSessionBgGradient = useColorModeValue(
-    "linear(to-br, blue.50, purple.50)",
-    "linear(to-br, rgba(15, 23, 42, 1), rgba(76, 29, 149, 0.9))"
+    "linear(to-br, teal.50, blue.50)",
+    "linear(to-br, rgba(15, 23, 42, 1), rgba(15, 118, 110, 0.9))"
   );
-  const firstSessionBorderColor = useColorModeValue("gray.200", "whiteAlpha.200");
+  const firstSessionBorderColor = useColorModeValue("teal.100", "teal.600");
   const primaryCtaGradient = useColorModeValue(
     "linear(to-r, blue.600, blue.700)",
     "linear(to-r, blue.400, blue.500)"
@@ -82,6 +83,11 @@ const SessionsScreen: React.FC = () => {
   const metaBadgeBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.100");
   const metaBadgeBorderColor = useColorModeValue("blue.100", "whiteAlpha.300");
   const metaBadgeTextColor = useColorModeValue("gray.900", "gray.50");
+  const ctaBgGradient = useColorModeValue(
+    "linear(to-r, blue.50, teal.50)",
+    "linear(to-r, rgba(15, 23, 42, 1), rgba(15, 118, 110, 0.85))"
+  );
+  const ctaBorderColor = useColorModeValue("blue.100", "teal.500");
 
   return (
     <Box
@@ -340,6 +346,7 @@ const SessionsScreen: React.FC = () => {
           </Box>
 
           <Box as="section" aria-labelledby="sessions-formats-title">
+              <ForSessionsLottieIcon/>
             <Box
               as="header"
               mb={{ base: 4, md: 6 }}
@@ -443,6 +450,78 @@ const SessionsScreen: React.FC = () => {
               />
             </SimpleGrid>
           </Box>
+          <Box as="section" aria-labelledby="sessions-cta-title">
+            <Box
+              borderRadius="3xl"
+              borderWidth="1px"
+              borderColor={ctaBorderColor}
+              bgGradient={ctaBgGradient}
+              px={{ base: 4, md: 6 }}
+              py={{ base: 5, md: 6 }}
+            >
+              <Stack
+                direction={{ base: "column", md: "row" }}
+                spacing={{ base: 4, md: 6 }}
+                align={{ base: "flex-start", md: "center" }}
+                justify="space-between"
+              >
+                <Box maxW={{ base: "full", md: "60%" }}>
+                  <Heading
+                    id="sessions-cta-title"
+                    as="h2"
+                    fontSize={{ base: "lg", md: "xl" }}
+                  >
+                    Присоединяйтесь к сессиям AIFFA
+                  </Heading>
+                  <Text
+                    mt={2}
+                    fontSize={{ base: "sm", md: "md" }}
+                    color={mutedTextColor}
+                  >
+                    Не упустите возможность пообщаться с экспертами и коллегами:
+                    присоединяйтесь к открытым форматам или предложите свою
+                    консультацию и мероприятие как партнёр AIFFA.
+                  </Text>
+                </Box>
+                <Stack
+                  direction={{ base: "column", sm: "row" }}
+                  spacing={3}
+                  align={{ base: "stretch", sm: "center" }}
+                >
+                  <Button
+                    as="a"
+                    href="https://t.me/nickwhite_web"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    size="md"
+                    borderRadius="full"
+                    fontWeight="semibold"
+                    bg="blue.600"
+                    color="white"
+                    px={{ base: 5, md: 6 }}
+                    _hover={{ bg: "blue.700" }}
+                    _active={{ bg: "blue.800" }}
+                  >
+                    Написать в Telegram
+                  </Button>
+                  <Button
+                    as={RouterLink as any}
+                    to="/partners"
+                    size="md"
+                    borderRadius="full"
+                    fontWeight="semibold"
+                    variant="outline"
+                    borderColor="whiteAlpha.700"
+                    color="whiteAlpha.900"
+                    px={{ base: 5, md: 6 }}
+                    _hover={{ bg: "whiteAlpha.100" }}
+                  >
+                    Стать партнёром
+                  </Button>
+                </Stack>
+              </Stack>
+            </Box>
+          </Box>
         </VStack>
       </Box>
     </Box>
@@ -485,13 +564,13 @@ const EventDetailCard: React.FC<EventDetailCardProps> = ({
         content: '""',
         position: "absolute",
         inset: 0,
-        bgGradient:
-          "linear-gradient(120deg, rgba(59, 130, 246, 0.16), rgba(236, 72, 153, 0.14), rgba(59, 130, 246, 0.16))",
-        backgroundSize: "200% 200%",
-        opacity: 0.9,
+        bgGradient: "linear-gradient(135deg, rgba(45, 212, 191, 0.16), rgba(56, 189, 248, 0.14))",
+        backgroundSize: "180% 180%",
+        opacity: 0.8,
         animation: `${detailCardGlow} 18s ease-in-out infinite`,
         pointerEvents: "none",
       }}
+      boxShadow="sm"
       transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease"
       _hover={{
         borderColor: highlightBorderColor,
@@ -555,8 +634,28 @@ const SessionFormatCard: React.FC<SessionFormatCardProps> = ({
       borderColor={cardBorderColor}
       bg={cardBg}
       p={{ base: 4, md: 5 }}
+      position="relative"
+      overflow="hidden"
+      _before={{
+        content: '""',
+        position: "absolute",
+        inset: 0,
+        bgGradient:
+          "linear-gradient(135deg, rgba(59, 130, 246, 0.10), rgba(37, 99, 235, 0.06))",
+        backgroundSize: "200% 200%",
+        opacity: 0.9,
+        animation: `${detailCardGlow} 22s ease-in-out infinite`,
+        pointerEvents: "none",
+      }}
+      transition="transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease"
+      boxShadow="sm"
+      _hover={{
+        transform: "translateY(-3px)",
+        boxShadow: "lg",
+        borderColor: "blue.400",
+      }}
     >
-      <Stack spacing={3}>
+      <Stack spacing={3} position="relative" zIndex={1}>
         <Box
           borderRadius="full"
           boxSize={8}
@@ -566,6 +665,7 @@ const SessionFormatCard: React.FC<SessionFormatCardProps> = ({
           bg={iconCircleBg}
           color={iconColor}
           aria-hidden="true"
+          boxShadow="0 0 0 1px rgba(255, 255, 255, 0.08)"
         >
           {icon}
         </Box>

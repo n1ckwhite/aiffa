@@ -27,16 +27,28 @@ import { SessionsLottieIcon } from "@/shared/icons/components-icon";
 
 const sessionHighlightGlow = keyframes`
   0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.35);
+    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.45);
     transform: translateY(0);
   }
-  60% {
-    box-shadow: 0 0 0 20px rgba(59, 130, 246, 0);
+  70% {
+    box-shadow: 0 0 0 20px rgba(236, 72, 153, 0);
     transform: translateY(-1px);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
     transform: translateY(0);
+  }
+`;
+
+const detailCardGlow = keyframes`
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 `;
 
@@ -47,11 +59,15 @@ const SessionsScreen: React.FC = () => {
   const cardBorderColor = useColorModeValue("gray.200", "whiteAlpha.200");
   const iconCircleBg = useColorModeValue("blue.50", "whiteAlpha.200");
   const iconColor = useColorModeValue("blue.600", "whiteAlpha.900");
-  const highlightCardBg = useColorModeValue("blue.50", "rgba(15, 23, 42, 0.95)");
   const highlightCardBorder = useColorModeValue("blue.100", "blue.500");
   const metaTextColor = useColorModeValue("gray.700", "gray.300");
   const eventBlockBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)");
   const eventBlockBorderColor = useColorModeValue("blue.100", "whiteAlpha.300");
+  const firstSessionBgGradient = useColorModeValue(
+    "linear(to-br, blue.50, purple.50)",
+    "linear(to-br, rgba(15, 23, 42, 1), rgba(76, 29, 149, 0.9))"
+  );
+  const firstSessionBorderColor = useColorModeValue("gray.200", "whiteAlpha.200");
   const primaryCtaGradient = useColorModeValue(
     "linear(to-r, blue.600, blue.700)",
     "linear(to-r, blue.400, blue.500)"
@@ -63,6 +79,9 @@ const SessionsScreen: React.FC = () => {
   const secondaryCtaBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.200");
   const secondaryCtaHoverBg = useColorModeValue("gray.100", "whiteAlpha.300");
   const secondaryCtaColor = useColorModeValue("blue.700", "blue.50");
+  const metaBadgeBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.100");
+  const metaBadgeBorderColor = useColorModeValue("blue.100", "whiteAlpha.300");
+  const metaBadgeTextColor = useColorModeValue("gray.900", "gray.50");
 
   return (
     <Box
@@ -112,11 +131,15 @@ const SessionsScreen: React.FC = () => {
 
           <Box as="section" aria-labelledby="sessions-first-event-title">
             <Box
+              position="relative"
+              overflow="hidden"
               borderRadius="3xl"
               borderWidth="1px"
-              borderColor={highlightCardBorder}
-              bg={highlightCardBg}
-              p={{ base: 4, md: 6 }}
+              borderColor={firstSessionBorderColor}
+              bgGradient={firstSessionBgGradient}
+              px={{ base: 4, md: 6 }}
+              pt={{ base: 4, md: 6 }}
+              pb={{ base: 5, md: 7 }}
               animation={`${sessionHighlightGlow} 12s ease-out infinite`}
             >
               <Stack spacing={{ base: 4, md: 5 }} align="center">
@@ -142,28 +165,54 @@ const SessionsScreen: React.FC = () => {
                   >
                     Знакомство с AIFFA: первая живая сессия
                   </Heading>
+                  <Text
+                    mt={2}
+                    fontSize={{ base: "sm", md: "md" }}
+                    color={mutedTextColor}
+                  >
+                    Это встреча про экосистему и людей: расскажем, как устроено комьюнити AIFFA,
+                    какие форматы и возможности есть внутри, как мы помогаем друг другу расти.
+                    Это не просто проект, а живое сообщество, в котором все развиваются вместе.
+                  </Text>
                   <HStack
                     mt={3}
                     spacing={4}
                     flexWrap="wrap"
                     justify="center"
-                    fontSize={{ base: "xs", md: "sm" }}
-                    color={metaTextColor}
                   >
-                    <HStack spacing={2}>
-                      <Text as="time" dateTime="2025-02-01">
-                        1 февраля, 19:00 по Москве
-                      </Text>
-                    </HStack>
-                    <HStack spacing={1}>
-                      <Icon
-                        as={SiGooglemeet}
-                        boxSize={4}
-                        color="#0F9D58"
+                    <Box
+                      display="inline-flex"
+                      alignItems="center"
+                      px={{ base: 3, md: 4 }}
+                      py={{ base: 1.5, md: 2 }}
+                      borderRadius="full"
+                      borderWidth="1px"
+                      borderColor={metaBadgeBorderColor}
+                      bg={metaBadgeBg}
+                      color={metaBadgeTextColor}
+                      fontSize={{ base: "xs", md: "sm" }}
+                      fontWeight="medium"
+                      gap={{ base: 3, md: 4 }}
+                    >
+                      <Box as="time" dateTime="2025-05-01" fontWeight="semibold">
+                        1 мая, 19:00 по Москве
+                      </Box>
+                      <Box
+                        w="1px"
+                        h={{ base: "14px", md: "16px" }}
+                        bg="whiteAlpha.400"
                         aria-hidden="true"
                       />
-                      <Text>Онлайн: Google Meet</Text>
-                    </HStack>
+                      <HStack spacing={1.5}>
+                        <Icon
+                          as={SiGooglemeet}
+                          boxSize={4}
+                          color="#0F9D58"
+                          aria-hidden="true"
+                        />
+                        <Text>Онлайн: Google Meet</Text>
+                      </HStack>
+                    </Box>
                   </HStack>
                 </Box>
                 <SessionsLottieIcon/>
@@ -265,18 +314,26 @@ const SessionsScreen: React.FC = () => {
               spacing={{ base: 3, md: 4 }}
             >
               <EventDetailCard
+              icon={<FaQuestionCircle />}
                 title="О мероприятии"
                 description="Это мягкое знакомство с комьюнити AIFFA: расскажем, как устроен проект, какие форматы есть сейчас и как из них собрать маршрут под себя. Участники коротко представятся и смогут обозначить свои цели на ближайшие месяцы."
                 mutedTextColor={mutedTextColor}
                 eventBlockBg={eventBlockBg}
                 eventBlockBorderColor={eventBlockBorderColor}
+              iconCircleBg={iconCircleBg}
+              iconColor={iconColor}
+              highlightBorderColor={highlightCardBorder}
               />
               <EventDetailCard
+              icon={<SiGooglemeet />}
                 title="Как присоединиться"
                 description="Регистрации не нужно: просто заходите в Telegram‑сообщество AIFFA, следите за анонсом и подключайтесь по ссылке на Google Meet в указанное время. Если не успели на первую встречу — сможете присоединиться к следующим сессиям."
                 mutedTextColor={mutedTextColor}
                 eventBlockBg={eventBlockBg}
                 eventBlockBorderColor={eventBlockBorderColor}
+              iconCircleBg={iconCircleBg}
+              iconColor={iconColor}
+              highlightBorderColor={highlightCardBorder}
               />
             </SimpleGrid>
           </Box>
@@ -392,19 +449,27 @@ const SessionsScreen: React.FC = () => {
 };
 
 type EventDetailCardProps = {
+  icon: React.ReactNode;
   title: string;
   description: string;
   mutedTextColor: string;
   eventBlockBg: string;
   eventBlockBorderColor: string;
+  iconCircleBg: string;
+  iconColor: string;
+  highlightBorderColor: string;
 };
 
 const EventDetailCard: React.FC<EventDetailCardProps> = ({
+  icon,
   title,
   description,
   mutedTextColor,
   eventBlockBg,
   eventBlockBorderColor,
+  iconCircleBg,
+  iconColor,
+  highlightBorderColor,
 }) => {
   return (
     <Box
@@ -413,13 +478,48 @@ const EventDetailCard: React.FC<EventDetailCardProps> = ({
       borderColor={eventBlockBorderColor}
       bg={eventBlockBg}
       p={{ base: 3, md: 4 }}
+      position="relative"
+      overflow="hidden"
+      _before={{
+        content: '""',
+        position: "absolute",
+        inset: 0,
+        bgGradient:
+          "linear-gradient(120deg, rgba(59, 130, 246, 0.16), rgba(236, 72, 153, 0.14), rgba(59, 130, 246, 0.16))",
+        backgroundSize: "200% 200%",
+        opacity: 0.9,
+        animation: `${detailCardGlow} 18s ease-in-out infinite`,
+        pointerEvents: "none",
+      }}
+      transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease"
+      _hover={{
+        borderColor: highlightBorderColor,
+        boxShadow: "lg",
+        transform: "translateY(-2px)",
+      }}
     >
-      <Heading as="h3" fontSize={{ base: "md", md: "lg" }} mb={1}>
-        {title}
-      </Heading>
-      <Text fontSize={{ base: "sm", md: "sm" }} color={mutedTextColor}>
-        {description}
-      </Text>
+      <Stack spacing={2} position="relative" zIndex={1}>
+        <HStack spacing={3} align="center">
+          <Box
+            borderRadius="full"
+            boxSize={8}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            bg={iconCircleBg}
+            color={iconColor}
+            aria-hidden="true"
+          >
+            {icon}
+          </Box>
+          <Heading as="h3" fontSize={{ base: "md", md: "lg" }}>
+            {title}
+          </Heading>
+        </HStack>
+        <Text fontSize={{ base: "sm", md: "sm" }} color={mutedTextColor}>
+          {description}
+        </Text>
+      </Stack>
     </Box>
   );
 };

@@ -96,15 +96,12 @@ const Header: React.FC = React.memo(() => {
         </Flex>
 
         <HStack
-          gap={0}
+          gap={{ md: 2, lg: 3, xl: 4 }}
           display={{ base: 'none', md: 'flex' }}
           flex="1"
-          justify="space-between"
+          justify="flex-start"
         >
-          <Box
-            flex="1"
-            maxW={{ base: '100%', md: '420px', lg: '520px', xl: '640px' }}
-          >
+          <Box flex="1">
             <SearchBar
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}

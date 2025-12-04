@@ -30,7 +30,14 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           alignItems="center"
         >
           <Icon as={FaBookOpen} boxSize={4} aria-hidden="true" color={fillIcon} />
-          <Text ml={2} display={{ base: 'none', '2xl': 'inline' }} fontSize="sm" fontWeight="semibold">Материалы</Text>
+          <Text
+            ml={2}
+            display={{ base: 'none', lg: 'inline' }}
+            fontSize="sm"
+            fontWeight="semibold"
+          >
+            Материалы
+          </Text>
         </Link>
       </Tooltip>
       <Tooltip label="Задачи" openDelay={250} hasArrow>
@@ -47,7 +54,14 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           alignItems="center"
         >
           <Icon as={FaClipboardList} boxSize={4} aria-hidden="true" color={fillIcon} />
-          <Text ml={2} display={{ base: 'none', '2xl': 'inline' }} fontSize="sm" fontWeight="semibold">Задачи</Text>
+          <Text
+            ml={2}
+            display={{ base: 'none', lg: 'inline' }}
+            fontSize="sm"
+            fontWeight="semibold"
+          >
+            Задачи
+          </Text>
         </Link>
       </Tooltip>
       <Tooltip label="Профиль" openDelay={250} hasArrow>
@@ -64,7 +78,14 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           alignItems="center"
         >
           <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" color={fillIcon} />
-          <Text ml={2} display={{ base: 'none', '2xl': 'inline' }} fontSize="sm" fontWeight="semibold">Профиль</Text>
+          <Text
+            ml={2}
+            display={{ base: 'none', lg: 'inline' }}
+            fontSize="sm"
+            fontWeight="semibold"
+          >
+            Профиль
+          </Text>
         </Link>
       </Tooltip>
       
@@ -82,7 +103,14 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           alignItems="center"
         >
           <Icon as={FaCode} boxSize={4} aria-hidden="true" color={fillIcon} />
-          <Text ml={2} display={{ base: 'none', '2xl': 'inline' }} fontSize="sm" fontWeight="semibold">Хакатоны</Text>
+          <Text
+            ml={2}
+            display={{ base: 'none', lg: 'inline' }}
+            fontSize="sm"
+            fontWeight="semibold"
+          >
+            Хакатоны
+          </Text>
         </Link>
       </Tooltip>
 
@@ -102,7 +130,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           <Icon as={FaComments} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text
             ml={2}
-            display={{ base: 'none', '2xl': 'inline' }}
+            display={{ base: 'none', lg: 'inline' }}
             fontSize="sm"
             fontWeight="semibold"
           >

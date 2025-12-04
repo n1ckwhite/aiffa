@@ -101,7 +101,15 @@ const SessionsScreen: React.FC = () => {
                 maxW={{ base: "full", md: "720px" }}
                 transition="none"
               >
+                <Heading
+                  id="sessions-hero-title"
+                  as="h1"
+                  fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
+                >
+                  Живые форматы для роста, общения и поддержки
+                </Heading>
                 <Text
+                  mt={3}
                   fontSize={{ base: "xs", md: "sm" }}
                   textTransform="uppercase"
                   letterSpacing="0.12em"
@@ -110,13 +118,6 @@ const SessionsScreen: React.FC = () => {
                 >
                   Сессии AIFFA
                 </Text>
-                <Heading
-                  id="sessions-hero-title"
-                  as="h1"
-                  fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
-                >
-                  Живые форматы для роста, общения и поддержки
-                </Heading>
                 <Text
                   id="sessions-hero-description"
                   mt={3}

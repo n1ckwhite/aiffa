@@ -27,7 +27,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); if (results.length) onResultClick(results[Math.min(highlightIndex, results.length - 1)].route); }}>
-      <Box position="relative" className="search-area" zIndex={200000}>
+      <Box position="relative" className="search-area" zIndex={200000} w="100%">
         <Input
           id="site-search"
           name="search"
@@ -36,13 +36,11 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
           onChange={(e) => { setSearchQuery(e.target.value); setSearchOpen(true); }}
           bg={searchBg}
           border="none"
-          w={{ base: '100%', md: 'clamp(320px, 40vw, 560px)', lg: 'clamp(360px, 38vw, 680px)', xl: 'clamp(400px, 36vw, 760px)' }}
-          maxW={{ base: 'calc(100vw - 32px)', md: 'unset' }}
+          w="100%"
           pl={{ base: '44px', md: '56px', lg: '60px', xl: '64px' }}
           pr={{ base: isSearchFocused && searchQuery ? '44px' : '16px', md: isSearchFocused && searchQuery ? '40px' : '16px', lg: isSearchFocused && searchQuery ? '144px' : '120px' }}
           h={{ base: '40px', md: '34px', lg: '38px' }}
           borderRadius={{ base: '20px', md: '17px', lg: '19px' }}
-          ml={{ base: 0, md: 4, lg: 6 }}
           fontSize="sm"
           className="search-input"
           onFocus={() => { setIsSearchFocused(true); if (searchQuery.trim()) setSearchOpen(true); }}

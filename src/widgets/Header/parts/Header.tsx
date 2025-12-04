@@ -89,10 +89,19 @@ const Header: React.FC = React.memo(() => {
         py={3}
         align="center"
         justify="space-between"
+        gap={{ base: 3, md: 4, lg: 6 }}
       >
-        <Flex align="center" gap={3}><Logo /></Flex>
+        <Flex align="center" gap={3}>
+          <Logo />
+        </Flex>
 
-          <HStack gap={{ md: 2, lg: 3, xl: 4 }} display={{ base: 'none', md: 'flex' }}>
+        <HStack
+          gap={{ md: 2, lg: 3, xl: 4 }}
+          display={{ base: 'none', md: 'flex' }}
+          flex="1"
+          justify="space-between"
+        >
+          <Box flex="1" maxW={{ md: '520px', lg: '640px', xl: '720px' }}>
             <SearchBar
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
@@ -126,6 +135,7 @@ const Header: React.FC = React.memo(() => {
               markBg={markBg}
               isMobileMenuOpen={isMobileMenuOpen}
             />
+          </Box>
 
           <DesktopActions
             hoverBg={hoverBg}

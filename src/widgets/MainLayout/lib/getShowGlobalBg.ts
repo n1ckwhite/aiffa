@@ -5,7 +5,7 @@ export const getShowGlobalBg = (pathname: string): boolean => {
   const exactMatches = new Set<string>(['/', '/profile']);
   if (exactMatches.has(cleanPath)) return true;
 
-  const prefixMatches = ['/weekly', '/partners', '/hackathons'];
+  const prefixMatches = ['/weekly', '/partners', '/hackathons', '/sessions'];
   if (prefixMatches.some((prefix) => cleanPath.startsWith(prefix))) return true;
 
   if (!cleanPath.startsWith('/learn')) return false;

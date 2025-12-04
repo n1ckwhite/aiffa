@@ -227,15 +227,28 @@ const HackathonsNextHackathonSection: React.FC = () => {
                   href={telegramHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  variant="brand"
                   size="md"
                   fontSize={{ base: "sm", sm: "md" }}
+                  fontWeight="semibold"
                   px={{ base: 4, sm: 6, md: 7 }}
                   py={{ base: 2.5, sm: 3 }}
                   rightIcon={<ArrowForwardIcon />}
                   position="relative"
                   zIndex={1}
-                  color={useColorModeValue("gray.900", "white")}
+                  bgGradient="linear(to-r, blue.600, blue.700)"
+                  color="white"
+                  borderRadius="full"
+                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                  _hover={{
+                    bgGradient: "linear(to-r, blue.700, blue.800)",
+                    transform: { base: "none", md: "translateY(-1px)" },
+                    boxShadow: "lg",
+                  }}
+                  _active={{
+                    bgGradient: "linear(to-r, blue.800, blue.900)",
+                    transform: { base: "none", md: "translateY(0)" },
+                    boxShadow: "md",
+                  }}
                   aria-describedby="hackathons-next-countdown"
                 >
                   Участвовать в хакатоне

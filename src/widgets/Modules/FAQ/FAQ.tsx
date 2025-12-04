@@ -50,6 +50,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
                         borderWidth={0}
                         bg="transparent"
                         _hover={{ bg: 'transparent' }}
+                        _expanded={{ bg: 'transparent' }}
                         _focus={{ boxShadow: 'none' }}
                         mb={isExpanded ? 0 : 2}
                         justifyContent="space-between"

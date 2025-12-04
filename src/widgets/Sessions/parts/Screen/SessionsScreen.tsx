@@ -84,10 +84,14 @@ const SessionsScreen: React.FC = () => {
   const metaBadgeBorderColor = useColorModeValue("blue.100", "whiteAlpha.300");
   const metaBadgeTextColor = useColorModeValue("gray.900", "gray.50");
   const ctaBgGradient = useColorModeValue(
-    "linear(to-r, blue.50, teal.50)",
-    "linear(to-r, rgba(15, 23, 42, 1), rgba(15, 118, 110, 0.85))"
+    "linear(to-br, whiteAlpha.900, blue.50)",
+    "linear(to-br, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.96))"
   );
-  const ctaBorderColor = useColorModeValue("blue.100", "teal.500");
+  const ctaBorderColor = useColorModeValue("blue.200", "blue.600");
+  const partnerCtaBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.95)");
+  const partnerCtaColor = useColorModeValue("blue.700", "whiteAlpha.900");
+  const partnerCtaBorder = useColorModeValue("blue.200", "whiteAlpha.700");
+  const partnerCtaHoverBg = useColorModeValue("white", "rgba(15, 23, 42, 0.98)");
 
   return (
     <Box
@@ -450,31 +454,72 @@ const SessionsScreen: React.FC = () => {
               />
             </SimpleGrid>
           </Box>
-          <Box as="section" aria-labelledby="sessions-cta-title">
+          <Box
+            as="section"
+            aria-labelledby="sessions-cta-title"
+            display="flex"
+            justifyContent="center"
+          >
             <Box
+              position="relative"
+              overflow="hidden"
+              bgGradient={ctaBgGradient}
               borderRadius="3xl"
               borderWidth="1px"
               borderColor={ctaBorderColor}
-              bgGradient={ctaBgGradient}
-              px={{ base: 4, md: 6 }}
-              py={{ base: 5, md: 6 }}
+              px={{ base: 3, sm: 4, md: 8 }}
+              py={{ base: 5, md: 8 }}
+              maxW="1200px"
+              mx="auto"
             >
-              <Stack
-                direction={{ base: "column", md: "row" }}
-                spacing={{ base: 4, md: 6 }}
-                align={{ base: "flex-start", md: "center" }}
-                justify="space-between"
+              <Box
+                position="absolute"
+                inset="-40px"
+                opacity={0.35}
+                filter="blur(42px)"
+                pointerEvents="none"
+                aria-hidden="true"
               >
-                <Box maxW={{ base: "full", md: "60%" }}>
+                <Box
+                  position="absolute"
+                  top="-10%"
+                  left="-12%"
+                  w={{ base: "240px", md: "280px" }}
+                  h={{ base: "240px", md: "280px" }}
+                  bgGradient="radial(circle at 30% 30%, rgba(59,130,246,0.6), transparent)"
+                />
+                <Box
+                  position="absolute"
+                  bottom="-18%"
+                  right="-8%"
+                  w={{ base: "260px", md: "320px" }}
+                  h={{ base: "260px", md: "320px" }}
+                  bgGradient="radial(circle at 70% 70%, rgba(244,114,182,0.5), transparent)"
+                />
+              </Box>
+
+              <Stack
+                direction="column"
+                spacing={{ base: 5, md: 6 }}
+                align="center"
+                justify="center"
+                position="relative"
+                zIndex={1}
+              >
+                <Box
+                  as="header"
+                  textAlign={{ base: "center", md: "center" }}
+                  mx={{ base: "auto", md: 0 }}
+                >
                   <Heading
                     id="sessions-cta-title"
                     as="h2"
-                    fontSize={{ base: "lg", md: "xl" }}
+                    fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
                   >
                     Присоединяйтесь к сессиям AIFFA
                   </Heading>
                   <Text
-                    mt={2}
+                    mt={3}
                     fontSize={{ base: "sm", md: "md" }}
                     color={mutedTextColor}
                   >
@@ -483,38 +528,68 @@ const SessionsScreen: React.FC = () => {
                     консультацию и мероприятие как партнёр AIFFA.
                   </Text>
                 </Box>
+
                 <Stack
                   direction={{ base: "column", sm: "row" }}
-                  spacing={3}
+                  spacing={4}
+                  w={{ base: "full", md: "auto" }}
+                  justify={{ base: "center", md: "flex-end" }}
                   align={{ base: "stretch", sm: "center" }}
+                  maxW={{ base: "480px", md: "unset" }}
+                  mx={{ base: "auto", md: 0 }}
                 >
                   <Button
                     as="a"
                     href="https://t.me/nickwhite_web"
                     target="_blank"
                     rel="noopener noreferrer"
-                    size="md"
-                    borderRadius="full"
+                    size="lg"
                     fontWeight="semibold"
-                    bg="blue.600"
+                    px={{ base: 6, md: 8 }}
+                    py={{ base: 3, md: 3.5 }}
+                    w={{ base: "100%", sm: "auto" }}
+                    minW={{ sm: "220px" }}
+                    bgGradient="linear(to-r, blue.600, blue.700)"
                     color="white"
-                    px={{ base: 5, md: 6 }}
-                    _hover={{ bg: "blue.700" }}
-                    _active={{ bg: "blue.800" }}
+                    transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                    _hover={{
+                      bgGradient: "linear(to-r, blue.700, blue.800)",
+                      transform: { base: "none", md: "translateY(-1px)" },
+                      boxShadow: "lg",
+                    }}
+                    _active={{
+                      bgGradient: "linear(to-r, blue.800, blue.900)",
+                      transform: { base: "none", md: "translateY(0)" },
+                      boxShadow: "md",
+                    }}
+                    borderRadius="full"
                   >
                     Написать в Telegram
                   </Button>
                   <Button
                     as={RouterLink as any}
                     to="/partners"
-                    size="md"
-                    borderRadius="full"
+                    size="lg"
                     fontWeight="semibold"
-                    variant="outline"
-                    borderColor="whiteAlpha.700"
-                    color="whiteAlpha.900"
-                    px={{ base: 5, md: 6 }}
-                    _hover={{ bg: "whiteAlpha.100" }}
+                    px={{ base: 6, md: 8 }}
+                    py={{ base: 3, md: 3.5 }}
+                    w={{ base: "100%", sm: "auto" }}
+                    minW={{ sm: "220px" }}
+                    borderColor={partnerCtaBorder}
+                    bg={partnerCtaBg}
+                    color={partnerCtaColor}
+                    transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease"
+                    _hover={{
+                      bg: partnerCtaHoverBg,
+                      borderColor: ctaBorderColor,
+                      transform: { base: "none", md: "translateY(-1px)" },
+                      boxShadow: "lg",
+                    }}
+                    _active={{
+                      transform: { base: "none", md: "translateY(0)" },
+                      boxShadow: "md",
+                    }}
+                    borderRadius="full"
                   >
                     Стать партнёром
                   </Button>

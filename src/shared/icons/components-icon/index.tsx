@@ -14,3 +14,4 @@ export { default as RewardsLottieIcon } from './RewardsLottieIcon';
 export { default as FinanceLottieIcon } from './FinanceLottieIcon';
 export { default as LevelLottieIcon } from './LevelLottieIcon';
 export { default as BusinessTeamLottieIcon } from './BusinessTeamLottieIcon';
+export { default as SessionsLottieIcon } from './SessionsLottieIcon';

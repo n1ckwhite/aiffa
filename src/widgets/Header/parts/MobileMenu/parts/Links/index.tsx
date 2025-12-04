@@ -29,15 +29,6 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       </Button>
 
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
-        <Link as={RouterLink as any} to="/profile" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
-          <HStack spacing={3} align="center">
-            <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" color={fillIcon} />
-            <Text>Профиль</Text>
-          </HStack>
-        </Link>
-      </Button>
-      
-      <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/hackathons" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
             <Icon as={FaCode} boxSize={4} aria-hidden="true" color={fillIcon} />
@@ -51,6 +42,15 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
           <HStack spacing={3} align="center">
             <Icon as={FaComments} boxSize={4} aria-hidden="true" color={fillIcon} />
             <Text>Сессии</Text>
+          </HStack>
+        </Link>
+      </Button>
+
+      <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
+        <Link as={RouterLink as any} to="/profile" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
+          <HStack spacing={3} align="center">
+            <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" color={fillIcon} />
+            <Text>Профиль</Text>
           </HStack>
         </Link>
       </Button>

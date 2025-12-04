@@ -64,31 +64,6 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           </Text>
         </Link>
       </Tooltip>
-      <Tooltip label="Профиль" openDelay={250} hasArrow>
-        <Link
-          as={RouterLink as any}
-          to="/profile"
-          aria-label="Профиль"
-          onClick={() => { setIsMobileMenuOpen(false); }}
-          _hover={{ bg: hoverBg }}
-          px={2}
-          py={1.5}
-          borderRadius="md"
-          display="inline-flex"
-          alignItems="center"
-        >
-          <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" color={fillIcon} />
-          <Text
-            ml={2}
-            display={{ base: 'none', lg: 'inline' }}
-            fontSize="sm"
-            fontWeight="semibold"
-          >
-            Профиль
-          </Text>
-        </Link>
-      </Tooltip>
-      
       <Tooltip label="Хакатоны" openDelay={250} hasArrow>
         <Link
           as={RouterLink as any}
@@ -135,6 +110,30 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
             fontWeight="semibold"
           >
             Сессии
+          </Text>
+        </Link>
+      </Tooltip>
+      <Tooltip label="Профиль" openDelay={250} hasArrow>
+        <Link
+          as={RouterLink as any}
+          to="/profile"
+          aria-label="Профиль"
+          onClick={() => { setIsMobileMenuOpen(false); }}
+          _hover={{ bg: hoverBg }}
+          px={2}
+          py={1.5}
+          borderRadius="md"
+          display="inline-flex"
+          alignItems="center"
+        >
+          <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" color={fillIcon} />
+          <Text
+            ml={2}
+            display={{ base: 'none', lg: 'inline' }}
+            fontSize="sm"
+            fontWeight="semibold"
+          >
+            Профиль
           </Text>
         </Link>
       </Tooltip>

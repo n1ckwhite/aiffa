@@ -10,6 +10,11 @@ import {
   Button,
   HStack,
   Icon,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { keyframes } from "@emotion/react";
@@ -92,6 +97,29 @@ const SessionsScreen: React.FC = () => {
   const partnerCtaColor = useColorModeValue("blue.700", "whiteAlpha.900");
   const partnerCtaBorder = useColorModeValue("blue.200", "whiteAlpha.700");
   const partnerCtaHoverBg = useColorModeValue("white", "rgba(15, 23, 42, 0.98)");
+
+  const sessionsFaqItems = [
+    {
+      question: "Нужна ли регистрация, чтобы прийти на сессию?",
+      answer:
+        "Нет, отдельная регистрация не требуется: достаточно быть в Telegram‑сообществе AIFFA и следить за анонсами. В описании мероприятия мы даём время и ссылку для подключения — просто заходите в назначенный час.",
+    },
+    {
+      question: "Это платные сессии или участие бесплатное?",
+      answer:
+        "Основные форматы — знакомства, Q&A, AMA, разборах проектов — остаются бесплатными для участников комьюнити. Если мы запускаем платные консультации или спецформаты, это всегда явно отмечено в анонсе.",
+    },
+    {
+      question: "Можно ли предложить свою тему или провести сессию как эксперт?",
+      answer:
+        "Да. Если вы хотите провести консультацию, разбор или тематическую встречу, напишите нам в Telegram или через страницу партнёрства — обсудим формат, аудиторию и время. Мы открыты к формату «эксперт из комьюнити».",
+    },
+    {
+      question: "Будут ли записи, если не получается прийти в прямом эфире?",
+      answer:
+        "Часть форматов мы записываем и делаем выжимки, но не все встречи попадают в открытый доступ. Если для вас критична запись, ориентируйтесь на пометку в анонсе или уточняйте у организаторов перед сессией.",
+    },
+  ];
 
   return (
     <Box
@@ -597,6 +625,93 @@ const SessionsScreen: React.FC = () => {
                 </Stack>
               </Stack>
             </Box>
+          </Box>
+
+          <Box as="section" aria-labelledby="sessions-faq-title">
+            <VStack
+              align="stretch"
+              spacing={{ base: 4, md: 5 }}
+              maxW={{ base: "full", md: "900px" }}
+              mx="auto"
+            >
+              <Box as="header">
+                <Heading
+                  id="sessions-faq-title"
+                  as="h2"
+                  fontSize={{ base: "lg", md: "xl" }}
+                  textAlign={{ base: "left", md: "left" }}
+                >
+                  Частые вопросы про сессии
+                </Heading>
+                <Text
+                  mt={2}
+                  fontSize={{ base: "sm", md: "md" }}
+                  color={mutedTextColor}
+                >
+                  Коротко отвечаем на типичные вопросы про формат, участие и
+                  партнёрство.
+                </Text>
+              </Box>
+
+              <Box
+                borderWidth="1px"
+                borderColor={cardBorderColor}
+                borderRadius="2xl"
+                p={{ base: 3, md: 4, lg: 5 }}
+                bg={cardBg}
+              >
+                <Accordion allowToggle>
+                  {sessionsFaqItems.map((item) => (
+                    <AccordionItem key={item.question} border="none">
+                      {({ isExpanded }) => (
+                        <>
+                          <h3>
+                            <AccordionButton
+                              px={0}
+                              py={{ base: 2.5, md: 3 }}
+                              borderRadius="xl"
+                              borderBottomRadius={isExpanded ? 0 : "xl"}
+                              borderWidth={0}
+                              bg="transparent"
+                              _hover={{ bg: "transparent" }}
+                              _expanded={{ bg: "transparent" }}
+                              _focus={{ boxShadow: "none", bg: "transparent" }}
+                              _active={{ bg: "transparent" }}
+                              mb={isExpanded ? 0 : 2}
+                              justifyContent="space-between"
+                              alignItems="flex-start"
+                            >
+                              <Box
+                                flex="1"
+                                textAlign="left"
+                                fontWeight="semibold"
+                                fontSize={{ base: "sm", md: "md" }}
+                              >
+                                {item.question}
+                              </Box>
+                              <AccordionIcon
+                                ml={{ base: 2, md: 3 }}
+                                mt={{ base: 1, md: 1.5 }}
+                              />
+                            </AccordionButton>
+                          </h3>
+                          <AccordionPanel
+                            px={0}
+                            pt={0}
+                            pb={3}
+                            fontSize="sm"
+                            lineHeight={1.8}
+                            color={mutedTextColor}
+                          >
+                            {item.answer}
+                          </AccordionPanel>
+                        </>
+                      )}
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </Box>
+            </VStack>
           </Box>
         </VStack>
       </Box>

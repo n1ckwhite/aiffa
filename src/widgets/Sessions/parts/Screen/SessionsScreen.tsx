@@ -576,6 +576,7 @@ const SessionsScreen: React.FC = () => {
                     w={{ base: "100%", sm: "auto" }}
                     minW={{ sm: "220px" }}
                     borderColor={partnerCtaBorder}
+                    borderWidth="1px"
                     bg={partnerCtaBg}
                     color={partnerCtaColor}
                     transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease"

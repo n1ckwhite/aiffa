@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { Box, Heading, HStack, Icon, SimpleGrid, Stack, Text } from "@chakra-ui/react";
-import { FaComments, FaProjectDiagram, FaUserFriends } from "react-icons/fa";
+import { Box, Heading, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { PeopleLottieIcon } from "@/shared/icons/components-icon";
 import { useSessionsColors } from "@/widgets/Sessions/colors/useSessionsColors";
 import { iconIdleFloat } from "@/widgets/Sessions/animations";
+import { useSessionsForWhomCards } from "./data";
 
 const SessionsForWhomSection: React.FC = () => {
   const {
@@ -21,6 +21,8 @@ const SessionsForWhomSection: React.FC = () => {
     iconCircleBg,
     iconColor,
   } = useSessionsColors();
+
+  const cards = useSessionsForWhomCards();
 
   return (
     <Box as="section" aria-labelledby="sessions-audience-title">
@@ -109,111 +111,47 @@ const SessionsForWhomSection: React.FC = () => {
             spacing={{ base: 3, md: 4 }}
             flex="1"
           >
-            <Box
-              as="article"
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={forWhomCardBorderColor}
-              bg={forWhomCardBg}
-              p={{ base: 3, md: 4 }}
-            >
-              <HStack spacing={2} mb={2} align="center">
-                <Box
-                  borderRadius="full"
-                  boxSize={6}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  bg={iconCircleBg}
-                  color={iconColor}
-                  aria-hidden="true"
-                  animation={`${iconIdleFloat} 6s ease-in-out infinite`}
-                >
-                  <Icon as={FaComments} boxSize={3} />
-                </Box>
-                <Text fontSize="xs" textTransform="uppercase" letterSpacing="0.12em" color={forWhomCardTextColor}>
-                  Старт в IT
+            {cards.map((card) => (
+              <Box
+                key={card.id}
+                as="article"
+                borderRadius="2xl"
+                borderWidth="1px"
+                borderColor={forWhomCardBorderColor}
+                bg={forWhomCardBg}
+                p={{ base: 3, md: 4 }}
+              >
+                <HStack spacing={2} mb={2} align="center">
+                  <Box
+                    borderRadius="full"
+                    boxSize={6}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    bg={iconCircleBg}
+                    color={iconColor}
+                    aria-hidden="true"
+                    animation={`${iconIdleFloat} 6s ease-in-out infinite`}
+                  >
+                    {card.icon}
+                  </Box>
+                  <Text
+                    fontSize="xs"
+                    textTransform="uppercase"
+                    letterSpacing="0.12em"
+                    color={forWhomCardTextColor}
+                  >
+                    {card.subtitle}
+                  </Text>
+                </HStack>
+                <Heading as="h3" fontSize="sm" mb={1} color={forWhomCardTitleColor}>
+                  {card.title}
+                </Heading>
+                <Text fontSize="xs" color={forWhomCardTextColor}>
+                  {card.description}
                 </Text>
-              </HStack>
-              <Heading as="h3" fontSize="sm" mb={1} color={forWhomCardTitleColor}>
-                Понять, с чего начать и куда идти
-              </Heading>
-              <Text fontSize="xs" color={forWhomCardTextColor}>
-                Разбираем роли, стеки и реальные задачи, чтобы собрать для тебя
-                понятный маршрут: от первых шагов до уверенного джуна.
-              </Text>
-            </Box>
-
-            <Box
-              as="article"
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={forWhomCardBorderColor}
-              bg={forWhomCardBg}
-              p={{ base: 3, md: 4 }}
-            >
-              <HStack spacing={2} mb={2} align="center">
-                <Box
-                  borderRadius="full"
-                  boxSize={6}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  bg={iconCircleBg}
-                  color={iconColor}
-                  aria-hidden="true"
-                  animation={`${iconIdleFloat} 6s ease-in-out infinite`}
-                >
-                  <Icon as={FaProjectDiagram} boxSize={3} />
-                </Box>
-                <Text fontSize="xs" textTransform="uppercase" letterSpacing="0.12em" color={forWhomCardTextColor}>
-                  Свой проект
-                </Text>
-              </HStack>
-              <Heading as="h3" fontSize="sm" mb={1} color={forWhomCardTitleColor}>
-                Показать проект и получить разбор
-              </Heading>
-              <Text fontSize="xs" color={forWhomCardTextColor}>
-                Приходишь со своим pet‑проектом или рабочей задачей — вместе
-                смотрим код, архитектуру и обсуждаем, что улучшить и как двигаться
-                дальше.
-              </Text>
-            </Box>
-
-            <Box
-              as="article"
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={forWhomCardBorderColor}
-              bg={forWhomCardBg}
-              p={{ base: 3, md: 4 }}
-            >
-              <HStack spacing={2} mb={2} align="center">
-                <Box
-                  borderRadius="full"
-                  boxSize={6}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  bg={iconCircleBg}
-                  color={iconColor}
-                  aria-hidden="true"
-                  animation={`${iconIdleFloat} 6s ease-in-out infinite`}
-                >
-                  <Icon as={FaUserFriends} boxSize={3} />
-                </Box>
-                <Text fontSize="xs" textTransform="uppercase" letterSpacing="0.12em" color={forWhomCardTextColor}>
-                  Люди и команды
-                </Text>
-              </HStack>
-              <Heading as="h3" fontSize="sm" mb={1} color={forWhomCardTitleColor}>
-                Найти своих и видеть, как решают задачи другие
-              </Heading>
-              <Text fontSize="xs" color={forWhomCardTextColor}>
-                Знакомишься с ребятами, смотришь чужие решения, собираешь команду
-                под хакатон или долгий проект и не варишься в одиночестве.
-              </Text>
-            </Box>
+              </Box>
+            ))}
           </SimpleGrid>
         </Stack>
       </Box>

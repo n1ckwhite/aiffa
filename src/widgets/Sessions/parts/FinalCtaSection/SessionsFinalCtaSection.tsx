@@ -130,7 +130,7 @@ const SessionsFinalCtaSection: React.FC = () => {
             </Button>
             <Button
               as="a"
-              href="https://t.me/nickwhite_web?text=Хочу%20предложить%20тему%20для%20сессии%20AIFFA"
+              href="https://t.me/nickwhite_web"
               target="_blank"
               rel="noopener noreferrer"
               size="lg"

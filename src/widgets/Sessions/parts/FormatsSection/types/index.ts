@@ -4,4 +4,6 @@ export type SessionFormatCardProps = {
   description: string;
 };
 
-
+export type SessionFormatCardComponentProps = {
+  card: SessionFormatCardProps;
+};

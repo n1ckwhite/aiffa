@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Box, Heading, Stack, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import { useSessionsColors } from "@/widgets/Sessions/colors/useSessionsColors";
 
 const SessionsHeroSection: React.FC = () => {

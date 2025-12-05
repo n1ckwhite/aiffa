@@ -4,4 +4,12 @@ export type EventDetailCardProps = {
   description: string;
 };
 
+export type EventDetailCardUiProps = {
+  mutedTextColor: string;
+  eventBlockBg: string;
+  eventBlockBorderColor: string;
+  iconCircleBg: string;
+  iconColor: string;
+  highlightBorderColor: string;
+};
 

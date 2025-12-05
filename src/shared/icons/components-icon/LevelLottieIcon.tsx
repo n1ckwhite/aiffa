@@ -5,7 +5,7 @@ import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 import levelAnimation from "@/shared/icons/json-icons/level.json";
-import levelIcon from "@/shared/icons/svg-icons/level-icon.svg";
+import levelIcon from "@/shared/icons/webp-icons/level-icon.webp";
 
 const LevelLottieIcon: React.FC = () => {
   const staticSrc = getStaticSrcFromModule(levelIcon as any);

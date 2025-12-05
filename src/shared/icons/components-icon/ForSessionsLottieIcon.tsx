@@ -3,7 +3,7 @@
 import React from "react";
 import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
-import forSessionsIcon from "@/shared/icons/svg-icons/for-sessions-icon.svg";
+import forSessionsIcon from "@/shared/icons/webp-icons/for-sessions-icon.webp";
 import forSessionsAnimation from "shared/icons/json-icons/for-sessions.json";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 

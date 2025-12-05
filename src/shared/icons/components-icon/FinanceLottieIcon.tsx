@@ -5,7 +5,7 @@ import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 import partnersAnimation from "@/shared/icons/json-icons/finance.json";
-import financeIcon from "@/shared/icons/svg-icons/finance-icon.svg";
+import financeIcon from "@/shared/icons/webp-icons/finance-icon.webp";
 
 const FinanceLottieIcon: React.FC = () => {
   const staticSrc = getStaticSrcFromModule(financeIcon as any);

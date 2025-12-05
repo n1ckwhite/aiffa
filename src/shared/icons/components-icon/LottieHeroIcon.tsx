@@ -4,7 +4,7 @@ import React from "react";
 import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import lottieAnimation from "@/shared/icons/json-icons/lottie.json";
-import lottieHeroStatic from "@/shared/icons/svg-icons/lottie-hero-icon.svg";
+import lottieHeroStatic from "@/shared/icons/webp-icons/lottie-hero-icon.webp";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 
 const LottieHeroIcon: React.FC = () => {

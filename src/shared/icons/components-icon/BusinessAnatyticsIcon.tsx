@@ -4,7 +4,7 @@ import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 import businessAnalyticsAnimation from "@/shared/icons/json-icons/business-analytics.json";
-import businessAnalyticsIcon from "@/shared/icons/svg-icons/business-analystics-icon.svg";
+import businessAnalyticsIcon from "@/shared/icons/webp-icons/business-analystics-icon.webp";
 
 const BusinessAnalyticsIcon: React.FC = () => {
   const staticSrc = getStaticSrcFromModule(businessAnalyticsIcon);

@@ -5,7 +5,7 @@ import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 import businessTeamAnimation from "@/shared/icons/json-icons/business-team.json";
-import businessTeamIcon from "@/shared/icons/svg-icons/business-team-icon.svg";
+import businessTeamIcon from "@/shared/icons/webp-icons/business-team-icon.webp";
 
 const BusinessTeamLottieIcon: React.FC = () => {
   const staticSrc = getStaticSrcFromModule(businessTeamIcon);

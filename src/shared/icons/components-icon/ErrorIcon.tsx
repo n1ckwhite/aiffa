@@ -3,7 +3,7 @@
 import React from "react";
 import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
-import errorIcon from "@/shared/icons/svg-icons/error-icon.svg";
+import errorIcon from "@/shared/icons/webp-icons/error-icon.webp";
 import errorAnimation from "@/shared/icons/json-icons/404.json";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 

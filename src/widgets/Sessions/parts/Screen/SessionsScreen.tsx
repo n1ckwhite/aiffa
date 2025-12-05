@@ -154,76 +154,6 @@ const SessionsScreen: React.FC = () => {
             </Stack>
           </Box>
 
-          <Box as="section" aria-labelledby="sessions-for-whom-title">
-            <Box
-              as="header"
-              mb={{ base: 4, md: 5 }}
-              textAlign="center"
-              maxW={{ base: "full", md: "720px" }}
-              mx="auto"
-            >
-              <Heading
-                id="sessions-for-whom-title"
-                as="h2"
-                fontSize={{ base: "xl", md: "2xl" }}
-              >
-                Для кого это
-              </Heading>
-              <Text
-                mt={2}
-                fontSize={{ base: "sm", md: "md" }}
-                color={mutedTextColor}
-              >
-                Сессии помогут, если ты:
-              </Text>
-            </Box>
-
-            <Box
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={cardBorderColor}
-              bg={cardBg}
-              p={{ base: 4, md: 5 }}
-              maxW={{ base: "full", md: "720px" }}
-              mx="auto"
-            >
-              <VStack
-                as="ul"
-                role="list"
-                align="stretch"
-                spacing={2}
-                listStyleType="none"
-                pl={0}
-              >
-                <Box as="li" role="listitem">
-                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
-                    ищешь путь развития в IT
-                  </Text>
-                </Box>
-                <Box as="li" role="listitem">
-                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
-                    хочешь разобрать свой проект
-                  </Text>
-                </Box>
-                <Box as="li" role="listitem">
-                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
-                    хочешь найти команду
-                  </Text>
-                </Box>
-                <Box as="li" role="listitem">
-                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
-                    хочешь познакомиться с другими
-                  </Text>
-                </Box>
-                <Box as="li" role="listitem">
-                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
-                    хочешь увидеть, как работают настоящие задачи
-                  </Text>
-                </Box>
-              </VStack>
-            </Box>
-          </Box>
-
           <Box as="section" aria-labelledby="sessions-first-event-title">
             <Box
               position="relative"
@@ -380,7 +310,128 @@ const SessionsScreen: React.FC = () => {
               </Stack>
             </Box>
           </Box>
+          <Box as="section" aria-labelledby="sessions-first-event-details-title">
+            <Box
+              as="header"
+              mb={{ base: 4, md: 5 }}
+              textAlign="center"
+              maxW={{ base: "full", md: "720px" }}
+              mx="auto"
+            >
+              <Heading
+                id="sessions-first-event-details-title"
+                as="h2"
+                fontSize={{ base: "xl", md: "2xl" }}
+              >
+                Как проходит первая сессия
+              </Heading>
+              <Text
+                mt={2}
+                fontSize={{ base: "sm", md: "md" }}
+                color={mutedTextColor}
+              >
+                Коротко о том, что будет на знакомстве и как к нему подключиться.
+              </Text>
+            </Box>
+            
+            <SimpleGrid
+              columns={{ base: 1, md: 2 }}
+              spacing={{ base: 3, md: 4 }}
+            >
+              <EventDetailCard
+              icon={<FaQuestionCircle />}
+                title="О мероприятии"
+                description="Это мягкое знакомство с комьюнити AIFFA: расскажем, как устроен проект, какие форматы есть сейчас и как из них собрать маршрут под себя. Участники коротко представятся и смогут обозначить свои цели на ближайшие месяцы."
+                mutedTextColor={mutedTextColor}
+                eventBlockBg={eventBlockBg}
+                eventBlockBorderColor={eventBlockBorderColor}
+              iconCircleBg={iconCircleBg}
+              iconColor={iconColor}
+              highlightBorderColor={highlightCardBorder}
+              />
+              <EventDetailCard
+              icon={<SiGooglemeet />}
+                title="Как присоединиться"
+                description="Регистрации не нужно: просто заходите в Telegram‑сообщество AIFFA, следите за анонсом и подключайтесь по ссылке на Google Meet в указанное время. Если не успели на первую встречу — сможете присоединиться к следующим сессиям."
+                mutedTextColor={mutedTextColor}
+                eventBlockBg={eventBlockBg}
+                eventBlockBorderColor={eventBlockBorderColor}
+              iconCircleBg={iconCircleBg}
+              iconColor={iconColor}
+              highlightBorderColor={highlightCardBorder}
+              />
+            </SimpleGrid>
+          </Box>
+          <Box as="section" aria-labelledby="sessions-for-whom-title">
+            <Box
+              as="header"
+              mb={{ base: 4, md: 5 }}
+              textAlign="center"
+              maxW={{ base: "full", md: "720px" }}
+              mx="auto"
+            >
+              <Heading
+                id="sessions-for-whom-title"
+                as="h2"
+                fontSize={{ base: "xl", md: "2xl" }}
+              >
+                Для кого это
+              </Heading>
+              <Text
+                mt={2}
+                fontSize={{ base: "sm", md: "md" }}
+                color={mutedTextColor}
+              >
+                Сессии помогут, если ты:
+              </Text>
+            </Box>
+            
 
+            <Box
+              borderRadius="2xl"
+              borderWidth="1px"
+              borderColor={cardBorderColor}
+              bg={cardBg}
+              p={{ base: 4, md: 5 }}
+              maxW={{ base: "full", md: "720px" }}
+              mx="auto"
+            >
+              <VStack
+                as="ul"
+                role="list"
+                align="stretch"
+                spacing={2}
+                listStyleType="none"
+                pl={0}
+              >
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
+                    ищешь путь развития в IT
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
+                    хочешь разобрать свой проект
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
+                    хочешь найти команду
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
+                    хочешь познакомиться с другими
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
+                    хочешь увидеть, как работают настоящие задачи
+                  </Text>
+                </Box>
+              </VStack>
+            </Box>
+          </Box>
           <Box as="section" aria-labelledby="sessions-schedule-title">
             <Box
               borderRadius="2xl"
@@ -442,60 +493,6 @@ const SessionsScreen: React.FC = () => {
               </VStack>
             </Box>
           </Box>
-
-          <Box as="section" aria-labelledby="sessions-first-event-details-title">
-            <Box
-              as="header"
-              mb={{ base: 4, md: 5 }}
-              textAlign="center"
-              maxW={{ base: "full", md: "720px" }}
-              mx="auto"
-            >
-              <Heading
-                id="sessions-first-event-details-title"
-                as="h2"
-                fontSize={{ base: "xl", md: "2xl" }}
-              >
-                Как проходит первая сессия
-              </Heading>
-              <Text
-                mt={2}
-                fontSize={{ base: "sm", md: "md" }}
-                color={mutedTextColor}
-              >
-                Коротко о том, что будет на знакомстве и как к нему подключиться.
-              </Text>
-            </Box>
-
-            <SimpleGrid
-              columns={{ base: 1, md: 2 }}
-              spacing={{ base: 3, md: 4 }}
-            >
-              <EventDetailCard
-              icon={<FaQuestionCircle />}
-                title="О мероприятии"
-                description="Это мягкое знакомство с комьюнити AIFFA: расскажем, как устроен проект, какие форматы есть сейчас и как из них собрать маршрут под себя. Участники коротко представятся и смогут обозначить свои цели на ближайшие месяцы."
-                mutedTextColor={mutedTextColor}
-                eventBlockBg={eventBlockBg}
-                eventBlockBorderColor={eventBlockBorderColor}
-              iconCircleBg={iconCircleBg}
-              iconColor={iconColor}
-              highlightBorderColor={highlightCardBorder}
-              />
-              <EventDetailCard
-              icon={<SiGooglemeet />}
-                title="Как присоединиться"
-                description="Регистрации не нужно: просто заходите в Telegram‑сообщество AIFFA, следите за анонсом и подключайтесь по ссылке на Google Meet в указанное время. Если не успели на первую встречу — сможете присоединиться к следующим сессиям."
-                mutedTextColor={mutedTextColor}
-                eventBlockBg={eventBlockBg}
-                eventBlockBorderColor={eventBlockBorderColor}
-              iconCircleBg={iconCircleBg}
-              iconColor={iconColor}
-              highlightBorderColor={highlightCardBorder}
-              />
-            </SimpleGrid>
-          </Box>
-
           <Box as="section" aria-labelledby="sessions-formats-title">
               <ForSessionsLottieIcon/>
             <Box

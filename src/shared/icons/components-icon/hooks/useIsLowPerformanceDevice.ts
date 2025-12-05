@@ -15,31 +15,17 @@ export const useIsLowPerformanceDevice = (): boolean => {
     }
 
     const nav = navigator as any;
-    const hardwareConcurrency: number | undefined = nav.hardwareConcurrency;
-    const deviceMemory: number | undefined = nav.deviceMemory;
     const userAgent = nav.userAgent || "";
 
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(userAgent);
+    // Считаем «ПК» всем, что не похоже на мобильные/планшеты.
+    const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(
+      userAgent
+    );
 
-    // Для мобильных устройств становимся более консервативными:
-    // анимацию включаем только при заметно более мощном железе.
-    if (isMobile) {
-      const hasManyCores =
-        typeof hardwareConcurrency === "number" && hardwareConcurrency >= 8;
-      const hasEnoughMemory =
-        typeof deviceMemory === "number" && deviceMemory >= 6;
-
-      // Если нет явных признаков мощного устройства — считаем его слабым.
-      return !(hasManyCores && hasEnoughMemory);
-    }
-
-    // Для десктопов оставляем более мягкий порог.
-    const isLowCoreCount =
-      typeof hardwareConcurrency === "number" && hardwareConcurrency <= 2;
-    const isLowMemory =
-      typeof deviceMemory === "number" && deviceMemory > 0 && deviceMemory <= 4;
-
-    return isLowCoreCount || isLowMemory;
+    // На мобильных и планшетах всегда считаем устройство «слабым» —
+    // рендерим только статичный fallback (webp/картинку), без Lottie.
+    // На десктопах анимации включены по умолчанию (если нет reduced‑motion).
+    return isMobileOrTablet;
   }, []);
 };
 

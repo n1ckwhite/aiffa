@@ -3,7 +3,7 @@
 import React from "react";
 import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
-import lottieAnimation from "@/shared/icons/json-icons/lottie.json";
+import lottieAnimation from "@/shared/icons/json-icons/error-robot.json";
 import lottieHeroStatic from "@/shared/icons/svg-icons/lottie-hero-icon.svg";
 import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 

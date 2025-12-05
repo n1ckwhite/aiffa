@@ -5,6 +5,14 @@ const nextConfig = {
   reactStrictMode: true,
   // Включаем карты исходников для продакшн-бандла, чтобы убрать предупреждение Lighthouse
   productionBrowserSourceMaps: true,
+  // Тонкая настройка размеров изображений, чтобы Next подбирал размеры
+  // ближе к фактическим контейнерам (500px, 440px и т.п.) и не генерировал
+  // чрезмерно большие варианты вроде 828px / 750px для маленьких иконок.
+  images: {
+    deviceSizes: [320, 360, 414, 440, 500, 640, 768, 1024, 1280],
+    imageSizes: [64, 96, 128, 160, 192, 256, 320, 384],
+    formats: ["image/avif", "image/webp"]
+  },
   webpack: (config) => {
     config.resolve.alias["react-router-dom"] = path.resolve(
       process.cwd(),

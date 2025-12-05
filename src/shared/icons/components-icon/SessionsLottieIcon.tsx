@@ -11,7 +11,7 @@ const SessionsLottieIcon: React.FC = () => {
     <LazyLottieIcon
       animationData={sessionsAnimation}
       boxProps={{
-        w: { base: "250px", md: "350px" },
+        w: { base: "220px", md: "300px" },
         aspectRatio: 750 / 500,
         mx: "auto",
       }}
@@ -19,11 +19,10 @@ const SessionsLottieIcon: React.FC = () => {
         <OptimizedIconImage
           src={sessionsIcon}
           alt="Иконка сессий"
-          width={438}
-          height={285}
-          sizes="438px"
+          width={300}
+          height={200}
+          sizes="(max-width: 768px) 70vw, 300px"
           priority
-          fetchPriority="high"
         />
       }
     />

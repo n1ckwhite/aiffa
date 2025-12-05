@@ -23,7 +23,6 @@ const EventDetailCard: React.FC<EventDetailCardProps & EventDetailCardUiProps> =
         "linear-gradient(135deg, rgba(45, 212, 191, 0.16), rgba(56, 189, 248, 0.14))",
       backgroundSize: "180% 180%",
       opacity: 0.8,
-      animation: `${detailCardGlow} 18s ease-in-out infinite`,
     }
   );
 

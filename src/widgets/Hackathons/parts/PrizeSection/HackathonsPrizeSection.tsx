@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { useHackathonsPrizeSectionColors } from "./colors/useHackathonsPrizeSectionColors";
-import { prizeBlobA, prizeBlobB, prizeGlow, prizeShimmer } from "./animations";
 import { useHackathonsPrizeTiers } from "./data";
 import { BusinessTeamLottieIcon } from "@/shared/icons/components-icon";
 import PillBadge from "@/shared/ui/PillBadge";
@@ -27,7 +26,6 @@ const HackathonsPrizeSection: React.FC = () => {
         px={{ base: 5, md: 8 }}
         pt={{ base: 6, md: 8 }}
         pb={{ base: 6, md: 8 }}
-        animation={`${prizeGlow} 5s ease-out infinite`}
       >
         <Box
           position="absolute"
@@ -44,7 +42,6 @@ const HackathonsPrizeSection: React.FC = () => {
             w={{ base: "220px", md: "260px" }}
             h={{ base: "220px", md: "260px" }}
             bgGradient="radial(pink.400, transparent)"
-            animation={`${prizeBlobA} 20s ease-in-out infinite`}
           />
           <Box
             position="absolute"
@@ -53,7 +50,6 @@ const HackathonsPrizeSection: React.FC = () => {
             w={{ base: "260px", md: "320px" }}
             h={{ base: "260px", md: "320px" }}
             bgGradient="radial(purple.500, transparent)"
-            animation={`${prizeBlobB} 24s ease-in-out infinite`}
           />
         </Box>
 
@@ -65,7 +61,6 @@ const HackathonsPrizeSection: React.FC = () => {
           w="40%"
           bgGradient="linear(to-r, transparent, whiteAlpha.900, transparent)"
           opacity={0.9}
-          animation={`${prizeShimmer} 7s ease-in-out infinite`}
           zIndex={1}
         />
 

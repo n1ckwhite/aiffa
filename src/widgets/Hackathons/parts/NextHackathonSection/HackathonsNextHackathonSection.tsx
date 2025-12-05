@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/icons";
 import { telegramHref } from "../../../Footer/model/links";
 import { RewardsLottieIcon } from "@/shared/icons/components-icon";
-import { cardGlow, floatBlobA, floatBlobB, shimmer } from "./animations";
 import { useNextHackathonCountdown } from "./hooks";
 import { useNextHackathonSectionColors } from "./colors/useHackathonsNextHackathonSectionColors";
 
@@ -67,7 +66,6 @@ const HackathonsNextHackathonSection: React.FC = () => {
         borderColor={cardBorderColor}
         px={{ base: 6, md: 8 }}
         py={{ base: 5, md: 8 }}
-        animation={`${cardGlow} 4s ease-out infinite`}
       >
         <Box
           position="absolute"
@@ -84,7 +82,6 @@ const HackathonsNextHackathonSection: React.FC = () => {
             w={{ base: "220px", md: "260px" }}
             h={{ base: "220px", md: "260px" }}
             bgGradient="radial(blue.400, transparent)"
-            animation={`${floatBlobA} 18s ease-in-out infinite`}
           />
           <Box
             position="absolute"
@@ -93,7 +90,6 @@ const HackathonsNextHackathonSection: React.FC = () => {
             w={{ base: "260px", md: "320px" }}
             h={{ base: "260px", md: "320px" }}
             bgGradient="radial(purple.400, transparent)"
-            animation={`${floatBlobB} 22s ease-in-out infinite`}
           />
         </Box>
 
@@ -105,7 +101,6 @@ const HackathonsNextHackathonSection: React.FC = () => {
           w="40%"
           bgGradient="linear(to-r, transparent, whiteAlpha.800, transparent)"
           opacity={0.8}
-          animation={`${shimmer} 6s ease-in-out infinite`}
           zIndex={1}
         />
         <Stack

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
-import { detailCardGlow, iconIdleFloat } from "@/widgets/Sessions/animations";
+import { iconIdleFloat } from "@/widgets/Sessions/animations";
 import type { SessionFormatCardComponentProps } from "../../types";
 import { useSessionsColors } from "@/widgets/Sessions/colors/useSessionsColors";
 
@@ -29,7 +29,6 @@ const SessionFormatCard: React.FC<SessionFormatCardComponentProps> = ({ card }) 
           "linear-gradient(135deg, rgba(59, 130, 246, 0.10), rgba(37, 99, 235, 0.06))",
         backgroundSize: "200% 200%",
         opacity: 0.9,
-        animation: `${detailCardGlow} 22s ease-in-out infinite`,
         pointerEvents: "none",
       }}
       transition="transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease"

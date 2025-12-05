@@ -16,7 +16,6 @@ const PeopleLottieIcon: React.FC = () => {
         w: { base: "250px", md: "350px" },
         aspectRatio: 1600 / 820,
         mx: "auto",
-        mb: 4,
       }}
       fallback={
         <Image

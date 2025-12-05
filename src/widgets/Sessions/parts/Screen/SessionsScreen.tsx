@@ -25,7 +25,7 @@ import {
   FaLightbulb,
 } from "react-icons/fa";
 import { SiGooglemeet } from "react-icons/si";
-import { SessionsLottieIcon, ForSessionsLottieIcon } from "@/shared/icons/components-icon";
+import { SessionsLottieIcon, ForSessionsLottieIcon, PeopleLottieIcon } from "@/shared/icons/components-icon";
 import FAQ from "widgets/Modules/FAQ/FAQ";
 
 const sessionHighlightGlow = keyframes`
@@ -106,6 +106,18 @@ const SessionsScreen: React.FC = () => {
   const partnerCtaColor = useColorModeValue("blue.700", "whiteAlpha.900");
   const partnerCtaBorder = useColorModeValue("blue.200", "whiteAlpha.700");
   const partnerCtaHoverBg = useColorModeValue("white", "rgba(15, 23, 42, 0.98)");
+  const forWhomBgGradient = useColorModeValue(
+    "linear(to-br, blue.50, teal.50)",
+    "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.95))"
+  );
+  const forWhomBorderColor = useColorModeValue("blue.100", "whiteAlpha.200");
+  const forWhomTitleColor = useColorModeValue("blue.900", "whiteAlpha.900");
+  const forWhomDescriptionColor = useColorModeValue("gray.700", "whiteAlpha.800");
+  const forWhomItemColor = useColorModeValue("whiteAlpha.900", "whiteAlpha.900");
+  const forWhomCardBg = useColorModeValue("white", "rgba(15, 23, 42, 0.88)");
+  const forWhomCardBorderColor = useColorModeValue("blue.100", "whiteAlpha.400");
+  const forWhomCardTitleColor = useColorModeValue("gray.900", "white");
+  const forWhomCardTextColor = useColorModeValue("gray.700", "whiteAlpha.900");
 
   return (
     <Box
@@ -362,74 +374,203 @@ const SessionsScreen: React.FC = () => {
               />
             </SimpleGrid>
           </Box>
-          <Box as="section" aria-labelledby="sessions-for-whom-title">
+          <Box as="section" aria-labelledby="sessions-audience-title">
             <Box
-              as="header"
-              mb={{ base: 4, md: 5 }}
-              textAlign="center"
-              maxW={{ base: "full", md: "720px" }}
-              mx="auto"
-            >
-              <Heading
-                id="sessions-for-whom-title"
-                as="h2"
-                fontSize={{ base: "xl", md: "2xl" }}
-              >
-                Для кого это
-              </Heading>
-              <Text
-                mt={2}
-                fontSize={{ base: "sm", md: "md" }}
-                color={mutedTextColor}
-              >
-                Сессии помогут, если ты:
-              </Text>
-            </Box>
-            
-
-            <Box
-              borderRadius="2xl"
+              position="relative"
+              overflow="hidden"
+              bgGradient={forWhomBgGradient}
+              borderRadius="3xl"
               borderWidth="1px"
-              borderColor={cardBorderColor}
-              bg={cardBg}
-              p={{ base: 4, md: 5 }}
-              maxW={{ base: "full", md: "720px" }}
-              mx="auto"
+              borderColor={forWhomBorderColor}
+              px={{ base: 4, md: 6, lg: 8 }}
+              py={{ base: 5, md: 7, lg: 8 }}
             >
-              <VStack
-                as="ul"
-                role="list"
-                align="stretch"
-                spacing={2}
-                listStyleType="none"
-                pl={0}
+              <Box
+                position="absolute"
+                inset="-40px"
+                opacity={0.45}
+                filter="blur(42px)"
+                pointerEvents="none"
+                aria-hidden="true"
               >
-                <Box as="li" role="listitem">
-                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
-                    ищешь путь развития в IT
-                  </Text>
-                </Box>
-                <Box as="li" role="listitem">
-                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
-                    хочешь разобрать свой проект
-                  </Text>
-                </Box>
-                <Box as="li" role="listitem">
-                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
-                    хочешь найти команду
-                  </Text>
-                </Box>
-                <Box as="li" role="listitem">
-                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
-                    хочешь познакомиться с другими
-                  </Text>
-                </Box>
-                <Box as="li" role="listitem">
-                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
-                    хочешь увидеть, как работают настоящие задачи
-                  </Text>
-                </Box>
-              </VStack>
+                <Box
+                  position="absolute"
+                  top="-12%"
+                  left="-18%"
+                  w={{ base: "220px", md: "260px" }}
+                  h={{ base: "220px", md: "260px" }}
+                  bgGradient="radial(circle at 20% 20%, rgba(59,130,246,0.85), transparent)"
+                />
+                <Box
+                  position="absolute"
+                  bottom="-22%"
+                  right="-10%"
+                  w={{ base: "260px", md: "320px" }}
+                  h={{ base: "260px", md: "320px" }}
+                  bgGradient="radial(circle at 80% 80%, rgba(45,212,191,0.45), transparent)"
+                />
+              </Box>
+
+              <Stack
+                direction="column"
+                spacing={4}
+                align="center"
+                justify="center"
+                position="relative"
+                zIndex={1}
+              >
+                <Stack
+                  spacing={{ base: 4, md: 5 }}
+                  maxW="full"
+                >
+                  <Box textAlign="center">
+                    <Text
+                      fontSize="xs"
+                      textTransform="uppercase"
+                      letterSpacing="0.18em"
+                      color={sectionLabelColor}
+                      mb={1}
+                    >
+                      Кому подойдут сессии
+                    </Text>
+                    <Heading
+                      id="sessions-audience-title"
+                      as="h2"
+                      fontSize={{ base: "xl", md: "2xl" }}
+                      color={forWhomTitleColor}
+                    >
+                      Если не хочется учиться в одиночку
+                    </Heading>
+                    <Text
+                      mt={3}
+                      fontSize={{ base: "sm", md: "md" }}
+                      color={forWhomDescriptionColor}
+                    >
+                      Сессии — это живые созвоны, где можно задать вопросы, показать свой
+                      код и услышать опыт других. Подходят, если хочется поддержки и
+                      понятного следующего шага.
+                    </Text>
+                  </Box>
+
+                  <Box
+                    w="100%"
+                  >
+                    <PeopleLottieIcon />
+                  </Box>
+                </Stack>
+
+                <SimpleGrid
+                  columns={{ base: 1, md: 3 }}
+                  spacing={{ base: 3, md: 4 }}
+                  flex="1"
+                >
+                  <Box
+                    as="article"
+                    borderRadius="2xl"
+                    borderWidth="1px"
+                    borderColor={forWhomCardBorderColor}
+                    bg={forWhomCardBg}
+                    p={{ base: 3, md: 4 }}
+                  >
+                    <HStack spacing={2} mb={2} align="center">
+                      <Box
+                        borderRadius="full"
+                        boxSize={6}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        bg={iconCircleBg}
+                        color={iconColor}
+                        aria-hidden="true"
+                        animation={`${iconIdleFloat} 6s ease-in-out infinite`}
+                      >
+                        <Icon as={FaComments} boxSize={3} />
+                      </Box>
+                      <Text fontSize="xs" textTransform="uppercase" letterSpacing="0.12em" color={forWhomCardTextColor}>
+                        Старт в IT
+                      </Text>
+                    </HStack>
+                    <Heading as="h3" fontSize="sm" mb={1} color={forWhomCardTitleColor}>
+                      Понять, с чего начать и куда идти
+                    </Heading>
+                    <Text fontSize="xs" color={forWhomCardTextColor}>
+                      Разбираем роли, стеки и реальные задачи, чтобы собрать для тебя
+                      понятный маршрут: от первых шагов до уверенного джуна.
+                    </Text>
+                  </Box>
+
+                  <Box
+                    as="article"
+                    borderRadius="2xl"
+                    borderWidth="1px"
+                    borderColor={forWhomCardBorderColor}
+                    bg={forWhomCardBg}
+                    p={{ base: 3, md: 4 }}
+                  >
+                    <HStack spacing={2} mb={2} align="center">
+                      <Box
+                        borderRadius="full"
+                        boxSize={6}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        bg={iconCircleBg}
+                        color={iconColor}
+                        aria-hidden="true"
+                        animation={`${iconIdleFloat} 6s ease-in-out infinite`}
+                      >
+                        <Icon as={FaProjectDiagram} boxSize={3} />
+                      </Box>
+                      <Text fontSize="xs" textTransform="uppercase" letterSpacing="0.12em" color={forWhomCardTextColor}>
+                        Свой проект
+                      </Text>
+                    </HStack>
+                    <Heading as="h3" fontSize="sm" mb={1} color={forWhomCardTitleColor}>
+                      Показать проект и получить разбор
+                    </Heading>
+                    <Text fontSize="xs" color={forWhomCardTextColor}>
+                      Приходишь со своим pet‑проектом или рабочей задачей — вместе
+                      смотрим код, архитектуру и обсуждаем, что улучшить и как двигаться
+                      дальше.
+                    </Text>
+                  </Box>
+
+                  <Box
+                    as="article"
+                    borderRadius="2xl"
+                    borderWidth="1px"
+                    borderColor={forWhomCardBorderColor}
+                    bg={forWhomCardBg}
+                    p={{ base: 3, md: 4 }}
+                  >
+                    <HStack spacing={2} mb={2} align="center">
+                      <Box
+                        borderRadius="full"
+                        boxSize={6}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        bg={iconCircleBg}
+                        color={iconColor}
+                        aria-hidden="true"
+                        animation={`${iconIdleFloat} 6s ease-in-out infinite`}
+                      >
+                        <Icon as={FaUserFriends} boxSize={3} />
+                      </Box>
+                      <Text fontSize="xs" textTransform="uppercase" letterSpacing="0.12em" color={forWhomCardTextColor}>
+                        Люди и команды
+                      </Text>
+                    </HStack>
+                    <Heading as="h3" fontSize="sm" mb={1} color={forWhomCardTitleColor}>
+                      Найти своих и видеть, как решают задачи другие
+                    </Heading>
+                    <Text fontSize="xs" color={forWhomCardTextColor}>
+                      Знакомишься с ребятами, смотришь чужие решения, собираешь команду
+                      под хакатон или долгий проект и не варишься в одиночестве.
+                    </Text>
+                  </Box>
+                </SimpleGrid>
+              </Stack>
             </Box>
           </Box>
           <Box as="section" aria-labelledby="sessions-schedule-title">

@@ -22,6 +22,7 @@ import {
   FaHandshake,
   FaMapMarkerAlt,
   FaTelegramPlane,
+  FaLightbulb,
 } from "react-icons/fa";
 import { SiGooglemeet } from "react-icons/si";
 import { SessionsLottieIcon, ForSessionsLottieIcon } from "@/shared/icons/components-icon";
@@ -51,6 +52,18 @@ const detailCardGlow = keyframes`
   }
   100% {
     background-position: 0% 50%;
+  }
+`;
+
+const iconIdleFloat = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1px);
+  }
+  100% {
+    transform: translateY(0);
   }
 `;
 
@@ -139,6 +152,76 @@ const SessionsScreen: React.FC = () => {
                 </Text>
               </Box>
             </Stack>
+          </Box>
+
+          <Box as="section" aria-labelledby="sessions-for-whom-title">
+            <Box
+              as="header"
+              mb={{ base: 4, md: 5 }}
+              textAlign="center"
+              maxW={{ base: "full", md: "720px" }}
+              mx="auto"
+            >
+              <Heading
+                id="sessions-for-whom-title"
+                as="h2"
+                fontSize={{ base: "xl", md: "2xl" }}
+              >
+                Для кого это
+              </Heading>
+              <Text
+                mt={2}
+                fontSize={{ base: "sm", md: "md" }}
+                color={mutedTextColor}
+              >
+                Сессии помогут, если ты:
+              </Text>
+            </Box>
+
+            <Box
+              borderRadius="2xl"
+              borderWidth="1px"
+              borderColor={cardBorderColor}
+              bg={cardBg}
+              p={{ base: 4, md: 5 }}
+              maxW={{ base: "full", md: "720px" }}
+              mx="auto"
+            >
+              <VStack
+                as="ul"
+                role="list"
+                align="stretch"
+                spacing={2}
+                listStyleType="none"
+                pl={0}
+              >
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
+                    ищешь путь развития в IT
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
+                    хочешь разобрать свой проект
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
+                    хочешь найти команду
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
+                    хочешь познакомиться с другими
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "md" }} color={metaTextColor}>
+                    хочешь увидеть, как работают настоящие задачи
+                  </Text>
+                </Box>
+              </VStack>
+            </Box>
           </Box>
 
           <Box as="section" aria-labelledby="sessions-first-event-title">
@@ -230,6 +313,7 @@ const SessionsScreen: React.FC = () => {
                 <SessionsLottieIcon/>
 
                 <Stack
+                  w="full"
                   direction={{ base: "column", sm: "row" }}
                   spacing={3}
                   justify="center"
@@ -294,6 +378,68 @@ const SessionsScreen: React.FC = () => {
                   </Button>
                 </Stack>
               </Stack>
+            </Box>
+          </Box>
+
+          <Box as="section" aria-labelledby="sessions-schedule-title">
+            <Box
+              borderRadius="2xl"
+              borderWidth="1px"
+              borderColor={eventBlockBorderColor}
+              bg={eventBlockBg}
+              p={{ base: 4, md: 5 }}
+              maxW={{ base: "full", md: "640px" }}
+              mx="auto"
+            >
+              <Heading
+                id="sessions-schedule-title"
+                as="h2"
+                fontSize={{ base: "md", md: "lg" }}
+                mb={{ base: 3, md: 4 }}
+              >
+                📅 Расписание ближайших 4 встреч
+              </Heading>
+              <VStack
+                as="ul"
+                role="list"
+                align="stretch"
+                spacing={2}
+                listStyleType="none"
+                pl={0}
+              >
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "sm" }} color={metaTextColor}>
+                    <Box as="span" fontWeight="semibold">
+                      1 мая
+                    </Box>{" "}
+                    — знакомство
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "sm" }} color={metaTextColor}>
+                    <Box as="span" fontWeight="semibold">
+                      8 мая
+                    </Box>{" "}
+                    — AMA
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "sm" }} color={metaTextColor}>
+                    <Box as="span" fontWeight="semibold">
+                      15 мая
+                    </Box>{" "}
+                    — разбор проектов
+                  </Text>
+                </Box>
+                <Box as="li" role="listitem">
+                  <Text fontSize={{ base: "sm", md: "sm" }} color={metaTextColor}>
+                    <Box as="span" fontWeight="semibold">
+                      22 мая
+                    </Box>{" "}
+                    — networking
+                  </Text>
+                </Box>
+              </VStack>
             </Box>
           </Box>
 
@@ -531,13 +677,12 @@ const SessionsScreen: React.FC = () => {
                 </Box>
 
                 <Stack
-                  direction={{ base: "column", sm: "row" }}
+                  direction={{ base: "column", md: "row" }}
                   spacing={4}
-                  w={{ base: "full", md: "auto" }}
-                  justify={{ base: "center", md: "flex-end" }}
-                  align={{ base: "stretch", sm: "center" }}
-                  maxW={{ base: "480px", md: "unset" }}
-                  mx={{ base: "auto", md: 0 }}
+                  w="full"
+                  justify="center"
+                  align="stretch"
+                  mx="auto"
                 >
                   <Button
                     as="a"
@@ -548,8 +693,7 @@ const SessionsScreen: React.FC = () => {
                     fontWeight="semibold"
                     px={{ base: 6, md: 8 }}
                     py={{ base: 3, md: 3.5 }}
-                    w={{ base: "100%", sm: "auto" }}
-                    minW={{ sm: "220px" }}
+                    w="100%"
                     bgGradient="linear(to-r, blue.600, blue.700)"
                     color="white"
                     transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
@@ -568,14 +712,43 @@ const SessionsScreen: React.FC = () => {
                     Написать в Telegram
                   </Button>
                   <Button
+                    as="a"
+                    href="https://t.me/nickwhite_web?text=Хочу%20предложить%20тему%20для%20сессии%20AIFFA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    size="lg"
+                    fontWeight="semibold"
+                    px={{ base: 6, md: 8 }}
+                    py={{ base: 3, md: 3.5 }}
+                    w="100%"
+                    borderColor={ctaBorderColor}
+                    borderWidth="1px"
+                    bg={partnerCtaBg}
+                    color={partnerCtaColor}
+                    leftIcon={<Icon as={FaLightbulb} boxSize={4} aria-hidden="true" />}
+                    transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease"
+                    _hover={{
+                      bg: partnerCtaHoverBg,
+                      borderColor: ctaBorderColor,
+                      transform: { base: "none", md: "translateY(-1px)" },
+                      boxShadow: "lg",
+                    }}
+                    _active={{
+                      transform: { base: "none", md: "translateY(0)" },
+                      boxShadow: "md",
+                    }}
+                    borderRadius="full"
+                  >
+                    Предложить тему
+                  </Button>
+                  <Button
                     as={RouterLink as any}
                     to="/partners"
                     size="lg"
                     fontWeight="semibold"
                     px={{ base: 6, md: 8 }}
                     py={{ base: 3, md: 3.5 }}
-                    w={{ base: "100%", sm: "auto" }}
-                    minW={{ sm: "220px" }}
+                    w="100%"
                     borderColor={partnerCtaBorder}
                     borderWidth="1px"
                     bg={partnerCtaBg}
@@ -679,6 +852,12 @@ const EventDetailCard: React.FC<EventDetailCardProps> = ({
             bg={iconCircleBg}
             color={iconColor}
             aria-hidden="true"
+            animation={`${iconIdleFloat} 5s ease-in-out infinite`}
+            transition="transform 0.18s ease, box-shadow 0.18s ease"
+            _hover={{
+              transform: "translateY(-1px) scale(1.05)",
+              boxShadow: "0 0 0 2px rgba(59, 130, 246, 0.45)",
+            }}
           >
             {icon}
           </Box>
@@ -756,6 +935,12 @@ const SessionFormatCard: React.FC<SessionFormatCardProps> = ({
           color={iconColor}
           aria-hidden="true"
           boxShadow="0 0 0 1px rgba(255, 255, 255, 0.08)"
+          animation={`${iconIdleFloat} 5s ease-in-out infinite`}
+          transition="transform 0.18s ease, box-shadow 0.18s ease"
+          _hover={{
+            transform: "translateY(-1px) scale(1.05)",
+            boxShadow: "0 0 0 2px rgba(59, 130, 246, 0.45)",
+          }}
         >
           {icon}
         </Box>

@@ -11,7 +11,7 @@ const PeopleLottieIcon: React.FC = () => {
     <LazyLottieIcon
       animationData={peopleAnimation}
       boxProps={{
-        w: { base: "250px", md: "350px" },
+        w: { base: "220px", md: "320px" },
         aspectRatio: 1600 / 820,
         mx: "auto",
       }}
@@ -19,9 +19,10 @@ const PeopleLottieIcon: React.FC = () => {
         <OptimizedIconImage
           src={peopleIcon}
           alt="Иконка людей"
-          width={438}
-          height={224}
-          sizes="438px"
+          width={320}
+          height={164}
+          sizes="(max-width: 768px) 90vw, 320px"
+          priority
         />
       }
     />

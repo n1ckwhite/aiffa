@@ -15,6 +15,7 @@ type OptimizedIconImageProps = {
   height: number;
   sizes?: string;
   priority?: boolean;
+  fetchPriority?: 'auto' | 'high' | 'low';
 };
 
 const OptimizedIconImage: React.FC<OptimizedIconImageProps> = ({
@@ -24,6 +25,7 @@ const OptimizedIconImage: React.FC<OptimizedIconImageProps> = ({
   height,
   sizes = "(max-width: 768px) 70vw, 350px",
   priority = false,
+  fetchPriority = 'auto'
 }) => {
   return (
     <NextImage
@@ -32,6 +34,7 @@ const OptimizedIconImage: React.FC<OptimizedIconImageProps> = ({
       width={width}
       height={height}
       sizes={sizes}
+      fetchPriority={fetchPriority}
       priority={priority}
       style={{
         width: "100%",

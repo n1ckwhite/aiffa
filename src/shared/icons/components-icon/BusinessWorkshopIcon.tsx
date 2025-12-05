@@ -21,7 +21,6 @@ const BusinessWorkshopIcon: React.FC = () => {
           width={250}
           height={250}
           sizes="250px"
-          priority
         />
       }
     />

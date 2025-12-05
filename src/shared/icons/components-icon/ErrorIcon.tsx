@@ -23,7 +23,6 @@ const ErrorIcon: React.FC = () => {
           width={350}
           height={250}
           sizes="350px"
-          priority
         />
       }
     />

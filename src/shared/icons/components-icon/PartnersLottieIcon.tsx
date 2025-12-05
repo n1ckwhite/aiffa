@@ -22,7 +22,6 @@ const PartnersLottieIcon: React.FC = () => {
           width={350}
           height={234}
           sizes="350px"
-          priority
         />
       }
     />

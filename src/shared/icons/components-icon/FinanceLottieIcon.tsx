@@ -22,7 +22,6 @@ const FinanceLottieIcon: React.FC = () => {
           width={350}
           height={350}
           sizes="350px"
-          priority
         />
       }
     />

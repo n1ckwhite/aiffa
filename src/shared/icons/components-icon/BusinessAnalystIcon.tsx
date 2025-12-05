@@ -22,7 +22,6 @@ const BusinessAnalystIcon: React.FC = () => {
           width={350}
           height={233}
           sizes="350px"
-          priority
         />
       }
     />

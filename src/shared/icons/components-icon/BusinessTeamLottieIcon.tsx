@@ -22,7 +22,6 @@ const BusinessTeamLottieIcon: React.FC = () => {
           width={350}
           height={231}
           sizes="350px"
-          priority
         />
       }
     />

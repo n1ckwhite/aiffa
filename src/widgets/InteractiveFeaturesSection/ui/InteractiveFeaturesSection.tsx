@@ -3,8 +3,7 @@ import { Box, Container, VStack, Text, SimpleGrid } from '@chakra-ui/react';
 import { useInteractiveColors } from '../colors/useInteractiveColors';
 import { colorRgbMap } from '../data/colors';
 import { features } from '../data/features';
-import iconImage from '@/shared/test/icon_2.webp';
-import Image from "next/image";
+import { LottieHeroIcon } from "@/shared/icons/components-icon";
 
 
 const InteractiveFeaturesSection: React.FC = () => {
@@ -12,12 +11,7 @@ const InteractiveFeaturesSection: React.FC = () => {
 
   return (
     <Box px={0}>
-        <Box maxW="100px" mx="auto">
-        <Image
-            src={iconImage}
-            alt="Комьюнити AIFFA"
-        />
-        </Box>
+        <LottieHeroIcon />
       <Container maxW="1200px">
         <VStack spacing={12} align="center">
           <VStack

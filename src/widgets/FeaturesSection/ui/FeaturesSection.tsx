@@ -1,10 +1,9 @@
 import React from 'react';
 import { Box, Container, VStack, SimpleGrid } from '@chakra-ui/react';
-import Image from 'next/image';
 import { useFeaturesSectionColors } from './colors/useFeaturesSectionColors';
 import { HeaderBlock, FeatureItem } from './parts';
 import { features } from '../model/data';
-import iconImage from '@/shared/test/icon.webp';
+import { PeopleLottieIcon } from "@/shared/icons/components-icon";
 
 const FeaturesSection: React.FC = () => {
   const colors = useFeaturesSectionColors();
@@ -13,14 +12,7 @@ const FeaturesSection: React.FC = () => {
       <Container maxW="1200px">
         <VStack spacing={12} align="center">
           <HeaderBlock
-            icon={
-              <Box maxW="350px" mx="auto">
-                <Image
-                  src={iconImage}
-                  alt="Комьюнити AIFFA"
-                />
-              </Box>
-            }
+              icon={<PeopleLottieIcon />}
             title="Почему выбирают AIFFA?"
             description="AIFFA — открытая экосистема без paywall: задачи, понятные примеры и практика.
 Мы растём вместе с сообществом: обратная связь, вклад участников и ваша поддержка

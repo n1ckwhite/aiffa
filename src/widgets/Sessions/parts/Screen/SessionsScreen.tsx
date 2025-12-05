@@ -86,7 +86,7 @@ const SessionsScreen: React.FC = () => {
   const iconColor = useColorModeValue("blue.600", "whiteAlpha.900");
   const highlightCardBorder = useColorModeValue("blue.100", "blue.500");
   const metaTextColor = useColorModeValue("gray.700", "gray.300");
-  const eventBlockBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.96)");
+  const eventBlockBg = useColorModeValue("white", "rgba(15, 23, 42, 0.96)");
   const eventBlockBorderColor = useColorModeValue("teal.100", "teal.500");
   const firstSessionBgGradient = useColorModeValue(
     "linear(to-br, teal.50, blue.50)",
@@ -131,7 +131,6 @@ const SessionsScreen: React.FC = () => {
   const scheduleMarkerColor = useColorModeValue("blue.500", "teal.300");
   const scheduleChipBg = useColorModeValue("blue.50", "whiteAlpha.200");
   const scheduleChipColor = useColorModeValue("blue.700", "blue.100");
-  const scheduleCardBg = useColorModeValue("blue.50", "rgba(15, 23, 42, 0.96)");
 
   const upcomingSessions: UpcomingSession[] = [
     {
@@ -406,9 +405,9 @@ const SessionsScreen: React.FC = () => {
                 mutedTextColor={mutedTextColor}
                 eventBlockBg={eventBlockBg}
                 eventBlockBorderColor={eventBlockBorderColor}
-              iconCircleBg={iconCircleBg}
-              iconColor={iconColor}
-              highlightBorderColor={highlightCardBorder}
+                iconCircleBg={iconCircleBg}
+                iconColor={iconColor}
+                highlightBorderColor={highlightCardBorder}
               />
               <EventDetailCard
               icon={<SiGooglemeet />}
@@ -671,7 +670,7 @@ const SessionsScreen: React.FC = () => {
                   borderRadius="2xl"
                   borderWidth="1px"
                   borderColor={cardBorderColor}
-                  bg={scheduleCardBg}
+                  bg={cardBg}
                   p={{ base: 4, md: 5 }}
                   position="relative"
                   overflow="hidden"
@@ -679,11 +678,8 @@ const SessionsScreen: React.FC = () => {
                     content: '""',
                     position: "absolute",
                     inset: 0,
-                    bgGradient:
-                      "linear-gradient(135deg, rgba(59, 130, 246, 0.06), rgba(45, 212, 191, 0.06))",
-                    backgroundSize: "200% 200%",
-                    opacity: 0.9,
-                    animation: `${detailCardGlow} 22s ease-in-out infinite`,
+                    bg: "transparent",
+                    bgImage: "none",
                     pointerEvents: "none",
                   }}
                   boxShadow="sm"
@@ -1089,10 +1085,7 @@ const EventDetailCard: React.FC<EventDetailCardProps> = ({
         content: '""',
         position: "absolute",
         inset: 0,
-        bgGradient: "linear-gradient(135deg, rgba(45, 212, 191, 0.16), rgba(56, 189, 248, 0.14))",
-        backgroundSize: "180% 180%",
-        opacity: 0.8,
-        animation: `${detailCardGlow} 18s ease-in-out infinite`,
+        bg: "transparent",
         pointerEvents: "none",
       }}
       boxShadow="sm"

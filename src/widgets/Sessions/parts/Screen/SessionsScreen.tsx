@@ -107,7 +107,7 @@ const SessionsScreen: React.FC = () => {
   const partnerCtaBorder = useColorModeValue("blue.200", "whiteAlpha.700");
   const partnerCtaHoverBg = useColorModeValue("white", "rgba(15, 23, 42, 0.98)");
   const forWhomBgGradient = useColorModeValue(
-    "linear(to-br, blue.50, teal.50)",
+    "linear(to-br, blue.50, blue.100)",
     "linear(to-br, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.95))"
   );
   const forWhomBorderColor = useColorModeValue("blue.100", "whiteAlpha.200");
@@ -429,6 +429,7 @@ const SessionsScreen: React.FC = () => {
                       textTransform="uppercase"
                       letterSpacing="0.18em"
                       color={sectionLabelColor}
+                      fontWeight="semibold"
                       mb={1}
                     >
                       Кому подойдут сессии

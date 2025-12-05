@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Box, Heading, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { Box, Heading, HStack, SimpleGrid, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { useSessionsColors } from "@/widgets/Sessions/colors/useSessionsColors";
 import { iconIdleFloat, detailCardGlow } from "@/widgets/Sessions/animations";
 import { EventDetailCardProps, EventDetailCardUiProps } from "./types";
@@ -18,6 +18,18 @@ const EventDetailCard: React.FC<EventDetailCardProps & EventDetailCardUiProps> =
   iconColor,
   highlightBorderColor,
 }) => {
+  const beforeStyles = useColorModeValue(
+    {
+      bg: "transparent",
+    },
+    {
+      bgGradient:
+        "linear-gradient(135deg, rgba(45, 212, 191, 0.16), rgba(56, 189, 248, 0.14))",
+      backgroundSize: "180% 180%",
+      opacity: 0.8,
+      animation: `${detailCardGlow} 18s ease-in-out infinite`,
+    }
+  );
   return (
     <Box
       borderRadius="2xl"
@@ -31,12 +43,8 @@ const EventDetailCard: React.FC<EventDetailCardProps & EventDetailCardUiProps> =
         content: '""',
         position: "absolute",
         inset: 0,
-        bgGradient:
-          "linear-gradient(135deg, rgba(45, 212, 191, 0.16), rgba(56, 189, 248, 0.14))",
-        backgroundSize: "180% 180%",
-        opacity: 0.8,
-        animation: `${detailCardGlow} 18s ease-in-out infinite`,
         pointerEvents: "none",
+        ...beforeStyles,
       }}
       boxShadow="sm"
       transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease"

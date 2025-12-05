@@ -1,13 +1,11 @@
 "use client";
 import React from "react";
-import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
-import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 import businessAnalyticsAnimation from "@/shared/icons/json-icons/business-analytics.json";
 import businessAnalyticsIcon from "@/shared/icons/webp-icons/business-analystics-icon.webp";
+import OptimizedIconImage from "@/shared/icons/components-icon/OptimizedIconImage";
 
 const BusinessAnalyticsIcon: React.FC = () => {
-  const staticSrc = getStaticSrcFromModule(businessAnalyticsIcon);
   return (
     <LazyLottieIcon
       animationData={businessAnalyticsAnimation}
@@ -17,15 +15,13 @@ const BusinessAnalyticsIcon: React.FC = () => {
         mx: "auto",
       }}
       fallback={
-        <Image
-          src={staticSrc}
+        <OptimizedIconImage
+          src={businessAnalyticsIcon}
           alt="Иконка бизнес-аналитики"
-          w="100%"
-          h="100%"
-          objectFit="contain"
-          loading="eager"
-          fetchPriority="high"
-          aria-hidden="true"
+          width={350}
+          height={307}
+          sizes="350px"
+          priority
         />
       }
     />

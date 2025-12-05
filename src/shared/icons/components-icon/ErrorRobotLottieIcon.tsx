@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
-import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 import robotAnimation from "@/shared/icons/json-icons/error-robot.json";
 import robotIcon from "@/shared/icons/webp-icons/error-robot-icon.webp";
+import OptimizedIconImage from "@/shared/icons/components-icon/OptimizedIconImage";
+
 const ErrorLottieIcon: React.FC = () => {
-  const staticSrc = getStaticSrcFromModule(robotIcon);
   return (
     <LazyLottieIcon
       animationData={robotAnimation}
@@ -17,15 +16,13 @@ const ErrorLottieIcon: React.FC = () => {
         mx: "auto",
       }}
       fallback={
-        <Image
-          src={staticSrc}
+        <OptimizedIconImage
+          src={robotIcon}
           alt="Иконка ошибки"
-          w="100%"
-          h="100%"
-          objectFit="contain"
-          loading="eager"
-          fetchPriority="high"
-          aria-hidden="true"
+          width={250}
+          height={250}
+          sizes="250px"
+          priority
         />
       }
     />

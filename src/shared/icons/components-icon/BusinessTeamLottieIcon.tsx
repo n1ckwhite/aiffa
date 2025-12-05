@@ -21,7 +21,7 @@ const BusinessTeamLottieIcon: React.FC = () => {
           alt="Иконка команды бизнеса"
           width={350}
           height={231}
-          sizes="(max-width: 768px) 80vw, 350px"
+          sizes="350px"
           priority
         />
       }

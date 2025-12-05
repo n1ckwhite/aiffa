@@ -21,7 +21,7 @@ const SuccessStoriesLottieIcon: React.FC = () => {
           alt="Иконка успешных историй"
           width={250}
           height={250}
-          sizes="(max-width: 768px) 60vw, 250px"
+          sizes="250px"
           priority
         />
       }

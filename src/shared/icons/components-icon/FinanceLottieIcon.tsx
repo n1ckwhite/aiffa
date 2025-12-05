@@ -1,14 +1,12 @@
 "use client";
 
 import React from "react";
-import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
-import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
 import partnersAnimation from "@/shared/icons/json-icons/finance.json";
 import financeIcon from "@/shared/icons/webp-icons/finance-icon.webp";
+import OptimizedIconImage from "@/shared/icons/components-icon/OptimizedIconImage";
 
 const FinanceLottieIcon: React.FC = () => {
-  const staticSrc = getStaticSrcFromModule(financeIcon as any);
   return (
     <LazyLottieIcon
       animationData={partnersAnimation}
@@ -18,15 +16,13 @@ const FinanceLottieIcon: React.FC = () => {
         mx: "auto",
       }}
       fallback={
-        <Image
-          src={staticSrc}
+        <OptimizedIconImage
+          src={financeIcon}
           alt="Иконка финансов"
-          w="100%"
-          h="100%"
-          objectFit="contain"
-          loading="eager"
-          fetchPriority="high"
-          aria-hidden="true"
+          width={350}
+          height={350}
+          sizes="350px"
+          priority
         />
       }
     />

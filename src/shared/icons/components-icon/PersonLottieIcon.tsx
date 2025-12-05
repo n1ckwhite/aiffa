@@ -1,14 +1,12 @@
 "use client";
 
 import React from "react";
-import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import personIcon from "@/shared/icons/webp-icons/person-icon.webp";
 import personAnimation from "@/shared/icons/json-icons/person.json";
-import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
+import OptimizedIconImage from "@/shared/icons/components-icon/OptimizedIconImage";
 
 const PersonLottieIcon: React.FC = () => {
-  const staticSrc = getStaticSrcFromModule(personIcon as any);
   return (
     <LazyLottieIcon
       animationData={personAnimation}
@@ -18,13 +16,12 @@ const PersonLottieIcon: React.FC = () => {
         mx: "auto",
       }}
       fallback={
-        <Image
-          src={staticSrc}
+        <OptimizedIconImage
+          src={personIcon}
           alt="Иконка человека"
-          w="100%"
-          h="100%"
-          objectFit="contain"
-          loading="lazy"
+          width={350}
+          height={250}
+          sizes="350px"
         />
       }
     />

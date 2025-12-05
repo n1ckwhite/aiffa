@@ -1,14 +1,12 @@
 "use client";
 
 import React from "react";
-import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import errorIcon from "@/shared/icons/webp-icons/error-icon.webp";
 import errorAnimation from "@/shared/icons/json-icons/404.json";
-import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
+import OptimizedIconImage from "@/shared/icons/components-icon/OptimizedIconImage";
 
 const ErrorIcon: React.FC = () => {
-  const staticSrc = getStaticSrcFromModule(errorIcon);
   return (
     <LazyLottieIcon
       animationData={errorAnimation}
@@ -19,15 +17,13 @@ const ErrorIcon: React.FC = () => {
         mb: 4,
       }}
       fallback={
-        <Image
-          src={staticSrc}
+        <OptimizedIconImage
+          src={errorIcon}
           alt="Иконка ошибки"
-          w="100%"
-          h="100%"
-          objectFit="contain"
-          loading="eager"
-          fetchPriority="high"
-          aria-hidden="true"
+          width={350}
+          height={250}
+          sizes="350px"
+          priority
         />
       }
     />

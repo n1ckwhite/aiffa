@@ -1,14 +1,12 @@
 "use client";
 
 import React from "react";
-import { Image } from "@chakra-ui/react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import studentIcon from "@/shared/icons/webp-icons/student-icon.webp";
 import studentAnimation from "@/shared/icons/json-icons/student.json";
-import { getStaticSrcFromModule } from "@/shared/icons/components-icon/data/staticSrc";
+import OptimizedIconImage from "@/shared/icons/components-icon/OptimizedIconImage";
 
 const StudentIcon: React.FC = () => {
-  const staticSrc = getStaticSrcFromModule(studentIcon as any);
   return (
     <LazyLottieIcon
       animationData={studentAnimation}
@@ -18,13 +16,12 @@ const StudentIcon: React.FC = () => {
         mx: "auto",
       }}
       fallback={
-        <Image
-          src={staticSrc}
+        <OptimizedIconImage
+          src={studentIcon}
           alt="Иконка студента"
-          w="100%"
-          h="100%"
-          objectFit="contain"
-          loading="lazy"
+          width={150}
+          height={132}
+          sizes="150px"
         />
       }
     />

@@ -12,6 +12,8 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     "",
     "/learn",
     "/weekly",
+    "/hackathons",
+    "/sessions",
     "/partners",
     "/profile",
   ].map((path) => ({

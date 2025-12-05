@@ -14,7 +14,6 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { SiGooglemeet } from "react-icons/si";
 import { SessionsLottieIcon } from "@/shared/icons/components-icon";
 import { useSessionsColors } from "@/widgets/Sessions/colors/useSessionsColors";
-import { sessionHighlightGlow } from "@/widgets/Sessions/animations";
 
 const SessionsFirstSessionSection: React.FC = () => {
   const {
@@ -45,7 +44,6 @@ const SessionsFirstSessionSection: React.FC = () => {
         px={{ base: 4, md: 6 }}
         pt={{ base: 4, md: 6 }}
         pb={{ base: 5, md: 7 }}
-        animation={`${sessionHighlightGlow} 12s ease-out infinite`}
       >
         <Stack spacing={{ base: 4, md: 5 }} align="center">
           <Box

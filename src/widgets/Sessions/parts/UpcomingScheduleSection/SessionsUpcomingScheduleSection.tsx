@@ -14,7 +14,6 @@ import {
 import { SiGooglemeet } from "react-icons/si";
 import PillBadge from "@/shared/ui/PillBadge";
 import { useSessionsColors } from "@/widgets/Sessions/colors/useSessionsColors";
-import { iconIdleFloat } from "@/widgets/Sessions/animations";
 import { useSessionsUpcomingSessions } from "./data";
 
 const SessionsUpcomingScheduleSection: React.FC = () => {
@@ -104,7 +103,6 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
                   color={scheduleMarkerColor}
                   aria-hidden="true"
                   boxShadow="0 0 0 1px rgba(255, 255, 255, 0.08)"
-                  animation={`${iconIdleFloat} 5s ease-in-out infinite`}
                   transition="transform 0.18s ease, box-shadow 0.18s ease"
                 >
                   {session.icon}

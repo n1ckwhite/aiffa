@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
-import { iconIdleFloat } from "@/widgets/Sessions/animations";
 import type { SessionFormatCardComponentProps } from "../../types";
 import { useSessionsColors } from "@/widgets/Sessions/colors/useSessionsColors";
 
@@ -50,7 +49,6 @@ const SessionFormatCard: React.FC<SessionFormatCardComponentProps> = ({ card }) 
           color={iconColor}
           aria-hidden="true"
           boxShadow="0 0 0 1px rgba(255, 255, 255, 0.08)"
-          animation={`${iconIdleFloat} 5s ease-in-out infinite`}
           transition="transform 0.18s ease, box-shadow 0.18s ease"
           _hover={{
             transform: "translateY(-1px) scale(1.05)",

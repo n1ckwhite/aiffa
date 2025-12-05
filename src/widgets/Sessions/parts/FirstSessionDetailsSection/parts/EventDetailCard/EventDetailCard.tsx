@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Heading, HStack, Stack, Text, useColorModeValue } from "@chakra-ui/react";
-import { detailCardGlow, iconIdleFloat } from "@/widgets/Sessions/animations";
 import type { EventDetailCardProps, EventDetailCardUiProps } from "../../types";
 
 const EventDetailCard: React.FC<EventDetailCardProps & EventDetailCardUiProps> = ({
@@ -61,7 +60,6 @@ const EventDetailCard: React.FC<EventDetailCardProps & EventDetailCardUiProps> =
             bg={iconCircleBg}
             color={iconColor}
             aria-hidden="true"
-            animation={`${iconIdleFloat} 5s ease-in-out infinite`}
             transition="transform 0.18s ease, box-shadow 0.18s ease"
             _hover={{
               transform: "translateY(-1px) scale(1.05)",

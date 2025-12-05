@@ -4,7 +4,6 @@ import React from "react";
 import { Box, Heading, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { PeopleLottieIcon } from "@/shared/icons/components-icon";
 import { useSessionsColors } from "@/widgets/Sessions/colors/useSessionsColors";
-import { iconIdleFloat } from "@/widgets/Sessions/animations";
 import { useSessionsForWhomCards } from "./data";
 
 const SessionsForWhomSection: React.FC = () => {
@@ -131,7 +130,6 @@ const SessionsForWhomSection: React.FC = () => {
                     bg={iconCircleBg}
                     color={iconColor}
                     aria-hidden="true"
-                    animation={`${iconIdleFloat} 6s ease-in-out infinite`}
                   >
                     {card.icon}
                   </Box>

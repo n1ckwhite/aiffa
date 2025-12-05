@@ -122,6 +122,7 @@ const SessionsScreen: React.FC = () => {
   const scheduleMarkerColor = useColorModeValue("blue.500", "teal.300");
   const scheduleChipBg = useColorModeValue("blue.50", "whiteAlpha.200");
   const scheduleChipColor = useColorModeValue("blue.700", "blue.100");
+  const scheduleCardBg = useColorModeValue("white", "rgba(15, 23, 42, 0.96)");
 
   return (
     <Box
@@ -576,136 +577,6 @@ const SessionsScreen: React.FC = () => {
                   </Box>
                 </SimpleGrid>
               </Stack>
-            </Box>
-          </Box>
-          <Box as="section" aria-labelledby="sessions-schedule-title">
-            <Box
-              borderRadius="2xl"
-              borderWidth="1px"
-              borderColor={eventBlockBorderColor}
-              bg={eventBlockBg}
-              p={{ base: 4, md: 5 }}
-              mx="auto"
-            >
-              <HStack justify="space-between" align="center" mb={{ base: 3, md: 4 }}>
-                <HStack spacing={3} align="center">
-                  <Box
-                    borderRadius="full"
-                    boxSize={8}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    bg={scheduleChipBg}
-                    color={scheduleMarkerColor}
-                    aria-hidden="true"
-                  >
-                    <Icon as={FaCalendarAlt} boxSize={4} />
-                  </Box>
-                  <Box>
-                    <Heading
-                      id="sessions-schedule-title"
-                      as="h2"
-                      fontSize={{ base: "md", md: "lg" }}
-                    >
-                      Расписание ближайших 4 встреч
-                    </Heading>
-                    <Text
-                      mt={1}
-                      fontSize={{ base: "xs", md: "sm" }}
-                      color={mutedTextColor}
-                    >
-                      Все встречи проходят онлайн, по московскому времени.
-                    </Text>
-                  </Box>
-                </HStack>
-                <Box
-                  as="span"
-                  fontSize="xs"
-                  px={3}
-                  py={1}
-                  borderRadius="full"
-                  bg={scheduleChipBg}
-                  color={scheduleChipColor}
-                  display={{ base: "none", md: "inline-flex" }}
-                  alignItems="center"
-                >
-                  Май 2025
-                </Box>
-              </HStack>
-
-              <VStack
-                as="ul"
-                role="list"
-                align="stretch"
-                spacing={3}
-                listStyleType="none"
-                pl={0}
-              >
-                <HStack as="li" role="listitem" spacing={3} align="flex-start">
-                  <Box
-                    mt={1}
-                    borderRadius="full"
-                    boxSize={2}
-                    bg={scheduleMarkerColor}
-                    boxShadow="0 0 0 3px rgba(59,130,246,0.28)"
-                    aria-hidden="true"
-                  />
-                  <Text fontSize={{ base: "sm", md: "sm" }} color={metaTextColor}>
-                    <Box as="span" fontWeight="semibold">
-                      1 мая
-                    </Box>{" "}
-                    — знакомство
-                  </Text>
-                </HStack>
-                <HStack as="li" role="listitem" spacing={3} align="flex-start">
-                  <Box
-                    mt={1}
-                    borderRadius="full"
-                    boxSize={2}
-                    bg={scheduleMarkerColor}
-                    boxShadow="0 0 0 3px rgba(59,130,246,0.28)"
-                    aria-hidden="true"
-                  />
-                  <Text fontSize={{ base: "sm", md: "sm" }} color={metaTextColor}>
-                    <Box as="span" fontWeight="semibold">
-                      8 мая
-                    </Box>{" "}
-                    — AMA
-                  </Text>
-                </HStack>
-                <HStack as="li" role="listitem" spacing={3} align="flex-start">
-                  <Box
-                    mt={1}
-                    borderRadius="full"
-                    boxSize={2}
-                    bg={scheduleMarkerColor}
-                    boxShadow="0 0 0 3px rgba(59,130,246,0.28)"
-                    aria-hidden="true"
-                  />
-                  <Text fontSize={{ base: "sm", md: "sm" }} color={metaTextColor}>
-                    <Box as="span" fontWeight="semibold">
-                      15 мая
-                    </Box>{" "}
-                    — разбор проектов
-                  </Text>
-                </HStack>
-                <HStack as="li" role="listitem" spacing={3} align="flex-start">
-                  <Box
-                    mt={1}
-                    borderRadius="full"
-                    boxSize={2}
-                    bg={scheduleMarkerColor}
-                    boxShadow="0 0 0 3px rgba(59,130,246,0.28)"
-                    aria-hidden="true"
-                  />
-                  <Text fontSize={{ base: "sm", md: "sm" }} color={metaTextColor}>
-                    <Box as="span" fontWeight="semibold">
-                      22 мая
-                    </Box>{" "}
-                    — networking
-                  </Text>
-                </HStack>
-              </VStack>
             </Box>
           </Box>
           <Box as="section" aria-labelledby="sessions-formats-title">

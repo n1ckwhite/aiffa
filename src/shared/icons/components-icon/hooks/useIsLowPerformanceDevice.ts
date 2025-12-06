@@ -26,41 +26,29 @@ export const useIsLowPerformanceDevice = (): boolean => {
         return true;
       }
 
-      const nav = navigator as any;
-      const userAgent = (nav.userAgent || "").toLowerCase();
-      const hardwareConcurrency: number | undefined = nav.hardwareConcurrency;
-      const deviceMemory: number | undefined = nav.deviceMemory;
+      const nav = navigator as Navigator & {
+        deviceMemory?: number;
+      };
 
-      const isPhone =
-        /iphone|ipod|android.+mobile|windows phone/.test(userAgent);
-      const isTablet = /ipad|android(?!.*mobile)/.test(userAgent);
+      const cores = typeof nav.hardwareConcurrency === "number"
+        ? nav.hardwareConcurrency
+        : undefined;
+      const memory =
+        typeof nav.deviceMemory === "number" && nav.deviceMemory > 0
+          ? nav.deviceMemory
+          : undefined;
 
-      // Смартфоны — всегда без анимаций, только статичные fallback‑иконки.
-      if (isPhone) {
+      // Если совсем нет данных по ресурсам — осторожно считаем устройство слабым.
+      if (cores === undefined && memory === undefined) {
         return true;
       }
 
-      // Планшеты: включаем анимацию только на «сильных» устройствах.
-      if (isTablet) {
-        const hasManyCores =
-          typeof hardwareConcurrency === "number" && hardwareConcurrency >= 6;
-        const hasEnoughMemory =
-          typeof deviceMemory === "number" ? deviceMemory >= 4 : true;
+      // Единый простой порог для всех типов устройств:
+      // low-perf только при совсем малом числе ядер или памяти.
+      const hasLowCpu = typeof cores === "number" && cores <= 2;
+      const hasLowMemory = typeof memory === "number" && memory <= 2;
 
-        // low-perf, если планшет явно не тянет.
-        return !(hasManyCores && hasEnoughMemory);
-      }
-
-      // Десктопы/ноутбуки: в целом считаем сильными, но отрубаем анимации
-      // на совсем слабых машинах.
-      const veryLowCores =
-        typeof hardwareConcurrency === "number" && hardwareConcurrency <= 2;
-      const veryLowMemory =
-        typeof deviceMemory === "number" &&
-        deviceMemory > 0 &&
-        deviceMemory <= 2;
-
-      return veryLowCores || veryLowMemory;
+      return hasLowCpu || hasLowMemory;
     };
 
     setIsLowPerf(computeIsLowPerf());

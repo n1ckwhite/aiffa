@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  Box,
-  Circle,
-  Heading,
-  SimpleGrid,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Circle, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { InfoIcon } from "@chakra-ui/icons";
 import BusinessAnalyticsIcon from "@/shared/icons/components-icon/BusinessAnatyticsIcon";
 import { useHackathonsHowItWorksSectionColors } from "./colors/useHackathonsHowItWorksSectionColors";
 import { useHackathonsHowItWorksSteps } from "./data";
@@ -107,7 +101,19 @@ const HackathonsHowItWorksSection: React.FC = () => {
         </SimpleGrid>
 
         <Box mt={{ base: 4, md: 6 }}>
-          <Heading as="h3" size="md" mb={2}>
+          <Heading
+            as="h3"
+            size="md"
+            mb={2}
+            display="inline-flex"
+            alignItems="center"
+            gap={2}
+          >
+            <InfoIcon
+              boxSize={4}
+              color={mutedTextColor}
+              aria-hidden="true"
+            />
             Почему это важно
           </Heading>
           <Text fontSize={{ base: "md", md: "lg" }} color={mutedTextColor}>

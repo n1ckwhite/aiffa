@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, SimpleGrid, Text, HStack, Avatar, AvatarGroup } from '@chakra-ui/react';
+import { Box, SimpleGrid, Text, HStack, Avatar } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ChevronRightIcon, StarIcon, ViewIcon } from '@chakra-ui/icons';
 import { arrowLoop } from './animations';
@@ -35,11 +35,27 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
             <HStack spacing={2} flexWrap="wrap" mt="auto" pt={1}>
               {Array.isArray(p.authors) && p.authors.length > 0 && (
                 <Box fontSize="xs" color={colors.accent} bg="transparent" px={2.5} py={1} borderRadius="full" borderWidth="1px" borderStyle="dashed" borderColor={colors.chipBorder} display="inline-flex" alignItems="center" gap={2} onClick={(e: React.MouseEvent<HTMLDivElement>) => { e.stopPropagation(); }}>
-                  <AvatarGroup size="sm" max={3} spacing="-8px">
-                    {p.authors.map((a: { username: string; name?: string }) => (
+                  <Box display="inline-flex" alignItems="center">
+                    {p.authors.slice(0, 3).map((a: { username: string; name?: string }) => (
                       <Avatar key={a.username} as="button" onClick={(e: React.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); try { window.open(`https://github.com/${a.username}`, '_blank', 'noopener,noreferrer'); } catch {} }} onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); }} onTouchStart={(e: React.TouchEvent<HTMLButtonElement>) => { e.stopPropagation(); }} name={a.name} src={`https://avatars.githubusercontent.com/${a.username}?s=40`} boxSize="24px" border="0" aria-label={`GitHub ${a.name}`} />
                     ))}
-                  </AvatarGroup>
+                    {p.authors.length > 3 && (
+                      <Box
+                        ml="-8px"
+                        w="24px"
+                        h="24px"
+                        borderRadius="full"
+                        bg="gray.600"
+                        color="white"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        fontSize="xs"
+                      >
+                        {p.authors.length - 3}
+                      </Box>
+                    )}
+                  </Box>
                   {p.authors.length === 1 ? 'Автор' : 'Авторы'}
                 </Box>
               )}

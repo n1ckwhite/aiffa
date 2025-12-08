@@ -9,7 +9,18 @@ export const AuthorsBadge: React.FC<AuthorsBadgeProps> = ({ authors, colors }) =
   const stop = (e: React.SyntheticEvent) => { e.stopPropagation(); };
   return (
     <Box fontSize="xs" color={colors.blue.accent} bg="transparent" px={2.5} py={1} borderRadius="full" borderWidth="1px" borderStyle="dashed" borderColor={colors.blue.chipBorder} display="inline-flex" alignItems="center" gap={2}>
-      <AvatarGroup size="sm" max={3} spacing="-8px">
+      <AvatarGroup
+        size="sm"
+        max={3}
+        spacing="-8px"
+        sx={{
+          ".chakra-avatar__excess": {
+            w: "24px",
+            h: "24px",
+            fontSize: "xs",
+          },
+        }}
+      >
         {authors.map((a) => (
           <Avatar
             key={`proj-${a.username}`}

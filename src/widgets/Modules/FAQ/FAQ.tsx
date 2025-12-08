@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, VStack, HStack, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, Icon } from '@chakra-ui/react';
+import { Box, VStack, HStack, Heading, Icon } from '@chakra-ui/react';
 import { AddIcon, QuestionOutlineIcon } from '@chakra-ui/icons';
 import { useAppColors } from 'shared/theme/colors';
 import SupportBlock from 'widgets/SupportBlock';
@@ -38,82 +38,79 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
           p={{ base: 3, md: 4, lg: 5 }}
           bg={theme.cardBgFAQ}
         >
-          <Accordion>
-            {list.map((it, idx) => (
-              <AccordionItem key={idx} border="none">
-                {(() => {
-                  const expanded = openIndex === idx;
-                  const handleClick = () => {
-                    setOpenIndex(expanded ? null : idx);
-                  };
+          {list.map((it, idx) => {
+            const expanded = openIndex === idx;
 
-                  return (
-                    <>
-                      <h2>
-                        <AccordionButton
-                          px={0}
-                          py={{ base: 2.5, md: 3 }}
-                          borderRadius="xl"
-                          borderBottomRadius={expanded ? 0 : 'xl'}
-                          borderWidth={0}
-                          bg="transparent"
-                          _hover={{ bg: 'transparent' }}
-                          _expanded={{ bg: 'transparent' }}
-                          _focus={{ boxShadow: 'none', bg: 'transparent' }}
-                          _active={{ bg: 'transparent' }}
-                          mb={expanded ? 0 : 2}
-                          justifyContent="space-between"
-                          alignItems="flex-start"
-                          onClick={handleClick}
-                        >
-                          <HStack flex="1" spacing={3}>
-                            <Box
-                              as="span"
-                              fontWeight="semibold"
-                              fontSize={{ base: 'md', md: 'lg' }}
-                              textAlign="left"
-                            >
-                              {it.title}
-                            </Box>
-                          </HStack>
-                          <Box
-                            w="22px"
-                            h="22px"
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
-                            flexShrink={0}
-                            ml={{ base: 2, md: 3 }}
-                            mt={{ base: 1, md: 1.5 }}
-                            transform={expanded ? 'rotate(45deg)' : 'rotate(0deg)'}
-                            transition="transform 180ms ease"
-                          >
-                            <AddIcon boxSize={{ base: 2.5, md: 3 }} color={faqTitleColor} />
-                          </Box>
-                        </AccordionButton>
-                      </h2>
-                      {expanded && (
-                        <AccordionPanel
-                          px={0}
-                          pt={0}
-                          pb={3}
-                          fontSize="sm"
-                          lineHeight={1.8}
-                          color={faqTextColor}
-                          bg="transparent"
-                          borderWidth={0}
-                          mb={2}
-                          textAlign="left"
-                        >
-                          {it.content}
-                        </AccordionPanel>
-                      )}
-                    </>
-                  );
-                })()}
-              </AccordionItem>
-            ))}
-          </Accordion>
+            const handleClick = () => {
+              setOpenIndex(expanded ? null : idx);
+            };
+
+            return (
+              <Box key={idx} border="none">
+                <Box
+                  as="button"
+                  type="button"
+                  w="100%"
+                  px={0}
+                  py={{ base: 2.5, md: 3 }}
+                  borderRadius="xl"
+                  borderBottomRadius={expanded ? 0 : 'xl'}
+                  borderWidth={0}
+                  bg="transparent"
+                  _hover={{ bg: 'transparent' }}
+                  _focus={{ boxShadow: 'none', bg: 'transparent' }}
+                  _active={{ bg: 'transparent' }}
+                  mb={expanded ? 0 : 2}
+                  justifyContent="space-between"
+                  alignItems="flex-start"
+                  display="flex"
+                  onClick={handleClick}
+                  aria-expanded={expanded}
+                >
+                  <HStack flex="1" spacing={3}>
+                    <Box
+                      as="span"
+                      fontWeight="semibold"
+                      fontSize={{ base: 'md', md: 'lg' }}
+                      textAlign="left"
+                    >
+                      {it.title}
+                    </Box>
+                  </HStack>
+                  <Box
+                    w="22px"
+                    h="22px"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    flexShrink={0}
+                    ml={{ base: 2, md: 3 }}
+                    mt={{ base: 1, md: 1.5 }}
+                    transform={expanded ? 'rotate(45deg)' : 'rotate(0deg)'}
+                    transition="transform 180ms ease"
+                  >
+                    <AddIcon boxSize={{ base: 2.5, md: 3 }} color={faqTitleColor} />
+                  </Box>
+                </Box>
+                {expanded && (
+                  <Box
+                    px={0}
+                    pt={0}
+                    pb={3}
+                    fontSize="sm"
+                    lineHeight={1.8}
+                    color={faqTextColor}
+                    bg="transparent"
+                    borderWidth={0}
+                    mb={2}
+                    textAlign="left"
+                  >
+                    {it.content}
+                  </Box>
+                )}
+              </Box>
+            );
+          })}
         </Box>
         {showSupportBlock && <SupportBlock variant="modules" />}
       </VStack>

@@ -41,7 +41,12 @@ const ModuleProjectPage: FC = () => {
         projectTitle={project?.title || ''}
       />
       <VStack align="stretch" gap={4} maxW="840px" mx="auto">
-        <ProjectAuthorCard author={author} borderColor={borderColor} descColor={descColor} linkColor={linkColor} />
+        <ProjectAuthorCard
+          author={author}
+          borderColor={borderColor}
+          descColor={descColor}
+          linkColor={linkColor}
+        />
         {project && mod && (
           <ProjectHeaderCard
             project={{ id: project.id, title: project.title }}

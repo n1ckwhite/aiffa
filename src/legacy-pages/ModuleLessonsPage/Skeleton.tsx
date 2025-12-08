@@ -49,11 +49,18 @@ const ModuleLessonsSkeleton: React.FC = () => {
                 <HStack spacing={3} align="flex-start">
                   <SkeletonCircle boxSize="28px" />
                   <VStack align="stretch" spacing={2} flex={1}>
+                    {/* Заголовок урока */}
                     <Skeleton h="16px" w="80%" borderRadius="md" />
-                    <HStack spacing={2} flexWrap="wrap">
-                      <Skeleton h="18px" w="80px" borderRadius="full" />
-                      <Skeleton h="18px" w="110px" borderRadius="full" />
-                      <Skeleton h="18px" w="90px" borderRadius="full" />
+                    {/* Мета‑информация: звёзды, просмотры, комментарии */}
+                    <HStack spacing={3} flexWrap="wrap">
+                      <Skeleton h="14px" w="46px" borderRadius="full" />
+                      <Skeleton h="14px" w="46px" borderRadius="full" />
+                      <Skeleton h="14px" w="46px" borderRadius="full" />
+                    </HStack>
+                    {/* Бейджи: задачи, автор, «Открыть материал» */}
+                    <HStack spacing={2} flexWrap="wrap" pt={1}>
+                      <Skeleton h="20px" w="90px" borderRadius="full" />
+                      <Skeleton h="20px" w="110px" borderRadius="full" />
                     </HStack>
                   </VStack>
                   <Skeleton h="20px" w="20px" borderRadius="md" />

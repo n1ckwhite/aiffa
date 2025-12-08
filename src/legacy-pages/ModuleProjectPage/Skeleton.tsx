@@ -33,7 +33,6 @@ const ModuleProjectSkeleton: React.FC = () => {
                 <Skeleton h="14px" w="40px" borderRadius="full" />
                 <Skeleton h="14px" w="40px" borderRadius="full" />
                 <Skeleton h="14px" w="40px" borderRadius="full" />
-                <Skeleton h="24px" w="130px" borderRadius="full" />
               </HStack>
             </VStack>
           </HStack>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, HStack, VStack, Text } from '@chakra-ui/react';
-import { ChevronRightIcon, StarIcon, ViewIcon, ChatIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
 import type { ProjectLinkProps } from './types';
 import { IndexChip } from '../../../LessonCard/parts/IndexChip';
@@ -12,33 +12,12 @@ import { formatCount } from 'shared/functions/formatCount';
 
 export const ProjectLink: React.FC<ProjectLinkProps> = ({ mod, colors, levelAccent, arrowAnimationCss }) => {
   if (!mod?.project) return null;
-  const {
-    indexBg,
-    accentColor,
-    starsCount,
-    views,
-    commentsCount,
-    metaColor,
-  } = getProjectLinkMeta(mod, colors);
+  const { indexBg, accentColor } = getProjectLinkMeta(mod, colors);
   return (
     <Box as={RouterLink} to={`/learn/${mod.id}/projects`} borderWidth="2px" borderColor={colors.borderColor} bg={colors.cardBg} transition="all 180ms ease" p={5} borderRadius="xl" display="flex" gap={3} alignItems="flex-start" position="relative" overflow="hidden" boxShadow={'none'} mt={1} sx={{ '@media (hover: hover) and (pointer: fine)': { '&:hover': { background: colors.cardHoverBg, textDecoration: 'none', transform: 'translateY(-4px)', borderColor: levelAccent, boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)', '&::before': { transform: 'scaleX(1)' } } } }} _before={buildTopBarBefore(levelAccent)}>
       <IndexChip done={false} indexBg={indexBg} accentColor={accentColor}>P</IndexChip>
       <VStack align="start" spacing={1} flex={1} minW={0}>
         <Text fontWeight="semibold" noOfLines={2} wordBreak="break-word" overflowWrap="anywhere" style={{ hyphens: 'auto' }}>{PROJECT_LINK_TEXTS.title}</Text>
-        <HStack spacing={3} fontSize="xs" color={metaColor}>
-          <HStack spacing={1}>
-            <Box as="span">{formatCount(starsCount)}</Box>
-            <StarIcon boxSize={3} color="yellow.400" />
-          </HStack>
-          <HStack spacing={1}>
-            <Box as="span">{formatCount(views)}</Box>
-            <ViewIcon boxSize={3} />
-          </HStack>
-          <HStack spacing={1}>
-            <Box as="span">{formatCount(commentsCount)}</Box>
-            <ChatIcon boxSize={3} />
-          </HStack>
-        </HStack>
         <HStack spacing={2} flexWrap="wrap">
           <AuthorsBadge authors={(mod.project as any)?.authors} colors={colors} />
           <OpenProjectsBadge colors={colors} arrowAnimationCss={arrowAnimationCss} />

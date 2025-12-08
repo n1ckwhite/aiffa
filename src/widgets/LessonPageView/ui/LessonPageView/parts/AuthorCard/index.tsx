@@ -18,14 +18,33 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
   if (!author) return null;
 
   const tooltipLabel = isStarred
-    ? 'Спасибо за вклад! Автор увидит вашу поддержку'
+    ? 'Спасибо! Автор увидит вашу поддержку ✨'
     : 'Отметить материал полезным';
 
   const badgeBg = useColorModeValue(
     isStarred ? 'rgba(59,130,246,0.08)' : 'transparent',
-    isStarred ? 'rgba(129,140,248,0.22)' : 'whiteAlpha.50',
+    isStarred ? 'rgba(129,140,248,0.32)' : 'whiteAlpha.100',
   );
-  const badgeBorder = isStarred ? 'blue.300' : 'blue.200';
+
+  const badgeBorder = useColorModeValue(
+    isStarred ? 'blue.300' : 'blue.200',
+    isStarred ? 'blue.300' : 'whiteAlpha.300',
+  );
+
+  const badgeTextColor = useColorModeValue(
+    isStarred ? 'blue.700' : 'blue.600',
+    isStarred ? 'blue.100' : 'blue.200',
+  );
+
+  const hoverBg = useColorModeValue(
+    'rgba(59,130,246,0.12)',
+    'rgba(129,140,248,0.42)',
+  );
+
+  const activeBg = useColorModeValue(
+    'rgba(59,130,246,0.16)',
+    'rgba(129,140,248,0.5)',
+  );
 
   return (
     <Box borderWidth="1px" borderColor={borderColor} borderRadius="xl" p={{ base: 3, md: 4 }} bg="transparent">
@@ -44,7 +63,6 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
               <Tooltip label={tooltipLabel} hasArrow placement="top">
                 <Box
                   as={onToggleStar ? 'button' : 'div'}
-                  type={onToggleStar ? 'button' : undefined}
                   display="inline-flex"
                   alignItems="center"
                   gap={1}
@@ -54,7 +72,7 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
                   borderWidth="1px"
                   borderColor={badgeBorder}
                   bg={badgeBg}
-                  color={isStarred ? 'blue.700' : 'blue.600'}
+                  color={badgeTextColor}
                   cursor={onToggleStar ? 'pointer' : 'default'}
                   fontWeight="semibold"
                   letterSpacing="-0.01em"
@@ -62,12 +80,12 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
                   transition="background-color 0.18s ease-out, color 0.18s ease-out, border-color 0.18s ease-out"
                   _hover={
                     onToggleStar
-                      ? { bg: 'rgba(59,130,246,0.12)' }
+                      ? { bg: hoverBg }
                       : undefined
                   }
                   _active={
                     onToggleStar
-                      ? { bg: 'rgba(59,130,246,0.18)' }
+                      ? { bg: activeBg }
                       : undefined
                   }
                   onClick={onToggleStar}
@@ -82,10 +100,19 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
                     w="18px"
                     h="18px"
                     borderRadius="full"
-                    bg={isStarred ? 'yellow.200' : 'gray.100'}
+                    bg={useColorModeValue(
+                      isStarred ? 'yellow.200' : 'gray.100',
+                      isStarred ? 'yellow.300' : 'whiteAlpha.200',
+                    )}
                     flexShrink={0}
                   >
-                    <StarIcon boxSize={2.5} color={isStarred ? 'yellow.500' : 'gray.400'} />
+                    <StarIcon
+                      boxSize={2.5}
+                      color={useColorModeValue(
+                        isStarred ? 'yellow.500' : 'gray.400',
+                        isStarred ? 'yellow.400' : 'gray.300',
+                      )}
+                    />
                   </Box>
                 </Box>
               </Tooltip>

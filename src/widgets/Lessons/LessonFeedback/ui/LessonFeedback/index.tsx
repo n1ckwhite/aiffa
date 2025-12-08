@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Fade, HStack, IconButton, Portal, Text, VStack, Button } from '@chakra-ui/react';
+import { CheckCircleIcon } from '@chakra-ui/icons';
 import { useLessonFeedbackColors } from '../../colors';
 import { useMinWidthViewport } from '../../hooks/useViewport';
 import { useFeedbackController } from '../../hooks/useFeedbackController';
@@ -12,6 +13,8 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
   const isWide = useMinWidthViewport(1025);
   const { choice, mounted, visible, showThanks, pulsing, vote } = useFeedbackController(lessonKey);
   const { cardBg, cardShadow, border, textCol, chipBg, chipHover, upColor, downColor, thumbIdleColor, thanksColor } = useLessonFeedbackColors();
+
+  const [improveReason, setImproveReason] = React.useState<'short' | 'hard' | 'errors' | null>(null);
 
   if (!mounted || !isWide) return null;
 
@@ -75,22 +78,87 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
                 />
               </HStack>
             </HStack>
-          ) : (
-            <VStack align="flex-start" spacing={1}>
+          ) : choice === 'down' && !improveReason ? (
+            <VStack align="flex-start" spacing={2}>
               <Text
                 fontSize="sm"
                 fontWeight="semibold"
                 color={thanksColor}
               >
-                Спасибо за отзыв!
+                Спасибо за обратную связь 🙏
               </Text>
-              <HStack spacing={1} align="baseline" color={textCol} fontSize="xs">
-                <Text as="span">Понравился материал?</Text>
-                <Text as="span" fontWeight="semibold">
-                  Поддержите автора ⭐
-                </Text>
+              <Text fontSize="xs" color={textCol}>
+                Можно улучшить что-то?
+              </Text>
+              <HStack spacing={2} pt={0.5} flexWrap="wrap">
+                <Button
+                  size="sm"
+                  px={4}
+                  py={1}
+                  borderRadius="full"
+                  variant={improveReason === 'short' ? 'solid' : 'outline'}
+                  bg={improveReason === 'short' ? chipHover : chipBg}
+                  _hover={{ bg: chipHover }}
+                  _active={{ bg: chipHover }}
+                  borderColor={border}
+                  color={improveReason === 'short' ? 'white' : textCol}
+                  minW="max-content"
+                  onClick={() => setImproveReason('short')}
+                >
+                  Недостаточно подробно
+                </Button>
+                <Button
+                  size="sm"
+                  px={4}
+                  py={1}
+                  borderRadius="full"
+                  variant={improveReason === 'hard' ? 'solid' : 'outline'}
+                  bg={improveReason === 'hard' ? chipHover : chipBg}
+                  _hover={{ bg: chipHover }}
+                  _active={{ bg: chipHover }}
+                  borderColor={border}
+                  color={improveReason === 'hard' ? 'white' : textCol}
+                  minW="max-content"
+                  onClick={() => setImproveReason('hard')}
+                >
+                  Сложно понять
+                </Button>
+                <Button
+                  size="sm"
+                  px={4}
+                  py={1}
+                  borderRadius="full"
+                  variant={improveReason === 'errors' ? 'solid' : 'outline'}
+                  bg={improveReason === 'errors' ? chipHover : chipBg}
+                  _hover={{ bg: chipHover }}
+                  _active={{ bg: chipHover }}
+                  borderColor={border}
+                  color={improveReason === 'errors' ? 'white' : textCol}
+                  minW="max-content"
+                  onClick={() => setImproveReason('errors')}
+                >
+                  Есть ошибки
+                </Button>
               </HStack>
+              {improveReason && (
+                <Text fontSize="xs" color={textCol} pt={0.5}>
+                  {improveReason === 'short' && 'Отлично, сделаем объяснение более подробным и добавим примеры.'}
+                  {improveReason === 'hard' && 'Постараемся упростить формулировки и разбить материал на более понятные шаги.'}
+                  {improveReason === 'errors' && 'Спасибо, мы ещё раз внимательно проверим материал и исправим неточности.'}
+                </Text>
+              )}
             </VStack>
+          ) : (
+            <HStack align="center" spacing={2}>
+              <CheckCircleIcon boxSize={4} color={thanksColor} />
+              <Text
+                fontSize="sm"
+                fontWeight="semibold"
+                color={thanksColor}
+              >
+                Спасибо за ваш отзыв!
+              </Text>
+            </HStack>
           )}
         </Box>
       </Fade>

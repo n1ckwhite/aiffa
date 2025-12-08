@@ -11,7 +11,7 @@ import { ProjectSupport } from "widgets/ModuleProjectView/parts/ModuleProjectVie
 import { AuthorCard } from "widgets/LessonPageView/ui/LessonPageView/parts/AuthorCard";
 import LessonFeedback from "widgets/Lessons/LessonFeedback";
 import { useModuleProjectPageClientColors } from "./colors/useModuleProjectPageClientColors";
-import { useProjectAuthorSupport } from "./features/useProjectAuthorSupport";
+import { useProjectAuthorSupport } from "widgets/ModuleProjectView/parts/ModuleProjectView/features/useProjectAuthorSupport";
 import type { ModuleProjectPageClientProps } from "./types";
 
 const ModuleProjectPageClient = ({ moduleId, projectId }: ModuleProjectPageClientProps) => {

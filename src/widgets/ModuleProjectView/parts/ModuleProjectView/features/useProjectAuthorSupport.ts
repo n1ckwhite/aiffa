@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const useProjectAuthorSupport = (project: any) => {
   const initialStarsCount = Number(project?.ratingCount ?? 0);

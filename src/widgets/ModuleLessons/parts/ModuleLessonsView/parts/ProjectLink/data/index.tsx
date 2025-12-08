@@ -1,6 +1,3 @@
-import React from 'react';
-import { moduleIconById } from 'shared/lessons/moduleIcons';
-
 export const PROJECT_LINK_TEXTS = {
   title: 'Проекты',
   open: 'Открыть проекты',

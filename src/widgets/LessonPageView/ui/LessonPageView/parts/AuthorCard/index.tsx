@@ -16,10 +16,14 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
   commentsCount,
   isStarred,
   onToggleStar,
+  context,
 }) => {
   if (!author) return null;
 
-  const { tooltipLabel, supportLabel } = useAuthorSupportTexts(isStarred ?? false);
+  const { tooltipLabel, supportLabel } = useAuthorSupportTexts(
+    isStarred ?? false,
+    context ?? 'lesson',
+  );
 
   const {
     badgeBg,

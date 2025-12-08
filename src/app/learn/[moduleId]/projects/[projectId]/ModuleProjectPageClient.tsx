@@ -3,28 +3,24 @@
 import React from "react";
 import { Box, VStack } from "@chakra-ui/react";
 import ModuleProjectSkeleton from "pages/ModuleProjectPage/Skeleton";
-import { useAppColors } from "shared/theme/colors";
 import { useModuleProjectLoad, useProjectMarkdown } from "widgets/ModuleProjectView";
 import { ProjectBreadcrumbHeader } from "widgets/ModuleProjectView/parts/ModuleProjectView/parts/BreadcrumbHeader";
-import { ProjectAuthorCard } from "widgets/ModuleProjectView/parts/ModuleProjectView/parts/AuthorCard";
 import { ProjectHeaderCard } from "widgets/ModuleProjectView/parts/ModuleProjectView/parts/ProjectHeaderCard";
 import { ProjectMarkdown } from "widgets/ModuleProjectView/parts/ModuleProjectView/parts/ProjectMarkdown";
 import { ProjectSupport } from "widgets/ModuleProjectView/parts/ModuleProjectView/parts/ProjectSupport";
+import { AuthorCard } from "widgets/LessonPageView/ui/LessonPageView/parts/AuthorCard";
 import LessonFeedback from "widgets/Lessons/LessonFeedback";
-
-type ModuleProjectPageClientProps = {
-  moduleId: string;
-  projectId: string;
-};
+import { useModuleProjectPageClientColors } from "./colors/useModuleProjectPageClientColors";
+import { useProjectAuthorSupport } from "./features/useProjectAuthorSupport";
+import type { ModuleProjectPageClientProps } from "./types";
 
 const ModuleProjectPageClient = ({ moduleId, projectId }: ModuleProjectPageClientProps) => {
   const { mod, project, loading } = useModuleProjectLoad(moduleId, projectId);
-  const theme = useAppColors();
-  const borderColor = theme.borderColor;
-  const cardBg = theme.cardBg;
-  const descColor = theme.descColor;
-  const linkColor = theme.blue.accent;
+  const { borderColor, cardBg, descColor, linkColor } = useModuleProjectPageClientColors();
   const author = project?.authors?.[0];
+
+  const { starsCount, viewsCount, commentsCount, isStarred, handleToggleStar } =
+    useProjectAuthorSupport(project as any);
 
   const md = useProjectMarkdown(project?.mdPath);
 
@@ -47,11 +43,17 @@ const ModuleProjectPageClient = ({ moduleId, projectId }: ModuleProjectPageClien
         projectTitle={project?.title || ""}
       />
       <VStack align="stretch" gap={4} maxW="840px" mx="auto">
-        <ProjectAuthorCard
+        <AuthorCard
           author={author}
           borderColor={borderColor}
           descColor={descColor}
           linkColor={linkColor}
+          context="project"
+          starsCount={starsCount}
+          viewsCount={viewsCount}
+          commentsCount={commentsCount}
+          isStarred={isStarred}
+          onToggleStar={handleToggleStar}
         />
         {project && mod && (
           <ProjectHeaderCard

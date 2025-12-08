@@ -8,6 +8,7 @@ export type AuthorCardProps = {
   commentsCount?: number;
   isStarred?: boolean;
   onToggleStar?: () => void;
+  context?: 'lesson' | 'project';
 };
 
 

@@ -12,7 +12,7 @@ const ModuleProjectSkeleton: React.FC = () => {
       py={{ base: 8, md: 10 }}
     >
       {/* Хлебные крошки */}
-      <HStack spacing={2} mb={4} align="center">
+      <HStack mb={4} align="stretch" gap={2} maxW="840px" mx="auto" px={{ base: 4, md: 6 }}>
         <Skeleton h="10px" w="80px" borderRadius="full" />
         <Skeleton h="10px" w="6px" borderRadius="full" />
         <Skeleton h="10px" w="140px" borderRadius="full" />
@@ -20,13 +20,24 @@ const ModuleProjectSkeleton: React.FC = () => {
 
       <VStack align="stretch" gap={5} maxW="840px" mx="auto">
         {/* Автор проекта */}
-        <HStack spacing={4} align="center">
-          <SkeletonCircle boxSize={{ base: "40px", md: "44px" }} />
-          <VStack align="flex-start" spacing={2} flex={1}>
-            <Skeleton h="12px" w="120px" borderRadius="md" />
-            <Skeleton h="10px" w="200px" borderRadius="md" />
-          </VStack>
-        </HStack>
+        <Box borderRadius="xl" p={{ base: 3, md: 4 }}>
+          <HStack spacing={4} align="center">
+            <SkeletonCircle boxSize={{ base: "40px", md: "44px" }} />
+            <VStack align="flex-start" spacing={2} flex={1}>
+              {/* Автор + имя */}
+              <Skeleton h="12px" w="160px" borderRadius="md" />
+              {/* Текст про вклад */}
+              <Skeleton h="10px" w="220px" borderRadius="md" />
+              {/* Метрики + кнопка "Спасибо автору" */}
+              <HStack spacing={3} pt={1}>
+                <Skeleton h="14px" w="40px" borderRadius="full" />
+                <Skeleton h="14px" w="40px" borderRadius="full" />
+                <Skeleton h="14px" w="40px" borderRadius="full" />
+                <Skeleton h="24px" w="130px" borderRadius="full" />
+              </HStack>
+            </VStack>
+          </HStack>
+        </Box>
 
         {/* Карточка заголовка проекта */}
         <Box borderRadius="xl" p={{ base: 4, md: 5 }}>

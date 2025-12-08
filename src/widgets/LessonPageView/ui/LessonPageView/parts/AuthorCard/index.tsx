@@ -1,8 +1,10 @@
 import React from 'react';
-import { Avatar, Box, HStack, Link, Text, VStack, Tooltip, useColorModeValue } from '@chakra-ui/react';
+import { Avatar, Box, HStack, Link, Text, VStack, Tooltip } from '@chakra-ui/react';
 import { StarIcon, ViewIcon, ChatIcon } from '@chakra-ui/icons';
 import type { AuthorCardProps } from './types';
 import { formatCount } from 'shared/functions/formatCount';
+import { useAuthorCardColors } from './colors/useAuthorCardColors';
+import { useAuthorSupportTexts } from './features/useAuthorSupportTexts';
 
 export const AuthorCard: React.FC<AuthorCardProps> = ({
   author,
@@ -17,34 +19,18 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
 }) => {
   if (!author) return null;
 
-  const tooltipLabel = isStarred
-    ? 'Спасибо! Автор увидит вашу поддержку ✨'
-    : 'Отметить материал полезным';
+  const { tooltipLabel, supportLabel } = useAuthorSupportTexts(isStarred ?? false);
 
-  const badgeBg = useColorModeValue(
-    isStarred ? 'rgba(59,130,246,0.08)' : 'transparent',
-    isStarred ? 'rgba(129,140,248,0.32)' : 'whiteAlpha.100',
-  );
-
-  const badgeBorder = useColorModeValue(
-    isStarred ? 'blue.300' : 'blue.200',
-    isStarred ? 'blue.300' : 'whiteAlpha.300',
-  );
-
-  const badgeTextColor = useColorModeValue(
-    isStarred ? 'blue.700' : 'blue.600',
-    isStarred ? 'blue.100' : 'blue.200',
-  );
-
-  const hoverBg = useColorModeValue(
-    'rgba(59,130,246,0.12)',
-    'rgba(129,140,248,0.42)',
-  );
-
-  const activeBg = useColorModeValue(
-    'rgba(59,130,246,0.16)',
-    'rgba(129,140,248,0.5)',
-  );
+  const {
+    badgeBg,
+    badgeBorder,
+    badgeTextColor,
+    hoverBg,
+    activeBg,
+    tooltipBg,
+    tooltipTextColor,
+    starMetaColor,
+  } = useAuthorCardColors(isStarred ?? false);
 
   return (
     <Box borderWidth="1px" borderColor={borderColor} borderRadius="xl" p={{ base: 3, md: 4 }} bg="transparent">
@@ -60,62 +46,61 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
           <Text fontSize="xs" color={descColor}>Спасибо за вклад в сообщество! &#x2728;</Text>
           <HStack spacing={3} fontSize="xs" color={descColor} mt={1}>
             {typeof starsCount === 'number' && (
-              <Tooltip label={tooltipLabel} hasArrow placement="top">
-                <Box
-                  as={onToggleStar ? 'button' : 'div'}
-                  display="inline-flex"
-                  alignItems="center"
-                  gap={1}
-                  px={3}
-                  py={1}
-                  borderRadius="full"
-                  borderWidth="1px"
-                  borderColor={badgeBorder}
-                  bg={badgeBg}
-                  color={badgeTextColor}
-                  cursor={onToggleStar ? 'pointer' : 'default'}
-                  fontWeight="semibold"
-                  letterSpacing="-0.01em"
-                  boxShadow="none"
-                  transition="background-color 0.18s ease-out, color 0.18s ease-out, border-color 0.18s ease-out"
-                  _hover={
-                    onToggleStar
-                      ? { bg: hoverBg }
-                      : undefined
-                  }
-                  _active={
-                    onToggleStar
-                      ? { bg: activeBg }
-                      : undefined
-                  }
-                  onClick={onToggleStar}
-                  aria-pressed={onToggleStar ? !!isStarred : undefined}
-                >
+              <>
+                <HStack spacing={1}>
                   <Box as="span">{formatCount(starsCount)}</Box>
+                  <StarIcon boxSize={3} color={starMetaColor} />
+                </HStack>
+                <Tooltip
+                  label={tooltipLabel}
+                  hasArrow
+                  placement="top"
+                  bg={tooltipBg}
+                  color={tooltipTextColor}
+                  px={3}
+                  py={2}
+                  borderRadius="lg"
+                  fontSize="xs"
+                  fontWeight="semibold"
+                  whiteSpace="nowrap"
+                  boxShadow="0 10px 30px rgba(15,23,42,0.65)"
+                >
                   <Box
-                    as="span"
+                    as={onToggleStar ? 'button' : 'div'}
                     display="inline-flex"
                     alignItems="center"
-                    justifyContent="center"
-                    w="18px"
-                    h="18px"
+                    gap={2}
+                    px={3}
+                    py={1}
                     borderRadius="full"
-                    bg={useColorModeValue(
-                      isStarred ? 'yellow.200' : 'gray.100',
-                      isStarred ? 'yellow.300' : 'whiteAlpha.200',
-                    )}
-                    flexShrink={0}
+                    borderWidth="1px"
+                    borderColor={badgeBorder}
+                    bg={badgeBg}
+                    color={badgeTextColor}
+                    cursor={onToggleStar ? 'pointer' : 'default'}
+                    fontWeight="semibold"
+                    letterSpacing="-0.01em"
+                    boxShadow="none"
+                    transition="background-color 0.18s ease-out, color 0.18s ease-out, border-color 0.18s ease-out"
+                    _hover={
+                      onToggleStar
+                        ? { bg: hoverBg }
+                        : undefined
+                    }
+                    _active={
+                      onToggleStar
+                        ? { bg: activeBg }
+                        : undefined
+                    }
+                    onClick={onToggleStar}
+                    aria-pressed={onToggleStar ? !!isStarred : undefined}
                   >
-                    <StarIcon
-                      boxSize={2.5}
-                      color={useColorModeValue(
-                        isStarred ? 'yellow.500' : 'gray.400',
-                        isStarred ? 'yellow.400' : 'gray.300',
-                      )}
-                    />
+                    <Box as="span">
+                      {supportLabel}
+                    </Box>
                   </Box>
-                </Box>
-              </Tooltip>
+                </Tooltip>
+              </>
             )}
             {typeof viewsCount === 'number' && (
               <HStack spacing={1}>

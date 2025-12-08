@@ -44,7 +44,15 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
             </Link>
           </Text>
           <Text fontSize="xs" color={descColor}>Спасибо за вклад в сообщество! &#x2728;</Text>
-          <HStack spacing={3} fontSize="xs" color={descColor} mt={1}>
+          <HStack
+            spacing={{ base: 2, md: 3 }}
+            fontSize="xs"
+            color={descColor}
+            mt={1}
+            flexWrap="wrap"
+            alignItems="center"
+            rowGap={1}
+          >
             {typeof starsCount === 'number' && (
               <>
                 <HStack spacing={1}>

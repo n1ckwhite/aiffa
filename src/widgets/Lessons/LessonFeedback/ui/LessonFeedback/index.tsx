@@ -4,34 +4,41 @@ import { CheckCircleIcon, StarIcon } from '@chakra-ui/icons';
 import { useLessonFeedbackColors } from '../../colors';
 import { useMinWidthViewport } from '../../hooks/useViewport';
 import { useFeedbackController } from '../../hooks/useFeedbackController';
-import type { LessonFeedbackProps, VoteChoice } from '../../types';
+import type { LessonFeedbackProps } from '../../types';
 import { pressDown, pressUp } from '../../animations';
 import { ThumbUp } from '../parts/ThumbUp';
 import { ThumbDown } from '../parts/ThumbDown';
+import { useFeedbackVisibility } from '../../hooks/useFeedbackVisibility';
+import { useImprovementTexts } from '../../hooks/useImprovementTexts';
 
-const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText, onVoteChange, onSupportClick }) => {
+const LessonFeedback: React.FC<LessonFeedbackProps> = ({
+  lessonKey,
+  questionText,
+  onVoteChange,
+  onSupportClick,
+}) => {
   const isWide = useMinWidthViewport(1025);
   const { choice, mounted, visible, showThanks, pulsing, vote } = useFeedbackController(lessonKey);
-  const { cardBg, cardShadow, border, textCol, chipBg, chipHover, upColor, downColor, thumbIdleColor, thanksColor } = useLessonFeedbackColors();
+  const {
+    cardBg,
+    cardShadow,
+    border,
+    textCol,
+    chipBg,
+    chipHover,
+    upColor,
+    downColor,
+    thumbIdleColor,
+    thanksColor,
+  } = useLessonFeedbackColors();
 
   const [improveReason, setImproveReason] = React.useState<'short' | 'hard' | 'errors' | null>(null);
 
-  const isTasksPageFeedback = React.useMemo(
-    () => lessonKey.endsWith('/tasks'),
-    [lessonKey],
+  const { context, shouldShowQuestion, shouldShowThanks } = useFeedbackVisibility(
+    lessonKey,
+    isWide,
+    showThanks,
   );
-
-  const isProjectFeedback = React.useMemo(
-    () => lessonKey.startsWith('project/'),
-    [lessonKey],
-  );
-
-  // Для мобильных: показываем вопрос только после того, как пользователь хотя бы раз дошёл
-  // до триггерного блока:
-  // - для страниц уроков — "Перейти к задачам"
-  // - для страниц задач — FAQ по задачам.
-  // Блок с благодарностью после лайка/дизлайка отображается независимо от позиции скролла.
-  const [hasReachedTasksCta, setHasReachedTasksCta] = React.useState<boolean>(isWide);
 
   const {
     shortLabel,
@@ -40,80 +47,9 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
     shortExplanation,
     hardExplanation,
     errorsExplanation,
-  } = React.useMemo(() => {
-    // Тексты по умолчанию — для страниц материалов (уроков).
-    let base = {
-      shortLabel: 'Хочу больше примеров',
-      hardLabel: 'Сложно читать',
-      errorsLabel: 'Нашёл неточность',
-      shortExplanation: 'Добавим больше практических примеров и разборов кода.',
-      hardExplanation: 'Постараемся упростить формулировки и улучшить структуру материала.',
-      errorsExplanation: 'Перепроверим текст и исправим неточности и опечатки.',
-    };
-
-    if (isTasksPageFeedback) {
-      base = {
-        shortLabel: 'Слишком поверхностно',
-        hardLabel: 'Сложно разобраться',
-        errorsLabel: 'Что-то сломано',
-        shortExplanation: 'Добавим больше примеров и деталей, чтобы задача была понятнее.',
-        hardExplanation:
-          'Постараемся упростить формулировки, разбить решение на шаги и подсветить ключевые идеи.',
-        errorsExplanation: 'Перепроверим условие и проверку задачи, исправим баги и неточности.',
-      };
-    } else if (isProjectFeedback) {
-      base = {
-        shortLabel: 'Сложно запуститься',
-        hardLabel: 'Неясны шаги',
-        errorsLabel: 'Мало контекста',
-        shortExplanation: 'Улучшим инструкцию по запуску: добавим шаги и проверим окружение.',
-        hardExplanation: 'Разобьём описание проекта на более понятные шаги и чек-лист.',
-        errorsExplanation: 'Добавим больше пояснений, ссылок и примеров использования проекта.',
-      };
-    }
-
-    return base;
-  }, [isTasksPageFeedback, isProjectFeedback]);
-
-  React.useEffect(() => {
-    if (isWide) {
-      setHasReachedTasksCta(true);
-      return;
-    }
-
-    const handlePositionCheck = () => {
-      if (typeof window === 'undefined' || typeof document === 'undefined') return;
-      const anchorId = isTasksPageFeedback
-        ? 'tasks-faq-anchor'
-        : isProjectFeedback
-        ? 'project-support-anchor'
-        : 'lesson-tasks-cta-anchor';
-      const anchor = document.getElementById(anchorId);
-      if (!anchor) {
-        return;
-      }
-      const rect = anchor.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const reachedNow = rect.top <= viewportHeight * 0.7;
-      if (reachedNow) {
-        setHasReachedTasksCta(true);
-      }
-    };
-
-    handlePositionCheck();
-    window.addEventListener('scroll', handlePositionCheck);
-    window.addEventListener('resize', handlePositionCheck);
-
-    return () => {
-      window.removeEventListener('scroll', handlePositionCheck);
-      window.removeEventListener('resize', handlePositionCheck);
-    };
-  }, [isWide, isTasksPageFeedback]);
+  } = useImprovementTexts(context);
 
   if (!mounted) return null;
-
-  const shouldShowQuestion = !showThanks && hasReachedTasksCta;
-  const shouldShowThanks = showThanks;
 
   // Если ещё не дошли до CTA и пользователь не голосовал, ничего не показываем вообще.
   if (!shouldShowQuestion && !shouldShowThanks) {
@@ -137,7 +73,7 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
           py={{ base: 2.5, md: 3 }}
           boxShadow={cardShadow}
         >
-          {!showThanks ? (
+          {!shouldShowThanks ? (
             // Вопрос "Эта страница была полезна?" показываем только после CTA.
             shouldShowQuestion ? (
               <HStack spacing={3} align="center" justifyContent="space-between">

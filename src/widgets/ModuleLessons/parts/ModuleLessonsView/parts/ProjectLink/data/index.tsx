@@ -44,3 +44,24 @@ export const moduleIconById: Record<string, React.ReactNode> = {
   'typescript': (<Icon as={SiTypescript} boxSize="20px" />),
   'accessibility': (<Icon as={FaAccessibleIcon} boxSize="20px" />)
 };
+
+export const getProjectLinkMeta = (mod: any, colors: any) => {
+  const indexBg =
+    (colors as any).indexBg ?? (colors as any).blue?.indexBg ?? "blue.50";
+  const accentColor =
+    (colors as any).blue?.accent ?? colors.accent ?? "blue.600";
+
+  const starsCount = Number((mod?.project as any)?.ratingCount ?? 0);
+  const views = Number((mod?.project as any)?.views ?? 0);
+
+  const metaColor = (colors as any).descColor ?? "gray.500";
+
+  return {
+    indexBg,
+    accentColor,
+    starsCount,
+    views,
+    metaColor,
+  };
+};
+

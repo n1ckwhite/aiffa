@@ -1,15 +1,15 @@
 import React from 'react';
-import { Box, Avatar, AvatarGroup, useColorModeValue } from '@chakra-ui/react';
+import { Box, Avatar, AvatarGroup } from '@chakra-ui/react';
 import type { AuthorsBadgeProps } from './types';
 import { getAuthorsTitle } from '../../data';
+import { useAuthorsBadgeColors } from './colors/useAuthorsBadgeColors';
 
 export const AuthorsBadge: React.FC<AuthorsBadgeProps> = ({ authors, colors }) => {
   if (!Array.isArray(authors) || authors.length === 0) return null;
   const title = getAuthorsTitle(authors.length);
   const stop = (e: React.SyntheticEvent) => { e.stopPropagation(); };
 
-  const extraBg = useColorModeValue('gray.50', 'gray.700');
-  const extraColor = useColorModeValue(colors.blue.accent, colors.blue.accent);
+  const { extraBg, extraColor } = useAuthorsBadgeColors(colors.blue.accent);
 
   return (
     <Box fontSize="xs" color={colors.blue.accent} bg="transparent" px={2.5} py={1} borderRadius="full" borderWidth="1px" borderStyle="dashed" borderColor={colors.blue.chipBorder} display="inline-flex" alignItems="center" gap={2}>

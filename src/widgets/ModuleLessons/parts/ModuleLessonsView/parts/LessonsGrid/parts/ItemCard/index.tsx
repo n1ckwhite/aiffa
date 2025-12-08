@@ -6,6 +6,8 @@ import { IndexChip } from '../../../../../LessonCard/parts/IndexChip';
 import { TasksBadge } from '../../../../../LessonCard/parts/Badges/TasksBadge';
 import { OpenLinkBadge } from '../../../../../LessonCard/parts/Badges/OpenLinkBadge';
 import { AuthorsBadge } from '../../../ProjectLink/parts/AuthorsBadge';
+import { getItemCardMeta } from './data';
+import { formatCount } from 'shared/functions/formatCount';
 
 export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, colors, levelAccent, arrowAnimationCss, done }) => {
   const topBefore = {
@@ -21,26 +23,15 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
     transition: 'transform 0.3s ease-in-out',
   };
 
-  const totalTasks = ((lesson as any).tasks?.length ?? 0) as number;
-  const authors = (lesson as any).authors as Array<{ username: string; name?: string }> | undefined;
-  const starsCount = Number((lesson as any).ratingCount ?? 0);
-  const views = Number((lesson as any).views ?? 0);
-  const metaColor = (colors as any).descColor ?? 'gray.500';
-  const accentColor =
-    (colors as any).accent ?? (colors as any).blue?.accent ?? 'blue.400';
-  const chipBorder = (colors as any).chipBorder ?? (colors as any).blue?.chipBorder ?? 'blackAlpha.200';
-
-  const formatCount = (value: number): string => {
-    if (value >= 1_000_000) {
-      const millions = value / 1_000_000;
-      return millions >= 10 ? `${Math.round(millions)}M` : `${millions.toFixed(1)}M`;
-    }
-    if (value >= 1_000) {
-      const thousands = value / 1_000;
-      return thousands >= 10 ? `${Math.round(thousands)}k` : `${thousands.toFixed(1)}k`;
-    }
-    return String(value);
-  };
+  const {
+    totalTasks,
+    authors,
+    starsCount,
+    views,
+    metaColor,
+    accentColor,
+    chipBorder,
+  } = getItemCardMeta(lesson, colors);
 
   return (
     <Box

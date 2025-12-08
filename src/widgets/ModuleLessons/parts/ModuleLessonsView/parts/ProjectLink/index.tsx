@@ -7,27 +7,18 @@ import { IndexChip } from '../../../LessonCard/parts/IndexChip';
 import { AuthorsBadge } from './parts/AuthorsBadge';
 import { OpenProjectsBadge } from './parts/OpenProjectsBadge';
 import { buildTopBarBefore } from './animations';
-import { PROJECT_LINK_TEXTS } from './data';
+import { PROJECT_LINK_TEXTS, getProjectLinkMeta } from './data';
+import { formatCount } from 'shared/functions/formatCount';
 
 export const ProjectLink: React.FC<ProjectLinkProps> = ({ mod, colors, levelAccent, arrowAnimationCss }) => {
   if (!mod?.project) return null;
-  const indexBg = (colors as any).indexBg ?? (colors as any).blue?.indexBg ?? 'blue.50';
-  const accentColor = (colors as any).blue?.accent ?? colors.accent ?? 'blue.600';
-  const starsCount = Number((mod.project as any)?.ratingCount ?? 0);
-  const views = Number((mod.project as any)?.views ?? 0);
-  const metaColor = (colors as any).descColor ?? 'gray.500';
-
-  const formatCount = (value: number): string => {
-    if (value >= 1_000_000) {
-      const millions = value / 1_000_000;
-      return millions >= 10 ? `${Math.round(millions)}M` : `${millions.toFixed(1)}M`;
-    }
-    if (value >= 1_000) {
-      const thousands = value / 1_000;
-      return thousands >= 10 ? `${Math.round(thousands)}k` : `${thousands.toFixed(1)}k`;
-    }
-    return String(value);
-  };
+  const {
+    indexBg,
+    accentColor,
+    starsCount,
+    views,
+    metaColor,
+  } = getProjectLinkMeta(mod, colors);
   return (
     <Box as={RouterLink} to={`/learn/${mod.id}/projects`} borderWidth="2px" borderColor={colors.borderColor} bg={colors.cardBg} transition="all 180ms ease" p={5} borderRadius="xl" display="flex" gap={3} alignItems="flex-start" position="relative" overflow="hidden" boxShadow={'none'} mt={1} sx={{ '@media (hover: hover) and (pointer: fine)': { '&:hover': { background: colors.cardHoverBg, textDecoration: 'none', transform: 'translateY(-4px)', borderColor: levelAccent, boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)', '&::before': { transform: 'scaleX(1)' } } } }} _before={buildTopBarBefore(levelAccent)}>
       <IndexChip done={false} indexBg={indexBg} accentColor={accentColor}>P</IndexChip>

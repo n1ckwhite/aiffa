@@ -83,7 +83,11 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
 
     const handlePositionCheck = () => {
       if (typeof window === 'undefined' || typeof document === 'undefined') return;
-      const anchorId = isTasksPageFeedback ? 'tasks-faq-anchor' : 'lesson-tasks-cta-anchor';
+      const anchorId = isTasksPageFeedback
+        ? 'tasks-faq-anchor'
+        : isProjectFeedback
+        ? 'project-support-anchor'
+        : 'lesson-tasks-cta-anchor';
       const anchor = document.getElementById(anchorId);
       if (!anchor) {
         return;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Fade, HStack, IconButton, Portal, Text, VStack, Button } from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
+import { CheckCircleIcon, StarIcon } from '@chakra-ui/icons';
 import { useLessonFeedbackColors } from '../../colors';
 import { useMinWidthViewport } from '../../hooks/useViewport';
 import { useFeedbackController } from '../../hooks/useFeedbackController';
@@ -147,6 +147,26 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
                   {improveReason === 'errors' && 'Спасибо, мы ещё раз внимательно проверим материал и исправим неточности.'}
                 </Text>
               )}
+            </VStack>
+          ) : choice === 'up' ? (
+            <VStack align="flex-start" spacing={1.5}>
+              <HStack align="center" spacing={2}>
+                <CheckCircleIcon boxSize={4} color={thanksColor} />
+                <Text
+                  fontSize="sm"
+                  fontWeight="semibold"
+                  color={thanksColor}
+                >
+                  Спасибо! За ваш отзыв!
+                </Text>
+              </HStack>
+              <HStack spacing={1} align="center" fontSize="xs" color={textCol}>
+                <Text as="span">Хотите поддержать автора?</Text>
+                <HStack as="span" spacing={1} align="center" fontWeight="semibold" color={upColor}>
+                  <StarIcon boxSize={3} color={upColor} />
+                  <Text as="span">Поставить звезду</Text>
+                </HStack>
+              </HStack>
             </VStack>
           ) : (
             <HStack align="center" spacing={2}>

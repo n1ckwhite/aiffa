@@ -36,7 +36,7 @@ const LessonTasksPage: React.FC = () => {
       />
       <LessonFeedback
         lessonKey={`${currentModule.id}/${lesson.id}/tasks`}
-        questionText="Эти задачи были полезны?"
+        questionText="Было полезно потренироваться?"
       />
     </VStack>
   );

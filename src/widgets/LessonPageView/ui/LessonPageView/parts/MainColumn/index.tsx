@@ -38,12 +38,6 @@ export const MainColumn: React.FC<MainColumnProps> = ({
     applyStarChange(!isStarred);
   };
 
-  const handleThumbUp = () => {
-    if (!isStarred) {
-      applyStarChange(true);
-    }
-  };
-
   const tooltipLabel = isStarred
     ? 'Спасибо за вклад! Автор увидит вашу поддержку'
     : 'Отметить материал полезным';
@@ -74,7 +68,7 @@ export const MainColumn: React.FC<MainColumnProps> = ({
           moduleId={mod.id}
           lessonId={lesson.id}
         />
-        <FeedbackSection moduleId={mod.id} lessonId={lesson.id} onThumbUp={handleThumbUp} />
+        <FeedbackSection moduleId={mod.id} lessonId={lesson.id} />
       </Box>
     </Box>
   );

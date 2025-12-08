@@ -20,13 +20,23 @@ const LessonPageSkeleton: React.FC = () => {
               <Skeleton h={{ base: "28px", md: "34px" }} w={{ base: "82%", md: "70%" }} borderRadius="md" mb={4} />
 
               {/* Автор карточка */}
-              <HStack spacing={4} align="center" mb={8}>
-                <SkeletonCircle boxSize={{ base: "40px", md: "44px" }} />
-                <VStack align="flex-start" spacing={2} flex="1">
-                  <Skeleton h="12px" w="120px" borderRadius="md" />
-                  <Skeleton h="10px" w="200px" borderRadius="md" />
-                </VStack>
-              </HStack>
+              <Box borderRadius="xl" p={{ base: 3, md: 4 }} mb={8}>
+                <HStack spacing={4} align="center">
+                  <SkeletonCircle boxSize={{ base: "40px", md: "44px" }} />
+                  <VStack align="flex-start" spacing={2} flex="1">
+                    {/* Автор + имя */}
+                    <Skeleton h="12px" w="160px" borderRadius="md" />
+                    {/* Текст про вклад */}
+                    <Skeleton h="10px" w="220px" borderRadius="md" />
+                    {/* Метрики + кнопка "Спасибо автору" */}
+                    <HStack spacing={3} pt={1} flexWrap="wrap">
+                      <Skeleton h="14px" w="46px" borderRadius="full" />
+                      <Skeleton h="14px" w="46px" borderRadius="full" />
+                      <Skeleton h="14px" w="46px" borderRadius="full" />
+                    </HStack>
+                  </VStack>
+                </HStack>
+              </Box>
 
               {/* Вводный блок / TLDR без явной таблицы */}
               <Skeleton h="18px" w="110px" borderRadius="md" mb={3} />

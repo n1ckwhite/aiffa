@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Text, VStack, HStack, useColorModeValue } from '@chakra-ui/react';
-import { StarIcon, ViewIcon, ChatIcon } from '@chakra-ui/icons';
 import { type CourseCardProps } from './types/CourseCard.types';
 import { getLevelColor } from '../model';
 import { fadeInUp } from '../animations';
@@ -9,8 +8,6 @@ import { HeaderIcon, LessonsPill, StudyTimePill, CTAArrow } from './parts';
 import PillBadge from 'shared/ui/PillBadge';
 import { useCourseCardColors } from './colors/useCourseCardColors';
 import { useCourseProgress } from './hooks/useCourseProgress';
-import { formatCount } from 'shared/functions/formatCount';
-import AuthorsCountPill from 'shared/ui/AuthorsCountPill';
 
 const CourseCard: React.FC<CourseCardProps> = React.memo(({
   moduleId,
@@ -18,11 +15,6 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
   description,
   lessonsCount,
   studyTime,
-  starsCount,
-  views,
-  commentsCount,
-  topAuthors,
-  otherAuthorsCount,
   level,
   icon,
   delay = 0,

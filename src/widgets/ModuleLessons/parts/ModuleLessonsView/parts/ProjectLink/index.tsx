@@ -8,7 +8,6 @@ import { AuthorsBadge } from './parts/AuthorsBadge';
 import { OpenProjectsBadge } from './parts/OpenProjectsBadge';
 import { buildTopBarBefore } from './animations';
 import { PROJECT_LINK_TEXTS, getProjectLinkMeta } from './data';
-import { formatCount } from 'shared/functions/formatCount';
 
 export const ProjectLink: React.FC<ProjectLinkProps> = ({ mod, colors, levelAccent, arrowAnimationCss }) => {
   if (!mod?.project) return null;

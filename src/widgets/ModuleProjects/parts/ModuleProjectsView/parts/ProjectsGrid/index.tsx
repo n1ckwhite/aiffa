@@ -33,30 +33,49 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
               </HStack>
             </HStack>
             <HStack spacing={2} flexWrap="wrap" mt="auto" pt={1}>
-              {Array.isArray(p.authors) && p.authors.length > 0 && (
-                <Box fontSize="xs" color={colors.accent} bg="transparent" px={2.5} py={1} borderRadius="full" borderWidth="1px" borderStyle="dashed" borderColor={colors.chipBorder} display="inline-flex" alignItems="center" gap={2} onClick={(e: React.MouseEvent<HTMLDivElement>) => { e.stopPropagation(); }}>
-                  <Box display="inline-flex" alignItems="center">
-                    {p.authors.slice(0, 3).map((a: { username: string; name?: string }) => (
-                      <Avatar key={a.username} as="button" onClick={(e: React.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); try { window.open(`https://github.com/${a.username}`, '_blank', 'noopener,noreferrer'); } catch {} }} onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => { e.stopPropagation(); }} onTouchStart={(e: React.TouchEvent<HTMLButtonElement>) => { e.stopPropagation(); }} name={a.name} src={`https://avatars.githubusercontent.com/${a.username}?s=40`} boxSize="24px" border="0" aria-label={`GitHub ${a.name}`} />
-                    ))}
-                    {p.authors.length > 3 && (
-                      <Box
-                        ml="-8px"
-                        w="24px"
-                        h="24px"
-                        borderRadius="full"
-                        bg="gray.600"
-                        color="white"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        fontSize="xs"
-                      >
-                        {p.authors.length - 3}
-                      </Box>
-                    )}
-                  </Box>
-                  {p.authors.length === 1 ? 'Автор' : 'Авторы'}
+              {Array.isArray(p.authors) && p.authors.length > 0 && p.authors[0] && (
+                <Box
+                  fontSize="xs"
+                  color={colors.accent}
+                  bg="transparent"
+                  px={2.5}
+                  py={1}
+                  borderRadius="full"
+                  borderWidth="1px"
+                  borderStyle="dashed"
+                  borderColor={colors.chipBorder}
+                  display="inline-flex"
+                  alignItems="center"
+                  gap={2}
+                  onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  <Avatar
+                    as="button"
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                      e.stopPropagation();
+                      try {
+                        window.open(
+                          `https://github.com/${p.authors![0].username}`,
+                          '_blank',
+                          'noopener,noreferrer',
+                        );
+                      } catch {}
+                    }}
+                    onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) =>
+                      e.stopPropagation()
+                    }
+                    onTouchStart={(
+                      e: React.TouchEvent<HTMLButtonElement>,
+                    ) => e.stopPropagation()}
+                    name={p.authors[0].name}
+                    src={`https://avatars.githubusercontent.com/${p.authors[0].username}?s=40`}
+                    boxSize="24px"
+                    border="0"
+                    aria-label={`GitHub ${p.authors[0].name}`}
+                  />
+                  Автор
                 </Box>
               )}
               <Box as="span" fontSize="xs" color={colors.accent} bg={colors.chipBg} borderWidth="1px" borderColor={colors.chipBorder} px={2.5} py={1} borderRadius="full" display="inline-flex" alignItems="center" gap={1}>

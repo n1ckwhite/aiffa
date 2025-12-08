@@ -167,13 +167,6 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
                   <Box as="span">{formatCount(views)}</Box>
                 </HStack>
               </HStack>
-              {otherAuthorsCount > 0 && (
-                <AuthorsCountPill
-                  count={otherAuthorsCount}
-                  color="blue.300"
-                  borderColor="whiteAlpha.300"
-                />
-              )}
             </VStack>
           </Box>
         </HStack>

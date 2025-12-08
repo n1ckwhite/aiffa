@@ -13,6 +13,8 @@ export const manifest: CourseManifest = {
           "repoUrl": "https://github.com/n1ckwhite/JavaScript-Universe",
           "authors": [
             { "username": "n1ckwhite", "name": "Nick White" },
+            { "username": "PetePearl", "name": "Pete" },
+            { "username": "Phizick", "name": "Denis Kraev" },
             { "username": "demo-author-1", "name": "Author One" },
             { "username": "demo-author-2", "name": "Author Two" },
             { "username": "demo-author-3", "name": "Author Three" },

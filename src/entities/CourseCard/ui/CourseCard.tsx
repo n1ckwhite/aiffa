@@ -10,6 +10,7 @@ import PillBadge from 'shared/ui/PillBadge';
 import { useCourseCardColors } from './colors/useCourseCardColors';
 import { useCourseProgress } from './hooks/useCourseProgress';
 import { formatCount } from 'shared/functions/formatCount';
+import AuthorsCountPill from 'shared/ui/AuthorsCountPill';
 
 const CourseCard: React.FC<CourseCardProps> = React.memo(({
   moduleId,
@@ -167,23 +168,11 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
                 </HStack>
               </HStack>
               {otherAuthorsCount > 0 && (
-                <Box
-                  as="span"
-                  fontSize="xs"
+                <AuthorsCountPill
+                  count={otherAuthorsCount}
                   color="blue.300"
-                  bg="transparent"
-                  px={2.5}
-                  py={1}
-                  borderRadius="full"
-                  borderWidth="1px"
-                  borderStyle="dashed"
                   borderColor="whiteAlpha.300"
-                  display="inline-flex"
-                  alignItems="center"
-                  gap={2}
-                >
-                  {otherAuthorsCount} Авторы
-                </Box>
+                />
               )}
             </VStack>
           </Box>

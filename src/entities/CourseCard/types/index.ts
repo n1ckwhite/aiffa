@@ -6,6 +6,7 @@ export interface CourseCardProps {
   studyTime: string;
   starsCount: number;
   views: number;
+  commentsCount: number;
   topAuthors: { username: string; name: string; stars: number }[];
   otherAuthorsCount: number;
   level?: string;

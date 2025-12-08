@@ -33,6 +33,7 @@ export type Lesson = {
   rating?: number;
   ratingCount?: number;
   views?: number;
+  commentsCount?: number;
 };
 
 export type ModuleProject = {
@@ -43,6 +44,7 @@ export type ModuleProject = {
   authors?: Array<{ username: string; name: string }>;
   ratingCount?: number;
   views?: number;
+  commentsCount?: number;
 };
 
 export type Module = {

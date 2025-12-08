@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box, SimpleGrid, Text, HStack, Avatar } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { ChevronRightIcon, StarIcon, ViewIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon, StarIcon, ViewIcon, ChatIcon } from '@chakra-ui/icons';
 import { arrowLoop } from './animations';
 import type { ProjectsGridProps } from './types';
+import { formatCount } from 'shared/functions/formatCount';
 
 export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, colors }) => {
   if (projects.length === 0) {
@@ -25,11 +26,21 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
             <HStack spacing={3} fontSize="xs" color={colors.descColor} mt={1}>
               <HStack spacing={1}>
                 <StarIcon boxSize={3} color="yellow.400" />
-                <Box as="span">{typeof (p as any).ratingCount === 'number' ? (p as any).ratingCount : 0}</Box>
+                <Box as="span">
+                  {formatCount(Number((p as any).ratingCount ?? 0))}
+                </Box>
               </HStack>
               <HStack spacing={1}>
                 <ViewIcon boxSize={3} />
-                <Box as="span">{typeof (p as any).views === 'number' ? (p as any).views : 0}</Box>
+                <Box as="span">
+                  {formatCount(Number((p as any).views ?? 0))}
+                </Box>
+              </HStack>
+              <HStack spacing={1}>
+                <ChatIcon boxSize={3} />
+                <Box as="span">
+                  {formatCount(Number((p as any).commentsCount ?? 0))}
+                </Box>
               </HStack>
             </HStack>
             <HStack spacing={2} flexWrap="wrap" mt="auto" pt={1}>

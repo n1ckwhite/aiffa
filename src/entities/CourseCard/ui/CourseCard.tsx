@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Text, VStack, HStack, useColorModeValue } from '@chakra-ui/react';
-import { StarIcon, ViewIcon } from '@chakra-ui/icons';
+import { StarIcon, ViewIcon, ChatIcon } from '@chakra-ui/icons';
 import { type CourseCardProps } from './types/CourseCard.types';
 import { getLevelColor } from '../model';
 import { fadeInUp } from '../animations';
@@ -20,6 +20,7 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
   studyTime,
   starsCount,
   views,
+  commentsCount,
   topAuthors,
   otherAuthorsCount,
   level,
@@ -61,7 +62,7 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
       animation={`${fadeInUp} 0.6s ease-out ${delay}ms both`}
       position="relative"
       overflow="hidden"
-      h={{ base: 'auto', md: '320px' }}
+      h="auto"
       _focusVisible={{ boxShadow: focusRing, outline: 'none' }}
       transform={isActive ? 'translateY(-10px) scale(1.02)' : undefined}
       boxShadow={isActive ? `0 18px 40px ${hoverShadowColor}, 0 0 0 1px ${accentColor}20` : `0 8px 28px ${shadowColor}`}
@@ -165,6 +166,10 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
                 <HStack spacing={1}>
                   <ViewIcon boxSize={3} />
                   <Box as="span">{formatCount(views)}</Box>
+                </HStack>
+                <HStack spacing={1}>
+                  <ChatIcon boxSize={3} />
+                  <Box as="span">{formatCount(commentsCount)}</Box>
                 </HStack>
               </HStack>
             </VStack>

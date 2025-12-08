@@ -10,6 +10,7 @@ type ModuleMeta = {
   stars: number;
   views: number;
   authors: { username: string; name: string; stars: number }[];
+  comments: number;
 };
 
 const moduleMeta: Record<string, ModuleMeta> = (() => {
@@ -18,6 +19,7 @@ const moduleMeta: Record<string, ModuleMeta> = (() => {
   for (const mod of manifest.modules) {
     let stars = 0;
     let views = 0;
+    let comments = 0;
     const authorMap: Record<string, { username: string; name: string; stars: number }> = {};
 
     const addStarsForAuthors = (
@@ -41,8 +43,10 @@ const moduleMeta: Record<string, ModuleMeta> = (() => {
       const anyLesson = lesson as any;
       const lessonStars = Number(anyLesson.ratingCount ?? 0);
       const lessonViews = Number(anyLesson.views ?? 0);
+      const lessonComments = Number(anyLesson.commentsCount ?? 0);
       stars += lessonStars;
       views += lessonViews;
+      comments += lessonComments;
       addStarsForAuthors(anyLesson, lessonStars);
     }
 
@@ -50,8 +54,10 @@ const moduleMeta: Record<string, ModuleMeta> = (() => {
       const anyProject = mod.project as any;
       const projectStars = Number(anyProject.ratingCount ?? 0);
       const projectViews = Number(anyProject.views ?? 0);
+      const projectComments = Number(anyProject.commentsCount ?? 0);
       stars += projectStars;
       views += projectViews;
+      comments += projectComments;
       addStarsForAuthors(anyProject, projectStars);
     }
 
@@ -61,6 +67,7 @@ const moduleMeta: Record<string, ModuleMeta> = (() => {
       stars,
       views,
       authors,
+      comments,
     };
   }
 
@@ -93,6 +100,7 @@ const CourseGrid: React.FC<CourseGridProps> = ({ category = 'all', showHeader = 
                   studyTime={course.studyTime}
                   starsCount={moduleMeta[course.moduleId]?.stars ?? 0}
                   views={moduleMeta[course.moduleId]?.views ?? 0}
+                  commentsCount={moduleMeta[course.moduleId]?.comments ?? 0}
                   topAuthors={(moduleMeta[course.moduleId]?.authors ?? []).slice(0, 3)}
                   otherAuthorsCount={Math.max(
                     0,

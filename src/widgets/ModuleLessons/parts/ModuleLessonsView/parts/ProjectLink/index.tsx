@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, HStack, VStack, Text } from '@chakra-ui/react';
-import { ChevronRightIcon, StarIcon, ViewIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon, StarIcon, ViewIcon, ChatIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
 import type { ProjectLinkProps } from './types';
 import { IndexChip } from '../../../LessonCard/parts/IndexChip';
@@ -17,6 +17,7 @@ export const ProjectLink: React.FC<ProjectLinkProps> = ({ mod, colors, levelAcce
     accentColor,
     starsCount,
     views,
+    commentsCount,
     metaColor,
   } = getProjectLinkMeta(mod, colors);
   return (
@@ -32,6 +33,10 @@ export const ProjectLink: React.FC<ProjectLinkProps> = ({ mod, colors, levelAcce
           <HStack spacing={1}>
             <ViewIcon boxSize={3} />
             <Box as="span">{formatCount(views)}</Box>
+          </HStack>
+          <HStack spacing={1}>
+            <ChatIcon boxSize={3} />
+            <Box as="span">{formatCount(commentsCount)}</Box>
           </HStack>
         </HStack>
         <HStack spacing={2} flexWrap="wrap">

@@ -53,6 +53,7 @@ export const getProjectLinkMeta = (mod: any, colors: any) => {
 
   const starsCount = Number((mod?.project as any)?.ratingCount ?? 0);
   const views = Number((mod?.project as any)?.views ?? 0);
+  const commentsCount = Number((mod?.project as any)?.commentsCount ?? 0);
 
   const metaColor = (colors as any).descColor ?? "gray.500";
 
@@ -61,6 +62,7 @@ export const getProjectLinkMeta = (mod: any, colors: any) => {
     accentColor,
     starsCount,
     views,
+    commentsCount,
     metaColor,
   };
 };

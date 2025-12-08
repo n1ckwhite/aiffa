@@ -7,6 +7,7 @@ export const getItemCardMeta = (lesson: any, colors: any) => {
 
   const starsCount = Number((lesson as any).ratingCount ?? 0);
   const views = Number((lesson as any).views ?? 0);
+  const commentsCount = Number((lesson as any).commentsCount ?? 0);
 
   const metaColor = (colors as any).descColor ?? "gray.500";
   const accentColor =
@@ -21,6 +22,7 @@ export const getItemCardMeta = (lesson: any, colors: any) => {
     authors,
     starsCount,
     views,
+    commentsCount,
     metaColor,
     accentColor,
     chipBorder,

@@ -29,7 +29,8 @@ export const manifest: CourseManifest = {
             { "username": "demo-author-12", "name": "Author Twelve" }
           ],
           "ratingCount": 0,
-          "views": 0
+          "views": 0,
+          "commentsCount": 0
         },
         "lessons": [
           {
@@ -40,6 +41,7 @@ export const manifest: CourseManifest = {
             "rating": 4.9,
             "ratingCount": 37,
             "views": 1280,
+            "commentsCount": 0,
             "authors": [
               { "username": "n1ckwhite", "name": "Nick White" }
             ],

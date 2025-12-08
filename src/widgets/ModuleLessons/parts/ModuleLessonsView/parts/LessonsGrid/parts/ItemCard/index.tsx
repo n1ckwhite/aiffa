@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import { ChevronRightIcon, CheckIcon, StarIcon, ViewIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon, CheckIcon, StarIcon, ViewIcon, ChatIcon } from '@chakra-ui/icons';
 import type { ItemCardProps } from './types';
 import { IndexChip } from '../../../../../LessonCard/parts/IndexChip';
 import { TasksBadge } from '../../../../../LessonCard/parts/Badges/TasksBadge';
@@ -28,6 +28,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
     authors,
     starsCount,
     views,
+    commentsCount,
     metaColor,
     accentColor,
     chipBorder,
@@ -95,6 +96,12 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
             <ViewIcon boxSize={3} />
             <Box as="span">
               {formatCount(views)}
+            </Box>
+          </Box>
+          <Box as="span" display="inline-flex" alignItems="center" gap={1}>
+            <ChatIcon boxSize={3} />
+            <Box as="span">
+              {formatCount(commentsCount)}
             </Box>
           </Box>
         </Box>

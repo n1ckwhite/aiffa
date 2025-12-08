@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Fade, HStack, IconButton, Portal, Text } from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
+import { Box, Fade, HStack, IconButton, Portal, Text, VStack, Button } from '@chakra-ui/react';
 import { useLessonFeedbackColors } from '../../colors';
 import { useMinWidthViewport } from '../../hooks/useViewport';
 import { useFeedbackController } from '../../hooks/useFeedbackController';
@@ -9,7 +8,7 @@ import { pressDown, pressUp } from '../../animations';
 import { ThumbUp } from '../parts/ThumbUp';
 import { ThumbDown } from '../parts/ThumbDown';
 
-const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText, onVoteChange }) => {
+const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText, onVoteChange, onSupportClick }) => {
   const isWide = useMinWidthViewport(1025);
   const { choice, mounted, visible, showThanks, pulsing, vote } = useFeedbackController(lessonKey);
   const { cardBg, cardShadow, border, textCol, chipBg, chipHover, upColor, downColor, thumbIdleColor, thanksColor } = useLessonFeedbackColors();
@@ -77,10 +76,21 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
               </HStack>
             </HStack>
           ) : (
-            <HStack spacing={2} align="center">
-              <CheckCircleIcon color={thanksColor} />
-              <Text fontSize="md" fontWeight="semibold" color={thanksColor}>Спасибо за ваш отзыв!</Text>
-            </HStack>
+            <VStack align="flex-start" spacing={1}>
+              <Text
+                fontSize="sm"
+                fontWeight="semibold"
+                color={thanksColor}
+              >
+                Спасибо за отзыв!
+              </Text>
+              <HStack spacing={1} align="baseline" color={textCol} fontSize="xs">
+                <Text as="span">Понравился материал?</Text>
+                <Text as="span" fontWeight="semibold">
+                  Поддержите автора ⭐
+                </Text>
+              </HStack>
+            </VStack>
           )}
         </Box>
       </Fade>

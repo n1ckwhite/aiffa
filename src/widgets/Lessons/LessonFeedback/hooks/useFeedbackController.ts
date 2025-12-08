@@ -27,8 +27,9 @@ export const useFeedbackController = (lessonKey: string) => {
   const vote = (v: VoteChoice) => {
     setChoice(v);
     setPulsing(v);
-    const t1 = window.setTimeout(() => { setShowThanks(true); }, 250);
-    const t2 = window.setTimeout(() => { setVisible(false); setPulsing(null); }, 1600);
+    const t1 = window.setTimeout(() => { setShowThanks(true); }, 300);
+    // даём пользователю больше времени прочитать сообщение благодарности
+    const t2 = window.setTimeout(() => { setVisible(false); setPulsing(null); }, 4500);
     return { t1, t2 };
   };
 

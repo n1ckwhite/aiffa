@@ -38,9 +38,11 @@ export const MainColumn: React.FC<MainColumnProps> = ({
     applyStarChange(!isStarred);
   };
 
-  const tooltipLabel = isStarred
-    ? 'Спасибо за вклад! Автор увидит вашу поддержку'
-    : 'Отметить материал полезным';
+  const handleSupportClick = () => {
+    if (!isStarred) {
+      applyStarChange(true);
+    }
+  };
 
   return (
     <Box as="article" flex="1 1 auto" minW={0} pr={0}>
@@ -68,7 +70,7 @@ export const MainColumn: React.FC<MainColumnProps> = ({
           moduleId={mod.id}
           lessonId={lesson.id}
         />
-        <FeedbackSection moduleId={mod.id} lessonId={lesson.id} />
+        <FeedbackSection moduleId={mod.id} lessonId={lesson.id} onSupportClick={handleSupportClick} />
       </Box>
     </Box>
   );

@@ -1,36 +1,25 @@
 import React from 'react';
-import { Box, Fade, HStack, IconButton, Portal, Text, VStack, Button } from '@chakra-ui/react';
-import { CheckCircleIcon, StarIcon } from '@chakra-ui/icons';
+import { Box, Fade, Portal } from '@chakra-ui/react';
 import { useLessonFeedbackColors } from '../../colors';
 import { useMinWidthViewport } from '../../hooks/useViewport';
 import { useFeedbackController } from '../../hooks/useFeedbackController';
 import type { LessonFeedbackProps } from '../../types';
-import { pressDown, pressUp } from '../../animations';
-import { ThumbUp } from '../parts/ThumbUp';
-import { ThumbDown } from '../parts/ThumbDown';
 import { useFeedbackVisibility } from '../../hooks/useFeedbackVisibility';
 import { useImprovementTexts } from '../../hooks/useImprovementTexts';
+import { QuestionRow } from '../parts/QuestionRow';
+import { DownImproveBlock } from '../parts/DownImproveBlock';
+import { UpThanksBlock } from '../parts/UpThanksBlock';
+import { GenericThanks } from '../parts/GenericThanks';
 
 const LessonFeedback: React.FC<LessonFeedbackProps> = ({
   lessonKey,
   questionText,
   onVoteChange,
-  onSupportClick,
 }) => {
   const isWide = useMinWidthViewport(1025);
   const { choice, mounted, visible, showThanks, pulsing, vote } = useFeedbackController(lessonKey);
-  const {
-    cardBg,
-    cardShadow,
-    border,
-    textCol,
-    chipBg,
-    chipHover,
-    upColor,
-    downColor,
-    thumbIdleColor,
-    thanksColor,
-  } = useLessonFeedbackColors();
+  const { cardBg, cardShadow, border, textCol, chipBg, chipHover, upColor, downColor, thumbIdleColor, thanksColor } =
+    useLessonFeedbackColors();
 
   const [improveReason, setImproveReason] = React.useState<'short' | 'hard' | 'errors' | null>(null);
 
@@ -76,151 +65,52 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({
           {!shouldShowThanks ? (
             // Вопрос "Эта страница была полезна?" показываем только после CTA.
             shouldShowQuestion ? (
-              <HStack spacing={3} align="center" justifyContent="space-between">
-                <Text fontSize="md" fontWeight="semibold" color={textCol} pr={2}>
-                  {questionText || 'Эта страница была полезна?'}
-                </Text>
-                <HStack spacing={2}>
-                  <IconButton
-                    aria-label="Полезно"
-                    icon={<ThumbUp />}
-                    variant="ghost"
-                    borderRadius="12px"
-                    bg={choice === 'up' ? upColor : chipBg}
-                    color={choice === 'up' ? 'white' : thumbIdleColor}
-                    _hover={{ bg: choice === 'up' ? upColor : chipHover }}
-                    _active={{ transform: 'scale(0.96)' }}
-                    animation={pulsing === 'up' ? `${pressUp} 0.45s ease` : undefined}
-                    onClick={() => {
-                      vote('up');
-                      if (onVoteChange) {
-                        onVoteChange('up');
-                      }
-                    }}
-                    transition="all 0.15s ease"
-                  />
-                  <IconButton
-                    aria-label="Не полезно"
-                    icon={<ThumbDown />}
-                    variant="ghost"
-                    borderRadius="12px"
-                    bg={choice === 'down' ? downColor : chipBg}
-                    color={choice === 'down' ? 'white' : thumbIdleColor}
-                    _hover={{ bg: choice === 'down' ? downColor : chipHover }}
-                    _active={{ transform: 'scale(0.96)' }}
-                    animation={pulsing === 'down' ? `${pressDown} 0.45s ease` : undefined}
-                    onClick={() => {
-                      vote('down');
-                      if (onVoteChange) {
-                        onVoteChange('down');
-                      }
-                    }}
-                    transition="all 0.15s ease"
-                  />
-                </HStack>
-              </HStack>
+              <QuestionRow
+                text={questionText || 'Эта страница была полезна?'}
+                choice={choice}
+                pulsing={pulsing}
+                onVoteUp={() => {
+                  vote('up');
+                  if (onVoteChange) {
+                    onVoteChange('up');
+                  }
+                }}
+                onVoteDown={() => {
+                  vote('down');
+                  if (onVoteChange) {
+                    onVoteChange('down');
+                  }
+                }}
+                textCol={textCol}
+                upColor={upColor}
+                downColor={downColor}
+                chipBg={chipBg}
+                chipHover={chipHover}
+                thumbIdleColor={thumbIdleColor}
+              />
             ) : null
-          ) : choice === 'down' && !improveReason ? (
-            <VStack align="flex-start" spacing={2}>
-              <Text
-                fontSize="sm"
-                fontWeight="semibold"
-                color={thanksColor}
-              >
-                Спасибо за обратную связь!
-              </Text>
-              <Text fontSize="xs" color={textCol}>
-                Можно улучшить что-то?
-              </Text>
-              <HStack spacing={2} pt={0.5} flexWrap="wrap">
-                <Button
-                  size="sm"
-                  px={4}
-                  py={1}
-                  borderRadius="full"
-                  variant={improveReason === 'short' ? 'solid' : 'outline'}
-                  bg={improveReason === 'short' ? chipHover : chipBg}
-                  _hover={{ bg: chipHover }}
-                  _active={{ bg: chipHover }}
-                  borderColor={border}
-                  color={improveReason === 'short' ? 'white' : textCol}
-                  minW="max-content"
-                  onClick={() => setImproveReason('short')}
-                >
-                  {shortLabel}
-                </Button>
-                <Button
-                  size="sm"
-                  px={4}
-                  py={1}
-                  borderRadius="full"
-                  variant={improveReason === 'hard' ? 'solid' : 'outline'}
-                  bg={improveReason === 'hard' ? chipHover : chipBg}
-                  _hover={{ bg: chipHover }}
-                  _active={{ bg: chipHover }}
-                  borderColor={border}
-                  color={improveReason === 'hard' ? 'white' : textCol}
-                  minW="max-content"
-                  onClick={() => setImproveReason('hard')}
-                >
-                  {hardLabel}
-                </Button>
-                <Button
-                  size="sm"
-                  px={4}
-                  py={1}
-                  borderRadius="full"
-                  variant={improveReason === 'errors' ? 'solid' : 'outline'}
-                  bg={improveReason === 'errors' ? chipHover : chipBg}
-                  _hover={{ bg: chipHover }}
-                  _active={{ bg: chipHover }}
-                  borderColor={border}
-                  color={improveReason === 'errors' ? 'white' : textCol}
-                  minW="max-content"
-                  onClick={() => setImproveReason('errors')}
-                >
-                  {errorsLabel}
-                </Button>
-              </HStack>
-              {improveReason && (
-                <Text fontSize="xs" color={textCol} pt={0.5}>
-                  {improveReason === 'short' && shortExplanation}
-                  {improveReason === 'hard' && hardExplanation}
-                  {improveReason === 'errors' && errorsExplanation}
-                </Text>
-              )}
-            </VStack>
+          ) : choice === 'down' ? (
+            <DownImproveBlock
+              improveReason={improveReason}
+              onChangeReason={setImproveReason}
+              texts={{
+                shortLabel,
+                hardLabel,
+                errorsLabel,
+                shortExplanation,
+                hardExplanation,
+                errorsExplanation,
+              }}
+              thanksColor={thanksColor}
+              textCol={textCol}
+              chipBg={chipBg}
+              chipHover={chipHover}
+              border={border}
+            />
           ) : choice === 'up' ? (
-            <VStack align="flex-start" spacing={1.5}>
-              <HStack align="center" spacing={2}>
-                <CheckCircleIcon boxSize={4} color={thanksColor} />
-                <Text
-                  fontSize="sm"
-                  fontWeight="semibold"
-                  color={thanksColor}
-                >
-                  Спасибо! За ваш отзыв!
-                </Text>
-              </HStack>
-              <VStack align="flex-start" spacing={0.5} fontSize="xs" color={textCol}>
-                <Text as="span">Автор увидит вашу поддержку ✨</Text>
-                <HStack spacing={1} align="center" fontWeight="semibold" color={upColor}>
-                  <Text as="span">Поставьте звезду</Text>
-                  <StarIcon boxSize={3} color={upColor} />
-                </HStack>
-              </VStack>
-            </VStack>
+            <UpThanksBlock thanksColor={thanksColor} textCol={textCol} upColor={upColor} />
           ) : (
-            <HStack align="center" spacing={2}>
-              <CheckCircleIcon boxSize={4} color={thanksColor} />
-              <Text
-                fontSize="sm"
-                fontWeight="semibold"
-                color={thanksColor}
-              >
-                Спасибо за ваш отзыв!
-              </Text>
-            </HStack>
+            <GenericThanks thanksColor={thanksColor} />
           )}
         </Box>
       </Fade>

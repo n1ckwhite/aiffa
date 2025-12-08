@@ -70,7 +70,7 @@ export const LessonTasksView: React.FC<LessonTasksViewProps> = ({ mod, lesson, o
         />
       )}
 
-      <Box px={0}>
+      <Box px={0} id="tasks-faq-anchor">
         <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto">
           <ModulesFAQ variant="tasks" />
         </VStack>

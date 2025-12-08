@@ -16,9 +16,64 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
 
   const [improveReason, setImproveReason] = React.useState<'short' | 'hard' | 'errors' | null>(null);
 
-  // Для мобильных: показываем вопрос только после того, как пользователь хотя бы раз дошёл до блока "Перейти к задачам".
+  const isTasksPageFeedback = React.useMemo(
+    () => lessonKey.endsWith('/tasks'),
+    [lessonKey],
+  );
+
+  const isProjectFeedback = React.useMemo(
+    () => lessonKey.startsWith('project/'),
+    [lessonKey],
+  );
+
+  // Для мобильных: показываем вопрос только после того, как пользователь хотя бы раз дошёл
+  // до триггерного блока:
+  // - для страниц уроков — "Перейти к задачам"
+  // - для страниц задач — FAQ по задачам.
   // Блок с благодарностью после лайка/дизлайка отображается независимо от позиции скролла.
   const [hasReachedTasksCta, setHasReachedTasksCta] = React.useState<boolean>(isWide);
+
+  const {
+    shortLabel,
+    hardLabel,
+    errorsLabel,
+    shortExplanation,
+    hardExplanation,
+    errorsExplanation,
+  } = React.useMemo(() => {
+    // Тексты по умолчанию — для страниц материалов (уроков).
+    let base = {
+      shortLabel: 'Хочу больше примеров',
+      hardLabel: 'Сложно читать',
+      errorsLabel: 'Нашёл неточность',
+      shortExplanation: 'Добавим больше практических примеров и разборов кода.',
+      hardExplanation: 'Постараемся упростить формулировки и улучшить структуру материала.',
+      errorsExplanation: 'Перепроверим текст и исправим неточности и опечатки.',
+    };
+
+    if (isTasksPageFeedback) {
+      base = {
+        shortLabel: 'Слишком поверхностно',
+        hardLabel: 'Сложно разобраться',
+        errorsLabel: 'Что-то сломано',
+        shortExplanation: 'Добавим больше примеров и деталей, чтобы задача была понятнее.',
+        hardExplanation:
+          'Постараемся упростить формулировки, разбить решение на шаги и подсветить ключевые идеи.',
+        errorsExplanation: 'Перепроверим условие и проверку задачи, исправим баги и неточности.',
+      };
+    } else if (isProjectFeedback) {
+      base = {
+        shortLabel: 'Сложно запуститься',
+        hardLabel: 'Неясны шаги',
+        errorsLabel: 'Мало контекста',
+        shortExplanation: 'Улучшим инструкцию по запуску: добавим шаги и проверим окружение.',
+        hardExplanation: 'Разобьём описание проекта на более понятные шаги и чек-лист.',
+        errorsExplanation: 'Добавим больше пояснений, ссылок и примеров использования проекта.',
+      };
+    }
+
+    return base;
+  }, [isTasksPageFeedback, isProjectFeedback]);
 
   React.useEffect(() => {
     if (isWide) {
@@ -28,7 +83,8 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
 
     const handlePositionCheck = () => {
       if (typeof window === 'undefined' || typeof document === 'undefined') return;
-      const anchor = document.getElementById('lesson-tasks-cta-anchor');
+      const anchorId = isTasksPageFeedback ? 'tasks-faq-anchor' : 'lesson-tasks-cta-anchor';
+      const anchor = document.getElementById(anchorId);
       if (!anchor) {
         return;
       }
@@ -48,7 +104,7 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
       window.removeEventListener('scroll', handlePositionCheck);
       window.removeEventListener('resize', handlePositionCheck);
     };
-  }, [isWide]);
+  }, [isWide, isTasksPageFeedback]);
 
   if (!mounted) return null;
 
@@ -151,7 +207,7 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
                   minW="max-content"
                   onClick={() => setImproveReason('short')}
                 >
-                  Недостаточно подробно
+                  {shortLabel}
                 </Button>
                 <Button
                   size="sm"
@@ -167,7 +223,7 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
                   minW="max-content"
                   onClick={() => setImproveReason('hard')}
                 >
-                  Сложно понять
+                  {hardLabel}
                 </Button>
                 <Button
                   size="sm"
@@ -183,14 +239,14 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
                   minW="max-content"
                   onClick={() => setImproveReason('errors')}
                 >
-                  Есть ошибки
+                  {errorsLabel}
                 </Button>
               </HStack>
               {improveReason && (
                 <Text fontSize="xs" color={textCol} pt={0.5}>
-                  {improveReason === 'short' && 'Отлично, сделаем объяснение более подробным и добавим примеры.'}
-                  {improveReason === 'hard' && 'Постараемся упростить формулировки и разбить материал на более понятные шаги.'}
-                  {improveReason === 'errors' && 'Спасибо, мы ещё раз внимательно проверим материал и исправим неточности.'}
+                  {improveReason === 'short' && shortExplanation}
+                  {improveReason === 'hard' && hardExplanation}
+                  {improveReason === 'errors' && errorsExplanation}
                 </Text>
               )}
             </VStack>

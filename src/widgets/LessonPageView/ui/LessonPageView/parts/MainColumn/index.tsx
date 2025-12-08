@@ -66,10 +66,12 @@ export const MainColumn: React.FC<MainColumnProps> = ({
           onToggleStar={handleToggleStar}
         />
         <MarkdownRenderer content={md} />
-        <ActionsBar
-          moduleId={mod.id}
-          lessonId={lesson.id}
-        />
+        <Box id="lesson-tasks-cta-anchor">
+          <ActionsBar
+            moduleId={mod.id}
+            lessonId={lesson.id}
+          />
+        </Box>
         <FeedbackSection moduleId={mod.id} lessonId={lesson.id} onSupportClick={handleSupportClick} />
       </Box>
     </Box>

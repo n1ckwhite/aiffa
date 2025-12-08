@@ -16,68 +16,114 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
 
   const [improveReason, setImproveReason] = React.useState<'short' | 'hard' | 'errors' | null>(null);
 
-  if (!mounted || !isWide) return null;
+  // Для мобильных: показываем вопрос только после того, как пользователь хотя бы раз дошёл до блока "Перейти к задачам".
+  // Блок с благодарностью после лайка/дизлайка отображается независимо от позиции скролла.
+  const [hasReachedTasksCta, setHasReachedTasksCta] = React.useState<boolean>(isWide);
+
+  React.useEffect(() => {
+    if (isWide) {
+      setHasReachedTasksCta(true);
+      return;
+    }
+
+    const handlePositionCheck = () => {
+      if (typeof window === 'undefined' || typeof document === 'undefined') return;
+      const anchor = document.getElementById('lesson-tasks-cta-anchor');
+      if (!anchor) {
+        return;
+      }
+      const rect = anchor.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const reachedNow = rect.top <= viewportHeight * 0.7;
+      if (reachedNow) {
+        setHasReachedTasksCta(true);
+      }
+    };
+
+    handlePositionCheck();
+    window.addEventListener('scroll', handlePositionCheck);
+    window.addEventListener('resize', handlePositionCheck);
+
+    return () => {
+      window.removeEventListener('scroll', handlePositionCheck);
+      window.removeEventListener('resize', handlePositionCheck);
+    };
+  }, [isWide]);
+
+  if (!mounted) return null;
+
+  const shouldShowQuestion = !showThanks && hasReachedTasksCta;
+  const shouldShowThanks = showThanks;
+
+  // Если ещё не дошли до CTA и пользователь не голосовал, ничего не показываем вообще.
+  if (!shouldShowQuestion && !shouldShowThanks) {
+    return null;
+  }
 
   return (
     <Portal>
       <Fade in={visible} unmountOnExit>
         <Box
           position="fixed"
-          left={{ base: '16px', md: '24px' }}
-          bottom={{ base: `calc(24px + env(safe-area-inset-bottom))`, md: `calc(32px + env(safe-area-inset-bottom))` }}
+          left={{ base: '12px', md: '24px' }}
+          right={{ base: '12px', md: 'auto' }}
+          bottom={{ base: `calc(16px + env(safe-area-inset-bottom))`, md: `calc(32px + env(safe-area-inset-bottom))` }}
           zIndex={1200}
           bg={cardBg}
           borderWidth="1px"
           borderColor={border}
           borderRadius="16px"
-          px={4}
-          py={3}
+          px={{ base: 3, md: 4 }}
+          py={{ base: 2.5, md: 3 }}
           boxShadow={cardShadow}
         >
           {!showThanks ? (
-            <HStack spacing={3} align="center">
-              <Text fontSize="md" fontWeight="semibold" color={textCol} pr={2}>
-                {questionText || 'Эта страница была полезна?'}
-              </Text>
-              <HStack spacing={2}>
-                <IconButton
-                  aria-label="Полезно"
-                  icon={<ThumbUp />}
-                  variant="ghost"
-                  borderRadius="12px"
-                  bg={choice === 'up' ? upColor : chipBg}
-                  color={choice === 'up' ? 'white' : thumbIdleColor}
-                  _hover={{ bg: choice === 'up' ? upColor : chipHover }}
-                  _active={{ transform: 'scale(0.96)' }}
-                  animation={pulsing === 'up' ? `${pressUp} 0.45s ease` : undefined}
-                  onClick={() => {
-                    vote('up');
-                    if (onVoteChange) {
-                      onVoteChange('up');
-                    }
-                  }}
-                  transition="all 0.15s ease"
-                />
-                <IconButton
-                  aria-label="Не полезно"
-                  icon={<ThumbDown />}
-                  variant="ghost"
-                  borderRadius="12px"
-                  bg={choice === 'down' ? downColor : chipBg}
-                  color={choice === 'down' ? 'white' : thumbIdleColor}
-                  _hover={{ bg: choice === 'down' ? downColor : chipHover }}
-                  _active={{ transform: 'scale(0.96)' }}
-                  animation={pulsing === 'down' ? `${pressDown} 0.45s ease` : undefined}
-                  onClick={() => {
-                    vote('down');
-                    if (onVoteChange) {
-                      onVoteChange('down');
-                    }
-                  }}
-                  transition="all 0.15s ease"
-                />
+            // Вопрос "Эта страница была полезна?" показываем только после CTA.
+            shouldShowQuestion ? (
+              <HStack spacing={3} align="center" justifyContent="space-between">
+                <Text fontSize="md" fontWeight="semibold" color={textCol} pr={2}>
+                  {questionText || 'Эта страница была полезна?'}
+                </Text>
+                <HStack spacing={2}>
+                  <IconButton
+                    aria-label="Полезно"
+                    icon={<ThumbUp />}
+                    variant="ghost"
+                    borderRadius="12px"
+                    bg={choice === 'up' ? upColor : chipBg}
+                    color={choice === 'up' ? 'white' : thumbIdleColor}
+                    _hover={{ bg: choice === 'up' ? upColor : chipHover }}
+                    _active={{ transform: 'scale(0.96)' }}
+                    animation={pulsing === 'up' ? `${pressUp} 0.45s ease` : undefined}
+                    onClick={() => {
+                      vote('up');
+                      if (onVoteChange) {
+                        onVoteChange('up');
+                      }
+                    }}
+                    transition="all 0.15s ease"
+                  />
+                  <IconButton
+                    aria-label="Не полезно"
+                    icon={<ThumbDown />}
+                    variant="ghost"
+                    borderRadius="12px"
+                    bg={choice === 'down' ? downColor : chipBg}
+                    color={choice === 'down' ? 'white' : thumbIdleColor}
+                    _hover={{ bg: choice === 'down' ? downColor : chipHover }}
+                    _active={{ transform: 'scale(0.96)' }}
+                    animation={pulsing === 'down' ? `${pressDown} 0.45s ease` : undefined}
+                    onClick={() => {
+                      vote('down');
+                      if (onVoteChange) {
+                        onVoteChange('down');
+                      }
+                    }}
+                    transition="all 0.15s ease"
+                  />
+                </HStack>
               </HStack>
-            </HStack>
+            ) : null
           ) : choice === 'down' && !improveReason ? (
             <VStack align="flex-start" spacing={2}>
               <Text
@@ -85,7 +131,7 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
                 fontWeight="semibold"
                 color={thanksColor}
               >
-                Спасибо за обратную связь 🙏
+                Спасибо за обратную связь!
               </Text>
               <Text fontSize="xs" color={textCol}>
                 Можно улучшить что-то?
@@ -160,13 +206,13 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
                   Спасибо! За ваш отзыв!
                 </Text>
               </HStack>
-              <HStack spacing={1} align="center" fontSize="xs" color={textCol}>
-                <Text as="span">Хотите поддержать автора?</Text>
-                <HStack as="span" spacing={1} align="center" fontWeight="semibold" color={upColor}>
+              <VStack align="flex-start" spacing={0.5} fontSize="xs" color={textCol}>
+                <Text as="span">Автор увидит вашу поддержку ✨</Text>
+                <HStack spacing={1} align="center" fontWeight="semibold" color={upColor}>
+                  <Text as="span">Поставьте звезду</Text>
                   <StarIcon boxSize={3} color={upColor} />
-                  <Text as="span">Поставить звезду</Text>
                 </HStack>
-              </HStack>
+              </VStack>
             </VStack>
           ) : (
             <HStack align="center" spacing={2}>

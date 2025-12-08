@@ -30,6 +30,9 @@ export type Lesson = {
   tasks?: LessonTask[];
   durationMin?: number;
   authors?: Array<{ username: string; name: string }>;
+  rating?: number;
+  ratingCount?: number;
+  views?: number;
 };
 
 export type ModuleProject = {
@@ -38,6 +41,8 @@ export type ModuleProject = {
   mdPath: string;
   repoUrl?: string;
   authors?: Array<{ username: string; name: string }>;
+  ratingCount?: number;
+  views?: number;
 };
 
 export type Module = {

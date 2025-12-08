@@ -4,6 +4,10 @@ export interface CourseCardProps {
   description: string;
   lessonsCount: number;
   studyTime: string;
+  starsCount: number;
+  views: number;
+  topAuthors: { username: string; name: string; stars: number }[];
+  otherAuthorsCount: number;
   level?: string;
   icon?: React.ReactNode;
   delay?: number;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Text, VStack, HStack, useColorModeValue } from '@chakra-ui/react';
+import { Box, Text, VStack, HStack, useColorModeValue, Avatar, AvatarGroup } from '@chakra-ui/react';
+import { StarIcon, ViewIcon } from '@chakra-ui/icons';
 import { type CourseCardProps } from './types/CourseCard.types';
 import { getLevelColor } from '../model';
 import { fadeInUp } from '../animations';
@@ -15,6 +16,10 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
   description,
   lessonsCount,
   studyTime,
+  starsCount,
+  views,
+  topAuthors,
+  otherAuthorsCount,
   level,
   icon,
   delay = 0,
@@ -41,6 +46,26 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
 
   const { solvedLessonsCount } = useCourseProgress({ moduleId, lessonsCount });
 
+  const formatCount = (value: number): string => {
+    if (value >= 1_000_000) {
+      const millions = value / 1_000_000;
+      return millions >= 10 ? `${Math.round(millions)}M` : `${millions.toFixed(1)}M`;
+    }
+    if (value >= 1_000) {
+      const thousands = value / 1_000;
+      return thousands >= 10 ? `${Math.round(thousands)}k` : `${thousands.toFixed(1)}k`;
+    }
+    return String(value);
+  };
+
+  const handleAuthorClick = (event: React.MouseEvent, username: string) => {
+    event.stopPropagation();
+    try {
+      window.open(`https://github.com/${username}`, '_blank', 'noopener,noreferrer');
+    } catch {
+      // ignore
+    }
+  };
 
   return (
     <Box
@@ -146,6 +171,90 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
             >
               {description}
             </Text>
+            <VStack align="start" spacing={1} mt={2}>
+              <HStack
+                spacing={3}
+                fontSize="xs"
+                color={textColor}
+              >
+                <HStack spacing={1}>
+                  <StarIcon boxSize={3} color="yellow.400" />
+                  <Box as="span">{formatCount(starsCount)}</Box>
+                </HStack>
+                <HStack spacing={1}>
+                  <ViewIcon boxSize={3} />
+                  <Box as="span">{formatCount(views)}</Box>
+                </HStack>
+              </HStack>
+              {topAuthors.length > 0 && (
+                <HStack spacing={2} fontSize="xs" color={textColor} flexWrap="wrap" alignItems="center">
+                  <Box
+                    as="span"
+                    fontSize="xs"
+                    color="blue.300"
+                    bg="transparent"
+                    px={2.5}
+                    py={1}
+                    borderRadius="full"
+                    borderWidth="1px"
+                    borderStyle="dashed"
+                    borderColor="whiteAlpha.300"
+                    display="inline-flex"
+                    alignItems="center"
+                    gap={2}
+                  >
+                    Автор
+                  </Box>
+                  <HStack spacing={2} alignItems="center" flexWrap="wrap">
+                    <AvatarGroup size="sm" max={3} spacing="-8px">
+                      {topAuthors.map((author) => (
+                        <Avatar
+                          key={author.username}
+                          as="button"
+                          onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                            handleAuthorClick(e, author.username)
+                          }
+                          onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => e.stopPropagation()}
+                          onTouchStart={(e: React.TouchEvent<HTMLButtonElement>) => e.stopPropagation()}
+                          name={author.name}
+                          src={`https://avatars.githubusercontent.com/${author.username}?s=40`}
+                          boxSize="22px"
+                          border="0"
+                          aria-label={`GitHub ${author.name || author.username}`}
+                        />
+                      ))}
+                    </AvatarGroup>
+                    {topAuthors.map((author) => (
+                      <Box
+                        as="button"
+                        key={`name-${author.username}`}
+                        type="button"
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                          handleAuthorClick(e, author.username)
+                        }
+                        onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => e.stopPropagation()}
+                        onTouchStart={(e: React.TouchEvent<HTMLButtonElement>) => e.stopPropagation()}
+                        style={{
+                          background: 'transparent',
+                          border: 0,
+                          padding: 0,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        <Text as="span" fontSize="xs" color={textColor}>
+                          {author.name} · {formatCount(author.stars)}★
+                        </Text>
+                      </Box>
+                    ))}
+                    {otherAuthorsCount > 0 && (
+                      <Box as="span">
+                        +{otherAuthorsCount} других авторов
+                      </Box>
+                    )}
+                  </HStack>
+                </HStack>
+              )}
+            </VStack>
           </Box>
         </HStack>
 

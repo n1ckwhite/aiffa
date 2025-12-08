@@ -12,14 +12,32 @@ export const manifest: CourseManifest = {
           "mdPath": "/lessons/bazovye-komandy/project.md",
           "repoUrl": "https://github.com/n1ckwhite/JavaScript-Universe",
           "authors": [
-            { "username": "n1ckwhite", "name": "Nick White" }
-          ]
+            { "username": "n1ckwhite", "name": "Nick White" },
+            { "username": "demo-author-1", "name": "Author One" },
+            { "username": "demo-author-2", "name": "Author Two" },
+            { "username": "demo-author-3", "name": "Author Three" },
+            { "username": "demo-author-4", "name": "Author Four" },
+            { "username": "demo-author-5", "name": "Author Five" },
+            { "username": "demo-author-6", "name": "Author Six" },
+            { "username": "demo-author-7", "name": "Author Seven" },
+            { "username": "demo-author-8", "name": "Author Eight" },
+            { "username": "demo-author-9", "name": "Author Nine" },
+            { "username": "demo-author-10", "name": "Author Ten" },
+            { "username": "demo-author-11", "name": "Author Eleven" },
+            { "username": "demo-author-12", "name": "Author Twelve" }
+          ],
+          "ratingCount": 0,
+          "views": 0
         },
         "lessons": [
           {
             "id": "vvedenie-v-git",
             "title": "Введение в Git",
             "mdPath": "/lessons/bazovye-komandy/stage-01-intro-to-git.md",
+            "durationMin": 20,
+            "rating": 4.9,
+            "ratingCount": 37,
+            "views": 1280,
             "authors": [
               { "username": "n1ckwhite", "name": "Nick White" }
             ],

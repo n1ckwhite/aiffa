@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, SimpleGrid, Text, HStack, Avatar, AvatarGroup } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon, StarIcon, ViewIcon } from '@chakra-ui/icons';
 import { arrowLoop } from './animations';
 import type { ProjectsGridProps } from './types';
 
@@ -22,6 +22,16 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
           </Box>
           <Box flex="1" minW={0}>
             <Text fontWeight="semibold" noOfLines={2} wordBreak="break-word" overflowWrap="anywhere" style={{ hyphens: 'auto' }}>{p.title}</Text>
+            <HStack spacing={3} fontSize="xs" color={colors.descColor} mt={1}>
+              <HStack spacing={1}>
+                <StarIcon boxSize={3} color="yellow.400" />
+                <Box as="span">{typeof (p as any).ratingCount === 'number' ? (p as any).ratingCount : 0}</Box>
+              </HStack>
+              <HStack spacing={1}>
+                <ViewIcon boxSize={3} />
+                <Box as="span">{typeof (p as any).views === 'number' ? (p as any).views : 0}</Box>
+              </HStack>
+            </HStack>
             <HStack spacing={2} flexWrap="wrap" mt="auto" pt={1}>
               {Array.isArray(p.authors) && p.authors.length > 0 && (
                 <Box fontSize="xs" color={colors.accent} bg="transparent" px={2.5} py={1} borderRadius="full" borderWidth="1px" borderStyle="dashed" borderColor={colors.chipBorder} display="inline-flex" alignItems="center" gap={2} onClick={(e: React.MouseEvent<HTMLDivElement>) => { e.stopPropagation(); }}>

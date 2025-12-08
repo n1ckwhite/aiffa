@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, SimpleGrid, Text, HStack, Avatar } from '@chakra-ui/react';
+import { Box, SimpleGrid, Text, HStack, Avatar, Icon } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { ChevronRightIcon, StarIcon, ViewIcon, ChatIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon, StarIcon } from '@chakra-ui/icons';
+import { FiEye, FiMessageCircle } from 'react-icons/fi';
 import { arrowLoop } from './animations';
 import type { ProjectsGridProps } from './types';
 import { formatCount } from 'shared/functions/formatCount';
@@ -24,23 +25,23 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
           <Box flex="1" minW={0}>
             <Text fontWeight="semibold" noOfLines={2} wordBreak="break-word" overflowWrap="anywhere" style={{ hyphens: 'auto' }}>{p.title}</Text>
             <HStack spacing={3} fontSize="xs" color={colors.descColor} mt={1}>
-              <HStack spacing={1}>
+              <HStack spacing={1} flexShrink={0}>
                 <Box as="span">
                   {formatCount(Number((p as any).ratingCount ?? 0))}
                 </Box>
                 <StarIcon boxSize={3} color="yellow.400" />
               </HStack>
-              <HStack spacing={1}>
+              <HStack spacing={1} flexShrink={0}>
                 <Box as="span">
                   {formatCount(Number((p as any).views ?? 0))}
                 </Box>
-                <ViewIcon boxSize={3} />
+                <Icon as={FiEye} boxSize={3.5} flexShrink={0} />
               </HStack>
-              <HStack spacing={1}>
+              <HStack spacing={1} flexShrink={0}>
                 <Box as="span">
                   {formatCount(Number((p as any).commentsCount ?? 0))}
                 </Box>
-                <ChatIcon boxSize={3} />
+                <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} />
               </HStack>
             </HStack>
             <HStack spacing={2} flexWrap="wrap" mt="auto" pt={1}>

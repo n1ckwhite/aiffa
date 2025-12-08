@@ -1,6 +1,7 @@
 import React from 'react';
-import { Avatar, Box, HStack, Link, Text, VStack, Tooltip } from '@chakra-ui/react';
-import { StarIcon, ViewIcon, ChatIcon } from '@chakra-ui/icons';
+import { Avatar, Box, HStack, Link, Text, VStack, Tooltip, Icon } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
+import { FiEye, FiMessageCircle } from 'react-icons/fi';
 import { ProjectAuthorCardProps } from './types';
 import { formatCount } from 'shared/functions/formatCount';
 import { useAuthorCardColors } from 'widgets/LessonPageView/ui/LessonPageView/parts/AuthorCard/colors/useAuthorCardColors';
@@ -54,9 +55,9 @@ export const ProjectAuthorCard: React.FC<ProjectAuthorCardProps> = ({
           >
             {typeof starsCount === 'number' && (
               <>
-                <HStack spacing={1}>
+                <HStack spacing={1} flexShrink={0}>
                   <Box as="span">{formatCount(starsCount)}</Box>
-                  <StarIcon boxSize={3} color={starMetaColor} />
+                  <StarIcon boxSize={3} color={starMetaColor} flexShrink={0} />
                 </HStack>
                 <Tooltip
                   label={tooltipLabel}
@@ -110,15 +111,15 @@ export const ProjectAuthorCard: React.FC<ProjectAuthorCardProps> = ({
               </>
             )}
             {typeof viewsCount === 'number' && (
-              <HStack spacing={1}>
+              <HStack spacing={1} flexShrink={0}>
                 <Box as="span">{formatCount(viewsCount)}</Box>
-                <ViewIcon boxSize={3} />
+                <Icon as={FiEye} boxSize={3.5} flexShrink={0} />
               </HStack>
             )}
             {typeof commentsCount === 'number' && (
-              <HStack spacing={1}>
+              <HStack spacing={1} flexShrink={0}>
                 <Box as="span">{formatCount(commentsCount)}</Box>
-                <ChatIcon boxSize={3} />
+                <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} />
               </HStack>
             )}
           </HStack>

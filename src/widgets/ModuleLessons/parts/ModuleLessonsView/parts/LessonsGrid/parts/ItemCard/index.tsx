@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
-import { ChevronRightIcon, CheckIcon, StarIcon, ViewIcon, ChatIcon } from '@chakra-ui/icons';
+import { Box, Icon } from '@chakra-ui/react';
+import { ChevronRightIcon, CheckIcon, StarIcon } from '@chakra-ui/icons';
+import { FiEye, FiMessageCircle } from 'react-icons/fi';
 import type { ItemCardProps } from './types';
 import { IndexChip } from '../../../../../LessonCard/parts/IndexChip';
 import { TasksBadge } from '../../../../../LessonCard/parts/Badges/TasksBadge';
@@ -78,31 +79,24 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
           {lesson.title}
         </Box>
 
-        <Box
-          mt={1}
-          display="flex"
-          alignItems="center"
-          gap={3}
-          fontSize="xs"
-          color={metaColor}
-        >
-          <Box as="span" display="inline-flex" alignItems="center" gap={1}>
+        <Box mt={1} display="flex" alignItems="center" gap={3} fontSize="xs" color={metaColor}>
+          <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
             <Box as="span">
               {formatCount(starsCount)}
             </Box>
             <StarIcon boxSize={3} color="yellow.400" />
           </Box>
-          <Box as="span" display="inline-flex" alignItems="center" gap={1}>
+          <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
             <Box as="span">
               {formatCount(views)}
             </Box>
-            <ViewIcon boxSize={3} />
+            <Icon as={FiEye} boxSize={3.5} flexShrink={0} />
           </Box>
-          <Box as="span" display="inline-flex" alignItems="center" gap={1}>
+          <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
             <Box as="span">
               {formatCount(commentsCount)}
             </Box>
-            <ChatIcon boxSize={3} />
+            <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} />
           </Box>
         </Box>
 

@@ -160,16 +160,16 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
                 color={textColor}
               >
                 <HStack spacing={1}>
-                  <StarIcon boxSize={3} color="yellow.400" />
                   <Box as="span">{formatCount(starsCount)}</Box>
+                  <StarIcon boxSize={3} color="yellow.400" />
                 </HStack>
                 <HStack spacing={1}>
-                  <ViewIcon boxSize={3} />
                   <Box as="span">{formatCount(views)}</Box>
+                  <ViewIcon boxSize={3} />
                 </HStack>
                 <HStack spacing={1}>
-                  <ChatIcon boxSize={3} />
                   <Box as="span">{formatCount(commentsCount)}</Box>
+                  <ChatIcon boxSize={3} />
                 </HStack>
               </HStack>
             </VStack>

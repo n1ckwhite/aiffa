@@ -87,22 +87,22 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
           color={metaColor}
         >
           <Box as="span" display="inline-flex" alignItems="center" gap={1}>
-            <StarIcon boxSize={3} color="yellow.400" />
             <Box as="span">
               {formatCount(starsCount)}
             </Box>
+            <StarIcon boxSize={3} color="yellow.400" />
           </Box>
           <Box as="span" display="inline-flex" alignItems="center" gap={1}>
-            <ViewIcon boxSize={3} />
             <Box as="span">
               {formatCount(views)}
             </Box>
+            <ViewIcon boxSize={3} />
           </Box>
           <Box as="span" display="inline-flex" alignItems="center" gap={1}>
-            <ChatIcon boxSize={3} />
             <Box as="span">
               {formatCount(commentsCount)}
             </Box>
+            <ChatIcon boxSize={3} />
           </Box>
         </Box>
 

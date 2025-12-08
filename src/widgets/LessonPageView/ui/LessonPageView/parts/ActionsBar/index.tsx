@@ -3,6 +3,7 @@ import { Button, HStack } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
 import type { ActionsBarProps } from './types';
+import { formatCount } from 'shared/functions/formatCount';
 
 export const ActionsBar: React.FC<ActionsBarProps> = ({ moduleId, lessonId }) => {
   return (

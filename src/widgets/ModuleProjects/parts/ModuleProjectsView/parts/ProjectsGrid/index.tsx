@@ -25,22 +25,22 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
             <Text fontWeight="semibold" noOfLines={2} wordBreak="break-word" overflowWrap="anywhere" style={{ hyphens: 'auto' }}>{p.title}</Text>
             <HStack spacing={3} fontSize="xs" color={colors.descColor} mt={1}>
               <HStack spacing={1}>
-                <StarIcon boxSize={3} color="yellow.400" />
                 <Box as="span">
                   {formatCount(Number((p as any).ratingCount ?? 0))}
                 </Box>
+                <StarIcon boxSize={3} color="yellow.400" />
               </HStack>
               <HStack spacing={1}>
-                <ViewIcon boxSize={3} />
                 <Box as="span">
                   {formatCount(Number((p as any).views ?? 0))}
                 </Box>
+                <ViewIcon boxSize={3} />
               </HStack>
               <HStack spacing={1}>
-                <ChatIcon boxSize={3} />
                 <Box as="span">
                   {formatCount(Number((p as any).commentsCount ?? 0))}
                 </Box>
+                <ChatIcon boxSize={3} />
               </HStack>
             </HStack>
             <HStack spacing={2} flexWrap="wrap" mt="auto" pt={1}>

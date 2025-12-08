@@ -7,7 +7,6 @@ import TaskCompletionModal from 'features/TaskCompletionModal';
 import type { LessonTasksViewProps } from '../../types';
 import { TasksHeader } from './parts/Header';
 import { TasksList } from './parts/TasksList';
-import { AuthorCard } from 'widgets/LessonPageView/ui/LessonPageView/parts/AuthorCard';
 import { ModulesFAQ } from 'widgets/Modules';
 import { useLessonTasksView } from '../hooks/useLessonTasksView';
 
@@ -45,16 +44,6 @@ export const LessonTasksView: React.FC<LessonTasksViewProps> = ({ mod, lesson, o
             moduleId={mod.id}
             lessonId={lesson.id}
           />
-          {taskAuthors.map((author) => (
-            <Box key={`${author.username}-${author.name}`}>
-              <AuthorCard
-                author={author}
-                borderColor={colors.authorBorder}
-                descColor={colors.descColor}
-                linkColor={colors.linkColor}
-              />
-            </Box>
-          ))}
           <TasksList
             moduleId={mod.id}
             lesson={lesson}

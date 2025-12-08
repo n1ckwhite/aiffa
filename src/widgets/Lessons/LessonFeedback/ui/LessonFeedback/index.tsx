@@ -4,12 +4,12 @@ import { CheckCircleIcon } from '@chakra-ui/icons';
 import { useLessonFeedbackColors } from '../../colors';
 import { useMinWidthViewport } from '../../hooks/useViewport';
 import { useFeedbackController } from '../../hooks/useFeedbackController';
-import type { LessonFeedbackProps } from '../../types';
+import type { LessonFeedbackProps, VoteChoice } from '../../types';
 import { pressDown, pressUp } from '../../animations';
 import { ThumbUp } from '../parts/ThumbUp';
 import { ThumbDown } from '../parts/ThumbDown';
 
-const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText }) => {
+const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText, onVoteChange }) => {
   const isWide = useMinWidthViewport(1025);
   const { choice, mounted, visible, showThanks, pulsing, vote } = useFeedbackController(lessonKey);
   const { cardBg, cardShadow, border, textCol, chipBg, chipHover, upColor, downColor, thumbIdleColor, thanksColor } = useLessonFeedbackColors();
@@ -48,7 +48,12 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
                   _hover={{ bg: choice === 'up' ? upColor : chipHover }}
                   _active={{ transform: 'scale(0.96)' }}
                   animation={pulsing === 'up' ? `${pressUp} 0.45s ease` : undefined}
-                  onClick={() => vote('up')}
+                  onClick={() => {
+                    vote('up');
+                    if (onVoteChange) {
+                      onVoteChange('up');
+                    }
+                  }}
                   transition="all 0.15s ease"
                 />
                 <IconButton
@@ -61,7 +66,12 @@ const LessonFeedback: React.FC<LessonFeedbackProps> = ({ lessonKey, questionText
                   _hover={{ bg: choice === 'down' ? downColor : chipHover }}
                   _active={{ transform: 'scale(0.96)' }}
                   animation={pulsing === 'down' ? `${pressDown} 0.45s ease` : undefined}
-                  onClick={() => vote('down')}
+                  onClick={() => {
+                    vote('down');
+                    if (onVoteChange) {
+                      onVoteChange('down');
+                    }
+                  }}
                   transition="all 0.15s ease"
                 />
               </HStack>

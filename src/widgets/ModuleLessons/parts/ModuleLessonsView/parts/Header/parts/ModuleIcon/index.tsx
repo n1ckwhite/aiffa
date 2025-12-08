@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import type { ModuleIconProps } from './types';
-import { moduleIconById } from '../../../ProjectLink/data';
+import { moduleIconById } from 'shared/lessons/moduleIcons';
 
 export const ModuleIcon: React.FC<ModuleIconProps> = ({ modId, colors }) => {
   return (

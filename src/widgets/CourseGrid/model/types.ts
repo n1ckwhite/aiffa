@@ -16,3 +16,9 @@ export type CourseItem = {
 };
 
 
+export type ModuleMeta = {
+  stars: number;
+  views: number;
+  comments: number;
+  authors: { username: string; name: string; stars: number }[];
+};

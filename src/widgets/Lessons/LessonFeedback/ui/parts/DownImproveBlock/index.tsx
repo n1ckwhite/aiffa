@@ -2,8 +2,6 @@ import React from 'react';
 import { Button, HStack, Text, VStack } from '@chakra-ui/react';
 import { DownImproveBlockProps, ImproveReason } from './types';
 
-
-
 export const DownImproveBlock: React.FC<DownImproveBlockProps> = ({
   improveReason,
   onChangeReason,

@@ -90,9 +90,6 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
           >
             К задачам недели
           </Button>
-          <HStack spacing={0} my={4}>
-            <Divider />
-          </HStack>
           <AuthorNote
             name={author.name}
             href={authorHref}

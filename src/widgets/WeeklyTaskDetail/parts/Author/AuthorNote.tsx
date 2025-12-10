@@ -51,7 +51,6 @@ const AuthorNote: React.FC<AuthorNoteProps> = ({
       color={noteColor}
       borderRadius="xl"
       p={3}
-      mb={4}
     >
       <HStack spacing={3} align="flex-start">
         <Avatar

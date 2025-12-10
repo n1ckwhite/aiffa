@@ -5,18 +5,16 @@ import { ModulesFAQ } from 'widgets/Modules';
 import SupportBlock from 'widgets/SupportBlock';
 import WeeklyTasksHeader from '../Header/Header';
 import WeeklyTasksPromo from '../Promo/Promo';
-import WeeklyTasksTierBadge from '../TierBadge/parts/TierBadge/TierBadge';
 import WeeklyTasksGrid from '../TasksGrid/TasksGrid';
-import { useWeeklyTasksData } from '../TasksGrid/model/useWeeklyTasksData';
 import { useTierMeta } from '../../hooks/useTierMeta';
 import WeeklyTasksCountdown from '../Countdown/Countdown';
-import WeeklyTasksSkeleton from 'pages/WeeklyTasksPage/Skeleton';
+import { useWeeklyTasksData } from '../TasksGrid/model/useWeeklyTasksData';
 
 const WeeklyTasksScreen: React.FC = () => {
   const { profile } = useUserProfile();
   const xp = typeof (profile as any).xp === 'number' && isFinite((profile as any).xp) ? Math.max(0, (profile as any).xp) : 0;
   const { label: tierLabel } = useTierMeta(xp);
-  // const { isReady, tasks } = useWeeklyTasksData();
+  const { isReady, tasks } = useWeeklyTasksData();
 
   // if (!isReady) {
   //   return <WeeklyTasksSkeleton />;
@@ -30,7 +28,7 @@ const WeeklyTasksScreen: React.FC = () => {
         </Box>
         <WeeklyTasksPromo />
         <VStack spacing={3} mb={6}>
-          <WeeklyTasksCountdown />
+          <WeeklyTasksCountdown/>
         </VStack>
         {/* <WeeklyTasksGrid tasks={tasks as any} tierLabel={tierLabel as any} /> */}
       </Box>

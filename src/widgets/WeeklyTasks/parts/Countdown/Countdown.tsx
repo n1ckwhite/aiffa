@@ -11,7 +11,7 @@ const Countdown: React.FC<WeeklyTasksCountdownProps> = () => {
 
   return (
     <HStack spacing={3} wrap="wrap" justify="center">
-      <Label color={labelColor} />
+      <Label color={labelColor}/>
       <Time borderColor={borderColor} textColor={textColor} d={days} h={hours} m={minutes} s={seconds} />
     </HStack>
   );

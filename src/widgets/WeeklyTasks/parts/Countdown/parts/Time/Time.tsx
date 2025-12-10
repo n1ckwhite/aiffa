@@ -14,13 +14,13 @@ const Time: React.FC<TimeProps> = ({ borderColor, textColor, d, h, m, s }) => {
       fontWeight="semibold"
       color={textColor}
     >
-      <Text>{String(d).padStart(2,'0')}д</Text>
+      <Text suppressHydrationWarning>{String(d).padStart(2,'0')}д</Text>
       <Text>:</Text>
-      <Text>{String(h).padStart(2,'0')}ч</Text>
+      <Text suppressHydrationWarning>{String(h).padStart(2,'0')}ч</Text>
       <Text>:</Text>
-      <Text>{String(m).padStart(2,'0')}м</Text>
+      <Text suppressHydrationWarning>{String(m).padStart(2,'0')}м</Text>
       <Text>:</Text>
-      <Text>{String(s).padStart(2,'0')}с</Text>
+      <Text suppressHydrationWarning>{String(s).padStart(2,'0')}с</Text>
     </HStack>
   );
 };

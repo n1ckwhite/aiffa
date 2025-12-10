@@ -100,7 +100,6 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
             commentsCount={mdMeta?.commentsCount}
             solvedCount={mdMeta?.solvedCount}
           />
-          <Box id="lesson-tasks-cta-anchor" />
           <Divider my={4} />
           <ExampleBlock
             code={(mdMeta?.examples?.[0]?.code || meta.placeholder) as string}
@@ -175,7 +174,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
         </Box>
       </Box>
       <Box px={{ base: 4, md: 6 }} pb={{ base: 8, md: 10 }}>
-        <Box maxW={{ base: "100%", md: "900px" }} mx="auto">
+        <Box maxW={{ base: "100%", md: "900px" }} mx="auto" id="weekly-support-anchor">
           <SupportBlock variant="weekly" />
         </Box>
       </Box>

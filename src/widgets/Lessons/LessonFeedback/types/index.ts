@@ -1,6 +1,6 @@
 export type VoteChoice = 'up' | 'down';
 
-export type FeedbackContext = 'lesson' | 'tasks' | 'project';
+export type FeedbackContext = 'lesson' | 'tasks' | 'project' | 'weekly';
 
 export type LessonFeedbackProps = {
   lessonKey: string;

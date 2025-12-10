@@ -3,6 +3,9 @@ import type { FeedbackContext } from '../types';
 
 export const useFeedbackContext = (lessonKey: string): FeedbackContext => {
   return React.useMemo<FeedbackContext>(() => {
+    if (lessonKey.startsWith('weekly/')) {
+      return 'weekly';
+    }
     if (lessonKey.endsWith('/tasks')) {
       return 'tasks';
     }
@@ -14,6 +17,9 @@ export const useFeedbackContext = (lessonKey: string): FeedbackContext => {
 };
 
 export const getAnchorIdForContext = (context: FeedbackContext): string => {
+  if (context === 'weekly') {
+    return 'weekly-support-anchor';
+  }
   if (context === 'tasks') {
     return 'tasks-faq-anchor';
   }

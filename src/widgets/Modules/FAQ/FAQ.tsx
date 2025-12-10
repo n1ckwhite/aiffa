@@ -36,7 +36,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
           p={{ base: 3, md: 4, lg: 5 }}
           bg={theme.cardBgFAQ}
         >
-          <Accordion allowToggle>
+          <Accordion allowToggle defaultIndex={0}>
             {list.map((it, idx) => (
               <AccordionItem key={idx} border="none">
                 {({ isExpanded }) => (

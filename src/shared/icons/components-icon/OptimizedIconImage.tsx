@@ -31,14 +31,12 @@ const OptimizedIconImage: React.FC<OptimizedIconImageProps> = ({
     <NextImage
       src={src}
       alt={alt}
-      width={width}
-      height={height}
       sizes={sizes}
       fetchPriority={fetchPriority}
       priority={priority}
       style={{
-        width: "100%",
-        height: "100%",
+        width: "auto",
+        height: "auto",
         objectFit: "contain",
       }}
     />

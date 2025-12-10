@@ -65,8 +65,11 @@ import { WeeklyTaskParsed } from "./types";
     const tag = meta.tag ? String(meta.tag).toUpperCase() : undefined;
     const color = meta.color ? String(meta.color) : undefined;
     const reward = typeof meta.reward === 'number' && isFinite(meta.reward) ? meta.reward : undefined;
+    const stars = typeof meta.stars === 'number' && isFinite(meta.stars) ? meta.stars : undefined;
+    const comments = typeof meta.comments === 'number' && isFinite(meta.comments) ? meta.comments : undefined;
+    const solvedCount = typeof meta.solvedCount === 'number' && isFinite(meta.solvedCount) ? meta.solvedCount : undefined;
   
-    return { id, title, description, author, tip, examples, validatorSource, editorLanguage, level, tag, color, reward };
+    return { id, title, description, author, tip, examples, validatorSource, editorLanguage, level, tag, color, reward, stars, comments, solvedCount };
   }
   
   export type ValidateResult = { ok: boolean; msg?: string } | boolean;

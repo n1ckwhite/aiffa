@@ -1,6 +1,7 @@
 import { useColorModeValue } from '@chakra-ui/react';
 
 export const useAuthorCardColors = (isStarred: boolean) => {
+
   const badgeBg = useColorModeValue(
     isStarred ? 'rgba(59,130,246,0.08)' : 'transparent',
     isStarred ? 'rgba(129,140,248,0.32)' : 'whiteAlpha.100',
@@ -29,6 +30,8 @@ export const useAuthorCardColors = (isStarred: boolean) => {
   const tooltipBg = useColorModeValue('gray.800', 'blue.400');
   const tooltipTextColor = useColorModeValue('white', 'white');
 
+  const bgBlock = useColorModeValue('transparent', 'whiteAlpha.100');
+
   const starMetaColor = useColorModeValue(
     isStarred ? 'yellow.400' : 'gray.400',
     isStarred ? 'yellow.300' : 'gray.500',
@@ -43,6 +46,7 @@ export const useAuthorCardColors = (isStarred: boolean) => {
     tooltipBg,
     tooltipTextColor,
     starMetaColor,
+    bgBlock,
   };
 };
 

@@ -28,6 +28,9 @@ const TasksGrid: React.FC<WeeklyTasksGridProps> = ({ tasks, tierLabel }) => {
               to={`/weekly/${t.id}`}
               authorName={t.authorName}
               authorUrl={t.authorUrl}
+              starsCount={t.starsCount}
+              commentsCount={t.commentsCount}
+              solvedCount={t.solvedCount}
             />
           );
         })}

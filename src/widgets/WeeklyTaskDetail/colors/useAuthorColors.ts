@@ -6,9 +6,11 @@ export const useAuthorColors = () => {
   return {
     text: theme.descColor,
     link: theme.blue.accent,
-    noteBg: useColorModeValue('blackAlpha.50','whiteAlpha.100'),
+    noteBg: useColorModeValue('transparent','whiteAlpha.100'),
     noteBorder: theme.borderColor,
     noteColor: useColorModeValue('gray.800','gray.100'),
+    starInactive: useColorModeValue('gray.400', 'gray.500'),
+    starActive: 'yellow.400',
   };
 };
 

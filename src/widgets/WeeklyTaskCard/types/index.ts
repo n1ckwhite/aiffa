@@ -12,6 +12,9 @@ export type WeeklyTaskCardProps = {
   authorName?: string;
   authorUrl?: string;
   authorAvatarUrl?: string;
+  starsCount?: number;
+  commentsCount?: number;
+  solvedCount?: number;
 };
 
 export type Ring = { from: string; to: string };

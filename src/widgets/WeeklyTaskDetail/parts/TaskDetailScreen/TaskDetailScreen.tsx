@@ -98,6 +98,9 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
             href={authorHref}
             avatar={authorAvatar}
             note={authorNote}
+            starsCount={mdMeta?.starsCount}
+            commentsCount={mdMeta?.commentsCount}
+            solvedCount={mdMeta?.solvedCount}
           />
           <Divider my={4} />
           <ExampleBlock

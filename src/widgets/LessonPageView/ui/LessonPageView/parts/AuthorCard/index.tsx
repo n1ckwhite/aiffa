@@ -35,11 +35,12 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
     tooltipBg,
     tooltipTextColor,
     starMetaColor,
+    bgBlock,
   } = useAuthorCardColors(isStarred ?? false);
 
   return (
-    <Box borderWidth="1px" borderColor={borderColor} borderRadius="xl" p={{ base: 3, md: 4 }} bg="transparent">
-      <HStack spacing={3} align="center">
+    <Box borderWidth="1px" borderColor={borderColor} borderRadius="xl" p={{ base: 3, md: 4 }} bg={bgBlock}>
+      <HStack spacing={3} align="start">
         <Avatar name={author.name} src={`https://avatars.githubusercontent.com/${author.username}?s=80`} boxSize={{ base: '32px', md: '36px' }} />
         <VStack spacing={1} align="start">
           <Text fontSize="sm" color={descColor}>

@@ -19,7 +19,7 @@ export const AuthorInfo: React.FC<AuthorInfoProps> = ({ authorName, authorUrl, a
         referrerPolicy="no-referrer"
       />
       <Text fontSize="xs">
-        Автор изменений:{' '}
+        Автор:{' '}
         {authorUrl ? (
           <Box
             as="span"

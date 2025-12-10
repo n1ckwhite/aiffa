@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, VStack, Heading, Text } from '@chakra-ui/react';
+import { Box, VStack, Heading, Text, Icon } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
+import { FiMessageCircle, FiUserCheck } from 'react-icons/fi';
 import { Link as RouterLink } from 'react-router-dom';
 import { useWeeklyTaskCardColors } from './colors';
 import type { WeeklyTaskCardProps } from './types';
@@ -10,10 +12,29 @@ import { AuthorInfo } from './parts/AuthorInfo';
 import { RewardBar } from './parts/RewardBar';
 import { BackgroundDeco } from './parts/BackgroundDeco';
 import { DoneOverlay } from './parts/DoneOverlay';
+import { formatCount } from 'shared/functions/formatCount';
 
-const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({ taskId, label, description, done, tag, icon, colorScheme, to, authorName, authorUrl, authorAvatarUrl }) => {
+const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
+  taskId,
+  label,
+  description,
+  done,
+  tag,
+  icon,
+  colorScheme,
+  to,
+  authorName,
+  authorUrl,
+  authorAvatarUrl,
+  starsCount,
+  commentsCount,
+  solvedCount,
+}) => {
   const colors = useWeeklyTaskCardColors();
   const ring = getRing(colorScheme);
+  const effectiveStars = typeof starsCount === 'number' ? starsCount : 37;
+  const effectiveComments = typeof commentsCount === 'number' ? commentsCount : 12;
+  const effectiveSolved = typeof solvedCount === 'number' ? solvedCount : 128;
 
   return (
     <Box
@@ -53,6 +74,34 @@ const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({ taskId, label, descript
             authorBorderColor={colors.borderColor}
             authorLinkColor={colors.authorLink}
           />
+          <Box
+            mt={2}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            gap={3}
+            fontSize="xs"
+            color={colors.descColor}
+          >
+            <Box as="span" display="inline-flex" alignItems="center" gap={1}>
+              <Box as="span">
+                {formatCount(effectiveStars)}
+              </Box>
+              <StarIcon boxSize={3} color="yellow.400" />
+            </Box>
+            <Box as="span" display="inline-flex" alignItems="center" gap={1}>
+              <Box as="span">
+                {formatCount(effectiveComments)}
+              </Box>
+              <Icon as={FiMessageCircle} boxSize={3.5} />
+            </Box>
+            <Box as="span" display="inline-flex" alignItems="center" gap={1}>
+              <Box as="span">
+                {formatCount(effectiveSolved)}
+              </Box>
+              <Icon as={FiUserCheck} boxSize={3.5} color={colors.solvedIconColor} />
+            </Box>
+          </Box>
         </Box>
 
         <RewardBar ring={ring} borderColor={colors.taskInnerBorder} />

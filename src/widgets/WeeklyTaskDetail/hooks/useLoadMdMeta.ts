@@ -39,6 +39,9 @@ export const useLoadMdMeta = (taskId: string, fallbackLabel: string, fallbackDes
             validator: compileValidator(parsed.validatorSource),
             editorLanguage: parsed.editorLanguage,
             tag: parsed.tag,
+            starsCount: parsed.stars,
+            commentsCount: parsed.comments,
+            solvedCount: parsed.solvedCount,
           };
           return meta;
         });

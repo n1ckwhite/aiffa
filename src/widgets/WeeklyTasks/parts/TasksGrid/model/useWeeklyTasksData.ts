@@ -6,7 +6,20 @@ import { FaHtml5, FaJs, FaReact } from 'react-icons/fa6';
 import { SiGo, SiCss3, SiTypescript, SiNodedotjs, SiGit, SiReact } from 'react-icons/si';
 import { createAsyncCache } from 'utils/cache';
 
-const parsedMdCache = createAsyncCache<string, { title: string; description: string; authorName?: string; authorUrl?: string; tag?: string; level?: 'Начальный' | 'Средний' | 'Продвинутый'; parsedId?: string }>();
+type WeeklyTaskMeta = {
+  title: string;
+  description: string;
+  authorName?: string;
+  authorUrl?: string;
+  tag?: string;
+  level?: 'Начальный' | 'Средний' | 'Продвинутый';
+  parsedId?: string;
+  starsCount?: number;
+  commentsCount?: number;
+  solvedCount?: number;
+};
+
+const parsedMdCache = createAsyncCache<string, WeeklyTaskMeta>();
 
 function iconByTag(tag?: string): React.ElementType {
   switch ((tag || '').toUpperCase()) {
@@ -75,11 +88,14 @@ export type WeeklyTaskListItem = {
   icon: React.ElementType;
   color: string;
   level?: 'Начальный' | 'Средний' | 'Продвинутый';
+  starsCount?: number;
+  commentsCount?: number;
+  solvedCount?: number;
 };
 
 export const useWeeklyTasksData = () => {
   const { profile } = useUserProfile();
-  const [mdData, setMdData] = React.useState<Record<string, { title: string; description: string; authorName?: string; authorUrl?: string; tag?: string; level?: 'Начальный' | 'Средний' | 'Продвинутый'; parsedId?: string }>>({});
+  const [mdData, setMdData] = React.useState<Record<string, WeeklyTaskMeta>>({});
 
   const [weeklyList, setWeeklyList] = React.useState<Array<{ id: string; mdPath: string; editorLanguage: string }>>([]);
   React.useEffect(() => {
@@ -97,13 +113,27 @@ export const useWeeklyTasksData = () => {
             const parsed = parseWeeklyTaskMd(text);
             const authorUrl = parsed.author?.url || (parsed.author?.github ? `https://github.com/${parsed.author.github}` : undefined);
             const tag = parsed.tag || inferTag(parsed.editorLanguage);
-            return { title: parsed.title || w.id, description: parsed.description || '', authorName: parsed.author?.name, authorUrl, tag, level: parsed.level, parsedId: parsed.id || undefined };
+            const starsCount = typeof (parsed as any).stars === 'number' ? (parsed as any).stars : undefined;
+            const commentsCount = typeof (parsed as any).comments === 'number' ? (parsed as any).comments : undefined;
+            const solvedCount = typeof (parsed as any).solvedCount === 'number' ? (parsed as any).solvedCount : undefined;
+            return {
+              title: parsed.title || w.id,
+              description: parsed.description || '',
+              authorName: parsed.author?.name,
+              authorUrl,
+              tag,
+              level: parsed.level,
+              parsedId: parsed.id || undefined,
+              starsCount,
+              commentsCount,
+              solvedCount,
+            };
           });
           return [w.id, value] as const;
         };
         const entries = await Promise.all(weeklyManifest.map((w: any) => loadOne(w)));
         if (!cancelled) {
-          const map: Record<string, { title: string; description: string; authorName?: string; authorUrl?: string; tag?: string; level?: 'Начальный' | 'Средний' | 'Продвинутый'; parsedId?: string }> = {};
+          const map: Record<string, WeeklyTaskMeta> = {};
           for (const [id, meta] of entries) map[id] = meta;
           setMdData(map);
         }
@@ -130,7 +160,24 @@ export const useWeeklyTasksData = () => {
       const icon = iconByTag(tag);
       const color = colorByTag(tag);
       const level = m?.level;
-      return { id: effectiveId, label, description, done: !!doneEntry.done, authorName, authorUrl, tag: (tag || 'TASK') as string, icon, color, level };
+      const starsCount = m?.starsCount;
+      const commentsCount = m?.commentsCount;
+      const solvedCount = m?.solvedCount;
+      return {
+        id: effectiveId,
+        label,
+        description,
+        done: !!doneEntry.done,
+        authorName,
+        authorUrl,
+        tag: (tag || 'TASK') as string,
+        icon,
+        color,
+        level,
+        starsCount,
+        commentsCount,
+        solvedCount,
+      };
     });
   }, [mdData, profile, weeklyList]);
 

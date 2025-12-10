@@ -14,6 +14,7 @@ export const useWeeklyTaskCardColors = () => {
     taskInnerBorder: theme.borderColor,
     taskCardShadow,
     taskCardShadowHover,
+    solvedIconColor: useColorModeValue('green.600', 'green.300'),
   };
 };
 

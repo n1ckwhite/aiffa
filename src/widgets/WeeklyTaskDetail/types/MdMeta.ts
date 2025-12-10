@@ -11,6 +11,9 @@ export type MdMeta = {
   validator: ((input: string) => ValidateResult) | null;
   editorLanguage: string;
   tag?: string;
+  starsCount?: number;
+  commentsCount?: number;
+  solvedCount?: number;
 };
 
 

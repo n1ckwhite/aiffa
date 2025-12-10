@@ -37,10 +37,20 @@ const projectTexts: ImprovementTexts = {
   errorsExplanation: 'Добавим больше пояснений, ссылок и примеров использования проекта.',
 };
 
+const weeklyTexts: ImprovementTexts = {
+  shortLabel: 'Слишком поверхностно',
+  hardLabel: 'Сложно разобраться',
+  errorsLabel: 'Что-то сломано',
+  shortExplanation: 'Добавим больше примеров и деталей, чтобы задача была понятнее.',
+  hardExplanation: 'Постараемся упростить формулировки, разбить решение на шаги и подсветить ключевые идеи.',
+  errorsExplanation: 'Перепроверим условие и проверку задачи, исправим баги и неточности.',
+};
+
 const MAP: Record<FeedbackContext, ImprovementTexts> = {
   lesson: lessonTexts,
   tasks: tasksTexts,
   project: projectTexts,
+  weekly: weeklyTexts,
 };
 
 export const getImprovementTexts = (context: FeedbackContext): ImprovementTexts => {

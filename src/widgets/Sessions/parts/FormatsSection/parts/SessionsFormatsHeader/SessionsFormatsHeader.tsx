@@ -27,7 +27,7 @@ const SessionsFormatsHeader: React.FC<SessionsFormatsHeaderProps> = ({
         Форматы сессий
       </Heading>
       <Text
-        mt={2}
+        mt={3}
         fontSize={{ base: "sm", md: "md" }}
         color={mutedTextColor}
       >

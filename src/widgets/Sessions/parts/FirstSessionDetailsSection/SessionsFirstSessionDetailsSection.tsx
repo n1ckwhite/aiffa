@@ -35,7 +35,7 @@ const SessionsFirstSessionDetailsSection: React.FC = () => {
           Как проходит первая сессия
         </Heading>
         <Text
-          mt={2}
+          mt={3}
           fontSize={{ base: "sm", md: "md" }}
           color={mutedTextColor}
         >

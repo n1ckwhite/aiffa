@@ -45,7 +45,7 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
           Расписание ближайших 4 встреч
         </Heading>
         <Text
-          mt={2}
+          mt={3}
           fontSize={{ base: "sm", md: "md" }}
           color={mutedTextColor}
         >

@@ -69,7 +69,7 @@ const SessionsFirstSessionSection: React.FC = () => {
               Знакомство с AIFFA: первая живая сессия
             </Heading>
             <Text
-              mt={2}
+              mt={3}
               fontSize={{ base: "sm", md: "md" }}
               color={mutedTextColor}
             >

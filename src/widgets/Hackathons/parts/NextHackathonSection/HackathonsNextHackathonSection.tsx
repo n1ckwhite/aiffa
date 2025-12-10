@@ -24,7 +24,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
     >
       <Stack
         mb={{ base: 4, md: 6 }}
-        spacing={2}
+        spacing={0}
         align="center"
       >
         <Stack
@@ -45,7 +45,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
           </Heading>
         </Stack>
         <Text
-          mt={2}
+          mt={3}
           fontSize={{ base: "sm", md: "md" }}
           color={mutedTextColor}
           textAlign="center"

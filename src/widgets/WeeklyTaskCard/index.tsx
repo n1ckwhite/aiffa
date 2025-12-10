@@ -15,7 +15,6 @@ import { DoneOverlay } from './parts/DoneOverlay';
 import { formatCount } from 'shared/functions/formatCount';
 
 const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
-  taskId,
   label,
   description,
   done,

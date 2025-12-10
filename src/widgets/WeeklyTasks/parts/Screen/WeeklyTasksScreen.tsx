@@ -16,11 +16,11 @@ const WeeklyTasksScreen: React.FC = () => {
   const { profile } = useUserProfile();
   const xp = typeof (profile as any).xp === 'number' && isFinite((profile as any).xp) ? Math.max(0, (profile as any).xp) : 0;
   const { label: tierLabel } = useTierMeta(xp);
-  const { isReady, tasks } = useWeeklyTasksData();
+  // const { isReady, tasks } = useWeeklyTasksData();
 
-  if (!isReady) {
-    return <WeeklyTasksSkeleton />;
-  }
+  // if (!isReady) {
+  //   return <WeeklyTasksSkeleton />;
+  // }
 
   return (
     <Box as="section" position="relative" pb="32px" aria-labelledby="weekly-tasks-title">
@@ -32,7 +32,7 @@ const WeeklyTasksScreen: React.FC = () => {
         <VStack spacing={3} mb={6}>
           <WeeklyTasksCountdown />
         </VStack>
-        <WeeklyTasksGrid tasks={tasks as any} tierLabel={tierLabel as any} />
+        {/* <WeeklyTasksGrid tasks={tasks as any} tierLabel={tierLabel as any} /> */}
       </Box>
       <Box px={{ base: 4, md: 6 }} mt={6}>
         <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto">

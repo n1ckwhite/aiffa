@@ -11,6 +11,7 @@ import TaskCompletionModal from 'features/TaskCompletionModal';
 import SupportBlock from 'widgets/SupportBlock';
 import WeeklyTaskDetailSkeleton from 'pages/WeeklyTaskDetailPage/Skeleton';
 import { useTaskDetailColors } from './colors/useTaskDetailColors';
+import LessonFeedback from 'widgets/Lessons/LessonFeedback';
 
 type TaskDetailScreenProps = {
   taskId?: string;
@@ -99,6 +100,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
             commentsCount={mdMeta?.commentsCount}
             solvedCount={mdMeta?.solvedCount}
           />
+          <Box id="lesson-tasks-cta-anchor" />
           <Divider my={4} />
           <ExampleBlock
             code={(mdMeta?.examples?.[0]?.code || meta.placeholder) as string}
@@ -177,6 +179,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
           <SupportBlock variant="weekly" />
         </Box>
       </Box>
+      <LessonFeedback lessonKey={`weekly/${taskId}`} questionText="Эта задача была полезна?" />
     </>
   );
 };

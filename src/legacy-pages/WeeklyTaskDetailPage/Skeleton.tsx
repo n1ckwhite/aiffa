@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, VStack, HStack, Heading } from '@chakra-ui/react';
+import { Box, VStack, HStack, Heading, Skeleton, SkeletonCircle } from '@chakra-ui/react';
 import { useAppColors } from 'shared/theme/colors';
 
 const WeeklyTaskDetailSkeleton: React.FC = () => {
@@ -18,19 +18,19 @@ const WeeklyTaskDetailSkeleton: React.FC = () => {
       <Box borderWidth={0} borderColor={border} borderRadius="xl" p={{ base: 0, md: 0 }}>
         {/* Tag / status */}
         <HStack spacing={3} mb={2} align="center">
-          <Box h="20px" w="70px" borderRadius="full" bg={bg} />
-          <Box h="20px" w="90px" borderRadius="full" bg={bg} />
+          <Skeleton h="20px" w="70px" borderRadius="full" />
+          <Skeleton h="20px" w="90px" borderRadius="full" />
         </HStack>
 
         {/* Title */}
         <Heading size="lg" mb={3}>
-          <Box h="24px" w="60%" borderRadius="md" bg={bg} />
+          <Skeleton h="24px" w="60%" borderRadius="md" />
         </Heading>
         {/* Description */}
-        <Box h="12px" w="80%" mb={2} borderRadius="md" bg={bg} />
+        <Skeleton h="12px" w="80%" mb={2} borderRadius="md" />
 
         {/* Back button under title */}
-        <Box h="36px" w="200px" borderRadius="full" bg={bg} mb={4} />
+        <Skeleton h="36px" w="200px" borderRadius="full" mb={4} />
 
         {/* Author card + совет + метрики */}
         <Box
@@ -45,19 +45,19 @@ const WeeklyTaskDetailSkeleton: React.FC = () => {
         >
           <HStack spacing={3} align="flex-start">
             {/* Аватар */}
-            <Box w="32px" h="32px" borderRadius="full" bg={bg} />
+            <SkeletonCircle boxSize="32px" />
             <VStack align="stretch" spacing={2} flex={1}>
               {/* Автор: имя + спасибо за вклад */}
-              <Box h="12px" w="60%" borderRadius="md" bg={bg} />
-              <Box h="10px" w="70%" borderRadius="md" bg={bg} />
+              <Skeleton h="12px" w="60%" borderRadius="md" />
+              <Skeleton h="10px" w="70%" borderRadius="md" />
               {/* Совет автора */}
-              <Box h="10px" w="85%" borderRadius="md" bg={bg} />
+              <Skeleton h="10px" w="85%" borderRadius="md" />
               {/* Метрики + кнопка \"Спасибо автору\" */}
               <HStack spacing={3} mt={1}>
-                <Box h="10px" w="36px" borderRadius="md" bg={bg} />
-                <Box h="24px" w="120px" borderRadius="full" bg={bg} />
-                <Box h="10px" w="32px" borderRadius="md" bg={bg} />
-                <Box h="10px" w="40px" borderRadius="md" bg={bg} />
+                <Skeleton h="10px" w="36px" borderRadius="md" />
+                <Skeleton h="24px" w="120px" borderRadius="full" />
+                <Skeleton h="10px" w="32px" borderRadius="md" />
+                <Skeleton h="10px" w="40px" borderRadius="md" />
               </HStack>
             </VStack>
           </HStack>
@@ -65,16 +65,17 @@ const WeeklyTaskDetailSkeleton: React.FC = () => {
 
         {/* Example code block placeholder */}
         <Box
-          h="120px"
           borderWidth="1px"
           borderColor={border}
           borderRadius="md"
           bg={faint}
           mb={3}
-        />
+        >
+          <Skeleton h="120px" w="100%" borderRadius="md" />
+        </Box>
 
         <VStack align="stretch" spacing={3}>
-          <Box h="14px" w="120px" borderRadius="md" bg={bg} />
+          <Skeleton h="14px" w="120px" borderRadius="md" />
           {/* macOS-like code editor window */}
           <Box borderWidth="1px" borderColor={border} borderRadius="lg" overflow="hidden" position="relative">
             <HStack spacing={2} p={2} borderBottomWidth="1px" borderColor={border} bg={faint}>
@@ -82,17 +83,17 @@ const WeeklyTaskDetailSkeleton: React.FC = () => {
               <Box w="12px" h="12px" borderRadius="full" bg="#ffbd2e" />
               <Box w="12px" h="12px" borderRadius="full" bg="#27c93f" />
             </HStack>
-            <Box bg={bg} h={{ base: '200px', md: '280px' }} />
+            <Skeleton bg={bg} h={{ base: '200px', md: '280px' }} w="100%" />
             {/* Start button placeholder */}
             <Box position="absolute" inset={0} display="flex" alignItems="center" justifyContent="center">
-              <Box h="40px" w="160px" borderRadius="full" bg={bg} />
+              <Skeleton h="40px" w="160px" borderRadius="full" />
             </Box>
           </Box>
           {/* Buttons row */}
           <HStack spacing={3} flexWrap="wrap">
-            <Box h="36px" w="120px" borderRadius="md" bg={bg} />
-            <Box h="36px" w="140px" borderRadius="md" bg={bg} />
-            <Box h="36px" w="120px" borderRadius="md" bg={bg} />
+            <Skeleton h="36px" w="120px" borderRadius="md" />
+            <Skeleton h="36px" w="140px" borderRadius="md" />
+            <Skeleton h="36px" w="120px" borderRadius="md" />
           </HStack>
         </VStack>
 
@@ -107,13 +108,13 @@ const WeeklyTaskDetailSkeleton: React.FC = () => {
         p={{ base: 4, md: 5 }}
         bg={faint}
       >
-        <Box h="16px" w="50%" borderRadius="md" bg={bg} mb={2} />
-        <Box h="10px" w="90%" borderRadius="md" bg={bg} mb={1} />
-        <Box h="10px" w="80%" borderRadius="md" bg={bg} mb={3} />
+        <Skeleton h="16px" w="50%" borderRadius="md" mb={2} />
+        <Skeleton h="10px" w="90%" borderRadius="md" mb={1} />
+        <Skeleton h="10px" w="80%" borderRadius="md" mb={3} />
         <HStack spacing={3}>
-          <Box h="36px" w="180px" borderRadius="full" bg={bg} />
-          <Box h="36px" w="200px" borderRadius="full" bg={bg} />
-          <Box h="36px" w="140px" borderRadius="full" bg={bg} />
+          <Skeleton h="36px" w="180px" borderRadius="full" />
+          <Skeleton h="36px" w="200px" borderRadius="full" />
+          <Skeleton h="36px" w="140px" borderRadius="full" />
         </HStack>
       </Box>
     </Box>

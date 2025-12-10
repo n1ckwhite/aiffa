@@ -24,16 +24,15 @@ const FormatsSection: React.FC = () => {
   } = usePartnersColors();
 
   return (
-    <VStack as="section" aria-labelledby="partners-formats-heading" align="center" spacing={4}>
+    <VStack as="section" aria-labelledby="partners-formats-heading" align="center" spacing={3}>
       <PartnersLottieIcon />
-      <Heading as="h2" id="partners-formats-heading" size="md" letterSpacing="-0.02em">
-        Форматы партнёрства
-      </Heading>
-      <Text fontSize="sm" color={mutedTextColor}>
-        Мы подбираем формат под задачи компании: от HR и бренда до продвижения
-        технологий и инструментов.
-      </Text>
-
+        <Heading as="h2" id="partners-formats-heading" size="md" letterSpacing="-0.02em">
+          Форматы партнёрства
+        </Heading>
+        <Text fontSize="sm" color={mutedTextColor}>
+          Мы подбираем формат под задачи компании: от HR и бренда до продвижения
+          технологий и инструментов.
+        </Text>
       <VStack spacing={4} align="stretch">
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 4, md: 5 }}>
           <Box
@@ -251,10 +250,10 @@ const FormatsSection: React.FC = () => {
           textAlign="center"
         >
           <BusinessWorkshopIcon />
-          <Heading as="h3" size="sm" letterSpacing="-0.02em">
+          <Heading as="h2" size="md" letterSpacing="-0.02em">
             Пакеты по уровню вовлечения
           </Heading>
-          <Text fontSize="xs" color={mutedTextColor} mt={1}>
+          <Text fontSize="sm" color={mutedTextColor} mt={3}>
             Примеры форматов: финальный scope и стоимость обсуждаем индивидуально под вашу задачу.
           </Text>
           <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, md: 4 }} mt={3}>
@@ -312,7 +311,7 @@ const FormatsSection: React.FC = () => {
               </Text>
             </Box>
           </SimpleGrid>
-          <Text fontSize="xs" color={mutedTextColor} mt={{ base: 3, md: 4 }}>
+          <Text fontSize="sm" color={mutedTextColor} mt={3}>
             Цены формируются индивидуально и зависят от масштаба, формата и задач партнёрства.
           </Text>
         </Box>

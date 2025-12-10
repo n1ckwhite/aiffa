@@ -22,6 +22,7 @@ const HowItWorksSection: React.FC = () => {
   return (
     <Box as="section" aria-label="Как проходит партнёрство" zIndex={100}>
       <VStack align="center" spacing={{ base: 4, md: 5 }}>
+        <Box as="header" textAlign="center" justifyContent="center" alignItems="center" display="flex" flexDirection="column" gap={3}>
         <Heading as="h2" size="md" letterSpacing="-0.02em">
           Как проходит партнёрство
         </Heading>
@@ -29,6 +30,7 @@ const HowItWorksSection: React.FC = () => {
           Делаем процесс прозрачным: на старте вы формулируете задачу, на финише — получаете
           отчёт с результатами и следующими шагами.
         </Text>
+        </Box>
         <HStack
           spacing={6}
           align="stretch"

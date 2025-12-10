@@ -32,10 +32,10 @@ const HeroSection: React.FC = () => {
       >
         <Stack
           as="header"
-          direction={{ base: "column", sm: "row" }}
+          direction="column"
           justify="center"
           align="center"
-          spacing={{ base: 2, sm: 3 }}
+          spacing={3}
         >
           <Heading
             as="h1"
@@ -46,7 +46,6 @@ const HeroSection: React.FC = () => {
           >
             Стать партнёром AIFFA
           </Heading>
-        </Stack>
         <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
           Партнёрство для компаний
         </PillBadge>
@@ -68,6 +67,7 @@ const HeroSection: React.FC = () => {
           Если вам нужны бренд, найм или продвижение технологий среди разработчиков — здесь вы
           получаете понятные результаты, а мы берём на себя весь продакшн.
         </Text>
+        </Stack>
         <BusinessAnalystIcon />
         <HStack spacing={4} flexWrap="wrap" justify="center">
           <Button

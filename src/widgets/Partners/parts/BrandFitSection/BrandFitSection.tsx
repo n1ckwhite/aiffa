@@ -47,7 +47,7 @@ const BrandFitSection: React.FC = () => {
               letterSpacing="-0.02em"
               mt={2}
             >
-              Кому и зачем подходит спонсорство?
+              Кому и зачем подходит спонсорство
             </Heading>
           </Box>
           <Text fontSize="sm" color={mutedTextColor}>

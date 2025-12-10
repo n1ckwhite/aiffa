@@ -8,7 +8,13 @@ const WeeklyTaskDetailSkeleton: React.FC = () => {
   const border = theme.borderColor;
   const faint = theme.cardHoverBg;
   return (
-    <Box w="100%" maxW={{ base: '100%', md: '1100px', lg: '1280px' }} mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <Box
+      w="100%"
+      maxW={{ base: '100%', md: '1100px', lg: '1280px' }}
+      mx="auto"
+      px={{ base: 4, md: 6 }}
+      py={{ base: 8, md: 10 }}
+    >
       <Box borderWidth={0} borderColor={border} borderRadius="xl" p={{ base: 0, md: 0 }}>
         {/* Tag / status */}
         <HStack spacing={3} mb={2} align="center">
@@ -26,18 +32,46 @@ const WeeklyTaskDetailSkeleton: React.FC = () => {
         {/* Back button under title */}
         <Box h="36px" w="200px" borderRadius="full" bg={bg} mb={4} />
 
-        {/* Author row */}
-        <HStack spacing={3} mb={3}>
-          <Box w="20px" h="20px" borderRadius="full" bg={bg} />
-          <Box h="12px" w="160px" borderRadius="md" bg={bg} />
-        </HStack>
-        {/* Author note */}
-        <Box role="note" aria-label="Совет автора" bg={faint} borderWidth="1px" borderColor={border} borderRadius="lg" p={3} mb={3}>
-          <Box h="10px" w="80%" borderRadius="md" bg={bg} />
+        {/* Author card + совет + метрики */}
+        <Box
+          role="note"
+          aria-label="Совет автора"
+          bg={faint}
+          borderWidth="1px"
+          borderColor={border}
+          borderRadius="lg"
+          p={3}
+          mb={3}
+        >
+          <HStack spacing={3} align="flex-start">
+            {/* Аватар */}
+            <Box w="32px" h="32px" borderRadius="full" bg={bg} />
+            <VStack align="stretch" spacing={2} flex={1}>
+              {/* Автор: имя + спасибо за вклад */}
+              <Box h="12px" w="60%" borderRadius="md" bg={bg} />
+              <Box h="10px" w="70%" borderRadius="md" bg={bg} />
+              {/* Совет автора */}
+              <Box h="10px" w="85%" borderRadius="md" bg={bg} />
+              {/* Метрики + кнопка \"Спасибо автору\" */}
+              <HStack spacing={3} mt={1}>
+                <Box h="10px" w="36px" borderRadius="md" bg={bg} />
+                <Box h="24px" w="120px" borderRadius="full" bg={bg} />
+                <Box h="10px" w="32px" borderRadius="md" bg={bg} />
+                <Box h="10px" w="40px" borderRadius="md" bg={bg} />
+              </HStack>
+            </VStack>
+          </HStack>
         </Box>
 
         {/* Example code block placeholder */}
-        <Box h="120px" borderWidth="1px" borderColor={border} borderRadius="md" bg={faint} mb={3} />
+        <Box
+          h="120px"
+          borderWidth="1px"
+          borderColor={border}
+          borderRadius="md"
+          bg={faint}
+          mb={3}
+        />
 
         <VStack align="stretch" spacing={3}>
           <Box h="14px" w="120px" borderRadius="md" bg={bg} />

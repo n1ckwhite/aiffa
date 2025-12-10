@@ -1,7 +1,11 @@
 import React from 'react';
 import { Box, VStack, HStack, Skeleton, SkeletonCircle } from '@chakra-ui/react';
+import { useAppColors } from 'shared/theme/colors';
 
 const ModuleProjectSkeleton: React.FC = () => {
+  const theme = useAppColors();
+  const border = theme.borderColor;
+
   return (
     <Box
       w="100%"
@@ -20,7 +24,12 @@ const ModuleProjectSkeleton: React.FC = () => {
 
       <VStack align="stretch" gap={5} maxW="840px" mx="auto">
         {/* Автор проекта */}
-        <Box borderRadius="xl" p={{ base: 3, md: 4 }}>
+        <Box
+          borderRadius="xl"
+          p={{ base: 3, md: 4 }}
+          borderWidth="1px"
+          borderColor={border}
+        >
           <HStack spacing={4} align="center">
             <SkeletonCircle boxSize={{ base: "40px", md: "44px" }} />
             <VStack align="flex-start" spacing={2} flex={1}>

@@ -3,9 +3,9 @@ import { HStack, Text, Avatar, Box, Link as ChakraLink, Icon, Tooltip } from '@c
 import { StarIcon } from '@chakra-ui/icons';
 import { FiMessageCircle, FiUserCheck } from 'react-icons/fi';
 import { useAuthorColors } from '../../colors/useAuthorColors';
-import { useAuthorCardColors } from 'widgets/LessonPageView/ui/LessonPageView/parts/AuthorCard/colors/useAuthorCardColors';
-import { useAuthorSupportTexts } from 'widgets/LessonPageView/ui/LessonPageView/parts/AuthorCard/features/useAuthorSupportTexts';
 import { AuthorNoteProps } from './types';
+import { useAuthorNoteData } from './hooks/useAuthorNoteData';
+import { useAuthorNoteSupport } from './hooks/useAuthorNoteSupport';
 
 const AuthorNote: React.FC<AuthorNoteProps> = ({
   name,
@@ -17,15 +17,16 @@ const AuthorNote: React.FC<AuthorNoteProps> = ({
   solvedCount,
 }) => {
   const { text, link, noteBg, noteBorder, noteColor, starInactive, starActive } = useAuthorColors();
-  const baseStars = typeof starsCount === 'number' ? starsCount : 37;
-  const effectiveComments = typeof commentsCount === 'number' ? commentsCount : 12;
-  const effectiveSolved = typeof solvedCount === 'number' ? solvedCount : 128;
-  const [currentStars, setCurrentStars] = React.useState(baseStars);
-  const [isStarred, setIsStarred] = React.useState(false);
-
-  const { tooltipLabel, supportLabel } = useAuthorSupportTexts(isStarred);
-
+  const { baseStars, effectiveComments, effectiveSolved } = useAuthorNoteData(
+    starsCount,
+    commentsCount,
+    solvedCount,
+  );
   const {
+    isStarred,
+    displayStars,
+    tooltipLabel,
+    supportLabel,
     badgeBg,
     badgeBorder,
     badgeTextColor,
@@ -33,14 +34,8 @@ const AuthorNote: React.FC<AuthorNoteProps> = ({
     activeBg,
     tooltipBg,
     tooltipTextColor,
-  } = useAuthorCardColors(isStarred);
-
-  const handleToggleSupport = React.useCallback(() => {
-    setIsStarred((prev) => {
-      setCurrentStars((count) => count + (prev ? -1 : 1));
-      return !prev;
-    });
-  }, []);
+    handleToggleSupport,
+  } = useAuthorNoteSupport(baseStars);
   return (
     <Box
       role="note"
@@ -84,7 +79,7 @@ const AuthorNote: React.FC<AuthorNoteProps> = ({
           >
             <>
               <HStack spacing={1} flexShrink={0}>
-                <Box as="span">{currentStars}</Box>
+                <Box as="span">{displayStars}</Box>
                 <StarIcon boxSize={3} color={isStarred ? starActive : starInactive} flexShrink={0} />
               </HStack>
               <Tooltip

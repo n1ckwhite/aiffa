@@ -38,10 +38,14 @@ const ModuleProjectSkeleton: React.FC = () => {
               {/* Текст про вклад */}
               <Skeleton h="10px" w="220px" borderRadius="md" />
               {/* Метрики + кнопка "Спасибо автору" */}
-              <HStack spacing={3} pt={1}>
-                <Skeleton h="14px" w="40px" borderRadius="full" />
-                <Skeleton h="14px" w="40px" borderRadius="full" />
-                <Skeleton h="14px" w="40px" borderRadius="full" />
+              <HStack spacing={3} pt={1} flexWrap="wrap">
+                {/* Кол-во звёзд */}
+                <Skeleton h="10px" w="34px" borderRadius="md" />
+                {/* Кнопка "Спасибо автору" */}
+                <Skeleton h="24px" w="120px" borderRadius="full" />
+                {/* Просмотры / комментарии */}
+                <Skeleton h="10px" w="32px" borderRadius="md" />
+                <Skeleton h="10px" w="40px" borderRadius="md" />
               </HStack>
             </VStack>
           </HStack>

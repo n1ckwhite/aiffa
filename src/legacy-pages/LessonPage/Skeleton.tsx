@@ -1,7 +1,10 @@
 import React from 'react';
 import { Box, VStack, HStack, Skeleton, SkeletonCircle } from '@chakra-ui/react';
+import { useAppColors } from 'shared/theme/colors';
 
 const LessonPageSkeleton: React.FC = () => {
+  const theme = useAppColors();
+  const border = theme.borderColor;
   return (
     <Box as="main" pb="32px">
       <Box maxW="1200px" mx="auto" px={{ base: 4, md: 6 }} pt={{ base: 6, md: 8 }}>
@@ -25,8 +28,7 @@ const LessonPageSkeleton: React.FC = () => {
                 p={{ base: 3, md: 4 }}
                 mb={8}
                 borderWidth="1px"
-                borderColor="blackAlpha.200"
-                _dark={{ borderColor: "whiteAlpha.200" }}
+                borderColor={border}
               >
                 <HStack spacing={4} align="flex-start">
                   {/* Аватар автора */}

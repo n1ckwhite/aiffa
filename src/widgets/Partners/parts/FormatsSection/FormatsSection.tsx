@@ -29,7 +29,7 @@ const FormatsSection: React.FC = () => {
         <Heading as="h2" id="partners-formats-heading" size="md" letterSpacing="-0.02em">
           Форматы партнёрства
         </Heading>
-        <Text fontSize="sm" color={mutedTextColor}>
+        <Text fontSize="sm" color={mutedTextColor} align="center">
           Мы подбираем формат под задачи компании: от HR и бренда до продвижения
           технологий и инструментов.
         </Text>

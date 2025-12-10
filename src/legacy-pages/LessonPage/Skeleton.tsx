@@ -19,20 +19,32 @@ const LessonPageSkeleton: React.FC = () => {
               {/* Заголовок урока */}
               <Skeleton h={{ base: "28px", md: "34px" }} w={{ base: "82%", md: "70%" }} borderRadius="md" mb={4} />
 
-              {/* Автор карточка */}
-              <Box borderRadius="xl" p={{ base: 3, md: 4 }} mb={8}>
-                <HStack spacing={4} align="center">
+              {/* Автор карточка (в стиле WeeklyTaskDetailSkeleton) */}
+              <Box
+                borderRadius="xl"
+                p={{ base: 3, md: 4 }}
+                mb={8}
+                borderWidth="1px"
+                borderColor="blackAlpha.200"
+                _dark={{ borderColor: "whiteAlpha.200" }}
+              >
+                <HStack spacing={4} align="flex-start">
+                  {/* Аватар автора */}
                   <SkeletonCircle boxSize={{ base: "40px", md: "44px" }} />
                   <VStack align="flex-start" spacing={2} flex="1">
-                    {/* Автор + имя */}
-                    <Skeleton h="12px" w="160px" borderRadius="md" />
-                    {/* Текст про вклад */}
-                    <Skeleton h="10px" w="220px" borderRadius="md" />
-                    {/* Метрики + кнопка "Спасибо автору" */}
+                    {/* Строка "Автор: …" */}
+                    <Skeleton h="12px" w="55%" borderRadius="md" />
+                    {/* "Спасибо за вклад в сообщество! ✨" */}
+                    <Skeleton h="10px" w="70%" borderRadius="md" />
+                    {/* Ряд со звёздами, кнопкой "Спасибо автору" и метриками */}
                     <HStack spacing={3} pt={1} flexWrap="wrap">
-                      <Skeleton h="14px" w="46px" borderRadius="full" />
-                      <Skeleton h="14px" w="46px" borderRadius="full" />
-                      <Skeleton h="14px" w="46px" borderRadius="full" />
+                      {/* Кол‑во звёзд */}
+                      <Skeleton h="10px" w="34px" borderRadius="md" />
+                      {/* Кнопка "Спасибо автору" (пилюля) */}
+                      <Skeleton h="24px" w="120px" borderRadius="full" />
+                      {/* Кол‑во просмотров / комментариев */}
+                      <Skeleton h="10px" w="32px" borderRadius="md" />
+                      <Skeleton h="10px" w="40px" borderRadius="md" />
                     </HStack>
                   </VStack>
                 </HStack>

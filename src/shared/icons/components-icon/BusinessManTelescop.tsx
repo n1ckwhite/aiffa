@@ -22,6 +22,7 @@ const BusinessManTelescop: React.FC = () => {
           width={300}
           height={231}
           sizes="350px"
+          priority
         />
       }
     />

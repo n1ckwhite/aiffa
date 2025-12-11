@@ -85,8 +85,8 @@ const FilterBar = <T extends string = string>({
               bg={isActive ? activeBg : idleBg}
               borderColor={isActive ? activeBorder : idleBorder}
               color={labelColor}
-              boxShadow={isActive ? "0 4px 10px rgba(15,23,42,0.12)" : "none"}
-              transition="background-color 0.16s ease-out, border-color 0.16s ease-out, color 0.16s ease-out, box-shadow 0.18s ease-out"
+              boxShadow="none"
+              transition="background-color 0.16s ease-out, border-color 0.16s ease-out, color 0.16s ease-out"
               _hover={{
                 bg: isActive ? activeBg : idleHoverBg,
                 borderColor: isActive ? activeBorder : idleHoverBorder,

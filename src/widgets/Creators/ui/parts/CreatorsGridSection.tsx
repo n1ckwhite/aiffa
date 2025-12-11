@@ -1,12 +1,33 @@
 import React from "react";
-import { Box, Button, Heading, SimpleGrid, Text, VStack, useColorModeValue } from "@chakra-ui/react";
-import { FiUserPlus } from "react-icons/fi";
+import {
+  Box,
+  Button,
+  Heading,
+  SimpleGrid,
+  Text,
+  VStack,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { FiUserPlus, FiChevronDown } from "react-icons/fi";
 import FilterBar from "shared/ui/FilterBar";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import { useCreatorsFilter } from "../hooks/useCreatorsFilter";
 import { usePagination } from "widgets/ModuleProjects/hooks/usePagination";
 import { Pagination } from "widgets/ModuleLessons/parts/Pagination";
 import CreatorCard from "./CreatorCard";
+
+type TimeRangeValue = "week" | "month" | "year" | "all";
+
+const TIME_RANGE_ITEMS: { value: TimeRangeValue; label: string }[] = [
+  { value: "week", label: "За неделю" },
+  { value: "month", label: "За месяц" },
+  { value: "year", label: "За год" },
+  { value: "all", label: "За всё время" },
+];
 
 const CreatorsGridSection: React.FC = () => {
   const { items } = useCreatorsData();
@@ -24,6 +45,11 @@ const CreatorsGridSection: React.FC = () => {
   const pagedItems = filteredItems.slice(start, end);
   const subtitleColor = useColorModeValue("gray.600", "gray.300");
   const buttonColor = useColorModeValue("blue.600", "blue.300");
+  const [timeRange, setTimeRange] = React.useState<TimeRangeValue>("month");
+  const menuBg = useColorModeValue("white", "gray.800");
+  const menuBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
+  const menuHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.200");
+  const menuTextColor = useColorModeValue("gray.800", "gray.100");
 
   return (
     <Box as="section" aria-label="Команда создателей AIFFA">
@@ -72,6 +98,40 @@ const CreatorsGridSection: React.FC = () => {
           onChange={setRoleFilter}
           ariaLabel="Фильтр по ролям создателей"
         />
+        <Box display="flex" justifyContent="center">
+          <Menu>
+            <MenuButton
+              as={Button}
+              size="xs"
+              borderRadius="full"
+              variant="outline"
+              rightIcon={<FiChevronDown />}
+              px={4}
+              py={1.5}
+            >
+              {TIME_RANGE_ITEMS.find((item) => item.value === timeRange)?.label ?? "За месяц"}
+            </MenuButton>
+            <MenuList
+              bg={menuBg}
+              borderColor={menuBorder}
+              py={1}
+              minW="180px"
+            >
+              {TIME_RANGE_ITEMS.map((item) => (
+                <MenuItem
+                  key={item.value}
+                  onClick={() => setTimeRange(item.value)}
+                  fontSize="sm"
+                  color={menuTextColor}
+                  _hover={{ bg: menuHoverBg }}
+                  fontWeight={item.value === timeRange ? "semibold" : "normal"}
+                >
+                  {item.label}
+                </MenuItem>
+              ))}
+            </MenuList>
+          </Menu>
+        </Box>
       </VStack>
       <SimpleGrid
         mt={3}

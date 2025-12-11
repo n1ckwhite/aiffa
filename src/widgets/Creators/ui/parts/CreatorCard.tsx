@@ -100,6 +100,15 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     { light: "orange.500", dark: "orange.300" },
   ] as const;
 
+  const cardAccentPalettes = [
+    { light: "purple.100", dark: "purple.900" },
+    { light: "green.100", dark: "green.900" },
+    { light: "teal.100", dark: "teal.900" },
+    { light: "blue.100", dark: "blue.900" },
+    { light: "pink.100", dark: "pink.900" },
+    { light: "orange.100", dark: "orange.900" },
+  ] as const;
+
   const avatarIndex = React.useMemo(() => {
     if (!name) return 0;
     const sum = Array.from(name).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
@@ -109,6 +118,10 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const avatarBg = useColorModeValue(
     avatarPalettes[avatarIndex].light,
     avatarPalettes[avatarIndex].dark,
+  );
+  const cardAccentBg = useColorModeValue(
+    cardAccentPalettes[avatarIndex].light,
+    cardAccentPalettes[avatarIndex].dark,
   );
 
   return (
@@ -132,136 +145,145 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         borderColor: rankBorder,
       }}
     >
-      <HStack justify="space-between" align="center" mb={2}>
-        <HStack spacing={2}>
-          <Icon as={FiAward} boxSize={4} color={rankColor} aria-hidden="true" />
-          <HStack
-            px={3}
-            py={0.5}
-            borderRadius="full"
-            borderWidth="1px"
-            borderColor={rankBorder}
-            bg={rankBg}
-            spacing={1}
-          >
-            <Text as="span" fontSize="xs" color={rankColor}>
-              #{index}
-            </Text>
+      <Box
+        position="absolute"
+        inset={0}
+        bgGradient={`linear(to-br, ${cardAccentBg}, transparent 65%)`}
+        opacity={0.35}
+        pointerEvents="none"
+      />
+      <Box position="relative">
+        <HStack justify="space-between" align="center" mb={2}>
+          <HStack spacing={2}>
+            <Icon as={FiAward} boxSize={4} color={rankColor} aria-hidden="true" />
+            <HStack
+              px={3}
+              py={0.5}
+              borderRadius="full"
+              borderWidth="1px"
+              borderColor={rankBorder}
+              bg={rankBg}
+              spacing={1}
+            >
+              <Text as="span" fontSize="xs" color={rankColor}>
+                #{index}
+              </Text>
+            </HStack>
           </HStack>
         </HStack>
-      </HStack>
 
-      <HStack align="center" spacing={3} mb={2}>
-        <Box position="relative">
-          <Box
-            position="absolute"
-            inset={-1}
-            borderRadius="full"
-            borderWidth="2px"
-            borderColor={avatarBg}
-            opacity={0.9}
-          />
-          <Avatar
-            size="sm"
-            name={name}
-            src={avatar}
-            position="relative"
-            bg={avatarBg}
-            color="white"
-          />
-        </Box>
-        <VStack align="flex-start" spacing={0.5}>
-          <Text fontSize="lg" fontWeight="semibold" letterSpacing="-0.02em" color={primaryTextColor}>
-            {name}
-          </Text>
+        <HStack align="center" spacing={3} mb={2}>
+          <Box position="relative">
+            <Box
+              position="absolute"
+              inset={-1}
+              borderRadius="full"
+              borderWidth="2px"
+              borderColor={avatarBg}
+              opacity={0.9}
+            />
+            <Avatar
+              size="sm"
+              name={name}
+              src={avatar}
+              position="relative"
+              bg={avatarBg}
+              color="white"
+            />
+          </Box>
+          <VStack align="flex-start" spacing={0.5}>
+            <Text fontSize="lg" fontWeight="semibold" letterSpacing="-0.02em" color={primaryTextColor}>
+              {name}
+            </Text>
+            <HStack spacing={1}>
+              <Box
+                as="span"
+                px={2}
+                py={0.5}
+                borderRadius="full"
+                borderWidth="1px"
+                borderColor={roleBorder}
+                bg={roleBg}
+                fontSize="xs"
+                fontWeight="semibold"
+                color={roleColor}
+                display="inline-flex"
+                alignItems="center"
+                gap={1}
+              >
+                <Icon as={RoleIcon} boxSize={3} aria-hidden="true" />
+                <Text as="span">{roleLabelMap[role]}</Text>
+              </Box>
+            </HStack>
+          </VStack>
+        </HStack>
+
+        <HStack spacing={3} mb={1} fontSize="xs" color={metaColor}>
           <HStack spacing={1}>
+            <Icon as={FiZap} boxSize={3.5} aria-hidden="true" color={xpIconColor} />
+            <Text as="span">XP</Text>
             <Box
               as="span"
               px={2}
               py={0.5}
               borderRadius="full"
               borderWidth="1px"
-              borderColor={roleBorder}
-              bg={roleBg}
-              fontSize="xs"
+              borderColor={xpBorder}
+              bg={xpBg}
               fontWeight="semibold"
-              color={roleColor}
-              display="inline-flex"
-              alignItems="center"
-              gap={1}
+              color={primaryTextColor}
             >
-              <Icon as={RoleIcon} boxSize={3} aria-hidden="true" />
-              <Text as="span">{roleLabelMap[role]}</Text>
+              {xp.toLocaleString("ru-RU")}
             </Box>
           </HStack>
-        </VStack>
-      </HStack>
+        </HStack>
+        <HStack spacing={2} fontSize="xs" color={metaColor} mb={2} flexWrap="wrap">
+          <HStack spacing={1}>
+            <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
+            <Text as="span">
+              {lessons}{" "}
+              <Text as="span" fontWeight="semibold">
+                материалов
+              </Text>
+            </Text>
+          </HStack>
+          <HStack spacing={1}>
+            <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
+            <Text as="span">
+              {weeklyTasks}{" "}
+              <Text as="span" fontWeight="semibold">
+                задач
+              </Text>
+            </Text>
+          </HStack>
+          <HStack spacing={1}>
+            <Icon as={FiCheckCircle} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
+            <Text as="span">
+              {reviews}{" "}
+              <Text as="span" fontWeight="semibold">
+                ревью
+              </Text>
+            </Text>
+          </HStack>
+        </HStack>
 
-      <HStack spacing={3} mb={1} fontSize="xs" color={metaColor}>
-        <HStack spacing={1}>
-          <Icon as={FiZap} boxSize={3.5} aria-hidden="true" color={xpIconColor} />
-          <Text as="span">XP</Text>
-          <Box
-            as="span"
-            px={2}
-            py={0.5}
+        <HStack justify="flex-start">
+          <Button
+            size="xs"
             borderRadius="full"
-            borderWidth="1px"
-            borderColor={xpBorder}
-            bg={xpBg}
-            fontWeight="semibold"
-            color={primaryTextColor}
+            variant="ghost"
+            color={linkColor}
+            mt={0.5}
+            onClick={onOpenProfile}
+            rightIcon={<FiArrowRight />}
+            px={2}
+            _hover={{ bg: linkHoverBg, transform: "translateX(2px)" }}
+            _active={{ transform: "translateX(1px)" }}
           >
-            {xp.toLocaleString("ru-RU")}
-          </Box>
+            Перейти
+          </Button>
         </HStack>
-      </HStack>
-      <HStack spacing={2} fontSize="xs" color={metaColor} mb={2} flexWrap="wrap">
-        <HStack spacing={1}>
-          <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
-          <Text as="span">
-            {lessons}{" "}
-            <Text as="span" fontWeight="semibold">
-              материалов
-            </Text>
-          </Text>
-        </HStack>
-        <HStack spacing={1}>
-          <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
-          <Text as="span">
-            {weeklyTasks}{" "}
-            <Text as="span" fontWeight="semibold">
-              задач
-            </Text>
-          </Text>
-        </HStack>
-        <HStack spacing={1}>
-          <Icon as={FiCheckCircle} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
-          <Text as="span">
-            {reviews}{" "}
-            <Text as="span" fontWeight="semibold">
-              ревью
-            </Text>
-          </Text>
-        </HStack>
-      </HStack>
-
-      <HStack justify="flex-start">
-        <Button
-          size="xs"
-          borderRadius="full"
-          variant="ghost"
-          color={linkColor}
-          mt={0.5}
-          onClick={onOpenProfile}
-          rightIcon={<FiArrowRight />}
-          px={2}
-          _hover={{ bg: linkHoverBg, transform: "translateX(2px)" }}
-          _active={{ transform: "translateX(1px)" }}
-        >
-          Перейти
-        </Button>
-      </HStack>
+      </Box>
     </Box>
   );
 };

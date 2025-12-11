@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, HStack, VStack, Text, Avatar, Button, Icon, useColorModeValue } from "@chakra-ui/react";
-import { FiBookOpen, FiTarget, FiCheckCircle, FiAward } from "react-icons/fi";
+import { FiBookOpen, FiTarget, FiCheckCircle, FiAward, FiArrowRight } from "react-icons/fi";
 import type { Creator } from "../../model/types";
 
 type CreatorCardProps = {
@@ -46,6 +46,11 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const rankColor =
     index === 1 ? goldColor : index === 2 ? silverColor : index === 3 ? bronzeColor : defaultColor;
   const metaColor = useColorModeValue("gray.500", "gray.300");
+  const materialsIconColor = useColorModeValue("orange.400", "orange.300");
+  const tasksIconColor = useColorModeValue("blue.400", "blue.300");
+  const reviewsIconColor = useColorModeValue("green.500", "green.300");
+  const linkColor = useColorModeValue("blue.600", "blue.300");
+  const linkHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
 
   return (
@@ -97,19 +102,19 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       </HStack>
       <HStack spacing={3} fontSize="xs" color={metaColor} mb={3} flexWrap="wrap">
         <HStack spacing={1}>
-          <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" />
+          <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
           <Text as="span">
             {lessons} материалов
           </Text>
         </HStack>
         <HStack spacing={1}>
-          <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" />
+          <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
           <Text as="span">
             {weeklyTasks} задач
           </Text>
         </HStack>
         <HStack spacing={1}>
-          <Icon as={FiCheckCircle} boxSize={3.5} aria-hidden="true" />
+          <Icon as={FiCheckCircle} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
           <Text as="span">
             {reviews} ревью
           </Text>
@@ -119,12 +124,16 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       <Button
         size="sm"
         borderRadius="full"
-        variant="outline"
-        colorScheme="blue"
+        variant="ghost"
+        color={linkColor}
         mt={1}
         onClick={onOpenProfile}
+        rightIcon={<FiArrowRight />}
+        px={2}
+        _hover={{ bg: linkHoverBg, transform: "translateX(2px)" }}
+        _active={{ transform: "translateX(1px)" }}
       >
-        Профиль
+        Перейти
       </Button>
     </Box>
   );

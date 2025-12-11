@@ -106,18 +106,13 @@ const ContributionSection: React.FC = () => {
               py={3}
               bgGradient="linear(to-r, blue.400, blue.500)"
               color="white"
-              boxShadow="0 12px 30px rgba(37, 99, 235, 0.4)"
               display="inline-flex"
               alignItems="center"
               gap={2}
               _hover={{
                 bgGradient: "linear(to-r, blue.500, blue.600)",
-                transform: "translateY(-1px)",
-                boxShadow: "0 16px 36px rgba(37, 99, 235, 0.5)",
               }}
               _active={{
-                transform: "translateY(0)",
-                boxShadow: "0 8px 20px rgba(37, 99, 235, 0.45)",
               }}
               rightIcon={<FiArrowRight />}
             >

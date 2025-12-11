@@ -5,7 +5,7 @@ const baseCreators: Creator[] = [
     id: "nick-white",
     name: "Nick White",
     role: "maintainer",
-    avatar: undefined,
+    avatar: "https://avatars.githubusercontent.com/n1ckwhite",
     title: "Создатель AIFFA и куратор платформы",
     description:
       "Отвечает за вектор развития AIFFA, архитектуру модулей и Weekly‑формат. Делает так, чтобы обучение ощущалось как естественный рост, а не как скучный курс.",
@@ -29,13 +29,18 @@ const baseCreators: Creator[] = [
         label: "Telegram",
         href: "https://t.me/aiffa_hub",
       },
+      {
+        type: "github",
+        label: "GitHub",
+        href: "https://github.com/n1ckwhite",
+      },
     ],
   },
   {
     id: "petepearl",
     name: "PetePearl",
     role: "author",
-    avatar: undefined,
+    avatar: "https://avatars.githubusercontent.com/PetePearl",
     title: "Автор задач по фронтенду и дизайну",
     description:
       "Готовит задачи, в которых нужно не просто написать код, а сделать по‑настоящему живой интерфейс. Следит за тем, чтобы вы чувствовали вкус к деталям.",
@@ -53,7 +58,13 @@ const baseCreators: Creator[] = [
     },
     areas: ["materials", "weekly", "projects", "articles"],
     roleGroups: ["materialsAuthors", "weeklyAuthors"],
-    profileLinks: [],
+    profileLinks: [
+      {
+        type: "github",
+        label: "GitHub",
+        href: "https://github.com/PetePearl",
+      },
+    ],
   },
   {
     id: "community",
@@ -84,6 +95,96 @@ const baseCreators: Creator[] = [
       },
     ],
     roleGroups: ["mentorsReviewers", "hackathonParticipants", "supporters"],
+  },
+  {
+    id: "dan-abramov",
+    name: "Dan Abramov",
+    role: "author",
+    avatar: "https://avatars.githubusercontent.com/gaearon",
+    title: "Инженер и автор образовательных материалов",
+    description:
+      "Помогает разработчикам лучше понимать React и принципы современного фронтенда. Делает сложные концепции визуальными и доступными.",
+    badges: [
+      { id: "react", label: "React" },
+      { id: "education", label: "Обучение" },
+    ],
+    xp: 19800,
+    totalContributions: 44,
+    contributions: {
+      lessons: 60,
+      weeklyTasks: 18,
+      projects: 9,
+      reviews: 110,
+    },
+    areas: ["materials", "weekly", "projects", "articles"],
+    roleGroups: ["materialsAuthors", "weeklyAuthors"],
+    profileLinks: [
+      {
+        type: "github",
+        label: "GitHub",
+        href: "https://github.com/gaearon",
+      },
+    ],
+  },
+  {
+    id: "sindre",
+    name: "Sindre Sorhus",
+    role: "maintainer",
+    avatar: "https://avatars.githubusercontent.com/sindresorhus",
+    title: "Автор open‑source библиотек и инструментов",
+    description:
+      "Поддерживает десятки полезных пакетов, которые используют разработчики по всему миру. Показывает, как маленькие утилиты делают экосистему сильнее.",
+    badges: [
+      { id: "oss", label: "Open‑source" },
+      { id: "tools", label: "Инструменты" },
+    ],
+    xp: 22400,
+    totalContributions: 58,
+    contributions: {
+      lessons: 45,
+      weeklyTasks: 20,
+      projects: 14,
+      reviews: 160,
+    },
+    areas: ["materials", "projects", "support"],
+    roleGroups: ["maintainers", "supporters"],
+    profileLinks: [
+      {
+        type: "github",
+        label: "GitHub",
+        href: "https://github.com/sindresorhus",
+      },
+    ],
+  },
+  {
+    id: "evan-you",
+    name: "Evan You",
+    role: "mentor",
+    avatar: "https://avatars.githubusercontent.com/yyx990803",
+    title: "Создатель Vue и ментор фронтенд‑сообщества",
+    description:
+      "Показывает, как построить современный фронтенд‑стек и оставаться внимательным к DX. Делится опытом создания фреймворков и экосистемы вокруг них.",
+    badges: [
+      { id: "vue", label: "Vue" },
+      { id: "mentor", label: "Менторство" },
+    ],
+    xp: 21000,
+    totalContributions: 50,
+    contributions: {
+      lessons: 55,
+      weeklyTasks: 16,
+      projects: 11,
+      reviews: 140,
+    },
+    areas: ["materials", "projects", "hackathons"],
+    roleGroups: ["mentorsReviewers", "hackathonParticipants"],
+    profileLinks: [
+      {
+        type: "github",
+        label: "GitHub",
+        href: "https://github.com/yyx990803",
+      },
+    ],
   },
 ];
 

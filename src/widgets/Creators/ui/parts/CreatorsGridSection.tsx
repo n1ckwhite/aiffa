@@ -11,9 +11,11 @@ import {
   MenuItem,
   MenuList,
   IconButton,
+  Icon,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FiUserPlus, FiFilter, FiCheck } from "react-icons/fi";
+import { FiUserPlus, FiFilter, FiCheck, FiClock, FiCalendar, FiTrendingUp } from "react-icons/fi";
+import type { IconType } from "react-icons";
 import FilterBar from "shared/ui/FilterBar";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import { useCreatorsFilter } from "../hooks/useCreatorsFilter";
@@ -29,6 +31,13 @@ const TIME_RANGE_ITEMS: { value: TimeRangeValue; label: string }[] = [
   { value: "year", label: "За год" },
   { value: "all", label: "За всё время" },
 ];
+
+const TIME_RANGE_BADGE_ICONS: Record<TimeRangeValue, IconType> = {
+  week: FiClock,
+  month: FiCalendar,
+  year: FiTrendingUp,
+  all: FiTrendingUp,
+};
 
 const CreatorsGridSection: React.FC = () => {
   const { items } = useCreatorsData();
@@ -64,6 +73,10 @@ const CreatorsGridSection: React.FC = () => {
   const filterHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
   const filterHoverBorder = useColorModeValue("blue.200", "blue.300");
   const isDefaultTimeRange = timeRange === "all";
+  const badgeBg = useColorModeValue("white", "gray.900");
+  const badgeBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.300");
+  const badgeIconColor = useColorModeValue("green.500", "green.300");
+  const TimeRangeBadgeIcon = TIME_RANGE_BADGE_ICONS[timeRange];
 
   return (
     <Box as="section" aria-label="Команда создателей AIFFA">
@@ -113,7 +126,7 @@ const CreatorsGridSection: React.FC = () => {
             ariaLabel="Фильтр по ролям создателей"
           />
         </Box>
-        <Box flexShrink={0}>
+        <Box flexShrink={0} position="relative">
           <Menu>
             <MenuButton
               as={IconButton}
@@ -177,6 +190,22 @@ const CreatorsGridSection: React.FC = () => {
               ))}
             </MenuList>
           </Menu>
+          <Box
+            position="absolute"
+            top={-1.5}
+            right={-1.5}
+            w={5}
+            h={5}
+            borderRadius="full"
+            bg={badgeBg}
+            borderWidth="1px"
+            borderColor={badgeBorder}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Icon as={TimeRangeBadgeIcon} boxSize={3} aria-hidden="true" color={badgeIconColor} />
+          </Box>
         </Box>
       </Box>
       <SimpleGrid

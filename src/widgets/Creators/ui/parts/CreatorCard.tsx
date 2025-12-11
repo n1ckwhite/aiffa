@@ -92,6 +92,10 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       borderColor={cardBorder}
       borderRadius="2xl"
       p={{ base: 3, md: 4 }}
+      w="full"
+      maxW={{ base: "100%", md: "360px" }}
+      minW={{ md: "320px" }}
+      mx="auto"
       bg={cardBg}
     >
       <HStack justify="space-between" align="center" mb={2}>

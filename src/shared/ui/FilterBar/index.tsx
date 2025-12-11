@@ -1,10 +1,13 @@
 import React from "react";
-import { Box, HStack, useColorModeValue } from "@chakra-ui/react";
+import { Box, HStack, Icon, Text, useColorModeValue } from "@chakra-ui/react";
+import type { IconType } from "react-icons";
 import HorizontalScroll from "shared/ui/HorizontalScroll";
 
 export type FilterBarItem<T extends string = string> = {
   value: T;
   label: string;
+  icon?: IconType;
+  accentColor?: string;
 };
 
 export type FilterBarProps<T extends string = string> = {
@@ -20,7 +23,10 @@ const FilterBar = <T extends string = string>({
   onChange,
   ariaLabel = "Фильтр",
 }: FilterBarProps<T>) => {
-  const activeBg = useColorModeValue("blue.50", "whiteAlpha.100");
+  const activeBg = useColorModeValue(
+    "linear-gradient(135deg, rgba(59,130,246,0.08), rgba(129,140,248,0.14))",
+    "linear-gradient(135deg, rgba(148,163,184,0.18), rgba(59,130,246,0.32))",
+  );
   const activeBorder = useColorModeValue("blue.500", "blue.300");
   const activeColor = useColorModeValue("blue.700", "blue.200");
 
@@ -44,12 +50,18 @@ const FilterBar = <T extends string = string>({
         spacing={2}
         minW="max-content"
         align="stretch"
+        justify="center"
         px={0.5}
+        mx="auto"
         role="tablist"
         aria-label={ariaLabel}
       >
         {items.map((item) => {
           const isActive = item.value === activeValue;
+          const accent = item.accentColor ?? activeColor;
+          const iconActiveColor = accent;
+          const iconIdleColor = useColorModeValue("gray.400", "gray.500");
+          const labelColor = isActive ? useColorModeValue("gray.900", "gray.100") : idleColor;
 
           return (
             <Box
@@ -73,9 +85,9 @@ const FilterBar = <T extends string = string>({
               whiteSpace="nowrap"
               bg={isActive ? activeBg : idleBg}
               borderColor={isActive ? activeBorder : idleBorder}
-              color={isActive ? activeColor : idleColor}
-              boxShadow="none"
-              transition="background-color 0.16s ease-out, border-color 0.16s ease-out, color 0.16s ease-out, transform 0.08s ease-out"
+              color={labelColor}
+              boxShadow={isActive ? "0 4px 10px rgba(15,23,42,0.12)" : "none"}
+              transition="background-color 0.16s ease-out, border-color 0.16s ease-out, color 0.16s ease-out, box-shadow 0.18s ease-out, transform 0.08s ease-out"
               _hover={{
                 bg: isActive ? activeBg : idleHoverBg,
                 borderColor: isActive ? activeBorder : idleHoverBorder,
@@ -85,7 +97,17 @@ const FilterBar = <T extends string = string>({
                 transform: "translateY(0)",
               }}
             >
-              {item.label}
+              <HStack as="span" spacing={1} align="center">
+                {item.icon && (
+                  <Icon
+                    as={item.icon}
+                    boxSize={3}
+                    aria-hidden="true"
+                    color={isActive ? iconActiveColor : iconIdleColor}
+                  />
+                )}
+                <Text as="span">{item.label}</Text>
+              </HStack>
             </Box>
           );
         })}

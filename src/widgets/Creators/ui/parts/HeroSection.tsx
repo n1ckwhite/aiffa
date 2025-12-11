@@ -1,56 +1,107 @@
 import React from "react";
-import { Box, Heading, Text, Stack, VStack, Button, useColorModeValue } from "@chakra-ui/react";
+import { Box, Heading, Text, Stack, VStack, useColorModeValue } from "@chakra-ui/react";
 import PersonLottieIcon from "@/shared/icons/components-icon/PersonLottieIcon";
 
 const HeroSection: React.FC = () => {
-  const primaryTextColor = useColorModeValue("gray.600", "gray.200");
-  const secondaryTextColor = useColorModeValue("gray.500", "gray.300");
-
-  const handleScrollToContribution = React.useCallback(() => {
-    const target = document.getElementById("creators-contribution");
-    if (!target) {
-      return;
-    }
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
+  const primaryTextColor = useColorModeValue("gray.100", "gray.100");
+  const secondaryTextColor = useColorModeValue("gray.200", "gray.300");
+  const cardBgGradient = useColorModeValue(
+    "linear(to-br, rgba(15,23,42,0.98), rgba(59,130,246,0.9))",
+    "linear(to-br, rgba(15,23,42,1), rgba(30,64,175,0.9))",
+  );
+  const cardBorderColor = useColorModeValue("whiteAlpha.200", "whiteAlpha.200");
 
   return (
     <Box as="section" aria-label="Создатели AIFFA">
-      <Stack
-        direction={{ base: "column", md: "row" }}
-        spacing={{ base: 6, md: 10 }}
-        align={{ base: "stretch", md: "center" }}
+      <Box
+        position="relative"
+        overflow="hidden"
+        bgGradient={cardBgGradient}
+        borderRadius="3xl"
+        borderWidth="1px"
+        borderColor={cardBorderColor}
+        px={{ base: 5, md: 7 }}
+        py={{ base: 5, md: 7 }}
       >
-        <VStack align="flex-start" spacing={4} flex={1}>
-          <Heading as="h1" size="xl" letterSpacing="-0.04em">
-            Создатели
-          </Heading>
-          <Text fontSize={{ base: "md", md: "lg" }} color={primaryTextColor} lineHeight={1.8}>
-            Люди, которые делают AIFFA лучше каждый день.
-          </Text>
-          <Text fontSize="sm" color={secondaryTextColor} lineHeight={1.8}>
-            AIFFA — это не просто материалы. Это вклад сотен людей: авторов задач, создателей проектов, участников
-            хакатонов, менторов и тех, кто поддерживает идею. Попасть сюда может каждый.
-          </Text>
-          <Button
-            onClick={handleScrollToContribution}
-            mt={1}
-            size="sm"
-            borderRadius="full"
-            colorScheme="blue"
-            variant="solid"
-          >
-            Как стать создателем
-          </Button>
-        </VStack>
         <Box
-          flex={{ base: "none", md: 1 }}
-          maxW={{ base: "280px", md: "360px" }}
-          mx={{ base: "auto", md: 0 }}
+          position="absolute"
+          inset="-40px"
+          opacity={0.6}
+          filter="blur(42px)"
+          pointerEvents="none"
         >
-          <PersonLottieIcon />
+          <Box
+            position="absolute"
+            top={{ base: "55%", md: "25%" }}
+            left="-10%"
+            w={{ base: "220px", md: "260px" }}
+            h={{ base: "220px", md: "260px" }}
+            bgGradient="radial(circle at 50% 50%, rgba(59,130,246,0.75), transparent 70%)"
+          />
+          <Box
+            position="absolute"
+            bottom="-15%"
+            right="-5%"
+            w={{ base: "260px", md: "320px" }}
+            h={{ base: "260px", md: "320px" }}
+            bgGradient="radial(circle at 50% 50%, rgba(129,140,248,0.75), transparent 70%)"
+          />
         </Box>
-      </Stack>
+
+        <Stack
+          direction={{ base: "column", md: "row" }}
+          spacing={{ base: 5, md: 8 }}
+          align={{ base: "flex-start", md: "center" }}
+          position="relative"
+          zIndex={1}
+        >
+          <VStack align="flex-start" spacing={3} flex={1}>
+            <Box>
+              <Text
+                fontSize={{ base: "xs", md: "sm" }}
+                textTransform="uppercase"
+                letterSpacing="0.08em"
+                color={secondaryTextColor}
+                mb={1}
+              >
+                Команда создателей
+              </Text>
+              <Heading
+                as="h1"
+                size="xl"
+                letterSpacing="-0.04em"
+                color="white"
+              >
+                Создатели AIFFA
+              </Heading>
+            </Box>
+            <Text
+              fontSize={{ base: "md", md: "xl" }}
+              fontWeight="semibold"
+              color={primaryTextColor}
+              lineHeight={1.5}
+            >
+              Люди, которые делают AIFFA лучше каждый день.
+            </Text>
+            <Text
+              fontSize={{ base: "xs", md: "sm" }}
+              color={secondaryTextColor}
+              lineHeight={1.9}
+              maxW={{ base: "full", md: "520px" }}
+            >
+              AIFFA — это не просто материалы. Это вклад сотен людей: авторов задач, создателей проектов, участников
+              хакатонов, менторов и тех, кто поддерживает идею. Попасть сюда может каждый.
+            </Text>
+          </VStack>
+          <Box
+            flex={{ base: "none", md: 1 }}
+            maxW={{ base: "240px", md: "320px" }}
+            mx={{ base: "auto", md: 0 }}
+          >
+            <PersonLottieIcon />
+          </Box>
+        </Stack>
+      </Box>
     </Box>
   );
 };

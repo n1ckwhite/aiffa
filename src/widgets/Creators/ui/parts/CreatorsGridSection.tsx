@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Heading, SimpleGrid, Text, VStack, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Heading, SimpleGrid, Text, VStack, useColorModeValue } from "@chakra-ui/react";
+import { FiUserPlus } from "react-icons/fi";
 import FilterBar from "shared/ui/FilterBar";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import { useCreatorsFilter } from "../hooks/useCreatorsFilter";
@@ -22,15 +23,48 @@ const CreatorsGridSection: React.FC = () => {
   );
   const pagedItems = filteredItems.slice(start, end);
   const subtitleColor = useColorModeValue("gray.600", "gray.300");
+  const buttonColor = useColorModeValue("blue.600", "blue.300");
 
   return (
     <Box as="section" aria-label="Команда создателей AIFFA">
       <Heading as="h2" size="md" mb={2} letterSpacing="-0.02em" textAlign="center">
-      Люди, которые развивают AIFFA.
+        Люди, которые развивают AIFFA.
       </Heading>
-      <Text fontSize="sm" color={subtitleColor} textAlign="center" mb={4}>
-      Выберите создателей по роли — находите тех, кто делает платформу сильнее.
+      <Text fontSize="sm" color={subtitleColor} textAlign="center" mb={2}>
+        Выберите создателей по роли — находите тех, кто делает платформу сильнее.
       </Text>
+      <Box textAlign="center" mb={4}>
+        <Button
+          onClick={() => {
+            const target = document.getElementById("creators-contribution");
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }}
+          borderRadius="full"
+          mt={1}
+          fontSize="sm"
+          fontWeight="semibold"
+          px={4}
+          py={2}
+          bgGradient="linear(to-r, blue.400, blue.500)"
+          color="white"
+          boxShadow="0 10px 25px rgba(37, 99, 235, 0.35)"
+          transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+          leftIcon={<FiUserPlus />}
+          _hover={{
+            bgGradient: "linear(to-r, blue.500, blue.600)",
+            transform: "translateY(-1px)",
+            boxShadow: "0 14px 30px rgba(37, 99, 235, 0.45)",
+          }}
+          _active={{
+            transform: "translateY(0)",
+            boxShadow: "0 6px 18px rgba(30, 64, 175, 0.4)",
+          }}
+        >
+          Как стать создателем
+        </Button>
+      </Box>
       <VStack align="stretch" spacing={2} mb={1}>
         <FilterBar
           activeValue={roleFilter}

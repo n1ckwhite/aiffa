@@ -132,7 +132,17 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       </HStack>
 
       <HStack align="center" spacing={3} mb={2}>
-        <Avatar size="sm" name={name} src={avatar} />
+        <Box position="relative">
+          <Box
+            position="absolute"
+            inset={-1}
+            borderRadius="full"
+            borderWidth="2px"
+            borderColor={rankBorder}
+            opacity={0.85}
+          />
+          <Avatar size="sm" name={name} src={avatar} position="relative" />
+        </Box>
         <VStack align="flex-start" spacing={0.5}>
           <Text fontSize="lg" fontWeight="semibold" letterSpacing="-0.02em" color={primaryTextColor}>
             {name}

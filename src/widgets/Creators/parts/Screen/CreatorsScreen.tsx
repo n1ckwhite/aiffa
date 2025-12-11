@@ -6,7 +6,7 @@ import TimeRangeSection from "../../ui/parts/TimeRangeSection";
 import ContributionSection from "../../ui/parts/ContributionSection";
 
 const CreatorsScreen: React.FC = () => {
-  const pageDescriptionColor = useColorModeValue("gray.400", "gray.300");
+  const pageDescriptionColor = useColorModeValue("gray.600", "gray.300");
 
   return (
     <Box
@@ -17,7 +17,7 @@ const CreatorsScreen: React.FC = () => {
       px={{ base: 4, md: 6 }}
       transition="none"
     >
-      <Box maxW="1200px" mx="auto">
+      <Box maxW="1320px" mx="auto">
         <VStack align="stretch" spacing={{ base: 8, md: 10 }}>
           <Box as="section" aria-label="Описание страницы создателей AIFFA">
             <VStack

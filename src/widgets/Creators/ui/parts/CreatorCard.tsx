@@ -100,15 +100,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     { light: "orange.500", dark: "orange.300" },
   ] as const;
 
-  const cardAccentPalettes = [
-    { light: "purple.100", dark: "purple.900" },
-    { light: "green.100", dark: "green.900" },
-    { light: "teal.100", dark: "teal.900" },
-    { light: "blue.100", dark: "blue.900" },
-    { light: "pink.100", dark: "pink.900" },
-    { light: "orange.100", dark: "orange.900" },
-  ] as const;
-
   const avatarIndex = React.useMemo(() => {
     if (!name) return 0;
     const sum = Array.from(name).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
@@ -119,10 +110,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     avatarPalettes[avatarIndex].light,
     avatarPalettes[avatarIndex].dark,
   );
-  const cardAccentBg = useColorModeValue(
-    cardAccentPalettes[avatarIndex].light,
-    cardAccentPalettes[avatarIndex].dark,
-  );
+  const cardAccentBg = useColorModeValue("rgba(15,23,42,0.04)", "rgba(15,23,42,0.55)");
   const isTop3 = index <= 3;
 
   return (
@@ -132,9 +120,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       borderRadius="2xl"
       p={{ base: 3, md: 4 }}
       w="full"
-      maxW={{ base: "100%", md: "360px" }}
-      minW={{ md: "320px" }}
-      mx="auto"
       bg={cardBg}
       position="relative"
       overflow="hidden"
@@ -150,7 +135,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         position="absolute"
         inset={0}
         bgGradient={`linear(to-br, ${cardAccentBg}, transparent 65%)`}
-        opacity={isTop3 ? 0.4 : 0.18}
+        opacity={isTop3 ? 0.22 : 0.12}
         pointerEvents="none"
       />
       <Box position="relative">

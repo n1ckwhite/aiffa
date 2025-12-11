@@ -10,9 +10,10 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  IconButton,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FiUserPlus, FiChevronDown } from "react-icons/fi";
+import { FiUserPlus, FiChevronDown, FiFilter, FiCheck } from "react-icons/fi";
 import FilterBar from "shared/ui/FilterBar";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import { useCreatorsFilter } from "../hooks/useCreatorsFilter";
@@ -45,11 +46,20 @@ const CreatorsGridSection: React.FC = () => {
   const pagedItems = filteredItems.slice(start, end);
   const subtitleColor = useColorModeValue("gray.600", "gray.300");
   const buttonColor = useColorModeValue("blue.600", "blue.300");
-  const [timeRange, setTimeRange] = React.useState<TimeRangeValue>("month");
+  const [timeRange, setTimeRange] = React.useState<TimeRangeValue>("all");
   const menuBg = useColorModeValue("white", "gray.800");
   const menuBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const menuHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.200");
   const menuTextColor = useColorModeValue("gray.800", "gray.100");
+  const activeMenuBg = useColorModeValue("blue.50", "whiteAlpha.100");
+  const activeMenuBorder = useColorModeValue("blue.300", "blue.300");
+  const filterIdleBg = useColorModeValue("whiteAlpha.10", "whiteAlpha.50");
+  const filterActiveBg = useColorModeValue("rgba(59,130,246,0.16)", "rgba(59,130,246,0.28)");
+  const filterIdleBorder = useColorModeValue("whiteAlpha.300", "whiteAlpha.300");
+  const filterActiveBorder = useColorModeValue("blue.400", "blue.300");
+  const filterIdleIcon = useColorModeValue("gray.400", "gray.400");
+  const filterActiveIcon = useColorModeValue("blue.400", "blue.200");
+  const isDefaultTimeRange = timeRange === "all";
 
   return (
     <Box as="section" aria-label="Команда создателей AIFFA">
@@ -101,16 +111,27 @@ const CreatorsGridSection: React.FC = () => {
         <Box display="flex" justifyContent="center">
           <Menu>
             <MenuButton
-              as={Button}
-              size="xs"
-              borderRadius="full"
+              as={IconButton}
+              aria-label="Фильтр по периоду времени"
+              icon={<FiFilter />}
+              size="sm"
+              borderRadius="md"
               variant="outline"
-              rightIcon={<FiChevronDown />}
-              px={4}
-              py={1.5}
-            >
-              {TIME_RANGE_ITEMS.find((item) => item.value === timeRange)?.label ?? "За месяц"}
-            </MenuButton>
+              borderWidth="1px"
+              bg={isDefaultTimeRange ? filterIdleBg : filterActiveBg}
+              borderColor={isDefaultTimeRange ? filterIdleBorder : filterActiveBorder}
+              color={isDefaultTimeRange ? filterIdleIcon : filterActiveIcon}
+              w={9}
+              h={9}
+              _hover={{
+                bg: isDefaultTimeRange ? filterIdleBg : filterActiveBg,
+                borderColor: filterActiveBorder,
+                color: filterActiveIcon,
+              }}
+              _active={{
+                bg: filterActiveBg,
+              }}
+            />
             <MenuList
               bg={menuBg}
               borderColor={menuBorder}
@@ -123,10 +144,30 @@ const CreatorsGridSection: React.FC = () => {
                   onClick={() => setTimeRange(item.value)}
                   fontSize="sm"
                   color={menuTextColor}
-                  _hover={{ bg: menuHoverBg }}
+                  borderRadius="md"
+                  mt={0.5}
+                  mb={0.5}
+                  px={3}
+                  py={2}
+                  bg={item.value === timeRange ? activeMenuBg : "transparent"}
+                  borderWidth={item.value === timeRange ? "1px" : "0"}
+                  borderColor={item.value === timeRange ? activeMenuBorder : "transparent"}
+                  _hover={{
+                    bg: item.value === timeRange ? activeMenuBg : menuHoverBg,
+                  }}
                   fontWeight={item.value === timeRange ? "semibold" : "normal"}
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
                 >
                   {item.label}
+                  {item.value === timeRange && (
+                    <FiCheck
+                      aria-hidden="true"
+                      size={16}
+                      style={{ marginLeft: 8, color: "#22c55e" }}
+                    />
+                  )}
                 </MenuItem>
               ))}
             </MenuList>

@@ -59,8 +59,7 @@ const FilterBar = <T extends string = string>({
         {items.map((item) => {
           const isActive = item.value === activeValue;
           const accent = item.accentColor ?? activeColor;
-          const iconActiveColor = accent;
-          const iconIdleColor = useColorModeValue("gray.400", "gray.500");
+          const iconColor = accent;
           const labelColor = isActive ? useColorModeValue("gray.900", "gray.100") : idleColor;
 
           return (
@@ -103,7 +102,7 @@ const FilterBar = <T extends string = string>({
                     as={item.icon}
                     boxSize={3}
                     aria-hidden="true"
-                    color={isActive ? iconActiveColor : iconIdleColor}
+                    color={iconColor}
                   />
                 )}
                 <Text as="span">{item.label}</Text>

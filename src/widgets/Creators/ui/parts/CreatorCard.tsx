@@ -124,7 +124,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
             {name}
           </Text>
           <HStack spacing={1}>
-            <Icon as={RoleIcon} boxSize={3.5} aria-hidden="true" color={roleColor} />
             <Box
               as="span"
               px={2}
@@ -136,8 +135,12 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
               fontSize="xs"
               fontWeight="semibold"
               color={roleColor}
+              display="inline-flex"
+              alignItems="center"
+              gap={1}
             >
-              {roleLabelMap[role]}
+              <Icon as={RoleIcon} boxSize={3} aria-hidden="true" />
+              <Text as="span">{roleLabelMap[role]}</Text>
             </Box>
           </HStack>
         </VStack>

@@ -84,6 +84,11 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const roleBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const xpBg = useColorModeValue("purple.50", "whiteAlpha.100");
   const xpBorder = useColorModeValue("purple.200", "purple.400");
+  const cardHoverBg = useColorModeValue("white", "whiteAlpha.100");
+  const cardShadow = useColorModeValue(
+    "0 10px 30px rgba(15,23,42,0.10)",
+    "0 14px 40px rgba(0,0,0,0.65)",
+  );
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
 
   return (
@@ -97,6 +102,15 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       minW={{ md: "320px" }}
       mx="auto"
       bg={cardBg}
+      position="relative"
+      overflow="hidden"
+      transition="background-color 0.18s ease-out, box-shadow 0.2s ease-out, transform 0.16s ease-out, border-color 0.16s ease-out"
+      _hover={{
+        bg: cardHoverBg,
+        boxShadow: cardShadow,
+        transform: "translateY(-3px)",
+        borderColor: rankBorder,
+      }}
     >
       <HStack justify="space-between" align="center" mb={2}>
         <HStack spacing={2}>

@@ -149,19 +149,28 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         <HStack spacing={1}>
           <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
           <Text as="span">
-            {lessons} материалов
+            {lessons}{" "}
+            <Text as="span" fontWeight="semibold">
+              материалов
+            </Text>
           </Text>
         </HStack>
         <HStack spacing={1}>
           <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
           <Text as="span">
-            {weeklyTasks} задач
+            {weeklyTasks}{" "}
+            <Text as="span" fontWeight="semibold">
+              задач
+            </Text>
           </Text>
         </HStack>
         <HStack spacing={1}>
           <Icon as={FiCheckCircle} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
           <Text as="span">
-            {reviews} ревью
+            {reviews}{" "}
+            <Text as="span" fontWeight="semibold">
+              ревью
+            </Text>
           </Text>
         </HStack>
       </HStack>

@@ -1,6 +1,18 @@
 import React from "react";
 import { Box, HStack, VStack, Text, Avatar, Button, Icon, useColorModeValue } from "@chakra-ui/react";
-import { FiBookOpen, FiTarget, FiCheckCircle, FiAward, FiArrowRight } from "react-icons/fi";
+import {
+  FiBookOpen,
+  FiTarget,
+  FiCheckCircle,
+  FiAward,
+  FiArrowRight,
+  FiZap,
+  FiShield,
+  FiFileText,
+  FiUser,
+  FiUserCheck,
+} from "react-icons/fi";
+import type { IconType } from "react-icons";
 import type { Creator } from "../../model/types";
 
 type CreatorCardProps = {
@@ -14,6 +26,13 @@ const roleLabelMap: Record<Creator["role"], string> = {
   mentor: "Ментор",
   reviewer: "Ревьюер",
   maintainer: "Мейнтейнер",
+};
+
+const roleIconMap: Record<Creator["role"], IconType> = {
+  author: FiFileText,
+  mentor: FiUser,
+  reviewer: FiUserCheck,
+  maintainer: FiShield,
 };
 
 const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile }) => {
@@ -51,6 +70,18 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const reviewsIconColor = useColorModeValue("green.500", "green.300");
   const linkColor = useColorModeValue("blue.600", "blue.300");
   const linkHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
+  const xpIconColor = useColorModeValue("purple.500", "purple.300");
+  const roleColors = {
+    author: { light: "orange.500", dark: "orange.300" },
+    mentor: { light: "teal.500", dark: "teal.300" },
+    reviewer: { light: "purple.500", dark: "purple.300" },
+    maintainer: { light: "blue.600", dark: "blue.300" },
+  } as const;
+  const currentRoleColors = roleColors[role];
+  const roleColor = useColorModeValue(currentRoleColors.light, currentRoleColors.dark);
+  const RoleIcon = roleIconMap[role];
+  const xpBg = useColorModeValue("purple.50", "whiteAlpha.100");
+  const xpBorder = useColorModeValue("purple.200", "purple.400");
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
 
   return (
@@ -86,18 +117,32 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           <Text fontSize="lg" fontWeight="semibold" letterSpacing="-0.02em" color={primaryTextColor}>
             {name}
           </Text>
-          <Text fontSize="sm" color={metaColor}>
-            Роль: {roleLabelMap[role]}
-          </Text>
+          <HStack spacing={1}>
+            <Icon as={RoleIcon} boxSize={3.5} aria-hidden="true" color={roleColor} />
+            <Text fontSize="sm" color={metaColor}>
+              {roleLabelMap[role]}
+            </Text>
+          </HStack>
         </VStack>
       </HStack>
 
       <HStack spacing={4} mb={1} fontSize="xs" color={metaColor}>
         <HStack spacing={1}>
-          <Text as="span">XP:</Text>
-          <Text as="span" fontWeight="semibold" color={primaryTextColor}>
+          <Icon as={FiZap} boxSize={3.5} aria-hidden="true" color={xpIconColor} />
+          <Text as="span">XP</Text>
+          <Box
+            as="span"
+            px={2}
+            py={0.5}
+            borderRadius="full"
+            borderWidth="1px"
+            borderColor={xpBorder}
+            bg={xpBg}
+            fontWeight="semibold"
+            color={primaryTextColor}
+          >
             {xp.toLocaleString("ru-RU")}
-          </Text>
+          </Box>
         </HStack>
       </HStack>
       <HStack spacing={3} fontSize="xs" color={metaColor} mb={3} flexWrap="wrap">

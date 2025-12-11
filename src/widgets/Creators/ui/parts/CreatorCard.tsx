@@ -123,6 +123,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     cardAccentPalettes[avatarIndex].light,
     cardAccentPalettes[avatarIndex].dark,
   );
+  const isTop3 = index <= 3;
 
   return (
     <Box
@@ -140,16 +141,16 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       transition="background-color 0.18s ease-out, box-shadow 0.2s ease-out, transform 0.16s ease-out, border-color 0.16s ease-out"
       _hover={{
         bg: cardHoverBg,
-        boxShadow: cardShadow,
-        transform: "translateY(-3px)",
-        borderColor: rankBorder,
+        boxShadow: isTop3 ? cardShadow : "0 6px 18px rgba(15,23,42,0.06)",
+        transform: isTop3 ? "translateY(-3px)" : "translateY(-1px)",
+        borderColor: isTop3 ? rankBorder : cardBorder,
       }}
     >
       <Box
         position="absolute"
         inset={0}
         bgGradient={`linear(to-br, ${cardAccentBg}, transparent 65%)`}
-        opacity={0.35}
+        opacity={isTop3 ? 0.4 : 0.18}
         pointerEvents="none"
       />
       <Box position="relative">

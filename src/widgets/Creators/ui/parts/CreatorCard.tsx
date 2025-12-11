@@ -42,24 +42,19 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const cardBg = useColorModeValue("white", "whiteAlpha.50");
   const cardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
 
-  const goldBg = useColorModeValue("yellow.50", "yellow.900");
   const goldBorder = useColorModeValue("yellow.400", "yellow.300");
   const goldColor = useColorModeValue("yellow.700", "yellow.200");
 
-  const silverBg = useColorModeValue("purple.50", "purple.900");
   const silverBorder = useColorModeValue("purple.400", "purple.300");
   const silverColor = useColorModeValue("purple.700", "purple.200");
 
-  const bronzeBg = useColorModeValue("orange.50", "orange.900");
   const bronzeBorder = useColorModeValue("orange.400", "orange.300");
   const bronzeColor = useColorModeValue("orange.700", "orange.200");
 
-  const defaultBg = useColorModeValue("gray.50", "whiteAlpha.100");
   const defaultBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const defaultColor = useColorModeValue("gray.500", "gray.300");
 
-  const rankBg =
-    index === 1 ? goldBg : index === 2 ? silverBg : index === 3 ? bronzeBg : defaultBg;
+  const rankBg = useColorModeValue("whiteAlpha.700", "whiteAlpha.100");
   const rankBorder =
     index === 1 ? goldBorder : index === 2 ? silverBorder : index === 3 ? bronzeBorder : defaultBorder;
   const rankColor =
@@ -82,8 +77,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const RoleIcon = roleIconMap[role];
   const roleBg = useColorModeValue("white", "whiteAlpha.100");
   const roleBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
-  const xpBg = useColorModeValue("purple.50", "whiteAlpha.100");
-  const xpBorder = useColorModeValue("purple.200", "purple.400");
+  const xpBg = useColorModeValue("gray.50", "whiteAlpha.100");
+  const xpBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const cardHoverBg = useColorModeValue("white", "whiteAlpha.100");
   const cardShadow = useColorModeValue(
     "0 10px 30px rgba(15,23,42,0.10)",
@@ -110,7 +105,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     avatarPalettes[avatarIndex].light,
     avatarPalettes[avatarIndex].dark,
   );
-  const cardAccentBg = useColorModeValue("rgba(15,23,42,0.04)", "rgba(15,23,42,0.55)");
   const isTop3 = index <= 3;
 
   return (
@@ -131,13 +125,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         borderColor: isTop3 ? rankBorder : cardBorder,
       }}
     >
-      <Box
-        position="absolute"
-        inset={0}
-        bgGradient={`linear(to-br, ${cardAccentBg}, transparent 65%)`}
-        opacity={isTop3 ? 0.22 : 0.12}
-        pointerEvents="none"
-      />
       <Box position="relative">
         <HStack justify="space-between" align="center" mb={2}>
           <HStack spacing={2}>

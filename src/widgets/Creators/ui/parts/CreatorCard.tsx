@@ -91,6 +91,26 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   );
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
 
+  const avatarPalettes = [
+    { light: "purple.600", dark: "purple.300" },
+    { light: "green.600", dark: "green.300" },
+    { light: "teal.600", dark: "teal.300" },
+    { light: "blue.600", dark: "blue.300" },
+    { light: "pink.600", dark: "pink.300" },
+    { light: "orange.500", dark: "orange.300" },
+  ] as const;
+
+  const avatarIndex = React.useMemo(() => {
+    if (!name) return 0;
+    const sum = Array.from(name).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+    return sum % avatarPalettes.length;
+  }, [name]);
+
+  const avatarBg = useColorModeValue(
+    avatarPalettes[avatarIndex].light,
+    avatarPalettes[avatarIndex].dark,
+  );
+
   return (
     <Box
       borderWidth="1px"
@@ -138,10 +158,17 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
             inset={-1}
             borderRadius="full"
             borderWidth="2px"
-            borderColor={rankBorder}
-            opacity={0.85}
+            borderColor={avatarBg}
+            opacity={0.9}
           />
-          <Avatar size="sm" name={name} src={avatar} position="relative" />
+          <Avatar
+            size="sm"
+            name={name}
+            src={avatar}
+            position="relative"
+            bg={avatarBg}
+            color="white"
+          />
         </Box>
         <VStack align="flex-start" spacing={0.5}>
           <Text fontSize="lg" fontWeight="semibold" letterSpacing="-0.02em" color={primaryTextColor}>

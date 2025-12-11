@@ -127,8 +127,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
 
   return (
     <Box
-      borderWidth="1px"
-      borderColor={cardBorder}
+      borderWidth={isTop3 ? "2px" : "1px"}
+      borderColor={isTop3 ? rankBorder : cardBorder}
       borderRadius="2xl"
       p={{ base: 3, md: 4 }}
       w="full"

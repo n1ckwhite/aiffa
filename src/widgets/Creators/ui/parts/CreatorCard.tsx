@@ -80,6 +80,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const currentRoleColors = roleColors[role];
   const roleColor = useColorModeValue(currentRoleColors.light, currentRoleColors.dark);
   const RoleIcon = roleIconMap[role];
+  const roleBg = useColorModeValue("white", "whiteAlpha.100");
+  const roleBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const xpBg = useColorModeValue("purple.50", "whiteAlpha.100");
   const xpBorder = useColorModeValue("purple.200", "purple.400");
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
@@ -119,9 +121,20 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           </Text>
           <HStack spacing={1}>
             <Icon as={RoleIcon} boxSize={3.5} aria-hidden="true" color={roleColor} />
-            <Text fontSize="sm" color={metaColor}>
+            <Box
+              as="span"
+              px={2}
+              py={0.5}
+              borderRadius="full"
+              borderWidth="1px"
+              borderColor={roleBorder}
+              bg={roleBg}
+              fontSize="xs"
+              fontWeight="semibold"
+              color={roleColor}
+            >
               {roleLabelMap[role]}
-            </Text>
+            </Box>
           </HStack>
         </VStack>
       </HStack>

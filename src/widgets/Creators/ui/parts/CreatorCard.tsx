@@ -91,10 +91,10 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       borderWidth="1px"
       borderColor={cardBorder}
       borderRadius="2xl"
-      p={{ base: 4, md: 5 }}
+      p={{ base: 3, md: 4 }}
       bg={cardBg}
     >
-      <HStack justify="space-between" align="center" mb={3}>
+      <HStack justify="space-between" align="center" mb={2}>
         <HStack spacing={2}>
           <Icon as={FiAward} boxSize={4} color={rankColor} aria-hidden="true" />
           <HStack
@@ -113,8 +113,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         </HStack>
       </HStack>
 
-      <HStack align="center" spacing={4} mb={3}>
-        <Avatar size="md" name={name} src={avatar} />
+      <HStack align="center" spacing={3} mb={2}>
+        <Avatar size="sm" name={name} src={avatar} />
         <VStack align="flex-start" spacing={0.5}>
           <Text fontSize="lg" fontWeight="semibold" letterSpacing="-0.02em" color={primaryTextColor}>
             {name}
@@ -139,7 +139,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         </VStack>
       </HStack>
 
-      <HStack spacing={4} mb={1} fontSize="xs" color={metaColor}>
+      <HStack spacing={3} mb={1} fontSize="xs" color={metaColor}>
         <HStack spacing={1}>
           <Icon as={FiZap} boxSize={3.5} aria-hidden="true" color={xpIconColor} />
           <Text as="span">XP</Text>
@@ -158,7 +158,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           </Box>
         </HStack>
       </HStack>
-      <HStack spacing={3} fontSize="xs" color={metaColor} mb={3} flexWrap="wrap">
+      <HStack spacing={2} fontSize="xs" color={metaColor} mb={2} flexWrap="wrap">
         <HStack spacing={1}>
           <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
           <Text as="span">
@@ -188,20 +188,22 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         </HStack>
       </HStack>
 
-      <Button
-        size="sm"
-        borderRadius="full"
-        variant="ghost"
-        color={linkColor}
-        mt={1}
-        onClick={onOpenProfile}
-        rightIcon={<FiArrowRight />}
-        px={2}
-        _hover={{ bg: linkHoverBg, transform: "translateX(2px)" }}
-        _active={{ transform: "translateX(1px)" }}
-      >
-        Перейти
-      </Button>
+      <HStack justify="flex-start">
+        <Button
+          size="xs"
+          borderRadius="full"
+          variant="ghost"
+          color={linkColor}
+          mt={0.5}
+          onClick={onOpenProfile}
+          rightIcon={<FiArrowRight />}
+          px={2}
+          _hover={{ bg: linkHoverBg, transform: "translateX(2px)" }}
+          _active={{ transform: "translateX(1px)" }}
+        >
+          Перейти
+        </Button>
+      </HStack>
     </Box>
   );
 };

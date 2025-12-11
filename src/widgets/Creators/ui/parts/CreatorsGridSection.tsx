@@ -26,10 +26,10 @@ const CreatorsGridSection: React.FC = () => {
   return (
     <Box as="section" aria-label="Команда создателей AIFFA">
       <Heading as="h2" size="md" mb={2} letterSpacing="-0.02em" textAlign="center">
-        Команда создателей
+      Люди, которые развивают AIFFA.
       </Heading>
       <Text fontSize="sm" color={subtitleColor} textAlign="center" mb={4}>
-        Рассмотрите создателей в разных ролях — выберите тех, с кем вам по пути в развитии AIFFA.
+      Выберите создателей по роли — находите тех, кто делает платформу сильнее.
       </Text>
       <VStack align="stretch" spacing={2} mb={1}>
         <FilterBar

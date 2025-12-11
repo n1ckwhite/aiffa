@@ -79,21 +79,15 @@ const CreatorsGridSection: React.FC = () => {
   const TimeRangeBadgeIcon = TIME_RANGE_BADGE_ICONS[timeRange];
 
   return (
-    <Box as="section" aria-label="Команда создателей AIFFA">
-      <Heading as="h2" size="md" mb={2} letterSpacing="-0.02em" textAlign="center">
+    <VStack align="stretch" spacing={5} as="section" aria-label="Команда создателей AIFFA">
+      <Heading as="h2" size="md" letterSpacing="-0.02em">
         Люди, которые развивают AIFFA.
       </Heading>
-      <Text fontSize="sm" color={subtitleColor} textAlign="center" mb={2}>
+      <Text fontSize="sm" color={subtitleColor}>
         Выберите создателей по роли — находите тех, кто делает платформу сильнее.
       </Text>
-      <Box textAlign="center" mb={4}>
+      <Box textAlign="center">
         <Button
-          onClick={() => {
-            const target = document.getElementById("creators-contribution");
-            if (target) {
-              target.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-          }}
           borderRadius="full"
           fontSize="sm"
           fontWeight="semibold"
@@ -242,7 +236,7 @@ const CreatorsGridSection: React.FC = () => {
           />
         </Box>
       )}
-    </Box>
+    </VStack>
   );
 };
 

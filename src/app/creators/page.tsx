@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
 };
 
-const CreatorsPage = () => {
+const CreatorsPage: React.FC = () => {
   return <CreatorsPageClient />;
 };
 

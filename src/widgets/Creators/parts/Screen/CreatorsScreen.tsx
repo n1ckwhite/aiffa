@@ -9,9 +9,7 @@ const CreatorsScreen: React.FC = () => {
 
   return (
     <Box
-      as="main"
-      role="main"
-      aria-label="Создатели AIFFA"
+      as="section"
       py={{ base: 8, md: 10 }}
       px={{ base: 4, md: 6 }}
       transition="none"
@@ -44,7 +42,7 @@ const CreatorsScreen: React.FC = () => {
             </VStack>
           </Box>
           <HeroSection />
-          <CreatorsGridSection />
+          {/* <CreatorsGridSection /> */}
           <ContributionSection />
         </VStack>
       </Box>

@@ -11,7 +11,7 @@ const BusinessManTelescop: React.FC = () => {
     <LazyLottieIcon
       animationData={businessManTelescopAnimation}
       boxProps={{
-        w: { base: "250px", md: "300px" },
+        w: { base: "200px", md: "300px" },
         aspectRatio: 1012 / 832,
         mx: "auto",
       }}
@@ -20,7 +20,7 @@ const BusinessManTelescop: React.FC = () => {
           src={businessManTelescopIcon}
           alt="Иконка команды бизнеса"
           width={300}
-          height={231}
+          height={300}
           sizes="350px"
           priority
         />

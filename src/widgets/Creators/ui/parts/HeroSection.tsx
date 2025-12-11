@@ -7,8 +7,8 @@ const HeroSection: React.FC = () => {
   const primaryTextColor = useColorModeValue("gray.100", "gray.100");
   const secondaryTextColor = useColorModeValue("gray.200", "gray.300");
   const cardBgGradient = useColorModeValue(
-    "linear(to-br, rgba(15,23,42,0.98), rgba(59,130,246,0.9))",
-    "linear(to-br, rgba(15,23,42,1), rgba(30,64,175,0.9))",
+    "linear(to-br, rgba(15,23,42,0.98), rgba(147,51,234,0.95))",
+    "linear(to-br, rgba(15,23,42,1), rgba(126,34,206,0.95))",
   );
   const cardBorderColor = useColorModeValue("whiteAlpha.200", "whiteAlpha.200");
 
@@ -37,7 +37,7 @@ const HeroSection: React.FC = () => {
             left="-10%"
             w={{ base: "220px", md: "260px" }}
             h={{ base: "220px", md: "260px" }}
-            bgGradient="radial(circle at 50% 50%, rgba(59,130,246,0.75), transparent 70%)"
+            bgGradient="radial(circle at 50% 50%, rgba(147,51,234,0.8), transparent 70%)"
           />
           <Box
             position="absolute"
@@ -45,18 +45,23 @@ const HeroSection: React.FC = () => {
             right="-5%"
             w={{ base: "260px", md: "320px" }}
             h={{ base: "260px", md: "320px" }}
-            bgGradient="radial(circle at 50% 50%, rgba(129,140,248,0.75), transparent 70%)"
+            bgGradient="radial(circle at 50% 50%, rgba(236,72,153,0.75), transparent 70%)"
           />
         </Box>
 
         <Stack
           direction={{ base: "column", md: "row" }}
           spacing={{ base: 5, md: 8 }}
-          align={{ base: "flex-start", md: "center" }}
+          align={{ base: "center", md: "center" }}
           position="relative"
           zIndex={1}
         >
-          <VStack align="flex-start" spacing={3} flex={1}>
+          <VStack
+            align={{ base: "center", md: "flex-start" }}
+            spacing={3}
+            flex={1}
+            textAlign={{ base: "center", md: "left" }}
+          >
             <Box>
               <Text
                 fontSize={{ base: "xs", md: "sm" }}

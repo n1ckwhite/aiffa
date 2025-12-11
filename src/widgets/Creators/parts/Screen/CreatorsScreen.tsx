@@ -18,7 +18,7 @@ const CreatorsScreen: React.FC = () => {
       transition="none"
     >
       <Box maxW="1200px" mx="auto">
-        <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
+        <VStack align="stretch" spacing={{ base: 8, md: 10 }}>
           <Box as="section" aria-label="Описание страницы создателей AIFFA">
             <VStack
               align="center"

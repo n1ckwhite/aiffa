@@ -84,17 +84,14 @@ const CreatorsGridSection: React.FC = () => {
           py={2}
           bgGradient="linear(to-r, blue.400, blue.500)"
           color="white"
-          boxShadow="0 10px 25px rgba(37, 99, 235, 0.35)"
-          transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+          transition="background 0.2s ease, transform 0.15s ease"
           leftIcon={<FiUserPlus />}
           _hover={{
             bgGradient: "linear(to-r, blue.500, blue.600)",
             transform: "translateY(-1px)",
-            boxShadow: "0 14px 30px rgba(37, 99, 235, 0.45)",
           }}
           _active={{
             transform: "translateY(0)",
-            boxShadow: "0 6px 18px rgba(30, 64, 175, 0.4)",
           }}
         >
           Как стать создателем

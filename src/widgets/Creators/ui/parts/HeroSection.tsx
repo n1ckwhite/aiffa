@@ -4,13 +4,21 @@ import PersonLottieIcon from "@/shared/icons/components-icon/PersonLottieIcon";
 import { BusinessManTelescop } from "@/shared/icons/components-icon";
 
 const HeroSection: React.FC = () => {
-  const primaryTextColor = useColorModeValue("gray.100", "gray.100");
-  const secondaryTextColor = useColorModeValue("gray.200", "gray.300");
+  const primaryTextColor = useColorModeValue("gray.800", "gray.100");
+  const secondaryTextColor = useColorModeValue("gray.600", "gray.300");
   const cardBgGradient = useColorModeValue(
-    "linear(to-br, rgba(15,23,42,0.98), rgba(147,51,234,0.95))",
+    "linear(to-br, blue.50, whiteAlpha.900)",
     "linear(to-br, rgba(15,23,42,1), rgba(126,34,206,0.95))",
   );
-  const cardBorderColor = useColorModeValue("whiteAlpha.200", "whiteAlpha.200");
+  const cardBorderColor = useColorModeValue("gray.200", "whiteAlpha.200");
+  const leftGlowGradient = useColorModeValue(
+    "radial(circle at 50% 50%, rgba(59,130,246,0.35), transparent 70%)",
+    "radial(circle at 50% 50%, rgba(147,51,234,0.8), transparent 70%)",
+  );
+  const rightGlowGradient = useColorModeValue(
+    "radial(circle at 50% 50%, rgba(129,140,248,0.35), transparent 70%)",
+    "radial(circle at 50% 50%, rgba(236,72,153,0.75), transparent 70%)",
+  );
 
   return (
     <Box as="section" aria-label="Создатели AIFFA">
@@ -27,7 +35,7 @@ const HeroSection: React.FC = () => {
         <Box
           position="absolute"
           inset="-40px"
-          opacity={0.6}
+          opacity={useColorModeValue(0.45, 0.6)}
           filter="blur(42px)"
           pointerEvents="none"
         >
@@ -37,7 +45,7 @@ const HeroSection: React.FC = () => {
             left="-10%"
             w={{ base: "220px", md: "260px" }}
             h={{ base: "220px", md: "260px" }}
-            bgGradient="radial(circle at 50% 50%, rgba(147,51,234,0.8), transparent 70%)"
+            bgGradient={leftGlowGradient}
           />
           <Box
             position="absolute"
@@ -45,7 +53,7 @@ const HeroSection: React.FC = () => {
             right="-5%"
             w={{ base: "260px", md: "320px" }}
             h={{ base: "260px", md: "320px" }}
-            bgGradient="radial(circle at 50% 50%, rgba(236,72,153,0.75), transparent 70%)"
+            bgGradient={rightGlowGradient}
           />
         </Box>
 
@@ -76,7 +84,7 @@ const HeroSection: React.FC = () => {
                 as="h1"
                 size="xl"
                 letterSpacing="-0.04em"
-                color="white"
+                color={useColorModeValue("gray.900", "white")}
               >
                 Создатели AIFFA
               </Heading>

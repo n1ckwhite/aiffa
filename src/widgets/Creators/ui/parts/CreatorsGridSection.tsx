@@ -53,12 +53,16 @@ const CreatorsGridSection: React.FC = () => {
   const menuTextColor = useColorModeValue("gray.800", "gray.100");
   const activeMenuBg = useColorModeValue("blue.50", "whiteAlpha.100");
   const activeMenuBorder = useColorModeValue("blue.300", "blue.300");
-  const filterIdleBg = useColorModeValue("whiteAlpha.10", "whiteAlpha.50");
-  const filterActiveBg = useColorModeValue("rgba(59,130,246,0.16)", "rgba(59,130,246,0.28)");
-  const filterIdleBorder = useColorModeValue("whiteAlpha.300", "whiteAlpha.300");
+
+  // Стили фильтра времени — максимально похожи на чипы ролей
+  const filterIdleBg = useColorModeValue("white", "whiteAlpha.50");
+  const filterActiveBg = useColorModeValue("rgba(59,130,246,0.12)", "rgba(59,130,246,0.28)");
+  const filterIdleBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const filterActiveBorder = useColorModeValue("blue.400", "blue.300");
-  const filterIdleIcon = useColorModeValue("gray.400", "gray.400");
+  const filterIdleIcon = useColorModeValue("gray.700", "gray.100");
   const filterActiveIcon = useColorModeValue("blue.400", "blue.200");
+  const filterHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
+  const filterHoverBorder = useColorModeValue("blue.200", "blue.300");
   const isDefaultTimeRange = timeRange === "all";
 
   return (
@@ -84,14 +88,12 @@ const CreatorsGridSection: React.FC = () => {
           py={2}
           bgGradient="linear(to-r, blue.400, blue.500)"
           color="white"
-          transition="background 0.2s ease, transform 0.15s ease"
+          transition="background 0.2s ease"
           leftIcon={<FiUserPlus />}
           _hover={{
             bgGradient: "linear(to-r, blue.500, blue.600)",
-            transform: "translateY(-1px)",
           }}
           _active={{
-            transform: "translateY(0)",
           }}
         >
           Как стать создателем
@@ -118,7 +120,7 @@ const CreatorsGridSection: React.FC = () => {
               aria-label="Фильтр по периоду времени"
               icon={<FiFilter />}
               size="sm"
-              borderRadius="md"
+              borderRadius="full"
               variant="outline"
               borderWidth="1px"
               bg={isDefaultTimeRange ? filterIdleBg : filterActiveBg}
@@ -127,8 +129,8 @@ const CreatorsGridSection: React.FC = () => {
               w={9}
               h={9}
               _hover={{
-                bg: isDefaultTimeRange ? filterIdleBg : filterActiveBg,
-                borderColor: filterActiveBorder,
+                bg: isDefaultTimeRange ? filterHoverBg : filterActiveBg,
+                borderColor: isDefaultTimeRange ? filterHoverBorder : filterActiveBorder,
                 color: filterActiveIcon,
               }}
               _active={{

@@ -13,7 +13,7 @@ import {
   IconButton,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FiUserPlus, FiChevronDown, FiFilter, FiCheck } from "react-icons/fi";
+import { FiUserPlus, FiFilter, FiCheck } from "react-icons/fi";
 import FilterBar from "shared/ui/FilterBar";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import { useCreatorsFilter } from "../hooks/useCreatorsFilter";
@@ -78,7 +78,6 @@ const CreatorsGridSection: React.FC = () => {
             }
           }}
           borderRadius="full"
-          mt={1}
           fontSize="sm"
           fontWeight="semibold"
           px={4}
@@ -101,14 +100,21 @@ const CreatorsGridSection: React.FC = () => {
           Как стать создателем
         </Button>
       </Box>
-      <VStack align="stretch" spacing={2} mb={1}>
-        <FilterBar
-          activeValue={roleFilter}
-          items={roleFilters}
-          onChange={setRoleFilter}
-          ariaLabel="Фильтр по ролям создателей"
-        />
-        <Box display="flex" justifyContent="center">
+      <Box
+        display="flex"
+        alignItems="start"
+        justifyContent="space-between"
+        gap={3}
+      >
+        <Box flex="1" minW={0}>
+          <FilterBar
+            activeValue={roleFilter}
+            items={roleFilters}
+            onChange={setRoleFilter}
+            ariaLabel="Фильтр по ролям создателей"
+          />
+        </Box>
+        <Box flexShrink={0}>
           <Menu>
             <MenuButton
               as={IconButton}
@@ -135,7 +141,7 @@ const CreatorsGridSection: React.FC = () => {
             <MenuList
               bg={menuBg}
               borderColor={menuBorder}
-              py={1}
+              py={0}
               minW="180px"
             >
               {TIME_RANGE_ITEMS.map((item) => (
@@ -173,7 +179,7 @@ const CreatorsGridSection: React.FC = () => {
             </MenuList>
           </Menu>
         </Box>
-      </VStack>
+      </Box>
       <SimpleGrid
         mt={3}
         columns={{ base: 1, md: 2, lg: 3 }}

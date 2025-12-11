@@ -49,7 +49,7 @@ const FilterBar = <T extends string = string>({
         as="ul"
         spacing={2}
         minW="max-content"
-        align="stretch"
+        align="center"
         justify="center"
         px={0.5}
         mx="auto"
@@ -69,7 +69,7 @@ const FilterBar = <T extends string = string>({
               type="button"
               role="tab"
               aria-selected={isActive}
-              mt={1}
+              mt={0}
               aria-pressed={isActive}
               tabIndex={0}
               onClick={() => onChange(item.value)}
@@ -86,14 +86,12 @@ const FilterBar = <T extends string = string>({
               borderColor={isActive ? activeBorder : idleBorder}
               color={labelColor}
               boxShadow={isActive ? "0 4px 10px rgba(15,23,42,0.12)" : "none"}
-              transition="background-color 0.16s ease-out, border-color 0.16s ease-out, color 0.16s ease-out, box-shadow 0.18s ease-out, transform 0.08s ease-out"
+              transition="background-color 0.16s ease-out, border-color 0.16s ease-out, color 0.16s ease-out, box-shadow 0.18s ease-out"
               _hover={{
                 bg: isActive ? activeBg : idleHoverBg,
                 borderColor: isActive ? activeBorder : idleHoverBorder,
-                transform: "translateY(-1px)",
               }}
               _active={{
-                transform: "translateY(0)",
               }}
             >
               <HStack as="span" spacing={1} align="center">

@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Heading, Text, Stack, VStack, useColorModeValue } from "@chakra-ui/react";
 import PersonLottieIcon from "@/shared/icons/components-icon/PersonLottieIcon";
+import { BusinessManTelescop } from "@/shared/icons/components-icon";
 
 const HeroSection: React.FC = () => {
   const primaryTextColor = useColorModeValue("gray.100", "gray.100");
@@ -98,7 +99,7 @@ const HeroSection: React.FC = () => {
             maxW={{ base: "240px", md: "320px" }}
             mx={{ base: "auto", md: 0 }}
           >
-            <PersonLottieIcon />
+            <BusinessManTelescop />
           </Box>
         </Stack>
       </Box>

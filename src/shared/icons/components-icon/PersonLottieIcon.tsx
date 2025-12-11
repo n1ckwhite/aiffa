@@ -3,7 +3,7 @@
 import React from "react";
 import LazyLottieIcon from "@/shared/icons/components-icon/LazyLottieIcon";
 import personIcon from "@/shared/icons/webp-icons/person-icon.webp";
-import personAnimation from "@/shared/icons/json-icons/person.json";
+import personAnimation from "@/shared/icons/json-icons/businessman-telescop.json";
 import OptimizedIconImage from "@/shared/icons/components-icon/OptimizedIconImage";
 
 const PersonLottieIcon: React.FC = () => {

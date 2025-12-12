@@ -22,6 +22,10 @@ const FeaturedCreatorsSection: React.FC = () => {
   const monthCalendarIconColor = useColorModeValue("orange.500", "orange.300");
   const monthClockIconColor = useColorModeValue("blue.400", "blue.300");
   const monthPulseDotColor = useColorModeValue("orange.400", "orange.300");
+  const monthChipBg = useColorModeValue("whiteAlpha.800", "whiteAlpha.100");
+  const monthChipBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
+  const monthMonthHighlight = useColorModeValue("orange.700", "orange.200");
+  const monthTimeHighlight = useColorModeValue("blue.400", "blue.200");
 
   const materialsCreators = React.useMemo(() => {
     if (!items || items.length === 0) {
@@ -133,18 +137,48 @@ const FeaturedCreatorsSection: React.FC = () => {
                 }}
               />
               <HStack spacing={2}>
-                <HStack spacing={1.5}>
+                <Box
+                  px={3}
+                  py={1}
+                  borderRadius="full"
+                  borderWidth="1px"
+                  borderColor={monthChipBorder}
+                  bg={monthChipBg}
+                  display="inline-flex"
+                  alignItems="center"
+                  gap={1.5}
+                >
                   <Icon as={FiCalendar} boxSize={3.5} aria-hidden="true" color={monthCalendarIconColor} />
                   <Text fontSize="xs" color={monthMetaColor}>
-                    Текущий месяц: {monthInfo.monthLabel}
+                    <Text as="span" opacity={0.85}>
+                      Текущий месяц:
+                    </Text>{" "}
+                    <Text as="span" fontWeight="semibold" color={monthMonthHighlight}>
+                      {monthInfo.monthLabel}
+                    </Text>
                   </Text>
-                </HStack>
-                <HStack spacing={1.5}>
+                </Box>
+                <Box
+                  px={3}
+                  py={1}
+                  borderRadius="full"
+                  borderWidth="1px"
+                  borderColor={monthChipBorder}
+                  bg={monthChipBg}
+                  display="inline-flex"
+                  alignItems="center"
+                  gap={1.5}
+                >
                   <Icon as={FiClock} boxSize={3.5} aria-hidden="true" color={monthClockIconColor} />
                   <Text fontSize="xs" color={monthMetaColor}>
-                    Осталось {monthInfo.remainingDays} д {monthInfo.remainingHours} ч
+                    <Text as="span" opacity={0.85}>
+                      Осталось
+                    </Text>{" "}
+                    <Text as="span" fontWeight="semibold" color={monthTimeHighlight}>
+                      {monthInfo.remainingDays} д {monthInfo.remainingHours} ч
+                    </Text>
                   </Text>
-                </HStack>
+                </Box>
               </HStack>
             </HStack>
             <Box

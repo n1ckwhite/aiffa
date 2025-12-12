@@ -335,30 +335,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index }) => {
           </HStack>
         </VStack>
         </Box>
-
-        <HStack spacing={2} mt={2} align="center">
-          <Tooltip label="AIFFA очень благодарна за вклад этого создателя" openDelay={200} hasArrow>
-            <Box
-              as="span"
-              px={1.5}
-              py={1.5}
-              borderRadius="full"
-              borderWidth="1px"
-              borderColor={gratitudeIconBorder}
-              bg={gratitudeIconBg}
-              display="inline-flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Icon as={FiHeart} boxSize={3} color={gratitudeIconColor} aria-hidden="true" />
-            </Box>
-          </Tooltip>
-          <Text fontSize="xs" color={metaColor}>
-            Если вам откликается то, что делает автор, загляните в профиль и познакомьтесь поближе.
-          </Text>
-        </HStack>
-
-        {/* нижняя ссылка не нужна — основной CTA выше */}
       </Box>
     </Box>
   );

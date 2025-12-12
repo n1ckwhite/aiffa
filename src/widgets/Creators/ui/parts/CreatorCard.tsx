@@ -26,6 +26,7 @@ type CreatorCardProps = {
   creator: Creator;
   index: number;
   mode?: "materials" | "weekly" | "articles" | "hackathons";
+  showRank?: boolean;
 };
 
 const roleLabelMap: Record<Creator["role"], string> = {
@@ -42,7 +43,7 @@ const roleIconMap: Record<Creator["role"], IconType> = {
   maintainer: FiShield,
 };
 
-const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "materials" }) => {
+const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "materials", showRank = true }) => {
   const { name, role, avatar, direction, contributions, profileLinks } = creator;
   const { lessons, weeklyTasks, reviews, projects } = contributions;
   const isWeeklyMode = mode === "weekly";
@@ -115,7 +116,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
     avatarPalettes[avatarIndex].light,
     avatarPalettes[avatarIndex].dark,
   );
-  const isTop3 = index <= 3;
+  const isTop3 = index <= 3 && showRank;
   const isTop1 = index === 1;
   const isTop2 = index === 2;
   const isTop3Only = index === 3;

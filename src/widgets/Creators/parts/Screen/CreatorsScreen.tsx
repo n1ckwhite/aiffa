@@ -5,6 +5,7 @@ import FeaturedCreatorsSection from "../../ui/parts/FeaturedCreatorsSection";
 import WeeklyAuthorsSection from "../../ui/parts/WeeklyAuthorsSection";
 import ArticleAuthorsSection from "../../ui/parts/ArticleAuthorsSection";
 import HackathonWinnersSection from "../../ui/parts/HackathonWinnersSection";
+import SupportersSection from "../../ui/parts/SupportersSection";
 
 const CreatorsScreen: React.FC = () => {
   const pageDescriptionColor = useColorModeValue("gray.600", "gray.300");
@@ -48,6 +49,7 @@ const CreatorsScreen: React.FC = () => {
           <WeeklyAuthorsSection />
           <ArticleAuthorsSection />
           <HackathonWinnersSection />
+          <SupportersSection />
           {/* <CreatorsGridSection /> */}
         </VStack>
       </Box>

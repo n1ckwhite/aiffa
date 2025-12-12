@@ -15,7 +15,7 @@ const roleLabelMap: Record<Creator["role"], string> = {
 };
 
 const CreatorProfileCard: React.FC<CreatorProfileCardProps> = ({ creator, index }) => {
-  const { name, role, avatar, description, contributions, profileLinks } = creator;
+  const { name, role, avatar, title, contributions, profileLinks } = creator;
 
   const cardBg = useColorModeValue("white", "gray.900");
   const cardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
@@ -100,7 +100,7 @@ const CreatorProfileCard: React.FC<CreatorProfileCardProps> = ({ creator, index 
             Bio
           </Text>
           <Text fontSize="sm" color={primaryText} lineHeight={1.8}>
-            {description}
+            {title}
           </Text>
         </Box>
 

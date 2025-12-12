@@ -33,8 +33,6 @@ export type Creator = {
   role: CreatorRole;
   avatar?: string;
   title: string;
-  description: string;
-  badges: CreatorBadge[];
   contributions: {
     lessons: number;
     weeklyTasks: number;

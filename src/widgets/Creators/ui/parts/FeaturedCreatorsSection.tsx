@@ -106,7 +106,7 @@ const FeaturedCreatorsSection: React.FC = () => {
               />
             </Box>
             <Heading as="h2" size="md" letterSpacing="-0.02em">
-            Авторы месяца AIFFA
+            Авторы материалов AIFFA
             </Heading>
           </HStack>
           <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>

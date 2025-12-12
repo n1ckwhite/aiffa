@@ -299,16 +299,18 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
               </Box>
             </HStack>
             {descriptionText && (
-              <Text
-                fontSize="xs"
-                fontWeight="medium"
-                color={primaryTextColor}
-                maxW="full"
-                textAlign="left"
-                noOfLines={2}
-              >
-                {descriptionText}
-              </Text>
+              <HStack spacing={1.5} align="center">
+                <Text
+                  fontSize="xs"
+                  fontWeight="medium"
+                  color={primaryTextColor}
+                  maxW="full"
+                  textAlign="left"
+                  noOfLines={2}
+                >
+                  {descriptionText}
+                </Text>
+              </HStack>
             )}
           </VStack>
         </HStack>

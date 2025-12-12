@@ -88,7 +88,7 @@ const FeaturedCreatorsSection: React.FC = () => {
     >
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={4} textAlign="center">
-          <HStack spacing={2} align="center" justify="center">
+          <HStack spacing={2} align="start" justify="center">
             <Box
               as="span"
               px={2.5}
@@ -119,23 +119,6 @@ const FeaturedCreatorsSection: React.FC = () => {
           </Text>
           <VStack spacing={2} w="full" maxW={{ base: "360px", md: "460px" }}>
             <HStack spacing={3} justify="center">
-              <Box
-                as="span"
-                w="8px"
-                h="8px"
-                borderRadius="full"
-                flexShrink={0}
-                bg={monthPulseDotColor}
-                boxShadow="0 0 0 0 rgba(251,146,60,0.7)"
-                animation="monthPulse 1.6s ease-out infinite"
-                sx={{
-                  "@keyframes monthPulse": {
-                    "0%": { boxShadow: "0 0 0 0 rgba(251,146,60,0.7)", transform: "scale(1)" },
-                    "70%": { boxShadow: "0 0 0 10px rgba(251,146,60,0)", transform: "scale(1.05)" },
-                    "100%": { boxShadow: "0 0 0 0 rgba(251,146,60,0)", transform: "scale(1)" },
-                  },
-                }}
-              />
               <HStack spacing={2}>
                 <Box
                   px={3}
@@ -203,6 +186,7 @@ const FeaturedCreatorsSection: React.FC = () => {
                 key={creator.id}
                 creator={creator}
                 index={index + 1}
+                mode="materials"
               />
             ))}
           </SimpleGrid>

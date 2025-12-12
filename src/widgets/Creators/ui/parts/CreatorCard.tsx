@@ -23,6 +23,7 @@ import type { Creator } from "../../model/types";
 type CreatorCardProps = {
   creator: Creator;
   index: number;
+  mode?: "materials" | "weekly";
 };
 
 const roleLabelMap: Record<Creator["role"], string> = {
@@ -39,9 +40,10 @@ const roleIconMap: Record<Creator["role"], IconType> = {
   maintainer: FiShield,
 };
 
-const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index }) => {
+const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "materials" }) => {
   const { name, role, avatar, direction, contributions, profileLinks } = creator;
   const { lessons, weeklyTasks, reviews } = contributions;
+  const isWeeklyMode = mode === "weekly";
 
   const cardBg = useColorModeValue("white", "whiteAlpha.50");
   const cardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
@@ -135,14 +137,21 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index }) => {
 
   const cardHref = profileLinks[0]?.href;
 
-  const gratitudeMessages: string[] = [
+  const gratitudeMessagesMaterials: string[] = [
     "Спасибо от комьюнити AIFFA — твои материалы помогают многим сделать первый шаг.",
     "Спасибо за задачи и идеи — с тобой участникам проще расти и не застревать в сложностях.",
     "Спасибо, что делишься опытом — именно такие авторы делают AIFFA живой экосистемой.",
   ];
 
-  const descriptionText =
-    gratitudeMessages[index - 1] ?? gratitudeMessages[gratitudeMessages.length - 1];
+  const gratitudeMessagesWeekly: string[] = [
+    "Спасибо за задачи недели — они помогают каждую неделю делать маленький, но важный шаг вперёд.",
+    "Спасибо за weekly‑челленджи — с ними сообществу проще не выпадать из практики и держать темп.",
+    "Спасибо за живые, прикладные задачи недели — за счёт них AIFFA остаётся местом про реальную работу.",
+  ];
+
+  const sourceMessages = isWeeklyMode ? gratitudeMessagesWeekly : gratitudeMessagesMaterials;
+
+  const descriptionText = sourceMessages[index - 1] ?? sourceMessages[sourceMessages.length - 1];
 
   const rootProps = cardHref
     ? ({
@@ -312,33 +321,37 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index }) => {
           w="full"
           align="flex-start"
         >
-          <HStack spacing={2}>
-            <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
-            <Text as="span">
-              Поделился{" "}
-              <Text as="span" fontWeight="semibold">
-                {lessons} материалами
+          {!isWeeklyMode && (
+            <HStack spacing={2}>
+              <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
+              <Text as="span">
+                Поделился{" "}
+                <Text as="span" fontWeight="semibold">
+                  {lessons} материалами
+                </Text>
               </Text>
-            </Text>
-          </HStack>
+            </HStack>
+          )}
           <HStack spacing={2}>
             <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
             <Text as="span">
               Придумал{" "}
               <Text as="span" fontWeight="semibold">
-                {weeklyTasks} задач для материала
+                {weeklyTasks} {isWeeklyMode ? "задач недели" : "задач для материала"}
               </Text>
             </Text>
           </HStack>
-          <HStack spacing={2}>
-            <Icon as={FiUsers} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
-            <Text as="span">
-              Участвовал в{" "}
-              <Text as="span" fontWeight="semibold">
-                {reviews} коллаборациях
+          {!isWeeklyMode && (
+            <HStack spacing={2}>
+              <Icon as={FiUsers} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
+              <Text as="span">
+                Участвовал в{" "}
+                <Text as="span" fontWeight="semibold">
+                  {reviews} коллаборациях
+                </Text>
               </Text>
-            </Text>
-          </HStack>
+            </HStack>
+          )}
         </VStack>
         </Box>
       </Box>

@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Heading, Text, VStack, useColorModeValue } from "@chakra-ui/react";
 import HeroSection from "../../ui/parts/HeroSection";
 import FeaturedCreatorsSection from "../../ui/parts/FeaturedCreatorsSection";
+import WeeklyAuthorsSection from "../../ui/parts/WeeklyAuthorsSection";
 
 const CreatorsScreen: React.FC = () => {
   const pageDescriptionColor = useColorModeValue("gray.600", "gray.300");
@@ -42,6 +43,7 @@ const CreatorsScreen: React.FC = () => {
           </Box>
           <HeroSection />
           <FeaturedCreatorsSection />
+          <WeeklyAuthorsSection />
           {/* <CreatorsGridSection /> */}
         </VStack>
       </Box>

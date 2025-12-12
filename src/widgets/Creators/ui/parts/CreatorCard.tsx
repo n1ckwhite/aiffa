@@ -60,14 +60,18 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
 
   const defaultBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const defaultColor = useColorModeValue("gray.500", "gray.300");
+  const accentColor = useColorModeValue("blue.500", "blue.300");
+  const pillBorderColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
+  const pillHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
 
   // Палитра для weekly‑карточек (чтобы иконка места совпадала с фоном)
-  const weeklyTop1Border = useColorModeValue("cyan.400", "cyan.300");
-  const weeklyTop1Color = useColorModeValue("cyan.600", "cyan.200");
-  const weeklyTop2Border = useColorModeValue("teal.400", "teal.300");
-  const weeklyTop2Color = useColorModeValue("teal.600", "teal.200");
-  const weeklyTop3Border = useColorModeValue("blue.500", "blue.300");
-  const weeklyTop3Color = useColorModeValue("blue.500", "blue.200");
+  // Weekly‑награды: цвета под голубой фон карточек
+  const weeklyTop1Border = useColorModeValue("teal.300", "teal.400");
+  const weeklyTop1Color = useColorModeValue("teal.700", "teal.200");
+  const weeklyTop2Border = useColorModeValue("cyan.300", "cyan.400");
+  const weeklyTop2Color = useColorModeValue("cyan.700", "cyan.200");
+  const weeklyTop3Border = useColorModeValue("blue.300", "blue.400");
+  const weeklyTop3Color = useColorModeValue("blue.700", "blue.200");
   const weeklyDefaultBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const weeklyDefaultColor = useColorModeValue("gray.500", "gray.300");
 
@@ -106,35 +110,9 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
   const gratitudeIconBg = useColorModeValue("pink.50", "whiteAlpha.100");
   const gratitudeIconBorder = useColorModeValue("pink.200", "pink.400");
 
-  const top1BgGradientMaterials = useColorModeValue(
-    "linear(to-br, rgba(253,224,71,0.26), rgba(250,250,249,0.9))",
-    "linear(to-br, rgba(202,138,4,0.45), rgba(23,23,23,0.92))",
-  );
-  const top2BgGradientMaterials = useColorModeValue(
-    "linear(to-br, rgba(196,181,253,0.22), rgba(248,250,252,0.9))",
-    "linear(to-br, rgba(109,40,217,0.4), rgba(23,23,23,0.92))",
-  );
-  const top3BgGradientMaterials = useColorModeValue(
-    "linear(to-br, rgba(251,146,60,0.20), rgba(248,250,252,0.9))",
-    "linear(to-br, rgba(234,88,12,0.4), rgba(23,23,23,0.92))",
-  );
-
-  const top1BgGradientWeekly = useColorModeValue(
-    "linear(to-br, rgba(56,189,248,0.26), rgba(248,250,252,0.96))",
-    "linear(to-br, rgba(8,145,178,0.6), rgba(15,23,42,0.96))",
-  );
-  const top2BgGradientWeekly = useColorModeValue(
-    "linear(to-br, rgba(129,230,217,0.22), rgba(239,246,255,0.96))",
-    "linear(to-br, rgba(45,212,191,0.55), rgba(15,23,42,0.96))",
-  );
-  const top3BgGradientWeekly = useColorModeValue(
-    "linear(to-br, rgba(96,165,250,0.24), rgba(239,246,255,0.96))",
-    "linear(to-br, rgba(37,99,235,0.6), rgba(15,23,42,0.96))",
-  );
-
-  const top1BgGradient = isWeeklyMode ? top1BgGradientWeekly : top1BgGradientMaterials;
-  const top2BgGradient = isWeeklyMode ? top2BgGradientWeekly : top2BgGradientMaterials;
-  const top3BgGradient = isWeeklyMode ? top3BgGradientWeekly : top3BgGradientMaterials;
+  // Фон карточек как у «пилюль» в Hero: плотный в светлой теме и whiteAlpha.100 в тёмной
+  const cardBgMaterials = useColorModeValue("whiteAlpha.900", "whiteAlpha.100");
+  const cardBgWeekly = useColorModeValue("whiteAlpha.900", "whiteAlpha.100");
   const roleColors = {
     author: { light: "orange.500", dark: "orange.300" },
     mentor: { light: "teal.500", dark: "teal.300" },
@@ -203,22 +181,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
 
   const descriptionText = sourceMessages[index - 1] ?? sourceMessages[sourceMessages.length - 1];
 
-  const cardHoverShadow = isWeeklyMode
-    ? isTop1
-      ? "0 22px 60px rgba(34,211,238,0.45)"
-      : isTop2
-      ? "0 18px 50px rgba(56,189,248,0.45)"
-      : isTop3Only
-      ? "0 16px 40px rgba(59,130,246,0.40)"
-      : "0 6px 18px rgba(15,23,42,0.35)"
-    : isTop1
-    ? "0 22px 60px rgba(202,138,4,0.45)"
-    : isTop2
-    ? "0 18px 50px rgba(88,28,135,0.45)"
-    : isTop3Only
-    ? "0 16px 40px rgba(194,65,12,0.40)"
-    : "0 6px 18px rgba(15,23,42,0.06)";
-
   const rootProps = cardHref
     ? ({
         as: "a",
@@ -234,10 +196,10 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
       borderRadius="2xl"
       p={{ base: 3, md: 4 }}
       w="full"
-      bg={cardBg}
-      bgGradient={
-        isTop1 ? top1BgGradient : isTop2 ? top2BgGradient : isTop3Only ? top3BgGradient : undefined
-      }
+      bg={isWeeklyMode ? cardBgWeekly : cardBgMaterials}
+      boxShadow={useColorModeValue("sm", "sm")}
+      borderWidth="1px"
+      borderColor={pillBorderColor}
       position="relative"
       overflow="hidden"
       role="group"
@@ -245,14 +207,10 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
       aria-label={cardHref ? `Открыть ссылку автора ${name}` : undefined}
       transition="background-color 0.18s ease-out, box-shadow 0.2s ease-out, transform 0.16s ease-out, border-color 0.16s ease-out"
       _hover={{
-        boxShadow: cardHoverShadow,
-        transform: isTop1
-          ? "translateY(-6px)"
-          : isTop2
-          ? "translateY(-4px)"
-          : isTop3
-          ? "translateY(-3px)"
-          : "translateY(-1px)",
+        bg: pillHoverBg,
+        boxShadow: useColorModeValue("md", "md"),
+        borderColor: accentColor,
+        transform: "translateY(-1px)",
       }}
     >
       <Box
@@ -282,16 +240,15 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
         <Box flex="1">
           <HStack justify="space-between" align="center" mb={2} spacing={2}>
             {isTop3 && (
-              <Box
+              <HStack
+                spacing={1}
                 px={2}
                 py={0.5}
                 borderRadius="full"
                 borderWidth="1px"
                 borderColor={rankBorder}
                 bg={rankBg}
-                display="inline-flex"
                 alignItems="center"
-                justifyContent="center"
               >
                 <Icon
                   as={FiAward}
@@ -299,7 +256,10 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
                   aria-hidden="true"
                   color={rankColor}
                 />
-              </Box>
+                <Text as="span" fontSize="xs" fontWeight="semibold" color={rankColor}>
+                  #{index}
+                </Text>
+              </HStack>
             )}
             {cardHref && (
               <Icon

@@ -195,27 +195,6 @@ const FeaturedCreatorsSection: React.FC = () => {
           w="full"
           pt={{ base: 3, md: 4 }}
         >
-          <HStack
-            spacing={{ base: 2, md: 3 }}
-            maxW="full"
-            justify="center"
-            flexDirection={{ base: "column", sm: "row" }}
-          >
-            <Icon
-              as={FaHeart}
-              boxSize={{ base: 6, md: 6 }}
-              color={thanksIconColor}
-              aria-hidden="true"
-            />
-            <Text
-              fontSize={{ base: "xs", md: "sm" }}
-              color={thanksTextColor}
-              textAlign={{ base: "center", sm: "left" }}
-            >
-              Спасибо авторам материалов и всем, кто помогал их создавать и улучшать. Ваш вклад поднимает уровень всей
-              экосистемы AIFFA и помогает большему числу людей расти через практику.
-            </Text>
-          </HStack>
         </Box>
       </VStack>
     </Box>

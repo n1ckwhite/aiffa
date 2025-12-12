@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Heading, Text, SimpleGrid, VStack, HStack, Button, useColorModeValue } from "@chakra-ui/react";
+import { Box, Heading, Text, SimpleGrid, VStack, HStack, Button, Icon, useColorModeValue } from "@chakra-ui/react";
+import { FiBookOpen, FiClock, FiCalendar } from "react-icons/fi";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import CreatorCard from "./CreatorCard";
 
@@ -9,7 +10,8 @@ const FeaturedCreatorsSection: React.FC = () => {
   const sectionBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const sectionBg = useColorModeValue("white", "whiteAlpha.50");
   const filterIdleBg = useColorModeValue("white", "whiteAlpha.50");
-  const filterActiveBg = useColorModeValue("blue.600", "blue.400");
+  const weekActiveBg = useColorModeValue("orange.500", "orange.400");
+  const monthActiveBg = useColorModeValue("blue.600", "blue.400");
   const filterIdleColor = useColorModeValue("gray.700", "gray.100");
   const filterActiveColor = useColorModeValue("white", "white");
 
@@ -54,46 +56,69 @@ const FeaturedCreatorsSection: React.FC = () => {
     >
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={1} textAlign="center">
-          <Heading as="h2" size="md" letterSpacing="-0.02em">
-            Авторы материалов AIFFA
-          </Heading>
+          <HStack spacing={2} align="center" justify="center">
+            <Box
+              as="span"
+              px={2.5}
+              py={1.5}
+              borderRadius="full"
+              borderWidth="1px"
+              borderColor={useColorModeValue("orange.400", "orange.300")}
+              bg={useColorModeValue("orange.50", "whiteAlpha.100")}
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Icon
+                as={FiBookOpen}
+                boxSize={3.5}
+                aria-hidden="true"
+                color={useColorModeValue("orange.400", "orange.300")}
+              />
+            </Box>
+            <Heading as="h2" size="md" letterSpacing="-0.02em">
+              Авторы материалов AIFFA
+            </Heading>
+          </HStack>
           <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
             Небольшая выборка людей, которые создают материалы для AIFFA. Можно посмотреть авторов по активности за
             неделю или за месяц.
           </Text>
           <HStack spacing={2} mt={2}>
             <Button
-              size="xs"
+              size="sm"
               borderRadius="full"
-              px={3}
-              py={1}
-              bg={timeRange === "week" ? filterActiveBg : filterIdleBg}
+              px={4}
+              py={2}
+              bg={timeRange === "week" ? weekActiveBg : filterIdleBg}
               color={timeRange === "week" ? filterActiveColor : filterIdleColor}
               borderWidth="1px"
-              borderColor={timeRange === "week" ? filterActiveBg : sectionBorder}
-              fontSize="xs"
+              borderColor={timeRange === "week" ? weekActiveBg : sectionBorder}
+              fontSize="sm"
               fontWeight="semibold"
               onClick={() => setTimeRange("week")}
+              leftIcon={<FiClock size={16} />}
               _hover={{
-                bg: timeRange === "week" ? filterActiveBg : useColorModeValue("blackAlpha.50", "whiteAlpha.100"),
+                bg: timeRange === "week" ? weekActiveBg : useColorModeValue("blackAlpha.50", "whiteAlpha.100"),
               }}
             >
               За неделю
             </Button>
             <Button
-              size="xs"
+              size="sm"
               borderRadius="full"
-              px={3}
-              py={1}
-              bg={timeRange === "month" ? filterActiveBg : filterIdleBg}
+              px={4}
+              py={2}
+              bg={timeRange === "month" ? monthActiveBg : filterIdleBg}
               color={timeRange === "month" ? filterActiveColor : filterIdleColor}
               borderWidth="1px"
-              borderColor={timeRange === "month" ? filterActiveBg : sectionBorder}
-              fontSize="xs"
+              borderColor={timeRange === "month" ? monthActiveBg : sectionBorder}
+              fontSize="sm"
               fontWeight="semibold"
               onClick={() => setTimeRange("month")}
+              leftIcon={<FiCalendar size={16} />}
               _hover={{
-                bg: timeRange === "month" ? filterActiveBg : useColorModeValue("blackAlpha.50", "whiteAlpha.100"),
+                bg: timeRange === "month" ? monthActiveBg : useColorModeValue("blackAlpha.50", "whiteAlpha.100"),
               }}
             >
               За месяц

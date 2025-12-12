@@ -238,35 +238,18 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
       </Box>
       <Box position="relative" display="flex" flexDirection="column" h="100%">
         <Box flex="1">
-          <HStack justify="space-between" align="center" mb={2} spacing={2}>
-          <HStack spacing={2}>
-            <Icon as={FiAward} boxSize={4} color={rankColor} aria-hidden="true" />
-            <HStack
-              px={3}
-              py={0.5}
-              borderRadius="full"
-              borderWidth="1px"
-              borderColor={rankBorder}
-              bg={rankBg}
-              spacing={1}
-            >
-              <Text as="span" fontSize="xs" color={rankColor}>
-                #{index}
-              </Text>
-            </HStack>
+          <HStack justify="flex-end" align="center" mb={2} spacing={2}>
+            {cardHref && (
+              <Icon
+                as={FiExternalLink}
+                boxSize={3.5}
+                aria-hidden="true"
+                color={linkColor}
+              />
+            )}
           </HStack>
-          {cardHref && (
-            <Icon
-              as={FiExternalLink}
-              boxSize={3.5}
-              aria-hidden="true"
-              color={linkColor}
-            />
-          )}
-        </HStack>
-        
 
-        <HStack align="flex-start" spacing={3} mt={2} mb={4}>
+        <HStack align="flex-start" spacing={3} mt={0} mb={4}>
           <Box
             position="relative"
             transition="transform 0.18s ease-out"

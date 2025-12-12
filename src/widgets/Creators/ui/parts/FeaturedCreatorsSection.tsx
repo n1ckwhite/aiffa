@@ -82,10 +82,9 @@ const FeaturedCreatorsSection: React.FC = () => {
       as="section"
       aria-label="Избранные создатели AIFFA"
       bg="transparent"
-      p={{ base: 4, md: 5 }}
     >
       <VStack align="stretch" spacing={4}>
-        <VStack align="center" spacing={1} textAlign="center">
+        <VStack align="center" spacing={4} textAlign="center">
           <HStack spacing={2} align="center" justify="center">
             <Box
               as="span"
@@ -115,7 +114,7 @@ const FeaturedCreatorsSection: React.FC = () => {
             только топ‑3 — чтобы сохранить ценность вклада и мотивацию. По окончании месяца результаты фиксируются, а
             участники получают достижения.
           </Text>
-          <VStack spacing={2} mt={3} w="full" maxW={{ base: "360px", md: "460px" }}>
+          <VStack spacing={2} w="full" maxW={{ base: "360px", md: "460px" }}>
             <HStack spacing={3} justify="center">
               <Box
                 as="span"

@@ -69,7 +69,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const materialsIconColor = useColorModeValue("orange.400", "orange.300");
   const tasksIconColor = useColorModeValue("blue.400", "blue.300");
   const reviewsIconColor = useColorModeValue("green.500", "green.300");
-  const linkColor = useColorModeValue("blue.600", "blue.300");
+  const linkColor = useColorModeValue("blue.600", "blue.200");
   const linkHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
   const top1BgGradient = useColorModeValue(
     "linear(to-br, rgba(253,224,71,0.26), rgba(250,250,249,0.9))",
@@ -245,20 +245,12 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         </HStack>
         
 
-        <VStack align="center" spacing={2} mb={3}>
+        <HStack align="flex-start" spacing={3} mt={2} mb={4}>
           <Box
             position="relative"
             transition="transform 0.18s ease-out"
             _groupHover={{ transform: "translateY(-2px)" }}
           >
-            <Box
-              position="absolute"
-              inset={-2}
-              borderRadius="full"
-              borderWidth="2px"
-              borderColor={avatarBg}
-              opacity={0.9}
-            />
             <Avatar
               size="md"
               name={name}
@@ -268,7 +260,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
               color="white"
             />
           </Box>
-          <VStack align="center" spacing={1}>
+          <VStack align="flex-start" spacing={1}>
             <Text
               fontSize="md"
               fontWeight="semibold"
@@ -303,14 +295,14 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
                 fontSize="xs"
                 color={metaColor}
                 maxW="full"
-                textAlign="center"
+                textAlign="left"
                 noOfLines={2}
               >
                 {title}
               </Text>
             )}
           </VStack>
-        </VStack>
+        </HStack>
 
         <VStack
           spacing={1}

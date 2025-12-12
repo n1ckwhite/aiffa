@@ -6,7 +6,6 @@ import {
   FiCheckCircle,
   FiAward,
   FiArrowRight,
-  FiZap,
   FiShield,
   FiFileText,
   FiUser,
@@ -36,7 +35,7 @@ const roleIconMap: Record<Creator["role"], IconType> = {
 };
 
 const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile }) => {
-  const { name, role, avatar, xp, contributions } = creator;
+  const { name, role, avatar, contributions } = creator;
   const { lessons, weeklyTasks, reviews } = contributions;
 
   const cardBg = useColorModeValue("white", "whiteAlpha.50");
@@ -65,7 +64,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const reviewsIconColor = useColorModeValue("green.500", "green.300");
   const linkColor = useColorModeValue("blue.600", "blue.300");
   const linkHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
-  const xpIconColor = useColorModeValue("purple.500", "purple.300");
   const roleColors = {
     author: { light: "orange.500", dark: "orange.300" },
     mentor: { light: "teal.500", dark: "teal.300" },
@@ -77,8 +75,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const RoleIcon = roleIconMap[role];
   const roleBg = useColorModeValue("white", "whiteAlpha.100");
   const roleBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
-  const xpBg = useColorModeValue("gray.50", "whiteAlpha.100");
-  const xpBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const cardHoverBg = useColorModeValue("white", "whiteAlpha.100");
   const cardShadow = useColorModeValue(
     "0 10px 30px rgba(15,23,42,0.10)",
@@ -191,25 +187,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           </VStack>
         </HStack>
 
-        <HStack spacing={3} mb={1} fontSize="xs" color={metaColor}>
-          <HStack spacing={1}>
-            <Icon as={FiZap} boxSize={3.5} aria-hidden="true" color={xpIconColor} />
-            <Text as="span">XP</Text>
-            <Box
-              as="span"
-              px={2}
-              py={0.5}
-              borderRadius="full"
-              borderWidth="1px"
-              borderColor={xpBorder}
-              bg={xpBg}
-              fontWeight="semibold"
-              color={primaryTextColor}
-            >
-              {xp.toLocaleString("ru-RU")}
-            </Box>
-          </HStack>
-        </HStack>
         <HStack spacing={2} fontSize="xs" color={metaColor} mb={2} flexWrap="wrap">
           <HStack spacing={1}>
             <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />

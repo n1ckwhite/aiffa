@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Heading, Text, VStack, useColorModeValue } from "@chakra-ui/react";
 import HeroSection from "../../ui/parts/HeroSection";
+import FeaturedCreatorsSection from "../../ui/parts/FeaturedCreatorsSection";
 import CreatorsGridSection from "../../ui/parts/CreatorsGridSection";
 import ContributionSection from "../../ui/parts/ContributionSection";
 
@@ -42,6 +43,7 @@ const CreatorsScreen: React.FC = () => {
             </VStack>
           </Box>
           <HeroSection />
+          <FeaturedCreatorsSection />
           {/* <CreatorsGridSection /> */}
           <ContributionSection />
         </VStack>

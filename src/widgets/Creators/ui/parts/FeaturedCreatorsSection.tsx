@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Heading, Text, SimpleGrid, VStack, HStack, Icon, useColorModeValue } from "@chakra-ui/react";
 import { FiBookOpen, FiCalendar, FiClock } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import CreatorCard from "./CreatorCard";
 
@@ -26,6 +27,8 @@ const FeaturedCreatorsSection: React.FC = () => {
   const monthChipBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const monthMonthHighlight = useColorModeValue("orange.700", "orange.200");
   const monthTimeHighlight = useColorModeValue("blue.400", "blue.200");
+  const thanksIconColor = useColorModeValue("pink.500", "pink.300");
+  const thanksTextColor = useColorModeValue("gray.800", "gray.100");
 
   const materialsCreators = React.useMemo(() => {
     if (!items || items.length === 0) {
@@ -203,6 +206,32 @@ const FeaturedCreatorsSection: React.FC = () => {
               />
             ))}
           </SimpleGrid>
+        </Box>
+        <Box
+          w="full"
+          pt={{ base: 3, md: 4 }}
+        >
+          <HStack
+            spacing={{ base: 2, md: 3 }}
+            maxW="full"
+            justify="center"
+            flexDirection={{ base: "column", sm: "row" }}
+          >
+            <Icon
+              as={FaHeart}
+              boxSize={{ base: 6, md: 6 }}
+              color={thanksIconColor}
+              aria-hidden="true"
+            />
+            <Text
+              fontSize={{ base: "xs", md: "sm" }}
+              color={thanksTextColor}
+              textAlign={{ base: "center", sm: "left" }}
+            >
+              Спасибо авторам материалов и всем, кто помогал их создавать и улучшать. Ваш вклад поднимает уровень всей
+              экосистемы AIFFA и помогает большему числу людей расти через практику.
+            </Text>
+          </HStack>
         </Box>
       </VStack>
     </Box>

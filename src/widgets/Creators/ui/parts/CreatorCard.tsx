@@ -204,7 +204,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         />
       </Box>
       <Box position="relative">
-        <HStack justify="flex-start" align="center" mb={2} spacing={2}>
+        <HStack justify="space-between" align="center" mb={2} spacing={2}>
+          <HStack spacing={2}>
           <Icon as={FiAward} boxSize={4} color={rankColor} aria-hidden="true" />
           <HStack
             px={3}
@@ -219,7 +220,28 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
               #{index}
             </Text>
           </HStack>
+          </HStack>
+          <Box
+        w="26px"
+        h="26px"
+        borderRadius="full"
+        borderWidth="1px"
+        borderColor={useColorModeValue("whiteAlpha.500", "whiteAlpha.300")}
+        bg={useColorModeValue("blackAlpha.40", "whiteAlpha.100")}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        pointerEvents="none"
+      >
+        <Icon
+          as={FiArrowRight}
+          boxSize={3}
+          aria-hidden="true"
+          color={useColorModeValue("whiteAlpha.900", "whiteAlpha.900")}
+        />
+      </Box>
         </HStack>
+        
 
         <VStack align="center" spacing={2} mb={3}>
           <Box

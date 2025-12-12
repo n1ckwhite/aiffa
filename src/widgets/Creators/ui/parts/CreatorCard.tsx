@@ -135,8 +135,14 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index }) => {
 
   const cardHref = profileLinks[0]?.href;
 
+  const gratitudeMessages: string[] = [
+    "Спасибо от комьюнити AIFFA — твои материалы помогают многим сделать первый шаг.",
+    "Спасибо за задачи и идеи — с тобой участникам проще расти и не застревать в сложностях.",
+    "Спасибо, что делишься опытом — именно такие авторы делают AIFFA живой экосистемой.",
+  ];
+
   const descriptionText =
-    "Спасибо за материалы и вклад в AIFFA — именно благодаря таким авторам платформа живёт и растёт.";
+    gratitudeMessages[index - 1] ?? gratitudeMessages[gratitudeMessages.length - 1];
 
   const rootProps = cardHref
     ? ({

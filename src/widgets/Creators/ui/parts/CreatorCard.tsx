@@ -69,6 +69,18 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const reviewsIconColor = useColorModeValue("green.500", "green.300");
   const linkColor = useColorModeValue("blue.600", "blue.300");
   const linkHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
+  const top1BgGradient = useColorModeValue(
+    "linear(to-br, rgba(253,224,71,0.26), rgba(250,250,249,0.9))",
+    "linear(to-br, rgba(202,138,4,0.45), rgba(23,23,23,0.92))",
+  );
+  const top2BgGradient = useColorModeValue(
+    "linear(to-br, rgba(196,181,253,0.22), rgba(248,250,252,0.9))",
+    "linear(to-br, rgba(109,40,217,0.4), rgba(23,23,23,0.92))",
+  );
+  const top3BgGradient = useColorModeValue(
+    "linear(to-br, rgba(251,146,60,0.20), rgba(248,250,252,0.9))",
+    "linear(to-br, rgba(234,88,12,0.4), rgba(23,23,23,0.92))",
+  );
   const roleColors = {
     author: { light: "orange.500", dark: "orange.300" },
     mentor: { light: "teal.500", dark: "teal.300" },
@@ -109,6 +121,9 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     avatarPalettes[avatarIndex].dark,
   );
   const isTop3 = index <= 3;
+  const isTop1 = index === 1;
+  const isTop2 = index === 2;
+  const isTop3Only = index === 3;
 
   const DirectionIcon = React.useMemo<IconType>(() => {
     const key = (direction || "").toLowerCase();
@@ -123,20 +138,35 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
 
   return (
     <Box
-      borderWidth={isTop3 ? "2px" : "1px"}
+      borderWidth={isTop1 ? "2.5px" : isTop3 ? "2px" : "1px"}
       borderColor={isTop3 ? rankBorder : cardBorder}
       borderRadius="2xl"
       p={{ base: 3, md: 4 }}
       w="full"
       bg={cardBg}
+      bgGradient={
+        isTop1 ? top1BgGradient : isTop2 ? top2BgGradient : isTop3Only ? top3BgGradient : undefined
+      }
       position="relative"
       overflow="hidden"
       role="group"
       transition="background-color 0.18s ease-out, box-shadow 0.2s ease-out, transform 0.16s ease-out, border-color 0.16s ease-out"
       _hover={{
         bg: cardHoverBg,
-        boxShadow: isTop3 ? cardShadow : "0 6px 18px rgba(15,23,42,0.06)",
-        transform: isTop3 ? "translateY(-3px)" : "translateY(-1px)",
+        boxShadow: isTop1
+          ? "0 22px 60px rgba(202,138,4,0.45)"
+          : isTop2
+          ? "0 18px 50px rgba(88,28,135,0.45)"
+          : isTop3Only
+          ? "0 16px 40px rgba(194,65,12,0.40)"
+          : "0 6px 18px rgba(15,23,42,0.06)",
+        transform: isTop1
+          ? "translateY(-6px)"
+          : isTop2
+          ? "translateY(-4px)"
+          : isTop3
+          ? "translateY(-3px)"
+          : "translateY(-1px)",
         borderColor: isTop3 ? rankBorder : cardBorder,
       }}
     >
@@ -181,6 +211,27 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
               </Text>
             </HStack>
           </HStack>
+          {isTop3 && (
+            <Box
+              px={3}
+              py={0.5}
+              borderRadius="full"
+              borderWidth="1px"
+              borderColor={rankBorder}
+              bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
+            >
+              <Text
+                as="span"
+                fontSize="xs"
+                fontWeight="semibold"
+                letterSpacing="0.04em"
+                textTransform="uppercase"
+                color={rankColor}
+              >
+                {isTop1 ? "ТОП‑1 месяца" : isTop2 ? "ТОП‑2 месяца" : "ТОП‑3 месяца"}
+              </Text>
+            </Box>
+          )}
         </HStack>
 
         <HStack align="center" spacing={3} mb={2}>

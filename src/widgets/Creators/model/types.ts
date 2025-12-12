@@ -35,8 +35,6 @@ export type Creator = {
   title: string;
   description: string;
   badges: CreatorBadge[];
-  xp: number;
-  totalContributions: number;
   contributions: {
     lessons: number;
     weeklyTasks: number;

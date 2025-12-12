@@ -13,8 +13,6 @@ const baseCreators: Creator[] = [
       { id: "vision", label: "Вижн‑лид" },
       { id: "weekly", label: "Куратор Weekly" },
     ],
-    xp: 24800,
-    totalContributions: 52,
     contributions: {
       lessons: 80,
       weeklyTasks: 40,
@@ -48,8 +46,6 @@ const baseCreators: Creator[] = [
       { id: "frontend", label: "Frontend" },
       { id: "uiux", label: "UI/UX" },
     ],
-    xp: 12480,
-    totalContributions: 16,
     contributions: {
       lessons: 35,
       weeklyTasks: 28,
@@ -78,8 +74,6 @@ const baseCreators: Creator[] = [
       { id: "open", label: "Открыто для новых создателей" },
       { id: "review", label: "Ревью и менторство" },
     ],
-    xp: 37200,
-    totalContributions: 70,
     contributions: {
       lessons: 120,
       weeklyTasks: 70,
@@ -108,8 +102,6 @@ const baseCreators: Creator[] = [
       { id: "react", label: "React" },
       { id: "education", label: "Обучение" },
     ],
-    xp: 19800,
-    totalContributions: 44,
     contributions: {
       lessons: 60,
       weeklyTasks: 18,
@@ -138,8 +130,6 @@ const baseCreators: Creator[] = [
       { id: "oss", label: "Open‑source" },
       { id: "tools", label: "Инструменты" },
     ],
-    xp: 22400,
-    totalContributions: 58,
     contributions: {
       lessons: 45,
       weeklyTasks: 20,
@@ -168,8 +158,6 @@ const baseCreators: Creator[] = [
       { id: "vue", label: "Vue" },
       { id: "mentor", label: "Менторство" },
     ],
-    xp: 21000,
-    totalContributions: 50,
     contributions: {
       lessons: 55,
       weeklyTasks: 16,
@@ -193,9 +181,6 @@ const roles: Creator["role"][] = ["author", "mentor", "reviewer", "maintainer"];
 const generatedCreators: Creator[] = Array.from({ length: 47 }, (_, index) => {
   const i = index + 1;
   const role = roles[i % roles.length];
-
-  const xp = 4000 + i * 320;
-  const totalContributions = 6 + (i % 18);
 
   const lessons = 5 + (i % 10);
   const weeklyTasks = 3 + (i % 8);
@@ -229,8 +214,6 @@ const generatedCreators: Creator[] = Array.from({ length: 47 }, (_, index) => {
       { id: "community", label: "Сообщество" },
       { id: "active", label: "Активный вклад" },
     ],
-    xp,
-    totalContributions,
     contributions: {
       lessons,
       weeklyTasks,

@@ -61,7 +61,7 @@ const baseCreators: BaseCreator[] = [
       projects: 24,
       reviews: 300,
     },
-    areas: ["materials", "weekly", "projects", "hackathons", "support"],
+    areas: ["materials", "weekly", "projects", "hackathons", "articles", "support"],
     profileLinks: [
       {
         type: "telegram",

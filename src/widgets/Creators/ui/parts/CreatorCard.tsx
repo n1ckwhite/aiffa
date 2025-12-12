@@ -25,7 +25,7 @@ import type { Creator } from "../../model/types";
 type CreatorCardProps = {
   creator: Creator;
   index: number;
-  mode?: "materials" | "weekly";
+  mode?: "materials" | "weekly" | "articles";
 };
 
 const roleLabelMap: Record<Creator["role"], string> = {
@@ -44,8 +44,9 @@ const roleIconMap: Record<Creator["role"], IconType> = {
 
 const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "materials" }) => {
   const { name, role, avatar, direction, contributions, profileLinks } = creator;
-  const { lessons, weeklyTasks, reviews } = contributions;
+  const { lessons, weeklyTasks, reviews, projects } = contributions;
   const isWeeklyMode = mode === "weekly";
+  const isArticlesMode = mode === "articles";
 
   const cardBg = useColorModeValue("white", "whiteAlpha.50");
   const cardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
@@ -143,7 +144,17 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
     "Спасибо за живые, прикладные задачи недели — за счёт них AIFFA остаётся местом про реальную работу.",
   ];
 
-  const sourceMessages = isWeeklyMode ? gratitudeMessagesWeekly : gratitudeMessagesMaterials;
+  const gratitudeMessagesArticles: string[] = [
+    "Спасибо за статьи — через твои разборы и истории многим проще понять, как всё работает в реальных проектах.",
+    "Спасибо за подробные статьи и примеры — они помогают не только читать теорию, но и применять её в своей работе.",
+    "Спасибо за статьи с личным опытом — такие тексты делают AIFFA местом, куда хочется возвращаться за смыслом, а не только за задачами.",
+  ];
+
+  const sourceMessages = isWeeklyMode
+    ? gratitudeMessagesWeekly
+    : isArticlesMode
+    ? gratitudeMessagesArticles
+    : gratitudeMessagesMaterials;
 
   const descriptionText = sourceMessages[index - 1] ?? sourceMessages[sourceMessages.length - 1];
 
@@ -307,7 +318,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
           w="full"
           align="flex-start"
         >
-          {!isWeeklyMode && (
+          {!isWeeklyMode && !isArticlesMode && (
             <HStack spacing={2}>
               <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
               <Text as="span">
@@ -318,16 +329,51 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
               </Text>
             </HStack>
           )}
-          <HStack spacing={2}>
-            <Icon as={isWeeklyMode ? FiCheckSquare : FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
-            <Text as="span">
-              Придумал{" "}
-              <Text as="span" fontWeight="semibold">
-                {weeklyTasks} {isWeeklyMode ? "задач недели" : "задач для материала"}
+          {isWeeklyMode && (
+            <HStack spacing={2}>
+              <Icon as={FiCheckSquare} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
+              <Text as="span">
+                Придумал{" "}
+                <Text as="span" fontWeight="semibold">
+                  {weeklyTasks} задач недели
+                </Text>
               </Text>
-            </Text>
-          </HStack>
-          {!isWeeklyMode && (
+            </HStack>
+          )}
+          {!isWeeklyMode && !isArticlesMode && (
+            <HStack spacing={2}>
+              <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
+              <Text as="span">
+                Придумал{" "}
+                <Text as="span" fontWeight="semibold">
+                  {weeklyTasks} задач для материала
+                </Text>
+              </Text>
+            </HStack>
+          )}
+          {isArticlesMode && (
+            <>
+              <HStack spacing={2}>
+                <Icon as={FiFileText} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
+                <Text as="span">
+                  Написал{" "}
+                  <Text as="span" fontWeight="semibold">
+                    {projects} статей
+                  </Text>
+                </Text>
+              </HStack>
+              <HStack spacing={2}>
+                <Icon as={FiStar} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
+                <Text as="span">
+                  Получил{" "}
+                  <Text as="span" fontWeight="semibold">
+                    {reviews} звёзд на статьях
+                  </Text>
+                </Text>
+              </HStack>
+            </>
+          )}
+          {!isWeeklyMode && !isArticlesMode && (
             <HStack spacing={2}>
               <Icon as={FiUsers} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
               <Text as="span">

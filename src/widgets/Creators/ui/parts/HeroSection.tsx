@@ -1,11 +1,12 @@
 import React from "react";
-import { Box, Heading, Text, Stack, VStack, useColorModeValue } from "@chakra-ui/react";
-import PersonLottieIcon from "@/shared/icons/components-icon/PersonLottieIcon";
+import { Box, Heading, Text, Stack, VStack, HStack, useColorModeValue } from "@chakra-ui/react";
+import { FiMessageCircle, FiTarget, FiUsers } from "react-icons/fi";
 import { BusinessManTelescop } from "@/shared/icons/components-icon";
 
 const HeroSection: React.FC = () => {
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
   const secondaryTextColor = useColorModeValue("gray.600", "gray.300");
+  const accentColor = useColorModeValue("blue.500", "blue.300");
   const cardBgGradient = useColorModeValue(
     "linear(to-br, blue.50, whiteAlpha.900)",
     "linear(to-br, rgba(15,23,42,1), rgba(126,34,206,0.95))",
@@ -106,6 +107,61 @@ const HeroSection: React.FC = () => {
               AIFFA — это не просто материалы. Это вклад сотен людей: авторов задач, создателей проектов, участников
               хакатонов, менторов и тех, кто поддерживает идею. Попасть сюда может каждый.
             </Text>
+            <Stack
+              as="ul"
+              aria-label="Чем занимаются создатели AIFFA"
+              direction={{ base: "column", md: "row" }}
+              spacing={{ base: 3, md: 4 }}
+              pt={2}
+              w="full"
+              justify={{ base: "center", md: "flex-start" }}
+            >
+              <HStack
+                as="li"
+                spacing={2}
+                align="flex-start"
+                bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
+                borderRadius="md"
+                px={3.5}
+                py={2}
+                boxShadow={useColorModeValue("sm", "sm")}
+              >
+                <Box as={FiUsers} aria-hidden="true" boxSize={{ base: 5, md: 6 }} color={accentColor} mt={0.5} />
+                <Text fontSize={{ base: "xs", md: "sm" }} color={secondaryTextColor}>
+                  Помогают улучшать модули и задачи, чтобы обучение оставалось актуальным.
+                </Text>
+              </HStack>
+              <HStack 
+                as="li"
+                spacing={2}
+                align="flex-start"
+                bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
+                borderRadius="md"
+                px={3.5}
+                py={2}
+                boxShadow={useColorModeValue("sm", "sm")}
+              >
+                <Box as={FiTarget} aria-hidden="true" boxSize={{ base: 5, md: 6 }} color={accentColor} mt={0.5} />
+                <Text fontSize={{ base: "xs", md: "sm" }} color={secondaryTextColor}>
+                  Задают направление развития и помогают не застрять на сложных темах.
+                </Text>
+              </HStack>
+              <HStack
+                as="li"
+                spacing={2}
+                align="flex-start"
+                bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
+                borderRadius="md"
+                px={3.5}
+                py={2}
+                boxShadow={useColorModeValue("sm", "sm")}
+              >
+                <Box as={FiMessageCircle} aria-hidden="true" boxSize={{ base: 5, md: 6 }} color={accentColor} mt={0.5} />
+                <Text fontSize={{ base: "xs", md: "sm" }} color={secondaryTextColor}>
+                  Создают поддерживающее сообщество, где можно задать вопрос и получить отзыв.
+                </Text>
+              </HStack>
+            </Stack>
           </VStack>
           <Box
             flex={{ base: "none", md: 1 }}

@@ -254,26 +254,22 @@ export const buildComponents = (colors: any) => {
       </Box>
     ),
     img: (p) => {
-      const title = (p as any).title as string | undefined;
       const alt = (p as any).alt as string | undefined;
-      const caption = title || undefined;
       return (
-        <Box my={6} textAlign="center">
-          <Image
-            src={(p as any).src}
-            alt={alt}
-            loading="lazy"
-            decoding="async"
-            mx="auto"
-            borderRadius="lg"
-            boxShadow="xl"
-            maxH="520px"
-            objectFit="contain"
-            borderWidth="1px"
-            borderColor={borderCol}
-          />
-          {caption && <Text mt={2} fontSize="sm" opacity={0.7}>{caption}</Text>}
-        </Box>
+        <Image
+          src={(p as any).src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          mx="auto"
+          my={6}
+          borderRadius="lg"
+          maxH="520px"
+          objectFit="contain"
+          borderWidth="1px"
+          borderColor={borderCol}
+          display="block"
+        />
       );
     },
     code: CodeBlock as any,

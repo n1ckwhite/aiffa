@@ -341,12 +341,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           </HStack>
         </VStack>
 
-        <Text
-          fontSize="xs"
-          color={metaColor}
-          mt={1}
-        >
-          Карточка — это приглашение познакомиться и найти точку для совместных проектов.
+        <Text fontSize="xs" color={metaColor} mt={1}>
+          Если вам откликается то, что делает автор, загляните в профиль и познакомьтесь поближе.
         </Text>
 
         {/* нижняя ссылка не нужна — основной CTA выше */}

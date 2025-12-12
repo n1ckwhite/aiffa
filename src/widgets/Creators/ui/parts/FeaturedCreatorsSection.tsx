@@ -8,7 +8,11 @@ const FeaturedCreatorsSection: React.FC = () => {
   const { items } = useCreatorsData();
   const subtitleColor = useColorModeValue("gray.600", "gray.300");
   const sectionBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
-  const sectionBg = useColorModeValue("white", "whiteAlpha.50");
+  const sectionBg = useColorModeValue("rgba(255,255,255,0.9)", "rgba(15,23,42,0.94)");
+  const sectionBgGradient = useColorModeValue(
+    "linear(to-br, rgba(254,243,199,0.65), rgba(255,255,255,0.98))",
+    "linear(to-br, rgba(15,23,42,0.98), rgba(251,146,60,0.20))",
+  );
   const filterIdleBg = useColorModeValue("white", "whiteAlpha.50");
   const weekActiveBg = useColorModeValue("orange.500", "orange.400");
   const monthActiveBg = useColorModeValue("blue.600", "blue.400");
@@ -52,6 +56,7 @@ const FeaturedCreatorsSection: React.FC = () => {
       borderRadius="2xl"
       borderColor={sectionBorder}
       bg={sectionBg}
+      bgGradient={sectionBgGradient}
       p={{ base: 4, md: 5 }}
     >
       <VStack align="stretch" spacing={4}>

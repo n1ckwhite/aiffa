@@ -191,11 +191,6 @@ const FeaturedCreatorsSection: React.FC = () => {
             ))}
           </SimpleGrid>
         </Box>
-        <Box
-          w="full"
-          pt={{ base: 3, md: 4 }}
-        >
-        </Box>
       </VStack>
     </Box>
   );

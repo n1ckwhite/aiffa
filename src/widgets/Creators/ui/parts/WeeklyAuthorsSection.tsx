@@ -90,7 +90,7 @@ const WeeklyAuthorsSection: React.FC = () => {
   }
 
   return (
-    <Box as="section" aria-label="Авторы задач недели AIFFA" py={{ base: 5, md: 6 }}>
+    <Box as="section" aria-label="Авторы задач недели AIFFA">
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={4} textAlign="center">
           <HStack spacing={2} align="start" justify="center">

@@ -50,7 +50,8 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({
 
   const metaColor = useColorModeValue("gray.500", "gray.300");
   const titleColor = useColorModeValue("gray.800", "gray.100");
-  const bgIconColor = useColorModeValue("blackAlpha.100", "whiteAlpha.150");
+  // Цвет фоновой иконки как на блоках авторов
+  const bgIconColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
 
   return (
     <Box
@@ -80,12 +81,12 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({
           position="absolute"
           right={-4}
           bottom={-6}
-          opacity={0.18}
+          opacity={0.16}
           transform="rotate(-10deg) translate3d(0, 0, 0)"
           transition="transform 0.25s ease-out, opacity 0.25s ease-out"
           _groupHover={{
             transform: "rotate(-4deg) translate3d(12px, -10px, 0)",
-            opacity: 0.26,
+            opacity: 0.24,
           }}
           aria-hidden="true"
         />

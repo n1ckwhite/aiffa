@@ -5,6 +5,7 @@ import {
   FiTarget,
   FiUsers,
   FiAward,
+  FiStar,
   FiArrowRight,
   FiShield,
   FiFileText,
@@ -146,6 +147,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     return FaGlobe;
   };
 
+  const topRankIcon: IconType | null = isTop1 ? FiAward : isTop2 ? FiStar : isTop3Only ? FiUsers : null;
+
   return (
     <Box
       borderWidth={isTop1 ? "2.5px" : isTop3 ? "2px" : "1px"}
@@ -162,7 +165,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       role="group"
       transition="background-color 0.18s ease-out, box-shadow 0.2s ease-out, transform 0.16s ease-out, border-color 0.16s ease-out"
       _hover={{
-        bg: cardHoverBg,
         boxShadow: isTop1
           ? "0 22px 60px rgba(202,138,4,0.45)"
           : isTop2
@@ -204,44 +206,21 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         />
       </Box>
       <Box position="relative">
-        <HStack justify="space-between" align="center" mb={2}>
-          <HStack spacing={2}>
-            <Icon as={FiAward} boxSize={4} color={rankColor} aria-hidden="true" />
-            <HStack
-              px={3}
-              py={0.5}
-              borderRadius="full"
-              borderWidth="1px"
-              borderColor={rankBorder}
-              bg={rankBg}
-              spacing={1}
-            >
-              <Text as="span" fontSize="xs" color={rankColor}>
-                #{index}
-              </Text>
-            </HStack>
+        <HStack justify="flex-start" align="center" mb={2} spacing={2}>
+          <Icon as={FiAward} boxSize={4} color={rankColor} aria-hidden="true" />
+          <HStack
+            px={3}
+            py={0.5}
+            borderRadius="full"
+            borderWidth="1px"
+            borderColor={rankBorder}
+            bg={rankBg}
+            spacing={1}
+          >
+            <Text as="span" fontSize="xs" color={rankColor}>
+              #{index}
+            </Text>
           </HStack>
-          {isTop3 && (
-            <Box
-              px={3}
-              py={0.5}
-              borderRadius="full"
-              borderWidth="1px"
-              borderColor={rankBorder}
-              bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
-            >
-              <Text
-                as="span"
-                fontSize="xs"
-                fontWeight="semibold"
-                letterSpacing="0.04em"
-                textTransform="uppercase"
-                color={rankColor}
-              >
-                {isTop1 ? "ТОП‑1 месяца" : isTop2 ? "ТОП‑2 месяца" : "ТОП‑3 месяца"}
-              </Text>
-            </Box>
-          )}
         </HStack>
 
         <VStack align="center" spacing={2} mb={3}>

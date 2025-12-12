@@ -126,6 +126,7 @@ const FeaturedCreatorsSection: React.FC = () => {
                 w="8px"
                 h="8px"
                 borderRadius="full"
+                flexShrink={0}
                 bg={monthPulseDotColor}
                 boxShadow="0 0 0 0 rgba(251,146,60,0.7)"
                 animation="monthPulse 1.6s ease-out infinite"
@@ -151,9 +152,6 @@ const FeaturedCreatorsSection: React.FC = () => {
                 >
                   <Icon as={FiCalendar} boxSize={3.5} aria-hidden="true" color={monthCalendarIconColor} />
                   <Text fontSize="xs" color={monthMetaColor}>
-                    <Text as="span" opacity={0.85}>
-                      Текущий месяц:
-                    </Text>{" "}
                     <Text as="span" fontWeight="semibold" color={monthMonthHighlight}>
                       {monthInfo.monthLabel}
                     </Text>
@@ -172,9 +170,6 @@ const FeaturedCreatorsSection: React.FC = () => {
                 >
                   <Icon as={FiClock} boxSize={3.5} aria-hidden="true" color={monthClockIconColor} />
                   <Text fontSize="xs" color={monthMetaColor}>
-                    <Text as="span" opacity={0.85}>
-                      Осталось
-                    </Text>{" "}
                     <Text as="span" fontWeight="semibold" color={monthTimeHighlight}>
                       {monthInfo.remainingDays} д {monthInfo.remainingHours} ч
                     </Text>
@@ -199,12 +194,7 @@ const FeaturedCreatorsSection: React.FC = () => {
             </Box>
           </VStack>
         </VStack>
-        <Box
-          maxH={{ base: "260px", md: "320px" }}
-          overflowY={featuredCreators.length > 3 ? "auto" : "visible"}
-          pr={featuredCreators.length > 3 ? 1 : 0}
-          transition="max-height 0.25s ease-out"
-        >
+        <Box w="full">
           <SimpleGrid
             columns={{ base: 1, md: 3 }}
             spacing={{ base: 4, md: 5 }}

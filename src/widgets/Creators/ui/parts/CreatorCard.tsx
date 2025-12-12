@@ -5,6 +5,7 @@ import {
   FiTarget,
   FiUsers,
   FiAward,
+  FiStar,
   FiExternalLink,
   FiHeart,
   FiShield,
@@ -60,11 +61,42 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
   const defaultBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const defaultColor = useColorModeValue("gray.500", "gray.300");
 
+  // Палитра для weekly‑карточек (чтобы иконка места совпадала с фоном)
+  const weeklyTop1Border = useColorModeValue("cyan.400", "cyan.300");
+  const weeklyTop1Color = useColorModeValue("cyan.600", "cyan.200");
+  const weeklyTop2Border = useColorModeValue("teal.400", "teal.300");
+  const weeklyTop2Color = useColorModeValue("teal.600", "teal.200");
+  const weeklyTop3Border = useColorModeValue("blue.500", "blue.300");
+  const weeklyTop3Color = useColorModeValue("blue.500", "blue.200");
+  const weeklyDefaultBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
+  const weeklyDefaultColor = useColorModeValue("gray.500", "gray.300");
+
   const rankBg = useColorModeValue("whiteAlpha.700", "whiteAlpha.100");
-  const rankBorder =
+
+  const rankBorderMaterials =
     index === 1 ? goldBorder : index === 2 ? silverBorder : index === 3 ? bronzeBorder : defaultBorder;
-  const rankColor =
+  const rankColorMaterials =
     index === 1 ? goldColor : index === 2 ? silverColor : index === 3 ? bronzeColor : defaultColor;
+
+  const rankBorderWeekly =
+    index === 1
+      ? weeklyTop1Border
+      : index === 2
+      ? weeklyTop2Border
+      : index === 3
+      ? weeklyTop3Border
+      : weeklyDefaultBorder;
+  const rankColorWeekly =
+    index === 1
+      ? weeklyTop1Color
+      : index === 2
+      ? weeklyTop2Color
+      : index === 3
+      ? weeklyTop3Color
+      : weeklyDefaultColor;
+
+  const rankBorder = isWeeklyMode ? rankBorderWeekly : rankBorderMaterials;
+  const rankColor = isWeeklyMode ? rankColorWeekly : rankColorMaterials;
   const metaColor = useColorModeValue("gray.500", "gray.300");
   const materialsIconColor = useColorModeValue("orange.400", "orange.300");
   const tasksIconColor = useColorModeValue("blue.400", "blue.300");
@@ -248,7 +280,27 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
       </Box>
       <Box position="relative" display="flex" flexDirection="column" h="100%">
         <Box flex="1">
-          <HStack justify="flex-end" align="center" mb={2} spacing={2}>
+          <HStack justify="space-between" align="center" mb={2} spacing={2}>
+            {isTop3 && (
+              <Box
+                px={2}
+                py={0.5}
+                borderRadius="full"
+                borderWidth="1px"
+                borderColor={rankBorder}
+                bg={rankBg}
+                display="inline-flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Icon
+                  as={FiAward}
+                  boxSize={3.5}
+                  aria-hidden="true"
+                  color={rankColor}
+                />
+              </Box>
+            )}
             {cardHref && (
               <Icon
                 as={FiExternalLink}

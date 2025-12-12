@@ -17,6 +17,7 @@ import {
   FiCpu,
   FiCloud,
   FiLayers,
+  FiCheckSquare,
 } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import type { Creator } from "../../model/types";
@@ -318,7 +319,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
             </HStack>
           )}
           <HStack spacing={2}>
-            <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
+            <Icon as={isWeeklyMode ? FiCheckSquare : FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
             <Text as="span">
               Придумал{" "}
               <Text as="span" fontWeight="semibold">

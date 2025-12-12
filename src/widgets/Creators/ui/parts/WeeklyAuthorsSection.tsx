@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Heading, Text, SimpleGrid, VStack, HStack, Icon, useColorModeValue } from "@chakra-ui/react";
-import { FiTarget, FiClock, FiCalendar } from "react-icons/fi";
+import { FiCheckSquare, FiClock, FiCalendar } from "react-icons/fi";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import CreatorCard from "./CreatorCard";
 
@@ -107,7 +107,7 @@ const WeeklyAuthorsSection: React.FC = () => {
               justifyContent="center"
             >
               <Icon
-                as={FiTarget}
+                as={FiCheckSquare}
                 boxSize={3.5}
                 aria-hidden="true"
                 color={iconColor}

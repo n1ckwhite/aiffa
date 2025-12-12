@@ -81,6 +81,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     "0 14px 40px rgba(0,0,0,0.65)",
   );
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
+  const bgIconColor = useColorModeValue("blackAlpha.100", "whiteAlpha.100");
 
   const avatarPalettes = [
     { light: "purple.600", dark: "purple.300" },
@@ -122,6 +123,23 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         borderColor: isTop3 ? rankBorder : cardBorder,
       }}
     >
+      <Box
+        position="absolute"
+        inset={0}
+        pointerEvents="none"
+        overflow="hidden"
+      >
+        <Icon
+          as={RoleIcon}
+          boxSize={28}
+          color={bgIconColor}
+          position="absolute"
+          right={-2}
+          bottom={-4}
+          transform="rotate(-8deg)"
+          aria-hidden="true"
+        />
+      </Box>
       <Box position="relative">
         <HStack justify="space-between" align="center" mb={2}>
           <HStack spacing={2}>

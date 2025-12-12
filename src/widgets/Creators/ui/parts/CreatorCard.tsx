@@ -6,7 +6,7 @@ import {
   FiUsers,
   FiAward,
   FiStar,
-  FiArrowRight,
+  FiExternalLink,
   FiShield,
   FiFileText,
   FiUser,
@@ -219,40 +219,29 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       <Box position="relative">
         <HStack justify="space-between" align="center" mb={2} spacing={2}>
           <HStack spacing={2}>
-          <Icon as={FiAward} boxSize={4} color={rankColor} aria-hidden="true" />
-          <HStack
-            px={3}
-            py={0.5}
-            borderRadius="full"
-            borderWidth="1px"
-            borderColor={rankBorder}
-            bg={rankBg}
-            spacing={1}
-          >
-            <Text as="span" fontSize="xs" color={rankColor}>
-              #{index}
-            </Text>
+            <Icon as={FiAward} boxSize={4} color={rankColor} aria-hidden="true" />
+            <HStack
+              px={3}
+              py={0.5}
+              borderRadius="full"
+              borderWidth="1px"
+              borderColor={rankBorder}
+              bg={rankBg}
+              spacing={1}
+            >
+              <Text as="span" fontSize="xs" color={rankColor}>
+                #{index}
+              </Text>
+            </HStack>
           </HStack>
-          </HStack>
-          <Box
-        w="26px"
-        h="26px"
-        borderRadius="full"
-        borderWidth="1px"
-        borderColor={useColorModeValue("whiteAlpha.500", "whiteAlpha.300")}
-        bg={useColorModeValue("blackAlpha.40", "whiteAlpha.100")}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        pointerEvents="none"
-      >
-        <Icon
-          as={FiArrowRight}
-          boxSize={3}
-          aria-hidden="true"
-          color={useColorModeValue("whiteAlpha.900", "whiteAlpha.900")}
-        />
-      </Box>
+          {cardHref && (
+            <Icon
+              as={FiExternalLink}
+              boxSize={3.5}
+              aria-hidden="true"
+              color={linkColor}
+            />
+          )}
         </HStack>
         
 
@@ -334,31 +323,39 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           <HStack spacing={2}>
             <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
             <Text as="span">
-              {lessons}{" "}
+              Поделился{" "}
               <Text as="span" fontWeight="semibold">
-                материалов
+                {lessons} материалами
               </Text>
             </Text>
           </HStack>
           <HStack spacing={2}>
             <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
             <Text as="span">
-              {weeklyTasks}{" "}
+              Придумал{" "}
               <Text as="span" fontWeight="semibold">
-                задач
+                {weeklyTasks} задач для материала
               </Text>
             </Text>
           </HStack>
           <HStack spacing={2}>
             <Icon as={FiUsers} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
             <Text as="span">
-              {reviews}{" "}
+              Участвовал в{" "}
               <Text as="span" fontWeight="semibold">
-                коллабораций
+                {reviews} коллаборациях
               </Text>
             </Text>
           </HStack>
         </VStack>
+
+        <Text
+          fontSize="xs"
+          color={metaColor}
+          mt={1}
+        >
+          Карточка — это приглашение познакомиться и найти точку для совместных проектов.
+        </Text>
 
         {/* нижняя ссылка не нужна — основной CTA выше */}
       </Box>

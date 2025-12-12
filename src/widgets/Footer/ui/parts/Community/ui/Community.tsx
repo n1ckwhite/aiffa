@@ -65,7 +65,7 @@ export const Community: React.FC<CommunityProps> = ({
         </Link>
       </VStack>
 
-      <HStack spacing={3} pt={2}>
+      <HStack spacing={3} pt={1}>
         <Link href={githubHref} isExternal>
           <IconButton aria-label="GitHub" icon={<GitHubIcon />} variant="ghost" size="sm" color={colors.textColor} _hover={{ color: colors.linkHover }} />
         </Link>

@@ -150,15 +150,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           display="inline-flex"
           alignItems="center"
         >
-          <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" color={fillIcon} />
-          <Text
-            ml={2}
-            display={{ base: 'none', lg: 'inline' }}
-            fontSize="sm"
-            fontWeight="semibold"
-          >
-            Профиль
-          </Text>
+          <Icon as={FaUserCircle} boxSize={5} aria-hidden="true" color={fillIcon} />
         </Link>
       </Tooltip>
       

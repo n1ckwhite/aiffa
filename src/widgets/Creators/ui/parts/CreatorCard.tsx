@@ -64,52 +64,17 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
   const pillBorderColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const pillHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
 
-  // Палитра для weekly‑карточек (чтобы иконка места совпадала с фоном)
-  // Weekly‑награды: цвета под голубой фон карточек
-  const weeklyTop1Border = useColorModeValue("teal.300", "teal.400");
-  const weeklyTop1Color = useColorModeValue("teal.700", "teal.200");
-  const weeklyTop2Border = useColorModeValue("cyan.300", "cyan.400");
-  const weeklyTop2Color = useColorModeValue("cyan.700", "cyan.200");
-  const weeklyTop3Border = useColorModeValue("blue.300", "blue.400");
-  const weeklyTop3Color = useColorModeValue("blue.700", "blue.200");
-  const weeklyDefaultBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
-  const weeklyDefaultColor = useColorModeValue("gray.500", "gray.300");
-
   const rankBg = useColorModeValue("whiteAlpha.700", "whiteAlpha.100");
 
-  const rankBorderMaterials =
+  const rankBorder =
     index === 1 ? goldBorder : index === 2 ? silverBorder : index === 3 ? bronzeBorder : defaultBorder;
-  const rankColorMaterials =
+  const rankColor =
     index === 1 ? goldColor : index === 2 ? silverColor : index === 3 ? bronzeColor : defaultColor;
-
-  const rankBorderWeekly =
-    index === 1
-      ? weeklyTop1Border
-      : index === 2
-      ? weeklyTop2Border
-      : index === 3
-      ? weeklyTop3Border
-      : weeklyDefaultBorder;
-  const rankColorWeekly =
-    index === 1
-      ? weeklyTop1Color
-      : index === 2
-      ? weeklyTop2Color
-      : index === 3
-      ? weeklyTop3Color
-      : weeklyDefaultColor;
-
-  const rankBorder = isWeeklyMode ? rankBorderWeekly : rankBorderMaterials;
-  const rankColor = isWeeklyMode ? rankColorWeekly : rankColorMaterials;
   const metaColor = useColorModeValue("gray.500", "gray.300");
   const materialsIconColor = useColorModeValue("orange.400", "orange.300");
   const tasksIconColor = useColorModeValue("blue.400", "blue.300");
   const reviewsIconColor = useColorModeValue("green.500", "green.300");
   const linkColor = useColorModeValue("blue.600", "blue.200");
-  const gratitudeIconColor = useColorModeValue("pink.500", "pink.300");
-  const gratitudeIconBg = useColorModeValue("pink.50", "whiteAlpha.100");
-  const gratitudeIconBorder = useColorModeValue("pink.200", "pink.400");
-
   // Фон карточек как у «пилюль» в Hero: плотный в светлой теме и whiteAlpha.100 в тёмной
   const cardBgMaterials = useColorModeValue("whiteAlpha.900", "whiteAlpha.100");
   const cardBgWeekly = useColorModeValue("whiteAlpha.900", "whiteAlpha.100");

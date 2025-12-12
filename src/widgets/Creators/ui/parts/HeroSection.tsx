@@ -106,28 +106,34 @@ const HeroSection: React.FC = () => {
               lineHeight={1.9}
               maxW={{ base: "full", sm: "420px", md: "520px" }}
             >
-              AIFFA — это не просто материалы. Это вклад сотен людей: авторов задач, создателей проектов, участников
-              хакатонов, менторов и тех, кто поддерживает идею. Попасть сюда может каждый.
+              AIFFA — это экосистема, которую создают люди: авторы задач и материалов, создатели проектов, участники
+              хакатонов, менторы и те, кто поддерживает идею. Попасть в эту команду может каждый.
             </Text>
             <Stack
               as="ul"
               aria-label="Чем занимаются создатели AIFFA"
-              direction={{ base: "column", md: "row" }}
-              spacing={{ base: 3, md: 4 }}
+              direction={{ base: "column", lg: "row" }}
+              spacing={{ base: 3, lg: 4 }}
               pt={2}
               w="full"
-              justify={{ base: "center", md: "flex-start" }}
+              textAlign="left"
+              justify={{ base: "center", lg: "flex-start" }}
+              flexWrap={{ base: "wrap", lg: "nowrap" }}
             >
               <HStack
                 as="li"
-                spacing={2}
+                spacing={3}
                 align="flex-start"
                 bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
-                borderRadius="md"
+                borderRadius="xl"
                 borderWidth="1px"
                 borderColor={pillBorderColor}
                 px={3.5}
-                py={2}
+                py={3}
+                flex={1}
+                minW={{ base: "100%", md: "260px" }}
+                maxW={{ base: "420px", lg: "auto" }}
+                mx={{ base: "auto", lg: 0 }}
                 boxShadow={useColorModeValue("sm", "sm")}
                 transition="background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease"
                 _hover={{
@@ -137,21 +143,41 @@ const HeroSection: React.FC = () => {
                   transform: "translateY(-1px)",
                 }}
               >
-                <Box as={FiUsers} aria-hidden="true" boxSize={{ base: 5, md: 6 }} color={accentColor} mt={0.5} />
+                <Box
+                  w={{ base: 8, md: 9 }}
+                  h={{ base: 8, md: 9 }}
+                  borderRadius="full"
+                  bg={useColorModeValue("blue.50", "whiteAlpha.100")}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  flexShrink={0}
+                >
+                  <Box
+                    as={FiUsers}
+                    aria-hidden="true"
+                    boxSize={{ base: 5, md: 5 }}
+                    color={useColorModeValue("blue.500", "blue.300")}
+                  />
+                </Box>
                 <Text fontSize={{ base: "xs", md: "sm" }} color={secondaryTextColor}>
                   Помогают улучшать модули и задачи, чтобы обучение оставалось актуальным.
                 </Text>
               </HStack>
-              <HStack 
+              <HStack
                 as="li"
-                spacing={2}
+                spacing={3}
                 align="flex-start"
                 bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
-                borderRadius="md"
+                borderRadius="xl"
                 borderWidth="1px"
                 borderColor={pillBorderColor}
                 px={3.5}
-                py={2}
+                py={3}
+                flex={1}
+                minW={{ base: "100%", md: "260px" }}
+                maxW={{ base: "420px", lg: "auto" }}
+                mx={{ base: "auto", lg: 0 }}
                 boxShadow={useColorModeValue("sm", "sm")}
                 transition="background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease"
                 _hover={{
@@ -161,21 +187,41 @@ const HeroSection: React.FC = () => {
                   transform: "translateY(-1px)",
                 }}
               >
-                <Box as={FiTarget} aria-hidden="true" boxSize={{ base: 5, md: 6 }} color={accentColor} mt={0.5} />
+                <Box
+                  w={{ base: 8, md: 9 }}
+                  h={{ base: 8, md: 9 }}
+                  borderRadius="full"
+                  bg={useColorModeValue("purple.50", "whiteAlpha.100")}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  flexShrink={0}
+                >
+                  <Box
+                    as={FiTarget}
+                    aria-hidden="true"
+                    boxSize={{ base: 5, md: 5 }}
+                    color={useColorModeValue("purple.500", "purple.300")}
+                  />
+                </Box>
                 <Text fontSize={{ base: "xs", md: "sm" }} color={secondaryTextColor}>
                   Задают направление развития и помогают не застрять на сложных темах.
                 </Text>
               </HStack>
               <HStack
                 as="li"
-                spacing={2}
+                spacing={3}
                 align="flex-start"
                 bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
-                borderRadius="md"
+                borderRadius="xl"
                 borderWidth="1px"
                 borderColor={pillBorderColor}
                 px={3.5}
-                py={2}
+                py={3}
+                flex={1}
+                minW={{ base: "100%", md: "260px" }}
+                maxW={{ base: "420px", lg: "auto" }}
+                mx={{ base: "auto", lg: 0 }}
                 boxShadow={useColorModeValue("sm", "sm")}
                 transition="background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease"
                 _hover={{
@@ -185,7 +231,23 @@ const HeroSection: React.FC = () => {
                   transform: "translateY(-1px)",
                 }}
               >
-                <Box as={FiMessageCircle} aria-hidden="true" boxSize={{ base: 5, md: 6 }} color={accentColor} mt={0.5} />
+                <Box
+                  w={{ base: 8, md: 9 }}
+                  h={{ base: 8, md: 9 }}
+                  borderRadius="full"
+                  bg={useColorModeValue("teal.50", "whiteAlpha.100")}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  flexShrink={0}
+                >
+                  <Box
+                    as={FiMessageCircle}
+                    aria-hidden="true"
+                    boxSize={{ base: 5, md: 5 }}
+                    color={useColorModeValue("teal.500", "teal.300")}
+                  />
+                </Box>
                 <Text fontSize={{ base: "xs", md: "sm" }} color={secondaryTextColor}>
                   Создают поддерживающее сообщество, где можно задать вопрос и получить отзыв.
                 </Text>

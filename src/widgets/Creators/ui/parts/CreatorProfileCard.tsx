@@ -121,7 +121,7 @@ const CreatorProfileCard: React.FC<CreatorProfileCardProps> = ({ creator, index 
             <Text as="span" color={primaryText} fontWeight="semibold">
               {contributions.projects}
             </Text>
-            , ревью:{" "}
+            , коллабораций:{" "}
             <Text as="span" color={primaryText} fontWeight="semibold">
               {contributions.reviews}
             </Text>

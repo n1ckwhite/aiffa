@@ -9,8 +9,8 @@ const baseCreators: Creator[] = [
     title: "Создатель AIFFA и куратор платформы",
     direction: "Fullstack",
     contributions: {
-      lessons: 80,
-      weeklyTasks: 40,
+      lessons: 120,
+      weeklyTasks: 20,
       projects: 12,
       reviews: 150,
     },
@@ -37,8 +37,8 @@ const baseCreators: Creator[] = [
     title: "Автор задач по фронтенду и дизайну",
     direction: "Frontend",
     contributions: {
-      lessons: 35,
-      weeklyTasks: 28,
+      lessons: 40,
+      weeklyTasks: 60,
       projects: 5,
       reviews: 60,
     },
@@ -60,8 +60,8 @@ const baseCreators: Creator[] = [
     title: "Сообщество создателей и ревьюеров",
     direction: "Community",
     contributions: {
-      lessons: 120,
-      weeklyTasks: 70,
+      lessons: 80,
+      weeklyTasks: 40,
       projects: 24,
       reviews: 300,
     },

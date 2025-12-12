@@ -15,7 +15,9 @@ const FeaturedCreatorsSection: React.FC = () => {
   );
   const filterIdleBg = useColorModeValue("white", "whiteAlpha.50");
   const weekActiveBg = useColorModeValue("orange.500", "orange.400");
-  const monthActiveBg = useColorModeValue("blue.600", "blue.400");
+  const monthActiveBg = useColorModeValue("rgba(59,130,246,0.12)", "rgba(59,130,246,0.28)");
+  const monthActiveBorder = useColorModeValue("blue.500", "blue.300");
+  const monthIdleBorder = useColorModeValue("blue.300", "blue.400");
   const filterIdleColor = useColorModeValue("gray.700", "gray.100");
   const filterActiveColor = useColorModeValue("white", "white");
 
@@ -114,16 +116,16 @@ const FeaturedCreatorsSection: React.FC = () => {
               borderRadius="full"
               px={4}
               py={2}
-              bg={timeRange === "month" ? monthActiveBg : filterIdleBg}
-              color={timeRange === "month" ? filterActiveColor : filterIdleColor}
+              bg={timeRange === "month" ? monthActiveBg : "transparent"}
+              color={timeRange === "month" ? useColorModeValue("blue.700", "blue.100") : filterIdleColor}
               borderWidth="1px"
-              borderColor={timeRange === "month" ? monthActiveBg : sectionBorder}
+              borderColor={timeRange === "month" ? monthActiveBorder : monthIdleBorder}
               fontSize="sm"
               fontWeight="semibold"
               onClick={() => setTimeRange("month")}
               leftIcon={<FiCalendar size={16} />}
               _hover={{
-                bg: timeRange === "month" ? monthActiveBg : useColorModeValue("blackAlpha.50", "whiteAlpha.100"),
+                bg: timeRange === "month" ? monthActiveBg : useColorModeValue("rgba(59,130,246,0.06)", "whiteAlpha.100"),
               }}
             >
               За месяц

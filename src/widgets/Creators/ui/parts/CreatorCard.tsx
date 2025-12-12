@@ -3,7 +3,7 @@ import { Box, HStack, VStack, Text, Avatar, Button, Icon, useColorModeValue } fr
 import {
   FiBookOpen,
   FiTarget,
-  FiCheckCircle,
+  FiUsers,
   FiAward,
   FiArrowRight,
   FiShield,
@@ -237,11 +237,11 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
             </Text>
           </HStack>
           <HStack spacing={1}>
-            <Icon as={FiCheckCircle} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
+            <Icon as={FiUsers} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
             <Text as="span">
               {reviews}{" "}
               <Text as="span" fontWeight="semibold">
-                ревью
+                коллабораций
               </Text>
             </Text>
           </HStack>

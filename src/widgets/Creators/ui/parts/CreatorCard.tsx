@@ -171,6 +171,22 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
 
   const descriptionText = sourceMessages[index - 1] ?? sourceMessages[sourceMessages.length - 1];
 
+  const cardHoverShadow = isWeeklyMode
+    ? isTop1
+      ? "0 22px 60px rgba(34,211,238,0.45)"
+      : isTop2
+      ? "0 18px 50px rgba(56,189,248,0.45)"
+      : isTop3Only
+      ? "0 16px 40px rgba(59,130,246,0.40)"
+      : "0 6px 18px rgba(15,23,42,0.35)"
+    : isTop1
+    ? "0 22px 60px rgba(202,138,4,0.45)"
+    : isTop2
+    ? "0 18px 50px rgba(88,28,135,0.45)"
+    : isTop3Only
+    ? "0 16px 40px rgba(194,65,12,0.40)"
+    : "0 6px 18px rgba(15,23,42,0.06)";
+
   const rootProps = cardHref
     ? ({
         as: "a",
@@ -197,13 +213,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
       aria-label={cardHref ? `Открыть ссылку автора ${name}` : undefined}
       transition="background-color 0.18s ease-out, box-shadow 0.2s ease-out, transform 0.16s ease-out, border-color 0.16s ease-out"
       _hover={{
-        boxShadow: isTop1
-          ? "0 22px 60px rgba(202,138,4,0.45)"
-          : isTop2
-          ? "0 18px 50px rgba(88,28,135,0.45)"
-          : isTop3Only
-          ? "0 16px 40px rgba(194,65,12,0.40)"
-          : "0 6px 18px rgba(15,23,42,0.06)",
+        boxShadow: cardHoverShadow,
         transform: isTop1
           ? "translateY(-6px)"
           : isTop2

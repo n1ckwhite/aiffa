@@ -47,6 +47,17 @@ export const Navigation: React.FC = () => {
         </Link>
         <Link
           as={RouterLink as any}
+          to="/creators"
+          fontSize="sm"
+          color={colors.textColor}
+          _hover={{ color: colors.linkHover }}
+          transition="color 0.2s"
+          textAlign="left"
+        >
+          Создатели
+        </Link>
+        <Link
+          as={RouterLink as any}
           to="/partners"
           fontSize="sm"
           color={colors.textColor}

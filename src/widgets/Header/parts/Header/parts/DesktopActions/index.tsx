@@ -1,7 +1,7 @@
 import React from 'react';
 import { HStack, Link, Text, Tooltip, Icon } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { FaBookOpen, FaClipboardList, FaUserCircle, FaCode, FaComments } from 'react-icons/fa';
+import { FaBookOpen, FaClipboardList, FaUserCircle, FaCode, FaComments, FaUserFriends } from 'react-icons/fa';
 import DonateButton from '../../../DonateButton';
 import ThemeToggleButton from '../../../ThemeToggleButton';
 import type { DesktopActionsProps } from './types';
@@ -110,6 +110,30 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
             fontWeight="semibold"
           >
             Сессии
+          </Text>
+        </Link>
+      </Tooltip>
+      <Tooltip label="Создатели" openDelay={250} hasArrow>
+        <Link
+          as={RouterLink as any}
+          to="/creators"
+          aria-label="Создатели"
+          onClick={() => { setIsMobileMenuOpen(false); }}
+          _hover={{ bg: hoverBg }}
+          px={2}
+          py={1.5}
+          borderRadius="md"
+          display="inline-flex"
+          alignItems="center"
+        >
+          <Icon as={FaUserFriends} boxSize={4} aria-hidden="true" color={fillIcon} />
+          <Text
+            ml={2}
+            display={{ base: 'none', lg: 'inline' }}
+            fontSize="sm"
+            fontWeight="semibold"
+          >
+            Создатели
           </Text>
         </Link>
       </Tooltip>

@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FiCode } from "react-icons/fi";
-import { hackathonWinners } from "../../model/hackathonWinners";
+import { hackathonWinners, type HackathonWinner } from "../../model/hackathonWinners";
 
 type HackathonWinnerCardProps = {
   teamName: string;
@@ -101,7 +101,7 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({
 
           {members.length > 0 && (
             <AvatarGroup size="sm" max={4}>
-              {members.map((member) => (
+              {members.map((member: HackathonWinner["members"][number]) => (
                 <Avatar
                   key={member.id}
                   as={Link}

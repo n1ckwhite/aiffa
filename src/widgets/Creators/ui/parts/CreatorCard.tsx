@@ -16,8 +16,9 @@ import {
   FiCloud,
   FiLayers,
 } from "react-icons/fi";
+import { FaTelegramPlane, FaGithub, FaGlobe, FaTwitter } from "react-icons/fa";
 import type { IconType } from "react-icons";
-import type { Creator } from "../../model/types";
+import type { Creator, CreatorProfileLink } from "../../model/types";
 
 type CreatorCardProps = {
   creator: Creator;
@@ -40,7 +41,7 @@ const roleIconMap: Record<Creator["role"], IconType> = {
 };
 
 const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile }) => {
-  const { name, role, avatar, direction, contributions } = creator;
+  const { name, role, avatar, direction, contributions, title, profileLinks } = creator;
   const { lessons, weeklyTasks, reviews } = contributions;
 
   const cardBg = useColorModeValue("white", "whiteAlpha.50");
@@ -135,6 +136,15 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     if (key.includes("community")) return FiUsers;
     return RoleIcon;
   }, [direction, RoleIcon]);
+
+  const primaryProfileLink: CreatorProfileLink | undefined = profileLinks[0];
+
+  const getProfileIcon = (type: CreatorProfileLink["type"]): IconType => {
+    if (type === "telegram") return FaTelegramPlane;
+    if (type === "github") return FaGithub;
+    if (type === "x") return FaTwitter;
+    return FaGlobe;
+  };
 
   return (
     <Box
@@ -234,7 +244,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           )}
         </HStack>
 
-        <HStack align="center" spacing={3} mb={2}>
+        <VStack align="center" spacing={2} mb={3}>
           <Box
             position="relative"
             transition="transform 0.18s ease-out"
@@ -242,14 +252,14 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           >
             <Box
               position="absolute"
-              inset={-1}
+              inset={-2}
               borderRadius="full"
               borderWidth="2px"
               borderColor={avatarBg}
               opacity={0.9}
             />
             <Avatar
-              size="sm"
+              size="md"
               name={name}
               src={avatar}
               position="relative"
@@ -257,14 +267,20 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
               color="white"
             />
           </Box>
-          <VStack align="flex-start" spacing={0.5}>
-            <Text fontSize="lg" fontWeight="semibold" letterSpacing="-0.02em" color={primaryTextColor}>
+          <VStack align="center" spacing={1}>
+            <Text
+              fontSize="md"
+              fontWeight="semibold"
+              letterSpacing="-0.02em"
+              color={primaryTextColor}
+              noOfLines={1}
+            >
               {name}
             </Text>
             <HStack spacing={1}>
               <Box
                 as="span"
-                px={2}
+                px={2.5}
                 py={0.5}
                 borderRadius="full"
                 borderWidth="1px"
@@ -281,29 +297,125 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
                 <Text as="span">{direction || roleLabelMap[role]}</Text>
               </Box>
             </HStack>
+            {title && (
+              <Text
+                fontSize="xs"
+                color={metaColor}
+                maxW="full"
+                textAlign="center"
+                noOfLines={2}
+              >
+                {title}
+              </Text>
+            )}
           </VStack>
-        </HStack>
+        </VStack>
 
-        <HStack spacing={2} fontSize="xs" color={metaColor} mb={2} flexWrap="wrap">
-          <HStack spacing={1}>
-            <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
-            <Text as="span">
-              {lessons}{" "}
-              <Text as="span" fontWeight="semibold">
-                материалов
-              </Text>
-            </Text>
+        {primaryProfileLink && (
+          <HStack spacing={2} justify="center" mb={3}>
+            <Button
+              as="a"
+              href={primaryProfileLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              size="xs"
+              borderRadius="full"
+              px={4}
+              variant="solid"
+              fontSize="xs"
+              fontWeight="semibold"
+              bgGradient="linear(to-r, teal.500, emerald.500)"
+              color="white"
+              _hover={{
+                bgGradient: "linear(to-r, teal.600, emerald.600)",
+                transform: "translateY(-1px)",
+              }}
+              _active={{
+                transform: "translateY(0)",
+              }}
+            >
+              Подписаться
+            </Button>
+            <Button
+              size="xs"
+              borderRadius="full"
+              px={3}
+              variant="ghost"
+              fontSize="xs"
+              fontWeight="semibold"
+              color={linkColor}
+              onClick={onOpenProfile}
+              _hover={{ bg: linkHoverBg }}
+            >
+              Профиль
+            </Button>
           </HStack>
-          <HStack spacing={1}>
-            <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
-            <Text as="span">
-              {weeklyTasks}{" "}
-              <Text as="span" fontWeight="semibold">
-                задач
-              </Text>
-            </Text>
+        )}
+
+        {profileLinks.length > 1 && (
+          <HStack spacing={2} justify="center" mb={3}>
+            {profileLinks.slice(0, 3).map((link) => {
+              const IconCmp = getProfileIcon(link.type);
+              return (
+                <Box
+                  key={link.type + link.href}
+                  as="a"
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  w="26px"
+                  h="26px"
+                  borderRadius="full"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.300")}
+                  bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.50")}
+                  transition="transform 0.15s ease-out, box-shadow 0.15s ease-out, background-color 0.15s ease-out"
+                  _hover={{
+                    transform: "translateY(-1px)",
+                    boxShadow: "0 8px 22px rgba(15,23,42,0.25)",
+                    bg: useColorModeValue("white", "whiteAlpha.100"),
+                  }}
+                >
+                  <Icon as={IconCmp} boxSize={3} color={linkColor} />
+                </Box>
+              );
+            })}
           </HStack>
-          <HStack spacing={1}>
+        )}
+
+        <VStack
+          spacing={1.5}
+          fontSize="xs"
+          color={metaColor}
+          mb={3}
+          w="full"
+          align="stretch"
+        >
+          <HStack spacing={3} justify="space-between">
+            <HStack spacing={1}>
+              <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
+              <Text as="span">
+                {lessons}{" "}
+                <Text as="span" fontWeight="semibold">
+                  материалов
+                </Text>
+              </Text>
+            </HStack>
+            <HStack spacing={1}>
+              <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
+              <Text as="span">
+                {weeklyTasks}{" "}
+                <Text as="span" fontWeight="semibold">
+                  задач
+                </Text>
+              </Text>
+            </HStack>
+          </HStack>
+          <HStack spacing={1} justify="flex-start">
             <Icon as={FiUsers} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
             <Text as="span">
               {reviews}{" "}
@@ -312,24 +424,26 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
               </Text>
             </Text>
           </HStack>
-        </HStack>
+        </VStack>
 
-        <HStack justify="flex-start">
-          <Button
-            size="xs"
-            borderRadius="full"
-            variant="ghost"
-            color={linkColor}
-            mt={0.5}
-            onClick={onOpenProfile}
-            rightIcon={<FiArrowRight />}
-            px={2}
-            _hover={{ bg: linkHoverBg, transform: "translateX(2px)" }}
-            _active={{ transform: "translateX(1px)" }}
-          >
-            Перейти
-          </Button>
-        </HStack>
+        {!primaryProfileLink && (
+          <HStack justify="flex-start">
+            <Button
+              size="xs"
+              borderRadius="full"
+              variant="ghost"
+              color={linkColor}
+              mt={0.5}
+              onClick={onOpenProfile}
+              rightIcon={<FiArrowRight />}
+              px={2}
+              _hover={{ bg: linkHoverBg, transform: "translateX(2px)" }}
+              _active={{ transform: "translateX(1px)" }}
+            >
+              Перейти
+            </Button>
+          </HStack>
+        )}
       </Box>
     </Box>
   );

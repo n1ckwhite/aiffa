@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, HStack, VStack, Text, Avatar, Button, Icon, useColorModeValue } from "@chakra-ui/react";
+import { Box, HStack, VStack, Text, Avatar, Button, Icon, Tooltip, useColorModeValue } from "@chakra-ui/react";
 import {
   FiBookOpen,
   FiTarget,
@@ -16,6 +16,12 @@ import {
   FiCloud,
   FiLayers,
 } from "react-icons/fi";
+import {
+  FaTrophy,
+  FaStar,
+  FaUsers as FaUsersGroup,
+  FaRocket,
+} from "react-icons/fa6";
 import type { IconType } from "react-icons";
 import type { Creator } from "../../model/types";
 
@@ -37,6 +43,66 @@ const roleIconMap: Record<Creator["role"], IconType> = {
   mentor: FiUser,
   reviewer: FiUserCheck,
   maintainer: FiShield,
+};
+
+const creatorAchievements: Record<
+  Creator["id"],
+  { id: string; icon: IconType; label: string; color: string; from: string; to: string }[]
+> = {
+  "nick-white": [
+    {
+      id: "best-month",
+      icon: FaTrophy,
+      label: "Лучший автор месяца",
+      color: "orange",
+      from: "#fb923c",
+      to: "#f97316",
+    },
+    {
+      id: "maintainer",
+      icon: FiShield,
+      label: "Мейнтейнер платформы",
+      color: "blue",
+      from: "#60a5fa",
+      to: "#3b82f6",
+    },
+  ],
+  petepearl: [
+    {
+      id: "best-week",
+      icon: FaStar,
+      label: "Автор недели",
+      color: "yellow",
+      from: "#facc15",
+      to: "#eab308",
+    },
+    {
+      id: "uiux",
+      icon: FiMonitor,
+      label: "Фронтенд & UI",
+      color: "purple",
+      from: "#a855f7",
+      to: "#7e22ce",
+    },
+  ],
+  community: [
+    {
+      id: "mentor",
+      icon: FaUsersGroup,
+      label: "Комьюнити‑ментор",
+      color: "green",
+      from: "#22c55e",
+      to: "#16a34a",
+    },
+    {
+      id: "support",
+      icon: FaRocket,
+      label: "Поддержка создателей",
+      color: "teal",
+      from: "#2dd4bf",
+      to: "#0d9488",
+    },
+  ],
 };
 
 const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile }) => {
@@ -87,6 +153,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   );
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
   const bgIconColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
+  const achievementBg = useColorModeValue("blackAlpha.40", "whiteAlpha.100");
 
   const avatarPalettes = [
     { light: "purple.600", dark: "purple.300" },
@@ -120,6 +187,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     if (key.includes("community")) return FiUsers;
     return RoleIcon;
   }, [direction, RoleIcon]);
+
+  const achievements = creatorAchievements[creator.id] || [];
 
   return (
     <Box
@@ -230,6 +299,39 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
                 <Text as="span">{direction || roleLabelMap[role]}</Text>
               </Box>
             </HStack>
+            {achievements.length > 0 && (
+              <HStack spacing={1} mt={1}>
+                {achievements.map((ach) => (
+                  <Tooltip key={ach.id} label={ach.label} openDelay={200}>
+                    <Box
+                      as="button"
+                      type="button"
+                      aria-label={ach.label}
+                      h="26px"
+                      w="26px"
+                      borderRadius="full"
+                      position="relative"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      bg={achievementBg}
+                      borderWidth="1px"
+                      borderColor={`${ach.color}.400`}
+                      transition="transform 0.15s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out"
+                      _hover={{ transform: "translateY(-1px)" }}
+                    >
+                      <Box
+                        position="absolute"
+                        inset="3px"
+                        borderRadius="full"
+                        bgGradient={`linear(to-br, ${ach.from}, ${ach.to})`}
+                      />
+                      <Icon as={ach.icon} boxSize={3} color="white" position="relative" />
+                    </Box>
+                  </Tooltip>
+                ))}
+              </HStack>
+            )}
           </VStack>
         </HStack>
 

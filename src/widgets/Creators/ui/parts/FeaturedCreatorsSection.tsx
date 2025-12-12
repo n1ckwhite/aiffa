@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Heading, Text, SimpleGrid, VStack, HStack, Button, Icon, useColorModeValue } from "@chakra-ui/react";
-import { FiBookOpen, FiClock, FiCalendar, FiUsers, FiChevronUp } from "react-icons/fi";
+import { Box, Heading, Text, SimpleGrid, VStack, HStack, Icon, useColorModeValue } from "@chakra-ui/react";
+import { FiBookOpen } from "react-icons/fi";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import CreatorCard from "./CreatorCard";
 
@@ -13,25 +13,12 @@ const FeaturedCreatorsSection: React.FC = () => {
     "linear(to-br, rgba(254,243,199,0.65), rgba(255,255,255,0.98))",
     "linear(to-br, rgba(15,23,42,0.98), rgba(251,146,60,0.20))",
   );
-  const filterIdleBg = useColorModeValue("white", "whiteAlpha.50");
-  const weekActiveBg = useColorModeValue("orange.500", "orange.400");
-  const monthActiveBg = useColorModeValue("rgba(251,146,60,0.16)", "rgba(251,146,60,0.25)");
-  const monthActiveBorder = useColorModeValue("orange.500", "orange.300");
-  const monthIdleBorder = useColorModeValue("orange.300", "orange.400");
-  const filterIdleColor = useColorModeValue("gray.700", "gray.100");
-  const filterActiveColor = useColorModeValue("white", "white");
   const iconBorderColor = useColorModeValue("orange.400", "orange.300");
   const iconBg = useColorModeValue("orange.50", "whiteAlpha.100");
   const iconColor = useColorModeValue("orange.400", "orange.300");
-  const weekIdleHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
-  const monthIdleHoverBg = useColorModeValue("rgba(251,146,60,0.08)", "whiteAlpha.100");
-  const monthActiveTextColor = useColorModeValue("orange.800", "orange.100");
-  const showAllBorderColor = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
-  const showAllHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
-
-  type TimeRange = "week" | "month";
-  const [timeRange, setTimeRange] = React.useState<TimeRange>("week");
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const monthTrackBg = useColorModeValue("blackAlpha.100", "whiteAlpha.100");
+  const monthFillBg = useColorModeValue("orange.400", "orange.300");
+  const monthMetaColor = useColorModeValue("gray.700", "gray.200");
 
   const materialsCreators = React.useMemo(() => {
     if (!items || items.length === 0) {
@@ -45,24 +32,38 @@ const FeaturedCreatorsSection: React.FC = () => {
       return [];
     }
 
-    const sorted = [...materialsCreators].sort((a, b) => {
-      if (timeRange === "week") {
-        return b.contributions.weeklyTasks - a.contributions.weeklyTasks;
-      }
-      return b.contributions.lessons - a.contributions.lessons;
+    return [...materialsCreators].sort(
+      (a, b) => b.contributions.lessons - a.contributions.lessons,
+    );
+  }, [materialsCreators]);
+
+  const [nowTs, setNowTs] = React.useState(() => Date.now());
+
+  React.useEffect(() => {
+    const id = window.setInterval(() => {
+      setNowTs(Date.now());
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const monthInfo = React.useMemo(() => {
+    const now = new Date(nowTs);
+    const start = new Date(now.getFullYear(), now.getMonth(), 1);
+    const end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    const totalMs = end.getTime() - start.getTime();
+    const elapsedMs = now.getTime() - start.getTime();
+    const remainingMs = Math.max(end.getTime() - now.getTime(), 0);
+
+    const progress = totalMs > 0 ? Math.min(Math.max(elapsedMs / totalMs, 0), 1) : 0;
+    const remainingDays = Math.floor(remainingMs / (1000 * 60 * 60 * 24));
+    const remainingHours = Math.floor((remainingMs / (1000 * 60 * 60)) % 24);
+
+    const monthLabel = now.toLocaleDateString("ru-RU", {
+      month: "long",
     });
 
-    if (isExpanded) {
-      return sorted;
-    }
-
-    return sorted.slice(0, 3);
-  }, [materialsCreators, timeRange, isExpanded]);
-
-  const shouldScroll = isExpanded && featuredCreators.length > 3;
-  const containerMaxH = isExpanded
-    ? { base: "360px", md: "420px" }
-    : { base: "260px", md: "260px" };
+    return { progress, remainingDays, remainingHours, monthLabel };
+  }, [nowTs]);
 
   if (featuredCreators.length === 0) {
     return null;
@@ -102,58 +103,39 @@ const FeaturedCreatorsSection: React.FC = () => {
               />
             </Box>
             <Heading as="h2" size="md" letterSpacing="-0.02em">
-              Авторы материалов AIFFA
+              Авторы, которые двигают контент AIFFA
             </Heading>
           </HStack>
           <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
-            Небольшая выборка людей, которые создают материалы для AIFFA. Можно посмотреть авторов по активности за
-            неделю или за месяц.
+            Небольшая выборка людей, которые создают материалы для AIFFA. Авторы отсортированы по общему вкладу в
+            материалы.
           </Text>
-          <HStack spacing={2} mt={3}>
-            <Button
-              size="sm"
+          <VStack spacing={1} mt={2} w="full" maxW={{ base: "320px", md: "420px" }}>
+            <Text fontSize="xs" color={monthMetaColor}>
+              Текущий месяц: {monthInfo.monthLabel} · осталось {monthInfo.remainingDays} д{" "}
+              {monthInfo.remainingHours} ч
+            </Text>
+            <Box
+              w="full"
+              h="6px"
               borderRadius="full"
-              px={4}
-              py={2}
-              bg={timeRange === "week" ? weekActiveBg : filterIdleBg}
-              color={timeRange === "week" ? filterActiveColor : filterIdleColor}
-              borderWidth="1px"
-              borderColor={timeRange === "week" ? weekActiveBg : sectionBorder}
-              fontSize="sm"
-              fontWeight="semibold"
-              onClick={() => setTimeRange("week")}
-              leftIcon={<FiClock size={16} />}
-              _hover={{
-                bg: timeRange === "week" ? weekActiveBg : weekIdleHoverBg,
-              }}
+              bg={monthTrackBg}
+              overflow="hidden"
             >
-              За неделю
-            </Button>
-            <Button
-              size="sm"
-              borderRadius="full"
-              px={4}
-              py={2}
-              bg={timeRange === "month" ? monthActiveBg : "transparent"}
-              color={timeRange === "month" ? monthActiveTextColor : filterIdleColor}
-              borderWidth="1px"
-              borderColor={timeRange === "month" ? monthActiveBorder : monthIdleBorder}
-              fontSize="sm"
-              fontWeight="semibold"
-              onClick={() => setTimeRange("month")}
-              leftIcon={<FiCalendar size={16} />}
-              _hover={{
-                bg: timeRange === "month" ? monthActiveBg : monthIdleHoverBg,
-              }}
-            >
-              За месяц
-            </Button>
-          </HStack>
+              <Box
+                h="100%"
+                w={`${Math.max(monthInfo.progress * 100, 4)}%`}
+                bg={monthFillBg}
+                borderRadius="full"
+                transition="width 0.4s ease-out"
+              />
+            </Box>
+          </VStack>
         </VStack>
         <Box
-          maxH={containerMaxH}
-          overflowY={shouldScroll ? "auto" : "visible"}
-          pr={shouldScroll ? 1 : 0}
+          maxH={{ base: "260px", md: "320px" }}
+          overflowY={featuredCreators.length > 3 ? "auto" : "visible"}
+          pr={featuredCreators.length > 3 ? 1 : 0}
           transition="max-height 0.25s ease-out"
         >
           <SimpleGrid
@@ -170,27 +152,6 @@ const FeaturedCreatorsSection: React.FC = () => {
             ))}
           </SimpleGrid>
         </Box>
-        {materialsCreators.length > 3 && (
-          <Box textAlign="center" pt={1}>
-            <Button
-              size="sm"
-              variant="outline"
-              borderRadius="full"
-              px={4}
-              py={2}
-              fontSize="sm"
-              fontWeight="semibold"
-              borderColor={showAllBorderColor}
-              leftIcon={isExpanded ? <FiChevronUp size={16} /> : <FiUsers size={16} />}
-              onClick={() => setIsExpanded((prev) => !prev)}
-              _hover={{
-                bg: showAllHoverBg,
-              }}
-            >
-              {isExpanded ? "Показать только топ‑3" : "Показать всех авторов материалов"}
-            </Button>
-          </Box>
-        )}
       </VStack>
     </Box>
   );

@@ -51,6 +51,8 @@ const FeaturedCreatorsSection: React.FC = () => {
     return sorted.slice(0, 3);
   }, [materialsCreators, timeRange, isExpanded]);
 
+  const shouldScroll = isExpanded && featuredCreators.length > 3;
+
   if (featuredCreators.length === 0) {
     return null;
   }
@@ -137,19 +139,25 @@ const FeaturedCreatorsSection: React.FC = () => {
             </Button>
           </HStack>
         </VStack>
-        <SimpleGrid
-          columns={{ base: 1, md: 3 }}
-          spacing={{ base: 4, md: 5 }}
-          alignItems="stretch"
+        <Box
+          maxH={shouldScroll ? { base: "360px", md: "420px" } : "none"}
+          overflowY={shouldScroll ? "auto" : "visible"}
+          pr={shouldScroll ? 1 : 0}
         >
-          {featuredCreators.map((creator, index) => (
-            <CreatorCard
-              key={creator.id}
-              creator={creator}
-              index={index + 1}
-            />
-          ))}
-        </SimpleGrid>
+          <SimpleGrid
+            columns={{ base: 1, md: 3 }}
+            spacing={{ base: 4, md: 5 }}
+            alignItems="stretch"
+          >
+            {featuredCreators.map((creator, index) => (
+              <CreatorCard
+                key={creator.id}
+                creator={creator}
+                index={index + 1}
+              />
+            ))}
+          </SimpleGrid>
+        </Box>
         {materialsCreators.length > 3 && (
           <Box textAlign="center" pt={1}>
             <Button

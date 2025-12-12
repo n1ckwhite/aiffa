@@ -10,6 +10,11 @@ import {
   FiFileText,
   FiUser,
   FiUserCheck,
+  FiMonitor,
+  FiServer,
+  FiCpu,
+  FiCloud,
+  FiLayers,
 } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import type { Creator } from "../../model/types";
@@ -105,6 +110,17 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   );
   const isTop3 = index <= 3;
 
+  const DirectionIcon = React.useMemo<IconType>(() => {
+    const key = (direction || "").toLowerCase();
+    if (key.includes("front")) return FiMonitor;
+    if (key.includes("back")) return FiServer;
+    if (key.includes("machine") || key.includes("ml") || key.includes("data")) return FiCpu;
+    if (key.includes("devops") || key.includes("infra")) return FiCloud;
+    if (key.includes("fullstack")) return FiLayers;
+    if (key.includes("community")) return FiUsers;
+    return RoleIcon;
+  }, [direction, RoleIcon]);
+
   return (
     <Box
       borderWidth={isTop3 ? "2px" : "1px"}
@@ -131,7 +147,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         overflow="hidden"
       >
         <Icon
-          as={RoleIcon}
+          as={DirectionIcon}
           boxSize={28}
           color={bgIconColor}
           position="absolute"
@@ -210,7 +226,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
                 alignItems="center"
                 gap={1}
               >
-                <Icon as={RoleIcon} boxSize={3} aria-hidden="true" />
+                <Icon as={DirectionIcon} boxSize={3} aria-hidden="true" />
                 <Text as="span">{direction || roleLabelMap[role]}</Text>
               </Box>
             </HStack>

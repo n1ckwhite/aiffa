@@ -7,6 +7,8 @@ const HeroSection: React.FC = () => {
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
   const secondaryTextColor = useColorModeValue("gray.600", "gray.300");
   const accentColor = useColorModeValue("blue.500", "blue.300");
+  const pillBorderColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
+  const pillHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
   const cardBgGradient = useColorModeValue(
     "linear(to-br, white, gray.50)",
     "linear(to-br, rgba(15,23,42,1), rgba(30,64,175,0.7))",
@@ -122,9 +124,18 @@ const HeroSection: React.FC = () => {
                 align="flex-start"
                 bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
                 borderRadius="md"
+                borderWidth="1px"
+                borderColor={pillBorderColor}
                 px={3.5}
                 py={2}
                 boxShadow={useColorModeValue("sm", "sm")}
+                transition="background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease"
+                _hover={{
+                  bg: pillHoverBg,
+                  boxShadow: useColorModeValue("md", "md"),
+                  borderColor: accentColor,
+                  transform: "translateY(-1px)",
+                }}
               >
                 <Box as={FiUsers} aria-hidden="true" boxSize={{ base: 5, md: 6 }} color={accentColor} mt={0.5} />
                 <Text fontSize={{ base: "xs", md: "sm" }} color={secondaryTextColor}>
@@ -137,9 +148,18 @@ const HeroSection: React.FC = () => {
                 align="flex-start"
                 bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
                 borderRadius="md"
+                borderWidth="1px"
+                borderColor={pillBorderColor}
                 px={3.5}
                 py={2}
                 boxShadow={useColorModeValue("sm", "sm")}
+                transition="background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease"
+                _hover={{
+                  bg: pillHoverBg,
+                  boxShadow: useColorModeValue("md", "md"),
+                  borderColor: accentColor,
+                  transform: "translateY(-1px)",
+                }}
               >
                 <Box as={FiTarget} aria-hidden="true" boxSize={{ base: 5, md: 6 }} color={accentColor} mt={0.5} />
                 <Text fontSize={{ base: "xs", md: "sm" }} color={secondaryTextColor}>
@@ -152,9 +172,18 @@ const HeroSection: React.FC = () => {
                 align="flex-start"
                 bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.100")}
                 borderRadius="md"
+                borderWidth="1px"
+                borderColor={pillBorderColor}
                 px={3.5}
                 py={2}
                 boxShadow={useColorModeValue("sm", "sm")}
+                transition="background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease"
+                _hover={{
+                  bg: pillHoverBg,
+                  boxShadow: useColorModeValue("md", "md"),
+                  borderColor: accentColor,
+                  transform: "translateY(-1px)",
+                }}
               >
                 <Box as={FiMessageCircle} aria-hidden="true" boxSize={{ base: 5, md: 6 }} color={accentColor} mt={0.5} />
                 <Text fontSize={{ base: "xs", md: "sm" }} color={secondaryTextColor}>

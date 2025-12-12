@@ -50,6 +50,7 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({
 
   const metaColor = useColorModeValue("gray.500", "gray.300");
   const titleColor = useColorModeValue("gray.800", "gray.100");
+  const bgIconColor = useColorModeValue("blackAlpha.100", "whiteAlpha.150");
 
   return (
     <Box
@@ -71,6 +72,24 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({
         transform: "translateY(-1px)",
       }}
     >
+      <Box position="absolute" inset={0} pointerEvents="none" overflow="hidden">
+        <Icon
+          as={FiCode}
+          boxSize={28}
+          color={bgIconColor}
+          position="absolute"
+          right={-4}
+          bottom={-6}
+          opacity={0.18}
+          transform="rotate(-10deg) translate3d(0, 0, 0)"
+          transition="transform 0.25s ease-out, opacity 0.25s ease-out"
+          _groupHover={{
+            transform: "rotate(-4deg) translate3d(12px, -10px, 0)",
+            opacity: 0.26,
+          }}
+          aria-hidden="true"
+        />
+      </Box>
       <VStack align="flex-start" spacing={3}>
         <HStack justify="space-between" w="full">
           <HStack spacing={2}>
@@ -100,7 +119,7 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({
           </Text>
 
           {members.length > 0 && (
-            <AvatarGroup size="sm" max={4}>
+            <AvatarGroup size="sm" max={5}>
               {members.map((member: HackathonWinner["members"][number]) => (
                 <Avatar
                   key={member.id}

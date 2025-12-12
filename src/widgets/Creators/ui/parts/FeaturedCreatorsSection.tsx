@@ -52,6 +52,9 @@ const FeaturedCreatorsSection: React.FC = () => {
   }, [materialsCreators, timeRange, isExpanded]);
 
   const shouldScroll = isExpanded && featuredCreators.length > 3;
+  const containerMaxH = isExpanded
+    ? { base: "360px", md: "420px" }
+    : { base: "260px", md: "260px" };
 
   if (featuredCreators.length === 0) {
     return null;
@@ -140,9 +143,10 @@ const FeaturedCreatorsSection: React.FC = () => {
           </HStack>
         </VStack>
         <Box
-          maxH={shouldScroll ? { base: "360px", md: "420px" } : "none"}
+          maxH={containerMaxH}
           overflowY={shouldScroll ? "auto" : "visible"}
           pr={shouldScroll ? 1 : 0}
+          transition="max-height 0.25s ease-out"
         >
           <SimpleGrid
             columns={{ base: 1, md: 3 }}

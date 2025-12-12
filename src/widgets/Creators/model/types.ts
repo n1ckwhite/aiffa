@@ -33,6 +33,7 @@ export type Creator = {
   role: CreatorRole;
   avatar?: string;
   title: string;
+  direction: string;
   contributions: {
     lessons: number;
     weeklyTasks: number;

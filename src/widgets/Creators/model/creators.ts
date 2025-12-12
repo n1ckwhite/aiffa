@@ -7,6 +7,7 @@ const baseCreators: Creator[] = [
     role: "maintainer",
     avatar: "https://avatars.githubusercontent.com/n1ckwhite",
     title: "Создатель AIFFA и куратор платформы",
+    direction: "Fullstack",
     contributions: {
       lessons: 80,
       weeklyTasks: 40,
@@ -34,6 +35,7 @@ const baseCreators: Creator[] = [
     role: "author",
     avatar: "https://avatars.githubusercontent.com/PetePearl",
     title: "Автор задач по фронтенду и дизайну",
+    direction: "Frontend",
     contributions: {
       lessons: 35,
       weeklyTasks: 28,
@@ -56,6 +58,7 @@ const baseCreators: Creator[] = [
     role: "mentor",
     avatar: "https://avatars.githubusercontent.com/aiffadev",
     title: "Сообщество создателей и ревьюеров",
+    direction: "Community",
     contributions: {
       lessons: 120,
       weeklyTasks: 70,

@@ -35,7 +35,7 @@ const roleIconMap: Record<Creator["role"], IconType> = {
 };
 
 const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile }) => {
-  const { name, role, avatar, contributions } = creator;
+  const { name, role, avatar, direction, contributions } = creator;
   const { lessons, weeklyTasks, reviews } = contributions;
 
   const cardBg = useColorModeValue("white", "whiteAlpha.50");
@@ -182,7 +182,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
                 gap={1}
               >
                 <Icon as={RoleIcon} boxSize={3} aria-hidden="true" />
-                <Text as="span">{roleLabelMap[role]}</Text>
+                <Text as="span">{direction || roleLabelMap[role]}</Text>
               </Box>
             </HStack>
           </VStack>

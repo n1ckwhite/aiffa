@@ -8,8 +8,8 @@ const HeroSection: React.FC = () => {
   const secondaryTextColor = useColorModeValue("gray.600", "gray.300");
   const accentColor = useColorModeValue("blue.500", "blue.300");
   const cardBgGradient = useColorModeValue(
-    "linear(to-br, blue.50, whiteAlpha.900)",
-    "linear(to-br, rgba(15,23,42,1), rgba(126,34,206,0.95))",
+    "linear(to-br, white, gray.50)",
+    "linear(to-br, rgba(15,23,42,1), rgba(30,64,175,0.7))",
   );
   const cardBorderColor = useColorModeValue("gray.200", "whiteAlpha.200");
   const leftGlowGradient = useColorModeValue(

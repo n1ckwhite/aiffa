@@ -70,7 +70,7 @@ const baseCreators: Creator[] = [
     id: "community",
     name: "AIFFA Community",
     role: "mentor",
-    avatar: undefined,
+    avatar: "https://avatars.githubusercontent.com/aiffadev",
     title: "Сообщество создателей и ревьюеров",
     description:
       "Люди, которые пишут материалы, придумывают задачи недели, ревьюят решения и помогают другим вырасти. Каждый может стать частью команды создателей.",

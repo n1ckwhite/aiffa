@@ -85,7 +85,7 @@ const HeroSection: React.FC = () => {
               </Text>
               <Heading
                 as="h1"
-                size="xl"
+                fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
                 letterSpacing="-0.04em"
                 color={useColorModeValue("gray.900", "white")}
               >
@@ -93,7 +93,7 @@ const HeroSection: React.FC = () => {
               </Heading>
             </Box>
             <Text
-              fontSize={{ base: "md", md: "xl" }}
+              fontSize={{ base: "sm", sm: "md", md: "lg" }}
               fontWeight="semibold"
               color={primaryTextColor}
               lineHeight={1.5}
@@ -101,10 +101,10 @@ const HeroSection: React.FC = () => {
               Люди, которые делают AIFFA лучше каждый день.
             </Text>
             <Text
-              fontSize={{ base: "xs", md: "sm" }}
+              fontSize={{ base: "xs", sm: "sm", md: "sm" }}
               color={secondaryTextColor}
               lineHeight={1.9}
-              maxW={{ base: "full", md: "520px" }}
+              maxW={{ base: "full", sm: "420px", md: "520px" }}
             >
               AIFFA — это не просто материалы. Это вклад сотен людей: авторов задач, создателей проектов, участников
               хакатонов, менторов и тех, кто поддерживает идею. Попасть сюда может каждый.

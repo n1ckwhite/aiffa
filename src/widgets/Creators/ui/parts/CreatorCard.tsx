@@ -93,7 +93,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
 
   const avatarIndex = React.useMemo(() => {
     if (!name) return 0;
-    const sum = Array.from(name).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+    const initials = name.trim().slice(0, 2);
+    const sum = Array.from(initials).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
     return sum % avatarPalettes.length;
   }, [name]);
 

@@ -21,6 +21,8 @@ import { FaTelegramPlane, FaGithub, FaGlobe, FaTwitter } from "react-icons/fa";
 import type { IconType } from "react-icons";
 import type { Creator, CreatorProfileLink } from "../../model/types";
 
+const githubBioCache = new Map<string, string>();
+
 type CreatorCardProps = {
   creator: Creator;
   index: number;
@@ -42,7 +44,7 @@ const roleIconMap: Record<Creator["role"], IconType> = {
 };
 
 const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile }) => {
-  const { name, role, avatar, direction, contributions, title, profileLinks } = creator;
+  const { name, role, avatar, direction, contributions, title, profileLinks, githubUsername } = creator;
   const { lessons, weeklyTasks, reviews } = contributions;
 
   const cardBg = useColorModeValue("white", "whiteAlpha.50");
@@ -147,6 +149,45 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
 
   const topRankIcon: IconType | null = isTop1 ? FiAward : isTop2 ? FiStar : isTop3Only ? FiUsers : null;
   const cardHref = profileLinks[0]?.href;
+
+  const [githubBio, setGithubBio] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (!githubUsername) {
+      return;
+    }
+
+    if (githubBioCache.has(githubUsername)) {
+      setGithubBio(githubBioCache.get(githubUsername) ?? null);
+      return;
+    }
+
+    let isCancelled = false;
+
+    const loadBio = async () => {
+      try {
+        const response = await fetch(`https://api.github.com/users/${githubUsername}`);
+        if (!response.ok) {
+          return;
+        }
+        const data = (await response.json()) as { bio?: string | null };
+        if (!isCancelled && data.bio) {
+          githubBioCache.set(githubUsername, data.bio);
+          setGithubBio(data.bio);
+        }
+      } catch {
+        // Молча игнорируем ошибку — просто останемся с локальным описанием.
+      }
+    };
+
+    void loadBio();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [githubUsername]);
+
+  const descriptionText = (githubBio ?? "").trim() || title;
 
   const rootProps = cardHref
     ? ({
@@ -290,15 +331,16 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
                 <Text as="span">{direction || roleLabelMap[role]}</Text>
               </Box>
             </HStack>
-            {title && (
+            {descriptionText && (
               <Text
                 fontSize="xs"
-                color={metaColor}
+                fontWeight="medium"
+                color={primaryTextColor}
                 maxW="full"
                 textAlign="left"
                 noOfLines={2}
               >
-                {title}
+                {descriptionText}
               </Text>
             )}
           </VStack>

@@ -32,6 +32,10 @@ export type Creator = {
   name: string;
   role: CreatorRole;
   avatar?: string;
+  /**
+   * Опциональный GitHub-username. Если указан — описание подтягиваем из bio GitHub.
+   */
+  githubUsername?: string;
   title: string;
   direction: string;
   contributions: {

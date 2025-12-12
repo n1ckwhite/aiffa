@@ -1,11 +1,17 @@
 import type { Creator } from "./types";
 
-const baseCreators: Creator[] = [
+type BaseCreator = Omit<Creator, "profileLinks" | "avatar"> & {
+  avatar?: Creator["avatar"];
+  profileLinks?: Creator["profileLinks"];
+};
+
+const baseCreators: BaseCreator[] = [
   {
     id: "nick-white",
     name: "Nick White",
     role: "maintainer",
     avatar: "https://avatars.githubusercontent.com/n1ckwhite",
+    githubUsername: "n1ckwhite",
     title: "Создатель AIFFA и куратор платформы",
     direction: "Fullstack",
     contributions: {
@@ -22,11 +28,6 @@ const baseCreators: Creator[] = [
         label: "Telegram",
         href: "https://t.me/aiffa_hub",
       },
-      {
-        type: "github",
-        label: "GitHub",
-        href: "https://github.com/n1ckwhite",
-      },
     ],
   },
   {
@@ -34,7 +35,8 @@ const baseCreators: Creator[] = [
     name: "PetePearl",
     role: "author",
     avatar: "https://avatars.githubusercontent.com/PetePearl",
-    title: "Автор задач по фронтенду и дизайну",
+    githubUsername: "PetePearl",
+    title: "Автор Материалов AIFFA",
     direction: "Frontend",
     contributions: {
       lessons: 40,
@@ -44,19 +46,13 @@ const baseCreators: Creator[] = [
     },
     areas: ["materials", "weekly", "projects", "articles"],
     roleGroups: ["materialsAuthors", "weeklyAuthors"],
-    profileLinks: [
-      {
-        type: "github",
-        label: "GitHub",
-        href: "https://github.com/PetePearl",
-      },
-    ],
   },
   {
     id: "community",
     name: "AIFFA Community",
     role: "mentor",
     avatar: "https://avatars.githubusercontent.com/aiffadev",
+    githubUsername: "aiffadev",
     title: "Сообщество создателей и ревьюеров",
     direction: "Community",
     contributions: {
@@ -77,6 +73,31 @@ const baseCreators: Creator[] = [
   },
 ];
 
-export const creators: Creator[] = baseCreators;
+export const creators: Creator[] = baseCreators.map((creator) => {
+  const profileLinks: Creator["profileLinks"] = [...(creator.profileLinks ?? [])];
+
+  if (creator.githubUsername) {
+    const githubHref = `https://github.com/${creator.githubUsername}`;
+    const hasGithubLink = profileLinks.some((link) => link.type === "github");
+
+    if (!hasGithubLink) {
+      profileLinks.push({
+        type: "github",
+        label: "GitHub",
+        href: githubHref,
+      });
+    }
+  }
+
+  const avatar =
+    creator.avatar ??
+    (creator.githubUsername ? `https://avatars.githubusercontent.com/${creator.githubUsername}` : undefined);
+
+  return {
+    ...creator,
+    avatar,
+    profileLinks,
+  };
+});
 
 

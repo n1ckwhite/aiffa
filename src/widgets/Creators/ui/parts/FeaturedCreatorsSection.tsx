@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Heading, Text, SimpleGrid, VStack, HStack, Button, Icon, useColorModeValue } from "@chakra-ui/react";
-import { FiBookOpen, FiClock, FiCalendar } from "react-icons/fi";
+import { FiBookOpen, FiClock, FiCalendar, FiUsers, FiChevronUp } from "react-icons/fi";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import CreatorCard from "./CreatorCard";
 
@@ -169,6 +169,7 @@ const FeaturedCreatorsSection: React.FC = () => {
               fontSize="sm"
               fontWeight="semibold"
               borderColor={useColorModeValue("blackAlpha.300", "whiteAlpha.300")}
+              leftIcon={isExpanded ? <FiChevronUp size={16} /> : <FiUsers size={16} />}
               onClick={() => setIsExpanded((prev) => !prev)}
               _hover={{
                 bg: useColorModeValue("blackAlpha.50", "whiteAlpha.100"),

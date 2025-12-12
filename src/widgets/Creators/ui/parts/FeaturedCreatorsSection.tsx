@@ -81,11 +81,7 @@ const FeaturedCreatorsSection: React.FC = () => {
     <Box
       as="section"
       aria-label="Избранные создатели AIFFA"
-      borderWidth="1px"
-      borderRadius="2xl"
-      borderColor={sectionBorder}
-      bg={sectionBg}
-      bgGradient={sectionBgGradient}
+      bg="transparent"
       p={{ base: 4, md: 5 }}
     >
       <VStack align="stretch" spacing={4}>
@@ -111,7 +107,7 @@ const FeaturedCreatorsSection: React.FC = () => {
               />
             </Box>
             <Heading as="h2" size="md" letterSpacing="-0.02em">
-              Авторы, которые двигают контент AIFFA
+            Авторы месяца AIFFA
             </Heading>
           </HStack>
           <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>

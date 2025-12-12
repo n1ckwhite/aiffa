@@ -146,9 +146,20 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   };
 
   const topRankIcon: IconType | null = isTop1 ? FiAward : isTop2 ? FiStar : isTop3Only ? FiUsers : null;
+  const cardHref = profileLinks[0]?.href;
+
+  const rootProps = cardHref
+    ? ({
+        as: "a",
+        href: cardHref,
+        target: "_blank",
+        rel: "noopener noreferrer",
+      } as const)
+    : ({ as: "div" } as const);
 
   return (
     <Box
+      {...rootProps}
       borderWidth={isTop1 ? "2.5px" : isTop3 ? "2px" : "1px"}
       borderColor={isTop3 ? rankBorder : cardBorder}
       borderRadius="2xl"
@@ -161,6 +172,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       position="relative"
       overflow="hidden"
       role="group"
+      cursor={cardHref ? "pointer" : "default"}
+      aria-label={cardHref ? `Открыть ссылку автора ${name}` : undefined}
       transition="background-color 0.18s ease-out, box-shadow 0.2s ease-out, transform 0.16s ease-out, border-color 0.16s ease-out"
       _hover={{
         boxShadow: isTop1

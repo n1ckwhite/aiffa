@@ -84,12 +84,12 @@ const HeroSection: React.FC = () => {
                 Команда создателей
               </Text>
               <Heading
-                as="h1"
-                fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
+                as="p"
+                fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
                 letterSpacing="-0.04em"
                 color={useColorModeValue("gray.900", "white")}
               >
-                Создатели AIFFA
+                Команда создателей AIFFA
               </Heading>
             </Box>
             <Text

@@ -26,7 +26,7 @@ const CreatorsScreen: React.FC = () => {
                 fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
                 letterSpacing="-0.03em"
               >
-                Страница создателей AIFFA
+                Создатели AIFFA
               </Heading>
               <Text
                 mt={3}

@@ -1,11 +1,10 @@
 import React from "react";
-import { Box, HStack, VStack, Text, Avatar, Button, Icon, Tooltip, useColorModeValue } from "@chakra-ui/react";
+import { Box, HStack, VStack, Text, Avatar, Icon, Tooltip, useColorModeValue } from "@chakra-ui/react";
 import {
   FiBookOpen,
   FiTarget,
   FiUsers,
   FiAward,
-  FiStar,
   FiExternalLink,
   FiHeart,
   FiShield,
@@ -18,14 +17,12 @@ import {
   FiCloud,
   FiLayers,
 } from "react-icons/fi";
-import { FaTelegramPlane, FaGithub, FaGlobe, FaTwitter } from "react-icons/fa";
 import type { IconType } from "react-icons";
-import type { Creator, CreatorProfileLink } from "../../model/types";
+import type { Creator } from "../../model/types";
 
 type CreatorCardProps = {
   creator: Creator;
   index: number;
-  onOpenProfile?: () => void;
 };
 
 const roleLabelMap: Record<Creator["role"], string> = {
@@ -42,8 +39,8 @@ const roleIconMap: Record<Creator["role"], IconType> = {
   maintainer: FiShield,
 };
 
-const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile }) => {
-  const { name, role, avatar, direction, contributions, title, profileLinks, githubUsername } = creator;
+const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index }) => {
+  const { name, role, avatar, direction, contributions, profileLinks } = creator;
   const { lessons, weeklyTasks, reviews } = contributions;
 
   const cardBg = useColorModeValue("white", "whiteAlpha.50");
@@ -74,7 +71,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const gratitudeIconColor = useColorModeValue("pink.500", "pink.300");
   const gratitudeIconBg = useColorModeValue("pink.50", "whiteAlpha.100");
   const gratitudeIconBorder = useColorModeValue("pink.200", "pink.400");
-  const linkHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
   const top1BgGradient = useColorModeValue(
     "linear(to-br, rgba(253,224,71,0.26), rgba(250,250,249,0.9))",
     "linear(to-br, rgba(202,138,4,0.45), rgba(23,23,23,0.92))",
@@ -98,11 +94,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const RoleIcon = roleIconMap[role];
   const roleBg = useColorModeValue("white", "whiteAlpha.100");
   const roleBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
-  const cardHoverBg = useColorModeValue("white", "whiteAlpha.100");
-  const cardShadow = useColorModeValue(
-    "0 10px 30px rgba(15,23,42,0.10)",
-    "0 14px 40px rgba(0,0,0,0.65)",
-  );
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
   const bgIconColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
 
@@ -142,14 +133,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     return RoleIcon;
   }, [direction, RoleIcon]);
 
-  const getProfileIcon = (type: CreatorProfileLink["type"]): IconType => {
-    if (type === "telegram") return FaTelegramPlane;
-    if (type === "github") return FaGithub;
-    if (type === "x") return FaTwitter;
-    return FaGlobe;
-  };
-
-  const topRankIcon: IconType | null = isTop1 ? FiAward : isTop2 ? FiStar : isTop3Only ? FiUsers : null;
   const cardHref = profileLinks[0]?.href;
 
   const descriptionText =
@@ -167,7 +150,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   return (
     <Box
       {...rootProps}
-      borderWidth={isTop1 ? "2.5px" : isTop3 ? "2px" : "1px"}
+      borderWidth="1px"
       borderColor={isTop3 ? rankBorder : cardBorder}
       borderRadius="2xl"
       p={{ base: 3, md: 4 }}

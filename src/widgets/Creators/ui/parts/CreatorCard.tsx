@@ -73,18 +73,36 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
   const gratitudeIconColor = useColorModeValue("pink.500", "pink.300");
   const gratitudeIconBg = useColorModeValue("pink.50", "whiteAlpha.100");
   const gratitudeIconBorder = useColorModeValue("pink.200", "pink.400");
-  const top1BgGradient = useColorModeValue(
+
+  const top1BgGradientMaterials = useColorModeValue(
     "linear(to-br, rgba(253,224,71,0.26), rgba(250,250,249,0.9))",
     "linear(to-br, rgba(202,138,4,0.45), rgba(23,23,23,0.92))",
   );
-  const top2BgGradient = useColorModeValue(
+  const top2BgGradientMaterials = useColorModeValue(
     "linear(to-br, rgba(196,181,253,0.22), rgba(248,250,252,0.9))",
     "linear(to-br, rgba(109,40,217,0.4), rgba(23,23,23,0.92))",
   );
-  const top3BgGradient = useColorModeValue(
+  const top3BgGradientMaterials = useColorModeValue(
     "linear(to-br, rgba(251,146,60,0.20), rgba(248,250,252,0.9))",
     "linear(to-br, rgba(234,88,12,0.4), rgba(23,23,23,0.92))",
   );
+
+  const top1BgGradientWeekly = useColorModeValue(
+    "linear(to-br, rgba(56,189,248,0.26), rgba(248,250,252,0.96))",
+    "linear(to-br, rgba(8,145,178,0.6), rgba(15,23,42,0.96))",
+  );
+  const top2BgGradientWeekly = useColorModeValue(
+    "linear(to-br, rgba(129,230,217,0.22), rgba(239,246,255,0.96))",
+    "linear(to-br, rgba(45,212,191,0.55), rgba(15,23,42,0.96))",
+  );
+  const top3BgGradientWeekly = useColorModeValue(
+    "linear(to-br, rgba(96,165,250,0.24), rgba(239,246,255,0.96))",
+    "linear(to-br, rgba(37,99,235,0.6), rgba(15,23,42,0.96))",
+  );
+
+  const top1BgGradient = isWeeklyMode ? top1BgGradientWeekly : top1BgGradientMaterials;
+  const top2BgGradient = isWeeklyMode ? top2BgGradientWeekly : top2BgGradientMaterials;
+  const top3BgGradient = isWeeklyMode ? top3BgGradientWeekly : top3BgGradientMaterials;
   const roleColors = {
     author: { light: "orange.500", dark: "orange.300" },
     mentor: { light: "teal.500", dark: "teal.300" },
@@ -165,8 +183,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
   return (
     <Box
       {...rootProps}
-      borderWidth="1px"
-      borderColor={isTop3 ? rankBorder : cardBorder}
       borderRadius="2xl"
       p={{ base: 3, md: 4 }}
       w="full"
@@ -195,7 +211,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
           : isTop3
           ? "translateY(-3px)"
           : "translateY(-1px)",
-        borderColor: isTop3 ? rankBorder : cardBorder,
       }}
     >
       <Box

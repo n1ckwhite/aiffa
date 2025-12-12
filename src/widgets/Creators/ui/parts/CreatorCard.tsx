@@ -153,7 +153,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const cardHref = profileLinks[0]?.href;
 
   const descriptionText =
-    "Спасибо за материалы и вклад в AIFFA — это поднимает уровень всей платформы.";
+    "Спасибо за материалы и вклад в AIFFA — именно благодаря таким авторам платформа живёт и растёт.";
 
   const rootProps = cardHref
     ? ({

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Heading, Text, SimpleGrid, VStack, HStack, Icon, useColorModeValue } from "@chakra-ui/react";
-import { FiBookOpen } from "react-icons/fi";
+import { FiBookOpen, FiCalendar, FiClock } from "react-icons/fi";
 import { useCreatorsData } from "../hooks/useCreatorsData";
 import CreatorCard from "./CreatorCard";
 
@@ -19,6 +19,9 @@ const FeaturedCreatorsSection: React.FC = () => {
   const monthTrackBg = useColorModeValue("blackAlpha.100", "whiteAlpha.100");
   const monthFillBg = useColorModeValue("orange.400", "orange.300");
   const monthMetaColor = useColorModeValue("gray.700", "gray.200");
+  const monthCalendarIconColor = useColorModeValue("orange.500", "orange.300");
+  const monthClockIconColor = useColorModeValue("blue.400", "blue.300");
+  const monthPulseDotColor = useColorModeValue("orange.400", "orange.300");
 
   const materialsCreators = React.useMemo(() => {
     if (!items || items.length === 0) {
@@ -58,9 +61,10 @@ const FeaturedCreatorsSection: React.FC = () => {
     const remainingDays = Math.floor(remainingMs / (1000 * 60 * 60 * 24));
     const remainingHours = Math.floor((remainingMs / (1000 * 60 * 60)) % 24);
 
-    const monthLabel = now.toLocaleDateString("ru-RU", {
+    const rawMonth = now.toLocaleDateString("ru-RU", {
       month: "long",
     });
+    const monthLabel = rawMonth.charAt(0).toUpperCase() + rawMonth.slice(1);
 
     return { progress, remainingDays, remainingHours, monthLabel };
   }, [nowTs]);
@@ -110,11 +114,39 @@ const FeaturedCreatorsSection: React.FC = () => {
             Небольшая выборка людей, которые создают материалы для AIFFA. Авторы отсортированы по общему вкладу в
             материалы.
           </Text>
-          <VStack spacing={1} mt={2} w="full" maxW={{ base: "320px", md: "420px" }}>
-            <Text fontSize="xs" color={monthMetaColor}>
-              Текущий месяц: {monthInfo.monthLabel} · осталось {monthInfo.remainingDays} д{" "}
-              {monthInfo.remainingHours} ч
-            </Text>
+          <VStack spacing={2} mt={3} w="full" maxW={{ base: "360px", md: "460px" }}>
+            <HStack spacing={3} justify="center">
+              <Box
+                as="span"
+                w="8px"
+                h="8px"
+                borderRadius="full"
+                bg={monthPulseDotColor}
+                boxShadow="0 0 0 0 rgba(251,146,60,0.7)"
+                animation="monthPulse 1.6s ease-out infinite"
+                sx={{
+                  "@keyframes monthPulse": {
+                    "0%": { boxShadow: "0 0 0 0 rgba(251,146,60,0.7)", transform: "scale(1)" },
+                    "70%": { boxShadow: "0 0 0 10px rgba(251,146,60,0)", transform: "scale(1.05)" },
+                    "100%": { boxShadow: "0 0 0 0 rgba(251,146,60,0)", transform: "scale(1)" },
+                  },
+                }}
+              />
+              <HStack spacing={2}>
+                <HStack spacing={1.5}>
+                  <Icon as={FiCalendar} boxSize={3.5} aria-hidden="true" color={monthCalendarIconColor} />
+                  <Text fontSize="xs" color={monthMetaColor}>
+                    Текущий месяц: {monthInfo.monthLabel}
+                  </Text>
+                </HStack>
+                <HStack spacing={1.5}>
+                  <Icon as={FiClock} boxSize={3.5} aria-hidden="true" color={monthClockIconColor} />
+                  <Text fontSize="xs" color={monthMetaColor}>
+                    Осталось {monthInfo.remainingDays} д {monthInfo.remainingHours} ч
+                  </Text>
+                </HStack>
+              </HStack>
+            </HStack>
             <Box
               w="full"
               h="6px"

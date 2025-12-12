@@ -25,7 +25,7 @@ import type { Creator } from "../../model/types";
 type CreatorCardProps = {
   creator: Creator;
   index: number;
-  mode?: "materials" | "weekly" | "articles";
+  mode?: "materials" | "weekly" | "articles" | "hackathons";
 };
 
 const roleLabelMap: Record<Creator["role"], string> = {
@@ -47,6 +47,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
   const { lessons, weeklyTasks, reviews, projects } = contributions;
   const isWeeklyMode = mode === "weekly";
   const isArticlesMode = mode === "articles";
+  const isHackathonMode = mode === "hackathons";
 
   const cardBg = useColorModeValue("white", "whiteAlpha.50");
   const cardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
@@ -150,10 +151,18 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
     "Спасибо за статьи с личным опытом — такие тексты делают AIFFA местом, куда хочется возвращаться за смыслом, а не только за задачами.",
   ];
 
+  const gratitudeMessagesHackathons: string[] = [
+    "Спасибо за хакатонные форматы — с ними участники могут безопасно пробовать сложные вещи и не бояться ошибаться.",
+    "Спасибо за хакатоны и разборы — они помогают командам быстрее проверять идеи и находить сильные решения.",
+    "Спасибо за хакатоны с живыми задачами — за счёт них AIFFA остаётся местом про реальный продукт и командную работу.",
+  ];
+
   const sourceMessages = isWeeklyMode
     ? gratitudeMessagesWeekly
     : isArticlesMode
     ? gratitudeMessagesArticles
+    : isHackathonMode
+    ? gratitudeMessagesHackathons
     : gratitudeMessagesMaterials;
 
   const descriptionText = sourceMessages[index - 1] ?? sourceMessages[sourceMessages.length - 1];
@@ -318,7 +327,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
           w="full"
           align="flex-start"
         >
-          {!isWeeklyMode && !isArticlesMode && (
+          {!isWeeklyMode && !isArticlesMode && !isHackathonMode && (
             <HStack spacing={2}>
               <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
               <Text as="span">
@@ -340,7 +349,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
               </Text>
             </HStack>
           )}
-          {!isWeeklyMode && !isArticlesMode && (
+          {!isWeeklyMode && !isArticlesMode && !isHackathonMode && (
             <HStack spacing={2}>
               <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
               <Text as="span">
@@ -373,7 +382,29 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
               </HStack>
             </>
           )}
-          {!isWeeklyMode && !isArticlesMode && (
+          {isHackathonMode && (
+            <>
+              <HStack spacing={2}>
+                <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
+                <Text as="span">
+                  Участвовал в{" "}
+                  <Text as="span" fontWeight="semibold">
+                    {projects} хакатонах и проектных спринтах
+                  </Text>
+                </Text>
+              </HStack>
+              <HStack spacing={2}>
+                <Icon as={FiAward} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
+                <Text as="span">
+                  Брал призовые места в{" "}
+                  <Text as="span" fontWeight="semibold">
+                    {reviews} хакатонных форматах
+                  </Text>
+                </Text>
+              </HStack>
+            </>
+          )}
+          {!isWeeklyMode && !isArticlesMode && !isHackathonMode && (
             <HStack spacing={2}>
               <Icon as={FiUsers} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
               <Text as="span">

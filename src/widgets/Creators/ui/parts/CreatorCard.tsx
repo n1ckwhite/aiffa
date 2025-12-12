@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, HStack, VStack, Text, Avatar, Button, Icon, useColorModeValue } from "@chakra-ui/react";
+import { Box, HStack, VStack, Text, Avatar, Button, Icon, Tooltip, useColorModeValue } from "@chakra-ui/react";
 import {
   FiBookOpen,
   FiTarget,
@@ -7,6 +7,7 @@ import {
   FiAward,
   FiStar,
   FiExternalLink,
+  FiHeart,
   FiShield,
   FiFileText,
   FiUser,
@@ -20,8 +21,6 @@ import {
 import { FaTelegramPlane, FaGithub, FaGlobe, FaTwitter } from "react-icons/fa";
 import type { IconType } from "react-icons";
 import type { Creator, CreatorProfileLink } from "../../model/types";
-
-const githubBioCache = new Map<string, string>();
 
 type CreatorCardProps = {
   creator: Creator;
@@ -72,6 +71,9 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const tasksIconColor = useColorModeValue("blue.400", "blue.300");
   const reviewsIconColor = useColorModeValue("green.500", "green.300");
   const linkColor = useColorModeValue("blue.600", "blue.200");
+  const gratitudeIconColor = useColorModeValue("pink.500", "pink.300");
+  const gratitudeIconBg = useColorModeValue("pink.50", "whiteAlpha.100");
+  const gratitudeIconBorder = useColorModeValue("pink.200", "pink.400");
   const linkHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
   const top1BgGradient = useColorModeValue(
     "linear(to-br, rgba(253,224,71,0.26), rgba(250,250,249,0.9))",
@@ -150,44 +152,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
   const topRankIcon: IconType | null = isTop1 ? FiAward : isTop2 ? FiStar : isTop3Only ? FiUsers : null;
   const cardHref = profileLinks[0]?.href;
 
-  const [githubBio, setGithubBio] = React.useState<string | null>(null);
-
-  React.useEffect(() => {
-    if (!githubUsername) {
-      return;
-    }
-
-    if (githubBioCache.has(githubUsername)) {
-      setGithubBio(githubBioCache.get(githubUsername) ?? null);
-      return;
-    }
-
-    let isCancelled = false;
-
-    const loadBio = async () => {
-      try {
-        const response = await fetch(`https://api.github.com/users/${githubUsername}`);
-        if (!response.ok) {
-          return;
-        }
-        const data = (await response.json()) as { bio?: string | null };
-        if (!isCancelled && data.bio) {
-          githubBioCache.set(githubUsername, data.bio);
-          setGithubBio(data.bio);
-        }
-      } catch {
-        // Молча игнорируем ошибку — просто останемся с локальным описанием.
-      }
-    };
-
-    void loadBio();
-
-    return () => {
-      isCancelled = true;
-    };
-  }, [githubUsername]);
-
-  const descriptionText = (githubBio ?? "").trim() || title;
+  const descriptionText =
+    "Спасибо за материалы и вклад в AIFFA — это поднимает уровень всей платформы.";
 
   const rootProps = cardHref
     ? ({
@@ -257,8 +223,9 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           aria-hidden="true"
         />
       </Box>
-      <Box position="relative">
-        <HStack justify="space-between" align="center" mb={2} spacing={2}>
+      <Box position="relative" display="flex" flexDirection="column" h="100%">
+        <Box flex="1">
+          <HStack justify="space-between" align="center" mb={2} spacing={2}>
           <HStack spacing={2}>
             <Icon as={FiAward} boxSize={4} color={rankColor} aria-hidden="true" />
             <HStack
@@ -382,10 +349,29 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
             </Text>
           </HStack>
         </VStack>
+        </Box>
 
-        <Text fontSize="xs" color={metaColor} mt={1}>
-          Если вам откликается то, что делает автор, загляните в профиль и познакомьтесь поближе.
-        </Text>
+        <HStack spacing={2} mt={2} align="center">
+          <Tooltip label="AIFFA очень благодарна за вклад этого создателя" openDelay={200} hasArrow>
+            <Box
+              as="span"
+              px={1.5}
+              py={1.5}
+              borderRadius="full"
+              borderWidth="1px"
+              borderColor={gratitudeIconBorder}
+              bg={gratitudeIconBg}
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Icon as={FiHeart} boxSize={3} color={gratitudeIconColor} aria-hidden="true" />
+            </Box>
+          </Tooltip>
+          <Text fontSize="xs" color={metaColor}>
+            Если вам откликается то, что делает автор, загляните в профиль и познакомьтесь поближе.
+          </Text>
+        </HStack>
 
         {/* нижняя ссылка не нужна — основной CTA выше */}
       </Box>

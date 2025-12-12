@@ -81,7 +81,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
     "0 14px 40px rgba(0,0,0,0.65)",
   );
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
-  const bgIconColor = useColorModeValue("blackAlpha.100", "whiteAlpha.100");
+  const bgIconColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
 
   const avatarPalettes = [
     { light: "purple.600", dark: "purple.300" },
@@ -138,11 +138,11 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           right={-2}
           bottom={-4}
           transform="rotate(-8deg) translate3d(0, 0, 0)"
-          opacity={0.12}
+          opacity={0.16}
           transition="transform 0.25s ease-out, opacity 0.25s ease-out"
           _groupHover={{
             transform: "rotate(-2deg) translate3d(10px, -8px, 0)",
-            opacity: 0.2,
+            opacity: 0.24,
           }}
           aria-hidden="true"
         />

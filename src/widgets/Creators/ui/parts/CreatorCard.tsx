@@ -115,6 +115,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
       bg={cardBg}
       position="relative"
       overflow="hidden"
+      role="group"
       transition="background-color 0.18s ease-out, box-shadow 0.2s ease-out, transform 0.16s ease-out, border-color 0.16s ease-out"
       _hover={{
         bg: cardHoverBg,
@@ -136,7 +137,13 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
           position="absolute"
           right={-2}
           bottom={-4}
-          transform="rotate(-8deg)"
+          transform="rotate(-8deg) translate3d(0, 0, 0)"
+          opacity={0.12}
+          transition="transform 0.25s ease-out, opacity 0.25s ease-out"
+          _groupHover={{
+            transform: "rotate(-2deg) translate3d(10px, -8px, 0)",
+            opacity: 0.2,
+          }}
           aria-hidden="true"
         />
       </Box>
@@ -161,7 +168,11 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, onOpenProfile
         </HStack>
 
         <HStack align="center" spacing={3} mb={2}>
-          <Box position="relative">
+          <Box
+            position="relative"
+            transition="transform 0.18s ease-out"
+            _groupHover={{ transform: "translateY(-2px)" }}
+          >
             <Box
               position="absolute"
               inset={-1}

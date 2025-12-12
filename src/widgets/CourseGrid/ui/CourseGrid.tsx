@@ -19,9 +19,14 @@ const CourseGrid: React.FC<CourseGridProps> = ({ category = 'all', showHeader = 
             />
           )}
 
-          <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} spacing={{ base: 5, md: 6 }} w="full">
+          <SimpleGrid
+            columns={{ base: 1, md: 2, xl: 3 }}
+            spacing={{ base: 5, md: 6 }}
+            w="full"
+            alignItems="stretch"
+          >
             {courses.map((course, index) => (
-              <Box key={course.id} data-index={index} sx={{ animation: 'none' }}>
+              <Box key={course.id} data-index={index} sx={{ animation: 'none' }} h="full">
                 <CourseCard
                   moduleId={course.moduleId}
                   title={course.title}

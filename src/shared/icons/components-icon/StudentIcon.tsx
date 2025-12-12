@@ -22,6 +22,7 @@ const StudentIcon: React.FC = () => {
           width={150}
           height={132}
           sizes="150px"
+          priority
         />
       }
     />

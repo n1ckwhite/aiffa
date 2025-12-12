@@ -23,6 +23,7 @@ const FeaturedCreatorsSection: React.FC = () => {
 
   type TimeRange = "week" | "month";
   const [timeRange, setTimeRange] = React.useState<TimeRange>("week");
+  const [isExpanded, setIsExpanded] = React.useState(false);
 
   const materialsCreators = React.useMemo(() => {
     if (!items || items.length === 0) {
@@ -43,8 +44,12 @@ const FeaturedCreatorsSection: React.FC = () => {
       return b.contributions.lessons - a.contributions.lessons;
     });
 
+    if (isExpanded) {
+      return sorted;
+    }
+
     return sorted.slice(0, 3);
-  }, [materialsCreators, timeRange]);
+  }, [materialsCreators, timeRange, isExpanded]);
 
   if (featuredCreators.length === 0) {
     return null;
@@ -91,7 +96,7 @@ const FeaturedCreatorsSection: React.FC = () => {
             Небольшая выборка людей, которые создают материалы для AIFFA. Можно посмотреть авторов по активности за
             неделю или за месяц.
           </Text>
-          <HStack spacing={2} mt={2}>
+          <HStack spacing={2} mt={3}>
             <Button
               size="sm"
               borderRadius="full"
@@ -145,6 +150,26 @@ const FeaturedCreatorsSection: React.FC = () => {
             />
           ))}
         </SimpleGrid>
+        {materialsCreators.length > 3 && (
+          <Box textAlign="center" pt={1}>
+            <Button
+              size="sm"
+              variant="outline"
+              borderRadius="full"
+              px={4}
+              py={2}
+              fontSize="sm"
+              fontWeight="semibold"
+              borderColor={useColorModeValue("blackAlpha.300", "whiteAlpha.300")}
+              onClick={() => setIsExpanded((prev) => !prev)}
+              _hover={{
+                bg: useColorModeValue("blackAlpha.50", "whiteAlpha.100"),
+              }}
+            >
+              {isExpanded ? "Показать только топ‑3" : "Показать всех авторов материалов"}
+            </Button>
+          </Box>
+        )}
       </VStack>
     </Box>
   );

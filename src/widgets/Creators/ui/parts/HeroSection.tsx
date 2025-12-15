@@ -116,9 +116,9 @@ const HeroSection: React.FC = () => {
               spacing={{ base: 3, lg: 4 }}
               pt={2}
               w="full"
+              wrap="wrap"
               textAlign="left"
               justify={{ base: "center", lg: "flex-start" }}
-              flexWrap={{ base: "wrap", lg: "nowrap" }}
             >
               <HStack
                 as="li"

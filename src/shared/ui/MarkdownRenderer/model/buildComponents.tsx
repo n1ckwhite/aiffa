@@ -257,35 +257,28 @@ export const buildComponents = (colors: any) => {
       const alt = (p as any).alt as string | undefined;
       const src = (p as any).src as string | undefined;
       return (
-        <Box
-          as="figure"
+        <Image
+          src={src}
+          alt={alt}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
           mx="auto"
           my={6}
+          borderRadius="lg"
+          width={960}
+          height={540}
           w="100%"
           maxW="960px"
-          borderRadius="lg"
-          overflow="hidden"
-          position="relative"
-        >
-          <Box paddingTop="56.25%" />
-          <Image
-            src={src}
-            alt={alt}
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
-            position="absolute"
-            inset={0}
-            w="100%"
-            h="100%"
-            objectFit="contain"
-            display="block"
-            draggable={false}
-            sizes="(min-width: 768px) 960px, 100vw"
-            borderRadius="0"
-            borderWidth={0}
-          />
-        </Box>
+          h="auto"
+          maxH="520px"
+          objectFit="contain"
+          borderWidth="1px"
+          borderColor={borderCol}
+          display="block"
+          draggable={false}
+          sizes="(min-width: 768px) 960px, 100vw"
+        />
       );
     },
     code: CodeBlock as any,

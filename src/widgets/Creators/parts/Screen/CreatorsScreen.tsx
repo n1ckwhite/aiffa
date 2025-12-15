@@ -260,7 +260,6 @@ const CreatorsScreen: React.FC = () => {
             id="senior-benefits"
             scrollMarginTop="90px"
             aria-label="Как вклад делает авторов сильнее"
-            p={{ base: 4, md: 6 }}
           >
             <VStack spacing={{ base: 4, md: 5 }} align="center" textAlign="center">
               <SeniorTeamIcon />
@@ -284,6 +283,7 @@ const CreatorsScreen: React.FC = () => {
                   spacing={3}
                   p={5}
                   borderRadius="xl"
+                  textAlign="left"
                   bg={seniorCardBg}
                   borderWidth="1px"
                   borderColor={seniorCardBorder}
@@ -318,6 +318,7 @@ const CreatorsScreen: React.FC = () => {
                   spacing={3}
                   p={5}
                   borderRadius="xl"
+                  textAlign="left"
                   bg={seniorCardBg}
                   borderWidth="1px"
                   borderColor={seniorCardBorder}
@@ -352,6 +353,7 @@ const CreatorsScreen: React.FC = () => {
                   spacing={3}
                   p={5}
                   borderRadius="xl"
+                  textAlign="left"
                   bg={seniorCardBg}
                   borderWidth="1px"
                   borderColor={seniorCardBorder}

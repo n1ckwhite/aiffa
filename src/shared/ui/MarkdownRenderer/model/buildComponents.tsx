@@ -265,9 +265,6 @@ export const buildComponents = (colors: any) => {
           maxW="960px"
           borderRadius="lg"
           overflow="hidden"
-          borderWidth="1px"
-          borderColor={borderCol}
-          bg={useColorModeValue("white", "whiteAlpha.50")}
           position="relative"
         >
           <Box paddingTop="56.25%" />

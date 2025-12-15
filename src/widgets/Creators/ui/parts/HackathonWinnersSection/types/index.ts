@@ -1,4 +1,4 @@
-import type { HackathonWinner } from "../../../model/hackathonWinners";
+import { HackathonWinner } from "@/widgets/Creators/model/hackathonWinners";
 
 export type HackathonWinnerCardProps = {
   teamName: string;

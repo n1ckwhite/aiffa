@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import type { Creator } from "../../../../../model/types";
+import { Creator } from "@/widgets/Creators/model/types";
 
 export type CreatorCardProfileProps = {
   name: string;

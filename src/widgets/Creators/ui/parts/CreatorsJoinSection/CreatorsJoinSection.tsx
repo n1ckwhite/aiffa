@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Heading, HStack, Icon, SimpleGrid, Text, VStack } from "@chakra-ui/react";
-import { BusinessWorkshopIcon } from "@/shared/icons/components-icon";
 import { joinCards } from "./data/joinCards";
 import { useCreatorsJoinColors } from "./colors/useCreatorsJoinColors";
 import type { JoinCard } from "./types";
@@ -12,7 +11,6 @@ const CreatorsJoinSection: React.FC = () => {
     <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-label="Как попасть в создатели AIFFA">
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={3} textAlign="center">
-          <BusinessWorkshopIcon />
           <Heading as="h3" size="md" letterSpacing="-0.02em">
             Как попасть в создатели AIFFA
           </Heading>

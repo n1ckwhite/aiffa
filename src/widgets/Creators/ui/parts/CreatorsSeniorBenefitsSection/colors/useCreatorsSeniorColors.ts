@@ -1,4 +1,4 @@
-import { useCreatorsColors } from "../../../colors/useCreatorsColors";
+import { useCreatorsColors } from "@/widgets/Creators/colors/useCreatorsColors";
 
 export const useCreatorsSeniorColors = () => {
   const { seniorCardBg, seniorCardBorder, seniorTextColor, seniorIconPalettes } = useCreatorsColors();

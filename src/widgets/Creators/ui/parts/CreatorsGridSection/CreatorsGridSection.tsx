@@ -10,7 +10,7 @@ import CreatorCard from "../CreatorCard";
 import { useCreatorsGridColors } from "./colors/useCreatorsGridColors";
 import { TIME_RANGE_ITEMS } from "./data/timeRange";
 import { useTimeRange } from "./helpers/useTimeRange";
-import type { Creator } from "../../../model/types";
+import { Creator } from "@/widgets/Creators/model/types";
 
 const CreatorsGridSection: React.FC = () => {
   const { items } = useCreatorsData();

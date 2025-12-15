@@ -1,4 +1,4 @@
-import type { Creator } from "../../../model/types";
+import { Creator } from "@/widgets/Creators/model/types";
 
 export const getFeaturedCreators = (items: Creator[] = []) => {
   const materialsCreators = items.filter((creator) => creator.areas?.includes("materials"));

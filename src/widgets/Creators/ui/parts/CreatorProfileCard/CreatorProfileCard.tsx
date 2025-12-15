@@ -4,7 +4,7 @@ import { roleLabelMap } from "./data/roleLabelMap";
 import { getMedal } from "./helpers/getMedal";
 import { useCreatorProfileCardColors } from "./colors/useCreatorProfileCardColors";
 import type { CreatorProfileCardProps } from "./types";
-import type { CreatorProfileLink } from "../../../model/types";
+import type { CreatorProfileLink } from "@/widgets/Creators/model/types";
 
 const CreatorProfileCard: React.FC<CreatorProfileCardProps> = ({ creator, index }) => {
   const { name, role, avatar, title, contributions, profileLinks } = creator;

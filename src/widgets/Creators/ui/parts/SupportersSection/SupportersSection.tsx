@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Heading, HStack, Icon, Link, Text, VStack, Wrap, WrapItem } from "@chakra-ui/react";
+import { Avatar, Box, Heading, HStack, Icon, Link, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { FiHeart } from "react-icons/fi";
 import { useCreatorsData } from "../../hooks/useCreatorsData";
 import { Creator } from "@/widgets/Creators/model/types";
@@ -65,11 +65,20 @@ const SupportersSection: React.FC = () => {
 
         <Box w="full">
           <VStack spacing={3} align="center">
-            <Wrap as="ul" listStyleType="none" m={0} p={0} spacing={{ base: 3, md: 4 }} justify="center">
+            <SimpleGrid
+              as="ul"
+              listStyleType="none"
+              m={0}
+              p={0}
+              w="full"
+              minChildWidth={{ base: "64px", md: "80px" }}
+              spacing={{ base: 3, md: 4 }}
+              justifyItems="center"
+            >
               {avatarItems.map((item) => {
                 const href = item.profileHref;
                 return (
-                  <WrapItem as="li" key={item.id}>
+                  <Box as="li" key={item.id} minW={0} w="full" display="flex" justifyContent="center">
                     <Box
                       as={Link}
                       href={href}
@@ -92,10 +101,10 @@ const SupportersSection: React.FC = () => {
                     >
                       <Avatar name={item.name} src={item.avatarSrc} boxSize={{ base: 8, md: 9 }} borderRadius="lg" bg={avatarFallbackBg} />
                     </Box>
-                  </WrapItem>
+                  </Box>
                 );
               })}
-            </Wrap>
+            </SimpleGrid>
           </VStack>
         </Box>
       </VStack>

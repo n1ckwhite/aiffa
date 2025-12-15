@@ -21,6 +21,7 @@ const SeniorTeamIcon: React.FC = () => {
           sizes="300px"
           width={300}
           height={300}
+          priority
           
         />
       }

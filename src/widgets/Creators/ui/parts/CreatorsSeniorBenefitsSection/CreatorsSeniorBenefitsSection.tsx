@@ -12,9 +12,9 @@ const CreatorsSeniorBenefitsSection: React.FC = () => {
 
   return (
     <Box as="section" id="senior-benefits" scrollMarginTop="90px" aria-labelledby={headingId}>
+      <SeniorTeamIcon />
       <VStack spacing={3} align="center" textAlign="center">
         <VStack spacing={3} align="center">
-          <SeniorTeamIcon />
           <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
             Как это делает вас сильнее
           </Heading>

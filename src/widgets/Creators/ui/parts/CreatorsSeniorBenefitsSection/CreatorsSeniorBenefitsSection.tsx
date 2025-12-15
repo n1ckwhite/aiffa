@@ -1,35 +1,12 @@
 import React from "react";
 import { Box, Heading, HStack, Icon, SimpleGrid, Text, VStack } from "@chakra-ui/react";
-import { FiMessageCircle, FiShare2, FiTrendingUp } from "react-icons/fi";
 import { SeniorTeamIcon } from "@/shared/icons/components-icon";
-import { useCreatorsColors } from "../../colors/useCreatorsColors";
-
-const seniorBenefitCards = [
-  {
-    title: "Глубже прокачиваете экспертизу",
-    description:
-      "Объясняя сложные вещи, вы структурируете знания и закрываете пробелы — это ускоряет рост синьоров и лидов.",
-    icon: FiTrendingUp,
-    paletteIndex: 0,
-  },
-  {
-    title: "Получаете обратную связь и идеи",
-    description:
-      "Люди применяют ваши материалы и задачи, задают вопросы, предлагают улучшения — это даёт свежий взгляд на архитектуру и практики.",
-    icon: FiMessageCircle,
-    paletteIndex: 1,
-  },
-  {
-    title: "Строите сеть и усиливаете репутацию",
-    description:
-      "Вы становитесь заметнее в сообществе: люди, которым вы помогли, готовы прийти на ревью, в спринт или в хакатон и закрыть сложные задачи плечом к плечу.",
-    icon: FiShare2,
-    paletteIndex: 2,
-  },
-];
+import { useCreatorsSeniorColors } from "./colors/useCreatorsSeniorColors";
+import { seniorBenefitCards } from "./data/seniorBenefitCards";
+import type { SeniorBenefitCard } from "./types";
 
 const CreatorsSeniorBenefitsSection: React.FC = () => {
-  const { seniorCardBg, seniorCardBorder, seniorTextColor, seniorIconPalettes } = useCreatorsColors();
+  const { seniorCardBg, seniorCardBorder, seniorTextColor, seniorIconPalettes } = useCreatorsSeniorColors();
 
   return (
     <Box as="section" id="senior-benefits" scrollMarginTop="90px" aria-label="Как вклад делает авторов сильнее">
@@ -40,14 +17,14 @@ const CreatorsSeniorBenefitsSection: React.FC = () => {
             Как это делает вас сильнее
           </Heading>
           <Text fontSize={{ base: "sm", md: "md" }} color={seniorTextColor} maxW={{ base: "full", md: "880px" }}>
-            Делитесь опытом, чтобы создать поток знаний для комьюнити: люди, которым вы помогаете, позже смогут усилить
-            ваши проекты, принести новые идеи и закрыть сложные задачи вместе с вами.
+            Делитесь опытом, чтобы создать поток знаний для комьюнити: люди, которым вы помогаете, позже смогут усилить ваши проекты, принести новые
+            идеи и закрыть сложные задачи вместе с вами.
           </Text>
         </VStack>
 
         <SimpleGrid minChildWidth="260px" spacing={{ base: 3, md: 4 }} justifyItems="stretch" w="full">
-          {seniorBenefitCards.map((card) => {
-            const palette = seniorIconPalettes[card.paletteIndex];
+          {seniorBenefitCards.map((card: SeniorBenefitCard) => {
+            const palette = seniorIconPalettes[card.paletteIndex as number];
 
             return (
               <HStack

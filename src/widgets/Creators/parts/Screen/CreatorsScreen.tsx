@@ -281,20 +281,26 @@ const CreatorsScreen: React.FC = () => {
               >
                 <HStack
                   align="flex-start"
-                  spacing={3}
+                  spacing={4}
                   p={5}
-                  borderRadius="xl"
+                  borderRadius="2xl"
                   textAlign="left"
                   bg={seniorCardBg}
                   borderWidth="1px"
                   borderColor={seniorCardBorder}
-                  boxShadow={useColorModeValue("xs", "xs")}
+                  boxShadow={useColorModeValue("lg", "lg")}
                   w="full"
                   minW="0"
+                  transition="all 0.2s ease"
+                  _hover={{
+                    transform: "translateY(-4px)",
+                    boxShadow: useColorModeValue("xl", "xl"),
+                    borderColor: seniorIconColor,
+                  }}
                 >
                   <Box
-                    w={9}
-                    h={9}
+                    w={10}
+                    h={10}
                     borderRadius="full"
                     bg={seniorIconBg}
                     display="flex"
@@ -304,11 +310,11 @@ const CreatorsScreen: React.FC = () => {
                   >
                     <Icon as={FiTrendingUp} aria-hidden="true" boxSize={5} color={seniorIconColor} />
                   </Box>
-                  <VStack align="flex-start" spacing={1}>
-                    <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")}>
+                  <VStack align="flex-start" spacing={2}>
+                    <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")} fontSize="md">
                       Глубже прокачиваете экспертизу
                     </Text>
-                    <Text fontSize="sm" color={seniorTextColor}>
+                    <Text fontSize="sm" color={seniorTextColor} lineHeight="1.5">
                       Объясняя сложные вещи, вы структурируете знания и закрываете пробелы — это ускоряет рост
                       синьоров и лидов.
                     </Text>
@@ -316,20 +322,26 @@ const CreatorsScreen: React.FC = () => {
                 </HStack>
                 <HStack
                   align="flex-start"
-                  spacing={3}
+                  spacing={4}
                   p={5}
-                  borderRadius="xl"
+                  borderRadius="2xl"
                   textAlign="left"
                   bg={seniorCardBg}
                   borderWidth="1px"
                   borderColor={seniorCardBorder}
-                  boxShadow={useColorModeValue("xs", "xs")}
+                  boxShadow={useColorModeValue("lg", "lg")}
                   w="full"
                   minW="0"
+                  transition="all 0.2s ease"
+                  _hover={{
+                    transform: "translateY(-4px)",
+                    boxShadow: useColorModeValue("xl", "xl"),
+                    borderColor: seniorIconColor,
+                  }}
                 >
                   <Box
-                    w={9}
-                    h={9}
+                    w={10}
+                    h={10}
                     borderRadius="full"
                     bg={seniorIconBg}
                     display="flex"
@@ -339,11 +351,11 @@ const CreatorsScreen: React.FC = () => {
                   >
                     <Icon as={FiMessageCircle} aria-hidden="true" boxSize={5} color={seniorIconColor} />
                   </Box>
-                  <VStack align="flex-start" spacing={1}>
-                    <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")}>
+                  <VStack align="flex-start" spacing={2}>
+                    <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")} fontSize="md">
                       Получаете обратную связь и идеи
                     </Text>
-                    <Text fontSize="sm" color={seniorTextColor}>
+                    <Text fontSize="sm" color={seniorTextColor} lineHeight="1.5">
                       Люди применяют ваши материалы и задачи, задают вопросы, предлагают улучшения — это даёт свежий
                       взгляд на архитектуру и практики.
                     </Text>
@@ -351,20 +363,26 @@ const CreatorsScreen: React.FC = () => {
                 </HStack>
                 <HStack
                   align="flex-start"
-                  spacing={3}
+                  spacing={4}
                   p={5}
-                  borderRadius="xl"
+                  borderRadius="2xl"
                   textAlign="left"
                   bg={seniorCardBg}
                   borderWidth="1px"
                   borderColor={seniorCardBorder}
-                  boxShadow={useColorModeValue("xs", "xs")}
+                  boxShadow={useColorModeValue("lg", "lg")}
                   w="full"
                   minW="0"
+                  transition="all 0.2s ease"
+                  _hover={{
+                    transform: "translateY(-4px)",
+                    boxShadow: useColorModeValue("xl", "xl"),
+                    borderColor: seniorIconColor,
+                  }}
                 >
                   <Box
-                    w={9}
-                    h={9}
+                    w={10}
+                    h={10}
                     borderRadius="full"
                     bg={seniorIconBg}
                     display="flex"
@@ -374,11 +392,11 @@ const CreatorsScreen: React.FC = () => {
                   >
                     <Icon as={FiShare2} aria-hidden="true" boxSize={5} color={seniorIconColor} />
                   </Box>
-                  <VStack align="flex-start" spacing={1} textAlign="left" w="full">
-                    <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")}>
+                  <VStack align="flex-start" spacing={2} textAlign="left" w="full">
+                    <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")} fontSize="md">
                       Строите сеть и усиливаете репутацию
                     </Text>
-                    <Text fontSize="sm" color={seniorTextColor}>
+                    <Text fontSize="sm" color={seniorTextColor} lineHeight="1.5">
                       Вы становитесь заметнее в сообществе: люди, которым вы помогли, готовы прийти на ревью, в спринт
                       или в хакатон и закрыть сложные задачи плечом к плечу.
                     </Text>

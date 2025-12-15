@@ -17,11 +17,12 @@ const BusinessManTelescop: React.FC = () => {
       }}
       fallback={
         <OptimizedIconImage
+          width={1012}
+          height={832}
+          style={{ width: "100%", height: "auto", aspectRatio: "1012 / 832", objectFit: "contain", display: "block" }}
           src={businessManTelescopIcon}
           alt="Иконка команды бизнеса"
-          width={300}
-          height={300}
-          sizes="350px"
+          sizes="(max-width: 768px) 90vw, 320px"
           priority
         />
       }

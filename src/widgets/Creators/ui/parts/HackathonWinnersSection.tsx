@@ -12,7 +12,7 @@ import {
   Link,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FiCode } from "react-icons/fi";
+import { FiCode, FiAward } from "react-icons/fi";
 import { hackathonWinners, type HackathonWinner } from "../../model/hackathonWinners";
 
 type HackathonWinnerCardProps = {
@@ -37,16 +37,16 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({
 
   const goldBorder = useColorModeValue("yellow.400", "yellow.300");
   const goldColor = useColorModeValue("yellow.700", "yellow.200");
-  const silverBorder = useColorModeValue("gray.400", "gray.500");
-  const silverColor = useColorModeValue("gray.700", "gray.200");
+  const purplerBorder = useColorModeValue("purple.400", "purple.300");
+  const purpleColor = useColorModeValue("purple.600", "purple.200");
   const bronzeBorder = useColorModeValue("orange.400", "orange.300");
   const bronzeColor = useColorModeValue("orange.700", "orange.200");
   const defaultBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const defaultColor = useColorModeValue("gray.500", "gray.300");
 
   const rankBg = useColorModeValue("whiteAlpha.700", "whiteAlpha.100");
-  const rankBorder = place === 1 ? goldBorder : place === 2 ? silverBorder : place === 3 ? bronzeBorder : defaultBorder;
-  const rankColor = place === 1 ? goldColor : place === 2 ? silverColor : place === 3 ? bronzeColor : defaultColor;
+  const rankBorder = place === 1 ? goldBorder : place === 2 ? purplerBorder : place === 3 ? bronzeBorder : defaultBorder;
+  const rankColor = place === 1 ? goldColor : place === 2 ? purpleColor : place === 3 ? bronzeColor : defaultColor;
 
   const metaColor = useColorModeValue("gray.500", "gray.300");
   const titleColor = useColorModeValue("gray.800", "gray.100");
@@ -104,7 +104,9 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({
               display="inline-flex"
               alignItems="center"
               justifyContent="center"
+              gap={1}
             >
+              <Icon as={FiAward} boxSize={3} aria-hidden="true" color={rankColor} />
               <Text as="span" fontSize="xs" fontWeight="semibold" color={rankColor}>
                 #{place}
               </Text>
@@ -182,11 +184,11 @@ const HackathonWinnersSection: React.FC = () => {
               <Icon as={FiCode} boxSize={3.5} aria-hidden="true" color={iconColor} />
             </Box>
             <Heading as="h2" size="md" letterSpacing="-0.02em">
-              Победители AIFFA Monthly Hackathon
+              Победители Хакатона
             </Heading>
           </HStack>
           <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
-            Здесь мы отмечаем команды, которые заняли призовые места в последнем AIFFA Monthly Hackathon. В рамках одного
+            Здесь мы отмечаем команды, которые заняли призовые места в последнем AIFFA Hackathon #1 — Задача старта. В рамках одного
             общего задания они предложили решения, которые особенно помогли продукту и комьюнити.
           </Text>
         </VStack>

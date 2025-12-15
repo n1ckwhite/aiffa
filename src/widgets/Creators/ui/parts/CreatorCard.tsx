@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, HStack, VStack, Text, Avatar, Icon, Tooltip, useColorModeValue } from "@chakra-ui/react";
+import { Box, HStack, VStack, Text, Avatar, Icon, useColorModeValue } from "@chakra-ui/react";
 import {
   FiBookOpen,
   FiTarget,
@@ -50,16 +50,13 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
   const isArticlesMode = mode === "articles";
   const isHackathonMode = mode === "hackathons";
 
-  const cardBg = useColorModeValue("white", "whiteAlpha.50");
-  const cardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
-
   const goldBorder = useColorModeValue("yellow.400", "yellow.300");
   const goldColor = useColorModeValue("yellow.700", "yellow.200");
 
   const silverBorder = useColorModeValue("purple.400", "purple.300");
-  const silverColor = useColorModeValue("purple.700", "purple.200");
+  const silverColor = useColorModeValue("purple.600", "purple.200");
 
-  const bronzeBorder = useColorModeValue("orange.400", "orange.300");
+  const bronzeBorder = useColorModeValue("orange.500", "orange.300");
   const bronzeColor = useColorModeValue("orange.700", "orange.200");
 
   const defaultBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
@@ -70,10 +67,19 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
 
   const rankBg = useColorModeValue("whiteAlpha.700", "whiteAlpha.100");
 
+  const rankPaletteArticles = {
+    1: { border: goldBorder, color: goldColor },
+    2: { border: silverBorder, color: silverColor },
+    3: { border: bronzeBorder, color: bronzeColor },
+    default: { border: defaultBorder, color: defaultColor },
+  } as const;
+
+  const rankPalette = isArticlesMode || isWeeklyMode ? rankPaletteArticles : rankPaletteArticles;
+
   const rankBorder =
-    index === 1 ? goldBorder : index === 2 ? silverBorder : index === 3 ? bronzeBorder : defaultBorder;
+    index === 1 ? rankPalette[1].border : index === 2 ? rankPalette[2].border : index === 3 ? rankPalette[3].border : rankPalette.default.border;
   const rankColor =
-    index === 1 ? goldColor : index === 2 ? silverColor : index === 3 ? bronzeColor : defaultColor;
+    index === 1 ? rankPalette[1].color : index === 2 ? rankPalette[2].color : index === 3 ? rankPalette[3].color : rankPalette.default.color;
   const metaColor = useColorModeValue("gray.500", "gray.300");
   const materialsIconColor = useColorModeValue("orange.400", "orange.300");
   const tasksIconColor = useColorModeValue("blue.400", "blue.300");

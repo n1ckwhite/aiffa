@@ -33,7 +33,7 @@ const ArticleAuthorsSection: React.FC = () => {
   return (
     <Box as="section" aria-label="Авторы статей AIFFA" bg="transparent">
       <VStack align="stretch" spacing={4}>
-        <VStack align="center" spacing={4} textAlign="center">
+        <VStack align="center" spacing={3} textAlign="center">
           <HStack spacing={2} align="center" justify="center">
             <Box
               as="span"
@@ -50,7 +50,7 @@ const ArticleAuthorsSection: React.FC = () => {
               <Icon as={FiStar} boxSize={3.5} aria-hidden="true" color={iconColor} />
             </Box>
             <Heading as="h2" size="md" letterSpacing="-0.02em">
-              Авторы статей AIFFA
+                Авторы статей AIFFA
             </Heading>
           </HStack>
           <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>

@@ -33,7 +33,7 @@ const ProjectsAuthorsSection: React.FC = () => {
   return (
     <Box as="section" aria-label="Авторы проектов AIFFA" bg="transparent">
       <VStack align="stretch" spacing={4}>
-        <VStack align="center" spacing={4} textAlign="center">
+        <VStack align="center" spacing={3} textAlign="center">
           <HStack spacing={2} align="center" justify="center">
             <Box
               as="span"

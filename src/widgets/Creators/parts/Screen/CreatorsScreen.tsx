@@ -54,7 +54,7 @@ const CreatorsScreen: React.FC = () => {
       transition="none"
     >
       <Box maxW="1320px" mx="auto">
-        <VStack align="stretch" spacing={{ base: 8, md: 10 }}>
+        <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
           <Box as="section" aria-label="Описание страницы создателей AIFFA">
             <VStack
               align="center"
@@ -83,7 +83,8 @@ const CreatorsScreen: React.FC = () => {
           <HeroSection />
           <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-label="Как попасть в создатели AIFFA">
           <BusinessWorkshopIcon/>
-            <VStack align="stretch" spacing={{ base: 4, md: 5 }}>
+            <VStack align="stretch" spacing={4}>
+              <VStack align="center" spacing={3} textAlign="center">
               <Heading
                 as="h3"
                 size="md"
@@ -103,7 +104,7 @@ const CreatorsScreen: React.FC = () => {
                 мейнтейнтят проекты, пишут статьи, помогают на хакатонах и поддерживают комьюнити. Присоединиться может
                 любой, кто создаёт пользу и готов делиться опытом.
               </Text>
-
+              </VStack>
               <SimpleGrid
                 minChildWidth="260px"
                 spacing={{ base: 3, md: 4 }}
@@ -261,9 +262,9 @@ const CreatorsScreen: React.FC = () => {
             scrollMarginTop="90px"
             aria-label="Как вклад делает авторов сильнее"
           >
-            <VStack spacing={{ base: 4, md: 5 }} align="center" textAlign="center">
               <SeniorTeamIcon />
-              <VStack spacing={2} align="center">
+            <VStack spacing={3} align="center" textAlign="center">
+              <VStack spacing={3} align="center">
                 <Heading as="h3" size="md" letterSpacing="-0.02em">
                   Как это делает вас сильнее
                 </Heading>

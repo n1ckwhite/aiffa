@@ -262,9 +262,9 @@ const CreatorsScreen: React.FC = () => {
             aria-label="Как вклад делает авторов сильнее"
             p={{ base: 4, md: 6 }}
           >
-            <VStack spacing={{ base: 3, md: 4 }} align="stretch">
-              <SeniorTeamIcon/>
-              <VStack spacing={2} align="flex-start">
+            <VStack spacing={{ base: 4, md: 5 }} align="center" textAlign="center">
+              <SeniorTeamIcon />
+              <VStack spacing={2} align="center">
                 <Heading as="h3" size="md" letterSpacing="-0.02em">
                   Как это делает вас сильнее
                 </Heading>
@@ -273,16 +273,23 @@ const CreatorsScreen: React.FC = () => {
                   усилить ваши проекты, принести новые идеи и закрыть сложные задачи вместе с вами.
                 </Text>
               </VStack>
-              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, md: 4 }}>
+              <SimpleGrid
+                minChildWidth="260px"
+                spacing={{ base: 3, md: 4 }}
+                justifyItems="stretch"
+                w="full"
+              >
                 <HStack
                   align="flex-start"
                   spacing={3}
-                  p={4}
+                  p={5}
                   borderRadius="xl"
                   bg={seniorCardBg}
                   borderWidth="1px"
                   borderColor={seniorCardBorder}
                   boxShadow={useColorModeValue("xs", "xs")}
+                  w="full"
+                  minW="0"
                 >
                   <Box
                     w={9}
@@ -309,12 +316,14 @@ const CreatorsScreen: React.FC = () => {
                 <HStack
                   align="flex-start"
                   spacing={3}
-                  p={4}
+                  p={5}
                   borderRadius="xl"
                   bg={seniorCardBg}
                   borderWidth="1px"
                   borderColor={seniorCardBorder}
                   boxShadow={useColorModeValue("xs", "xs")}
+                  w="full"
+                  minW="0"
                 >
                   <Box
                     w={9}
@@ -341,12 +350,14 @@ const CreatorsScreen: React.FC = () => {
                 <HStack
                   align="flex-start"
                   spacing={3}
-                  p={4}
+                  p={5}
                   borderRadius="xl"
                   bg={seniorCardBg}
                   borderWidth="1px"
                   borderColor={seniorCardBorder}
                   boxShadow={useColorModeValue("xs", "xs")}
+                  w="full"
+                  minW="0"
                 >
                   <Box
                     w={9}
@@ -360,7 +371,7 @@ const CreatorsScreen: React.FC = () => {
                   >
                     <Icon as={FiShare2} aria-hidden="true" boxSize={5} color={seniorIconColor} />
                   </Box>
-                  <VStack align="flex-start" spacing={1}>
+                  <VStack align="flex-start" spacing={1} textAlign="left" w="full">
                     <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")}>
                       Строите сеть и усиливаете репутацию
                     </Text>

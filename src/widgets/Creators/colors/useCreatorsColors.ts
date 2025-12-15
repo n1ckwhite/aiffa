@@ -36,9 +36,9 @@ export const useCreatorsColors = () => {
 
   const seniorIconPalettes = [
     {
-      iconBg: useColorModeValue("indigo.50", "whiteAlpha.100"),
-      color: useColorModeValue("indigo.500", "indigo.200"),
-      accentColor: useColorModeValue("indigo.400", "indigo.200"),
+      iconBg: useColorModeValue("blue.50", "whiteAlpha.100"),
+      color: useColorModeValue("blue.500", "blue.300"),
+      accentColor: useColorModeValue("blue.400", "blue.300"),
     },
     {
       iconBg: useColorModeValue("teal.50", "whiteAlpha.100"),

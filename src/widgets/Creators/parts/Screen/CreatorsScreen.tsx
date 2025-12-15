@@ -9,10 +9,10 @@ import {
   HStack,
   Icon,
   Button,
-  Wrap,
-  WrapItem,
+  Flex,
 } from "@chakra-ui/react";
-import { FiLogIn, FiAward, FiHeart, FiTrendingUp, FiMessageCircle, FiShare2, FiCompass } from "react-icons/fi";
+import { FiLogIn, FiAward, FiHeart, FiTrendingUp, FiMessageCircle, FiShare2, FiCompass, FiBookOpen, FiLayers, FiCheckSquare, FiStar, FiUsers } from "react-icons/fi";
+import type { IconType } from "react-icons";
 import FAQ from "widgets/Modules/FAQ/FAQ";
 import HeroSection from "../../ui/parts/HeroSection";
 import FeaturedCreatorsSection from "../../ui/parts/FeaturedCreatorsSection";
@@ -44,6 +44,17 @@ const CreatorsScreen: React.FC = () => {
   const navTextColor = useColorModeValue("gray.700", "gray.200");
   const navButtonBg = useColorModeValue("blue.500", "blue.400");
   const navButtonColor = useColorModeValue("white", "gray.900");
+  const navIconMap: Record<string, IconType> = {
+    "how-to-join": FiLogIn,
+    "senior-benefits": FiTrendingUp,
+    materials: FiBookOpen,
+    projects: FiLayers,
+    weekly: FiCheckSquare,
+    articles: FiStar,
+    hackathons: FiAward,
+    supporters: FiUsers,
+    "faq-creators": FiCompass,
+  };
   const navItems = [
     { id: "how-to-join", label: "Как попасть" },
     { id: "senior-benefits", label: "Сеньорам" },
@@ -103,53 +114,67 @@ const CreatorsScreen: React.FC = () => {
             borderColor={navCardBorder}
             bg={navCardBg}
             borderRadius="2xl"
-            p={{ base: 4, md: 5 }}
-            boxShadow={useColorModeValue("md", "md")}
+            p={{ base: 5, md: 6 }}
+            boxShadow={useColorModeValue("lg", "lg")}
             mt={{ base: 6, md: 7 }}
+            position="relative"
+            overflow="hidden"
+            _before={{
+              content: '""',
+              position: "absolute",
+              inset: 0,
+              bg: useColorModeValue("linear-gradient(135deg, rgba(59,130,246,0.08), rgba(14,165,233,0.06))", "linear-gradient(135deg, rgba(59,130,246,0.12), rgba(14,165,233,0.1))"),
+              pointerEvents: "none",
+            }}
           >
-            <VStack align="stretch" spacing={{ base: 3, md: 4 }}>
+            <VStack align="stretch" spacing={{ base: 4, md: 5 }} position="relative" zIndex={1}>
               <HStack align="flex-start" spacing={3}>
                 <Box
-                  w={10}
-                  h={10}
+                  w={12}
+                  h={12}
                   borderRadius="full"
                   bg={useColorModeValue("white", "whiteAlpha.200")}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
                   flexShrink={0}
-                  boxShadow={useColorModeValue("sm", "sm")}
+                  boxShadow={useColorModeValue("md", "md")}
                 >
-                  <Icon as={FiCompass} aria-hidden="true" boxSize={5} color={useColorModeValue("blue.600", "blue.200")} />
+                  <Icon as={FiCompass} aria-hidden="true" boxSize={6} color={useColorModeValue("blue.600", "blue.200")} />
                 </Box>
                 <VStack align="flex-start" spacing={1}>
                   <Heading as="h3" size="sm" color={navHeadingColor} letterSpacing="-0.01em">
                     Быстрые ссылки по разделам
                   </Heading>
-                  <Text fontSize="sm" color={navTextColor} maxW={{ base: "full", md: "840px" }}>
+                  <Text fontSize="sm" color={navTextColor} maxW={{ base: "full", md: "880px" }}>
                     Перейдите к нужному блоку: как попасть, вклад сеньоров, топ авторов материалов, проектов, weekly-задач,
                     статей, хакатонов, поддержка и FAQ.
                   </Text>
                 </VStack>
               </HStack>
-              <Wrap spacing={{ base: 2, md: 3 }} justify="center" shouldWrapChildren>
-                {navItems.map((item) => (
-                  <WrapItem key={item.id}>
+              <Flex wrap="wrap" gap={{ base: 2.5, md: 3 }} justify="center">
+                {navItems.map((item) => {
+                  const IconComp = navIconMap[item.id];
+                  return (
                     <Button
+                      key={item.id}
                       size="sm"
                       bg={navButtonBg}
                       color={navButtonColor}
-                      _hover={{ bg: useColorModeValue("blue.600", "blue.300"), transform: "translateY(-1px)" }}
-                      _active={{ bg: useColorModeValue("blue.700", "blue.200") }}
+                      leftIcon={IconComp ? <Icon as={IconComp} boxSize={4} /> : undefined}
+                      _hover={{ bg: useColorModeValue("blue.600", "blue.300"), transform: "translateY(-2px)" }}
+                      _active={{ bg: useColorModeValue("blue.700", "blue.200"), transform: "translateY(0px)" }}
                       borderRadius="full"
-                      px={{ base: 3, md: 4 }}
+                      px={{ base: 3.5, md: 4 }}
+                      py={{ base: 2.5, md: 2.5 }}
+                      boxShadow={useColorModeValue("md", "md")}
                       onClick={() => handleScrollTo(item.id)}
                     >
                       {item.label}
                     </Button>
-                  </WrapItem>
-                ))}
-              </Wrap>
+                  );
+                })}
+              </Flex>
             </VStack>
           </Box>
           <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-label="Как попасть в создатели AIFFA">

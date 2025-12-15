@@ -273,7 +273,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
             )}
           </HStack>
 
-        <HStack align="flex-start" spacing={3} mt={0} mb={4}>
+        <HStack align="flex-start" spacing={3} mt={0} mb={2}>
           <Box
             position="relative"
             transition="transform 0.18s ease-out"
@@ -318,20 +318,6 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
                 <Text as="span">{direction || roleLabelMap[role]}</Text>
               </Box>
             </HStack>
-            {descriptionText && (
-              <HStack spacing={1.5} align="center">
-                <Text
-                  fontSize="xs"
-                  fontWeight="medium"
-                  color={primaryTextColor}
-                  maxW="full"
-                  textAlign="left"
-                  noOfLines={2}
-                >
-                  {descriptionText}
-                </Text>
-              </HStack>
-            )}
           </VStack>
         </HStack>
 
@@ -343,6 +329,18 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
           w="full"
           align="flex-start"
         >
+                      <Box w="full">
+              <Text
+                fontSize="xs"
+                fontWeight="medium"
+                color={primaryTextColor}
+                textAlign="left"
+                whiteSpace="normal"
+                wordBreak="break-word"
+              >
+                {descriptionText}
+              </Text>
+            </Box>
           {!isWeeklyMode && !isArticlesMode && !isProjectsMode && !isHackathonMode && (
             <HStack spacing={2}>
               <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />

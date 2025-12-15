@@ -255,20 +255,25 @@ export const buildComponents = (colors: any) => {
     ),
     img: (p) => {
       const alt = (p as any).alt as string | undefined;
+      const src = (p as any).src as string | undefined;
       return (
         <Image
-          src={(p as any).src}
+          src={src}
           alt={alt}
           loading="lazy"
           decoding="async"
           mx="auto"
           my={6}
           borderRadius="lg"
+          w="100%"
+          maxW="960px"
+          h="auto"
           maxH="520px"
           objectFit="contain"
           borderWidth="1px"
           borderColor={borderCol}
           display="block"
+          sx={{ aspectRatio: "16 / 9" }}
         />
       );
     },

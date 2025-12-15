@@ -40,7 +40,7 @@ const OptimizedIconImage: React.FC<OptimizedIconImageProps> = ({
       width={width}
       height={height}
       style={{
-        width: "auto",
+        width: "100%",
         height: "auto",
         objectFit: "contain",
         ...style,

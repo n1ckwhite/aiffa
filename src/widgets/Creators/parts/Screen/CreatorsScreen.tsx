@@ -1,16 +1,16 @@
 import React from "react";
 import { Box, VStack } from "@chakra-ui/react";
 import FAQ from "widgets/Modules/FAQ/FAQ";
-import HeroSection from "../../ui/parts/HeroSection";
-import FeaturedCreatorsSection from "../../ui/parts/FeaturedCreatorsSection";
-import ProjectsAuthorsSection from "../../ui/parts/ProjectsAuthorsSection";
-import WeeklyAuthorsSection from "../../ui/parts/WeeklyAuthorsSection";
+import HeroSection from "../../ui/parts/HeroSection/HeroSection";
+import FeaturedCreatorsSection from "../../ui/parts/FeaturedCreatorsSection/FeaturedCreatorsSection";
+import ProjectsAuthorsSection from "../../ui/parts/ProjectsAuthorsSection/ProjectsAuthorsSection";
+import WeeklyAuthorsSection from "../../ui/parts/WeeklyAuthorsSection/WeeklyAuthorsSection";
 import ArticleAuthorsSection from "../../ui/parts/ArticleAuthorsSection";
-import HackathonWinnersSection from "../../ui/parts/HackathonWinnersSection";
-import SupportersSection from "../../ui/parts/SupportersSection";
-import CreatorsIntroSection from "../../ui/parts/CreatorsIntroSection/CreatorsIntroSection";
-import CreatorsJoinSection from "../../ui/parts/CreatorsJoinSection";
-import CreatorsSeniorBenefitsSection from "../../ui/parts/CreatorsSeniorBenefitsSection";
+import HackathonWinnersSection from "../../ui/parts/HackathonWinnersSection/HackathonWinnersSection";
+import SupportersSection from "../../ui/parts/SupportersSection/SupportersSection";
+import CreatorsIntroSection from "../../ui/parts/CreatorsIntroSection";
+import CreatorsJoinSection from "../../ui/parts/CreatorsJoinSection/CreatorsJoinSection";
+import CreatorsSeniorBenefitsSection from "../../ui/parts/CreatorsSeniorBenefitsSection/CreatorsSeniorBenefitsSection";
 
 const CreatorsScreen: React.FC = () => {
   return (

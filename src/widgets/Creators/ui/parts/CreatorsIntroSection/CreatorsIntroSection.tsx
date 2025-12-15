@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
-import { useCreatorsColors } from "../../../colors/useCreatorsColors";
+import { useCreatorsColors } from "@/widgets/Creators/colors/useCreatorsColors";
 
 const CreatorsIntroSection: React.FC = () => {
   const { pageDescriptionColor } = useCreatorsColors();

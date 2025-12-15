@@ -1,6 +1,7 @@
 import { useColorModeValue } from "@chakra-ui/react";
 
 export const useCreatorsColors = () => {
+  const pageTitleColor = useColorModeValue('gray.800', 'gray.100');
   const pageDescriptionColor = useColorModeValue("gray.600", "gray.300");
 
   const infoCardBg = useColorModeValue("white", "whiteAlpha.100");
@@ -53,6 +54,7 @@ export const useCreatorsColors = () => {
   ];
 
   return {
+    pageTitleColor,
     pageDescriptionColor,
     infoCardBg,
     infoCardBorder,

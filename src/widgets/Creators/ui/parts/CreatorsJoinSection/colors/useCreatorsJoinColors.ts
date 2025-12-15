@@ -1,6 +1,7 @@
 import { useColorModeValue } from "@chakra-ui/react";
 
 export const useCreatorsJoinColors = () => {
+  const pageTitleColor = useColorModeValue('gray.800', 'gray.100');
   const pageDescriptionColor = useColorModeValue("gray.600", "gray.300");
   const joinIconPalettes = [
     {
@@ -26,7 +27,7 @@ export const useCreatorsJoinColors = () => {
     },
   ];
 
-  return { pageDescriptionColor, joinIconPalettes };
+  return { pageTitleColor, pageDescriptionColor, joinIconPalettes };
 };
 
 

@@ -8,7 +8,7 @@ import type { SeniorBenefitCard } from "./types";
 const headingId = "creators-senior-benefits-heading";
 
 const CreatorsSeniorBenefitsSection: React.FC = () => {
-  const { seniorCardBg, seniorCardBorder, seniorTextColor, seniorIconPalettes } = useCreatorsSeniorColors();
+  const { pageTitleColor, seniorCardBg, seniorCardBorder, seniorTextColor, seniorIconPalettes } = useCreatorsSeniorColors();
 
   return (
     <Box as="section" id="senior-benefits" scrollMarginTop="90px" aria-labelledby={headingId}>
@@ -63,7 +63,7 @@ const CreatorsSeniorBenefitsSection: React.FC = () => {
                   <Icon as={card.icon} aria-hidden="true" boxSize={5} color={palette.color} />
                 </Box>
                 <VStack align="flex-start" spacing={2} textAlign="left" w="full">
-                  <Text fontWeight="semibold" color="gray.800" _dark={{ color: "gray.100" }} fontSize="md">
+                  <Text fontWeight="semibold" color={pageTitleColor} fontSize="md">
                     {card.title}
                   </Text>
                   <Text fontSize="sm" color={seniorTextColor} lineHeight="1.5">

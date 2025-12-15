@@ -7,7 +7,7 @@ import type { JoinCard } from "./types";
 const headingId = "creators-join-heading";
 
 const CreatorsJoinSection: React.FC = () => {
-  const { pageDescriptionColor, joinIconPalettes } = useCreatorsJoinColors();
+  const { pageTitleColor, pageDescriptionColor, joinIconPalettes } = useCreatorsJoinColors();
 
   return (
     <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-labelledby={headingId}>
@@ -60,7 +60,7 @@ const CreatorsJoinSection: React.FC = () => {
                     <Icon as={card.icon} aria-hidden="true" boxSize={5} color={palette.color} />
                   </Box>
                   <VStack align="flex-start" spacing={2}>
-                    <Text fontWeight="semibold" color="gray.800" _dark={{ color: "gray.100" }} fontSize="md">
+                    <Text fontWeight="semibold" color={pageTitleColor} fontSize="md">
                       {card.title}
                     </Text>
                     <Text fontSize="sm" color={pageDescriptionColor} lineHeight="1.5">

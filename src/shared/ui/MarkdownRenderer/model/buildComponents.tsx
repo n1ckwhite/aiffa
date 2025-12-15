@@ -274,8 +274,9 @@ export const buildComponents = (colors: any) => {
           <Image
             src={src}
             alt={alt}
-            loading="lazy"
+            loading="eager"
             decoding="async"
+            fetchPriority="high"
             position="absolute"
             inset={0}
             w="100%"

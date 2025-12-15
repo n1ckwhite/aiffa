@@ -26,6 +26,20 @@ const CreatorsScreen: React.FC = () => {
   const infoCardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const infoIconBg = useColorModeValue("blue.50", "whiteAlpha.100");
   const infoIconColor = useColorModeValue("blue.500", "blue.300");
+  const joinIconPalettes = [
+    {
+      bg: useColorModeValue("blue.50", "whiteAlpha.100"),
+      color: useColorModeValue("blue.500", "blue.300"),
+    },
+    {
+      bg: useColorModeValue("teal.50", "whiteAlpha.100"),
+      color: useColorModeValue("teal.500", "teal.200"),
+    },
+    {
+      bg: useColorModeValue("purple.50", "whiteAlpha.100"),
+      color: useColorModeValue("purple.500", "purple.200"),
+    },
+  ];
   const seniorCardBg = useColorModeValue("white", "whiteAlpha.100");
   const seniorCardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const seniorIconBg = useColorModeValue("purple.50", "whiteAlpha.100");
@@ -98,32 +112,38 @@ const CreatorsScreen: React.FC = () => {
                 <Box
                   borderWidth="1px"
                   borderColor={infoCardBorder}
-                  borderRadius="xl"
+                  borderRadius="2xl"
                   bg={infoCardBg}
-                  p={4}
-                  boxShadow={useColorModeValue("sm", "sm")}
+                  p={5}
+                  boxShadow={useColorModeValue("lg", "lg")}
                   w="full"
                   minW="0"
                   maxW="100%"
+                  transition="all 0.2s ease"
+                  _hover={{
+                    transform: "translateY(-4px)",
+                    boxShadow: useColorModeValue("xl", "xl"),
+                    borderColor: infoIconColor,
+                  }}
                 >
-                  <HStack align="flex-start" spacing={3}>
+                  <HStack align="flex-start" spacing={4}>
                     <Box
-                      w={9}
-                      h={9}
+                      w={10}
+                      h={10}
                       borderRadius="full"
-                      bg={infoIconBg}
+                      bg={joinIconPalettes[0].bg}
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                       flexShrink={0}
                     >
-                      <Icon as={FiLogIn} aria-hidden="true" boxSize={5} color={infoIconColor} />
+                      <Icon as={FiLogIn} aria-hidden="true" boxSize={5} color={joinIconPalettes[0].color} />
                     </Box>
-                    <VStack align="flex-start" spacing={1}>
-                      <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")}>
+                    <VStack align="flex-start" spacing={2}>
+                      <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")} fontSize="md">
                         Как я могу туда попасть?
                       </Text>
-                      <Text fontSize="sm" color={pageDescriptionColor}>
+                      <Text fontSize="sm" color={pageDescriptionColor} lineHeight="1.5">
                         Публикуйте материалы, задачи недели или статьи, ведите проекты, участвуйте в хакатонах и помогайте
                         другим — мы смотрим на пользу для сообщества и качество того, что вы делаете.
                       </Text>
@@ -134,32 +154,38 @@ const CreatorsScreen: React.FC = () => {
                 <Box
                   borderWidth="1px"
                   borderColor={infoCardBorder}
-                  borderRadius="xl"
+                  borderRadius="2xl"
                   bg={infoCardBg}
-                  p={4}
-                  boxShadow={useColorModeValue("sm", "sm")}
+                  p={5}
+                  boxShadow={useColorModeValue("lg", "lg")}
                   w="full"
                   minW="0"
                   maxW="100%"
+                  transition="all 0.2s ease"
+                  _hover={{
+                    transform: "translateY(-4px)",
+                    boxShadow: useColorModeValue("xl", "xl"),
+                    borderColor: infoIconColor,
+                  }}
                 >
-                  <HStack align="flex-start" spacing={3}>
+                  <HStack align="flex-start" spacing={4}>
                     <Box
-                      w={9}
-                      h={9}
+                      w={10}
+                      h={10}
                       borderRadius="full"
-                      bg={infoIconBg}
+                      bg={joinIconPalettes[1].bg}
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                       flexShrink={0}
                     >
-                      <Icon as={FiAward} aria-hidden="true" boxSize={5} color={infoIconColor} />
+                      <Icon as={FiAward} aria-hidden="true" boxSize={5} color={joinIconPalettes[1].color} />
                     </Box>
-                    <VStack align="flex-start" spacing={1}>
-                      <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")}>
+                    <VStack align="flex-start" spacing={2}>
+                      <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")} fontSize="md">
                         За что люди попадают туда?
                       </Text>
-                      <Text fontSize="sm" color={pageDescriptionColor}>
+                      <Text fontSize="sm" color={pageDescriptionColor} lineHeight="1.5">
                         За вклад, который помогает другим: полезные материалы и задачи, стабильные проекты, статьи с
                         практикой, участие и менторство на хакатонах, поддержку комьюнити и обратную связь.
                       </Text>
@@ -170,32 +196,38 @@ const CreatorsScreen: React.FC = () => {
                 <Box
                   borderWidth="1px"
                   borderColor={infoCardBorder}
-                  borderRadius="xl"
+                  borderRadius="2xl"
                   bg={infoCardBg}
-                  p={4}
-                  boxShadow={useColorModeValue("sm", "sm")}
+                  p={5}
+                  boxShadow={useColorModeValue("lg", "lg")}
                   w="full"
                   minW="0"
                   maxW="100%"
+                  transition="all 0.2s ease"
+                  _hover={{
+                    transform: "translateY(-4px)",
+                    boxShadow: useColorModeValue("xl", "xl"),
+                    borderColor: infoIconColor,
+                  }}
                 >
-                  <HStack align="flex-start" spacing={3}>
+                  <HStack align="flex-start" spacing={4}>
                     <Box
-                      w={9}
-                      h={9}
+                      w={10}
+                      h={10}
                       borderRadius="full"
-                      bg={infoIconBg}
+                      bg={joinIconPalettes[2].bg}
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                       flexShrink={0}
                     >
-                      <Icon as={FiHeart} aria-hidden="true" boxSize={5} color={infoIconColor} />
+                      <Icon as={FiHeart} aria-hidden="true" boxSize={5} color={joinIconPalettes[2].color} />
                     </Box>
-                    <VStack align="flex-start" spacing={1}>
-                      <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")}>
+                    <VStack align="flex-start" spacing={2}>
+                      <Text fontWeight="semibold" color={useColorModeValue("gray.800", "gray.100")} fontSize="md">
                         Почему это важно?
                       </Text>
-                      <Text fontSize="sm" color={pageDescriptionColor}>
+                      <Text fontSize="sm" color={pageDescriptionColor} lineHeight="1.5">
                         Это усиливает миссию AIFFA: делать обучение практичным, развивать культуру обмена знаниями,
                         повышать качество контента и благодарить людей, которые двигают экосистему вперёд.
                       </Text>

@@ -9,7 +9,8 @@ export type ModulesFaqVariant =
   | 'xp'
   | 'partners'
   | 'hackathons'
-  | 'sessions';
+  | 'sessions'
+  | 'creators';
 
 export type ModulesFAQProps = {
   title?: string;

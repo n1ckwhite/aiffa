@@ -273,7 +273,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
             )}
           </HStack>
 
-        <HStack align="flex-start" spacing={3} mt={0} mb={2}>
+        <HStack align="flex-start" spacing={3} mt={0} mb={3}>
           <Box
             position="relative"
             transition="transform 0.18s ease-out"
@@ -321,15 +321,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
           </VStack>
         </HStack>
 
-        <VStack
-          spacing={1}
-          fontSize="xs"
-          color={metaColor}
-          mb={3}
-          w="full"
-          align="flex-start"
-        >
-                      <Box w="full">
+        <Box w="full">
               <Text
                 fontSize="xs"
                 fontWeight="medium"
@@ -337,10 +329,18 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
                 textAlign="left"
                 whiteSpace="normal"
                 wordBreak="break-word"
+                mb={3}
               >
                 {descriptionText}
               </Text>
             </Box>
+        <VStack
+          spacing={1}
+          fontSize="xs"
+          color={metaColor}
+          w="full"
+          align="flex-start"
+        >
           {!isWeeklyMode && !isArticlesMode && !isProjectsMode && !isHackathonMode && (
             <HStack spacing={2}>
               <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />

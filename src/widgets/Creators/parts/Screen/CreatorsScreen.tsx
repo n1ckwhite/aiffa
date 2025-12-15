@@ -49,6 +49,7 @@ const CreatorsScreen: React.FC = () => {
       hover: string;
       active: string;
       color: string;
+      glow: string;
     }
   > = {
     "how-to-join": {
@@ -56,54 +57,63 @@ const CreatorsScreen: React.FC = () => {
       hover: useColorModeValue("blue.600", "blue.200"),
       active: useColorModeValue("blue.700", "blue.300"),
       color: useColorModeValue("white", "gray.900"),
+      glow: "rgba(59,130,246,0.35)",
     },
     "senior-benefits": {
       bg: useColorModeValue("purple.500", "purple.300"),
       hover: useColorModeValue("purple.600", "purple.200"),
       active: useColorModeValue("purple.700", "purple.300"),
       color: useColorModeValue("white", "gray.900"),
+      glow: "rgba(147,51,234,0.35)",
     },
     materials: {
       bg: useColorModeValue("cyan.500", "cyan.300"),
       hover: useColorModeValue("cyan.600", "cyan.200"),
       active: useColorModeValue("cyan.700", "cyan.300"),
       color: useColorModeValue("white", "gray.900"),
+      glow: "rgba(34,211,238,0.35)",
     },
     projects: {
       bg: useColorModeValue("teal.500", "teal.300"),
       hover: useColorModeValue("teal.600", "teal.200"),
       active: useColorModeValue("teal.700", "teal.300"),
       color: useColorModeValue("white", "gray.900"),
+      glow: "rgba(45,212,191,0.35)",
     },
     weekly: {
       bg: useColorModeValue("orange.500", "orange.300"),
       hover: useColorModeValue("orange.600", "orange.200"),
       active: useColorModeValue("orange.700", "orange.300"),
       color: useColorModeValue("white", "gray.900"),
+      glow: "rgba(249,115,22,0.35)",
     },
     articles: {
       bg: useColorModeValue("pink.500", "pink.300"),
       hover: useColorModeValue("pink.600", "pink.200"),
       active: useColorModeValue("pink.700", "pink.300"),
       color: useColorModeValue("white", "gray.900"),
+      glow: "rgba(236,72,153,0.35)",
     },
     hackathons: {
       bg: useColorModeValue("yellow.500", "yellow.300"),
       hover: useColorModeValue("yellow.600", "yellow.200"),
       active: useColorModeValue("yellow.700", "yellow.300"),
       color: useColorModeValue("gray.900", "gray.900"),
+      glow: "rgba(234,179,8,0.45)",
     },
     supporters: {
       bg: useColorModeValue("green.500", "green.300"),
       hover: useColorModeValue("green.600", "green.200"),
       active: useColorModeValue("green.700", "green.300"),
       color: useColorModeValue("white", "gray.900"),
+      glow: "rgba(34,197,94,0.35)",
     },
     "faq-creators": {
       bg: useColorModeValue("cyan.400", "cyan.300"),
       hover: useColorModeValue("cyan.500", "cyan.200"),
       active: useColorModeValue("cyan.600", "cyan.300"),
       color: useColorModeValue("gray.900", "gray.900"),
+      glow: "rgba(34,211,238,0.45)",
     },
   };
   const navIconMap: Record<string, IconType> = {
@@ -119,12 +129,12 @@ const CreatorsScreen: React.FC = () => {
   };
   const navItems = [
     { id: "how-to-join", label: "Как попасть" },
-    { id: "senior-benefits", label: "Сеньорам" },
     { id: "materials", label: "Материалы" },
-    { id: "projects", label: "Проекты" },
     { id: "weekly", label: "Weekly-задачи" },
     { id: "articles", label: "Статьи" },
+    { id: "projects", label: "Проекты" },
     { id: "hackathons", label: "Хакатоны" },
+    { id: "senior-benefits", label: "Сеньорам" },
     { id: "supporters", label: "Поддержка" },
     { id: "faq-creators", label: "FAQ" },
   ];
@@ -177,20 +187,21 @@ const CreatorsScreen: React.FC = () => {
             bg={navCardBg}
             borderRadius="2xl"
             p={{ base: 5, md: 6 }}
-            boxShadow={useColorModeValue("lg", "lg")}
             mt={{ base: 6, md: 7 }}
             position="relative"
-            overflow="hidden"
             _before={{
               content: '""',
               position: "absolute",
               inset: 0,
-              bg: useColorModeValue("linear-gradient(135deg, rgba(59,130,246,0.08), rgba(14,165,233,0.06))", "linear-gradient(135deg, rgba(59,130,246,0.12), rgba(14,165,233,0.1))"),
+              bg: useColorModeValue(
+                "linear-gradient(135deg, rgba(59,130,246,0.12), rgba(14,165,233,0.1))",
+                "linear-gradient(135deg, rgba(59,130,246,0.16), rgba(14,165,233,0.14))"
+              ),
               pointerEvents: "none",
             }}
           >
             <VStack align="stretch" spacing={{ base: 4, md: 5 }} position="relative" zIndex={1}>
-              <HStack align="flex-start" spacing={3}>
+              <VStack align={{ base: "center", md: "flex-start" }} spacing={2} textAlign={{ base: "center", md: "left" }}>
                 <Box
                   w={12}
                   h={12}
@@ -199,22 +210,30 @@ const CreatorsScreen: React.FC = () => {
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
-                  flexShrink={0}
                   boxShadow={useColorModeValue("md", "md")}
                 >
                   <Icon as={FiCompass} aria-hidden="true" boxSize={6} color={useColorModeValue("blue.600", "blue.200")} />
                 </Box>
-                <VStack align="flex-start" spacing={1}>
-                  <Heading as="h3" size="sm" color={navHeadingColor} letterSpacing="-0.01em">
-                    Быстрые ссылки по разделам
-                  </Heading>
-                  <Text fontSize="sm" color={navTextColor} maxW={{ base: "full", md: "880px" }}>
-                    Перейдите к нужному блоку: как попасть, вклад сеньоров, топ авторов материалов, проектов, weekly-задач,
-                    статей, хакатонов, поддержка и FAQ.
-                  </Text>
-                </VStack>
-              </HStack>
-              <Flex wrap="wrap" gap={{ base: 2.5, md: 3 }} justify="center">
+                <Heading as="h3" size="sm" color={navHeadingColor} letterSpacing="-0.01em">
+                  Быстрые ссылки по разделам
+                </Heading>
+                <Text
+                  fontSize={{ base: "sm", md: "sm" }}
+                  color={useColorModeValue("gray.100", "gray.50")}
+                  maxW={{ base: "full", md: "880px" }}
+                  noOfLines={{ base: 2, md: 3 }}
+                >
+                  Выберите раздел и переходите сразу к нужному блоку: как попасть, основные авторские направления, вклад
+                  сеньоров, поддержка и FAQ.
+                </Text>
+              </VStack>
+              <Flex
+                gap={{ base: 2.5, md: 3 }}
+                justify="center"
+                flexWrap="wrap"
+                overflow="visible"
+                pb={{ base: 1, md: 0 }}
+              >
                 {navItems.map((item) => {
                   const IconComp = navIconMap[item.id];
                   const palette = navPalettes[item.id];
@@ -225,12 +244,20 @@ const CreatorsScreen: React.FC = () => {
                       bg={palette?.bg}
                       color={palette?.color}
                       leftIcon={IconComp ? <Icon as={IconComp} boxSize={4} /> : undefined}
-                      _hover={{ bg: palette?.hover, transform: "translateY(-2px)" }}
+                      _hover={{
+                        bg: palette?.hover,
+                        transform: "translateY(-2px)",
+                      }}
                       _active={{ bg: palette?.active, transform: "translateY(0px)" }}
+                      _focusVisible={{
+                        boxShadow: palette ? `0 0 0 3px ${palette.glow}` : undefined,
+                        outline: "none",
+                      }}
                       borderRadius="full"
                       px={{ base: 3.5, md: 4 }}
                       py={{ base: 2.5, md: 2.5 }}
-                      boxShadow={useColorModeValue("md", "md")}
+                      boxShadow="none"
+                      minW="fit-content"
                       onClick={() => handleScrollTo(item.id)}
                     >
                       {item.label}

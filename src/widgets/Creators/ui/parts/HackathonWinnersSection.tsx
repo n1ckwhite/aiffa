@@ -122,7 +122,7 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({
           </Text>
 
           {members.length > 0 && (
-            <AvatarGroup size="sm" max={5}>
+            <AvatarGroup size="md">
               {members.map((member: HackathonWinner["members"][number]) => (
                 <Avatar
                   key={member.id}
@@ -135,9 +135,12 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({
                   loading="lazy"
                   borderWidth="2px"
                   borderColor={useColorModeValue("white", "transparent")}
+                  boxSize={10}
                   _hover={{
                     transform: "translateY(-1px)",
-                    boxShadow: useColorModeValue("md", "md"),
+                  }}
+                  _active={{
+                    transform: "translateY(0)",
                   }}
                 />
               ))}

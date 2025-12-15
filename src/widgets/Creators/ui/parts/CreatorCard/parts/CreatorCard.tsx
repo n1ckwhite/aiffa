@@ -1,28 +1,19 @@
 import React from "react";
 import { Box, Icon } from "@chakra-ui/react";
-import type { IconType } from "react-icons";
-import { gratitudeMessagesByMode } from "../data/gratitudeMessages";
-import { roleIconMap } from "../data/roles";
-import { getDirectionIcon } from "../functions/getDirectionIcon";
 import { useAvatarPalette } from "../hooks/useAvatarPalette";
 import { useCreatorCardColors } from "../colors/useCreatorCardColors";
-import type { CreatorCardMode, CreatorCardProps } from "../types";
+import type { CreatorCardProps } from "../types";
 import CreatorCardHeader from "./CreatorCardHeader/CreatorCardHeader";
 import CreatorCardProfile from "./CreatorCardProfile/CreatorCardProfile";
 import CreatorCardDescription from "./CreatorCardDescription/CreatorCardDescription";
 import CreatorCardMeta from "./CreatorCardMeta/CreatorCardMeta";
 import { buildMetaByMode } from "../data/metaByMode";
-
-const getDescription = (mode: CreatorCardMode, index: number) => {
-  const messages = gratitudeMessagesByMode[mode];
-  return messages[index - 1] ?? messages[messages.length - 1];
-};
+import { useCardComputed } from "../helpers/useCardComputed";
 
 const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "materials", showRank = true }) => {
   const { name, role, avatar, direction, contributions, profileLinks } = creator;
   const { lessons, weeklyTasks, reviews, projects } = contributions;
 
-  const isWeeklyMode = mode === "weekly";
   const { avatarIndex } = useAvatarPalette(name);
   const {
     accentColor,
@@ -45,27 +36,15 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
     rankPalette,
   } = useCreatorCardColors({ role, avatarIndex });
 
-  const rankBorder =
-    index === 1 ? rankPalette[1].border : index === 2 ? rankPalette[2].border : index === 3 ? rankPalette[3].border : rankPalette.default.border;
-  const rankColor =
-    index === 1 ? rankPalette[1].color : index === 2 ? rankPalette[2].color : index === 3 ? rankPalette[3].color : rankPalette.default.color;
-
-  const roleIcon = roleIconMap[role];
-  const DirectionIcon = React.useMemo<IconType>(() => getDirectionIcon(direction, roleIcon), [direction, roleIcon]);
-
-  const isTop3 = index <= 3 && showRank;
-  const cardHref = profileLinks[0]?.href;
-  const descriptionText = getDescription(mode, index);
-  const rootProps = cardHref
-    ? ({
-        as: "a",
-        href: cardHref,
-        target: "_blank",
-        rel: "noopener noreferrer",
-      } as const)
-    : ({ as: "div" } as const);
-
-  const cardBg = isWeeklyMode ? cardBgWeekly : cardBgMaterials;
+  const { rankBorder, rankColor, DirectionIcon, isTop3, cardHref, descriptionText, cardBg, rootProps } = useCardComputed({
+    creator,
+    index,
+    mode,
+    showRank,
+    rankPalette,
+    cardBgMaterials,
+    cardBgWeekly,
+  });
 
   const metaByMode = buildMetaByMode({
     lessons,

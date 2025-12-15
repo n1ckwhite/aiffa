@@ -1,53 +1,22 @@
 import React from "react";
-import { Box, HStack, VStack, Avatar, Heading, Text, Button, useColorModeValue } from "@chakra-ui/react";
-import type { Creator } from "../../model/types";
-
-type CreatorProfileCardProps = {
-  creator: Creator;
-  index?: number;
-};
-
-const roleLabelMap: Record<Creator["role"], string> = {
-  author: "Автор материалов",
-  mentor: "Ментор",
-  reviewer: "Ревьюер",
-  maintainer: "Мейнтейнер",
-};
+import { Avatar, Box, Button, Heading, HStack, Text, VStack } from "@chakra-ui/react";
+import { roleLabelMap } from "./data/roleLabelMap";
+import { getMedal } from "./helpers/getMedal";
+import { useCreatorProfileCardColors } from "./colors/useCreatorProfileCardColors";
+import type { CreatorProfileCardProps } from "./types";
+import type { CreatorProfileLink } from "../../../model/types";
 
 const CreatorProfileCard: React.FC<CreatorProfileCardProps> = ({ creator, index }) => {
   const { name, role, avatar, title, contributions, profileLinks } = creator;
+  const { lessons, weeklyTasks, projects, reviews } = contributions;
 
-  const cardBg = useColorModeValue("white", "gray.900");
-  const cardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
-  const primaryText = useColorModeValue("gray.900", "white");
-  const secondaryText = useColorModeValue("gray.600", "gray.300");
-  const sectionTitle = useColorModeValue("gray.500", "gray.400");
+  const { cardBg, cardBorder, primaryText, secondaryText, sectionTitle, primaryButtonBg, primaryButtonHover } = useCreatorProfileCardColors();
 
-  const primaryButtonBg = useColorModeValue("blue.600", "blue.400");
-  const primaryButtonHover = useColorModeValue("blue.500", "blue.300");
-
-  const telegramLink = profileLinks.find((link) => link.type === "telegram");
-
-  const medal =
-    index === undefined
-      ? null
-      : index === 1
-      ? "🥇"
-      : index === 2
-      ? "🥈"
-      : index === 3
-      ? "🥉"
-      : "🏅";
+  const telegramLink = profileLinks.find((link: CreatorProfileLink) => link.type === "telegram");
+  const medal = getMedal(index);
 
   return (
-    <Box
-      borderWidth="1px"
-      borderColor={cardBorder}
-      borderRadius="2xl"
-      p={{ base: 4, md: 5 }}
-      bg={cardBg}
-      color={primaryText}
-    >
+    <Box borderWidth="1px" borderColor={cardBorder} borderRadius="2xl" p={{ base: 4, md: 5 }} bg={cardBg} color={primaryText}>
       <VStack align="flex-start" spacing={2} mb={4}>
         {index !== undefined && (
           <HStack spacing={2}>
@@ -56,14 +25,7 @@ const CreatorProfileCard: React.FC<CreatorProfileCardProps> = ({ creator, index 
                 {medal}
               </Text>
             )}
-            <HStack
-              px={3}
-              py={0.5}
-              borderRadius="full"
-              borderWidth="1px"
-              borderColor="whiteAlpha.300"
-              spacing={1}
-            >
+            <HStack px={3} py={0.5} borderRadius="full" borderWidth="1px" borderColor="whiteAlpha.300" spacing={1}>
               <Text as="span" fontSize="xs" color={secondaryText}>
                 #{index}
               </Text>
@@ -111,19 +73,19 @@ const CreatorProfileCard: React.FC<CreatorProfileCardProps> = ({ creator, index 
           <Text fontSize="sm" color={secondaryText}>
             Материалов:{" "}
             <Text as="span" color={primaryText} fontWeight="semibold">
-              {contributions.lessons}
+              {lessons}
             </Text>
             , задач недели:{" "}
             <Text as="span" color={primaryText} fontWeight="semibold">
-              {contributions.weeklyTasks}
+              {weeklyTasks}
             </Text>
             , проектов:{" "}
             <Text as="span" color={primaryText} fontWeight="semibold">
-              {contributions.projects}
+              {projects}
             </Text>
             , коллабораций:{" "}
             <Text as="span" color={primaryText} fontWeight="semibold">
-              {contributions.reviews}
+              {reviews}
             </Text>
             .
           </Text>

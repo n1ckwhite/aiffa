@@ -25,7 +25,7 @@ import type { Creator } from "../../model/types";
 type CreatorCardProps = {
   creator: Creator;
   index: number;
-  mode?: "materials" | "weekly" | "articles" | "hackathons";
+  mode?: "materials" | "weekly" | "articles" | "projects" | "hackathons";
   showRank?: boolean;
 };
 
@@ -48,6 +48,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
   const { lessons, weeklyTasks, reviews, projects } = contributions;
   const isWeeklyMode = mode === "weekly";
   const isArticlesMode = mode === "articles";
+  const isProjectsMode = mode === "projects";
   const isHackathonMode = mode === "hackathons";
 
   const goldBorder = useColorModeValue("yellow.400", "yellow.300");
@@ -164,10 +165,18 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
     "Спасибо за хакатоны с живыми задачами — за счёт них AIFFA остаётся местом про реальный продукт и командную работу.",
   ];
 
+  const gratitudeMessagesProjects: string[] = [
+    "Спасибо за проекты — на них участники учатся собирать продакшн и видеть целую картину.",
+    "Спасибо за проектные вклады — они помогают командам быстрее расти и делать настоящие фичи.",
+    "Спасибо за живые проекты — они дают опыт, который невозможно получить только из задач.",
+  ];
+
   const sourceMessages = isWeeklyMode
     ? gratitudeMessagesWeekly
     : isArticlesMode
     ? gratitudeMessagesArticles
+    : isProjectsMode
+    ? gratitudeMessagesProjects
     : isHackathonMode
     ? gratitudeMessagesHackathons
     : gratitudeMessagesMaterials;
@@ -334,7 +343,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
           w="full"
           align="flex-start"
         >
-          {!isWeeklyMode && !isArticlesMode && !isHackathonMode && (
+          {!isWeeklyMode && !isArticlesMode && !isProjectsMode && !isHackathonMode && (
             <HStack spacing={2}>
               <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
               <Text as="span">
@@ -356,7 +365,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
               </Text>
             </HStack>
           )}
-          {!isWeeklyMode && !isArticlesMode && !isHackathonMode && (
+          {!isWeeklyMode && !isArticlesMode && !isProjectsMode && !isHackathonMode && (
             <HStack spacing={2}>
               <Icon as={FiTarget} boxSize={3.5} aria-hidden="true" color={tasksIconColor} />
               <Text as="span">
@@ -366,6 +375,28 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
                 </Text>
               </Text>
             </HStack>
+          )}
+          {isProjectsMode && (
+            <>
+              <HStack spacing={2}>
+                <Icon as={FiLayers} boxSize={3.5} aria-hidden="true" color={materialsIconColor} />
+                <Text as="span">
+                  Участвовал в{" "}
+                  <Text as="span" fontWeight="semibold">
+                    {projects} проектах
+                  </Text>
+                </Text>
+              </HStack>
+              <HStack spacing={2}>
+                <Icon as={FiStar} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
+                <Text as="span">
+                  Получил{" "}
+                  <Text as="span" fontWeight="semibold">
+                    {reviews} звёзд на проектах
+                  </Text>
+                </Text>
+              </HStack>
+            </>
           )}
           {isArticlesMode && (
             <>
@@ -411,7 +442,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
               </HStack>
             </>
           )}
-          {!isWeeklyMode && !isArticlesMode && !isHackathonMode && (
+          {!isWeeklyMode && !isArticlesMode && !isProjectsMode && !isHackathonMode && (
             <HStack spacing={2}>
               <Icon as={FiUsers} boxSize={3.5} aria-hidden="true" color={reviewsIconColor} />
               <Text as="span">

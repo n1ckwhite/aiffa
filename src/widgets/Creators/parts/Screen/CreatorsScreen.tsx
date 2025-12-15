@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Heading, Text, VStack, useColorModeValue } from "@chakra-ui/react";
 import HeroSection from "../../ui/parts/HeroSection";
 import FeaturedCreatorsSection from "../../ui/parts/FeaturedCreatorsSection";
+import ProjectsAuthorsSection from "../../ui/parts/ProjectsAuthorsSection";
 import WeeklyAuthorsSection from "../../ui/parts/WeeklyAuthorsSection";
 import ArticleAuthorsSection from "../../ui/parts/ArticleAuthorsSection";
 import HackathonWinnersSection from "../../ui/parts/HackathonWinnersSection";
@@ -46,6 +47,7 @@ const CreatorsScreen: React.FC = () => {
           </Box>
           <HeroSection />
           <FeaturedCreatorsSection />
+          <ProjectsAuthorsSection />
           <WeeklyAuthorsSection />
           <ArticleAuthorsSection />
           <HackathonWinnersSection />

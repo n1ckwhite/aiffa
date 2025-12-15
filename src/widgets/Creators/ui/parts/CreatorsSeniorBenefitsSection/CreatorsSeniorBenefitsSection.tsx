@@ -24,12 +24,13 @@ const CreatorsSeniorBenefitsSection: React.FC = () => {
           </Text>
         </VStack>
 
-        <SimpleGrid minChildWidth="260px" spacing={{ base: 3, md: 4 }} justifyItems="stretch" w="full">
+        <SimpleGrid as="ul" listStyleType="none" m={0} p={0} minChildWidth="260px" spacing={{ base: 3, md: 4 }} justifyItems="stretch" w="full">
           {seniorBenefitCards.map((card: SeniorBenefitCard) => {
             const palette = seniorIconPalettes[card.paletteIndex as number];
 
             return (
               <HStack
+                as="li"
                 key={card.title}
                 align="flex-start"
                 spacing={4}

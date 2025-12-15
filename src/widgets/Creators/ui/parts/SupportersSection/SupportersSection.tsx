@@ -65,11 +65,11 @@ const SupportersSection: React.FC = () => {
 
         <Box w="full">
           <VStack spacing={3} align="center">
-            <Wrap spacing={{ base: 3, md: 4 }} justify="center">
+            <Wrap as="ul" listStyleType="none" m={0} p={0} spacing={{ base: 3, md: 4 }} justify="center">
               {avatarItems.map((item) => {
                 const href = item.profileHref;
                 return (
-                  <WrapItem key={item.id}>
+                  <WrapItem as="li" key={item.id}>
                     <Box
                       as={Link}
                       href={href}

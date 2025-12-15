@@ -20,28 +20,14 @@ const CreatorsScreen: React.FC = () => {
           <CreatorsIntroSection />
           <HeroSection />
           <CreatorsJoinSection />
-          <Box id="materials" scrollMarginTop="90px">
             <FeaturedCreatorsSection />
-          </Box>
-          <Box id="projects" scrollMarginTop="90px">
             <ProjectsAuthorsSection />
-          </Box>
-          <Box id="weekly" scrollMarginTop="90px">
             <WeeklyAuthorsSection />
-          </Box>
-          <Box id="articles" scrollMarginTop="90px">
             <ArticleAuthorsSection />
-          </Box>
-          <Box id="hackathons" scrollMarginTop="90px">
             <HackathonWinnersSection />
-          </Box>
-          <Box id="supporters" scrollMarginTop="90px">
             <SupportersSection />
-          </Box>
           <CreatorsSeniorBenefitsSection />
-          <Box id="faq-creators" scrollMarginTop="90px">
             <FAQ variant="creators" showSupportBlock={false} />
-          </Box>
         </VStack>
       </Box>
     </Box>

@@ -22,12 +22,13 @@ const CreatorsJoinSection: React.FC = () => {
           </Text>
         </VStack>
 
-        <SimpleGrid minChildWidth="260px" spacing={{ base: 3, md: 4 }} justifyItems="stretch">
+        <SimpleGrid as="ul" listStyleType="none" m={0} p={0} minChildWidth="260px" spacing={{ base: 3, md: 4 }} justifyItems="stretch">
           {joinCards.map((card: JoinCard) => {
             const palette = joinIconPalettes[card.paletteIndex as number];
 
             return (
               <Box
+                as="li"
                 key={card.title}
                 borderWidth="1px"
                 borderColor={palette.borderColor}

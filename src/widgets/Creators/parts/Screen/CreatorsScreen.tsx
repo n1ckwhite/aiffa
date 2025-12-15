@@ -8,7 +8,7 @@ import WeeklyAuthorsSection from "../../ui/parts/WeeklyAuthorsSection";
 import ArticleAuthorsSection from "../../ui/parts/ArticleAuthorsSection";
 import HackathonWinnersSection from "../../ui/parts/HackathonWinnersSection";
 import SupportersSection from "../../ui/parts/SupportersSection";
-import CreatorsIntroSection from "../../ui/parts/CreatorsIntroSection";
+import CreatorsIntroSection from "../../ui/parts/CreatorsIntroSection/CreatorsIntroSection";
 import CreatorsJoinSection from "../../ui/parts/CreatorsJoinSection";
 import CreatorsSeniorBenefitsSection from "../../ui/parts/CreatorsSeniorBenefitsSection";
 

@@ -20,7 +20,7 @@ const SessionsLottieIcon: React.FC = () => {
           src={sessionsIcon}
           alt="Иконка сессий"
           width={300}
-          height={200}
+          height={195}
           sizes="(max-width: 768px) 70vw, 300px"
           priority
         />

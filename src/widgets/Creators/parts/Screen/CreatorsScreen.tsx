@@ -12,7 +12,7 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { FiLogIn, FiAward, FiHeart, FiTrendingUp, FiMessageCircle, FiShare2 } from "react-icons/fi";
+import { FiLogIn, FiAward, FiHeart, FiTrendingUp, FiMessageCircle, FiShare2, FiCompass } from "react-icons/fi";
 import FAQ from "widgets/Modules/FAQ/FAQ";
 import HeroSection from "../../ui/parts/HeroSection";
 import FeaturedCreatorsSection from "../../ui/parts/FeaturedCreatorsSection";
@@ -38,6 +38,12 @@ const CreatorsScreen: React.FC = () => {
   const seniorIconBg = useColorModeValue("purple.50", "whiteAlpha.100");
   const seniorIconColor = useColorModeValue("purple.500", "purple.200");
   const seniorTextColor = useColorModeValue("gray.700", "gray.200");
+  const navCardBg = useColorModeValue("blue.50", "whiteAlpha.100");
+  const navCardBorder = useColorModeValue("blue.100", "whiteAlpha.200");
+  const navHeadingColor = useColorModeValue("gray.800", "gray.100");
+  const navTextColor = useColorModeValue("gray.700", "gray.200");
+  const navButtonBg = useColorModeValue("blue.500", "blue.400");
+  const navButtonColor = useColorModeValue("white", "gray.900");
   const navItems = [
     { id: "how-to-join", label: "Как попасть" },
     { id: "senior-benefits", label: "Сеньорам" },
@@ -92,25 +98,60 @@ const CreatorsScreen: React.FC = () => {
             </VStack>
           </Box>
           <HeroSection />
-          <Wrap
-            spacing={{ base: 2, md: 3 }}
-            justify="center"
+          <Box
+            borderWidth="1px"
+            borderColor={navCardBorder}
+            bg={navCardBg}
+            borderRadius="2xl"
+            p={{ base: 4, md: 5 }}
+            boxShadow={useColorModeValue("md", "md")}
             mt={{ base: 6, md: 7 }}
-            shouldWrapChildren
           >
-            {navItems.map((item) => (
-              <WrapItem key={item.id}>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  colorScheme="blue"
-                  onClick={() => handleScrollTo(item.id)}
+            <VStack align="stretch" spacing={{ base: 3, md: 4 }}>
+              <HStack align="flex-start" spacing={3}>
+                <Box
+                  w={10}
+                  h={10}
+                  borderRadius="full"
+                  bg={useColorModeValue("white", "whiteAlpha.200")}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  flexShrink={0}
+                  boxShadow={useColorModeValue("sm", "sm")}
                 >
-                  {item.label}
-                </Button>
-              </WrapItem>
-            ))}
-          </Wrap>
+                  <Icon as={FiCompass} aria-hidden="true" boxSize={5} color={useColorModeValue("blue.600", "blue.200")} />
+                </Box>
+                <VStack align="flex-start" spacing={1}>
+                  <Heading as="h3" size="sm" color={navHeadingColor} letterSpacing="-0.01em">
+                    Быстрые ссылки по разделам
+                  </Heading>
+                  <Text fontSize="sm" color={navTextColor} maxW={{ base: "full", md: "840px" }}>
+                    Перейдите к нужному блоку: как попасть, вклад сеньоров, топ авторов материалов, проектов, weekly-задач,
+                    статей, хакатонов, поддержка и FAQ.
+                  </Text>
+                </VStack>
+              </HStack>
+              <Wrap spacing={{ base: 2, md: 3 }} justify="center" shouldWrapChildren>
+                {navItems.map((item) => (
+                  <WrapItem key={item.id}>
+                    <Button
+                      size="sm"
+                      bg={navButtonBg}
+                      color={navButtonColor}
+                      _hover={{ bg: useColorModeValue("blue.600", "blue.300"), transform: "translateY(-1px)" }}
+                      _active={{ bg: useColorModeValue("blue.700", "blue.200") }}
+                      borderRadius="full"
+                      px={{ base: 3, md: 4 }}
+                      onClick={() => handleScrollTo(item.id)}
+                    >
+                      {item.label}
+                    </Button>
+                  </WrapItem>
+                ))}
+              </Wrap>
+            </VStack>
+          </Box>
           <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-label="Как попасть в создатели AIFFA">
             <VStack align="stretch" spacing={{ base: 4, md: 5 }}>
               <Heading

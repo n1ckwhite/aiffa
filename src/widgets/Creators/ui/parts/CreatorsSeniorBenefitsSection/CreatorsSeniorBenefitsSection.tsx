@@ -13,7 +13,7 @@ const CreatorsSeniorBenefitsSection: React.FC = () => {
       <VStack spacing={3} align="center" textAlign="center">
         <VStack spacing={3} align="center">
           <SeniorTeamIcon />
-          <Heading as="h3" size="md" letterSpacing="-0.02em">
+          <Heading as="h2" size="md" letterSpacing="-0.02em">
             Как это делает вас сильнее
           </Heading>
           <Text fontSize={{ base: "sm", md: "md" }} color={seniorTextColor} maxW={{ base: "full", md: "880px" }}>

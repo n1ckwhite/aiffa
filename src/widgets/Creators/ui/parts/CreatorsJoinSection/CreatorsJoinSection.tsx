@@ -11,7 +11,7 @@ const CreatorsJoinSection: React.FC = () => {
     <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-label="Как попасть в создатели AIFFA">
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={3} textAlign="center">
-          <Heading as="h3" size="md" letterSpacing="-0.02em">
+          <Heading as="h2" size="md" letterSpacing="-0.02em">
             Как попасть в создатели AIFFA
           </Heading>
           <Text fontSize={{ base: "sm", md: "md" }} color={pageDescriptionColor} textAlign="center" maxW={{ base: "full", md: "840px" }} mx="auto">

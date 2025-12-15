@@ -33,7 +33,7 @@ const HeroSection: React.FC = () => {
               <Text fontSize={{ base: "xs", md: "sm" }} textTransform="uppercase" letterSpacing="0.08em" color={secondaryTextColor} mb={1}>
                 Команда создателей
               </Text>
-              <Heading as="p" fontSize={{ base: "xl", sm: "2xl", md: "3xl" }} letterSpacing="-0.04em" color={primaryTextColor}>
+              <Heading as="h2" fontSize={{ base: "xl", sm: "2xl", md: "3xl" }} letterSpacing="-0.04em" color={primaryTextColor}>
                 Команда создателей AIFFA
               </Heading>
             </Box>

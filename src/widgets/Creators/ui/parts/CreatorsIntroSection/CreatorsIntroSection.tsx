@@ -6,9 +6,9 @@ const CreatorsIntroSection: React.FC = () => {
   const { pageDescriptionColor } = useCreatorsColors();
 
   return (
-    <Box as="section" aria-label="Описание страницы создателей AIFFA">
+    <Box as="section" aria-labelledby="creators-page-title">
       <VStack align="center" spacing={0} textAlign="center">
-        <Heading as="h2" fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }} letterSpacing="-0.03em">
+        <Heading id="creators-page-title" as="h1" fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }} letterSpacing="-0.03em">
           Создатели AIFFA
         </Heading>
         <Text

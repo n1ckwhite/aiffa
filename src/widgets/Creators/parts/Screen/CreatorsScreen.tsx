@@ -14,14 +14,7 @@ import CreatorsSeniorBenefitsSection from "../../ui/parts/CreatorsSeniorBenefits
 
 const CreatorsScreen: React.FC = () => {
   return (
-    <Box
-      as="main"
-      role="main"
-      aria-label="Создатели AIFFA"
-      py={{ base: 8, md: 10 }}
-      px={{ base: 4, md: 6 }}
-      transition="none"
-    >
+    <Box as="main" role="main" aria-labelledby="creators-page-title" py={{ base: 8, md: 10 }} px={{ base: 4, md: 6 }} transition="none">
       <Box maxW="1320px" mx="auto">
         <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
           <CreatorsIntroSection />
@@ -49,7 +42,6 @@ const CreatorsScreen: React.FC = () => {
           <Box id="faq-creators" scrollMarginTop="90px">
             <FAQ variant="creators" showSupportBlock={false} />
           </Box>
-          {/* <CreatorsGridSection /> */}
         </VStack>
       </Box>
     </Box>

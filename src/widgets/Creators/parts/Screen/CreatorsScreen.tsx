@@ -42,8 +42,70 @@ const CreatorsScreen: React.FC = () => {
   const navCardBorder = useColorModeValue("blue.100", "whiteAlpha.200");
   const navHeadingColor = useColorModeValue("gray.800", "gray.100");
   const navTextColor = useColorModeValue("gray.700", "gray.200");
-  const navButtonBg = useColorModeValue("blue.500", "blue.400");
-  const navButtonColor = useColorModeValue("white", "gray.900");
+  const navPalettes: Record<
+    string,
+    {
+      bg: string;
+      hover: string;
+      active: string;
+      color: string;
+    }
+  > = {
+    "how-to-join": {
+      bg: useColorModeValue("blue.500", "blue.300"),
+      hover: useColorModeValue("blue.600", "blue.200"),
+      active: useColorModeValue("blue.700", "blue.300"),
+      color: useColorModeValue("white", "gray.900"),
+    },
+    "senior-benefits": {
+      bg: useColorModeValue("purple.500", "purple.300"),
+      hover: useColorModeValue("purple.600", "purple.200"),
+      active: useColorModeValue("purple.700", "purple.300"),
+      color: useColorModeValue("white", "gray.900"),
+    },
+    materials: {
+      bg: useColorModeValue("cyan.500", "cyan.300"),
+      hover: useColorModeValue("cyan.600", "cyan.200"),
+      active: useColorModeValue("cyan.700", "cyan.300"),
+      color: useColorModeValue("white", "gray.900"),
+    },
+    projects: {
+      bg: useColorModeValue("teal.500", "teal.300"),
+      hover: useColorModeValue("teal.600", "teal.200"),
+      active: useColorModeValue("teal.700", "teal.300"),
+      color: useColorModeValue("white", "gray.900"),
+    },
+    weekly: {
+      bg: useColorModeValue("orange.500", "orange.300"),
+      hover: useColorModeValue("orange.600", "orange.200"),
+      active: useColorModeValue("orange.700", "orange.300"),
+      color: useColorModeValue("white", "gray.900"),
+    },
+    articles: {
+      bg: useColorModeValue("pink.500", "pink.300"),
+      hover: useColorModeValue("pink.600", "pink.200"),
+      active: useColorModeValue("pink.700", "pink.300"),
+      color: useColorModeValue("white", "gray.900"),
+    },
+    hackathons: {
+      bg: useColorModeValue("yellow.500", "yellow.300"),
+      hover: useColorModeValue("yellow.600", "yellow.200"),
+      active: useColorModeValue("yellow.700", "yellow.300"),
+      color: useColorModeValue("gray.900", "gray.900"),
+    },
+    supporters: {
+      bg: useColorModeValue("green.500", "green.300"),
+      hover: useColorModeValue("green.600", "green.200"),
+      active: useColorModeValue("green.700", "green.300"),
+      color: useColorModeValue("white", "gray.900"),
+    },
+    "faq-creators": {
+      bg: useColorModeValue("cyan.400", "cyan.300"),
+      hover: useColorModeValue("cyan.500", "cyan.200"),
+      active: useColorModeValue("cyan.600", "cyan.300"),
+      color: useColorModeValue("gray.900", "gray.900"),
+    },
+  };
   const navIconMap: Record<string, IconType> = {
     "how-to-join": FiLogIn,
     "senior-benefits": FiTrendingUp,
@@ -155,15 +217,16 @@ const CreatorsScreen: React.FC = () => {
               <Flex wrap="wrap" gap={{ base: 2.5, md: 3 }} justify="center">
                 {navItems.map((item) => {
                   const IconComp = navIconMap[item.id];
+                  const palette = navPalettes[item.id];
                   return (
                     <Button
                       key={item.id}
                       size="sm"
-                      bg={navButtonBg}
-                      color={navButtonColor}
+                      bg={palette?.bg}
+                      color={palette?.color}
                       leftIcon={IconComp ? <Icon as={IconComp} boxSize={4} /> : undefined}
-                      _hover={{ bg: useColorModeValue("blue.600", "blue.300"), transform: "translateY(-2px)" }}
-                      _active={{ bg: useColorModeValue("blue.700", "blue.200"), transform: "translateY(0px)" }}
+                      _hover={{ bg: palette?.hover, transform: "translateY(-2px)" }}
+                      _active={{ bg: palette?.active, transform: "translateY(0px)" }}
                       borderRadius="full"
                       px={{ base: 3.5, md: 4 }}
                       py={{ base: 2.5, md: 2.5 }}

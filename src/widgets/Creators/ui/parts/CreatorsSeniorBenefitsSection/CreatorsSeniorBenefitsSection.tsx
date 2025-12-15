@@ -5,15 +5,17 @@ import { useCreatorsSeniorColors } from "./colors/useCreatorsSeniorColors";
 import { seniorBenefitCards } from "./data/seniorBenefitCards";
 import type { SeniorBenefitCard } from "./types";
 
+const headingId = "creators-senior-benefits-heading";
+
 const CreatorsSeniorBenefitsSection: React.FC = () => {
   const { seniorCardBg, seniorCardBorder, seniorTextColor, seniorIconPalettes } = useCreatorsSeniorColors();
 
   return (
-    <Box as="section" id="senior-benefits" scrollMarginTop="90px" aria-label="Как вклад делает авторов сильнее">
+    <Box as="section" id="senior-benefits" scrollMarginTop="90px" aria-labelledby={headingId}>
       <VStack spacing={3} align="center" textAlign="center">
         <VStack spacing={3} align="center">
           <SeniorTeamIcon />
-          <Heading as="h2" size="md" letterSpacing="-0.02em">
+          <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
             Как это делает вас сильнее
           </Heading>
           <Text fontSize={{ base: "sm", md: "md" }} color={seniorTextColor} maxW={{ base: "full", md: "880px" }}>

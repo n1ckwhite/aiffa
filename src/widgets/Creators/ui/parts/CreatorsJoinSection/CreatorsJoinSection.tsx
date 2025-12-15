@@ -4,14 +4,16 @@ import { joinCards } from "./data/joinCards";
 import { useCreatorsJoinColors } from "./colors/useCreatorsJoinColors";
 import type { JoinCard } from "./types";
 
+const headingId = "creators-join-heading";
+
 const CreatorsJoinSection: React.FC = () => {
   const { pageDescriptionColor, joinIconPalettes } = useCreatorsJoinColors();
 
   return (
-    <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-label="Как попасть в создатели AIFFA">
+    <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-labelledby={headingId}>
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={3} textAlign="center">
-          <Heading as="h2" size="md" letterSpacing="-0.02em">
+          <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
             Как попасть в создатели AIFFA
           </Heading>
           <Text fontSize={{ base: "sm", md: "md" }} color={pageDescriptionColor} textAlign="center" maxW={{ base: "full", md: "840px" }} mx="auto">

@@ -9,6 +9,8 @@ import { getSupporters } from "./helpers/getSupporters";
 import { getAvatarItems } from "./helpers/getAvatarItems";
 import type { SupporterAvatar } from "./types";
 
+const headingId = "creators-supporters-heading";
+
 const SupportersSection: React.FC = () => {
   const { items } = useCreatorsData();
   const {
@@ -32,7 +34,7 @@ const SupportersSection: React.FC = () => {
   const avatarItems = React.useMemo<SupporterAvatar[]>(() => getAvatarItems(supporters, githubSupporters), [supporters]);
 
   return (
-    <Box as="section" aria-label="Поддержка сообщества AIFFA" bg="transparent">
+    <Box as="section" aria-labelledby={headingId} bg="transparent">
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={3} textAlign="center">
           <HStack spacing={2} align="center" justify="center">
@@ -50,7 +52,7 @@ const SupportersSection: React.FC = () => {
             >
               <Icon as={FiHeart} boxSize={3.5} aria-hidden="true" color={iconColor} />
             </Box>
-            <Heading as="h2" size="md" letterSpacing="-0.02em">
+            <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
               Поддержка AIFFA
             </Heading>
           </HStack>

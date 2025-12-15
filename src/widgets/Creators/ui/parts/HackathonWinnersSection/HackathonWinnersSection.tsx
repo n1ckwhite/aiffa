@@ -7,6 +7,8 @@ import { useHackathonWinnersColors } from "./colors/useHackathonWinnersColors";
 import { getSortedHackathonWinners } from "./helpers/getSortedHackathonWinners";
 import type { HackathonWinner } from "../../../model/hackathonWinners";
 
+const headingId = "creators-hackathons-heading";
+
 const HackathonWinnersSection: React.FC = () => {
   const { subtitleColor, iconBorderColor, iconBg, iconColor } = useHackathonWinnersColors();
 
@@ -17,7 +19,7 @@ const HackathonWinnersSection: React.FC = () => {
   const sorted = React.useMemo(() => getSortedHackathonWinners(hackathonWinners as HackathonWinner[]), []);
 
   return (
-    <Box as="section" aria-label="Победители хакатона AIFFA" bg="transparent">
+    <Box as="section" aria-labelledby={headingId} bg="transparent">
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={3} textAlign="center">
           <HStack spacing={2} align="center" justify="center">
@@ -35,7 +37,7 @@ const HackathonWinnersSection: React.FC = () => {
             >
               <Icon as={FiCode} boxSize={3.5} aria-hidden="true" color={iconColor} />
             </Box>
-            <Heading as="h2" size="md" letterSpacing="-0.02em">
+            <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
               Победители Хакатона
             </Heading>
           </HStack>

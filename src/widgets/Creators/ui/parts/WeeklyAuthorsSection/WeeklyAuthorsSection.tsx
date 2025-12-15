@@ -8,6 +8,8 @@ import { getFeaturedWeeklyCreators } from "./helpers/getFeaturedWeeklyCreators";
 import { useWeekInfo } from "./hooks/useWeekInfo";
 import type { Creator } from "../../../model/types";
 
+const headingId = "creators-weekly-heading";
+
 const WeeklyAuthorsSection: React.FC = () => {
   const { items } = useCreatorsData();
   const weekInfo = useWeekInfo();
@@ -34,7 +36,7 @@ const WeeklyAuthorsSection: React.FC = () => {
   }
 
   return (
-    <Box as="section" aria-label="Авторы задач недели AIFFA">
+    <Box as="section" aria-labelledby={headingId}>
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={3} textAlign="center">
           <HStack spacing={2} align="start" justify="center">
@@ -52,7 +54,7 @@ const WeeklyAuthorsSection: React.FC = () => {
             >
               <Icon as={FiCheckSquare} boxSize={3.5} aria-hidden="true" color={iconColor} />
             </Box>
-            <Heading as="h2" size="md" letterSpacing="-0.02em">
+            <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
               Авторы задач недели AIFFA
             </Heading>
           </HStack>

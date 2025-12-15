@@ -7,6 +7,8 @@ import { useProjectsAuthorsColors } from "./colors/useProjectsAuthorsColors";
 import { getFeaturedProjectCreators } from "./helpers/getFeaturedProjectCreators";
 import type { Creator } from "../../../model/types";
 
+const headingId = "creators-projects-heading";
+
 const ProjectsAuthorsSection: React.FC = () => {
   const { items } = useCreatorsData();
   const { subtitleColor, iconBorderColor, iconBg, iconColor } = useProjectsAuthorsColors();
@@ -18,7 +20,7 @@ const ProjectsAuthorsSection: React.FC = () => {
   }
 
   return (
-    <Box as="section" aria-label="Авторы проектов AIFFA" bg="transparent">
+    <Box as="section" aria-labelledby={headingId} bg="transparent">
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={3} textAlign="center">
           <HStack spacing={2} align="center" justify="center">
@@ -36,7 +38,7 @@ const ProjectsAuthorsSection: React.FC = () => {
             >
               <Icon as={FiLayers} boxSize={3.5} aria-hidden="true" color={iconColor} />
             </Box>
-            <Heading as="h2" size="md" letterSpacing="-0.02em">
+            <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
               Авторы проектов AIFFA
             </Heading>
           </HStack>

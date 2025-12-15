@@ -8,6 +8,8 @@ import { getFeaturedCreators } from "./helpers/getFeaturedCreators";
 import { useMonthInfo } from "./hooks/useMonthInfo";
 import { Creator } from "@/widgets/Creators/model/types";
 
+const headingId = "creators-materials-heading";
+
 const FeaturedCreatorsSection: React.FC = () => {
   const { items } = useCreatorsData();
   const monthInfo = useMonthInfo();
@@ -34,7 +36,7 @@ const FeaturedCreatorsSection: React.FC = () => {
   }
 
   return (
-    <Box as="section" aria-label="Избранные создатели AIFFA" bg="transparent">
+    <Box as="section" aria-labelledby={headingId} bg="transparent">
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={3} textAlign="center">
           <HStack spacing={2} align="start" justify="center">
@@ -52,7 +54,7 @@ const FeaturedCreatorsSection: React.FC = () => {
             >
               <Icon as={FiBookOpen} boxSize={3.5} aria-hidden="true" color={iconColor} />
             </Box>
-            <Heading as="h2" size="md" letterSpacing="-0.02em">
+            <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
               Авторы материалов AIFFA
             </Heading>
           </HStack>

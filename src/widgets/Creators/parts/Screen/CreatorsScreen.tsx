@@ -8,11 +8,8 @@ import {
   SimpleGrid,
   HStack,
   Icon,
-  Button,
-  Flex,
 } from "@chakra-ui/react";
-import { FiLogIn, FiAward, FiHeart, FiTrendingUp, FiMessageCircle, FiShare2, FiCompass, FiBookOpen, FiLayers, FiCheckSquare, FiStar, FiUsers } from "react-icons/fi";
-import type { IconType } from "react-icons";
+import { FiLogIn, FiAward, FiHeart, FiTrendingUp, FiMessageCircle, FiShare2 } from "react-icons/fi";
 import FAQ from "widgets/Modules/FAQ/FAQ";
 import HeroSection from "../../ui/parts/HeroSection";
 import FeaturedCreatorsSection from "../../ui/parts/FeaturedCreatorsSection";
@@ -21,6 +18,7 @@ import WeeklyAuthorsSection from "../../ui/parts/WeeklyAuthorsSection";
 import ArticleAuthorsSection from "../../ui/parts/ArticleAuthorsSection";
 import HackathonWinnersSection from "../../ui/parts/HackathonWinnersSection";
 import SupportersSection from "../../ui/parts/SupportersSection";
+import { BusinessWorkshopIcon } from "@/shared/icons/components-icon";
 
 const CreatorsScreen: React.FC = () => {
   const pageDescriptionColor = useColorModeValue("gray.600", "gray.300");
@@ -28,123 +26,11 @@ const CreatorsScreen: React.FC = () => {
   const infoCardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const infoIconBg = useColorModeValue("blue.50", "whiteAlpha.100");
   const infoIconColor = useColorModeValue("blue.500", "blue.300");
-  const missionBg = useColorModeValue("blue.50", "whiteAlpha.100");
-  const missionBorder = useColorModeValue("blue.100", "whiteAlpha.200");
-  const missionIconBg = useColorModeValue("white", "whiteAlpha.50");
-  const missionIconColor = useColorModeValue("blue.600", "blue.200");
-  const missionTextColor = useColorModeValue("gray.700", "gray.200");
   const seniorCardBg = useColorModeValue("white", "whiteAlpha.100");
   const seniorCardBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const seniorIconBg = useColorModeValue("purple.50", "whiteAlpha.100");
   const seniorIconColor = useColorModeValue("purple.500", "purple.200");
   const seniorTextColor = useColorModeValue("gray.700", "gray.200");
-  const navCardBg = useColorModeValue("blue.50", "whiteAlpha.100");
-  const navCardBorder = useColorModeValue("blue.100", "whiteAlpha.200");
-  const navHeadingColor = useColorModeValue("gray.800", "gray.100");
-  const navTextColor = useColorModeValue("gray.700", "gray.200");
-  const navPalettes: Record<
-    string,
-    {
-      bg: string;
-      hover: string;
-      active: string;
-      color: string;
-      glow: string;
-    }
-  > = {
-    "how-to-join": {
-      bg: useColorModeValue("blue.500", "blue.300"),
-      hover: useColorModeValue("blue.600", "blue.200"),
-      active: useColorModeValue("blue.700", "blue.300"),
-      color: useColorModeValue("white", "gray.900"),
-      glow: "rgba(59,130,246,0.35)",
-    },
-    "senior-benefits": {
-      bg: useColorModeValue("purple.500", "purple.300"),
-      hover: useColorModeValue("purple.600", "purple.200"),
-      active: useColorModeValue("purple.700", "purple.300"),
-      color: useColorModeValue("white", "gray.900"),
-      glow: "rgba(147,51,234,0.35)",
-    },
-    materials: {
-      bg: useColorModeValue("cyan.500", "cyan.300"),
-      hover: useColorModeValue("cyan.600", "cyan.200"),
-      active: useColorModeValue("cyan.700", "cyan.300"),
-      color: useColorModeValue("white", "gray.900"),
-      glow: "rgba(34,211,238,0.35)",
-    },
-    projects: {
-      bg: useColorModeValue("teal.500", "teal.300"),
-      hover: useColorModeValue("teal.600", "teal.200"),
-      active: useColorModeValue("teal.700", "teal.300"),
-      color: useColorModeValue("white", "gray.900"),
-      glow: "rgba(45,212,191,0.35)",
-    },
-    weekly: {
-      bg: useColorModeValue("orange.500", "orange.300"),
-      hover: useColorModeValue("orange.600", "orange.200"),
-      active: useColorModeValue("orange.700", "orange.300"),
-      color: useColorModeValue("white", "gray.900"),
-      glow: "rgba(249,115,22,0.35)",
-    },
-    articles: {
-      bg: useColorModeValue("pink.500", "pink.300"),
-      hover: useColorModeValue("pink.600", "pink.200"),
-      active: useColorModeValue("pink.700", "pink.300"),
-      color: useColorModeValue("white", "gray.900"),
-      glow: "rgba(236,72,153,0.35)",
-    },
-    hackathons: {
-      bg: useColorModeValue("yellow.500", "yellow.300"),
-      hover: useColorModeValue("yellow.600", "yellow.200"),
-      active: useColorModeValue("yellow.700", "yellow.300"),
-      color: useColorModeValue("gray.900", "gray.900"),
-      glow: "rgba(234,179,8,0.45)",
-    },
-    supporters: {
-      bg: useColorModeValue("green.500", "green.300"),
-      hover: useColorModeValue("green.600", "green.200"),
-      active: useColorModeValue("green.700", "green.300"),
-      color: useColorModeValue("white", "gray.900"),
-      glow: "rgba(34,197,94,0.35)",
-    },
-    "faq-creators": {
-      bg: useColorModeValue("cyan.400", "cyan.300"),
-      hover: useColorModeValue("cyan.500", "cyan.200"),
-      active: useColorModeValue("cyan.600", "cyan.300"),
-      color: useColorModeValue("gray.900", "gray.900"),
-      glow: "rgba(34,211,238,0.45)",
-    },
-  };
-  const navIconMap: Record<string, IconType> = {
-    "how-to-join": FiLogIn,
-    "senior-benefits": FiTrendingUp,
-    materials: FiBookOpen,
-    projects: FiLayers,
-    weekly: FiCheckSquare,
-    articles: FiStar,
-    hackathons: FiAward,
-    supporters: FiUsers,
-    "faq-creators": FiCompass,
-  };
-  const navItems = [
-    { id: "how-to-join", label: "Как попасть" },
-    { id: "materials", label: "Материалы" },
-    { id: "weekly", label: "Weekly-задачи" },
-    { id: "articles", label: "Статьи" },
-    { id: "projects", label: "Проекты" },
-    { id: "hackathons", label: "Хакатоны" },
-    { id: "senior-benefits", label: "Сеньорам" },
-    { id: "supporters", label: "Поддержка" },
-    { id: "faq-creators", label: "FAQ" },
-  ];
-
-  const handleScrollTo = (id: string) => {
-    const el = typeof document !== "undefined" ? document.getElementById(id) : null;
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
 
   return (
     <Box
@@ -181,93 +67,8 @@ const CreatorsScreen: React.FC = () => {
             </VStack>
           </Box>
           <HeroSection />
-          <Box
-            borderWidth="1px"
-            borderColor={navCardBorder}
-            bg={navCardBg}
-            borderRadius="2xl"
-            p={{ base: 5, md: 6 }}
-            mt={{ base: 6, md: 7 }}
-            position="relative"
-            _before={{
-              content: '""',
-              position: "absolute",
-              inset: 0,
-              bg: useColorModeValue(
-                "linear-gradient(135deg, rgba(59,130,246,0.12), rgba(14,165,233,0.1))",
-                "linear-gradient(135deg, rgba(59,130,246,0.16), rgba(14,165,233,0.14))"
-              ),
-              pointerEvents: "none",
-            }}
-          >
-            <VStack align="stretch" spacing={{ base: 4, md: 5 }} position="relative" zIndex={1}>
-              <VStack align={{ base: "center", md: "flex-start" }} spacing={2} textAlign={{ base: "center", md: "left" }}>
-                <Box
-                  w={12}
-                  h={12}
-                  borderRadius="full"
-                  bg={useColorModeValue("white", "whiteAlpha.200")}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  boxShadow={useColorModeValue("md", "md")}
-                >
-                  <Icon as={FiCompass} aria-hidden="true" boxSize={6} color={useColorModeValue("blue.600", "blue.200")} />
-                </Box>
-                <Heading as="h3" size="sm" color={navHeadingColor} letterSpacing="-0.01em">
-                  Быстрые ссылки по разделам
-                </Heading>
-                <Text
-                  fontSize={{ base: "sm", md: "sm" }}
-                  color={useColorModeValue("gray.100", "gray.50")}
-                  maxW={{ base: "full", md: "880px" }}
-                  noOfLines={{ base: 2, md: 3 }}
-                >
-                  Выберите раздел и переходите сразу к нужному блоку: как попасть, основные авторские направления, вклад
-                  сеньоров, поддержка и FAQ.
-                </Text>
-              </VStack>
-              <Flex
-                gap={{ base: 2.5, md: 3 }}
-                justify="center"
-                flexWrap="wrap"
-                overflow="visible"
-                pb={{ base: 1, md: 0 }}
-              >
-                {navItems.map((item) => {
-                  const IconComp = navIconMap[item.id];
-                  const palette = navPalettes[item.id];
-                  return (
-                    <Button
-                      key={item.id}
-                      size="sm"
-                      bg={palette?.bg}
-                      color={palette?.color}
-                      leftIcon={IconComp ? <Icon as={IconComp} boxSize={4} /> : undefined}
-                      _hover={{
-                        bg: palette?.hover,
-                        transform: "translateY(-2px)",
-                      }}
-                      _active={{ bg: palette?.active, transform: "translateY(0px)" }}
-                      _focusVisible={{
-                        boxShadow: palette ? `0 0 0 3px ${palette.glow}` : undefined,
-                        outline: "none",
-                      }}
-                      borderRadius="full"
-                      px={{ base: 3.5, md: 4 }}
-                      py={{ base: 2.5, md: 2.5 }}
-                      boxShadow="none"
-                      minW="fit-content"
-                      onClick={() => handleScrollTo(item.id)}
-                    >
-                      {item.label}
-                    </Button>
-                  );
-                })}
-              </Flex>
-            </VStack>
-          </Box>
           <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-label="Как попасть в создатели AIFFA">
+          <BusinessWorkshopIcon/>
             <VStack align="stretch" spacing={{ base: 4, md: 5 }}>
               <Heading
                 as="h3"

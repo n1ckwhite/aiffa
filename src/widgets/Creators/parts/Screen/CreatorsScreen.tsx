@@ -89,28 +89,28 @@ const CreatorsScreen: React.FC = () => {
                 мейнтейнеры проектов, участники хакатонов и те, кто поддерживает идею. Найдите авторов, с которыми вам
                 по пути в обучении, коллаборациях и запуске новых проектов.
               </Text>
-              <Wrap
-                spacing={{ base: 2, md: 3 }}
-                justify="center"
-                mt={{ base: 4, md: 5 }}
-                shouldWrapChildren
-              >
-                {navItems.map((item) => (
-                  <WrapItem key={item.id}>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      colorScheme="blue"
-                      onClick={() => handleScrollTo(item.id)}
-                    >
-                      {item.label}
-                    </Button>
-                  </WrapItem>
-                ))}
-              </Wrap>
             </VStack>
           </Box>
           <HeroSection />
+          <Wrap
+            spacing={{ base: 2, md: 3 }}
+            justify="center"
+            mt={{ base: 6, md: 7 }}
+            shouldWrapChildren
+          >
+            {navItems.map((item) => (
+              <WrapItem key={item.id}>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  colorScheme="blue"
+                  onClick={() => handleScrollTo(item.id)}
+                >
+                  {item.label}
+                </Button>
+              </WrapItem>
+            ))}
+          </Wrap>
           <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-label="Как попасть в создатели AIFFA">
             <VStack align="stretch" spacing={{ base: 4, md: 5 }}>
               <Heading

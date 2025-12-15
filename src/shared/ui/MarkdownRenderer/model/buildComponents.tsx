@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Components } from 'react-markdown';
-import { Box, Divider, Heading, HStack, Icon, Image, Link as ChakraLink, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/react';
+import { Box, Divider, Heading, HStack, Icon, Image, Link as ChakraLink, ListItem, OrderedList, Text, UnorderedList, useColorModeValue } from '@chakra-ui/react';
 import { ChevronDownIcon, InfoOutlineIcon, LinkIcon, StarIcon, WarningIcon } from '@chakra-ui/icons';
 import { Link } from '@chakra-ui/react';
 import { CodeBlock } from '../ui/parts/CodeBlock';
@@ -257,28 +257,37 @@ export const buildComponents = (colors: any) => {
       const alt = (p as any).alt as string | undefined;
       const src = (p as any).src as string | undefined;
       return (
-        <Image
-          src={src}
-          alt={alt}
-          loading="lazy"
-          decoding="async"
+        <Box
+          as="figure"
           mx="auto"
           my={6}
-          borderRadius="lg"
-          width={960}
-          height={540}
           w="100%"
           maxW="960px"
-          h="auto"
-          maxH="520px"
-          objectFit="contain"
+          borderRadius="lg"
+          overflow="hidden"
           borderWidth="1px"
           borderColor={borderCol}
-          display="block"
-          bg={borderCol}
-          sizes="(min-width: 768px) 960px, 100vw"
-          draggable={false}
-        />
+          bg={useColorModeValue("white", "whiteAlpha.50")}
+          position="relative"
+        >
+          <Box paddingTop="56.25%" />
+          <Image
+            src={src}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            position="absolute"
+            inset={0}
+            w="100%"
+            h="100%"
+            objectFit="contain"
+            display="block"
+            draggable={false}
+            sizes="(min-width: 768px) 960px, 100vw"
+            borderRadius="0"
+            borderWidth={0}
+          />
+        </Box>
       );
     },
     code: CodeBlock as any,

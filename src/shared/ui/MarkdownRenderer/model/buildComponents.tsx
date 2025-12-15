@@ -265,6 +265,8 @@ export const buildComponents = (colors: any) => {
           mx="auto"
           my={6}
           borderRadius="lg"
+          width={960}
+          height={540}
           w="100%"
           maxW="960px"
           h="auto"
@@ -273,7 +275,9 @@ export const buildComponents = (colors: any) => {
           borderWidth="1px"
           borderColor={borderCol}
           display="block"
-          sx={{ aspectRatio: "16 / 9" }}
+          bg={borderCol}
+          sizes="(min-width: 768px) 960px, 100vw"
+          draggable={false}
         />
       );
     },

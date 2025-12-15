@@ -38,6 +38,24 @@ const CreatorsScreen: React.FC = () => {
   const seniorIconBg = useColorModeValue("purple.50", "whiteAlpha.100");
   const seniorIconColor = useColorModeValue("purple.500", "purple.200");
   const seniorTextColor = useColorModeValue("gray.700", "gray.200");
+  const navItems = [
+    { id: "how-to-join", label: "Как попасть" },
+    { id: "senior-benefits", label: "Сеньорам" },
+    { id: "materials", label: "Материалы" },
+    { id: "projects", label: "Проекты" },
+    { id: "weekly", label: "Weekly-задачи" },
+    { id: "articles", label: "Статьи" },
+    { id: "hackathons", label: "Хакатоны" },
+    { id: "supporters", label: "Поддержка" },
+    { id: "faq-creators", label: "FAQ" },
+  ];
+
+  const handleScrollTo = (id: string) => {
+    const el = typeof document !== "undefined" ? document.getElementById(id) : null;
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <Box
@@ -71,9 +89,29 @@ const CreatorsScreen: React.FC = () => {
                 мейнтейнеры проектов, участники хакатонов и те, кто поддерживает идею. Найдите авторов, с которыми вам
                 по пути в обучении, коллаборациях и запуске новых проектов.
               </Text>
+              <Wrap
+                spacing={{ base: 2, md: 3 }}
+                justify="center"
+                mt={{ base: 4, md: 5 }}
+                shouldWrapChildren
+              >
+                {navItems.map((item) => (
+                  <WrapItem key={item.id}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      colorScheme="blue"
+                      onClick={() => handleScrollTo(item.id)}
+                    >
+                      {item.label}
+                    </Button>
+                  </WrapItem>
+                ))}
+              </Wrap>
             </VStack>
           </Box>
-          <Box as="section" aria-label="Как попасть в создатели AIFFA">
+          <HeroSection />
+          <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-label="Как попасть в создатели AIFFA">
             <VStack align="stretch" spacing={{ base: 4, md: 5 }}>
               <Heading
                 as="h3"
@@ -197,94 +235,28 @@ const CreatorsScreen: React.FC = () => {
               </SimpleGrid>
             </VStack>
           </Box>
-          <Box
-            as="section"
-            aria-label="Почему это важно — миссия AIFFA"
-            borderWidth="1px"
-            borderColor={missionBorder}
-            borderRadius="2xl"
-            bg={missionBg}
-            p={{ base: 4, md: 6 }}
-            boxShadow={useColorModeValue("sm", "sm")}
-          >
-            <VStack spacing={{ base: 3, md: 4 }} align="stretch">
-              <HStack spacing={3} align="flex-start">
-                <Box
-                  w={10}
-                  h={10}
-                  borderRadius="full"
-                  bg={missionIconBg}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  flexShrink={0}
-                  boxShadow={useColorModeValue("sm", "sm")}
-                >
-                  <Icon as={FiHeart} aria-hidden="true" boxSize={5} color={missionIconColor} />
-                </Box>
-                <VStack align="flex-start" spacing={1}>
-                  <Heading as="h3" size="md" letterSpacing="-0.02em">
-                    Почему это важно? (миссия)
-                  </Heading>
-                  <Text fontSize={{ base: "sm", md: "md" }} color={missionTextColor}>
-                    AIFFA — это практическая экосистема. Мы благодарим авторов, потому что их работа держит платформу
-                    живой: она ускоряет обучение, создаёт пространство для коллабораций и вдохновляет новичков делать
-                    первые шаги.
-                  </Text>
-                </VStack>
-              </HStack>
-              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 2.5, md: 3 }}>
-                <HStack
-                  align="flex-start"
-                  spacing={2}
-                  p={3}
-                  borderRadius="lg"
-                  bg={useColorModeValue("white", "whiteAlpha.100")}
-                  borderWidth="1px"
-                  borderColor={useColorModeValue("white", "whiteAlpha.200")}
-                  boxShadow={useColorModeValue("xs", "xs")}
-                >
-                  <Icon as={FiAward} aria-hidden="true" boxSize={4} color={missionIconColor} />
-                  <Text fontSize="sm" color={missionTextColor}>
-                    Качество контента растёт, потому что авторы получают признание за полезные материалы и задачи.
-                  </Text>
-                </HStack>
-                <HStack
-                  align="flex-start"
-                  spacing={2}
-                  p={3}
-                  borderRadius="lg"
-                  bg={useColorModeValue("white", "whiteAlpha.100")}
-                  borderWidth="1px"
-                  borderColor={useColorModeValue("white", "whiteAlpha.200")}
-                  boxShadow={useColorModeValue("xs", "xs")}
-                >
-                  <Icon as={FiLogIn} aria-hidden="true" boxSize={4} color={missionIconColor} />
-                  <Text fontSize="sm" color={missionTextColor}>
-                    Сообщество становится доступнее: больше практик, статей, проектов и задач недели для всех уровней.
-                  </Text>
-                </HStack>
-                <HStack
-                  align="flex-start"
-                  spacing={2}
-                  p={3}
-                  borderRadius="lg"
-                  bg={useColorModeValue("white", "whiteAlpha.100")}
-                  borderWidth="1px"
-                  borderColor={useColorModeValue("white", "whiteAlpha.200")}
-                  boxShadow={useColorModeValue("xs", "xs")}
-                >
-                  <Icon as={FiHeart} aria-hidden="true" boxSize={4} color={missionIconColor} />
-                  <Text fontSize="sm" color={missionTextColor}>
-                    Эффект поддержки: новички видят примеры, получают помощь, а активные авторы чувствуют благодарность и
-                    продолжают развивать экосистему.
-                  </Text>
-                </HStack>
-              </SimpleGrid>
-            </VStack>
+          <Box id="materials" scrollMarginTop="90px">
+            <FeaturedCreatorsSection />
+          </Box>
+          <Box id="projects" scrollMarginTop="90px">
+            <ProjectsAuthorsSection />
+          </Box>
+          <Box id="weekly" scrollMarginTop="90px">
+            <WeeklyAuthorsSection />
+          </Box>
+          <Box id="articles" scrollMarginTop="90px">
+            <ArticleAuthorsSection />
+          </Box>
+          <Box id="hackathons" scrollMarginTop="90px">
+            <HackathonWinnersSection />
+          </Box>
+          <Box id="supporters" scrollMarginTop="90px">
+            <SupportersSection />
           </Box>
           <Box
             as="section"
+            id="senior-benefits"
+            scrollMarginTop="90px"
             aria-label="Как вклад делает авторов сильнее"
             borderWidth="1px"
             borderColor={seniorCardBorder}
@@ -403,14 +375,9 @@ const CreatorsScreen: React.FC = () => {
               </SimpleGrid>
             </VStack>
           </Box>
-          <HeroSection />
-          <FeaturedCreatorsSection />
-          <ProjectsAuthorsSection />
-          <WeeklyAuthorsSection />
-          <ArticleAuthorsSection />
-          <HackathonWinnersSection />
-          <SupportersSection />
-          <FAQ variant="creators" showSupportBlock={false} />
+          <Box id="faq-creators" scrollMarginTop="90px">
+            <FAQ variant="creators" showSupportBlock={false} />
+          </Box>
           {/* <CreatorsGridSection /> */}
         </VStack>
       </Box>

@@ -20,7 +20,7 @@ const PersonLottieIcon: React.FC = () => {
           src={personIcon}
           alt="Иконка человека"
           width={350}
-          height={250}
+          height={242}
           sizes="350px"
         />
       }

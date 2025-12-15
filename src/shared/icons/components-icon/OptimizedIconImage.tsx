@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import type { CSSProperties } from "react";
 import NextImage, { type StaticImageData } from "next/image";
 
 type OptimizedIconImageProps = {
@@ -16,6 +17,7 @@ type OptimizedIconImageProps = {
   sizes?: string;
   priority?: boolean;
   fetchPriority?: 'auto' | 'high' | 'low';
+  style?: CSSProperties;
 };
 
 const OptimizedIconImage: React.FC<OptimizedIconImageProps> = ({
@@ -25,7 +27,8 @@ const OptimizedIconImage: React.FC<OptimizedIconImageProps> = ({
   height,
   sizes = "(max-width: 768px) 70vw, 350px",
   priority = false,
-  fetchPriority = 'auto'
+  fetchPriority = 'auto',
+  style,
 }) => {
   return (
     <NextImage
@@ -34,10 +37,13 @@ const OptimizedIconImage: React.FC<OptimizedIconImageProps> = ({
       sizes={sizes}
       fetchPriority={fetchPriority}
       priority={priority}
+      width={width}
+      height={height}
       style={{
         width: "auto",
         height: "auto",
         objectFit: "contain",
+        ...style,
       }}
     />
   );

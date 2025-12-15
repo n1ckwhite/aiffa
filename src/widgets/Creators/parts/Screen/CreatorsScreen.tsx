@@ -18,7 +18,7 @@ import WeeklyAuthorsSection from "../../ui/parts/WeeklyAuthorsSection";
 import ArticleAuthorsSection from "../../ui/parts/ArticleAuthorsSection";
 import HackathonWinnersSection from "../../ui/parts/HackathonWinnersSection";
 import SupportersSection from "../../ui/parts/SupportersSection";
-import { BusinessWorkshopIcon } from "@/shared/icons/components-icon";
+import { BusinessWorkshopIcon, SeniorTeamIcon } from "@/shared/icons/components-icon";
 
 const CreatorsScreen: React.FC = () => {
   const pageDescriptionColor = useColorModeValue("gray.600", "gray.300");
@@ -90,7 +90,11 @@ const CreatorsScreen: React.FC = () => {
                 любой, кто создаёт пользу и готов делиться опытом.
               </Text>
 
-              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, md: 4 }}>
+              <SimpleGrid
+                minChildWidth="260px"
+                spacing={{ base: 3, md: 4 }}
+                justifyItems="stretch"
+              >
                 <Box
                   borderWidth="1px"
                   borderColor={infoCardBorder}
@@ -98,6 +102,9 @@ const CreatorsScreen: React.FC = () => {
                   bg={infoCardBg}
                   p={4}
                   boxShadow={useColorModeValue("sm", "sm")}
+                  w="full"
+                  minW="0"
+                  maxW="100%"
                 >
                   <HStack align="flex-start" spacing={3}>
                     <Box
@@ -131,6 +138,9 @@ const CreatorsScreen: React.FC = () => {
                   bg={infoCardBg}
                   p={4}
                   boxShadow={useColorModeValue("sm", "sm")}
+                  w="full"
+                  minW="0"
+                  maxW="100%"
                 >
                   <HStack align="flex-start" spacing={3}>
                     <Box
@@ -164,6 +174,9 @@ const CreatorsScreen: React.FC = () => {
                   bg={infoCardBg}
                   p={4}
                   boxShadow={useColorModeValue("sm", "sm")}
+                  w="full"
+                  minW="0"
+                  maxW="100%"
                 >
                   <HStack align="flex-start" spacing={3}>
                     <Box
@@ -215,14 +228,10 @@ const CreatorsScreen: React.FC = () => {
             id="senior-benefits"
             scrollMarginTop="90px"
             aria-label="Как вклад делает авторов сильнее"
-            borderWidth="1px"
-            borderColor={seniorCardBorder}
-            borderRadius="2xl"
-            bg={useColorModeValue("white", "whiteAlpha.50")}
             p={{ base: 4, md: 6 }}
-            boxShadow={useColorModeValue("sm", "sm")}
           >
             <VStack spacing={{ base: 3, md: 4 }} align="stretch">
+              <SeniorTeamIcon/>
               <VStack spacing={2} align="flex-start">
                 <Heading as="h3" size="md" letterSpacing="-0.02em">
                   Как это делает вас сильнее

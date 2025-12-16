@@ -23,6 +23,18 @@ export const Pagination: React.FC<PaginationProps> = ({
   const controlBorderRadius = { base: "10px", md: "12px" } as const;
   const gap = { base: 1, md: 2 } as const;
 
+  const lastPage = React.useMemo(() => {
+    const nums = pageItems.filter((it): it is number => typeof it === "number");
+    const computed = nums.length > 0 ? Math.max(...nums) : page;
+    return Number.isFinite(computed) && computed > 0 ? computed : page;
+  }, [pageItems, page]);
+
+  const mobilePages = React.useMemo(() => {
+    const candidates = [page - 1, page, page + 1].filter((p) => p >= 1 && p <= lastPage);
+    // ensure unique + stable order
+    return Array.from(new Set(candidates)).sort((a, b) => a - b);
+  }, [page, lastPage]);
+
   return (
     <HStack justify="center" align="center" pt={2} gap={gap} flexWrap="nowrap" maxW="100%">
       <IconButton
@@ -44,55 +56,75 @@ export const Pagination: React.FC<PaginationProps> = ({
         color={colors.controlsIcon}
       />
 
-      <Box
-        maxW={{ base: "52vw", sm: "56vw", md: "unset" }}
-        overflowX={{ base: "auto", md: "visible" }}
-        overflowY="hidden"
-        sx={{
-          WebkitOverflowScrolling: "touch",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          "&::-webkit-scrollbar": { display: "none" },
-        }}
-      >
-        <HStack gap={gap} flexWrap="nowrap">
-          {pageItems.map((it, idx) => {
-            if (typeof it === "string") {
-              return (
-                <Box key={`dots-${idx}`} as="span" px={1} color={colors.descColor} userSelect="none" flexShrink={0}>
-                  {it}
-                </Box>
-              );
-            }
+      {/* Mobile (no horizontal scroll): show only nearby pages */}
+      <HStack gap={gap} flexWrap="nowrap" display={{ base: "flex", md: "none" }}>
+        {mobilePages.map((p) => {
+          const isActive = p === page;
+          return (
+            <Button
+              key={p}
+              size="sm"
+              onClick={() => onSelect(p)}
+              aria-current={isActive ? "page" : undefined}
+              colorScheme={isActive ? "blue" : undefined}
+              variant={isActive ? "solid" : "outline"}
+              boxSize={controlBoxSize}
+              minW={controlBoxSize}
+              flexShrink={0}
+              px={0}
+              borderRadius={controlBorderRadius}
+              fontWeight={isActive ? "semibold" : "medium"}
+              fontSize="sm"
+              bg={isActive ? undefined : colors.controlsBg}
+              borderColor={colors.controlsBorder}
+              _hover={{ bg: isActive ? undefined : colors.controlsHoverBg }}
+              _active={{ transform: "translateY(1px)" }}
+              _focusVisible={{ boxShadow: "0 0 0 3px rgba(66, 153, 225, 0.35)" }}
+            >
+              {p}
+            </Button>
+          );
+        })}
+      </HStack>
 
-            const isActive = it === page;
+      {/* Desktop/tablet */}
+      <HStack gap={gap} flexWrap="nowrap" display={{ base: "none", md: "flex" }}>
+        {pageItems.map((it, idx) => {
+          if (typeof it === "string") {
             return (
-              <Button
-                key={it}
-                size="sm"
-                onClick={() => onSelect(it)}
-                aria-current={isActive ? "page" : undefined}
-                colorScheme={isActive ? "blue" : undefined}
-                variant={isActive ? "solid" : "outline"}
-                boxSize={controlBoxSize}
-                minW={controlBoxSize}
-                flexShrink={0}
-                px={0}
-                borderRadius={controlBorderRadius}
-                fontWeight={isActive ? "semibold" : "medium"}
-                fontSize={{ base: "sm", md: "sm" }}
-                bg={isActive ? undefined : colors.controlsBg}
-                borderColor={colors.controlsBorder}
-                _hover={{ bg: isActive ? undefined : colors.controlsHoverBg }}
-                _active={{ transform: "translateY(1px)" }}
-                _focusVisible={{ boxShadow: "0 0 0 3px rgba(66, 153, 225, 0.35)" }}
-              >
+              <Box key={`dots-${idx}`} as="span" px={1} color={colors.descColor} userSelect="none" flexShrink={0}>
                 {it}
-              </Button>
+              </Box>
             );
-          })}
-        </HStack>
-      </Box>
+          }
+
+          const isActive = it === page;
+          return (
+            <Button
+              key={it}
+              size="sm"
+              onClick={() => onSelect(it)}
+              aria-current={isActive ? "page" : undefined}
+              colorScheme={isActive ? "blue" : undefined}
+              variant={isActive ? "solid" : "outline"}
+              boxSize={controlBoxSize}
+              minW={controlBoxSize}
+              flexShrink={0}
+              px={0}
+              borderRadius={controlBorderRadius}
+              fontWeight={isActive ? "semibold" : "medium"}
+              fontSize="sm"
+              bg={isActive ? undefined : colors.controlsBg}
+              borderColor={colors.controlsBorder}
+              _hover={{ bg: isActive ? undefined : colors.controlsHoverBg }}
+              _active={{ transform: "translateY(1px)" }}
+              _focusVisible={{ boxShadow: "0 0 0 3px rgba(66, 153, 225, 0.35)" }}
+            >
+              {it}
+            </Button>
+          );
+        })}
+      </HStack>
 
       <IconButton
         aria-label="Следующая страница"

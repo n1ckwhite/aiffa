@@ -6,10 +6,10 @@ const ModuleProjectsSkeleton: React.FC = () => {
     <Box>
       <Box px={0}>
         <VStack align="stretch" gap={7} maxW={{ base: '100%', md: '900px' }} mx="auto">
-        <Box borderWidth="2px" borderRadius="xl" p={{ base: 4, md: 6 }}>
+        <Box borderRadius="xl" p={{ base: 4, md: 6 }}>
             <HStack align="center" spacing={{ base: 2, md: 3 }} mb={2}>
               <SkeletonCircle boxSize={{ base: '36px', md: '44px' }} />
-              <Heading as="h1" size="lg">Проекты</Heading>
+              <Skeleton h="18" w="170px" borderRadius="full" />
             </HStack>
             <HStack gap={3} align="center" flexWrap="wrap">
               <Skeleton h="20px" w="90px" borderRadius="full" />
@@ -25,7 +25,7 @@ const ModuleProjectsSkeleton: React.FC = () => {
 
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
             {Array.from({ length: 4 }).map((_, i) => (
-              <Box key={i} borderWidth="2px" borderRadius="xl" p={5} position="relative" overflow="hidden">
+              <Box key={i} borderRadius="xl" p={5} position="relative" overflow="hidden">
                 <HStack spacing={3} align="flex-start">
                   <SkeletonCircle boxSize="28px" />
                   <VStack align="stretch" spacing={2} flex={1}>
@@ -43,18 +43,7 @@ const ModuleProjectsSkeleton: React.FC = () => {
               </Box>
             ))}
           </SimpleGrid>
-
-          <HStack justify="space-between" align="center" pt={2}>
-            <Skeleton h="36px" w="36px" borderRadius="md" />
-            <HStack>
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Skeleton key={i} h="28px" w="36px" borderRadius="md" />
-              ))}
-            </HStack>
-            <Skeleton h="36px" w="36px" borderRadius="md" />
-          </HStack>
-
-          <Box borderWidth="2px" borderRadius="2xl" p={{ base: 4, md: 5 }}>
+          <Box borderRadius="2xl" p={{ base: 4, md: 5 }}>
             <HStack align="flex-start" spacing={3}>
               <Skeleton h="24px" w="24px" borderRadius="full" />
               <VStack align="stretch" spacing={2} flex={1}>

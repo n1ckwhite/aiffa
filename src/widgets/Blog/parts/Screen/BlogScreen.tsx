@@ -12,6 +12,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+import { useAppColors } from "@/shared/theme/colors";
 import { useBlogArticles } from "../../hooks/useBlogArticles";
 import type { BlogArticle } from "../../types";
 
@@ -27,6 +28,7 @@ const getDateLabel = (iso: string) => {
 };
 
 const BlogScreen: React.FC = () => {
+  const theme = useAppColors();
   const { items, isLoading } = useBlogArticles();
   const articles = React.useMemo(() => items.slice().sort((a, b) => (a.date < b.date ? 1 : -1)), [items]);
 
@@ -35,40 +37,47 @@ const BlogScreen: React.FC = () => {
       as="section"
       position="relative"
       aria-labelledby="blog-title"
-      bg="#0B0F19"
-      color="white"
-      py={{ base: 12, md: 16 }}
+      pb="32px"
     >
-      <Box w="100%" maxW="1200px" mx="auto" px={{ base: 4, md: 6 }}>
-        <VStack as="header" spacing={4} align="center" textAlign="center" pb={{ base: 10, md: 12 }}>
-          <Text fontSize="sm" color="#2DD4BF" fontWeight="semibold">
-            Blog
-          </Text>
-          <Heading id="blog-title" as="h1" fontSize={{ base: "4xl", md: "5xl" }} letterSpacing="-0.02em">
-            Latest Insights
+      <Box w="100%" maxW="1200px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+        <VStack as="header" spacing={3} align="center" textAlign="center" pb={{ base: 8, md: 10 }}>
+          <Heading
+            id="blog-title"
+            as="h1"
+            fontSize={{ base: "2xl", md: "3xl" }}
+            fontWeight="bold"
+            color={theme.titleColor}
+            letterSpacing="-0.02em"
+          >
+            Блог AIFFA
           </Heading>
-          <Text fontSize={{ base: "sm", md: "md" }} color="whiteAlpha.700" maxW={{ base: "100%", md: "720px" }} lineHeight={1.8}>
-            Stay updated with the latest trends and insights from our experts. Read our articles on various topics and enhance your knowledge.
+          <Text
+            fontSize={{ base: "sm", md: "md" }}
+            color={theme.descColor}
+            maxW={{ base: "100%", md: "820px" }}
+            lineHeight={1.8}
+          >
+            Статьи участников экосистемы: опыт, разборы, практические советы и истории — всё, что помогает расти быстрее и делать вклад.
           </Text>
         </VStack>
 
         {isLoading ? (
           <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 6, md: 8 }}>
             {Array.from({ length: 3 }).map((_, i) => (
-              <Box key={i} borderWidth="1px" borderColor="whiteAlpha.200" borderRadius="xl" bg="whiteAlpha.50" overflow="hidden">
+              <Box key={i} borderWidth="1px" borderColor={theme.borderColor} borderRadius="2xl" bg={theme.cardBg} overflow="hidden">
                 <AspectRatio ratio={16 / 9} w="full">
-                  <Skeleton startColor="whiteAlpha.100" endColor="whiteAlpha.200" />
+                  <Skeleton />
                 </AspectRatio>
                 <Box p={{ base: 5, md: 6 }}>
-                  <Skeleton h="12px" w="120px" mb={3} startColor="whiteAlpha.100" endColor="whiteAlpha.200" />
-                  <Skeleton h="22px" w="90%" mb={3} startColor="whiteAlpha.100" endColor="whiteAlpha.200" />
-                  <Skeleton h="14px" w="100%" mb={2} startColor="whiteAlpha.100" endColor="whiteAlpha.200" />
-                  <Skeleton h="14px" w="85%" mb={6} startColor="whiteAlpha.100" endColor="whiteAlpha.200" />
+                  <Skeleton h="12px" w="120px" mb={3} />
+                  <Skeleton h="22px" w="90%" mb={3} />
+                  <Skeleton h="14px" w="100%" mb={2} />
+                  <Skeleton h="14px" w="85%" mb={6} />
                   <HStack spacing={3}>
-                    <Skeleton boxSize="36px" borderRadius="full" startColor="whiteAlpha.100" endColor="whiteAlpha.200" />
+                    <Skeleton boxSize="36px" borderRadius="full" />
                     <VStack align="start" spacing={1}>
-                      <Skeleton h="12px" w="120px" startColor="whiteAlpha.100" endColor="whiteAlpha.200" />
-                      <Skeleton h="12px" w="110px" startColor="whiteAlpha.100" endColor="whiteAlpha.200" />
+                      <Skeleton h="12px" w="120px" />
+                      <Skeleton h="12px" w="110px" />
                     </VStack>
                   </HStack>
                 </Box>
@@ -85,13 +94,13 @@ const BlogScreen: React.FC = () => {
                   as={RouterLink as any}
                   to={`/blog/${article.slug}`}
                   borderWidth="1px"
-                  borderColor="whiteAlpha.200"
-                  borderRadius="xl"
-                  bg="whiteAlpha.50"
+                  borderColor={theme.borderColor}
+                  borderRadius="2xl"
+                  bg={theme.cardBg}
                   overflow="hidden"
                   display="block"
                   transition="transform 150ms ease, border-color 150ms ease"
-                  _hover={{ textDecoration: "none", transform: "translateY(-2px)", borderColor: "whiteAlpha.400" }}
+                  _hover={{ textDecoration: "none", transform: "translateY(-2px)", borderColor: theme.blue.chipBorder }}
                 >
                   <AspectRatio ratio={16 / 9} w="full">
                     <Image
@@ -105,13 +114,13 @@ const BlogScreen: React.FC = () => {
 
                   <Box p={{ base: 5, md: 6 }}>
                     <VStack align="stretch" spacing={3}>
-                      <Text fontSize="sm" color="#2DD4BF" fontWeight="semibold">
+                      <Text fontSize="sm" color={theme.blue.accent} fontWeight="semibold">
                         {category}
                       </Text>
-                      <Heading as="h2" fontSize={{ base: "xl", md: "2xl" }} letterSpacing="-0.02em" lineHeight={1.2}>
+                      <Heading as="h2" fontSize={{ base: "xl", md: "2xl" }} letterSpacing="-0.02em" lineHeight={1.2} color={theme.titleColor}>
                         {article.title}
                       </Heading>
-                      <Text fontSize="sm" color="whiteAlpha.700" lineHeight={1.7}>
+                      <Text fontSize="sm" color={theme.descColor} lineHeight={1.7}>
                         {article.description}
                       </Text>
                       <HStack spacing={3} pt={4}>
@@ -121,10 +130,10 @@ const BlogScreen: React.FC = () => {
                           boxSize="38px"
                         />
                         <VStack spacing={0} align="start" minW={0}>
-                          <Text fontSize="sm" fontWeight="semibold" noOfLines={1}>
+                          <Text fontSize="sm" fontWeight="semibold" noOfLines={1} color={theme.titleColor}>
                             {article.author?.name || "—"}
                           </Text>
-                          <Text fontSize="xs" color="whiteAlpha.600">
+                          <Text fontSize="xs" color={theme.descColor}>
                             {getDateLabel(article.date)}
                           </Text>
                         </VStack>

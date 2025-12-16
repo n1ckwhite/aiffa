@@ -16,7 +16,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { FiClock, FiEye, FiStar } from "react-icons/fi";
 import { useAppColors } from "@/shared/theme/colors";
 import { usePagination } from "widgets/ModuleLessons/hooks/usePagination";
-import { Pagination } from "widgets/ModuleLessons/parts/Pagination";
+import { Pagination } from "shared/ui/Pagination";
 import { useScrollToTop } from "shared/hooks/useScrollToTop";
 import { useBlogArticles } from "../../hooks/useBlogArticles";
 import type { BlogArticle } from "../../types";

@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, Heading, Icon, IconButton, Menu, MenuButton, MenuItem, MenuList, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { FiCheck, FiFilter, FiUserPlus } from "react-icons/fi";
 import FilterBar from "shared/ui/FilterBar";
-import { Pagination } from "widgets/ModuleLessons/parts/Pagination";
+import { Pagination } from "shared/ui/Pagination";
 import { usePagination } from "widgets/ModuleProjects/hooks/usePagination";
 import { useCreatorsData } from "../../hooks/useCreatorsData";
 import { useCreatorsFilter } from "../../hooks/useCreatorsFilter";

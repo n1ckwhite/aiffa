@@ -6,7 +6,7 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
-  title: "Блог — AIFFA",
+  title: "Блог",
   description: "Статьи участников AIFFA: опыт, разборы и практические советы",
   alternates: {
     canonical: `${SITE_URL}/blog`,

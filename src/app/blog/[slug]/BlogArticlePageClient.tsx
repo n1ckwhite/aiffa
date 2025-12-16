@@ -4,7 +4,7 @@ import React from "react";
 import BlogArticleScreen from "@/widgets/Blog/parts/ArticleScreen/BlogArticleScreen";
 import { loadBlogArticleBySlug } from "@/shared/articles/api";
 import type { BlogArticle } from "@/widgets/Blog/types";
-import { parseBlogArticleMd } from "@/shared/articles/md";
+import { parseBlogArticleMd, splitBlogArticleMarkdown } from "@/shared/articles/md";
 
 type BlogArticlePageClientProps = {
   slug: string;
@@ -13,7 +13,7 @@ type BlogArticlePageClientProps = {
 
 const BlogArticlePageClient = ({ slug, initialMarkdown }: BlogArticlePageClientProps) => {
   const [article, setArticle] = React.useState<BlogArticle | null>(null);
-  const markdown = initialMarkdown;
+  const markdown = React.useMemo(() => splitBlogArticleMarkdown(initialMarkdown).body, [initialMarkdown]);
 
   React.useEffect(() => {
     let cancelled = false;

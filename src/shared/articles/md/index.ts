@@ -14,7 +14,7 @@ export type BlogArticleParsed = {
   coverImage?: string;
 };
 
-const parseJsonFrontmatter = (md: string): { meta: any; body: string } => {
+export const splitBlogArticleMarkdown = (md: string): { meta: any; body: string } => {
   const fmMatch = md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
   if (!fmMatch) {
     return { meta: {}, body: md };
@@ -47,7 +47,7 @@ const extractDescriptionFromBody = (body: string): string => {
 };
 
 export const parseBlogArticleMd = (md: string): BlogArticleParsed => {
-  const { meta, body } = parseJsonFrontmatter(md);
+  const { meta, body } = splitBlogArticleMarkdown(md);
 
   const title = String(meta.title || "").trim() || extractTitleFromBody(body);
   const description = String(meta.description || "").trim() || extractDescriptionFromBody(body);

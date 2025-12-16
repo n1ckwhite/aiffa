@@ -83,7 +83,6 @@ const BlogScreen: React.FC = () => {
             fontSize={{ base: "2xl", md: "3xl" }}
             fontWeight="bold"
             color={theme.titleColor}
-            letterSpacing="-0.02em"
           >
             Блог AIFFA
           </Heading>
@@ -91,7 +90,6 @@ const BlogScreen: React.FC = () => {
             fontSize={{ base: "sm", md: "md" }}
             color={theme.descColor}
             maxW={{ base: "100%", md: "820px" }}
-            lineHeight={1.8}
           >
             Статьи участников экосистемы: опыт, разборы, практические советы и истории — всё, что помогает расти быстрее и делать вклад.
           </Text>
@@ -199,16 +197,18 @@ const BlogScreen: React.FC = () => {
             </SimpleGrid>
 
             {totalPages > 1 && (
-              <Pagination
-                pageItems={pageItems}
-                page={page}
-                canPrev={canPrev}
-                canNext={canNext}
-                onPrev={() => handleSetPage((p) => Math.max(1, p - 1))}
-                onNext={() => handleSetPage((p) => Math.min(totalPages, p + 1))}
-                onSelect={(p) => handleSetPage(p)}
-                colors={paginationColors}
-              />
+              <Box alignSelf="center" w="fit-content" maxW="100%">
+                <Pagination
+                  pageItems={pageItems}
+                  page={page}
+                  canPrev={canPrev}
+                  canNext={canNext}
+                  onPrev={() => handleSetPage((p) => Math.max(1, p - 1))}
+                  onNext={() => handleSetPage((p) => Math.min(totalPages, p + 1))}
+                  onSelect={(p) => handleSetPage(p)}
+                  colors={paginationColors}
+                />
+              </Box>
             )}
           </VStack>
         )}

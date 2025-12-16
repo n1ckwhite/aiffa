@@ -15,9 +15,10 @@ export type BlogArticleParsed = {
 };
 
 export const splitBlogArticleMarkdown = (md: string): { meta: any; body: string } => {
-  const fmMatch = md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
+  const normalized = md.replace(/^\uFEFF/, "");
+  const fmMatch = normalized.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?/);
   if (!fmMatch) {
-    return { meta: {}, body: md };
+    return { meta: {}, body: normalized };
   }
   const jsonText = fmMatch[1].trim();
   let meta: any = {};
@@ -26,7 +27,10 @@ export const splitBlogArticleMarkdown = (md: string): { meta: any; body: string 
   } catch {
     meta = {};
   }
-  const body = md.slice(fmMatch[0].length);
+  const bodyRaw = normalized.slice(fmMatch[0].length);
+  const body = bodyRaw
+    .replace(/^\s*---\s*\r?\n\{[\s\S]*?\}\r?\n---\s*\r?\n?/m, "")
+    .replace(/\r?\n---\s*\r?\n\{[\s\S]*?\}\r?\n---\s*\r?\n?/g, "\n");
   return { meta, body };
 };
 

@@ -106,16 +106,23 @@ const BlogScreen: React.FC = () => {
                 bg={theme.cardBg}
                 overflow="hidden"
               >
-                <Flex direction={{ base: "column", md: "row" }} h={{ base: "unset", md: "260px" }} align="stretch">
-                  <Box w={{ base: "full", md: "420px" }} flexShrink={0} overflow="hidden" h={{ base: "unset", md: "full" }}>
+                <Flex direction={{ base: "column", md: "row" }} align="stretch">
+                  <Box
+                    w={{ base: "full", md: "420px" }}
+                    flexShrink={0}
+                    overflow="hidden"
+                    alignSelf="stretch"
+                    display={{ base: "block", md: "flex" }}
+                    flexDirection="column"
+                  >
                     <AspectRatio ratio={16 / 9} w="full" display={{ base: "block", md: "none" }}>
                       <Skeleton />
                     </AspectRatio>
-                    <Box display={{ base: "none", md: "block" }} h="full">
+                    <Box display={{ base: "none", md: "block" }} flex="1" minH={0}>
                       <Skeleton h="100%" w="100%" />
                     </Box>
                   </Box>
-                  <Box p={{ base: 5, md: 6 }} flex="1" display="flex" flexDirection="column" minW={0} h={{ base: "unset", md: "full" }}>
+                  <Box p={{ base: 5, md: 6 }} flex="1" display="flex" flexDirection="column" minW={0}>
                     <Skeleton h="12px" w="120px" mb={3} />
                     <Skeleton h="22px" w="90%" mb={3} />
                     <Skeleton h="14px" w="100%" mb={2} />
@@ -155,8 +162,16 @@ const BlogScreen: React.FC = () => {
                       transition="transform 150ms ease, border-color 150ms ease"
                       _hover={{ textDecoration: "none", transform: "translateY(-2px)", borderColor: theme.blue.chipBorder }}
                     >
-                      <Flex direction={{ base: "column", md: "row" }} h={{ base: "unset", md: "260px" }} align="stretch">
-                        <Box w={{ base: "full", md: "420px" }} flexShrink={0} overflow="hidden" h={{ base: "unset", md: "full" }}>
+                      <Flex direction={{ base: "column", md: "row" }} align="stretch">
+                        <Box
+                          w={{ base: "full", md: "420px" }}
+                          flexShrink={0}
+                          overflow="hidden"
+                          maxH={{ base: "280px", md: "auto" }}
+                          alignSelf="stretch"
+                          display={{ base: "block", md: "flex" }}
+                          flexDirection="column"
+                        >
                           {/* Mobile: keep a predictable ratio */}
                           <AspectRatio ratio={16 / 9} w="full" display={{ base: "block", md: "none" }}>
                             <Image
@@ -164,11 +179,11 @@ const BlogScreen: React.FC = () => {
                               alt={article.title}
                               loading="lazy"
                               decoding="async"
-                              objectFit="cover"
+                              objectFit="contain"
                             />
                           </AspectRatio>
                           {/* md+: full height, no "border/radius" on image itself */}
-                          <Box display={{ base: "none", md: "block" }} h="full">
+                          <Box display={{ base: "none", md: "block" }} flex="1" minH={0}>
                             <Image
                               src={article.coverImage || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80"}
                               alt={article.title}
@@ -182,7 +197,7 @@ const BlogScreen: React.FC = () => {
                           </Box>
                         </Box>
 
-                        <Box p={{ base: 5, md: 6 }} flex="1" display="flex" flexDirection="column" minW={0} h={{ base: "unset", md: "full" }}>
+                        <Box p={{ base: 5, md: 6 }} flex="1" display="flex" flexDirection="column" minW={0}>
                           <VStack align="stretch" spacing={3}>
                             <Text fontSize="sm" color={theme.blue.accent} fontWeight="semibold">
                               {category}
@@ -193,11 +208,10 @@ const BlogScreen: React.FC = () => {
                               letterSpacing="-0.02em"
                               lineHeight={1.2}
                               color={theme.titleColor}
-                              noOfLines={{ base: 3, md: 2 }}
                             >
                               {article.title}
                             </Heading>
-                            <Text fontSize="sm" color={theme.descColor} lineHeight={1.7} noOfLines={{ base: 4, md: 3 }}>
+                            <Text fontSize="sm" color={theme.descColor} lineHeight={1.7}>
                               {article.description}
                             </Text>
                           </VStack>

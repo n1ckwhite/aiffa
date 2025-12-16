@@ -62,7 +62,7 @@ const BlogScreen: React.FC = () => {
         </VStack>
 
         {isLoading ? (
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 6, md: 8 }}>
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 6, md: 8 }}>
             {Array.from({ length: 3 }).map((_, i) => (
               <Box key={i} borderWidth="1px" borderColor={theme.borderColor} borderRadius="2xl" bg={theme.cardBg} overflow="hidden">
                 <AspectRatio ratio={16 / 9} w="full">
@@ -85,7 +85,7 @@ const BlogScreen: React.FC = () => {
             ))}
           </SimpleGrid>
         ) : (
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 6, md: 8 }}>
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 6, md: 8 }}>
             {articles.map((article: BlogArticle) => {
               const category = (article.tags || [])[0] ?? "Insights";
               return (

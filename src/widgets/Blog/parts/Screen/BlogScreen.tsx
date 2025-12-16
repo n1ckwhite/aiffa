@@ -133,7 +133,10 @@ const BlogScreen: React.FC = () => {
                     borderRadius="xl"
                     bg={theme.cardBg}
                     overflow="hidden"
-                    display="block"
+                    display="flex"
+                    flexDirection="column"
+                    h="100%"
+                    alignSelf="stretch"
                     transition="transform 150ms ease, border-color 150ms ease"
                     _hover={{ textDecoration: "none", transform: "translateY(-2px)", borderColor: theme.blue.chipBorder }}
                   >
@@ -147,7 +150,7 @@ const BlogScreen: React.FC = () => {
                       />
                     </AspectRatio>
 
-                    <Box p={{ base: 5, md: 6 }}>
+                    <Box p={{ base: 5, md: 6 }} display="flex" flexDirection="column" flex="1" minH={0}>
                       <VStack align="stretch" spacing={3}>
                         <Text fontSize="sm" color={theme.blue.accent} fontWeight="semibold">
                           {category}
@@ -158,8 +161,10 @@ const BlogScreen: React.FC = () => {
                         <Text fontSize="sm" color={theme.descColor} lineHeight={1.7}>
                           {article.description}
                         </Text>
+                      </VStack>
 
-                        <HStack spacing={4} pt={1} color={theme.descColor} fontSize="sm" flexWrap="wrap">
+                      <VStack align="stretch" spacing={3} pt={4} mt="auto">
+                        <HStack spacing={4} color={theme.descColor} fontSize="sm" flexWrap="wrap">
                           <HStack spacing={1.5}>
                             <Icon as={FiEye} aria-hidden="true" color={theme.blue.accent} />
                             <Text as="span">{formatCount(article.viewsCount)}</Text>
@@ -174,12 +179,8 @@ const BlogScreen: React.FC = () => {
                           </HStack>
                         </HStack>
 
-                        <HStack spacing={3} pt={4}>
-                          <Avatar
-                            name={article.author?.name || "Автор"}
-                            src={getGithubAvatarUrl(article.author?.github, 96)}
-                            boxSize="38px"
-                          />
+                        <HStack spacing={3}>
+                          <Avatar name={article.author?.name || "Автор"} src={getGithubAvatarUrl(article.author?.github, 96)} boxSize="38px" />
                           <VStack spacing={0} align="start" minW={0}>
                             <Text fontSize="sm" fontWeight="semibold" noOfLines={1} color={theme.titleColor}>
                               {article.author?.name || "—"}

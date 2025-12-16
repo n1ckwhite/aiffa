@@ -76,8 +76,8 @@ export const Pagination: React.FC<PaginationProps> = ({
     [lastPage, page],
   );
 
-  const mobilePages4 = React.useMemo(() => getCompactPages(4), [getCompactPages]);
   const mobilePages6 = React.useMemo(() => getCompactPages(6), [getCompactPages]);
+  const mobilePages8 = React.useMemo(() => getCompactPages(8), [getCompactPages]);
 
   return (
     <HStack justify="center" align="center" pt={2} gap={gap} flexWrap="nowrap" maxW="100%">
@@ -100,9 +100,9 @@ export const Pagination: React.FC<PaginationProps> = ({
         color={colors.controlsIcon}
       />
 
-      {/* Base mobile (iPhone 4): arrows + 4 smart page buttons */}
+      {/* Base mobile (iPhone 4): arrows + 6 smart page buttons */}
       <HStack gap={gap} flexWrap="nowrap" display={{ base: "flex", sm: "none" }}>
-        {mobilePages4.map((p) => {
+        {mobilePages6.map((p) => {
           const isActive = p === page;
           return (
             <Button
@@ -131,9 +131,9 @@ export const Pagination: React.FC<PaginationProps> = ({
         })}
       </HStack>
 
-      {/* Small screens (>= sm): arrows + up to 6 smart page buttons */}
+      {/* Small screens (>= sm): arrows + up to 8 smart page buttons */}
       <HStack gap={gap} flexWrap="nowrap" display={{ base: "none", sm: "flex", md: "none" }}>
-        {mobilePages6.map((p) => {
+        {mobilePages8.map((p) => {
           const isActive = p === page;
           return (
             <Button

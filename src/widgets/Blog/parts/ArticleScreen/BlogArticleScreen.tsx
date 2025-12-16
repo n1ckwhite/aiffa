@@ -1,7 +1,7 @@
 import React from "react";
 import { AspectRatio, Avatar, Badge, Box, Button, HStack, Heading, Icon, Image, Link, Text, VStack, Wrap, WrapItem } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { FiArrowLeft, FiShare2 } from "react-icons/fi";
+import { FiArrowLeft, FiClock, FiEye, FiShare2, FiStar } from "react-icons/fi";
 import MarkdownRenderer from "@/shared/ui/MarkdownRenderer";
 import { useAppColors } from "@/shared/theme/colors";
 import type { BlogArticle } from "../../types";
@@ -20,6 +20,13 @@ const getDateLabel = (iso: string) => {
 const getGithubAvatarUrl = (username?: string, size: number = 96) => {
   if (!username) return undefined;
   return `https://github.com/${username}.png?size=${size}`;
+};
+
+const formatCount = (value?: number) => {
+  if (typeof value !== "number" || !Number.isFinite(value)) return "—";
+  if (value < 1000) return String(value);
+  const k = value / 1000;
+  return `${k.toFixed(k >= 10 ? 0 : 1)}k`;
 };
 
 const BlogArticleScreen: React.FC<BlogArticleScreenProps> = ({ article, markdown }) => {
@@ -74,12 +81,12 @@ const BlogArticleScreen: React.FC<BlogArticleScreenProps> = ({ article, markdown
             bg={theme.cardBg}
             borderWidth="1px"
             borderColor={theme.borderColor}
-            borderRadius="2xl"
+            borderRadius="xl"
             p={{ base: 5, md: 7 }}
           >
             <VStack align="stretch" spacing={3}>
               {article.coverImage ? (
-                <AspectRatio ratio={16 / 9} w="full" borderRadius="xl" overflow="hidden">
+                <AspectRatio ratio={16 / 9} w="full" borderRadius="lg" overflow="hidden">
                   <Image src={article.coverImage} alt={article.title} objectFit="cover" loading="lazy" decoding="async" />
                 </AspectRatio>
               ) : null}
@@ -107,9 +114,24 @@ const BlogArticleScreen: React.FC<BlogArticleScreenProps> = ({ article, markdown
                     </Text>
                   )}
                   <Text fontSize="xs" color={theme.descColor}>
-                    {getDateLabel(article.date)} • {article.readingTime ?? "—"}
+                    {getDateLabel(article.date)}
                   </Text>
                 </VStack>
+              </HStack>
+
+              <HStack spacing={4} color={theme.descColor} fontSize="sm" flexWrap="wrap">
+                <HStack spacing={1.5}>
+                  <Icon as={FiEye} aria-hidden="true" color={theme.blue.accent} />
+                  <Text as="span">{formatCount(article.viewsCount)}</Text>
+                </HStack>
+                <HStack spacing={1.5}>
+                  <Icon as={FiStar} aria-hidden="true" color="yellow.400" />
+                  <Text as="span">{formatCount(article.starsCount)}</Text>
+                </HStack>
+                <HStack spacing={1.5}>
+                  <Icon as={FiClock} aria-hidden="true" color="purple.400" />
+                  <Text as="span">{article.readingTime ?? "—"}</Text>
+                </HStack>
               </HStack>
 
               <Heading id="blog-article-title" as="h1" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.02em" color={theme.titleColor}>

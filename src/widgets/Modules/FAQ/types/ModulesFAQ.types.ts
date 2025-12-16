@@ -11,7 +11,7 @@ export type ModulesFaqVariant =
   | 'hackathons'
   | 'sessions'
   | 'creators';
-
+  
 export type ModulesFAQProps = {
   title?: string;
   variant?: ModulesFaqVariant;

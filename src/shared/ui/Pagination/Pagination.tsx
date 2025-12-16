@@ -29,11 +29,55 @@ export const Pagination: React.FC<PaginationProps> = ({
     return Number.isFinite(computed) && computed > 0 ? computed : page;
   }, [pageItems, page]);
 
-  const mobilePages = React.useMemo(() => {
-    const candidates = [page - 1, page, page + 1].filter((p) => p >= 1 && p <= lastPage);
-    // ensure unique + stable order
-    return Array.from(new Set(candidates)).sort((a, b) => a - b);
-  }, [page, lastPage]);
+  const getCompactPages = React.useCallback(
+    (limit: number) => {
+      if (lastPage <= limit) {
+        return Array.from({ length: lastPage }, (_, i) => i + 1);
+      }
+
+      const mid = Math.max(1, Math.min(lastPage, Math.ceil(lastPage / 2)));
+      const required = Array.from(new Set([1, mid, lastPage]));
+
+      const isInMiddleRange = (p: number) => p > 1 && p < lastPage;
+      const addUnique = (arr: number[], value: number) => {
+        if (!Number.isFinite(value)) return;
+        if (value < 1 || value > lastPage) return;
+        if (arr.includes(value)) return;
+        arr.push(value);
+      };
+
+      // Start with required pages (start/middle/end), then add current neighborhood.
+      const acc: number[] = [...required];
+      [page - 1, page, page + 1].filter(isInMiddleRange).forEach((p) => addUnique(acc, p));
+
+      // Fill up to `limit` with pages around current page.
+      for (let offset = 2; acc.length < limit && offset <= lastPage; offset += 1) {
+        addUnique(acc, page - offset);
+        if (acc.length >= limit) break;
+        addUnique(acc, page + offset);
+      }
+
+      // Final fallback: fill from the beginning (excluding first/last).
+      for (let p = 2; acc.length < limit && p <= lastPage - 1; p += 1) {
+        addUnique(acc, p);
+      }
+
+      // If somehow we got more than `limit`, keep start/middle/end and nearest pages to current.
+      const unique = Array.from(new Set(acc));
+      if (unique.length <= limit) return unique.sort((a, b) => a - b);
+
+      const requiredSet = new Set(required);
+      const others = unique
+        .filter((p) => !requiredSet.has(p))
+        .sort((a, b) => Math.abs(a - page) - Math.abs(b - page));
+      const limited = [...required, ...others.slice(0, Math.max(0, limit - required.length))];
+      return Array.from(new Set(limited)).sort((a, b) => a - b);
+    },
+    [lastPage, page],
+  );
+
+  const mobilePages4 = React.useMemo(() => getCompactPages(4), [getCompactPages]);
+  const mobilePages6 = React.useMemo(() => getCompactPages(6), [getCompactPages]);
 
   return (
     <HStack justify="center" align="center" pt={2} gap={gap} flexWrap="nowrap" maxW="100%">
@@ -56,9 +100,9 @@ export const Pagination: React.FC<PaginationProps> = ({
         color={colors.controlsIcon}
       />
 
-      {/* Mobile (no horizontal scroll): show only nearby pages */}
-      <HStack gap={gap} flexWrap="nowrap" display={{ base: "flex", md: "none" }}>
-        {mobilePages.map((p) => {
+      {/* Base mobile (iPhone 4): arrows + 4 smart page buttons */}
+      <HStack gap={gap} flexWrap="nowrap" display={{ base: "flex", sm: "none" }}>
+        {mobilePages4.map((p) => {
           const isActive = p === page;
           return (
             <Button
@@ -87,7 +131,38 @@ export const Pagination: React.FC<PaginationProps> = ({
         })}
       </HStack>
 
-      {/* Desktop/tablet */}
+      {/* Small screens (>= sm): arrows + up to 6 smart page buttons */}
+      <HStack gap={gap} flexWrap="nowrap" display={{ base: "none", sm: "flex", md: "none" }}>
+        {mobilePages6.map((p) => {
+          const isActive = p === page;
+          return (
+            <Button
+              key={p}
+              size="sm"
+              onClick={() => onSelect(p)}
+              aria-current={isActive ? "page" : undefined}
+              colorScheme={isActive ? "blue" : undefined}
+              variant={isActive ? "solid" : "outline"}
+              boxSize={controlBoxSize}
+              minW={controlBoxSize}
+              flexShrink={0}
+              px={0}
+              borderRadius={controlBorderRadius}
+              fontWeight={isActive ? "semibold" : "medium"}
+              fontSize="sm"
+              bg={isActive ? undefined : colors.controlsBg}
+              borderColor={colors.controlsBorder}
+              _hover={{ bg: isActive ? undefined : colors.controlsHoverBg }}
+              _active={{ transform: "translateY(1px)" }}
+              _focusVisible={{ boxShadow: "0 0 0 3px rgba(66, 153, 225, 0.35)" }}
+            >
+              {p}
+            </Button>
+          );
+        })}
+      </HStack>
+
+      {/* Desktop/tablet: full pagination items */}
       <HStack gap={gap} flexWrap="nowrap" display={{ base: "none", md: "flex" }}>
         {pageItems.map((it, idx) => {
           if (typeof it === "string") {

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { loadManifest } from "shared/lessons/api";
 import { weeklyManifest } from "shared/weekly/manifest";
+import { loadBlogArticles } from "@/shared/articles/api";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
@@ -16,6 +17,7 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     "/sessions",
     "/partners",
     "/profile",
+    "/blog",
   ].map((path) => ({
     url: `${SITE_URL}${path}`,
     lastModified: now,
@@ -83,7 +85,15 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...moduleRoutes, ...weeklyRoutes];
+  const blogArticles = await loadBlogArticles();
+  const blogRoutes: MetadataRoute.Sitemap = blogArticles.map((a) => ({
+    url: `${SITE_URL}/blog/${a.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.65,
+  }));
+
+  return [...staticRoutes, ...moduleRoutes, ...weeklyRoutes, ...blogRoutes];
 };
 
 export default sitemap;

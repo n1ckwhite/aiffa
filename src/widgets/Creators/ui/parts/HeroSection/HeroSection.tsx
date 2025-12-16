@@ -21,7 +21,7 @@ const HeroSection: React.FC = () => {
 
   return (
     <Box as="section" aria-label="Создатели AIFFA">
-      <Box position="relative" overflow="hidden" bgGradient={cardBgGradient} borderRadius="3xl" borderWidth="1px" borderColor={cardBorderColor} px={{ base: 5, md: 7 }} py={{ base: 5, md: 7 }}>
+      <Box position="relative" overflow="hidden" bgGradient={cardBgGradient} borderRadius="3xl" borderWidth="1px" borderColor={cardBorderColor} px={{ base: 4, md: 7 }} py={{ base: 5, md: 7 }}>
         <Box position="absolute" inset="-40px" opacity={{ base: 0.45, md: 0.6 }} filter="blur(42px)" pointerEvents="none">
           <Box position="absolute" top={{ base: "55%", md: "25%" }} left="-10%" w={{ base: "220px", md: "260px" }} h={{ base: "220px", md: "260px" }} bgGradient={leftGlowGradient} />
           <Box position="absolute" bottom="-15%" right="-5%" w={{ base: "260px", md: "320px" }} h={{ base: "260px", md: "320px" }} bgGradient={rightGlowGradient} />
@@ -40,7 +40,7 @@ const HeroSection: React.FC = () => {
             <Text fontSize={{ base: "sm", sm: "md", md: "lg" }} fontWeight="semibold" color={primaryTextColor} lineHeight={1.5}>
               Люди, которые делают AIFFA лучше каждый день.
             </Text>
-            <Text fontSize={{ base: "xs", sm: "sm", md: "sm" }} color={secondaryTextColor} lineHeight={1.9} maxW={{ base: "full", sm: "420px", md: "520px" }}>
+            <Text fontSize="sm" color={secondaryTextColor} lineHeight={1.9} maxW={{ base: "full", sm: "420px", md: "520px" }}>
               AIFFA — это экосистема, которую создают авторы материалов и задач недели, мейнтейнеры проектов, авторы статей, участники хакатонов и те, кто поддерживает идею. Здесь можно найти людей, с которыми вы будете расти, запускать проекты и усиливать комьюнити.
             </Text>
             <Stack as="ul" aria-label="Чем занимаются создатели AIFFA" direction={{ base: "column", lg: "row" }} spacing={{ base: 3, lg: 4 }} pt={2} w="full" wrap="wrap" textAlign="left" justify={{ base: "center", lg: "flex-start" }}>
@@ -83,7 +83,7 @@ const HeroSection: React.FC = () => {
                     >
                       <Box as={bullet.icon} aria-hidden="true" boxSize={{ base: 5, md: 5 }} color={palette.iconColor} />
                     </Box>
-                    <Text fontSize={{ base: "xs", md: "sm" }} color={secondaryTextColor}>
+                    <Text fontSize="sm" color={secondaryTextColor}>
                       {bullet.text}
                     </Text>
                   </HStack>

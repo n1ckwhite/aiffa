@@ -13,7 +13,6 @@ const Header: React.FC<ModulesHeaderProps> = () => {
       spacing={3}
       align="center"
       textAlign="center"
-      pb="32px"
     >
       <Text
         as="h1"

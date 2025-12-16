@@ -33,7 +33,7 @@ export const useTableOfContents = (md: string | null) => {
         const fallback = current ?? (items[0]?.id || null);
         setActiveTocId((prev) => (prev === fallback ? prev : fallback));
       }
-    }, { root: null, rootMargin: '-90px 0px -70% 0px', threshold: [0, 0.1, 0.5, 1] });
+    }, { root: null, rootMargin: '-90px 0px -70% 0px', threshold: 0.1 });
 
     nodes.forEach((n) => observer.observe(n));
 
@@ -54,28 +54,8 @@ export const useTableOfContents = (md: string | null) => {
     }
     setActiveTocId(initialCurrent ?? (items[0]?.id || null));
 
-    const onScroll = () => {
-      const pivot = window.scrollY + window.innerHeight * 0.3;
-      let current: string | null = null;
-      for (const it of items) {
-        const el = document.getElementById(it.id);
-        if (!el) continue;
-        const top = el.offsetTop;
-        if (pivot >= top) current = it.id;
-      }
-      const docBottom = window.scrollY + window.innerHeight;
-      const nearBottom = docBottom >= document.documentElement.scrollHeight - 8;
-      if (nearBottom && items.length > 0) current = items[items.length - 1].id;
-      const fallback = current ?? (items[0]?.id || null);
-      setActiveTocId((prev) => (prev === fallback ? prev : fallback));
-    };
-    window.addEventListener('scroll', onScroll, { passive: true } as any);
-    window.addEventListener('resize', onScroll);
-
     return () => {
       observer.disconnect();
-      window.removeEventListener('scroll', onScroll as any);
-      window.removeEventListener('resize', onScroll as any);
     };
   }, [md]);
 

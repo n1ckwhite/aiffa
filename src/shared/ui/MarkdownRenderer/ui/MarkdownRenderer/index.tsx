@@ -12,7 +12,7 @@ import { useSegments } from '../../model/useSegments';
 import { useOpenDetails } from '../../model/useOpenDetails';
 import { DetailsBlock } from '../parts/DetailsBlock';
 
-export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
+const MarkdownRendererInner: React.FC<MarkdownRendererProps> = ({ content }) => {
   const colors = useMarkdownColors();
   const components = buildComponents(colors);
   const segments = useSegments(content);
@@ -51,6 +51,8 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
     </Box>
   );
 };
+
+export const MarkdownRenderer = React.memo(MarkdownRendererInner);
 
 export default MarkdownRenderer;
 

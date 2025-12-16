@@ -39,7 +39,7 @@ const BlogScreen: React.FC = () => {
       aria-labelledby="blog-title"
       pb="32px"
     >
-      <Box w="100%" maxW="1200px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+      <Box w="100%" maxW="1320px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
         <VStack as="header" spacing={3} align="center" textAlign="center" pb={{ base: 8, md: 10 }}>
           <Heading
             id="blog-title"
@@ -62,7 +62,7 @@ const BlogScreen: React.FC = () => {
         </VStack>
 
         {isLoading ? (
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 6, md: 8 }}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 6, md: 8 }}>
             {Array.from({ length: 3 }).map((_, i) => (
               <Box key={i} borderWidth="1px" borderColor={theme.borderColor} borderRadius="2xl" bg={theme.cardBg} overflow="hidden">
                 <AspectRatio ratio={16 / 9} w="full">
@@ -85,7 +85,7 @@ const BlogScreen: React.FC = () => {
             ))}
           </SimpleGrid>
         ) : (
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 6, md: 8 }}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 6, md: 8 }}>
             {articles.map((article: BlogArticle) => {
               const category = (article.tags || [])[0] ?? "Insights";
               return (

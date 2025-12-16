@@ -44,6 +44,19 @@ export const blogArticles: BlogArticleMeta[] = [
       "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/git-pull-vs-fetch-na-praktike.md",
   },
+  {
+    slug: "react-memo-kogda-i-zachem",
+    title: "React.memo: когда он реально нужен (и когда мешает)",
+    description:
+      "Понятно и по делу: как работают ре-рендеры, где React.memo помогает, и почему иногда лучше начать с архитектуры.",
+    date: "2025-12-16",
+    tags: ["React", "Практика"],
+    author: { name: "n1ckwhite", github: "n1ckwhite" },
+    readingTime: "6 мин",
+    coverImage:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80",
+    mdPath: "/articles/react-memo-kogda-i-zachem.md",
+  },
 ];
 
 export const getBlogArticleBySlug = (slug: string): BlogArticleMeta | undefined => {

@@ -10,9 +10,7 @@ const ModuleLessonsSkeleton: React.FC = () => {
           <Box borderRadius="xl" p={{ base: 4, md: 6 }}>
             <HStack align="center" spacing={{ base: 2, md: 3 }} mb={2}>
               <SkeletonCircle boxSize={{ base: '36px', md: '44px' }} />
-              <Heading as="h1" size="lg">
-                Материалы
-              </Heading>
+              <Skeleton h="18" w="170px" borderRadius="full" />
             </HStack>
             <HStack gap={3} align="center" flexWrap="wrap" mb={3}>
               <Skeleton h="20px" w="90px" borderRadius="full" />

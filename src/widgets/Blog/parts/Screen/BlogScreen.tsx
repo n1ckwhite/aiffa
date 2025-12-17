@@ -87,7 +87,7 @@ const BlogScreen: React.FC = () => {
             Блог AIFFA
           </Heading>
           <Text
-            fontSize={{ base: "sm", md: "md" }}
+            fontSize={{ base: "sm", md: "lg" }}
             color={theme.descColor}
             maxW={{ base: "100%", md: "820px" }}
           >

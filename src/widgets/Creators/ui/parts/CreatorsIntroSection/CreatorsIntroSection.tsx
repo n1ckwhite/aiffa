@@ -13,7 +13,7 @@ const CreatorsIntroSection: React.FC = () => {
         </Heading>
         <Text
           mt={3}
-          fontSize={{ base: "sm", md: "md" }}
+          fontSize={{ base: "sm", md: "lg" }}
           color={pageDescriptionColor}
           maxW={{ base: "full", md: "720px" }}
         >

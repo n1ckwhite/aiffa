@@ -147,7 +147,7 @@ const buildUnsplashSrcSet = (src: string) => {
   }
 };
 
-const BlogCoverImage: React.FC<{ src: string; alt: string }> = ({ src, alt }) => {
+const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }> = ({ src, alt, priority = false }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const skeletonStartColor = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
   const skeletonEndColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
@@ -162,20 +162,21 @@ const BlogCoverImage: React.FC<{ src: string; alt: string }> = ({ src, alt }) =>
         borderRadius="inherit"
         startColor={skeletonStartColor}
         endColor={skeletonEndColor}
-        isLoaded={isLoaded}
+        isLoaded={priority ? true : isLoaded}
       />
       <Image
         src={src}
         srcSet={srcSet}
         sizes={srcSet ? sizes : undefined}
         alt={alt}
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
         decoding="async"
         objectFit="cover"
         w="100%"
         h="100%"
         borderRadius="0"
-        opacity={isLoaded ? 1 : 0}
+        opacity={priority ? 1 : isLoaded ? 1 : 0}
         transition="opacity 220ms ease"
         onLoad={() => setIsLoaded(true)}
         onError={() => setIsLoaded(true)}
@@ -551,6 +552,7 @@ const BlogScreen: React.FC = () => {
                 key={i}
                 as="li"
                 listStyleType="none"
+                cursor="pointer"
                 borderWidth="1px"
                 borderColor={cardBorder}
                 borderRadius={cardRadius}
@@ -608,7 +610,7 @@ const BlogScreen: React.FC = () => {
               </Box>
             )}
             <SimpleGrid as="ul" columns={{ base: 1, md: 2, xl: 3 }} spacing={{ base: 6, md: 7 }} listStyleType="none" m={0} p={0}>
-              {pageArticles.map((article: BlogArticle) => {
+              {pageArticles.map((article: BlogArticle, idx: number) => {
                 const category = (article.tags || [])[0] ?? "Insights";
                 const categoryMeta = getCategoryMeta(category);
                 const authorBadge = getAuthorBadge(article);
@@ -621,6 +623,7 @@ const BlogScreen: React.FC = () => {
                     listStyleType="none"
                   >
                     <LinkBox
+                      cursor="pointer"
                       borderWidth="1px"
                       borderColor={cardBorder}
                       borderRadius={cardRadius}
@@ -664,14 +667,15 @@ const BlogScreen: React.FC = () => {
                         aria-label={`Открыть статью: ${article.title}`}
                         position="absolute"
                         inset={0}
-                        zIndex={1}
+                        zIndex={2}
                       />
 
-                      <Box p={cardPadding} display="flex" flexDirection="column" h="full" minW={0} position="relative" zIndex={2}>
+                      <Box p={cardPadding} display="flex" flexDirection="column" h="full" minW={0} position="relative" zIndex={1}>
                         <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="lg" mb={5}>
                           <BlogCoverImage
                             src={article.coverImage || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80"}
                             alt={article.title}
+                            priority={idx === 0}
                           />
                         </AspectRatio>
 

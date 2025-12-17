@@ -6,7 +6,7 @@
   "date": "2025-12-11",
   "tags": ["Node.js", "База"],
   "readingTime": "7 мин",
-  "coverImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80",
+  "coverImage": "/images/blog/1.avif",
   "author": { "name": "aiffadev", "github": "aiffadev" }
 }
 ---

@@ -6,7 +6,7 @@
   "date": "2025-12-04",
   "tags": ["React", "Performance"],
   "readingTime": "7 мин",
-  "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80",
+  "coverImage": "/images/blog/1.avif",
   "author": { "name": "n1ckwhite", "github": "n1ckwhite" }
 }
 ---

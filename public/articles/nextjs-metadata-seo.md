@@ -6,7 +6,7 @@
   "date": "2025-12-14",
   "tags": ["Next.js", "SEO"],
   "readingTime": "7 мин",
-  "coverImage": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1400&q=80",
+  "coverImage": "/images/blog/1.avif",
   "author": { "name": "n1ckwhite", "github": "n1ckwhite" }
 }
 ---

@@ -6,7 +6,7 @@
   "date": "2025-12-12",
   "tags": ["Accessibility", "Практика"],
   "readingTime": "5 мин",
-  "coverImage": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1400&q=80",
+  "coverImage": "/images/blog/1.avif",
   "author": { "name": "n1ckwhite", "github": "n1ckwhite" }
 }
 ---

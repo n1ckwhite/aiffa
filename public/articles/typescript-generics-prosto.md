@@ -6,7 +6,7 @@
   "date": "2025-12-15",
   "tags": ["TypeScript", "Практика"],
   "readingTime": "8 мин",
-  "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80",
+  "coverImage": "/images/blog/1.avif",
   "author": { "name": "aiffadev", "github": "aiffadev" }
 }
 ---

@@ -6,7 +6,7 @@
   "date": "2025-12-13",
   "tags": ["Chakra UI", "UI"],
   "readingTime": "6 мин",
-  "coverImage": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80",
+  "coverImage": "/images/blog/1.avif",
   "author": { "name": "aiffadev", "github": "aiffadev" }
 }
 ---

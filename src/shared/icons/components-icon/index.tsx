@@ -18,3 +18,4 @@ export { default as SessionsLottieIcon } from './SessionsLottieIcon';
 export { default as ForSessionsLottieIcon } from './ForSessionsLottieIcon';
 export { default as BusinessManTelescop } from './BusinessManTelescop';
 export { default as SeniorTeamIcon } from './SeniorTeamIcon';
+export { default as QuestioningLottieIcon } from './QuestioningLottieIcon';

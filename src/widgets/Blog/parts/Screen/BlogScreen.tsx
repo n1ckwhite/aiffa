@@ -21,7 +21,7 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 import { FiArrowUpRight, FiEye, FiMessageCircle, FiSearch, FiStar } from "react-icons/fi";
 import { useAppColors } from "@/shared/theme/colors";
-import { ErrorRobotLottieIcon } from "@/shared/icons/components-icon";
+import { QuestioningLottieIcon } from "@/shared/icons/components-icon";
 import { usePagination } from "widgets/ModuleLessons/hooks/usePagination";
 import { Pagination } from "shared/ui/Pagination";
 import { useScrollToTop } from "shared/hooks/useScrollToTop";
@@ -239,14 +239,14 @@ const BlogScreen: React.FC = () => {
         ) : (
           <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
             {!isLoading && filteredArticles.length === 0 && (
-              <Box w="full" textAlign="center" mt={{ base: 2, md: 3 }}>
+              <Box w="full" textAlign="center">
                 <VStack spacing={3} maxW="560px" mx="auto">
                   <Box w="full" opacity={0.95}>
-                    <ErrorRobotLottieIcon />
-                  </Box>
-                  <Text fontWeight="semibold" color={theme.titleColor} fontSize={{ base: "lg", md: "xl" }}>
+                    <QuestioningLottieIcon /> 
+                    <Text fontWeight="semibold" color={theme.titleColor} fontSize={{ base: "lg", md: "xl" }}>
                     Ничего не нашли
                   </Text>
+                  </Box>
                   <Text color={theme.descColor}>
                     По запросу:{" "}
                     <Text as="span" fontWeight="semibold" color={theme.blue.accent}>

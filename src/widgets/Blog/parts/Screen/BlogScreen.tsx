@@ -499,7 +499,25 @@ const BlogScreen: React.FC = () => {
                         </HStack>
 
                         <HStack spacing={3} mt="auto" pt={6} minH="56px" align="center">
-                          <Avatar name={article.author?.name || "Автор"} src={getGithubAvatarUrl(article.author?.github, 96)} boxSize="38px" />
+                          {authorHref ? (
+                            <Link
+                              href={authorHref}
+                              isExternal
+                              aria-label={`Открыть профиль автора в GitHub: ${article.author?.name || authorGithub || "автор"}`}
+                              position="relative"
+                              zIndex={3}
+                              display="inline-flex"
+                              _hover={{ textDecoration: "none" }}
+                            >
+                              <Avatar
+                                name={article.author?.name || "Автор"}
+                                src={getGithubAvatarUrl(article.author?.github, 96)}
+                                boxSize="38px"
+                              />
+                            </Link>
+                          ) : (
+                            <Avatar name={article.author?.name || "Автор"} src={getGithubAvatarUrl(article.author?.github, 96)} boxSize="38px" />
+                          )}
                           <VStack spacing={0} align="start" minW={0}>
                             {authorHref ? (
                               <Link

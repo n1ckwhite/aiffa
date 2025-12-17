@@ -159,7 +159,7 @@ const BlogArticleScreen: React.FC<BlogArticleScreenProps> = ({ article, markdown
 
               {(article.tags || []).length > 0 && (
                 <Wrap spacing={2} pt={1}>
-                  {(article.tags || []).map((t) => (
+                  {(article.tags || []).map((t: string) => (
                     <WrapItem key={t}>
                       <Badge
                         borderRadius="full"

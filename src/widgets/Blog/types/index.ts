@@ -1,4 +1,4 @@
-import type { BlogArticleMeta } from "@/shared/articles/manifest";
+import type { BlogArticleMeta } from "@/shared/articles/manifest/types";
 
 export type BlogArticle = BlogArticleMeta;
 

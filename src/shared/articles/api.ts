@@ -1,5 +1,5 @@
 import { createAsyncCache } from "utils/cache";
-import type { BlogArticleMeta } from "./manifest";
+import { BlogArticleMeta } from "./manifest/types";
 
 const blogManifestCache = createAsyncCache<string, BlogArticleMeta[]>();
 

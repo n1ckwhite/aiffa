@@ -41,6 +41,7 @@ import {
   FiServer,
   FiSearch,
   FiStar,
+  FiTag,
   FiX,
 } from "react-icons/fi";
 import { useAppColors } from "@/shared/theme/colors";
@@ -103,6 +104,18 @@ const TAG_ICONS: Record<BlogTagFilter, React.ElementType> = {
   Архитектура: FiLayers,
 };
 
+const getCategoryMeta = (rawCategory: string): { label: string; icon: React.ElementType } => {
+  const label = rawCategory || "Insights";
+  const t = normalizeTag(label);
+  if (t === "react") return { label, icon: FiCode };
+  if (t === "typescript" || t === "ts") return { label, icon: FiCode };
+  if (t === "backend" || t === "back-end" || t === "бэкенд" || t === "бекенд" || t === "node" || t === "node.js") return { label, icon: FiServer };
+  if (t === "accessibility" || t === "a11y" || t === "доступность") return { label, icon: FiEye };
+  if (t === "архитектура" || t === "architecture" || t === "арх") return { label, icon: FiLayers };
+  if (t === "next.js" || t === "nextjs") return { label, icon: FiLayers };
+  return { label, icon: FiTag };
+};
+
 const matchesTagFilter = (article: BlogArticle, filter: BlogTagFilter) => {
   if (filter === "Все") return true;
   const tags = (article.tags || []).map((t) => normalizeTag(t));
@@ -115,6 +128,60 @@ const matchesTagFilter = (article: BlogArticle, filter: BlogTagFilter) => {
     return tags.some((t) => t === "архитектура" || t === "architecture" || t === "арх");
   }
   return tags.includes(normalizeTag(filter));
+};
+
+const buildUnsplashSrcSet = (src: string) => {
+  try {
+    const url = new URL(src);
+    if (!url.hostname.includes("images.unsplash.com")) return undefined;
+    const widths = [480, 768, 1024, 1400];
+    return widths
+      .map((w) => {
+        const u = new URL(url.toString());
+        u.searchParams.set("w", String(w));
+        return `${u.toString()} ${w}w`;
+      })
+      .join(", ");
+  } catch {
+    return undefined;
+  }
+};
+
+const BlogCoverImage: React.FC<{ src: string; alt: string }> = ({ src, alt }) => {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const skeletonStartColor = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
+  const skeletonEndColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
+  const srcSet = React.useMemo(() => buildUnsplashSrcSet(src), [src]);
+  const sizes = "(max-width: 768px) 92vw, (max-width: 1280px) 45vw, 377px";
+
+  return (
+    <Box position="relative" w="100%" h="100%">
+      <Skeleton
+        position="absolute"
+        inset={0}
+        borderRadius="inherit"
+        startColor={skeletonStartColor}
+        endColor={skeletonEndColor}
+        isLoaded={isLoaded}
+      />
+      <Image
+        src={src}
+        srcSet={srcSet}
+        sizes={srcSet ? sizes : undefined}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        objectFit="cover"
+        w="100%"
+        h="100%"
+        borderRadius="0"
+        opacity={isLoaded ? 1 : 0}
+        transition="opacity 220ms ease"
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setIsLoaded(true)}
+      />
+    </Box>
+  );
 };
 
 const BlogScreen: React.FC = () => {
@@ -202,7 +269,6 @@ const BlogScreen: React.FC = () => {
   const filterButtonBg = useColorModeValue("white", "gray.800");
   const filterButtonBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const filterButtonHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.200");
-  const filterMenuBg = filterButtonBg;
   const filterMenuBorder = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
   const filterMenuShadow = useColorModeValue(
     "0 18px 44px rgba(15, 23, 42, 0.14)",
@@ -544,6 +610,7 @@ const BlogScreen: React.FC = () => {
             <SimpleGrid as="ul" columns={{ base: 1, md: 2, xl: 3 }} spacing={{ base: 6, md: 7 }} listStyleType="none" m={0} p={0}>
               {pageArticles.map((article: BlogArticle) => {
                 const category = (article.tags || [])[0] ?? "Insights";
+                const categoryMeta = getCategoryMeta(category);
                 const authorBadge = getAuthorBadge(article);
                 const authorGithub = article.author?.github;
                 const authorHref = authorGithub ? `https://github.com/${authorGithub}` : undefined;
@@ -601,22 +668,30 @@ const BlogScreen: React.FC = () => {
                       />
 
                       <Box p={cardPadding} display="flex" flexDirection="column" h="full" minW={0} position="relative" zIndex={2}>
-                        <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="xl" mb={5}>
-                          <Image
+                        <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="lg" mb={5}>
+                          <BlogCoverImage
                             src={article.coverImage || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80"}
                             alt={article.title}
-                            loading="lazy"
-                            decoding="async"
-                            objectFit="cover"
-                            w="100%"
-                            h="100%"
-                            borderRadius="0"
                           />
                         </AspectRatio>
 
-                        <Text fontSize="sm" color={categoryColor} fontWeight="semibold">
-                          {category}
-                        </Text>
+                        <Badge
+                          w="fit-content"
+                          borderRadius="full"
+                          px={2.5}
+                          py={1}
+                          fontSize="11px"
+                          letterSpacing="0.02em"
+                          variant="subtle"
+                          colorScheme="blue"
+                        >
+                          <HStack spacing={1.5} align="center">
+                            <Icon as={categoryMeta.icon} aria-hidden="true" boxSize={4} color={categoryColor} />
+                            <Text as="span" color={categoryColor} fontWeight="semibold" noOfLines={1}>
+                              {categoryMeta.label}
+                            </Text>
+                          </HStack>
+                        </Badge>
 
                         <HStack align="start" justify="space-between" spacing={3} mt={2}>
                           <Heading

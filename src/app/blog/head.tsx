@@ -23,7 +23,6 @@ const BlogHead = () => {
             imageSrcSet={imageSrcSet}
             imageSizes={imageSrcSet ? BLOG_CARD_COVER_SIZES : undefined}
             fetchPriority="high"
-            crossOrigin="anonymous"
           />
         );
       })}

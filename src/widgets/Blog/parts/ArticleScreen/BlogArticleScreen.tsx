@@ -102,6 +102,7 @@ const BlogArticleScreen: React.FC<BlogArticleScreenProps> = ({ article, markdown
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
+                    referrerPolicy="no-referrer"
                   />
                 </AspectRatio>
               ) : null}

@@ -25,7 +25,6 @@ import {
   SimpleGrid,
   Skeleton,
   Text,
-  useBreakpointValue,
   useColorModeValue,
   VisuallyHidden,
   VStack,
@@ -136,7 +135,6 @@ const matchesTagFilter = (article: BlogArticle, filter: BlogTagFilter) => {
 const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }> = ({ src, alt, priority = false }) => {
   const [loadState, setLoadState] = React.useState<"loading" | "loaded" | "error">("loading");
   const imgRef = React.useRef<HTMLImageElement | null>(null);
-  const isMobile = useBreakpointValue({ base: true, md: false }) ?? false;
   const skeletonStartColor = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
   const skeletonEndColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const fallbackBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
@@ -177,10 +175,11 @@ const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }>
           srcSet={srcSet}
           sizes={srcSet ? BLOG_CARD_COVER_SIZES : undefined}
           alt={alt}
-          // In iOS/Telegram webviews lazy-loading can be unreliable; eagerly load covers on mobile.
-          loading={priority || isMobile ? "eager" : "lazy"}
+          // In iOS/Telegram webviews lazy-loading can be unreliable; keep covers eager to prevent "missing" images.
+          loading="eager"
           fetchPriority={priority ? "high" : "auto"}
           decoding="async"
+          referrerPolicy="no-referrer"
           objectFit="cover"
           w="100%"
           h="100%"

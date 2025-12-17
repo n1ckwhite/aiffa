@@ -25,6 +25,17 @@ export const Sections: React.FC = () => {
         </Link>
         <Link
           as={RouterLink as any}
+          to="/blog"
+          fontSize="sm"
+          color={colors.textColor}
+          _hover={{ color: colors.linkHover }}
+          transition="color 0.2s"
+          textAlign="left"
+        >
+          Блог
+        </Link>
+        <Link
+          as={RouterLink as any}
           to="/weekly"
           fontSize="sm"
           color={colors.textColor}
@@ -33,17 +44,6 @@ export const Sections: React.FC = () => {
           textAlign="left"
         >
           Задачи недели
-        </Link>
-        <Link
-          as={RouterLink as any}
-          to="/creators"
-          fontSize="sm"
-          color={colors.textColor}
-          _hover={{ color: colors.linkHover }}
-          transition="color 0.2s"
-          textAlign="left"
-        >
-          Создатели
         </Link>
         <Link
           as={RouterLink as any}
@@ -66,6 +66,17 @@ export const Sections: React.FC = () => {
           textAlign="left"
         >
           Сессии
+        </Link>
+        <Link
+          as={RouterLink as any}
+          to="/creators"
+          fontSize="sm"
+          color={colors.textColor}
+          _hover={{ color: colors.linkHover }}
+          transition="color 0.2s"
+          textAlign="left"
+        >
+          Создатели
         </Link>
         <Link
           as={RouterLink as any}

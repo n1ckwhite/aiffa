@@ -4,6 +4,7 @@ import {
   Avatar,
   Badge,
   Box,
+  Button,
   HStack,
   Heading,
   Icon,
@@ -16,16 +17,31 @@ import {
   Link,
   LinkBox,
   LinkOverlay,
+  Menu,
+  MenuButton,
+  MenuItemOption,
+  MenuList,
+  MenuOptionGroup,
   SimpleGrid,
   Skeleton,
   Text,
   useColorModeValue,
   VStack,
-  Wrap,
-  WrapItem,
 } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
-import { FiArrowUpRight, FiEdit3, FiEye, FiMessageCircle, FiSearch, FiStar, FiX } from "react-icons/fi";
+import {
+  FiArrowUpRight,
+  FiChevronDown,
+  FiCode,
+  FiEdit3,
+  FiEye,
+  FiLayers,
+  FiMessageCircle,
+  FiServer,
+  FiSearch,
+  FiStar,
+  FiX,
+} from "react-icons/fi";
 import { useAppColors } from "@/shared/theme/colors";
 import { QuestioningLottieIcon } from "@/shared/icons/components-icon";
 import { usePagination } from "widgets/ModuleLessons/hooks/usePagination";
@@ -71,6 +87,35 @@ const getAuthorBadge = (article: BlogArticle): AuthorBadge => {
   return { label: "Автор AIFFA", colorScheme: "blue" };
 };
 
+type BlogTagFilter = "Все" | "React" | "TypeScript" | "Backend" | "Accessibility" | "Архитектура";
+
+const BLOG_TAG_FILTERS: BlogTagFilter[] = ["Все", "React", "TypeScript", "Backend", "Accessibility", "Архитектура"];
+
+const normalizeTag = (value: string) => value.trim().toLowerCase();
+
+const TAG_ICONS: Record<BlogTagFilter, React.ElementType> = {
+  Все: FiLayers,
+  React: FiCode,
+  TypeScript: FiCode,
+  Backend: FiServer,
+  Accessibility: FiEye,
+  Архитектура: FiLayers,
+};
+
+const matchesTagFilter = (article: BlogArticle, filter: BlogTagFilter) => {
+  if (filter === "Все") return true;
+  const tags = (article.tags || []).map((t) => normalizeTag(t));
+  if (!tags.length) return false;
+
+  if (filter === "Backend") {
+    return tags.some((t) => t === "backend" || t === "back-end" || t === "бэкенд" || t === "бекенд" || t === "сервер");
+  }
+  if (filter === "Архитектура") {
+    return tags.some((t) => t === "архитектура" || t === "architecture" || t === "арх");
+  }
+  return tags.includes(normalizeTag(filter));
+};
+
 const BlogScreen: React.FC = () => {
   const theme = useAppColors();
   const location = useLocation();
@@ -83,15 +128,26 @@ const BlogScreen: React.FC = () => {
       return "";
     }
   }, [location.search]);
+  const initialTagFromUrl = React.useMemo<BlogTagFilter>(() => {
+    try {
+      const params = new URLSearchParams(location.search);
+      const tag = (params.get("tag") ?? "").trim();
+      const found = BLOG_TAG_FILTERS.find((t) => t !== "Все" && normalizeTag(t) === normalizeTag(tag));
+      return found ?? "Все";
+    } catch {
+      return "Все";
+    }
+  }, [location.search]);
   const { items, isLoading } = useBlogArticles();
   const searchInputRef = React.useRef<HTMLInputElement | null>(null);
   const [query, setQuery] = React.useState<string>(initialQueryFromUrl);
   const [debouncedQuery, setDebouncedQuery] = React.useState<string>(initialQueryFromUrl);
+  const [tagFilter, setTagFilter] = React.useState<BlogTagFilter>(initialTagFromUrl);
   const articles = React.useMemo(() => items.slice().sort((a, b) => (a.date < b.date ? 1 : -1)), [items]);
   const normalizedQuery = React.useMemo(() => debouncedQuery.trim().toLowerCase(), [debouncedQuery]);
   const filteredArticles = React.useMemo(() => {
-    if (!normalizedQuery) return articles;
-    return articles.filter((a) => {
+    const base = normalizedQuery
+      ? articles.filter((a) => {
       const haystack = [
         a.title,
         a.description,
@@ -103,8 +159,12 @@ const BlogScreen: React.FC = () => {
         .join(" ")
         .toLowerCase();
       return haystack.includes(normalizedQuery);
-    });
-  }, [articles, normalizedQuery]);
+      })
+      : articles;
+
+    if (tagFilter === "Все") return base;
+    return base.filter((a) => matchesTagFilter(a, tagFilter));
+  }, [articles, normalizedQuery, tagFilter]);
   const isEmptyResults = !isLoading && filteredArticles.length === 0;
   const pageSize = 6;
   const { page, setPage, totalPages, start, end, canPrev, canNext, pageItems } = usePagination(filteredArticles.length, pageSize, "blog");
@@ -138,6 +198,15 @@ const BlogScreen: React.FC = () => {
   );
   const writeCtaIconBg = useColorModeValue("white", "blackAlpha.200");
   const writeCtaIconBorderColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
+  const filterButtonBg = useColorModeValue("white", "gray.800");
+  const filterButtonBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
+  const filterButtonHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.200");
+  const filterMenuBg = filterButtonBg;
+  const filterMenuBorder = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
+  const filterMenuShadow = useColorModeValue(
+    "0 18px 44px rgba(15, 23, 42, 0.14)",
+    "0 18px 44px rgba(0, 0, 0, 0.55)",
+  );
   const paginationColors = React.useMemo(
     () => ({
       controlsBg,
@@ -152,7 +221,7 @@ const BlogScreen: React.FC = () => {
   React.useEffect(() => {
     // Reset to first page on search changes (prevents "empty page" after filtering)
     setPage(1);
-  }, [normalizedQuery, setPage]);
+  }, [normalizedQuery, tagFilter, setPage]);
 
   React.useEffect(() => {
     const t = window.setTimeout(() => setDebouncedQuery(query), 220);
@@ -167,6 +236,11 @@ const BlogScreen: React.FC = () => {
       setQuery(q);
       setDebouncedQuery(q);
     }
+    const tag = (params.get("tag") ?? "").trim();
+    const nextTag = (BLOG_TAG_FILTERS.find((t) => t !== "Все" && normalizeTag(t) === normalizeTag(tag)) ?? "Все") as BlogTagFilter;
+    if (nextTag !== tagFilter) {
+      setTagFilter(nextTag);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
@@ -179,12 +253,17 @@ const BlogScreen: React.FC = () => {
     } else {
       params.delete("q");
     }
+    if (tagFilter !== "Все") {
+      params.set("tag", tagFilter);
+    } else {
+      params.delete("tag");
+    }
     const nextSearch = params.toString();
     const searchWithPrefix = nextSearch ? `?${nextSearch}` : "";
     if (searchWithPrefix !== location.search) {
       navigate(`${location.pathname}${searchWithPrefix}`, { replace: true, scroll: false });
     }
-  }, [query, location.pathname, location.search, navigate]);
+  }, [query, tagFilter, location.pathname, location.search, navigate]);
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -242,7 +321,14 @@ const BlogScreen: React.FC = () => {
             Статьи участников экосистемы: опыт, разборы, практические советы и истории — всё, что помогает расти быстрее и делать вклад.
           </Text>
 
-          <Box w="full" maxW={{ base: "100%", sm: "440px" }} pt={isEmptyResults ? 1 : 2}>
+          <HStack
+            w="full"
+            maxW={{ base: "100%", sm: "560px" }}
+            pt={isEmptyResults ? 1 : 2}
+            spacing={3}
+            justify="center"
+            flexWrap="wrap"
+          >
             <InputGroup
               size="lg"
               h="56px"
@@ -253,6 +339,7 @@ const BlogScreen: React.FC = () => {
               boxShadow={searchShadow}
               transition="box-shadow 180ms ease, border-color 180ms ease, transform 180ms ease"
               _hover={{ boxShadow: searchHoverShadow, borderColor: searchHoverBorder }}
+              maxW={{ base: "100%", sm: "440px" }}
             >
               <InputLeftElement pointerEvents="none" h="56px" w="56px">
                 <Box
@@ -312,7 +399,69 @@ const BlogScreen: React.FC = () => {
                 </InputRightElement>
               )}
             </InputGroup>
-          </Box>
+
+            <Menu placement="bottom-end" gutter={10}>
+              <MenuButton
+                as={Button}
+                aria-label="Фильтры статей"
+                rightIcon={<Icon as={FiChevronDown} aria-hidden="true" boxSize={5} color={theme.descColor} />}
+                variant="outline"
+                borderWidth="1px"
+                borderColor={filterButtonBorder}
+                bg={filterButtonBg}
+                borderRadius="full"
+                h="56px"
+                px={4}
+                minW={{ base: "100%", sm: "150px" }}
+                justifyContent="space-between"
+                boxShadow={searchShadow}
+                transition="background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease"
+                _hover={{ bg: filterButtonHoverBg, boxShadow: searchHoverShadow }}
+                _active={{ bg: filterButtonHoverBg }}
+                _focusVisible={{ boxShadow: "none" }}
+              >
+                <HStack spacing={2} minW={0}>
+                  <Icon as={TAG_ICONS[tagFilter]} aria-hidden="true" boxSize={5} color={theme.titleColor} opacity={0.9} />
+                  <Text fontWeight="semibold" color={theme.titleColor} fontSize="sm" noOfLines={1}>
+                    {tagFilter}
+                  </Text>
+                </HStack>
+              </MenuButton>
+              <MenuList
+              overflow="hidden"
+                bg={filterButtonBg}
+                borderColor={filterMenuBorder}
+                borderWidth="1px"
+                borderRadius="2xl"
+                boxShadow={filterMenuShadow}
+                py={0}
+                minW="240px"
+              >
+                <MenuOptionGroup
+                  type="radio"
+                  value={tagFilter}
+                  onChange={(v) => setTagFilter((v as BlogTagFilter) || "Все")}
+                >
+                  {BLOG_TAG_FILTERS.map((t) => (
+                    <MenuItemOption
+                      key={t}
+                      value={t}
+                      fontWeight="semibold"
+                      color={theme.titleColor}
+                      py={2.5}
+                      _hover={{ bg: filterButtonHoverBg }}
+                      _focus={{ bg: filterButtonHoverBg }}
+                    >
+                      <HStack spacing={2}>
+                        <Icon as={TAG_ICONS[t]} aria-hidden="true" boxSize={4} color={theme.descColor} />
+                        <Text>{t}</Text>
+                      </HStack>
+                    </MenuItemOption>
+                  ))}
+                </MenuOptionGroup>
+              </MenuList>
+            </Menu>
+          </HStack>
         </VStack>
 
         {isLoading ? (

@@ -21,13 +21,11 @@ const buildUnsplashSrcSet = (src: string) => {
 const HEAD_SIZES = "(max-width: 768px) 92vw, (max-width: 1280px) 45vw, 377px";
 
 const BlogHead = () => {
-  // Preload covers for the first row of cards so Lighthouse can discover LCP images from initial HTML.
   const sorted = (blogArticles || []).slice().sort((a, b) => (a.date < b.date ? 1 : -1));
   const candidates = sorted
     .map((a) => a.coverImage)
     .filter((v): v is string => typeof v === "string" && v.length > 0);
-
-  const unique = Array.from(new Set(candidates)).slice(0, 3);
+  const unique = Array.from(new Set(candidates));
 
   return (
     <>

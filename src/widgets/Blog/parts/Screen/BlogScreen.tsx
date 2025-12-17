@@ -414,8 +414,8 @@ const BlogScreen: React.FC = () => {
                   borderColor={filterButtonBorder}
                   bg={filterButtonBg}
                   borderRadius="full"
-                  h="56px"
-                  px={4}
+                  h="45px"
+                  px={3}
                   minW={{ base: "150px", sm: "150px" }}
                   justifyContent="space-between"
                   boxShadow={searchShadow}
@@ -426,7 +426,7 @@ const BlogScreen: React.FC = () => {
                 >
                   <HStack spacing={2} minW={0}>
                     <Icon as={TAG_ICONS[tagFilter]} aria-hidden="true" boxSize={5} color={theme.titleColor} opacity={0.9} />
-                    <Text fontWeight="semibold" color={theme.titleColor} fontSize="sm" noOfLines={1}>
+                    <Text fontWeight="semibold" color={theme.titleColor} fontSize="sm" noOfLines={1} lineHeight="1">
                       {tagFilter}
                     </Text>
                   </HStack>

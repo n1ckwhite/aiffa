@@ -29,10 +29,11 @@ export const Outlet: React.FC = () => null;
 export const useLocation = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const searchString = searchParams?.toString() ?? "";
 
   return {
     pathname: pathname ?? "",
-    search: searchParams ? `?${searchParams.toString()}` : "",
+    search: searchString ? `?${searchString}` : "",
     hash: "",
     state: null,
     key: "default"
@@ -41,12 +42,12 @@ export const useLocation = () => {
 
 export const useNavigate = () => {
   const router = useRouter();
-  return (to: string, options?: { replace?: boolean }) => {
+  return (to: string, options?: { replace?: boolean; scroll?: boolean }) => {
     if (options?.replace) {
-      router.replace(to);
+      router.replace(to, { scroll: options?.scroll });
       return;
     }
-    router.push(to);
+    router.push(to, { scroll: options?.scroll });
   };
 };
 

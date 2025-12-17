@@ -150,7 +150,7 @@ const BlogScreen: React.FC = () => {
     const nextSearch = params.toString();
     const searchWithPrefix = nextSearch ? `?${nextSearch}` : "";
     if (searchWithPrefix !== location.search) {
-      navigate(`${location.pathname}${searchWithPrefix}`, { replace: true });
+      navigate(`${location.pathname}${searchWithPrefix}`, { replace: true, scroll: false });
     }
   }, [query, location.pathname, location.search, navigate]);
 

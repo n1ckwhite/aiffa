@@ -591,6 +591,7 @@ const BlogScreen: React.FC = () => {
                     transform="scale(0.82)"
                     transformOrigin="top center"
                     mt={{ base: -2, md: -3 }}
+                    height="123px"
                   >
                     <QuestioningLottieIcon />
                   </Box>

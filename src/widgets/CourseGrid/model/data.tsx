@@ -1,9 +1,9 @@
 import React from 'react';
 import { Icon } from '@chakra-ui/react';
 import type { CourseItem } from './types';
-import { FaReact, FaNodeJs, FaNpm, FaAccessibleIcon, FaLightbulb, FaLaptopCode } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaNpm, FaLightbulb, FaLaptopCode } from 'react-icons/fa';
 import { SiJavascript, SiTypescript, SiHtml5 } from 'react-icons/si';
-import { FiTerminal, FiCloud, FiBox } from 'react-icons/fi';
+import { FiTerminal, FiCloud, FiBox, FiEye } from 'react-icons/fi';
 
 export const courses: CourseItem[] = [
   { id: 0, moduleId: 'bazovye-komandy', category: 'base', title: 'Базовые команды', description: 'Терминал, Git, npx и базовые инструменты', lessonsCount: 15, studyTime: '3–7 дней', level: 'Начальный',
@@ -40,7 +40,7 @@ export const courses: CourseItem[] = [
     icon: (<Icon as={SiTypescript} boxSize="20px" />)
   },
   { id: 12, moduleId: 'accessibility', category: 'frontend', title: 'Accessibility', description: 'Создание доступных веб-приложений', lessonsCount: 26, studyTime: '2–3 недели', level: 'Продвинутый',
-    icon: (<Icon as={FaAccessibleIcon} boxSize="20px" />)
+    icon: (<Icon as={FiEye} boxSize="20px" />)
   }   
 ];
 

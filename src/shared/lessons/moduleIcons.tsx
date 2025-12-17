@@ -4,12 +4,12 @@ import {
   FaReact,
   FaNodeJs,
   FaNpm,
-  FaAccessibleIcon,
+  FaUniversalAccess,
   FaLightbulb,
   FaLaptopCode,
 } from 'react-icons/fa';
 import { SiJavascript, SiTypescript, SiHtml5 } from 'react-icons/si';
-import { FiTerminal, FiCloud, FiBox } from 'react-icons/fi';
+import { FiTerminal, FiCloud, FiBox, FiEye } from 'react-icons/fi';
 
 export const moduleIconById: Record<string, React.ReactNode> = {
   'bazovye-komandy': <Icon as={FiTerminal} boxSize="20px" />,
@@ -24,7 +24,7 @@ export const moduleIconById: Record<string, React.ReactNode> = {
   'react-native': <Icon as={FaReact} boxSize="20px" />,
   nodejs: <Icon as={FaNodeJs} boxSize="20px" />,
   typescript: <Icon as={SiTypescript} boxSize="20px" />,
-  accessibility: <Icon as={FaAccessibleIcon} boxSize="20px" />,
+  accessibility: <Icon as={FiEye} boxSize="20px" />,
 };
 
 

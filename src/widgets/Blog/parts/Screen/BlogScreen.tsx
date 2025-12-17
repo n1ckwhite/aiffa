@@ -26,6 +26,7 @@ import {
   Skeleton,
   Text,
   useColorModeValue,
+  VisuallyHidden,
   VStack,
 } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
@@ -321,26 +322,31 @@ const BlogScreen: React.FC = () => {
             Статьи участников экосистемы: опыт, разборы, практические советы и истории — всё, что помогает расти быстрее и делать вклад.
           </Text>
 
-          <HStack
+          <Box
+            as="form"
+            role="search"
+            aria-label="Поиск и фильтры статей"
+            onSubmit={(e: React.FormEvent) => e.preventDefault()}
             w="full"
             maxW={{ base: "100%", sm: "560px" }}
             pt={isEmptyResults ? 1 : 2}
-            spacing={3}
-            justify="center"
-            flexWrap="wrap"
           >
-            <InputGroup
-              size="lg"
-              h="56px"
-              bg={searchBg}
-              borderWidth="1px"
-              borderColor={searchBorder}
-              borderRadius="full"
-              boxShadow={searchShadow}
-              transition="box-shadow 180ms ease, border-color 180ms ease, transform 180ms ease"
-              _hover={{ boxShadow: searchHoverShadow, borderColor: searchHoverBorder }}
-              maxW={{ base: "100%", sm: "440px" }}
-            >
+            <HStack spacing={3} justify="center" flexWrap="wrap">
+              <InputGroup
+                size="lg"
+                h="56px"
+                bg={searchBg}
+                borderWidth="1px"
+                borderColor={searchBorder}
+                borderRadius="full"
+                boxShadow={searchShadow}
+                transition="box-shadow 180ms ease, border-color 180ms ease, transform 180ms ease"
+                _hover={{ boxShadow: searchHoverShadow, borderColor: searchHoverBorder }}
+                maxW={{ base: "100%", sm: "440px" }}
+              >
+              <VisuallyHidden as="label" htmlFor="blog-search">
+                Поиск по статьям
+              </VisuallyHidden>
               <InputLeftElement pointerEvents="none" h="56px" w="56px">
                 <Box
                   boxSize="40px"
@@ -379,6 +385,7 @@ const BlogScreen: React.FC = () => {
                 <InputRightElement h="56px" w="56px">
                   <IconButton
                     aria-label="Очистить поиск"
+                    type="button"
                     size="sm"
                     variant="ghost"
                     onClick={() => {
@@ -400,73 +407,75 @@ const BlogScreen: React.FC = () => {
               )}
             </InputGroup>
 
-            <HStack spacing={2} align="center">
-              <Text fontSize="sm" color={theme.descColor} fontWeight="semibold" whiteSpace="nowrap">
-                Фильтры:
-              </Text>
-              <Menu placement="bottom-end" gutter={10}>
-                <MenuButton
-                  as={Button}
-                  aria-label="Фильтры статей"
-                  rightIcon={<Icon as={FiChevronDown} aria-hidden="true" boxSize={5} color={theme.descColor} />}
-                  variant="outline"
-                  borderWidth="1px"
-                  borderColor={filterButtonBorder}
-                  bg={filterButtonBg}
-                  borderRadius="full"
-                  h="45px"
-                  px={3}
-                  minW={{ base: "150px", sm: "150px" }}
-                  justifyContent="space-between"
-                  boxShadow={searchShadow}
-                  transition="background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease"
-                  _hover={{ bg: filterButtonHoverBg, boxShadow: searchHoverShadow }}
-                  _active={{ bg: filterButtonHoverBg }}
-                  _focusVisible={{ boxShadow: "none" }}
-                >
-                  <HStack spacing={2} minW={0}>
-                    <Icon as={TAG_ICONS[tagFilter]} aria-hidden="true" boxSize={5} color={theme.titleColor} opacity={0.9} />
-                    <Text fontWeight="semibold" color={theme.titleColor} fontSize="sm" noOfLines={1} lineHeight="1">
-                      {tagFilter}
-                    </Text>
-                  </HStack>
-                </MenuButton>
-                <MenuList
-                  overflow="hidden"
-                  bg={filterButtonBg}
-                  borderColor={filterMenuBorder}
-                  borderWidth="1px"
-                  borderRadius="2xl"
-                  boxShadow={filterMenuShadow}
-                  py={0}
-                  minW="240px"
-                >
-                  <MenuOptionGroup
-                    type="radio"
-                    value={tagFilter}
-                    onChange={(v) => setTagFilter((v as BlogTagFilter) || "Все")}
+              <HStack spacing={2} align="center">
+                <Text fontSize="sm" color={theme.descColor} fontWeight="semibold" whiteSpace="nowrap">
+                  Фильтры:
+                </Text>
+                <Menu placement="bottom-end" gutter={10}>
+                  <MenuButton
+                    as={Button}
+                    aria-label="Фильтры статей"
+                    rightIcon={<Icon as={FiChevronDown} aria-hidden="true" boxSize={5} color={theme.descColor} />}
+                    variant="outline"
+                    borderWidth="1px"
+                    borderColor={filterButtonBorder}
+                    bg={filterButtonBg}
+                    borderRadius="full"
+                    h="45px"
+                    px={3}
+                    minW={{ base: "150px", sm: "150px" }}
+                    justifyContent="space-between"
+                    boxShadow={searchShadow}
+                    transition="background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease"
+                    _hover={{ bg: filterButtonHoverBg, boxShadow: searchHoverShadow }}
+                    _active={{ bg: filterButtonHoverBg }}
+                    _focusVisible={{ boxShadow: "none" }}
+                    type="button"
                   >
-                    {BLOG_TAG_FILTERS.map((t) => (
-                      <MenuItemOption
-                        key={t}
-                        value={t}
-                        fontWeight="semibold"
-                        color={theme.titleColor}
-                        py={2.5}
-                        _hover={{ bg: filterButtonHoverBg }}
-                        _focus={{ bg: filterButtonHoverBg }}
-                      >
-                        <HStack spacing={2}>
-                          <Icon as={TAG_ICONS[t]} aria-hidden="true" boxSize={4} color={theme.descColor} />
-                          <Text>{t}</Text>
-                        </HStack>
-                      </MenuItemOption>
-                    ))}
-                  </MenuOptionGroup>
-                </MenuList>
-              </Menu>
+                    <HStack spacing={2} minW={0}>
+                      <Icon as={TAG_ICONS[tagFilter]} aria-hidden="true" boxSize={5} color={theme.titleColor} opacity={0.9} />
+                      <Text fontWeight="semibold" color={theme.titleColor} fontSize="sm" noOfLines={1} lineHeight="1">
+                        {tagFilter}
+                      </Text>
+                    </HStack>
+                  </MenuButton>
+                  <MenuList
+                    overflow="hidden"
+                    bg={filterButtonBg}
+                    borderColor={filterMenuBorder}
+                    borderWidth="1px"
+                    borderRadius="2xl"
+                    boxShadow={filterMenuShadow}
+                    py={0}
+                    minW="240px"
+                  >
+                    <MenuOptionGroup
+                      type="radio"
+                      value={tagFilter}
+                      onChange={(v) => setTagFilter((v as BlogTagFilter) || "Все")}
+                    >
+                      {BLOG_TAG_FILTERS.map((t) => (
+                        <MenuItemOption
+                          key={t}
+                          value={t}
+                          fontWeight="semibold"
+                          color={theme.titleColor}
+                          py={2.5}
+                          _hover={{ bg: filterButtonHoverBg }}
+                          _focus={{ bg: filterButtonHoverBg }}
+                        >
+                          <HStack spacing={2}>
+                            <Icon as={TAG_ICONS[t]} aria-hidden="true" boxSize={4} color={theme.descColor} />
+                            <Text>{t}</Text>
+                          </HStack>
+                        </MenuItemOption>
+                      ))}
+                    </MenuOptionGroup>
+                  </MenuList>
+                </Menu>
+              </HStack>
             </HStack>
-          </HStack>
+          </Box>
         </VStack>
 
         {isLoading ? (
@@ -506,7 +515,7 @@ const BlogScreen: React.FC = () => {
         ) : (
           <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
             {isEmptyResults && (
-              <Box w="full" textAlign="center" mt={0}>
+              <Box w="full" textAlign="center" mt={0} role="status" aria-live="polite">
                 <VStack spacing={2} maxW="560px" mx="auto">
                   <Box
                     w="full"
@@ -719,7 +728,7 @@ const BlogScreen: React.FC = () => {
             </SimpleGrid>
 
             {totalPages > 1 && (
-              <Box alignSelf="center" w="fit-content" maxW="100%" mt={{ base: 2, md: 3 }}>
+              <Box as="nav" aria-label="Пагинация статей" alignSelf="center" w="fit-content" maxW="100%" mt={{ base: 2, md: 3 }}>
                 <Pagination
                   pageItems={pageItems}
                   page={page}
@@ -788,15 +797,16 @@ const BlogScreen: React.FC = () => {
             </Box>
 
             <VStack align="start" spacing={1} textAlign="left" minW={0}>
-              <Text
+              <Heading
                 id="blog-write-cta-title"
-                fontWeight="bold"
                 color={theme.titleColor}
+                as="h2"
                 fontSize={{ base: "lg", md: "xl" }}
+                fontWeight="bold"
                 letterSpacing="-0.01em"
               >
                 Хочешь стать автором в AIFFA?
-              </Text>
+              </Heading>
               <Text color={theme.descColor} fontSize={{ base: "sm", md: "md" }}>
                 Поделись практикой: кейс, ошибка, разбор решения или полезная находка. Черновик или план отправь через блок «Поддержка и сообщество» ниже — поможем оформить и опубликовать.
               </Text>

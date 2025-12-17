@@ -2,6 +2,7 @@ import React from "react";
 import {
   AspectRatio,
   Avatar,
+  Badge,
   Box,
   HStack,
   Heading,
@@ -12,11 +13,16 @@ import {
   InputLeftElement,
   InputRightElement,
   IconButton,
+  Link,
+  LinkBox,
+  LinkOverlay,
   SimpleGrid,
   Skeleton,
   Text,
   useColorModeValue,
   VStack,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { FiArrowUpRight, FiEdit3, FiEye, FiMessageCircle, FiSearch, FiStar, FiX } from "react-icons/fi";
@@ -45,6 +51,24 @@ const formatCount = (value?: number) => {
   if (value < 1000) return String(value);
   const k = value / 1000;
   return `${k.toFixed(k >= 10 ? 0 : 1)}k`;
+};
+
+type AuthorBadge = {
+  label: string;
+  colorScheme: "blue" | "purple" | "yellow" | "green" | "gray";
+};
+
+const getAuthorBadge = (article: BlogArticle): AuthorBadge => {
+  const hasGithub = Boolean(article.author?.github);
+  const date = new Date(article.date);
+  const isRecent = Number.isFinite(date.getTime()) && Date.now() - date.getTime() <= 1000 * 60 * 60 * 24 * 31;
+  const isTop =
+    (typeof article.starsCount === "number" && article.starsCount >= 50) ||
+    (typeof article.viewsCount === "number" && article.viewsCount >= 1500);
+
+  if (isRecent && isTop) return { label: "Топ месяца", colorScheme: "yellow" };
+  if (hasGithub) return { label: "Контрибьютор", colorScheme: "purple" };
+  return { label: "Автор AIFFA", colorScheme: "blue" };
 };
 
 const BlogScreen: React.FC = () => {
@@ -357,15 +381,16 @@ const BlogScreen: React.FC = () => {
             <SimpleGrid as="ul" columns={{ base: 1, md: 2, xl: 3 }} spacing={{ base: 6, md: 7 }} listStyleType="none" m={0} p={0}>
               {pageArticles.map((article: BlogArticle) => {
                 const category = (article.tags || [])[0] ?? "Insights";
+                const authorBadge = getAuthorBadge(article);
+                const authorGithub = article.author?.github;
+                const authorHref = authorGithub ? `https://github.com/${authorGithub}` : undefined;
                 return (
                   <Box
                     key={article.slug}
                     as="li"
                     listStyleType="none"
                   >
-                    <Box
-                      as={RouterLink as any}
-                      to={`/blog/${article.slug}`}
+                    <LinkBox
                       borderWidth="1px"
                       borderColor={cardBorder}
                       borderRadius={cardRadius}
@@ -403,7 +428,16 @@ const BlogScreen: React.FC = () => {
                         pointerEvents: "none",
                       }}
                     >
-                      <Box p={cardPadding} display="flex" flexDirection="column" h="full" minW={0}>
+                      <LinkOverlay
+                        as={RouterLink as any}
+                        to={`/blog/${article.slug}`}
+                        aria-label={`Открыть статью: ${article.title}`}
+                        position="absolute"
+                        inset={0}
+                        zIndex={1}
+                      />
+
+                      <Box p={cardPadding} display="flex" flexDirection="column" h="full" minW={0} position="relative" zIndex={2}>
                         <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="xl" mb={5}>
                           <Image
                             src={article.coverImage || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80"}
@@ -464,19 +498,49 @@ const BlogScreen: React.FC = () => {
                           </HStack>
                         </HStack>
 
-                        <HStack spacing={3} mt="auto" pt={6}>
+                        <HStack spacing={3} mt="auto" pt={6} minH="56px" align="center">
                           <Avatar name={article.author?.name || "Автор"} src={getGithubAvatarUrl(article.author?.github, 96)} boxSize="38px" />
                           <VStack spacing={0} align="start" minW={0}>
-                            <Text fontSize="sm" fontWeight="semibold" noOfLines={1} color={theme.titleColor}>
-                              {article.author?.name || "—"}
-                            </Text>
+                            {authorHref ? (
+                              <Link
+                                href={authorHref}
+                                isExternal
+                                fontSize="sm"
+                                fontWeight="semibold"
+                                noOfLines={1}
+                                color={theme.titleColor}
+                                position="relative"
+                                zIndex={3}
+                                _hover={{ textDecoration: "none", color: theme.blue.accent }}
+                                aria-label={`Открыть профиль автора в GitHub: ${article.author?.name || authorGithub || "автор"}`}
+                              >
+                                {article.author?.name || "—"}
+                              </Link>
+                            ) : (
+                              <Text fontSize="sm" fontWeight="semibold" noOfLines={1} color={theme.titleColor}>
+                                {article.author?.name || "—"}
+                              </Text>
+                            )}
+                            <Badge
+                              mt={1}
+                              w="fit-content"
+                              colorScheme={authorBadge.colorScheme}
+                              variant="subtle"
+                              borderRadius="full"
+                              px={2}
+                              py={0.5}
+                              fontSize="10px"
+                              letterSpacing="0.02em"
+                            >
+                              {authorBadge.label}
+                            </Badge>
                             <Text fontSize="xs" color={theme.descColor}>
                               {getDateLabel(article.date)}
                             </Text>
                           </VStack>
                         </HStack>
                       </Box>
-                    </Box>
+                    </LinkBox>
                   </Box>
                 );
               })}

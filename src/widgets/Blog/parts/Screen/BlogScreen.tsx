@@ -19,7 +19,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
-import { FiArrowUpRight, FiEye, FiMessageCircle, FiSearch, FiStar } from "react-icons/fi";
+import { FiArrowUpRight, FiEye, FiMessageCircle, FiSearch, FiStar, FiX } from "react-icons/fi";
 import { useAppColors } from "@/shared/theme/colors";
 import { QuestioningLottieIcon } from "@/shared/icons/components-icon";
 import { usePagination } from "widgets/ModuleLessons/hooks/usePagination";
@@ -182,7 +182,7 @@ const BlogScreen: React.FC = () => {
           spacing={3}
           align="center"
           textAlign="center"
-          pb={isEmptyResults ? { base: 2, md: 2 } : { base: 6, md: 8 }}
+          pb={isEmptyResults ? { base: 3, md: 5 } : { base: 6, md: 8 }}
         >
           <Heading
             id="blog-title"
@@ -254,9 +254,14 @@ const BlogScreen: React.FC = () => {
                       setQuery("");
                       window.setTimeout(() => searchInputRef.current?.focus(), 0);
                     }}
-                    icon={<Box as="span" fontSize="20px" lineHeight="1">×</Box>}
+                    icon={<Icon as={FiX} aria-hidden="true" boxSize={5} />}
+                    boxSize="40px"
+                    p={0}
                     borderRadius="full"
                     color={theme.descColor}
+                    display="inline-flex"
+                    alignItems="center"
+                    justifyContent="center"
                     _hover={{ bg: useColorModeValue("blackAlpha.50", "whiteAlpha.200") }}
                     _active={{ bg: useColorModeValue("blackAlpha.100", "whiteAlpha.300") }}
                   />

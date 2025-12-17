@@ -551,13 +551,10 @@ const BlogScreen: React.FC = () => {
                 fontSize={{ base: "lg", md: "xl" }}
                 letterSpacing="-0.01em"
               >
-                Хочешь написать статью?
+                Хочешь стать автором в AIFFA?
               </Text>
               <Text color={theme.descColor} fontSize={{ base: "sm", md: "md" }}>
-                Поделись опытом — сообщество оценит.
-              </Text>
-              <Text color={theme.descColor} fontSize={{ base: "sm", md: "md" }}>
-                Статьи пишут участники AIFFA — присоединяйся
+                Поделись практикой: кейс, ошибка, разбор решения или полезная находка. Черновик или план отправь через блок «Поддержка и сообщество» ниже — поможем оформить и опубликовать.
               </Text>
             </VStack>
           </HStack>

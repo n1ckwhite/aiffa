@@ -120,14 +120,14 @@ const getCategoryMeta = (rawCategory: string): { label: string; icon: React.Elem
 
 const matchesTagFilter = (article: BlogArticle, filter: BlogTagFilter) => {
   if (filter === "Все") return true;
-  const tags = (article.tags || []).map((t) => normalizeTag(t));
+  const tags = (article.tags || []).map((t: string) => normalizeTag(t));
   if (!tags.length) return false;
 
   if (filter === "Backend") {
-    return tags.some((t) => t === "backend" || t === "back-end" || t === "бэкенд" || t === "бекенд" || t === "сервер");
+    return tags.some((t: string) => t === "backend" || t === "back-end" || t === "бэкенд" || t === "бекенд" || t === "сервер");
   }
   if (filter === "Архитектура") {
-    return tags.some((t) => t === "архитектура" || t === "architecture" || t === "арх");
+    return tags.some((t: string) => t === "архитектура" || t === "architecture" || t === "арх");
   }
   return tags.includes(normalizeTag(filter));
 };

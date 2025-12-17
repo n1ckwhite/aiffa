@@ -400,67 +400,72 @@ const BlogScreen: React.FC = () => {
               )}
             </InputGroup>
 
-            <Menu placement="bottom-end" gutter={10}>
-              <MenuButton
-                as={Button}
-                aria-label="Фильтры статей"
-                rightIcon={<Icon as={FiChevronDown} aria-hidden="true" boxSize={5} color={theme.descColor} />}
-                variant="outline"
-                borderWidth="1px"
-                borderColor={filterButtonBorder}
-                bg={filterButtonBg}
-                borderRadius="full"
-                h="56px"
-                px={4}
-                minW={{ base: "100%", sm: "150px" }}
-                justifyContent="space-between"
-                boxShadow={searchShadow}
-                transition="background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease"
-                _hover={{ bg: filterButtonHoverBg, boxShadow: searchHoverShadow }}
-                _active={{ bg: filterButtonHoverBg }}
-                _focusVisible={{ boxShadow: "none" }}
-              >
-                <HStack spacing={2} minW={0}>
-                  <Icon as={TAG_ICONS[tagFilter]} aria-hidden="true" boxSize={5} color={theme.titleColor} opacity={0.9} />
-                  <Text fontWeight="semibold" color={theme.titleColor} fontSize="sm" noOfLines={1}>
-                    {tagFilter}
-                  </Text>
-                </HStack>
-              </MenuButton>
-              <MenuList
-              overflow="hidden"
-                bg={filterButtonBg}
-                borderColor={filterMenuBorder}
-                borderWidth="1px"
-                borderRadius="2xl"
-                boxShadow={filterMenuShadow}
-                py={0}
-                minW="240px"
-              >
-                <MenuOptionGroup
-                  type="radio"
-                  value={tagFilter}
-                  onChange={(v) => setTagFilter((v as BlogTagFilter) || "Все")}
+            <HStack spacing={2} align="center">
+              <Text fontSize="sm" color={theme.descColor} fontWeight="semibold" whiteSpace="nowrap">
+                Фильтры:
+              </Text>
+              <Menu placement="bottom-end" gutter={10}>
+                <MenuButton
+                  as={Button}
+                  aria-label="Фильтры статей"
+                  rightIcon={<Icon as={FiChevronDown} aria-hidden="true" boxSize={5} color={theme.descColor} />}
+                  variant="outline"
+                  borderWidth="1px"
+                  borderColor={filterButtonBorder}
+                  bg={filterButtonBg}
+                  borderRadius="full"
+                  h="56px"
+                  px={4}
+                  minW={{ base: "150px", sm: "150px" }}
+                  justifyContent="space-between"
+                  boxShadow={searchShadow}
+                  transition="background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease"
+                  _hover={{ bg: filterButtonHoverBg, boxShadow: searchHoverShadow }}
+                  _active={{ bg: filterButtonHoverBg }}
+                  _focusVisible={{ boxShadow: "none" }}
                 >
-                  {BLOG_TAG_FILTERS.map((t) => (
-                    <MenuItemOption
-                      key={t}
-                      value={t}
-                      fontWeight="semibold"
-                      color={theme.titleColor}
-                      py={2.5}
-                      _hover={{ bg: filterButtonHoverBg }}
-                      _focus={{ bg: filterButtonHoverBg }}
-                    >
-                      <HStack spacing={2}>
-                        <Icon as={TAG_ICONS[t]} aria-hidden="true" boxSize={4} color={theme.descColor} />
-                        <Text>{t}</Text>
-                      </HStack>
-                    </MenuItemOption>
-                  ))}
-                </MenuOptionGroup>
-              </MenuList>
-            </Menu>
+                  <HStack spacing={2} minW={0}>
+                    <Icon as={TAG_ICONS[tagFilter]} aria-hidden="true" boxSize={5} color={theme.titleColor} opacity={0.9} />
+                    <Text fontWeight="semibold" color={theme.titleColor} fontSize="sm" noOfLines={1}>
+                      {tagFilter}
+                    </Text>
+                  </HStack>
+                </MenuButton>
+                <MenuList
+                  overflow="hidden"
+                  bg={filterButtonBg}
+                  borderColor={filterMenuBorder}
+                  borderWidth="1px"
+                  borderRadius="2xl"
+                  boxShadow={filterMenuShadow}
+                  py={0}
+                  minW="240px"
+                >
+                  <MenuOptionGroup
+                    type="radio"
+                    value={tagFilter}
+                    onChange={(v) => setTagFilter((v as BlogTagFilter) || "Все")}
+                  >
+                    {BLOG_TAG_FILTERS.map((t) => (
+                      <MenuItemOption
+                        key={t}
+                        value={t}
+                        fontWeight="semibold"
+                        color={theme.titleColor}
+                        py={2.5}
+                        _hover={{ bg: filterButtonHoverBg }}
+                        _focus={{ bg: filterButtonHoverBg }}
+                      >
+                        <HStack spacing={2}>
+                          <Icon as={TAG_ICONS[t]} aria-hidden="true" boxSize={4} color={theme.descColor} />
+                          <Text>{t}</Text>
+                        </HStack>
+                      </MenuItemOption>
+                    ))}
+                  </MenuOptionGroup>
+                </MenuList>
+              </Menu>
+            </HStack>
           </HStack>
         </VStack>
 

@@ -16,14 +16,22 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
   const { items: list, title: defaultHeading } = modulesFaqConfig[key];
   const heading = title || defaultHeading;
   const supportVariant = key === 'blog' ? 'blog' : 'modules';
+  const sectionTitleId = `faq-${key}-title`;
 
   return (
-    <Box zIndex={100} >
-      <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto" >
+      <VStack
+        as="section"
+        aria-labelledby={sectionTitleId}
+        align="stretch"
+        gap={{ base: 5, md: 7 }}
+        maxW={{ base: '100%', md: '900px' }}
+        mx="auto"
+      >
         <HStack mb={2} spacing={3} color={faqHeadingColor} align="center">
           <Icon as={QuestionOutlineIcon} boxSize={{ base: 4, md: 5 }} />
           <Heading
             as="h2"
+            id={sectionTitleId}
             fontSize={{ base: 'lg', md: 'xl' }}
             letterSpacing="wider"
           >
@@ -106,7 +114,6 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
         </Box>
         {showSupportBlock && <SupportBlock variant={supportVariant} />}
       </VStack>
-    </Box>
   );
 };
 

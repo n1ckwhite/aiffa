@@ -172,12 +172,9 @@ const BlogScreen: React.FC = () => {
   };
 
   return (
-    <Box
-      as="section"
-      position="relative"
-      aria-labelledby="blog-title"
-    >
+    <Box position="relative">
       <Box w="100%" maxW="1240px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+        <Box as="section" aria-labelledby="blog-title">
         <VStack
           as="header"
           spacing={3}
@@ -479,6 +476,7 @@ const BlogScreen: React.FC = () => {
             )}
           </VStack>
         )}
+        </Box>
 
         <Box
           as="section"

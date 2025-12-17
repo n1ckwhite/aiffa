@@ -111,13 +111,13 @@ const BlogScreen: React.FC = () => {
                 overflow="hidden"
               >
                 <Box p={{ base: 5, md: 6 }} display="flex" flexDirection="column" h="full">
+                  <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="xl" mb={6}>
+                    <Skeleton />
+                  </AspectRatio>
                   <Skeleton h="12px" w="110px" mb={3} />
                   <Skeleton h="22px" w="95%" mb={3} />
                   <Skeleton h="14px" w="100%" mb={2} />
                   <Skeleton h="14px" w="85%" mb={6} />
-                  <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="xl" mb={6}>
-                    <Skeleton />
-                  </AspectRatio>
                   <HStack spacing={3} mt="auto" pt={2}>
                     <Skeleton boxSize="36px" borderRadius="full" />
                     <VStack align="start" spacing={1}>
@@ -153,6 +153,19 @@ const BlogScreen: React.FC = () => {
                       _hover={{ textDecoration: "none", transform: "translateY(-2px)", borderColor: theme.blue.chipBorder }}
                     >
                       <Box p={{ base: 5, md: 6 }} display="flex" flexDirection="column" h="full" minW={0}>
+                        <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="xl" mb={5}>
+                          <Image
+                            src={article.coverImage || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80"}
+                            alt={article.title}
+                            loading="lazy"
+                            decoding="async"
+                            objectFit="cover"
+                            w="100%"
+                            h="100%"
+                            borderRadius="0"
+                          />
+                        </AspectRatio>
+
                         <Text fontSize="sm" color={categoryColor} fontWeight="semibold">
                           {category}
                         </Text>
@@ -183,19 +196,6 @@ const BlogScreen: React.FC = () => {
                         <Text fontSize="sm" color={theme.descColor} lineHeight={1.7} mt={3} noOfLines={3}>
                           {article.description}
                         </Text>
-
-                        <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="xl" mt={5}>
-                          <Image
-                            src={article.coverImage || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80"}
-                            alt={article.title}
-                            loading="lazy"
-                            decoding="async"
-                            objectFit="cover"
-                            w="100%"
-                            h="100%"
-                            borderRadius="0"
-                          />
-                        </AspectRatio>
 
                         <HStack spacing={3} mt="auto" pt={6}>
                           <Avatar name={article.author?.name || "Автор"} src={getGithubAvatarUrl(article.author?.github, 96)} boxSize="38px" />

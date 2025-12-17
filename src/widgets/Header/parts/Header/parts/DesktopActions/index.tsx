@@ -1,5 +1,5 @@
 import React from 'react';
-import { HStack, Link, Text, Tooltip, Icon } from '@chakra-ui/react';
+import { Box, HStack, Link, Text, Tooltip, Icon, useColorModeValue } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { FaBookOpen, FaClipboardList, FaUserCircle, FaCode, FaComments, FaUserFriends, FaFeatherAlt } from 'react-icons/fa';
 import DonateButton from '../../../DonateButton';
@@ -12,7 +12,8 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
   onDonate,
   setIsMobileMenuOpen,
 }) => {
-  const { fillIcon, blogIcon } = useDesktopActionsColors();
+  const { fillIcon } = useDesktopActionsColors();
+  const dividerColor = useColorModeValue('blackAlpha.200', 'whiteAlpha.300');
 
   return (
     <HStack gap={{ base: 1, md: 1, xl: 2 }}>
@@ -40,6 +41,34 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           </Text>
         </Link>
       </Tooltip>
+
+      {/* Контент */}
+      <Tooltip label="Блог" openDelay={250} hasArrow>
+        <Link
+          as={RouterLink as any}
+          to="/blog"
+          aria-label="Блог"
+          onClick={() => { setIsMobileMenuOpen(false); }}
+          _hover={{ bg: hoverBg }}
+          px={2}
+          py={1.5}
+          borderRadius="md"
+          display="inline-flex"
+          alignItems="center"
+        >
+          <Icon as={FaFeatherAlt} boxSize={4} aria-hidden="true" color={fillIcon} />
+          <Text
+            ml={2}
+            display={{ base: 'none', lg: 'inline' }}
+            fontSize="sm"
+            fontWeight="semibold"
+          >
+            Блог
+          </Text>
+        </Link>
+      </Tooltip>
+
+      {/* Практика */}
       <Tooltip label="Задачи" openDelay={250} hasArrow>
         <Link
           as={RouterLink as any}
@@ -89,6 +118,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
         </Link>
       </Tooltip>
 
+      {/* Сообщество */}
       <Tooltip label="Сессии" openDelay={250} hasArrow>
         <Link
           as={RouterLink as any}
@@ -137,30 +167,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           </Text>
         </Link>
       </Tooltip>
-      <Tooltip label="Блог" openDelay={250} hasArrow>
-        <Link
-          as={RouterLink as any}
-          to="/blog"
-          aria-label="Блог"
-          onClick={() => { setIsMobileMenuOpen(false); }}
-          _hover={{ bg: hoverBg }}
-          px={2}
-          py={1.5}
-          borderRadius="md"
-          display="inline-flex"
-          alignItems="center"
-        >
-          <Icon as={FaFeatherAlt} boxSize={4} aria-hidden="true" color={fillIcon} />
-          <Text
-            ml={2}
-            display={{ base: 'none', lg: 'inline' }}
-            fontSize="sm"
-            fontWeight="semibold"
-          >
-            Блог
-          </Text>
-        </Link>
-      </Tooltip>
+
       <Tooltip label="Профиль" openDelay={250} hasArrow>
         <Link
           as={RouterLink as any}

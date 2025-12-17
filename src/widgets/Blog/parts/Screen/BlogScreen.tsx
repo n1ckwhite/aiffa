@@ -55,6 +55,10 @@ const BlogScreen: React.FC = () => {
   const controlsBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const controlsHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.200");
   const controlsIcon = useColorModeValue("gray.700", "gray.200");
+  const cardBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
+  const cardHoverBorder = useColorModeValue(theme.blue.chipBorder, "blue.400");
+  const cardShadow = useColorModeValue("0 10px 28px rgba(15, 23, 42, 0.08)", "0 12px 30px rgba(0, 0, 0, 0.35)");
+  const cardHoverShadow = useColorModeValue("0 18px 44px rgba(15, 23, 42, 0.14)", "0 18px 44px rgba(0, 0, 0, 0.45)");
   const paginationColors = React.useMemo(
     () => ({
       controlsBg,
@@ -111,10 +115,11 @@ const BlogScreen: React.FC = () => {
                 as="li"
                 listStyleType="none"
                 borderWidth="1px"
-                borderColor={theme.borderColor}
+                borderColor={cardBorder}
                 borderRadius={cardRadius}
                 bg={theme.cardBg}
                 overflow="hidden"
+                boxShadow={cardShadow}
               >
                 <Box p={cardPadding} display="flex" flexDirection="column" h="full">
                   <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="xl" mb={6}>
@@ -151,13 +156,41 @@ const BlogScreen: React.FC = () => {
                       as={RouterLink as any}
                       to={`/blog/${article.slug}`}
                       borderWidth="1px"
-                      borderColor={theme.borderColor}
+                      borderColor={cardBorder}
                       borderRadius={cardRadius}
                       bg={theme.cardBg}
                       overflow="hidden"
                       display="block"
-                      transition="transform 150ms ease, border-color 150ms ease"
-                      _hover={{ textDecoration: "none", transform: "translateY(-2px)", borderColor: theme.blue.chipBorder }}
+                      position="relative"
+                      boxShadow={cardShadow}
+                      transition="transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease"
+                      _hover={{
+                        textDecoration: "none",
+                        transform: "translateY(-3px)",
+                        borderColor: cardHoverBorder,
+                        boxShadow: cardHoverShadow,
+                        _after: { opacity: 1 },
+                      }}
+                      _before={{
+                        content: '""',
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: "3px",
+                        bg: `linear-gradient(90deg, ${theme.blue.accent}, rgba(59,130,246,0))`,
+                        opacity: 0.65,
+                        pointerEvents: "none",
+                      }}
+                      _after={{
+                        content: '""',
+                        position: "absolute",
+                        inset: 0,
+                        bg: `radial-gradient(600px 220px at 20% 0%, ${theme.blue.accent}14, transparent 55%)`,
+                        opacity: 0,
+                        transition: "opacity 180ms ease",
+                        pointerEvents: "none",
+                      }}
                     >
                       <Box p={cardPadding} display="flex" flexDirection="column" h="full" minW={0}>
                         <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="xl" mb={5}>

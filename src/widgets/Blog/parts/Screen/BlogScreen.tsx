@@ -25,6 +25,7 @@ import {
   SimpleGrid,
   Skeleton,
   Text,
+  useBreakpointValue,
   useColorModeValue,
   VisuallyHidden,
   VStack,
@@ -53,6 +54,7 @@ import { useScrollToTop } from "shared/hooks/useScrollToTop";
 import { ModulesFAQ } from "widgets/Modules";
 import { useBlogArticles } from "../../hooks/useBlogArticles";
 import type { BlogArticle } from "../../types";
+import { BLOG_CARD_COVER_SIZES, buildUnsplashSrcSet, normalizeUnsplashUrl } from "@/shared/articles/unsplash";
 
 const getGithubAvatarUrl = (username?: string, size: number = 96) => {
   if (!username) return undefined;
@@ -131,48 +133,15 @@ const matchesTagFilter = (article: BlogArticle, filter: BlogTagFilter) => {
   return tags.includes(normalizeTag(filter));
 };
 
-const normalizeUnsplashUrl = (src: string, width?: number) => {
-  try {
-    const url = new URL(src);
-    if (!url.hostname.includes("images.unsplash.com")) return src;
-
-    url.searchParams.set("auto", url.searchParams.get("auto") || "format");
-    url.searchParams.set("fit", url.searchParams.get("fit") || "crop");
-    url.searchParams.set("q", "70");
-    if (width) url.searchParams.set("w", String(width));
-
-    return url.toString();
-  } catch {
-    return src;
-  }
-};
-
-const buildUnsplashSrcSet = (src: string) => {
-  try {
-    const url = new URL(src);
-    if (!url.hostname.includes("images.unsplash.com")) return undefined;
-    // Card image area is ~377px wide on desktop; include 680 for 2x DPR screens to avoid selecting 768.
-    const widths = [320, 480, 680, 960, 1400];
-    return widths
-      .map((w) => {
-        const u = normalizeUnsplashUrl(url.toString(), w);
-        return `${u} ${w}w`;
-      })
-      .join(", ");
-  } catch {
-    return undefined;
-  }
-};
-
 const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }> = ({ src, alt, priority = false }) => {
-  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [loadState, setLoadState] = React.useState<"loading" | "loaded" | "error">("loading");
   const imgRef = React.useRef<HTMLImageElement | null>(null);
+  const isMobile = useBreakpointValue({ base: true, md: false }) ?? false;
   const skeletonStartColor = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
   const skeletonEndColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
+  const fallbackBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
   const srcSet = React.useMemo(() => buildUnsplashSrcSet(src), [src]);
-  // The actual rendered image area inside the card is ~337px on desktop (card width ~377px - 40px padding).
-  const sizes = "(max-width: 768px) calc(100vw - 32px), (max-width: 1280px) calc(50vw - 48px), 337px";
-  const normalizedSrc = React.useMemo(() => (srcSet ? normalizeUnsplashUrl(src, 680) : src), [src, srcSet]);
+  const normalizedSrc = React.useMemo(() => (srcSet ? normalizeUnsplashUrl(src, { width: 680 }) : src), [src, srcSet]);
 
   React.useEffect(() => {
     const img = imgRef.current;
@@ -180,9 +149,9 @@ const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }>
 
     // If the image was loaded from cache before React attached onLoad, complete will be true.
     if (img.complete && img.naturalWidth > 0) {
-      setIsLoaded(true);
+      setLoadState("loaded");
     }
-  }, [normalizedSrc, srcSet]);
+  }, [normalizedSrc]);
 
   return (
     <Box position="relative" w="100%" h="100%">
@@ -192,26 +161,36 @@ const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }>
         borderRadius="inherit"
         startColor={skeletonStartColor}
         endColor={skeletonEndColor}
-        isLoaded={priority ? true : isLoaded}
+        isLoaded={priority ? true : loadState !== "loading"}
       />
-      <Image
-        ref={imgRef}
-        src={normalizedSrc}
-        srcSet={srcSet}
-        sizes={srcSet ? sizes : undefined}
-        alt={alt}
-        loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : "auto"}
-        decoding="async"
-        objectFit="cover"
-        w="100%"
-        h="100%"
-        borderRadius="0"
-        opacity={priority ? 1 : isLoaded ? 1 : 0}
-        transition="opacity 220ms ease"
-        onLoad={() => setIsLoaded(true)}
-        onError={() => setIsLoaded(true)}
-      />
+      {loadState === "error" ? (
+        <Box
+          position="absolute"
+          inset={0}
+          borderRadius="inherit"
+          bg={fallbackBg}
+        />
+      ) : (
+        <Image
+          ref={imgRef}
+          src={normalizedSrc}
+          srcSet={srcSet}
+          sizes={srcSet ? BLOG_CARD_COVER_SIZES : undefined}
+          alt={alt}
+          // In iOS/Telegram webviews lazy-loading can be unreliable; eagerly load covers on mobile.
+          loading={priority || isMobile ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding="async"
+          objectFit="cover"
+          w="100%"
+          h="100%"
+          borderRadius="0"
+          opacity={priority ? 1 : loadState === "loaded" ? 1 : 0}
+          transition="opacity 220ms ease"
+          onLoad={() => setLoadState("loaded")}
+          onError={() => setLoadState("error")}
+        />
+      )}
     </Box>
   );
 };

@@ -5,6 +5,7 @@ import { FiArrowLeft, FiClock, FiEye, FiShare2, FiStar } from "react-icons/fi";
 import MarkdownRenderer from "@/shared/ui/MarkdownRenderer";
 import { useAppColors } from "@/shared/theme/colors";
 import type { BlogArticle } from "../../types";
+import { BLOG_ARTICLE_COVER_SIZES, buildUnsplashSrcSet, normalizeUnsplashUrl } from "@/shared/articles/unsplash";
 
 type BlogArticleScreenProps = {
   article: BlogArticle;
@@ -31,6 +32,11 @@ const formatCount = (value?: number) => {
 
 const BlogArticleScreen: React.FC<BlogArticleScreenProps> = ({ article, markdown }) => {
   const theme = useAppColors();
+  const coverSrcSet = React.useMemo(() => (article.coverImage ? buildUnsplashSrcSet(article.coverImage) : undefined), [article.coverImage]);
+  const coverSrc = React.useMemo(() => {
+    if (!article.coverImage) return undefined;
+    return coverSrcSet ? normalizeUnsplashUrl(article.coverImage, { width: 1024 }) : article.coverImage;
+  }, [article.coverImage, coverSrcSet]);
 
   const handleShareClick = async () => {
     const url = typeof window !== "undefined" ? window.location.href : "";
@@ -87,7 +93,16 @@ const BlogArticleScreen: React.FC<BlogArticleScreenProps> = ({ article, markdown
             <VStack align="stretch" spacing={3}>
               {article.coverImage ? (
                 <AspectRatio ratio={16 / 9} w="full" borderRadius="lg" overflow="hidden">
-                  <Image src={article.coverImage} alt={article.title} objectFit="cover" loading="lazy" decoding="async" />
+                  <Image
+                    src={coverSrc}
+                    srcSet={coverSrcSet}
+                    sizes={coverSrcSet ? BLOG_ARTICLE_COVER_SIZES : undefined}
+                    alt={article.title}
+                    objectFit="cover"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                  />
                 </AspectRatio>
               ) : null}
 

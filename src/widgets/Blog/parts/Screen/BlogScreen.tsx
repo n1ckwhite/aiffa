@@ -7,6 +7,11 @@ import {
   Heading,
   Icon,
   Image,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  IconButton,
   SimpleGrid,
   Skeleton,
   Text,
@@ -14,7 +19,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { FiArrowUpRight, FiEye, FiMessageCircle, FiStar } from "react-icons/fi";
+import { FiArrowUpRight, FiEye, FiMessageCircle, FiSearch, FiStar } from "react-icons/fi";
 import { useAppColors } from "@/shared/theme/colors";
 import { usePagination } from "widgets/ModuleLessons/hooks/usePagination";
 import { Pagination } from "shared/ui/Pagination";
@@ -43,10 +48,28 @@ const formatCount = (value?: number) => {
 const BlogScreen: React.FC = () => {
   const theme = useAppColors();
   const { items, isLoading } = useBlogArticles();
+  const [query, setQuery] = React.useState<string>("");
   const articles = React.useMemo(() => items.slice().sort((a, b) => (a.date < b.date ? 1 : -1)), [items]);
+  const normalizedQuery = React.useMemo(() => query.trim().toLowerCase(), [query]);
+  const filteredArticles = React.useMemo(() => {
+    if (!normalizedQuery) return articles;
+    return articles.filter((a) => {
+      const haystack = [
+        a.title,
+        a.description,
+        (a.tags || []).join(" "),
+        a.author?.name,
+        a.author?.github,
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+      return haystack.includes(normalizedQuery);
+    });
+  }, [articles, normalizedQuery]);
   const pageSize = 6;
-  const { page, setPage, totalPages, start, end, canPrev, canNext, pageItems } = usePagination(articles.length, pageSize, "blog");
-  const pageArticles = React.useMemo(() => articles.slice(start, end), [articles, start, end]);
+  const { page, setPage, totalPages, start, end, canPrev, canNext, pageItems } = usePagination(filteredArticles.length, pageSize, "blog");
+  const pageArticles = React.useMemo(() => filteredArticles.slice(start, end), [filteredArticles, start, end]);
   const scrollTop = useScrollToTop({ immediate: false });
   const categoryColor = theme.blue.accent;
   const cardRadius = "2xl";
@@ -59,6 +82,12 @@ const BlogScreen: React.FC = () => {
   const cardHoverBorder = useColorModeValue(theme.blue.chipBorder, "blue.400");
   const cardShadow = useColorModeValue("0 10px 28px rgba(15, 23, 42, 0.08)", "0 12px 30px rgba(0, 0, 0, 0.35)");
   const cardHoverShadow = useColorModeValue("0 18px 44px rgba(15, 23, 42, 0.14)", "0 18px 44px rgba(0, 0, 0, 0.45)");
+  const searchBg = useColorModeValue("white", "gray.800");
+  const searchBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
+  const searchShadow = useColorModeValue("0 10px 26px rgba(15, 23, 42, 0.08)", "0 14px 28px rgba(0, 0, 0, 0.35)");
+  const searchHoverShadow = useColorModeValue("0 14px 34px rgba(15, 23, 42, 0.12)", "0 16px 34px rgba(0, 0, 0, 0.45)");
+  const searchPlaceholder = useColorModeValue("gray.500", "whiteAlpha.700");
+  const searchIconBg = useColorModeValue("blue.50", "whiteAlpha.200");
   const paginationColors = React.useMemo(
     () => ({
       controlsBg,
@@ -69,6 +98,11 @@ const BlogScreen: React.FC = () => {
     }),
     [controlsBg, controlsBorder, controlsHoverBg, controlsIcon, theme.descColor],
   );
+
+  React.useEffect(() => {
+    // Reset to first page on search changes (prevents "empty page" after filtering)
+    setPage(1);
+  }, [normalizedQuery, setPage]);
 
   const handleSetPage = (next: number | ((p: number) => number)) => {
     setPage((prev) => {
@@ -105,6 +139,66 @@ const BlogScreen: React.FC = () => {
           >
             Статьи участников экосистемы: опыт, разборы, практические советы и истории — всё, что помогает расти быстрее и делать вклад.
           </Text>
+
+          <Box w="full" maxW={{ base: "100%", sm: "440px" }} pt={2}>
+            <InputGroup
+              size="lg"
+              h="56px"
+              bg={searchBg}
+              borderWidth="1px"
+              borderColor={searchBorder}
+              borderRadius="full"
+              boxShadow={searchShadow}
+              transition="box-shadow 180ms ease, border-color 180ms ease, transform 180ms ease"
+              _hover={{ boxShadow: searchHoverShadow, borderColor: useColorModeValue("blackAlpha.300", "whiteAlpha.300") }}
+            >
+              <InputLeftElement pointerEvents="none" h="56px" w="56px">
+                <Box
+                  boxSize="40px"
+                  borderRadius="full"
+                  bg={searchIconBg}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  color={theme.blue.accent}
+                >
+                  <Icon as={FiSearch} aria-hidden="true" boxSize={5} />
+                </Box>
+              </InputLeftElement>
+
+              <Input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Поиск по статьям"
+                aria-label="Поиск по статьям"
+                h="56px"
+                border="none"
+                bg="transparent"
+                pl="60px"
+                pr={query ? "56px" : 6}
+                fontWeight="semibold"
+                color={theme.titleColor}
+                _placeholder={{ color: searchPlaceholder, fontWeight: "medium" }}
+                _focusVisible={{ boxShadow: "none" }}
+              />
+
+              {query.trim() && (
+                <InputRightElement h="56px" w="56px">
+                  <IconButton
+                    aria-label="Очистить поиск"
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setQuery("")}
+                    icon={<Box as="span" fontSize="20px" lineHeight="1">×</Box>}
+                    borderRadius="full"
+                    color={theme.descColor}
+                    _hover={{ bg: useColorModeValue("blackAlpha.50", "whiteAlpha.200") }}
+                    _active={{ bg: useColorModeValue("blackAlpha.100", "whiteAlpha.300") }}
+                  />
+                </InputRightElement>
+              )}
+            </InputGroup>
+          </Box>
         </VStack>
 
         {isLoading ? (
@@ -143,6 +237,19 @@ const BlogScreen: React.FC = () => {
           </SimpleGrid>
         ) : (
           <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
+            {!isLoading && filteredArticles.length === 0 && (
+              <Box
+                borderWidth="1px"
+                borderColor={theme.borderColor}
+                borderRadius={cardRadius}
+                bg={theme.cardBg}
+                p={cardPadding}
+              >
+                <Text color={theme.descColor}>
+                  Ничего не нашли по запросу: <Text as="span" fontWeight="semibold" color={theme.titleColor}>{query.trim() || "—"}</Text>
+                </Text>
+              </Box>
+            )}
             <SimpleGrid as="ul" columns={{ base: 1, md: 2, xl: 3 }} spacing={{ base: 6, md: 7 }} listStyleType="none" m={0} p={0}>
               {pageArticles.map((article: BlogArticle) => {
                 const category = (article.tags || [])[0] ?? "Insights";

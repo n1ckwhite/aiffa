@@ -120,7 +120,6 @@ const BlogScreen: React.FC = () => {
       as="section"
       position="relative"
       aria-labelledby="blog-title"
-      pb="32px"
     >
       <Box w="100%" maxW="1240px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
         <VStack as="header" spacing={3} align="center" textAlign="center" pb={{ base: 6, md: 8 }}>
@@ -237,7 +236,7 @@ const BlogScreen: React.FC = () => {
             ))}
           </SimpleGrid>
         ) : (
-          <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
+          <VStack align="stretch" spacing={0}>
             {!isLoading && filteredArticles.length === 0 && (
               <Box w="full" textAlign="center">
                 <VStack spacing={3} maxW="560px" mx="auto">

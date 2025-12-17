@@ -3,13 +3,10 @@ import { Box, Text } from '@chakra-ui/react';
 import { useLessonsPillColors } from '../colors/useLessonsPillColors';
 import { LessonsPillProps } from '../types/LessonsPill.types';
 
-export const LessonsPill: React.FC<LessonsPillProps> = ({ lessonsCount, accentColor, isActive, completedLessonsCount }) => {
+export const LessonsPill: React.FC<LessonsPillProps> = ({ lessonsCount, accentColor, isActive, solvedLessonsCount }) => {
   const { gradientStart, gradientEnd, borderGradient, lessonsTextColor } = useLessonsPillColors();
-  const safeCompleted =
-    typeof completedLessonsCount === 'number' && Number.isFinite(completedLessonsCount) && completedLessonsCount >= 0
-      ? completedLessonsCount
-      : 0;
-  const clampedCompleted = Math.min(safeCompleted, lessonsCount);
+  const hasProgress = typeof solvedLessonsCount === 'number' && solvedLessonsCount > 0;
+  const clampedSolved = hasProgress ? Math.min(solvedLessonsCount as number, lessonsCount) : 0;
   return (
     <Box
       bg={`linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`}
@@ -33,7 +30,7 @@ export const LessonsPill: React.FC<LessonsPillProps> = ({ lessonsCount, accentCo
       }}
     >
       <Text fontSize="sm" color={lessonsTextColor} fontWeight="800" letterSpacing="0.03em" position="relative" zIndex={1}>
-        {`${clampedCompleted}/${lessonsCount} материалов`}
+        {hasProgress ? `${clampedSolved}/${lessonsCount} материалов` : `${lessonsCount} материалов`}
       </Text>
     </Box>
   );

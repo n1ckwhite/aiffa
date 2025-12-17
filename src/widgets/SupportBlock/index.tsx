@@ -45,14 +45,27 @@ const SupportBlock: React.FC<SupportBlockProps> = ({ borderColor, containerBg, a
               Если по материалам, задачам что‑то непонятно — пишите в Telegram. Обсуждайте идеи и предлагайте улучшения в JS HUB — обратная связь помогает делать материалы лучше.
             </Text>
           )}
+          {variant === 'blog' && (
+            <Text fontSize={{ base: 'sm', md: 'md' }} color={colors.descColor} lineHeight={1.8}>
+              Хотите стать автором или предложить тему? Напишите в Telegram — поможем упаковать идею в структуру и довести до публикации. Черновик, план или ссылка на документ — всё ок.
+            </Text>
+          )}
           {variant === 'project' && (
             <Text fontSize={{ base: 'sm', md: 'md' }} color={colors.descColor} lineHeight={1.8}>
               Делаете <b>проект</b> и застряли — задайте вопрос в Telegram. Покажите свой PR в JS HUB, получите обратную связь и помогите другим участникам. Мы рядом, чтобы вы довели проект до результата.
             </Text>
           )}
           <Stack direction={{ base: 'column', md: 'row' }} align={{ base: 'stretch', md: 'flex-start' }} spacing={{ base: 2.5, md: 3 }} pt={1} w="100%" flexWrap={{ base: 'nowrap', md: 'wrap' }}>
-            <TelegramLink colors={colors} />
-            <HubLink colors={colors} />
+            <TelegramLink
+              colors={colors}
+              label={variant === 'blog' ? 'Редакция в Telegram' : undefined}
+              ariaLabel={variant === 'blog' ? 'Редакция в Telegram (откроется в новой вкладке)' : undefined}
+            />
+            <HubLink
+              colors={colors}
+              label={variant === 'blog' ? 'Предложить статью (JS HUB)' : undefined}
+              ariaLabel={variant === 'blog' ? 'Предложить статью в JS HUB (откроется в новой вкладке)' : undefined}
+            />
             {variant === 'weekly' && <DonateButton />}
           </Stack>
         </VStack>

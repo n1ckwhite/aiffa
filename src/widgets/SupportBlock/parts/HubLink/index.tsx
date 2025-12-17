@@ -3,10 +3,15 @@ import { Link } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import type { HubLinkProps } from './types';
 
-export const HubLink: React.FC<HubLinkProps> = ({ colors }) => {
+export const HubLink: React.FC<HubLinkProps> = ({
+  colors,
+  href = 'https://t.me/nickwhite_web',
+  label = 'JS HUB — обсудить идею',
+  ariaLabel = 'JS HUB — обсудить идею (откроется в новой вкладке)',
+}) => {
   return (
     <Link
-      href="https://t.me/nickwhite_web"
+      href={href}
       isExternal
       px={{ base: 4, md: 5 }}
       py={{ base: 2.5, md: 3 }}
@@ -23,10 +28,10 @@ export const HubLink: React.FC<HubLinkProps> = ({ colors }) => {
       justifyContent="center"
       gap={2}
       w={{ base: '100%', sm: 'auto' }}
-      aria-label="JS HUB — обсудить идею (откроется в новой вкладке)"
+      aria-label={ariaLabel}
     >
       <ExternalLinkIcon />
-      JS HUB — обсудить идею
+      {label}
     </Link>
   );
 };

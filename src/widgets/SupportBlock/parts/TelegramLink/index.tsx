@@ -3,10 +3,15 @@ import { Link } from '@chakra-ui/react';
 import { ChatIcon } from '@chakra-ui/icons';
 import type { TelegramLinkProps } from './types';
 
-export const TelegramLink: React.FC<TelegramLinkProps> = ({ colors }) => {
+export const TelegramLink: React.FC<TelegramLinkProps> = ({
+  colors,
+  href = 'https://t.me/iamceob1tch',
+  label = 'Поддержка в Telegram',
+  ariaLabel = 'Поддержка в Telegram (откроется в новой вкладке)',
+}) => {
   return (
     <Link
-      href="https://t.me/iamceob1tch"
+      href={href}
       isExternal
       px={{ base: 4, md: 5 }}
       py={{ base: 2.5, md: 3 }}
@@ -23,10 +28,10 @@ export const TelegramLink: React.FC<TelegramLinkProps> = ({ colors }) => {
       justifyContent="center"
       gap={2}
       w={{ base: '100%', sm: 'auto' }}
-      aria-label="Поддержка в Telegram (откроется в новой вкладке)"
+      aria-label={ariaLabel}
     >
       <ChatIcon />
-      Поддержка в Telegram
+      {label}
     </Link>
   );
 };

@@ -5,6 +5,7 @@ export type ModulesFaqItem = {
 
 export type ModulesFaqVariant =
   | 'materials'
+  | 'blog'
   | 'tasks'
   | 'xp'
   | 'partners'

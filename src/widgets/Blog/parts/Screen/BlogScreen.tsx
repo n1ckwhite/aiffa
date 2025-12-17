@@ -19,12 +19,13 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
-import { FiArrowUpRight, FiEye, FiMessageCircle, FiSearch, FiStar, FiX } from "react-icons/fi";
+import { FiArrowUpRight, FiEdit3, FiEye, FiMessageCircle, FiSearch, FiStar, FiX } from "react-icons/fi";
 import { useAppColors } from "@/shared/theme/colors";
 import { QuestioningLottieIcon } from "@/shared/icons/components-icon";
 import { usePagination } from "widgets/ModuleLessons/hooks/usePagination";
 import { Pagination } from "shared/ui/Pagination";
 import { useScrollToTop } from "shared/hooks/useScrollToTop";
+import { ModulesFAQ } from "widgets/Modules";
 import { useBlogArticles } from "../../hooks/useBlogArticles";
 import type { BlogArticle } from "../../types";
 
@@ -478,6 +479,84 @@ const BlogScreen: React.FC = () => {
             )}
           </VStack>
         )}
+
+        <Box
+          as="section"
+          aria-labelledby="blog-write-cta-title"
+          mt={{ base: 8, md: 10 }}
+          w="full"
+          maxW={{ base: "100%", md: "900px" }}
+          mx="auto"
+          borderWidth="1px"
+          borderColor={useColorModeValue("blue.200", "blue.500")}
+          borderRadius={cardRadius}
+          boxShadow={useColorModeValue("0 18px 46px rgba(59,130,246,0.14)", "0 18px 46px rgba(0, 0, 0, 0.45)")}
+          p={{ base: 5, md: 6 }}
+          position="relative"
+          overflow="hidden"
+          bgGradient={useColorModeValue(
+            "linear(to-r, rgba(59,130,246,0.10), rgba(255,255,255,0.70))",
+            "linear(to-r, rgba(59,130,246,0.14), rgba(255,255,255,0.06))",
+          )}
+          _before={{
+            content: '""',
+            position: "absolute",
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: "5px",
+            bg: theme.blue.accent,
+            opacity: 0.9,
+            pointerEvents: "none",
+          }}
+          _after={{
+            content: '""',
+            position: "absolute",
+            inset: 0,
+            bg: `radial-gradient(800px 320px at 10% 0%, ${theme.blue.accent}18, transparent 55%)`,
+            pointerEvents: "none",
+          }}
+        >
+          <HStack align={{ base: "start", md: "center" }} spacing={4} position="relative">
+            <Box
+              boxSize={{ base: "46px", md: "52px" }}
+              borderRadius="full"
+              bg={useColorModeValue("white", "blackAlpha.200")}
+              borderWidth="1px"
+              borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              color={theme.blue.accent}
+              flexShrink={0}
+              mt={{ base: 0.5, md: 0 }}
+            >
+              <Icon as={FiEdit3} aria-hidden="true" boxSize={6} />
+            </Box>
+
+            <VStack align="start" spacing={1} textAlign="left" minW={0}>
+              <Text
+                id="blog-write-cta-title"
+                fontWeight="bold"
+                color={theme.titleColor}
+                fontSize={{ base: "lg", md: "xl" }}
+                letterSpacing="-0.01em"
+              >
+                Хочешь написать статью?
+              </Text>
+              <Text color={theme.descColor} fontSize={{ base: "sm", md: "md" }}>
+                Поделись опытом — сообщество оценит.
+              </Text>
+              <Text color={theme.descColor} fontSize={{ base: "sm", md: "md" }}>
+                Статьи пишут участники AIFFA — присоединяйся
+              </Text>
+            </VStack>
+          </HStack>
+        </Box>
+
+        <Box mt={{ base: 10, md: 14 }}>
+          <ModulesFAQ variant="blog" showSupportBlock />
+        </Box>
       </Box>
     </Box>
   );

@@ -15,6 +15,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
   const key = variant ?? 'materials';
   const { items: list, title: defaultHeading } = modulesFaqConfig[key];
   const heading = title || defaultHeading;
+  const supportVariant = key === 'blog' ? 'blog' : 'modules';
 
   return (
     <Box zIndex={100} >
@@ -103,7 +104,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
             ))}
           </Accordion>
         </Box>
-        {showSupportBlock && <SupportBlock variant="modules" />}
+        {showSupportBlock && <SupportBlock variant={supportVariant} />}
       </VStack>
     </Box>
   );

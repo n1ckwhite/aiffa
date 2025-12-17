@@ -18,7 +18,7 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { FiArrowUpRight, FiEye, FiMessageCircle, FiSearch, FiStar } from "react-icons/fi";
 import { useAppColors } from "@/shared/theme/colors";
 import { QuestioningLottieIcon } from "@/shared/icons/components-icon";
@@ -48,10 +48,14 @@ const formatCount = (value?: number) => {
 
 const BlogScreen: React.FC = () => {
   const theme = useAppColors();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { items, isLoading } = useBlogArticles();
+  const searchInputRef = React.useRef<HTMLInputElement | null>(null);
   const [query, setQuery] = React.useState<string>("");
+  const [debouncedQuery, setDebouncedQuery] = React.useState<string>("");
   const articles = React.useMemo(() => items.slice().sort((a, b) => (a.date < b.date ? 1 : -1)), [items]);
-  const normalizedQuery = React.useMemo(() => query.trim().toLowerCase(), [query]);
+  const normalizedQuery = React.useMemo(() => debouncedQuery.trim().toLowerCase(), [debouncedQuery]);
   const filteredArticles = React.useMemo(() => {
     if (!normalizedQuery) return articles;
     return articles.filter((a) => {
@@ -68,6 +72,7 @@ const BlogScreen: React.FC = () => {
       return haystack.includes(normalizedQuery);
     });
   }, [articles, normalizedQuery]);
+  const isEmptyResults = !isLoading && filteredArticles.length === 0;
   const pageSize = 6;
   const { page, setPage, totalPages, start, end, canPrev, canNext, pageItems } = usePagination(filteredArticles.length, pageSize, "blog");
   const pageArticles = React.useMemo(() => filteredArticles.slice(start, end), [filteredArticles, start, end]);
@@ -105,6 +110,56 @@ const BlogScreen: React.FC = () => {
     setPage(1);
   }, [normalizedQuery, setPage]);
 
+  React.useEffect(() => {
+    const t = window.setTimeout(() => setDebouncedQuery(query), 220);
+    return () => window.clearTimeout(t);
+  }, [query]);
+
+  React.useEffect(() => {
+    // Init from URL (?q=) + keep in sync on back/forward.
+    const params = new URLSearchParams(location.search);
+    const q = params.get("q") ?? "";
+    if (q !== query) {
+      setQuery(q);
+      setDebouncedQuery(q);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
+
+  React.useEffect(() => {
+    // Sync query -> URL without creating history entries.
+    const params = new URLSearchParams(location.search);
+    const next = query.trim();
+    if (next) {
+      params.set("q", next);
+    } else {
+      params.delete("q");
+    }
+    const nextSearch = params.toString();
+    const searchWithPrefix = nextSearch ? `?${nextSearch}` : "";
+    if (searchWithPrefix !== location.search) {
+      navigate(`${location.pathname}${searchWithPrefix}`, { replace: true });
+    }
+  }, [query, location.pathname, location.search, navigate]);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const isK = (e.key || "").toLowerCase() === "k";
+      if (isK && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        searchInputRef.current?.select();
+        return;
+      }
+      if (e.key === "Escape" && document.activeElement === searchInputRef.current && query.trim()) {
+        e.preventDefault();
+        setQuery("");
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [query]);
+
   const handleSetPage = (next: number | ((p: number) => number)) => {
     setPage((prev) => {
       const computed = typeof next === "function" ? next(prev) : next;
@@ -122,7 +177,13 @@ const BlogScreen: React.FC = () => {
       aria-labelledby="blog-title"
     >
       <Box w="100%" maxW="1240px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
-        <VStack as="header" spacing={3} align="center" textAlign="center" pb={{ base: 6, md: 8 }}>
+        <VStack
+          as="header"
+          spacing={3}
+          align="center"
+          textAlign="center"
+          pb={isEmptyResults ? { base: 2, md: 2 } : { base: 6, md: 8 }}
+        >
           <Heading
             id="blog-title"
             as="h1"
@@ -140,7 +201,7 @@ const BlogScreen: React.FC = () => {
             Статьи участников экосистемы: опыт, разборы, практические советы и истории — всё, что помогает расти быстрее и делать вклад.
           </Text>
 
-          <Box w="full" maxW={{ base: "100%", sm: "440px" }} pt={2}>
+          <Box w="full" maxW={{ base: "100%", sm: "440px" }} pt={isEmptyResults ? 1 : 2}>
             <InputGroup
               size="lg"
               h="56px"
@@ -167,6 +228,7 @@ const BlogScreen: React.FC = () => {
               </InputLeftElement>
 
               <Input
+                ref={searchInputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Поиск по статьям"
@@ -188,7 +250,10 @@ const BlogScreen: React.FC = () => {
                     aria-label="Очистить поиск"
                     size="sm"
                     variant="ghost"
-                    onClick={() => setQuery("")}
+                    onClick={() => {
+                      setQuery("");
+                      window.setTimeout(() => searchInputRef.current?.focus(), 0);
+                    }}
                     icon={<Box as="span" fontSize="20px" lineHeight="1">×</Box>}
                     borderRadius="full"
                     color={theme.descColor}
@@ -236,16 +301,22 @@ const BlogScreen: React.FC = () => {
             ))}
           </SimpleGrid>
         ) : (
-          <VStack align="stretch" spacing={0}>
-            {!isLoading && filteredArticles.length === 0 && (
-              <Box w="full" textAlign="center">
-                <VStack spacing={3} maxW="560px" mx="auto">
-                  <Box w="full" opacity={0.95}>
-                    <QuestioningLottieIcon /> 
-                    <Text fontWeight="semibold" color={theme.titleColor} fontSize={{ base: "lg", md: "xl" }}>
+          <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
+            {isEmptyResults && (
+              <Box w="full" textAlign="center" mt={0}>
+                <VStack spacing={2} maxW="560px" mx="auto">
+                  <Box
+                    w="full"
+                    opacity={0.95}
+                    transform="scale(0.82)"
+                    transformOrigin="top center"
+                    mt={{ base: -2, md: -3 }}
+                  >
+                    <QuestioningLottieIcon />
+                  </Box>
+                  <Text fontWeight="semibold" color={theme.titleColor} fontSize={{ base: "lg", md: "xl" }}>
                     Ничего не нашли
                   </Text>
-                  </Box>
                   <Text color={theme.descColor}>
                     По запросу:{" "}
                     <Text as="span" fontWeight="semibold" color={theme.blue.accent}>
@@ -387,7 +458,7 @@ const BlogScreen: React.FC = () => {
             </SimpleGrid>
 
             {totalPages > 1 && (
-              <Box alignSelf="center" w="fit-content" maxW="100%">
+              <Box alignSelf="center" w="fit-content" maxW="100%" mt={{ base: 2, md: 3 }}>
                 <Pagination
                   pageItems={pageItems}
                   page={page}

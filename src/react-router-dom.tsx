@@ -41,7 +41,11 @@ export const useLocation = () => {
 
 export const useNavigate = () => {
   const router = useRouter();
-  return (to: string) => {
+  return (to: string, options?: { replace?: boolean }) => {
+    if (options?.replace) {
+      router.replace(to);
+      return;
+    }
     router.push(to);
   };
 };

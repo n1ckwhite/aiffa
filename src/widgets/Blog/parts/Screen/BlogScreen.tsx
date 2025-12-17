@@ -159,7 +159,7 @@ const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }>
         borderRadius="inherit"
         startColor={skeletonStartColor}
         endColor={skeletonEndColor}
-        isLoaded={priority ? true : loadState !== "loading"}
+        isLoaded={loadState !== "loading"}
       />
       {loadState === "error" ? (
         <Box
@@ -184,7 +184,7 @@ const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }>
           w="100%"
           h="100%"
           borderRadius="0"
-          opacity={priority ? 1 : loadState === "loaded" ? 1 : 0}
+          opacity={loadState === "loaded" ? 1 : 0}
           transition="opacity 220ms ease"
           onLoad={() => setLoadState("loaded")}
           onError={() => setLoadState("error")}

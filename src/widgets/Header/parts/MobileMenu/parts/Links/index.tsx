@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button, HStack, Icon, Link, Text, VStack, useColorModeValue } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import type { MenuLinksProps } from './types';
-import { FaBookOpen, FaClipboardList, FaCode, FaUserCircle, FaComments, FaUserFriends, FaRegNewspaper } from 'react-icons/fa';
+import { FaBookOpen, FaClipboardList, FaCode, FaUserCircle, FaComments, FaUserFriends, FaFeatherAlt } from 'react-icons/fa';
 import { FaHandshake } from 'react-icons/fa6';
 import { useDesktopActionsColors } from '../../../Header/parts/DesktopActions/colors/useDeskopActionsColors';
 
@@ -58,7 +58,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/blog" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Icon as={FaRegNewspaper} boxSize={4} aria-hidden="true" color={fillIcon} />
+            <Icon as={FaFeatherAlt} boxSize={4} aria-hidden="true" color={fillIcon} />
             <Text>Блог</Text>
           </HStack>
         </Link>

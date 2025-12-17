@@ -1,7 +1,7 @@
 import React from 'react';
 import { HStack, Link, Text, Tooltip, Icon } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { FaBookOpen, FaClipboardList, FaUserCircle, FaCode, FaComments, FaUserFriends, FaRegNewspaper } from 'react-icons/fa';
+import { FaBookOpen, FaClipboardList, FaUserCircle, FaCode, FaComments, FaUserFriends, FaFeatherAlt } from 'react-icons/fa';
 import DonateButton from '../../../DonateButton';
 import ThemeToggleButton from '../../../ThemeToggleButton';
 import type { DesktopActionsProps } from './types';
@@ -12,7 +12,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
   onDonate,
   setIsMobileMenuOpen,
 }) => {
-  const { fillIcon } = useDesktopActionsColors();
+  const { fillIcon, blogIcon } = useDesktopActionsColors();
 
   return (
     <HStack gap={{ base: 1, md: 1, xl: 2 }}>
@@ -150,7 +150,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           display="inline-flex"
           alignItems="center"
         >
-          <Icon as={FaRegNewspaper} boxSize={4} aria-hidden="true" color={fillIcon} />
+          <Icon as={FaFeatherAlt} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text
             ml={2}
             display={{ base: 'none', lg: 'inline' }}

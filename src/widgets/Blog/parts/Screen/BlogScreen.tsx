@@ -10,6 +10,7 @@ import {
   SimpleGrid,
   Skeleton,
   Text,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
@@ -50,15 +51,19 @@ const BlogScreen: React.FC = () => {
   const categoryColor = theme.blue.accent;
   const cardRadius = "2xl";
   const cardPadding = "20px";
+  const controlsBg = useColorModeValue("white", "gray.800");
+  const controlsBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
+  const controlsHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.200");
+  const controlsIcon = useColorModeValue("gray.700", "gray.200");
   const paginationColors = React.useMemo(
     () => ({
-      controlsBg: theme.controlsBg,
-      controlsBorder: theme.borderColor,
-      controlsHoverBg: theme.controlsHoverBg,
-      controlsIcon: theme.controlsIcon,
+      controlsBg,
+      controlsBorder,
+      controlsHoverBg,
+      controlsIcon,
       descColor: theme.descColor,
     }),
-    [theme],
+    [controlsBg, controlsBorder, controlsHoverBg, controlsIcon, theme.descColor],
   );
 
   const handleSetPage = (next: number | ((p: number) => number)) => {

@@ -130,16 +130,32 @@ const matchesTagFilter = (article: BlogArticle, filter: BlogTagFilter) => {
   return tags.includes(normalizeTag(filter));
 };
 
+const normalizeUnsplashUrl = (src: string, width?: number) => {
+  try {
+    const url = new URL(src);
+    if (!url.hostname.includes("images.unsplash.com")) return src;
+
+    url.searchParams.set("auto", url.searchParams.get("auto") || "format");
+    url.searchParams.set("fit", url.searchParams.get("fit") || "crop");
+    url.searchParams.set("q", "70");
+    if (width) url.searchParams.set("w", String(width));
+
+    return url.toString();
+  } catch {
+    return src;
+  }
+};
+
 const buildUnsplashSrcSet = (src: string) => {
   try {
     const url = new URL(src);
     if (!url.hostname.includes("images.unsplash.com")) return undefined;
-    const widths = [480, 768, 1024, 1400];
+    // Card image area is ~377px wide on desktop; include 680 for 2x DPR screens to avoid selecting 768.
+    const widths = [320, 480, 680, 960, 1400];
     return widths
       .map((w) => {
-        const u = new URL(url.toString());
-        u.searchParams.set("w", String(w));
-        return `${u.toString()} ${w}w`;
+        const u = normalizeUnsplashUrl(url.toString(), w);
+        return `${u} ${w}w`;
       })
       .join(", ");
   } catch {
@@ -149,10 +165,22 @@ const buildUnsplashSrcSet = (src: string) => {
 
 const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }> = ({ src, alt, priority = false }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
+  const imgRef = React.useRef<HTMLImageElement | null>(null);
   const skeletonStartColor = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
   const skeletonEndColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const srcSet = React.useMemo(() => buildUnsplashSrcSet(src), [src]);
   const sizes = "(max-width: 768px) 92vw, (max-width: 1280px) 45vw, 377px";
+  const normalizedSrc = React.useMemo(() => (srcSet ? normalizeUnsplashUrl(src, 680) : src), [src, srcSet]);
+
+  React.useEffect(() => {
+    const img = imgRef.current;
+    if (!img) return;
+
+    // If the image was loaded from cache before React attached onLoad, complete will be true.
+    if (img.complete && img.naturalWidth > 0) {
+      setIsLoaded(true);
+    }
+  }, [normalizedSrc, srcSet]);
 
   return (
     <Box position="relative" w="100%" h="100%">
@@ -165,7 +193,8 @@ const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }>
         isLoaded={priority ? true : isLoaded}
       />
       <Image
-        src={src}
+        ref={imgRef}
+        src={normalizedSrc}
         srcSet={srcSet}
         sizes={srcSet ? sizes : undefined}
         alt={alt}

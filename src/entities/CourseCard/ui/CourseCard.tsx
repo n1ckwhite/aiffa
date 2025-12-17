@@ -39,7 +39,7 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
     accentColor,
   } = useCourseCardColors();
 
-  const { solvedLessonsCount } = useCourseProgress({ moduleId, lessonsCount });
+  const { completedLessonsCount } = useCourseProgress({ moduleId, lessonsCount });
 
   return (
     <Box
@@ -153,7 +153,7 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
             lessonsCount={lessonsCount}
             accentColor={accentColor}
             isActive={isActive}
-            solvedLessonsCount={solvedLessonsCount}
+            completedLessonsCount={completedLessonsCount}
           />
           <StudyTimePill studyTime={studyTime} />
         </VStack>

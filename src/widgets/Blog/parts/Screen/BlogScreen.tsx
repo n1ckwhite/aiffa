@@ -51,10 +51,18 @@ const BlogScreen: React.FC = () => {
   const theme = useAppColors();
   const location = useLocation();
   const navigate = useNavigate();
+  const initialQueryFromUrl = React.useMemo(() => {
+    try {
+      const params = new URLSearchParams(location.search);
+      return params.get("q") ?? "";
+    } catch {
+      return "";
+    }
+  }, [location.search]);
   const { items, isLoading } = useBlogArticles();
   const searchInputRef = React.useRef<HTMLInputElement | null>(null);
-  const [query, setQuery] = React.useState<string>("");
-  const [debouncedQuery, setDebouncedQuery] = React.useState<string>("");
+  const [query, setQuery] = React.useState<string>(initialQueryFromUrl);
+  const [debouncedQuery, setDebouncedQuery] = React.useState<string>(initialQueryFromUrl);
   const articles = React.useMemo(() => items.slice().sort((a, b) => (a.date < b.date ? 1 : -1)), [items]);
   const normalizedQuery = React.useMemo(() => debouncedQuery.trim().toLowerCase(), [debouncedQuery]);
   const filteredArticles = React.useMemo(() => {

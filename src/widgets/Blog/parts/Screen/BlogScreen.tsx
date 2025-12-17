@@ -170,7 +170,8 @@ const BlogCoverImage: React.FC<{ src: string; alt: string; priority?: boolean }>
   const skeletonStartColor = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
   const skeletonEndColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const srcSet = React.useMemo(() => buildUnsplashSrcSet(src), [src]);
-  const sizes = "(max-width: 768px) 92vw, (max-width: 1280px) 45vw, 377px";
+  // The actual rendered image area inside the card is ~337px on desktop (card width ~377px - 40px padding).
+  const sizes = "(max-width: 768px) calc(100vw - 32px), (max-width: 1280px) calc(50vw - 48px), 337px";
   const normalizedSrc = React.useMemo(() => (srcSet ? normalizeUnsplashUrl(src, 680) : src), [src, srcSet]);
 
   React.useEffect(() => {

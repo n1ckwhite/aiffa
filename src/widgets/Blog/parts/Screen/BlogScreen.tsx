@@ -21,6 +21,7 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 import { FiArrowUpRight, FiEye, FiMessageCircle, FiSearch, FiStar } from "react-icons/fi";
 import { useAppColors } from "@/shared/theme/colors";
+import { ErrorRobotLottieIcon } from "@/shared/icons/components-icon";
 import { usePagination } from "widgets/ModuleLessons/hooks/usePagination";
 import { Pagination } from "shared/ui/Pagination";
 import { useScrollToTop } from "shared/hooks/useScrollToTop";
@@ -122,7 +123,7 @@ const BlogScreen: React.FC = () => {
       pb="32px"
     >
       <Box w="100%" maxW="1240px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
-        <VStack as="header" spacing={3} align="center" textAlign="center" pb={{ base: 8, md: 10 }}>
+        <VStack as="header" spacing={3} align="center" textAlign="center" pb={{ base: 6, md: 8 }}>
           <Heading
             id="blog-title"
             as="h1"
@@ -238,16 +239,24 @@ const BlogScreen: React.FC = () => {
         ) : (
           <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
             {!isLoading && filteredArticles.length === 0 && (
-              <Box
-                borderWidth="1px"
-                borderColor={theme.borderColor}
-                borderRadius={cardRadius}
-                bg={theme.cardBg}
-                p={cardPadding}
-              >
-                <Text color={theme.descColor}>
-                  Ничего не нашли по запросу: <Text as="span" fontWeight="semibold" color={theme.titleColor}>{query.trim() || "—"}</Text>
-                </Text>
+              <Box w="full" textAlign="center" mt={{ base: 2, md: 3 }}>
+                <VStack spacing={3} maxW="560px" mx="auto">
+                  <Box w="full" opacity={0.95}>
+                    <ErrorRobotLottieIcon />
+                  </Box>
+                  <Text fontWeight="semibold" color={theme.titleColor} fontSize={{ base: "lg", md: "xl" }}>
+                    Ничего не нашли
+                  </Text>
+                  <Text color={theme.descColor}>
+                    По запросу:{" "}
+                    <Text as="span" fontWeight="semibold" color={theme.blue.accent}>
+                      {query.trim() || "—"}
+                    </Text>
+                  </Text>
+                  <Text color={theme.descColor} fontSize="sm">
+                    Попробуйте изменить запрос или очистить поиск — мы покажем все статьи.
+                  </Text>
+                </VStack>
               </Box>
             )}
             <SimpleGrid as="ul" columns={{ base: 1, md: 2, xl: 3 }} spacing={{ base: 6, md: 7 }} listStyleType="none" m={0} p={0}>

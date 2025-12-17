@@ -1,13 +1,20 @@
 import React from 'react';
-import { Box, Button, HStack, Icon, Link, Text, VStack, useColorModeValue } from '@chakra-ui/react';
+import { Avatar, Box, Button, HStack, Icon, Link, Text, VStack, useColorModeValue } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import type { MenuLinksProps } from './types';
 import { FaBookOpen, FaClipboardList, FaCode, FaUserCircle, FaComments, FaUserFriends, FaFeatherAlt } from 'react-icons/fa';
 import { FaHandshake } from 'react-icons/fa6';
 import { useDesktopActionsColors } from '../../../Header/parts/DesktopActions/colors/useDeskopActionsColors';
+import { useUserProfile } from 'entities/user';
 
 export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg, donateHoverBg, onDonate }) => {
-  const { fillIcon } = useDesktopActionsColors()
+  const { fillIcon } = useDesktopActionsColors();
+  const avatarBorderColor = useColorModeValue('blackAlpha.200', 'whiteAlpha.200');
+  const avatarBg = useColorModeValue('whiteAlpha.900', 'whiteAlpha.200');
+  const { profile } = useUserProfile();
+  const githubAvatarUrl =
+    profile.avatarUrl || (profile.githubUsername ? `https://github.com/${profile.githubUsername}.png?size=96` : '');
+  const hasGithubConnected = Boolean(profile.githubUsername);
   return (
     <VStack gap={2} align="stretch">
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
@@ -67,7 +74,18 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>
         <Link as={RouterLink as any} to="/profile" onClick={onClose} display="block" w="100%" px={1} py={2} borderRadius="md" _hover={{ bg: hoverBg, textDecoration: 'none' }}>
           <HStack spacing={3} align="center">
-            <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" color={fillIcon} />
+            {hasGithubConnected ? (
+              <Avatar
+                name={profile.name || 'Профиль'}
+                src={githubAvatarUrl}
+                boxSize="22px"
+                borderWidth="1px"
+                borderColor={avatarBorderColor}
+                bg={avatarBg}
+              />
+            ) : (
+              <Icon as={FaUserCircle} boxSize={4} aria-hidden="true" color={fillIcon} />
+            )}
             <Text>Профиль</Text>
           </HStack>
         </Link>

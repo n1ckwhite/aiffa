@@ -33,6 +33,7 @@ import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import {
   FiArrowUpRight,
   FiChevronDown,
+  FiClock,
   FiCode,
   FiEdit3,
   FiEye,
@@ -767,6 +768,10 @@ const BlogScreen: React.FC = () => {
                           <HStack spacing={1.5}>
                             <Icon as={FiMessageCircle} aria-hidden="true" color="green.400" />
                             <Text as="span">{formatCount(article.commentsCount)}</Text>
+                          </HStack>
+                          <HStack spacing={1.5}>
+                            <Icon as={FiClock} aria-hidden="true" color="purple.400" />
+                            <Text as="span">{article.readingTime ?? "—"}</Text>
                           </HStack>
                         </HStack>
 

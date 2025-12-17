@@ -25,7 +25,7 @@ const BlogHead = () => {
   const candidates = sorted
     .map((a) => a.coverImage)
     .filter((v): v is string => typeof v === "string" && v.length > 0);
-  const unique = Array.from(new Set(candidates));
+  const unique = Array.from(new Set(candidates)).slice(0, 3);
 
   return (
     <>

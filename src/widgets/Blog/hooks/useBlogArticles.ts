@@ -2,7 +2,7 @@
 
 import React from "react";
 import type { BlogArticle } from "../types";
-import { loadBlogArticles } from "@/shared/articles/api";
+import { blogArticles } from "@/shared/articles/manifest";
 
 type UseBlogArticlesState = {
   items: BlogArticle[];
@@ -10,33 +10,9 @@ type UseBlogArticlesState = {
 };
 
 export const useBlogArticles = () => {
-  const [state, setState] = React.useState<UseBlogArticlesState>({
-    items: [],
-    isLoading: true,
-  });
-
-  React.useEffect(() => {
-    let cancelled = false;
-
-    const run = async () => {
-      try {
-        const items = (await loadBlogArticles()) as BlogArticle[];
-        if (cancelled) return;
-        setState({ items, isLoading: false });
-      } catch {
-        if (cancelled) return;
-        setState({ items: [], isLoading: false });
-      }
-    };
-
-    run();
-
-    return () => {
-      cancelled = true;
-    };
+  return React.useMemo<UseBlogArticlesState>(() => {
+    return { items: (blogArticles as unknown as BlogArticle[]) ?? [], isLoading: false };
   }, []);
-
-  return state;
 };
 
 

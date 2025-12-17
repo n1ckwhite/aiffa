@@ -231,6 +231,9 @@ const BlogScreen: React.FC = () => {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Поиск по статьям"
                 aria-label="Поиск по статьям"
+                id="blog-search"
+                name="blog-search"
+                autoComplete="off"
                 h="56px"
                 border="none"
                 bg="transparent"

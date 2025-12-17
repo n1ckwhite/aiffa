@@ -14,6 +14,7 @@ export type BlogArticleMeta = {
   author: BlogAuthor;
   viewsCount?: number;
   starsCount?: number;
+  commentsCount?: number;
   readingTime?: string;
   coverImage?: string;
   mdPath: string; // public path, e.g. /articles/my-post.md
@@ -30,6 +31,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "n1ckwhite", github: "n1ckwhite" },
     viewsCount: 1320,
     starsCount: 48,
+    commentsCount: 12,
     readingTime: "5 мин",
     coverImage:
       "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1400&q=80",
@@ -45,6 +47,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "aiffadev", github: "aiffadev" },
     viewsCount: 980,
     starsCount: 32,
+    commentsCount: 7,
     readingTime: "7 мин",
     coverImage:
       "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80",
@@ -60,6 +63,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "n1ckwhite", github: "n1ckwhite" },
     viewsCount: 1540,
     starsCount: 61,
+    commentsCount: 9,
     readingTime: "6 мин",
     coverImage:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80",
@@ -74,6 +78,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "aiffadev", github: "aiffadev" },
     viewsCount: 2120,
     starsCount: 73,
+    commentsCount: 14,
     readingTime: "8 мин",
     coverImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/typescript-generics-prosto.md",
@@ -87,6 +92,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "n1ckwhite", github: "n1ckwhite" },
     viewsCount: 1870,
     starsCount: 64,
+    commentsCount: 11,
     readingTime: "7 мин",
     coverImage: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/nextjs-metadata-seo.md",
@@ -100,6 +106,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "aiffadev", github: "aiffadev" },
     viewsCount: 1430,
     starsCount: 41,
+    commentsCount: 6,
     readingTime: "6 мин",
     coverImage: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/chakra-ui-patterny-kartochek.md",
@@ -113,6 +120,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "n1ckwhite", github: "n1ckwhite" },
     viewsCount: 980,
     starsCount: 29,
+    commentsCount: 4,
     readingTime: "5 мин",
     coverImage: "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/a11y-focus-visible.md",
@@ -126,6 +134,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "aiffadev", github: "aiffadev" },
     viewsCount: 1650,
     starsCount: 57,
+    commentsCount: 8,
     readingTime: "7 мин",
     coverImage: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/nodejs-event-loop-na-palcah.md",
@@ -139,6 +148,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "n1ckwhite", github: "n1ckwhite" },
     viewsCount: 1240,
     starsCount: 38,
+    commentsCount: 5,
     readingTime: "5 мин",
     coverImage: "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/css-grid-shpargalka.md",
@@ -152,6 +162,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "aiffadev", github: "aiffadev" },
     viewsCount: 1920,
     starsCount: 70,
+    commentsCount: 13,
     readingTime: "9 мин",
     coverImage: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/git-rebase-bez-paniki.md",
@@ -165,6 +176,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "n1ckwhite", github: "n1ckwhite" },
     viewsCount: 1100,
     starsCount: 33,
+    commentsCount: 3,
     readingTime: "6 мин",
     coverImage: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/testy-react-minimum.md",
@@ -178,6 +190,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "aiffadev", github: "aiffadev" },
     viewsCount: 890,
     starsCount: 21,
+    commentsCount: 2,
     readingTime: "5 мин",
     coverImage: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/docker-dev-setup.md",
@@ -191,6 +204,7 @@ export const blogArticles: BlogArticleMeta[] = [
     author: { name: "n1ckwhite", github: "n1ckwhite" },
     viewsCount: 1760,
     starsCount: 58,
+    commentsCount: 10,
     readingTime: "7 мин",
     coverImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80",
     mdPath: "/articles/perf-react-render-loop.md",

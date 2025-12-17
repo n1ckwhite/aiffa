@@ -5,15 +5,15 @@ import {
   Box,
   HStack,
   Heading,
+  Icon,
   Image,
   SimpleGrid,
   Skeleton,
   Text,
-  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { FiArrowUpRight } from "react-icons/fi";
+import { FiArrowUpRight, FiEye, FiMessageCircle, FiStar } from "react-icons/fi";
 import { useAppColors } from "@/shared/theme/colors";
 import { usePagination } from "widgets/ModuleLessons/hooks/usePagination";
 import { Pagination } from "shared/ui/Pagination";
@@ -47,8 +47,9 @@ const BlogScreen: React.FC = () => {
   const { page, setPage, totalPages, start, end, canPrev, canNext, pageItems } = usePagination(articles.length, pageSize, "blog");
   const pageArticles = React.useMemo(() => articles.slice(start, end), [articles, start, end]);
   const scrollTop = useScrollToTop({ immediate: false });
-  const categoryColor = useColorModeValue("purple.600", "purple.300");
+  const categoryColor = theme.blue.accent;
   const cardRadius = "2xl";
+  const cardPadding = "20px";
   const paginationColors = React.useMemo(
     () => ({
       controlsBg: theme.controlsBg,
@@ -110,7 +111,7 @@ const BlogScreen: React.FC = () => {
                 bg={theme.cardBg}
                 overflow="hidden"
               >
-                <Box p={{ base: 5, md: 6 }} display="flex" flexDirection="column" h="full">
+                <Box p={cardPadding} display="flex" flexDirection="column" h="full">
                   <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="xl" mb={6}>
                     <Skeleton />
                   </AspectRatio>
@@ -118,6 +119,7 @@ const BlogScreen: React.FC = () => {
                   <Skeleton h="22px" w="95%" mb={3} />
                   <Skeleton h="14px" w="100%" mb={2} />
                   <Skeleton h="14px" w="85%" mb={6} />
+                  <Skeleton h="12px" w="180px" mb={5} />
                   <HStack spacing={3} mt="auto" pt={2}>
                     <Skeleton boxSize="36px" borderRadius="full" />
                     <VStack align="start" spacing={1}>
@@ -152,7 +154,7 @@ const BlogScreen: React.FC = () => {
                       transition="transform 150ms ease, border-color 150ms ease"
                       _hover={{ textDecoration: "none", transform: "translateY(-2px)", borderColor: theme.blue.chipBorder }}
                     >
-                      <Box p={{ base: 5, md: 6 }} display="flex" flexDirection="column" h="full" minW={0}>
+                      <Box p={cardPadding} display="flex" flexDirection="column" h="full" minW={0}>
                         <AspectRatio ratio={16 / 9} w="full" overflow="hidden" borderRadius="xl" mb={5}>
                           <Image
                             src={article.coverImage || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80"}
@@ -180,6 +182,7 @@ const BlogScreen: React.FC = () => {
                             noOfLines={2}
                             flex="1"
                             minW={0}
+                            minH="2.4em"
                           >
                             {article.title}
                           </Heading>
@@ -193,9 +196,24 @@ const BlogScreen: React.FC = () => {
                           </Box>
                         </HStack>
 
-                        <Text fontSize="sm" color={theme.descColor} lineHeight={1.7} mt={3} noOfLines={3}>
+                        <Text fontSize="sm" color={theme.descColor} lineHeight={1.7} mt={3} noOfLines={3} minH="5.1em">
                           {article.description}
                         </Text>
+
+                        <HStack spacing={4} color={theme.descColor} fontSize="sm" mt={4}>
+                          <HStack spacing={1.5}>
+                            <Icon as={FiEye} aria-hidden="true" color={theme.blue.accent} />
+                            <Text as="span">{formatCount(article.viewsCount)}</Text>
+                          </HStack>
+                          <HStack spacing={1.5}>
+                            <Icon as={FiStar} aria-hidden="true" color="yellow.400" />
+                            <Text as="span">{formatCount(article.starsCount)}</Text>
+                          </HStack>
+                          <HStack spacing={1.5}>
+                            <Icon as={FiMessageCircle} aria-hidden="true" color="green.400" />
+                            <Text as="span">{formatCount(article.commentsCount)}</Text>
+                          </HStack>
+                        </HStack>
 
                         <HStack spacing={3} mt="auto" pt={6}>
                           <Avatar name={article.author?.name || "Автор"} src={getGithubAvatarUrl(article.author?.github, 96)} boxSize="38px" />

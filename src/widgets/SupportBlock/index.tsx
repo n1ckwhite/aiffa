@@ -63,8 +63,8 @@ const SupportBlock: React.FC<SupportBlockProps> = ({ borderColor, containerBg, a
             />
             <HubLink
               colors={colors}
-              label={variant === 'blog' ? 'Предложить статью (JS HUB)' : undefined}
-              ariaLabel={variant === 'blog' ? 'Предложить статью в JS HUB (откроется в новой вкладке)' : undefined}
+              label={variant === 'blog' ? 'Предложить статью' : undefined}
+              ariaLabel={variant === 'blog' ? 'Предложить статью (откроется в новой вкладке)' : undefined}
             />
             {variant === 'weekly' && <DonateButton />}
           </Stack>

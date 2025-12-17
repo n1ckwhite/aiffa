@@ -93,8 +93,19 @@ const BlogScreen: React.FC = () => {
   const searchBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const searchShadow = useColorModeValue("0 10px 26px rgba(15, 23, 42, 0.08)", "0 14px 28px rgba(0, 0, 0, 0.35)");
   const searchHoverShadow = useColorModeValue("0 14px 34px rgba(15, 23, 42, 0.12)", "0 16px 34px rgba(0, 0, 0, 0.45)");
+  const searchHoverBorder = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
   const searchPlaceholder = useColorModeValue("gray.500", "whiteAlpha.700");
   const searchIconBg = useColorModeValue("blue.50", "whiteAlpha.200");
+  const clearButtonHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.200");
+  const clearButtonActiveBg = useColorModeValue("blackAlpha.100", "whiteAlpha.300");
+  const writeCtaBorderColor = useColorModeValue("blue.200", "blue.500");
+  const writeCtaBoxShadow = useColorModeValue("0 18px 46px rgba(59,130,246,0.14)", "0 18px 46px rgba(0, 0, 0, 0.45)");
+  const writeCtaBgGradient = useColorModeValue(
+    "linear(to-r, rgba(59,130,246,0.10), rgba(255,255,255,0.70))",
+    "linear(to-r, rgba(59,130,246,0.14), rgba(255,255,255,0.06))",
+  );
+  const writeCtaIconBg = useColorModeValue("white", "blackAlpha.200");
+  const writeCtaIconBorderColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const paginationColors = React.useMemo(
     () => ({
       controlsBg,
@@ -209,7 +220,7 @@ const BlogScreen: React.FC = () => {
               borderRadius="full"
               boxShadow={searchShadow}
               transition="box-shadow 180ms ease, border-color 180ms ease, transform 180ms ease"
-              _hover={{ boxShadow: searchHoverShadow, borderColor: useColorModeValue("blackAlpha.300", "whiteAlpha.300") }}
+              _hover={{ boxShadow: searchHoverShadow, borderColor: searchHoverBorder }}
             >
               <InputLeftElement pointerEvents="none" h="56px" w="56px">
                 <Box
@@ -263,8 +274,8 @@ const BlogScreen: React.FC = () => {
                     display="inline-flex"
                     alignItems="center"
                     justifyContent="center"
-                    _hover={{ bg: useColorModeValue("blackAlpha.50", "whiteAlpha.200") }}
-                    _active={{ bg: useColorModeValue("blackAlpha.100", "whiteAlpha.300") }}
+                    _hover={{ bg: clearButtonHoverBg }}
+                    _active={{ bg: clearButtonActiveBg }}
                   />
                 </InputRightElement>
               )}
@@ -489,16 +500,13 @@ const BlogScreen: React.FC = () => {
           maxW={{ base: "100%", md: "900px" }}
           mx="auto"
           borderWidth="1px"
-          borderColor={useColorModeValue("blue.200", "blue.500")}
+          borderColor={writeCtaBorderColor}
           borderRadius={cardRadius}
-          boxShadow={useColorModeValue("0 18px 46px rgba(59,130,246,0.14)", "0 18px 46px rgba(0, 0, 0, 0.45)")}
+          boxShadow={writeCtaBoxShadow}
           p={{ base: 5, md: 6 }}
           position="relative"
           overflow="hidden"
-          bgGradient={useColorModeValue(
-            "linear(to-r, rgba(59,130,246,0.10), rgba(255,255,255,0.70))",
-            "linear(to-r, rgba(59,130,246,0.14), rgba(255,255,255,0.06))",
-          )}
+          bgGradient={writeCtaBgGradient}
           _before={{
             content: '""',
             position: "absolute",
@@ -522,9 +530,9 @@ const BlogScreen: React.FC = () => {
             <Box
               boxSize={{ base: "46px", md: "52px" }}
               borderRadius="full"
-              bg={useColorModeValue("white", "blackAlpha.200")}
+              bg={writeCtaIconBg}
               borderWidth="1px"
-              borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")}
+              borderColor={writeCtaIconBorderColor}
               display="flex"
               alignItems="center"
               justifyContent="center"

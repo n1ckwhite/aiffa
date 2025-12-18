@@ -3,40 +3,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAppColors } from "@/shared/theme/colors";
 import { usePagination } from "widgets/ModuleLessons/hooks/usePagination";
 import { useScrollToTop } from "shared/hooks/useScrollToTop";
-import { useBlogArticles } from "../../../hooks/useBlogArticles";
-import type { BlogArticle } from "../../../types";
-import { useBlogScreenColors } from "../colors/useBlogScreenColors";
-import { buildBlogPageHref, getBlogPageFromPathname } from "../lib/paginationPath";
-import { BLOG_TAG_FILTERS, matchesTagFilter, normalizeTag, type BlogTagFilter } from "../lib/tags";
-import { useDebouncedSetter } from "./useDebouncedSetter";
-import { useBlogHotkeys } from "./useBlogHotkeys";
-
-export type BlogScreenController = {
-  theme: ReturnType<typeof useAppColors>;
-  colors: ReturnType<typeof useBlogScreenColors>;
-
-  // search + filters
-  query: string;
-  setQuery: (next: string) => void;
-  debouncedQuery: string;
-  tagFilter: BlogTagFilter;
-  setTagFilter: (next: BlogTagFilter) => void;
-  searchInputRef: React.RefObject<HTMLInputElement | null>;
-
-  // data
-  isLoading: boolean;
-  isEmptyResults: boolean;
-  pageArticles: BlogArticle[];
-  pageSize: number;
-
-  // pagination
-  page: number;
-  totalPages: number;
-  canPrev: boolean;
-  canNext: boolean;
-  pageItems: Array<number | string>;
-  handleSetPage: (next: number | ((p: number) => number)) => void;
-};
+import { useBlogArticles } from "../../../../hooks/useBlogArticles";
+import { useBlogScreenColors } from "../../colors/useBlogScreenColors/useBlogScreenColors";
+import { buildBlogPageHref, getBlogPageFromPathname } from "../../lib/paginationPath";
+import { BLOG_TAG_FILTERS, matchesTagFilter, normalizeTag, type BlogTagFilter } from "../../lib/tags";
+import { useDebouncedSetter } from "../useDebouncedSetter";
+import { useBlogHotkeys } from "../useBlogHotkeys/useBlogHotkeys";
+import { BlogScreenController } from "./types";
 
 export const useBlogScreenController = (): BlogScreenController => {
   const theme = useAppColors();

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import { useBlogScreenController } from "./hooks/useBlogScreenController";
+import { useBlogScreenController } from "./hooks/useBlogScreenController/useBlogScreenController";
 import { BlogHeroSection } from "./parts/BlogHeroSection";
 import { BlogArticlesSection } from "./parts/BlogArticlesSection";
 import { BlogWriteCtaSection } from "./parts/BlogWriteCtaSection";

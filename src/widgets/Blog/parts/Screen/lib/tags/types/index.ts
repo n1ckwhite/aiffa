@@ -1,0 +1,1 @@
+export type BlogTagFilter = "Все" | "Frontend" | "Backend" | "Mobile" | "DevOps" | "React" | "TypeScript" | "Accessibility" | "Архитектура";

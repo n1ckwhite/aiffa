@@ -1,9 +1,7 @@
-import type { BlogArticle } from "../../../types";
+import { BlogArticle } from "@/widgets/Blog/types";
+import { AuthorBadge } from "./types";
 
-export type AuthorBadge = {
-  label: string;
-  colorScheme: "blue" | "purple" | "yellow" | "green" | "gray";
-};
+
 
 export const getAuthorBadge = (article: BlogArticle): AuthorBadge => {
   const hasGithub = Boolean(article.author?.github);

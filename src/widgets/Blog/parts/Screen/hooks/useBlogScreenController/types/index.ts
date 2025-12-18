@@ -1,6 +1,6 @@
 import { useAppColors } from "@/shared/theme/colors";
 import { useBlogScreenColors } from "../../../colors/useBlogScreenColors/useBlogScreenColors";
-import { BlogTagFilter } from "../../../lib/tags";
+import { BlogTagFilter } from "../../../lib/tags/tags";
 import type { BlogArticle } from "@/widgets/Blog/types";
 
 export type BlogScreenController = {

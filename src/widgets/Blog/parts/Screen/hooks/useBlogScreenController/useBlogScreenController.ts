@@ -6,7 +6,7 @@ import { useScrollToTop } from "shared/hooks/useScrollToTop";
 import { useBlogArticles } from "../../../../hooks/useBlogArticles";
 import { useBlogScreenColors } from "../../colors/useBlogScreenColors/useBlogScreenColors";
 import { buildBlogPageHref, getBlogPageFromPathname } from "../../lib/paginationPath";
-import { BLOG_TAG_FILTERS, matchesTagFilter, normalizeTag, type BlogTagFilter } from "../../lib/tags";
+import { BLOG_TAG_FILTERS, matchesTagFilter, normalizeTag, type BlogTagFilter } from "../../lib/tags/tags";
 import { useDebouncedSetter } from "../useDebouncedSetter";
 import { useBlogHotkeys } from "../useBlogHotkeys/useBlogHotkeys";
 import { BlogScreenController } from "./types";

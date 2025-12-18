@@ -1,3 +1,4 @@
+import { BlogArticle } from "@/widgets/Blog/types";
 import type { ElementType } from "react";
 import {
   FiCloud,
@@ -11,18 +12,9 @@ import {
   FiSmartphone,
   FiTag,
 } from "react-icons/fi";
-import type { BlogArticle } from "../../../types";
+import type { BlogTagFilter } from "./types";
 
-export type BlogTagFilter =
-  | "Все"
-  | "Frontend"
-  | "Backend"
-  | "Mobile"
-  | "DevOps"
-  | "React"
-  | "TypeScript"
-  | "Accessibility"
-  | "Архитектура";
+
 
 export const BLOG_TAG_FILTERS: BlogTagFilter[] = [
   "Все",

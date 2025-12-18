@@ -16,22 +16,31 @@ export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
   authorBadge,
   dateIso,
 }) => {
+  const avatarLabel = `Открыть профиль автора в GitHub: ${authorName || authorGithub || "автор"}`;
+
   return (
     <HStack spacing={3} mt="auto" pt={6} minH="56px" align="center">
       {authorHref ? (
         <Link
           href={authorHref}
           isExternal
-          aria-label={`Открыть профиль автора в GitHub: ${authorName || authorGithub || "автор"}`}
+          aria-label={avatarLabel}
           position="relative"
           zIndex={3}
           display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
+          boxSize="48px"
+          minW="48px"
+          borderRadius="full"
           _hover={{ textDecoration: "none" }}
         >
           <Avatar name={authorName || "Автор"} src={getGithubAvatarUrl(authorGithub, 96)} boxSize="38px" />
         </Link>
       ) : (
-        <Avatar name={authorName || "Автор"} src={getGithubAvatarUrl(authorGithub, 96)} boxSize="38px" />
+        <Box display="inline-flex" alignItems="center" justifyContent="center" boxSize="48px" minW="48px">
+          <Avatar name={authorName || "Автор"} src={getGithubAvatarUrl(authorGithub, 96)} boxSize="38px" />
+        </Box>
       )}
 
       <VStack spacing={0} align="start" minW={0}>
@@ -46,7 +55,7 @@ export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
             position="relative"
             zIndex={3}
             _hover={{ textDecoration: "none", color: accentColor }}
-            aria-label={`Открыть профиль автора в GitHub: ${authorName || authorGithub || "автор"}`}
+            aria-label={avatarLabel}
           >
             {authorName || "—"}
           </Link>

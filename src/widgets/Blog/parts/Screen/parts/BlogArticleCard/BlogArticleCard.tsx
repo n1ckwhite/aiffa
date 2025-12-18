@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
+import { Box, Text } from "@chakra-ui/react";
 import { getAuthorBadge } from "../../lib/authorBadge/authorBadge";
 import { formatCount } from "../../lib/format";
 import { getCategoryMeta } from "../../lib/tags/tags";
@@ -32,8 +31,8 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
 
   return (
     <Box key={article.slug} as="li" listStyleType="none">
-      <LinkBox
-        cursor="pointer"
+      <Box
+        cursor="default"
         borderWidth="1px"
         borderColor={cardBorder}
         borderRadius={cardRadius}
@@ -71,15 +70,6 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
           pointerEvents: "none",
         }}
       >
-        <LinkOverlay
-          as={RouterLink as any}
-          to={`/blog/${article.slug}`}
-          aria-label={`Открыть статью: ${article.title}`}
-          position="absolute"
-          inset={0}
-          zIndex={2}
-        />
-
         <Box p={cardPadding} display="flex" flexDirection="column" h="full" minW={0} position="relative" zIndex={1}>
           <BlogArticleCover title={article.title} coverImage={article.coverImage} priority={index < 3} />
 
@@ -112,7 +102,7 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
             dateIso={article.date}
           />
         </Box>
-      </LinkBox>
+      </Box>
     </Box>
   );
 };

@@ -4,9 +4,9 @@ import type { useAppColors } from "@/shared/theme/colors";
 import { QuestioningLottieIcon } from "@/shared/icons/components-icon";
 import { Pagination } from "shared/ui/Pagination";
 import type { PaginationColors } from "shared/ui/Pagination";
-import type { BlogArticle } from "../../../types";
-import { BlogArticleCard } from "./BlogArticleCard";
-import { BlogArticlesSkeletonGrid } from "./BlogArticlesSkeletonGrid";
+import type { BlogArticle } from "../../../../types";
+import { BlogArticleCard } from "../BlogArticleCard/BlogArticleCard";
+import { BlogArticlesSkeletonGrid } from "../BlogArticlesSkeletonGrid";
 
 export type BlogArticlesSectionProps = {
   theme: ReturnType<typeof useAppColors>;

@@ -16,11 +16,11 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 import { FiArrowUpRight, FiClock, FiEye, FiMessageCircle, FiStar } from "react-icons/fi";
 import type { useAppColors } from "@/shared/theme/colors";
-import type { BlogArticle } from "../../../types";
-import { BlogCoverImage } from "./BlogCoverImage";
-import { getAuthorBadge } from "../lib/authorBadge/authorBadge";
-import { formatCount, getDateLabel, getGithubAvatarUrl } from "../lib/format";
-import { getCategoryMeta } from "../lib/tags/tags";
+import type { BlogArticle } from "../../../../types";
+import { BlogCoverImage } from "../BlogCoverImage";
+import { getAuthorBadge } from "../../lib/authorBadge/authorBadge";
+import { formatCount, getDateLabel, getGithubAvatarUrl } from "../../lib/format";
+import { getCategoryMeta } from "../../lib/tags/tags";
 
 export type BlogArticleCardProps = {
   article: BlogArticle;

@@ -1,10 +1,10 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import { useBlogScreenController } from "./hooks/useBlogScreenController/useBlogScreenController";
-import { BlogHeroSection } from "./parts/BlogHeroSection";
-import { BlogArticlesSection } from "./parts/BlogArticlesSection";
+import { BlogHeroSection } from "./parts/BlogHeroSection/BlogHeroSection";
+import { BlogArticlesSection } from "./parts/BlogArticlesSection/BlogArticlesSection";
 import { BlogWriteCtaSection } from "./parts/BlogWriteCtaSection";
-import { BlogFaqSupportSection } from "./parts/BlogFaqSupportSection";
+import { BlogFaqSupportSection } from "./parts/BlogFaqSupportSection/BlogFaqSupportSection";
 
 const BlogScreen: React.FC = () => {
   const c = useBlogScreenController();

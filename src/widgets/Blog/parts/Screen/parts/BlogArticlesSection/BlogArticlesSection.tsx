@@ -6,7 +6,7 @@ import { Pagination } from "shared/ui/Pagination";
 import type { PaginationColors } from "shared/ui/Pagination";
 import type { BlogArticle } from "../../../../types";
 import { BlogArticleCard } from "../BlogArticleCard/BlogArticleCard";
-import { BlogArticlesSkeletonGrid } from "../BlogArticlesSkeletonGrid";
+import { BlogArticlesSkeletonGrid } from "../BlogArticlesSkeletonGrid/BlogArticlesSkeletonGrid";
 
 export type BlogArticlesSectionProps = {
   theme: ReturnType<typeof useAppColors>;

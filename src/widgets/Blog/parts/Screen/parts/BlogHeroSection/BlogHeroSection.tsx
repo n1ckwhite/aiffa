@@ -21,7 +21,8 @@ import {
 } from "@chakra-ui/react";
 import { FiChevronDown, FiSearch, FiX } from "react-icons/fi";
 import type { useAppColors } from "@/shared/theme/colors";
-import { BLOG_TAG_FILTERS, TAG_ICONS, type BlogTagFilter } from "../../lib/tags/tags";
+import { BLOG_TAG_FILTERS, TAG_ICONS } from "../../lib/tags/tags";
+import type { BlogTagFilter } from "../../lib/tags/types";
 
 export type BlogHeroSectionProps = {
   theme: ReturnType<typeof useAppColors>;

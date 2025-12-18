@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 import { useBlogScreenController } from "./hooks/useBlogScreenController/useBlogScreenController";
 import { BlogHeroSection } from "./parts/BlogHeroSection/BlogHeroSection";
 import { BlogArticlesSection } from "./parts/BlogArticlesSection/BlogArticlesSection";
-import { BlogWriteCtaSection } from "./parts/BlogWriteCtaSection";
+import { BlogWriteCtaSection } from "./parts/BlogWriteCtaSection/BlogWriteCtaSection";
 import { BlogFaqSupportSection } from "./parts/BlogFaqSupportSection/BlogFaqSupportSection";
 
 const BlogScreen: React.FC = () => {

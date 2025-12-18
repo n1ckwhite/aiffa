@@ -24,6 +24,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
         aria-labelledby={sectionTitleId}
         align="stretch"
         gap={{ base: 5, md: 7 }}
+        w="100%"
         maxW={{ base: '100%', md: '900px' }}
         mx="auto"
       >

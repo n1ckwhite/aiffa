@@ -13,9 +13,8 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
   onDonate,
   setIsMobileMenuOpen,
 }) => {
-  const { fillIcon } = useDesktopActionsColors();
-  const avatarBorderColor = useColorModeValue('blackAlpha.200', 'whiteAlpha.200');
-  const avatarBg = useColorModeValue('whiteAlpha.900', 'whiteAlpha.200');
+  const { fillIcon, avatarBorderColor, avatarBg } = useDesktopActionsColors();
+
   const { profile } = useUserProfile();
   const githubAvatarUrl =
     profile.avatarUrl || (profile.githubUsername ? `https://github.com/${profile.githubUsername}.png?size=96` : '');

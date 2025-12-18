@@ -11,7 +11,6 @@ const Logo: React.FC<LogoProps> = () => {
       title="AIFFA — главная страница"
       spacing={2}
       align="center"
-      flexShrink={0}
       _hover={{ textDecoration: 'none', opacity: 0.9 }}
     >
       <Image

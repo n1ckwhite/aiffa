@@ -84,6 +84,8 @@ const RoadmapCta: React.FC = () => {
               onClick={handleBuildRoadmapClick}
               borderRadius="full"
               colorScheme="blue"
+              px={{ base: 6, md: 7 }}
+              minW={{ base: "auto", md: "190px" }}
               alignSelf={{ base: "stretch", md: "center" }}
               aria-label="Построить роудмэп развития"
             >

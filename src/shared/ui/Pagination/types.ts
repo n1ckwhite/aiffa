@@ -14,6 +14,7 @@ export type PaginationProps = {
   onPrev: () => void;
   onNext: () => void;
   onSelect: (p: number) => void;
+  getPageHref?: (page: number) => string;
   colors: PaginationColors;
 };
 

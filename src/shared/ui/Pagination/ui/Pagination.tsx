@@ -13,6 +13,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   onPrev,
   onNext,
   onSelect,
+  getPageHref,
   colors,
 }) => {
   const controlBoxSize = { base: 8, md: 10 } as const; // 32px -> 40px
@@ -33,6 +34,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         direction="prev"
         isDisabled={!canPrev}
         onClick={onPrev}
+        href={getPageHref && canPrev ? getPageHref(Math.max(1, page - 1)) : undefined}
         colors={colors}
         controlBoxSize={controlBoxSize}
         iconBoxSize={iconBoxSize}
@@ -50,6 +52,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                 page={p}
                 isActive={isActive}
                 onSelect={handleSelect}
+                href={getPageHref ? getPageHref(p) : undefined}
                 colors={colors}
                 controlBoxSize={controlBoxSize}
                 controlBorderRadius={controlBorderRadius}
@@ -68,6 +71,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                 page={p}
                 isActive={isActive}
                 onSelect={handleSelect}
+                href={getPageHref ? getPageHref(p) : undefined}
                 colors={colors}
                 controlBoxSize={controlBoxSize}
                 controlBorderRadius={controlBorderRadius}
@@ -90,6 +94,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                 page={it}
                 isActive={isActive}
                 onSelect={handleSelect}
+                href={getPageHref ? getPageHref(it) : undefined}
                 colors={colors}
                 controlBoxSize={controlBoxSize}
                 controlBorderRadius={controlBorderRadius}
@@ -104,6 +109,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         direction="next"
         isDisabled={!canNext}
         onClick={onNext}
+        href={getPageHref && canNext ? getPageHref(Math.min(lastPage, page + 1)) : undefined}
         colors={colors}
         controlBoxSize={controlBoxSize}
         iconBoxSize={iconBoxSize}

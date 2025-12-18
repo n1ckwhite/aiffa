@@ -2,12 +2,14 @@ import React from "react";
 import { IconButton } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import type { PaginationArrowButtonProps } from "../types";
+import { handleClick } from "./helpers/shouldHandleClientNavigation";
 
 export const PaginationArrowButton: React.FC<PaginationArrowButtonProps> = ({
   ariaLabel,
   direction,
   isDisabled,
   onClick,
+  href,
   colors,
   controlBoxSize,
   iconBoxSize,
@@ -19,7 +21,9 @@ export const PaginationArrowButton: React.FC<PaginationArrowButtonProps> = ({
     <IconButton
       aria-label={ariaLabel}
       icon={<Icon boxSize={iconBoxSize} />}
-      onClick={onClick}
+      as={href ? ("a" as any) : undefined}
+      href={href}
+      onClick={(event: React.MouseEvent) => handleClick(href, onClick, event)}
       isDisabled={isDisabled}
       variant="outline"
       boxSize={controlBoxSize}

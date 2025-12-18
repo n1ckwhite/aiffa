@@ -5,6 +5,7 @@ export type PaginationArrowButtonProps = {
   direction: "prev" | "next";
   isDisabled: boolean;
   onClick: () => void;
+  href?: string;
   colors: PaginationColors;
   controlBoxSize: { base: number; md: number };
   iconBoxSize: { base: number; md: number };
@@ -15,6 +16,7 @@ export type PaginationPageButtonProps = {
   page: number;
   isActive: boolean;
   onSelect: (p: number) => void;
+  href?: string;
   colors: PaginationColors;
   controlBoxSize: { base: number; md: number };
   controlBorderRadius: { base: string; md: string };

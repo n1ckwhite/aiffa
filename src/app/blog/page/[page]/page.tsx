@@ -20,10 +20,10 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     title: `Блог — страница ${safePage}`,
     description: "Статьи участников AIFFA: опыт, разборы и практические советы",
     alternates: {
-      canonical: `${SITE_URL}/blog/page/${safePage}`,
+      canonical: `${SITE_URL}/blog/${safePage}`,
     },
     openGraph: {
-      url: `${SITE_URL}/blog/page/${safePage}`,
+      url: `${SITE_URL}/blog/${safePage}`,
       title: `Блог — страница ${safePage} — AIFFA`,
       description: "Статьи участников AIFFA: опыт, разборы и практические советы",
       type: "website",
@@ -34,10 +34,10 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 const BlogPaginatedRoutePage = ({ params }: PageProps) => {
   const pageNumber = Number.parseInt(params.page, 10);
   if (!Number.isFinite(pageNumber) || pageNumber <= 1) {
-    redirect("/blog");
+    redirect("/blog/1");
   }
 
-  return <BlogPageClient />;
+  redirect(`/blog/${pageNumber}`);
 };
 
 export default BlogPaginatedRoutePage;

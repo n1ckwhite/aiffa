@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import BlogPageClient from "../BlogPageClient";
 
 const SITE_URL =
@@ -14,8 +14,9 @@ type PageProps = {
 
 const parsePage = (raw: string): number | null => {
   const value = (raw ?? "").trim();
-  if (!/^\d+$/.test(value)) return null;
-  const n = Number.parseInt(value, 10);
+  const match = value.match(/^page(\d+)$/) ?? value.match(/^(\d+)$/);
+  if (!match) return null;
+  const n = Number.parseInt(match[1], 10);
   if (!Number.isFinite(n) || n < 1) return null;
   return n;
 };
@@ -26,7 +27,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     return {
       title: "Блог",
       description: "Статьи участников AIFFA: опыт, разборы и практические советы",
-      alternates: { canonical: `${SITE_URL}/blog/1` },
+      alternates: { canonical: `${SITE_URL}/blog/page1` },
     };
   }
 
@@ -34,10 +35,10 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     title: parsed === 1 ? "Блог" : `Блог — страница ${parsed}`,
     description: "Статьи участников AIFFA: опыт, разборы и практические советы",
     alternates: {
-      canonical: `${SITE_URL}/blog/${parsed}`,
+      canonical: `${SITE_URL}/blog/page${parsed}`,
     },
     openGraph: {
-      url: `${SITE_URL}/blog/${parsed}`,
+      url: `${SITE_URL}/blog/page${parsed}`,
       title: parsed === 1 ? "Блог — AIFFA" : `Блог — страница ${parsed} — AIFFA`,
       description: "Статьи участников AIFFA: опыт, разборы и практические советы",
       type: "website",
@@ -46,9 +47,14 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 };
 
 const BlogNumericPageRoute = ({ params }: PageProps) => {
-  const parsed = parsePage(params.page);
+  const raw = (params.page ?? "").trim();
+  const parsed = parsePage(raw);
   if (!parsed) {
     notFound();
+  }
+
+  if (/^\d+$/.test(raw)) {
+    redirect(`/blog/page${parsed}`);
   }
 
   return <BlogPageClient />;

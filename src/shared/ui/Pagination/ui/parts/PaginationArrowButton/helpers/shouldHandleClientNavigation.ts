@@ -6,7 +6,6 @@ export const shouldHandleClientNavigation = (event: React.MouseEvent) => {
   };
 
 export const handleClick = (href: string | undefined, onClick: () => void, event: React.MouseEvent) => {
-
   if (!href) {
     onClick();
     return;

@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   title: "Блог",
   description: "Статьи участников AIFFA: опыт, разборы и практические советы",
   alternates: {
-    canonical: `${SITE_URL}/blog/1`,
+    canonical: `${SITE_URL}/blog/page1`,
   },
   openGraph: {
-    url: `${SITE_URL}/blog/1`,
+    url: `${SITE_URL}/blog/page1`,
     title: "Блог — AIFFA",
     description: "Статьи участников AIFFA: опыт, разборы и практические советы",
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 const BlogRoutePage = () => {
-  redirect("/blog/1");
+  redirect("/blog/page1");
 };
 
 export default BlogRoutePage;

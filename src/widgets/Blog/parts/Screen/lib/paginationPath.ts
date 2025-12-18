@@ -1,6 +1,10 @@
 export const getBlogPageFromPathname = (pathname: string) => {
   const safePathname = pathname || "";
-  const match = safePathname.match(/\/blog\/(?:page\/)?(\d+)(?:\/)?$/);
+  const match =
+    safePathname.match(/\/blog\/page(\d+)(?:\/)?$/) ??
+    safePathname.match(/\/blog\/page\/(\d+)(?:\/)?$/) ??
+    safePathname.match(/\/blog\/(\d+)(?:\/)?$/);
+
   if (!match) return 1;
   const n = Number(match[1]);
   if (!Number.isFinite(n) || n < 1) return 1;
@@ -9,7 +13,7 @@ export const getBlogPageFromPathname = (pathname: string) => {
 
 export const buildBlogPageHref = (targetPage: number, search: string) => {
   const safePage = Number.isFinite(targetPage) && targetPage > 0 ? targetPage : 1;
-  const basePath = `/blog/${safePage}`;
+  const basePath = `/blog/page${safePage}`;
   const params = new URLSearchParams(search);
   params.delete("page");
   const nextSearch = params.toString();

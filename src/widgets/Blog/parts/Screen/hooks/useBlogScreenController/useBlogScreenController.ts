@@ -93,8 +93,6 @@ export const useBlogScreenController = (): BlogScreenController => {
   const scrollTop = useScrollToTop({ immediate: false });
 
   React.useEffect(() => {
-    // Reset to first page on search/filter changes (prevents "empty page" after filtering)
-    // Skip initial mount: initial page can be driven by URL (/blog/page/:n).
     if (!didMountResetRef.current) {
       didMountResetRef.current = true;
       return;
@@ -104,7 +102,6 @@ export const useBlogScreenController = (): BlogScreenController => {
   }, [normalizedQuery, tagFilter, setPage]);
 
   React.useEffect(() => {
-    // Keep pagination state in sync with URL (/blog/page/:n).
     const desired = Math.min(Math.max(pageFromPathname, 1), totalPages);
     if (desired !== page) {
       setPage(desired);
@@ -114,7 +111,6 @@ export const useBlogScreenController = (): BlogScreenController => {
   useDebouncedSetter(query, setDebouncedQuery, 220);
 
   React.useEffect(() => {
-    // Init from URL (?q=) + keep in sync on back/forward.
     const params = new URLSearchParams(location.search);
     const q = params.get("q") ?? "";
     if (q !== query) {
@@ -128,11 +124,9 @@ export const useBlogScreenController = (): BlogScreenController => {
     if (nextTag !== tagFilter) {
       setTagFilter(nextTag);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
   React.useEffect(() => {
-    // Sync query/tag -> URL without creating history entries.
     const params = new URLSearchParams(location.search);
     const next = query.trim();
     if (next) {
@@ -155,7 +149,14 @@ export const useBlogScreenController = (): BlogScreenController => {
   }, [query, tagFilter, location.pathname, location.search, navigate]);
 
   React.useEffect(() => {
-    // Sync page -> URL (push on user pagination actions, replace on programmatic resets).
+    const urlPage = Math.max(pageFromPathname, 1);
+    const hasPendingNav = !!pendingPageNavRef.current;
+    const isUrlPageKnownValid = urlPage <= totalPages;
+
+    if (!hasPendingNav && page !== urlPage) {
+      if (isLoading) return;
+      if (isUrlPageKnownValid) return;
+    }
     const desiredHref = buildBlogPageHrefForState(page);
     const currentHref = `${location.pathname}${location.search}`;
     if (desiredHref === currentHref) {
@@ -165,7 +166,7 @@ export const useBlogScreenController = (): BlogScreenController => {
     const replace = pendingPageNavRef.current?.replace ?? false;
     pendingPageNavRef.current = null;
     navigate(desiredHref, { replace, scroll: false });
-  }, [page, buildBlogPageHrefForState, location.pathname, location.search, navigate]);
+  }, [page, pageFromPathname, totalPages, isLoading, buildBlogPageHrefForState, location.pathname, location.search, navigate]);
 
   useBlogHotkeys({ query, setQuery, searchInputRef });
 

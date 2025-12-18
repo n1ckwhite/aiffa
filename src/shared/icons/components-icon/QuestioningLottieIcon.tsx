@@ -11,7 +11,7 @@ const QuestioningLottieIcon: React.FC = () => {
     <LazyLottieIcon
       animationData={questioningAnimation}
       boxProps={{
-        w: { base: "150px", md: "150px" },
+        w: { base: "200px", md: "200px" },
         aspectRatio: 1080 / 1080,
         mx: "auto",
       }}
@@ -19,9 +19,9 @@ const QuestioningLottieIcon: React.FC = () => {
         <OptimizedIconImage
           src={questioningIcon}
           alt="Иконка вопроса"
-          width={150}
-          height={150}
-          sizes="150px"
+          width={200}
+          height={200}
+          sizes="200px"
         />
       }
     />

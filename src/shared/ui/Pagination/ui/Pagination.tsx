@@ -1,5 +1,5 @@
 import React from "react";
-import { HStack } from "@chakra-ui/react";
+import { Box, Flex, HStack } from "@chakra-ui/react";
 import type { PaginationProps } from "../types";
 import { getLastPage } from "../helpers/getLastPage";
 import { getCompactPages } from "../helpers/getCompactPages";
@@ -33,7 +33,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const handleSelect = (p: number) => onSelect(p);
 
   return (
-    <HStack justify="center" align="center" pt={2} gap={gap} flexWrap="nowrap" maxW="100%">
+    <Flex w="100%" justify="space-between" align="center" pt={2} gap={gap} flexWrap="nowrap" maxW="100%">
       <PaginationArrowButton
         ariaLabel="Предыдущая страница"
         direction="prev"
@@ -45,63 +45,65 @@ export const Pagination: React.FC<PaginationProps> = ({
         controlBorderRadius={controlBorderRadius}
       />
 
-      {/* Base mobile (iPhone 4): arrows + 6 smart page buttons */}
-      <HStack gap={gap} flexWrap="nowrap" display={{ base: "flex", sm: "none" }}>
-        {mobilePages6.map((p) => {
-          const isActive = p === page;
-          return (
-            <PaginationPageButton
-              key={p}
-              page={p}
-              isActive={isActive}
-              onSelect={handleSelect}
-              colors={colors}
-              controlBoxSize={controlBoxSize}
-              controlBorderRadius={controlBorderRadius}
-            />
-          );
-        })}
-      </HStack>
+      <Box flex="1" minW={0} display="flex" justifyContent="center">
+        {/* Base mobile (iPhone 4): arrows + 6 smart page buttons */}
+        <HStack gap={gap} flexWrap="nowrap" display={{ base: "flex", sm: "none" }}>
+          {mobilePages6.map((p) => {
+            const isActive = p === page;
+            return (
+              <PaginationPageButton
+                key={p}
+                page={p}
+                isActive={isActive}
+                onSelect={handleSelect}
+                colors={colors}
+                controlBoxSize={controlBoxSize}
+                controlBorderRadius={controlBorderRadius}
+              />
+            );
+          })}
+        </HStack>
 
-      {/* Small screens (>= sm): arrows + up to 8 smart page buttons */}
-      <HStack gap={gap} flexWrap="nowrap" display={{ base: "none", sm: "flex", md: "none" }}>
-        {mobilePages8.map((p) => {
-          const isActive = p === page;
-          return (
-            <PaginationPageButton
-              key={p}
-              page={p}
-              isActive={isActive}
-              onSelect={handleSelect}
-              colors={colors}
-              controlBoxSize={controlBoxSize}
-              controlBorderRadius={controlBorderRadius}
-            />
-          );
-        })}
-      </HStack>
+        {/* Small screens (>= sm): arrows + up to 8 smart page buttons */}
+        <HStack gap={gap} flexWrap="nowrap" display={{ base: "none", sm: "flex", md: "none" }}>
+          {mobilePages8.map((p) => {
+            const isActive = p === page;
+            return (
+              <PaginationPageButton
+                key={p}
+                page={p}
+                isActive={isActive}
+                onSelect={handleSelect}
+                colors={colors}
+                controlBoxSize={controlBoxSize}
+                controlBorderRadius={controlBorderRadius}
+              />
+            );
+          })}
+        </HStack>
 
-      {/* Desktop/tablet: full pagination items */}
-      <HStack gap={gap} flexWrap="nowrap" display={{ base: "none", md: "flex" }}>
-        {pageItems.map((it, idx) => {
-          if (typeof it === "string") {
-            return <PaginationDots key={`dots-${idx}`} value={it} colors={colors} />;
-          }
+        {/* Desktop/tablet: full pagination items */}
+        <HStack gap={gap} flexWrap="nowrap" display={{ base: "none", md: "flex" }}>
+          {pageItems.map((it, idx) => {
+            if (typeof it === "string") {
+              return <PaginationDots key={`dots-${idx}`} value={it} colors={colors} />;
+            }
 
-          const isActive = it === page;
-          return (
-            <PaginationPageButton
-              key={it}
-              page={it}
-              isActive={isActive}
-              onSelect={handleSelect}
-              colors={colors}
-              controlBoxSize={controlBoxSize}
-              controlBorderRadius={controlBorderRadius}
-            />
-          );
-        })}
-      </HStack>
+            const isActive = it === page;
+            return (
+              <PaginationPageButton
+                key={it}
+                page={it}
+                isActive={isActive}
+                onSelect={handleSelect}
+                colors={colors}
+                controlBoxSize={controlBoxSize}
+                controlBorderRadius={controlBorderRadius}
+              />
+            );
+          })}
+        </HStack>
+      </Box>
 
       <PaginationArrowButton
         ariaLabel="Следующая страница"
@@ -113,7 +115,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         iconBoxSize={iconBoxSize}
         controlBorderRadius={controlBorderRadius}
       />
-    </HStack>
+    </Flex>
   );
 };
 

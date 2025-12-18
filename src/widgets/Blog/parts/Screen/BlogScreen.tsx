@@ -35,12 +35,17 @@ import {
   FiChevronDown,
   FiClock,
   FiCode,
+  FiCloud,
   FiEdit3,
   FiEye,
+  FiGrid,
+  FiHash,
   FiLayers,
   FiMessageCircle,
+  FiMonitor,
   FiServer,
   FiSearch,
+  FiSmartphone,
   FiStar,
   FiTag,
   FiX,
@@ -91,17 +96,39 @@ const getAuthorBadge = (article: BlogArticle): AuthorBadge => {
   return { label: "Автор AIFFA", colorScheme: "blue" };
 };
 
-type BlogTagFilter = "Все" | "React" | "TypeScript" | "Backend" | "Accessibility" | "Архитектура";
+type BlogTagFilter =
+  | "Все"
+  | "Frontend"
+  | "Backend"
+  | "Mobile"
+  | "DevOps"
+  | "React"
+  | "TypeScript"
+  | "Accessibility"
+  | "Архитектура";
 
-const BLOG_TAG_FILTERS: BlogTagFilter[] = ["Все", "React", "TypeScript", "Backend", "Accessibility", "Архитектура"];
+const BLOG_TAG_FILTERS: BlogTagFilter[] = [
+  "Все",
+  "Frontend",
+  "Backend",
+  "Mobile",
+  "DevOps",
+  "React",
+  "TypeScript",
+  "Accessibility",
+  "Архитектура",
+];
 
 const normalizeTag = (value: string) => value.trim().toLowerCase();
 
 const TAG_ICONS: Record<BlogTagFilter, React.ElementType> = {
-  Все: FiLayers,
-  React: FiCode,
-  TypeScript: FiCode,
+  Все: FiGrid,
+  Frontend: FiMonitor,
   Backend: FiServer,
+  Mobile: FiSmartphone,
+  DevOps: FiCloud,
+  React: FiCode,
+  TypeScript: FiHash,
   Accessibility: FiEye,
   Архитектура: FiLayers,
 };
@@ -110,7 +137,10 @@ const getCategoryMeta = (rawCategory: string): { label: string; icon: React.Elem
   const label = rawCategory || "Insights";
   const t = normalizeTag(label);
   if (t === "react") return { label, icon: FiCode };
-  if (t === "typescript" || t === "ts") return { label, icon: FiCode };
+  if (t === "typescript" || t === "ts") return { label, icon: FiHash };
+  if (t === "frontend" || t === "ui" || t === "css" || t === "html") return { label, icon: FiMonitor };
+  if (t === "mobile" || t === "react-native" || t === "reactnative" || t === "ios" || t === "android") return { label, icon: FiSmartphone };
+  if (t === "devops" || t === "docker" || t === "ci" || t === "cd" || t === "kubernetes" || t === "k8s") return { label, icon: FiCloud };
   if (t === "backend" || t === "back-end" || t === "бэкенд" || t === "бекенд" || t === "node" || t === "node.js") return { label, icon: FiServer };
   if (t === "accessibility" || t === "a11y" || t === "доступность") return { label, icon: FiEye };
   if (t === "архитектура" || t === "architecture" || t === "арх") return { label, icon: FiLayers };
@@ -123,8 +153,31 @@ const matchesTagFilter = (article: BlogArticle, filter: BlogTagFilter) => {
   const tags = (article.tags || []).map((t: string) => normalizeTag(t));
   if (!tags.length) return false;
 
+  if (filter === "Frontend") {
+    return tags.some((t: string) =>
+      t === "frontend" ||
+      t === "ui" ||
+      t === "css" ||
+      t === "html" ||
+      t === "react" ||
+      t === "typescript" ||
+      t === "ts" ||
+      t === "next.js" ||
+      t === "nextjs" ||
+      t === "chakra ui" ||
+      t === "chakra-ui" ||
+      t === "a11y" ||
+      t === "accessibility"
+    );
+  }
   if (filter === "Backend") {
     return tags.some((t: string) => t === "backend" || t === "back-end" || t === "бэкенд" || t === "бекенд" || t === "сервер");
+  }
+  if (filter === "Mobile") {
+    return tags.some((t: string) => t === "mobile" || t === "react-native" || t === "reactnative" || t === "ios" || t === "android");
+  }
+  if (filter === "DevOps") {
+    return tags.some((t: string) => t === "devops" || t === "docker" || t === "ci" || t === "cd" || t === "github actions" || t === "kubernetes" || t === "k8s");
   }
   if (filter === "Архитектура") {
     return tags.some((t: string) => t === "архитектура" || t === "architecture" || t === "арх");
@@ -600,7 +653,7 @@ const BlogScreen: React.FC = () => {
                     transform="scale(0.82)"
                     transformOrigin="top center"
                     mt={{ base: -2, md: -3 }}
-                    height="123px"
+                    height="150px"
                   >
                     <QuestioningLottieIcon />
                   </Box>
@@ -821,7 +874,13 @@ const BlogScreen: React.FC = () => {
             </SimpleGrid>
 
             {totalPages > 1 && (
-              <Box as="nav" aria-label="Пагинация статей" alignSelf="center" w="fit-content" maxW="100%" mt={{ base: 2, md: 3 }}>
+              <Box
+                as="nav"
+                aria-label="Пагинация статей"
+                w="full"
+                maxW="100%"
+                mt={{ base: 2, md: 3 }}
+              >
                 <Pagination
                   pageItems={pageItems}
                   page={page}

@@ -36,7 +36,7 @@ export const BlogHeroSection: React.FC<BlogHeroSectionProps> = ({
       flexDirection="column"
       alignItems="center"
       textAlign="center"
-      mb={{ base: 6, md: 10 }}
+      mb={6}
     >
       <BlogHeroHeading theme={theme} isEmptyResults={isEmptyResults} />
 

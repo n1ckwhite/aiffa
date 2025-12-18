@@ -1,5 +1,6 @@
 import React from "react";
-import { Avatar, Badge, HStack, Link, Text, VStack } from "@chakra-ui/react";
+import { Avatar, Box, HStack, Link, Text, VStack } from "@chakra-ui/react";
+import PillBadge from "shared/ui/PillBadge";
 import { getDateLabel, getGithubAvatarUrl } from "../../../../lib/format";
 import { BlogArticleAuthorRowProps } from "./types";
 
@@ -55,19 +56,11 @@ export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
           </Text>
         )}
 
-        <Badge
-          mt={1}
-          w="fit-content"
-          colorScheme={authorBadge.colorScheme}
-          variant="subtle"
-          borderRadius="full"
-          px={2}
-          py={0.5}
-          fontSize="10px"
-          letterSpacing="0.02em"
-        >
-          {authorBadge.label}
-        </Badge>
+        <Box mt={1}>
+          <PillBadge colorScheme={authorBadge.colorScheme as any} variant="outline" uppercase={false}>
+            {authorBadge.label}
+          </PillBadge>
+        </Box>
 
         <Text fontSize="xs" color={themeDescColor}>
           {getDateLabel(dateIso)}

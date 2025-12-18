@@ -11,6 +11,5 @@ export const handleClick = (href: string | undefined, onClick: () => void, event
     return;
   }
   if (!shouldHandleClientNavigation(event)) return;
-  event.preventDefault();
-  onClick();
+  return;
 }

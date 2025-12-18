@@ -2,13 +2,6 @@ import React from "react";
 import { Button } from "@chakra-ui/react";
 import type { PaginationPageButtonProps } from "../types";
 
-const shouldHandleClientNavigation = (event: React.MouseEvent) => {
-  if (event.defaultPrevented) return false;
-  if (event.button !== 0) return false;
-  if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey) return false;
-  return true;
-};
-
 export const PaginationPageButton: React.FC<PaginationPageButtonProps> = ({
   page,
   isActive,
@@ -24,11 +17,7 @@ export const PaginationPageButton: React.FC<PaginationPageButtonProps> = ({
       as={href ? ("a" as any) : undefined}
       href={href}
       onClick={(e: React.MouseEvent) => {
-        if (!href) {
-          onSelect(page);
-          return;
-        }
-        if (!shouldHandleClientNavigation(e)) return;
+        if (href) return;
         e.preventDefault();
         onSelect(page);
       }}

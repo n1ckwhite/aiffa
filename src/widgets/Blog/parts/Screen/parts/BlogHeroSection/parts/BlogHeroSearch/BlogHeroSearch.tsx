@@ -37,7 +37,6 @@ export const BlogHeroSearch: React.FC<BlogHeroSearchProps> = ({
       onSubmit={(e: React.FormEvent) => e.preventDefault()}
       w="full"
       maxW={{ base: "100%", sm: "560px" }}
-      pt={isEmptyResults ? 1 : 2}
     >
       <HStack spacing={3} justify="center" flexWrap="wrap">
         <InputGroup

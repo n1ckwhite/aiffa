@@ -29,8 +29,27 @@ export const BlogHeroSection: React.FC<BlogHeroSectionProps> = ({
   filterMenuShadow,
 }) => {
   return (
-    <Box as="section" aria-labelledby="blog-title">
+    <Box
+      as="section"
+      aria-labelledby="blog-title"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      textAlign="center"
+      mb={{ base: 6, md: 10 }}
+    >
       <BlogHeroHeading theme={theme} isEmptyResults={isEmptyResults} />
+
+      <HStack
+       aria-label="Поиск и фильтры статей"
+       aria-labelledby="blog-search-label"
+       spacing={{ base: 3, md: 6 }}
+       width="full"
+       role="group"
+       align="center"
+       flexDirection="column"
+       justify="center"
+       mt={{ base: 3, md: 6 }}>
 
       <BlogHeroSearch
         theme={theme}
@@ -49,7 +68,7 @@ export const BlogHeroSection: React.FC<BlogHeroSectionProps> = ({
         clearButtonActiveBg={clearButtonActiveBg}
       />
 
-      <HStack spacing={3} justify="center" mt={3}>
+      <HStack spacing={3} justify="center">
         <BlogHeroFilters
           theme={theme}
           tagFilter={tagFilter}
@@ -62,6 +81,7 @@ export const BlogHeroSection: React.FC<BlogHeroSectionProps> = ({
           searchShadow={searchShadow}
           searchHoverShadow={searchHoverShadow}
         />
+      </HStack>
       </HStack>
     </Box>
   );

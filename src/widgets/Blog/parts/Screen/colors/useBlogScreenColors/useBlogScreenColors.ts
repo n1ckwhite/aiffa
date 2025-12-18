@@ -1,54 +1,9 @@
 import React from "react";
 import { useColorModeValue } from "@chakra-ui/react";
-import type { PaginationColors } from "shared/ui/Pagination";
+import type { UseBlogScreenColorsResult } from "./types";
 import type { useAppColors } from "@/shared/theme/colors";
 
-type UseBlogScreenColorsResult = {
-  categoryColor: string;
-  cardRadius: string;
-  cardPadding: string;
-
-  controlsBg: string;
-  controlsBorder: string;
-  controlsHoverBg: string;
-  controlsIcon: string;
-
-  cardBorder: string;
-  cardHoverBorder: string;
-  cardShadow: string;
-  cardHoverShadow: string;
-
-  searchBg: string;
-  searchBorder: string;
-  searchShadow: string;
-  searchHoverShadow: string;
-  searchHoverBorder: string;
-  searchPlaceholder: string;
-  searchIconBg: string;
-  clearButtonHoverBg: string;
-  clearButtonActiveBg: string;
-
-  writeCtaBorderColor: string;
-  writeCtaBoxShadow: string;
-  writeCtaBgGradient: string;
-  writeCtaIconBg: string;
-  writeCtaIconBorderColor: string;
-
-  filterButtonBg: string;
-  filterButtonBorder: string;
-  filterButtonHoverBg: string;
-  filterMenuBorder: string;
-  filterMenuShadow: string;
-
-  paginationColors: PaginationColors;
-};
-
-/**
- * Centralized color tokens for BlogScreen to keep the main component lean.
- */
-type BlogScreenTheme = ReturnType<typeof useAppColors>;
-
-export const useBlogScreenColors = (theme: BlogScreenTheme): UseBlogScreenColorsResult => {
+export const useBlogScreenColors = (theme: ReturnType<typeof useAppColors>): UseBlogScreenColorsResult => {
   const categoryColor = theme.blue.accent;
   const cardRadius = "2xl";
   const cardPadding = "20px";

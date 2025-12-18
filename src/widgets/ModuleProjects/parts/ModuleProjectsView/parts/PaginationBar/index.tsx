@@ -5,7 +5,7 @@ import { PaginationBarProps } from "./types";
 
 export const PaginationBar: React.FC<PaginationBarProps> = ({ pageItems, page, canPrev, canNext, onPrev, onNext, onSelect, colors }) => {
   return (
-    <Box alignSelf="center" w="fit-content" maxW="100%">
+    <Box w="full" maxW="100%">
       <Pagination
         pageItems={pageItems}
         page={page}

@@ -5,12 +5,6 @@ import { getLastPage } from "../helpers/getLastPage";
 import { getCompactPages } from "../helpers/getCompactPages";
 import { PaginationArrowButton, PaginationDots, PaginationPageButton } from "./parts";
 
-/**
- * Shared pagination control.
- * - `base`: arrows + compact page buttons (no overflow/scroll)
- * - `sm`: arrows + more page buttons
- * - `md+`: uses full `pageItems` coming from pagination hook
- */
 export const Pagination: React.FC<PaginationProps> = ({
   pageItems,
   page,

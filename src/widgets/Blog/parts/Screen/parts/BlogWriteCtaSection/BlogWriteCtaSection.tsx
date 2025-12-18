@@ -1,18 +1,7 @@
 import React from "react";
 import { Box, HStack, Heading, Icon, Text, VStack } from "@chakra-ui/react";
 import { FiEdit3 } from "react-icons/fi";
-import type { useAppColors } from "@/shared/theme/colors";
-
-export type BlogWriteCtaSectionProps = {
-  theme: ReturnType<typeof useAppColors>;
-  cardRadius: string;
-
-  writeCtaBorderColor: string;
-  writeCtaBoxShadow: string;
-  writeCtaBgGradient: string;
-  writeCtaIconBg: string;
-  writeCtaIconBorderColor: string;
-};
+import { BlogWriteCtaSectionProps } from "./types";
 
 export const BlogWriteCtaSection: React.FC<BlogWriteCtaSectionProps> = ({
   theme,

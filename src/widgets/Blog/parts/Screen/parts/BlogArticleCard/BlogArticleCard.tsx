@@ -8,8 +8,8 @@ import { getAuthorHref } from "./lib/getAuthorLink";
 import type { BlogArticleCardProps } from "./types";
 import { BlogArticleCategoryBadge } from "./parts/BlogArticleCategoryBadge/BlogArticleCategoryBadge";
 import { BlogArticleCover } from "./parts/BlogArticleCover/BlogArticleCover";
-import { BlogArticleTitleRow } from "./parts/BlogArticleTitleRow";
-import { BlogArticleStatsRow } from "./parts/BlogArticleStatsRow";
+import { BlogArticleTitleRow } from "./parts/BlogArticleTitleRow/BlogArticleTitleRow";
+import { BlogArticleStatsRow } from "./parts/BlogArticleStatsRow/BlogArticleStatsRow";
 import { BlogArticleAuthorRow } from "./parts/BlogArticleAuthorRow/BlogArticleAuthorRow";
 
 export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({

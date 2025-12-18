@@ -1,35 +1,46 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppColors } from "@/shared/theme/colors";
-import { usePagination } from "widgets/ModuleLessons/hooks/usePagination";
 import { useScrollToTop } from "shared/hooks/useScrollToTop";
 import { useBlogArticles } from "../../../../hooks/useBlogArticles";
 import { useBlogScreenColors } from "../../colors/useBlogScreenColors/useBlogScreenColors";
-import { buildBlogPageHref, getBlogPageFromPathname } from "../../lib/paginationPath";
+import { buildBlogCanonicalHref, buildBlogPaginationHref, getBlogPageFromPathname } from "../../lib/paginationPath";
 import { BLOG_TAG_FILTERS, matchesTagFilter, normalizeTag } from "../../lib/tags/tags";
 import type { BlogTagFilter } from "../../lib/tags/types";
 import { useDebouncedSetter } from "../useDebouncedSetter";
 import { useBlogHotkeys } from "../useBlogHotkeys/useBlogHotkeys";
 import { BlogScreenController } from "./types";
 
+const clampPage = (value: number, totalPages: number) => {
+  const safe = Number.isFinite(value) ? value : 1;
+  const safeTotal = Number.isFinite(totalPages) && totalPages > 0 ? totalPages : 1;
+  return Math.min(Math.max(safe, 1), safeTotal);
+};
+
+const makePageItems = (total: number, current: number, radius = 2, fullLimit = 7) => {
+  if (total <= fullLimit) return Array.from({ length: total }, (_, i) => i + 1) as (number | string)[];
+  const items: (number | string)[] = [];
+  items.push(1);
+  const left = Math.max(2, current - radius);
+  const right = Math.min(total - 1, current + radius);
+  if (left > 2) items.push("…");
+  for (let i = left; i <= right; i++) items.push(i);
+  if (right < total - 1) items.push("…");
+  items.push(total);
+  return items;
+};
+
 export const useBlogScreenController = (): BlogScreenController => {
   const theme = useAppColors();
   const colors = useBlogScreenColors(theme);
   const location = useLocation();
   const navigate = useNavigate();
-  const pendingPageNavRef = React.useRef<{ replace: boolean } | null>(null);
-  const didMountResetRef = React.useRef(false);
 
   const searchInputRef = React.useRef<HTMLInputElement | null>(null);
 
   const pageFromPathname = React.useMemo(() => {
     return getBlogPageFromPathname(location.pathname || "");
   }, [location.pathname]);
-
-  const buildBlogPageHrefForState = React.useCallback(
-    (targetPage: number) => buildBlogPageHref(targetPage, location.search),
-    [location.search],
-  );
 
   const initialQueryFromUrl = React.useMemo(() => {
     try {
@@ -83,30 +94,26 @@ export const useBlogScreenController = (): BlogScreenController => {
   const isEmptyResults = !isLoading && filteredArticles.length === 0;
 
   const pageSize = 6;
-  const { page, setPage, totalPages, start, end, canPrev, canNext, pageItems } = usePagination(
-    filteredArticles.length,
-    pageSize,
-    "blog",
+  const totalPages = React.useMemo(
+    () => Math.max(1, Math.ceil(filteredArticles.length / pageSize)),
+    [filteredArticles.length],
   );
+  const page = React.useMemo(() => clampPage(pageFromPathname, totalPages), [pageFromPathname, totalPages]);
+  const start = React.useMemo(() => (page - 1) * pageSize, [page, pageSize]);
+  const end = React.useMemo(() => start + pageSize, [start, pageSize]);
+  const canPrev = page > 1;
+  const canNext = page < totalPages;
+  const pageItems = React.useMemo<(number | string)[]>(() => makePageItems(totalPages, page, 2, 7), [totalPages, page]);
   const pageArticles = React.useMemo(() => filteredArticles.slice(start, end), [filteredArticles, start, end]);
 
   const scrollTop = useScrollToTop({ immediate: false });
 
   React.useEffect(() => {
-    if (!didMountResetRef.current) {
-      didMountResetRef.current = true;
-      return;
-    }
-    pendingPageNavRef.current = { replace: true };
-    setPage(1);
-  }, [normalizedQuery, tagFilter, setPage]);
-
-  React.useEffect(() => {
-    const desired = Math.min(Math.max(pageFromPathname, 1), totalPages);
-    if (desired !== page) {
-      setPage(desired);
-    }
-  }, [pageFromPathname, totalPages, page, setPage]);
+    const raw = Math.max(pageFromPathname, 1);
+    if (isLoading) return;
+    if (raw <= totalPages) return;
+    navigate(buildBlogCanonicalHref(totalPages, location.search), { replace: true, scroll: false });
+  }, [pageFromPathname, totalPages, isLoading, location.search, navigate]);
 
   useDebouncedSetter(query, setDebouncedQuery, 220);
 
@@ -143,42 +150,24 @@ export const useBlogScreenController = (): BlogScreenController => {
 
     const nextSearch = params.toString();
     const searchWithPrefix = nextSearch ? `?${nextSearch}` : "";
-    if (searchWithPrefix !== location.search) {
-      navigate(`${location.pathname}${searchWithPrefix}`, { replace: true, scroll: false });
-    }
-  }, [query, tagFilter, location.pathname, location.search, navigate]);
-
-  React.useEffect(() => {
-    const urlPage = Math.max(pageFromPathname, 1);
-    const hasPendingNav = !!pendingPageNavRef.current;
-    const isUrlPageKnownValid = urlPage <= totalPages;
-
-    if (!hasPendingNav && page !== urlPage) {
-      if (isLoading) return;
-      if (isUrlPageKnownValid) return;
-    }
-    const desiredHref = buildBlogPageHrefForState(page);
     const currentHref = `${location.pathname}${location.search}`;
-    if (desiredHref === currentHref) {
-      pendingPageNavRef.current = null;
-      return;
+    const shouldResetToFirstPage = searchWithPrefix !== location.search && page !== 1;
+    const desiredHref = shouldResetToFirstPage
+      ? buildBlogCanonicalHref(1, searchWithPrefix)
+      : `${location.pathname}${searchWithPrefix}`;
+    if (desiredHref !== currentHref) {
+      navigate(desiredHref, { replace: true, scroll: false });
     }
-    const replace = pendingPageNavRef.current?.replace ?? false;
-    pendingPageNavRef.current = null;
-    navigate(desiredHref, { replace, scroll: false });
-  }, [page, pageFromPathname, totalPages, isLoading, buildBlogPageHrefForState, location.pathname, location.search, navigate]);
+  }, [query, tagFilter, page, location.pathname, location.search, navigate]);
 
   useBlogHotkeys({ query, setQuery, searchInputRef });
 
   const handleSetPage = (next: number | ((p: number) => number)) => {
-    pendingPageNavRef.current = { replace: false };
-    setPage((prev) => {
-      const computed = typeof next === "function" ? next(prev) : next;
-      if (computed !== prev) {
-        scrollTop();
-      }
-      return computed;
-    });
+    const computed = typeof next === "function" ? next(page) : next;
+    const safeNext = clampPage(computed, totalPages);
+    if (safeNext === page) return;
+    scrollTop();
+    navigate(buildBlogPaginationHref(safeNext, location.search), { replace: false, scroll: false });
   };
 
   return {

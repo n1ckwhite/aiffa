@@ -2,10 +2,10 @@ export const getShowGlobalBg = (pathname: string): boolean => {
   if (!pathname) return false;
   const cleanPath = pathname.split(/[?#]/)[0].replace(/\/+$/, '') || '/';
 
-  const exactMatches = new Set<string>(['/', '/profile', '/blog']);
+  const exactMatches = new Set<string>(['/', '/profile']);
   if (exactMatches.has(cleanPath)) return true;
 
-  const prefixMatches = ['/weekly', '/partners', '/hackathons', '/sessions', '/creators'];
+  const prefixMatches = ['/weekly', '/partners', '/hackathons', '/sessions', '/creators', '/blog'];
   if (prefixMatches.some((prefix) => cleanPath.startsWith(prefix))) return true;
 
   if (!cleanPath.startsWith('/learn')) return false;

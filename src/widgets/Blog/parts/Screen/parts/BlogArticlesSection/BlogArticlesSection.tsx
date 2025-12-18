@@ -1,41 +1,11 @@
 import React from "react";
-import { Box, SimpleGrid, Text, VStack } from "@chakra-ui/react";
-import type { useAppColors } from "@/shared/theme/colors";
-import { QuestioningLottieIcon } from "@/shared/icons/components-icon";
+import { Box, SimpleGrid, VStack } from "@chakra-ui/react";
 import { Pagination } from "shared/ui/Pagination";
-import type { PaginationColors } from "shared/ui/Pagination";
-import type { BlogArticle } from "../../../../types";
+import type { BlogArticle } from "@/widgets/Blog/types";
 import { BlogArticleCard } from "../BlogArticleCard/BlogArticleCard";
 import { BlogArticlesSkeletonGrid } from "../BlogArticlesSkeletonGrid/BlogArticlesSkeletonGrid";
-
-export type BlogArticlesSectionProps = {
-  theme: ReturnType<typeof useAppColors>;
-
-  isLoading: boolean;
-  isEmptyResults: boolean;
-  query: string;
-
-  pageSize: number;
-  pageArticles: BlogArticle[];
-
-  // card visuals
-  categoryColor: string;
-  cardRadius: string;
-  cardPadding: string;
-  cardBorder: string;
-  cardHoverBorder: string;
-  cardShadow: string;
-  cardHoverShadow: string;
-
-  // pagination
-  totalPages: number;
-  page: number;
-  canPrev: boolean;
-  canNext: boolean;
-  pageItems: Array<number | string>;
-  onSetPage: (next: number | ((p: number) => number)) => void;
-  paginationColors: PaginationColors;
-};
+import { BlogArticlesEmptyState } from "./parts/BlogArticlesEmptyState/BlogArticlesEmptyState";
+import type { BlogArticlesSectionProps } from "./types";
 
 export const BlogArticlesSection: React.FC<BlogArticlesSectionProps> = ({
   theme,
@@ -75,32 +45,7 @@ export const BlogArticlesSection: React.FC<BlogArticlesSectionProps> = ({
   return (
     <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
       {isEmptyResults && (
-        <Box w="full" textAlign="center" mt={0} role="status" aria-live="polite">
-          <VStack spacing={2} maxW="560px" mx="auto">
-            <Box
-              w="full"
-              opacity={0.95}
-              transform="scale(0.82)"
-              transformOrigin="top center"
-              mt={{ base: -2, md: -3 }}
-              height="150px"
-            >
-              <QuestioningLottieIcon />
-            </Box>
-            <Text fontWeight="semibold" color={theme.titleColor} fontSize={{ base: "lg", md: "xl" }}>
-              Ничего не нашли
-            </Text>
-            <Text color={theme.descColor}>
-              По запросу:{" "}
-              <Text as="span" fontWeight="semibold" color={theme.blue.accent}>
-                {query.trim() || "—"}
-              </Text>
-            </Text>
-            <Text color={theme.descColor} fontSize="sm">
-              Попробуйте изменить запрос или очистить поиск — мы покажем все статьи.
-            </Text>
-          </VStack>
-        </Box>
+        <BlogArticlesEmptyState theme={theme} query={query} />
       )}
 
       <SimpleGrid as="ul" columns={{ base: 1, md: 2, xl: 3 }} spacing={{ base: 6, md: 7 }} listStyleType="none" m={0} p={0}>

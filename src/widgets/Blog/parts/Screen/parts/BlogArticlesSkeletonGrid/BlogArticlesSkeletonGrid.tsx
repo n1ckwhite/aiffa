@@ -1,14 +1,6 @@
 import React from "react";
 import { AspectRatio, Box, HStack, SimpleGrid, Skeleton, VStack } from "@chakra-ui/react";
-
-export type BlogArticlesSkeletonGridProps = {
-  pageSize: number;
-  cardBorder: string;
-  cardRadius: string;
-  cardShadow: string;
-  cardPadding: string;
-  cardBg: string;
-};
+import { BlogArticlesSkeletonGridProps } from "./types";
 
 export const BlogArticlesSkeletonGrid: React.FC<BlogArticlesSkeletonGridProps> = ({
   pageSize,

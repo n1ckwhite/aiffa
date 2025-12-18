@@ -201,8 +201,6 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
         </Link>
       </Tooltip>
       
-      <DonateButton onClick={onDonate} />
-
       <ThemeToggleButton />
     </HStack>
   );

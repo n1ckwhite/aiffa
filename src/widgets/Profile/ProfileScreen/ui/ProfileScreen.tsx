@@ -13,6 +13,7 @@ import { useXpBursts } from '../../hooks/useXpBursts';
 import { useProfileScreenColors } from '../colors/useProfileScreenColors';
 import { useProfileEditing } from '../hooks/useProfileEditing';
 import { useAchievementsData } from '../hooks/useAchievementsData';
+import { parseGithubUsername } from '../hooks/useGithubHelpers';
 
 const ProfileScreen: React.FC = () => {
   const { profile } = useUserProfile();
@@ -23,7 +24,7 @@ const ProfileScreen: React.FC = () => {
   const {
     isOpen, onOpenEdit, onClose,
     name, bio, githubUrl, setEditGithubUrl, editName, editBio, editGithubUrl, setEditName, setEditBio,
-    isImporting, importFromGithub, onSaveModal, onReset, githubUsername
+    isImporting, importFromGithub, onSaveModal, onReset
   } = useProfileEditing();
 
   const xp = typeof (profile as any).xp === 'number' && isFinite((profile as any).xp) ? Math.max(0, (profile as any).xp) : 0;
@@ -75,7 +76,7 @@ const ProfileScreen: React.FC = () => {
               profileName={name}
               avatarUrl={(profile as any).avatarUrl || undefined}
               currentGithubUrl={githubUrl}
-              parseUsername={() => (githubUsername)}
+              parseUsername={parseGithubUsername}
               dividerColor={dividerColor}
               hintColor={hintColor}
             />

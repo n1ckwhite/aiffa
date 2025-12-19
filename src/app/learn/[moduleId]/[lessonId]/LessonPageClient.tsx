@@ -13,21 +13,20 @@ type LessonPageClientProps = {
 };
 
 const LessonPageClient = ({ moduleId, lessonId, initialMarkdown }: LessonPageClientProps) => {
-  // const { lesson, mod, loading } = useLessonLoad(moduleId, lessonId);
+  const { lesson, mod, loading } = useLessonLoad(moduleId, lessonId);
 
-  // if (loading || !lesson || !mod) {
-  //   return (
-  //     <VStack align="stretch" gap={6} pb="32px">
-  //       <LessonPageSkeleton />
-  //     </VStack>
-  //   );
-  // }
+  if (loading || !lesson || !mod) {
+    return (
+      <VStack align="stretch" gap={6} pb="32px">
+        <LessonPageSkeleton />
+      </VStack>
+    );
+  }
 
   return (
-    <p style={{ color: "red", marginTop: "100px" }}>huiny</p>
-    // <VStack align="stretch" gap={6} pb="32px">
-    //   <LessonPageView lesson={lesson} mod={mod} initialMarkdown={initialMarkdown} />
-    // </VStack>
+    <VStack align="stretch" gap={6} pb="32px">
+      <LessonPageView lesson={lesson} mod={mod} initialMarkdown={initialMarkdown} />
+    </VStack>
   );
 };
 

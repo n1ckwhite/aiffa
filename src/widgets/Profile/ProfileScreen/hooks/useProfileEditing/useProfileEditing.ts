@@ -1,25 +1,10 @@
 import React from 'react';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import { useUserProfile } from 'entities/user';
-import { GH_PREFIX, parseGithubUsername } from './useGithubHelpers';
-
-type ProfileDraft = {
-  name: string;
-  bio: string;
-};
-
-const DEFAULT_PROFILE: ProfileDraft = { name: 'Пользователь', bio: 'Описание' };
-const RESET_TOAST_ID = 'profile-reset-toast';
-
-const normalizeText = (value: string, fallback: string) => {
-  const trimmed = (value || '').trim();
-  return trimmed || fallback;
-};
-
-const extractGithubUsername = (url: string) => {
-  const match = (url || '').trim().match(/github\.com\/(?:users\/)?([A-Za-z0-9-_.]+)/i);
-  return match?.[1] || '';
-};
+import { GH_PREFIX, parseGithubUsername } from '../useGithubHelpers';
+import { normalizeText } from './helpers/normalize';
+import { importGithubProfile } from './helpers/github';
+import { DEFAULT_PROFILE, RESET_TOAST_ID, type ProfileDraft } from './types';
 
 export const useProfileEditing = () => {
   const { profile, updateProfile } = useUserProfile();
@@ -88,36 +73,35 @@ export const useProfileEditing = () => {
 
   const handleImportFromGithub = React.useCallback(async () => {
     try {
-      const url = (githubUrlInput || '').trim();
-      if (!url) return;
-
-      const username = extractGithubUsername(url);
-      if (!username) return;
-
       setIsImporting(true);
-      const res = await fetch(`https://api.github.com/users/${username}`);
-      if (!res.ok) throw new Error('GitHub API error');
-      const data = await res.json();
-      const ghName = (data?.name as string) || username;
-      const ghBio = (data?.bio as string) || '';
-      const ghAvatar = (data?.avatar_url as string) || '';
+      const imported = await importGithubProfile(githubUrlInput);
+      if (!imported) return;
+
       updateProfile({
-        name: ghName,
-        bio: ghBio,
-        avatarUrl: ghAvatar,
-        githubUrl: url,
-        githubUsername: username,
+        name: imported.name,
+        bio: imported.bio,
+        avatarUrl: imported.avatarUrl,
+        githubUrl: imported.githubUrl,
+        githubUsername: imported.githubUsername,
       });
 
-      setGithubUrlInput(url);
-      // Если модалка сейчас открыта, обновим draft, чтобы пользователь видел импортированные данные.
-      if (isOpen) setDraft({ name: ghName, bio: ghBio });
-    } catch {
-      // без тоста: по требованию показываем тосты только для reset
+      setGithubUrlInput(imported.githubUrl);
+      if (isOpen) setDraft({ name: imported.name, bio: imported.bio });
+    } catch(error) {
+      console.error(error);
+
+      toast({
+        id: 'profile-import-from-github-error',
+        title: 'Не удалось импортировать с GitHub',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+        position: 'bottom',
+      });
     } finally {
       setIsImporting(false);
     }
-  }, [githubUrlInput, updateProfile, isOpen]);
+  }, [githubUrlInput, updateProfile, isOpen, toast]);
 
   return {
     // disclosure

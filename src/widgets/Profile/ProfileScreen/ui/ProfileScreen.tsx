@@ -11,7 +11,7 @@ import { useTierMeta } from '../../hooks/useTierMeta';
 import { useStudyProgress } from '../../hooks/useStudyProgress';
 import { useXpBursts } from '../../hooks/useXpBursts';
 import { useProfileScreenColors } from '../colors/useProfileScreenColors';
-import { useProfileEditing } from '../hooks/useProfileEditing';
+import { useProfileEditing } from '../hooks/useProfileEditing/useProfileEditing';
 import { useAchievementsData } from '../hooks/useAchievementsData';
 import { parseGithubUsername } from '../hooks/useGithubHelpers';
 

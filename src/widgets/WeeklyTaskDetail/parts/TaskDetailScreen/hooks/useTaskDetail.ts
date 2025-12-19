@@ -84,10 +84,8 @@ export const useTaskDetail = (initialTaskId?: string) => {
   
 
   const onCheck = React.useCallback(async () => {
-    if (task.done) {
-      setResult({ ok: true, msg: 'Задача уже выполнена 🎉' });
-      return;
-    }
+    const wasAlreadyDone = !!task.done;
+    setResult(null);
     setChecking(true);
     try {
       let ok = false as boolean;
@@ -113,12 +111,18 @@ export const useTaskDetail = (initialTaskId?: string) => {
       if (ok) {
         const list = Array.isArray((profile as any).weeklyTasks) ? (profile as any).weeklyTasks : [];
         const willAllDone = list.length > 0 && list.every((t: any) => (t.id === task.id ? true : !!t.done));
+
+        if (wasAlreadyDone) {
+          setCongratsAll(willAllDone);
+          onOpen();
+          return;
+        }
+
         setCongratsAll(willAllDone);
         setWeeklyTask(task.id, { done: true });
         const reward = meta.reward ?? 50;
         const xp = Math.max(0, (profile as any).xp || 0) + reward;
         updateProfile({ xp });
-        setResult(null);
         onOpen();
       } else {
         const msg = 'Пока не совсем. Попробуйте ещё раз.';

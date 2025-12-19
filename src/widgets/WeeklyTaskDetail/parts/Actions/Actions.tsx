@@ -16,7 +16,7 @@ const Actions: React.FC<ActionsProps> = ({ onCheck, checking, done, externalLink
         onClick={onCheck}
         isLoading={checking}
         loadingText="Проверка"
-        isDisabled={!!done || !isEditorReady}
+        isDisabled={!isEditorReady}
         cursor={!isEditorReady ? 'not-allowed' : undefined}
         w={{ base: '100%', md: 'auto' }}
       >

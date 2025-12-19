@@ -29,7 +29,8 @@ const LessonPageClient = ({ moduleId, lessonId, initialMarkdown }: LessonPageCli
   //   </VStack>
   // );
   return (
-    <p style={{ color: "red" }}>Hello</p>
+    <LessonPageSkeleton />
+
   )
 };
 

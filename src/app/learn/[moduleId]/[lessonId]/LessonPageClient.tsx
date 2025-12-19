@@ -17,10 +17,9 @@ const LessonPageClient = ({ moduleId, lessonId, initialMarkdown }: LessonPageCli
 
   // if (loading || !lesson || !mod) {
   //   return (
-     return ( <VStack align="stretch" gap={6} pb="32px">
-        <LessonPageSkeleton />
-      </VStack>
-      )
+  //     <VStack align="stretch" gap={6} pb="32px">
+  //       <LessonPageSkeleton />
+  //     </VStack>
   //   );
   // }
 
@@ -29,6 +28,9 @@ const LessonPageClient = ({ moduleId, lessonId, initialMarkdown }: LessonPageCli
   //     <LessonPageView lesson={lesson} mod={mod} initialMarkdown={initialMarkdown} />
   //   </VStack>
   // );
+  return (
+    <p style={{ color: "red" }}>Hello</p>
+  )
 };
 
 export default LessonPageClient;

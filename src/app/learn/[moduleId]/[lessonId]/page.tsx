@@ -1,9 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
-import path from "node:path";
-import { promises as fs } from "node:fs";
-import { loadLesson, loadManifest } from "shared/lessons/api";
+import { loadLesson } from "shared/lessons/api";
 import LessonPageClient from "./LessonPageClient";
+import SeoStructuredData from "./SeoStructuredData";
 
 type LessonRouteParams = {
   params: {
@@ -40,88 +39,17 @@ export const generateMetadata = async ({ params }: LessonRouteParams): Promise<M
   };
 };
 
-const readLessonMarkdown = async (mdPath?: string | null): Promise<string | null> => {
-  if (!mdPath) return null;
-  try {
-    const relative = mdPath.startsWith("/") ? mdPath.slice(1) : mdPath;
-    const filePath = path.join(process.cwd(), "public", relative);
-    const content = await fs.readFile(filePath, "utf-8");
-    return content;
-  } catch {
-    return null;
-  }
-};
-
-const LessonRoutePage = async ({ params }: LessonRouteParams) => {
+// Важно для скорости: не делаем тяжёлых await здесь.
+// Данные подтягиваются в client-компоненте со скелетоном (как на /learn/:id).
+const LessonRoutePage = ({ params }: LessonRouteParams) => {
   const { moduleId, lessonId } = params;
-  const lesson = await loadLesson(moduleId, lessonId);
-  const initialMarkdown = await readLessonMarkdown(lesson?.mdPath);
-  const lessonAny = lesson as any;
-  const url = `${SITE_URL}/learn/${moduleId}/${lessonId}`;
-  const manifest = await loadManifest();
-  const moduleAny = (manifest.modules || []).find(
-    (mod: any) => mod.id === moduleId
-  ) as any;
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            headline: lessonAny?.title ?? "Урок",
-            description: lessonAny?.description,
-            url,
-            inLanguage: "ru-RU",
-            author: (lessonAny?.authors || []).map((author: any) => ({
-              "@type": "Person",
-              name: author.name ?? author.username,
-            })),
-          }),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              {
-                "@type": "ListItem",
-                position: 1,
-                name: "Главная",
-                item: SITE_URL,
-              },
-              {
-                "@type": "ListItem",
-                position: 2,
-                name: "Материалы",
-                item: `${SITE_URL}/learn`,
-              },
-              {
-                "@type": "ListItem",
-                position: 3,
-                name: moduleAny?.title ?? moduleId,
-                item: `${SITE_URL}/learn/${moduleId}`,
-              },
-              {
-                "@type": "ListItem",
-                position: 4,
-                name: lessonAny?.title ?? lessonId,
-                item: url,
-              },
-            ],
-          }),
-        }}
-      />
-      <LessonPageClient
-        moduleId={moduleId}
-        lessonId={lessonId}
-        initialMarkdown={initialMarkdown}
-      />
+      <LessonPageClient moduleId={moduleId} lessonId={lessonId} />
+      <Suspense fallback={null}>
+        <SeoStructuredData moduleId={moduleId} lessonId={lessonId} />
+      </Suspense>
     </>
   );
 };

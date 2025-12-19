@@ -23,14 +23,12 @@ const LessonPageClient = ({ moduleId, lessonId, initialMarkdown }: LessonPageCli
   //   );
   // }
 
-  // return (
-  //   <VStack align="stretch" gap={6} pb="32px">
-  //     <LessonPageView lesson={lesson} mod={mod} initialMarkdown={initialMarkdown} />
-  //   </VStack>
-  // );
   return (
-    <p style={{color: "red"}}>Hello</p>
-  )
+    <p style={{ color: "red", marginTop: "100px" }}>huiny</p>
+    // <VStack align="stretch" gap={6} pb="32px">
+    //   <LessonPageView lesson={lesson} mod={mod} initialMarkdown={initialMarkdown} />
+    // </VStack>
+  );
 };
 
 export default LessonPageClient;

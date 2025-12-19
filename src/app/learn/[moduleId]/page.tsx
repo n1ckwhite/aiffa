@@ -41,8 +41,20 @@ export const generateMetadata = async ({
   };
 };
 
-const ModuleLessonsRoutePage = ({ params }: ModuleLessonsRouteParams) => {
-  return <ModuleLessonsPageClient moduleId={params.moduleId} />;
+const ModuleLessonsRoutePage = async ({ params }: ModuleLessonsRouteParams) => {
+  // SSR: отдаём контент даже без JS (иначе client-hook загрузки не сработает).
+  // Для навигации внутри SPA Next всё равно подтянет эти props через RSC payload.
+  const moduleId = params.moduleId;
+  const manifest = await loadManifest();
+  const initialMod =
+    manifest.modules.find((m) => m.id === moduleId) ?? manifest.modules[0] ?? null;
+  return (
+    <ModuleLessonsPageClient
+      moduleId={moduleId}
+      // Важно: если модуль не найден — берём первый, чтобы не показывать вечный скелетон.
+      initialMod={initialMod}
+    />
+  );
 };
 
 export default ModuleLessonsRoutePage;

@@ -27,7 +27,7 @@ export type BlogArticlesSectionProps = {
   canPrev: boolean;
   canNext: boolean;
   pageItems: Array<number | string>;
-  onSetPage: (next: number | ((p: number) => number)) => void;
+  getPageHref: (p: number) => string;
   paginationColors: PaginationColors;
 };
 

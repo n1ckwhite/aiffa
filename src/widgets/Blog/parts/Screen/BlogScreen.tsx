@@ -6,8 +6,14 @@ import { BlogArticlesSection } from "./parts/BlogArticlesSection/BlogArticlesSec
 import { BlogWriteCtaSection } from "./parts/BlogWriteCtaSection/BlogWriteCtaSection";
 import { BlogFaqSupportSection } from "./parts/BlogFaqSupportSection/BlogFaqSupportSection";
 
-const BlogScreen: React.FC = () => {
-  const c = useBlogScreenController();
+type BlogScreenProps = {
+  initialPage?: number;
+  initialQuery?: string;
+  initialTag?: string;
+};
+
+const BlogScreen: React.FC<BlogScreenProps> = ({ initialPage, initialQuery, initialTag }) => {
+  const c = useBlogScreenController({ initialPage, initialQuery, initialTag });
 
   return (
     <Box position="relative">
@@ -55,7 +61,7 @@ const BlogScreen: React.FC = () => {
           canPrev={c.canPrev}
           canNext={c.canNext}
           pageItems={c.pageItems}
-          onSetPage={c.handleSetPage}
+          getPageHref={c.getPageHref}
           paginationColors={c.colors.paginationColors}
         />
 

@@ -27,5 +27,5 @@ export type BlogScreenController = {
     canPrev: boolean;
     canNext: boolean;
     pageItems: Array<number | string>;
-    handleSetPage: (next: number | ((p: number) => number)) => void;
+    getPageHref: (page: number) => string;
   };

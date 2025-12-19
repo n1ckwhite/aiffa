@@ -1,9 +1,7 @@
 import React from "react";
 import { Box, SimpleGrid, VStack } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
 import { Pagination } from "shared/ui/Pagination";
 import type { BlogArticle } from "@/widgets/Blog/types";
-import { buildBlogPaginationHref } from "../../lib/paginationPath";
 import { BlogArticleCard } from "../BlogArticleCard/BlogArticleCard";
 import { BlogArticlesSkeletonGrid } from "../BlogArticlesSkeletonGrid/BlogArticlesSkeletonGrid";
 import { BlogArticlesEmptyState } from "./parts/BlogArticlesEmptyState/BlogArticlesEmptyState";
@@ -28,15 +26,9 @@ export const BlogArticlesSection: React.FC<BlogArticlesSectionProps> = ({
   canPrev,
   canNext,
   pageItems,
-  onSetPage,
+  getPageHref,
   paginationColors,
 }) => {
-  const location = useLocation();
-  const getPageHref = React.useCallback(
-    (p: number) => buildBlogPaginationHref(p, location.search),
-    [location.search]
-  );
-
   if (isLoading) {
     return (
       <BlogArticlesSkeletonGrid
@@ -81,9 +73,9 @@ export const BlogArticlesSection: React.FC<BlogArticlesSectionProps> = ({
             page={page}
             canPrev={canPrev}
             canNext={canNext}
-            onPrev={() => onSetPage((p) => Math.max(1, p - 1))}
-            onNext={() => onSetPage((p) => Math.min(totalPages, p + 1))}
-            onSelect={(p) => onSetPage(p)}
+            onPrev={() => {}}
+            onNext={() => {}}
+            onSelect={() => {}}
             getPageHref={getPageHref}
             colors={paginationColors}
           />

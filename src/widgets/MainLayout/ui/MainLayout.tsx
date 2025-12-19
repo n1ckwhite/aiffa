@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useMemo } from "react";
+import { memo, ReactNode, Suspense, useMemo } from "react";
 import { Box } from "@chakra-ui/react";
 import { usePathname } from "next/navigation";
 import { useLayoutColors } from "../colors/useLayoutColors";
@@ -14,7 +14,7 @@ import FeedbackWidget from "widgets/FeedbackWidget";
 import GlobalBackground from "shared/ui/GlobalBackground";
 
 type MainLayoutProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const MainLayout = ({ children }: MainLayoutProps) => {
@@ -26,13 +26,13 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     <Box bg={appBg} minH="100dvh" position="relative" display="flex" flexDirection="column">
       {showGlobalBg && <GlobalBackground />}
 
-      <React.Suspense fallback={<HeaderFallback />}>
+      <Suspense fallback={<HeaderFallback />}>
         <Header />
-      </React.Suspense>
+      </Suspense>
       <HeaderSpacer />
 
       <LayoutErrorBoundary>
-        <React.Suspense fallback={<MainFallback />}>
+        <Suspense fallback={<MainFallback />}>
           <Box
             as="main"
             id="main-content"
@@ -40,12 +40,12 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           >
             {children}
           </Box>
-        </React.Suspense>
+        </Suspense>
       </LayoutErrorBoundary>
 
-      <React.Suspense fallback={<FooterFallback />}>
+      <Suspense fallback={<FooterFallback />}>
         <Footer />
-      </React.Suspense>
+      </Suspense>
 
       <FeedbackWidget />
     </Box>

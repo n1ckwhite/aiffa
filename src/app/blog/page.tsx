@@ -24,15 +24,15 @@ export const generateMetadata = async ({ searchParams }: BlogRoutePageProps): Pr
 
   return {
     title: isFirst ? "Блог" : `Блог — страница ${page}`,
-    description: "Статьи участников AIFFA: опыт, разборы и практические советы",
+  description: "Статьи участников AIFFA: опыт, разборы и практические советы",
     alternates: { canonical: canonicalUrl },
-    openGraph: {
+  openGraph: {
       url: canonicalUrl,
       title: isFirst ? "Блог — AIFFA" : `Блог — страница ${page} — AIFFA`,
-      description: "Статьи участников AIFFA: опыт, разборы и практические советы",
-      type: "website",
-    },
-  };
+    description: "Статьи участников AIFFA: опыт, разборы и практические советы",
+    type: "website",
+  },
+};
 };
 
 const BlogRoutePage = ({ searchParams }: BlogRoutePageProps) => {

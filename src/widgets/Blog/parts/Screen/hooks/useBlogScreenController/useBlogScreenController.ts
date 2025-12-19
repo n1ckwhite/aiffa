@@ -61,8 +61,8 @@ export const useBlogScreenController = ({
   const safeInitialQuery = (initialQuery ?? "").toString();
   const safeInitialTag = React.useMemo<BlogTagFilter>(() => {
     const tag = (initialTag ?? "").trim();
-    const found = BLOG_TAG_FILTERS.find((t) => t !== "Все" && normalizeTag(t) === normalizeTag(tag));
-    return found ?? "Все";
+      const found = BLOG_TAG_FILTERS.find((t) => t !== "Все" && normalizeTag(t) === normalizeTag(tag));
+      return found ?? "Все";
   }, [initialTag]);
 
   const { items, isLoading } = useBlogArticles();

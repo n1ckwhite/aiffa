@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
   const handleDonate = () => donateHelper({ toast, closeAllToasts: toast.closeAll });
 
   return (
-    <Box bg={colors.bg} mt={8} borderTop="1px solid" borderColor={colors.borderColor}>
+    <Box as="footer" bg={colors.bg} mt={8} borderTop="1px solid" borderColor={colors.borderColor}>
       <Container maxW="1200px" pt={6} pb={3}>
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6}>
           <Branding />

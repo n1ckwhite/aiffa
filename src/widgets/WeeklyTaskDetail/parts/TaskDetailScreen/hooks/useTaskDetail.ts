@@ -8,7 +8,10 @@ import { iconByTag } from '../../../lib/iconByTag';
 import { colorByTag } from '../../../lib/colorByTag';
 import { useScrollToTop } from 'shared/hooks/useScrollToTop';
 
-export type CheckResult = { ok: boolean; msg: string } | null;
+import { computeWillAllDone } from './helpers/progress';
+import { getComputedTag } from './helpers/meta';
+import { getWeeklyTask } from './helpers/task';
+import { getValidatorResult } from './helpers/validator';
 
 export const useTaskDetail = (initialTaskId?: string) => {
   const params = useParams();
@@ -19,26 +22,14 @@ export const useTaskDetail = (initialTaskId?: string) => {
   const toast = useToast();
   useScrollToTop();
 
-  const task = React.useMemo(() => {
-    const t = Array.isArray((profile as any).weeklyTasks)
-      ? (profile as any).weeklyTasks.find((x: any) => x.id === taskId)
-      : undefined;
-    return t || { id: taskId, label: 'Задача', description: '', done: false };
-  }, [profile, taskId]);
+  const task = React.useMemo(() => getWeeklyTask(profile as any, taskId), [profile, taskId]);
 
   const mdMeta = useLoadMdMeta(taskId, task.label, task.description);
   const externalLinks = useExternalLinks(taskId);
 
-  const lang = (mdMeta?.editorLanguage || '').toLowerCase();
-  const computedTag = (mdMeta?.tag || (
-    lang === 'html' ? 'HTML'
-    : lang === 'go' ? 'GO'
-    : lang === 'javascript' ? 'JS'
-    : lang === 'css' ? 'CSS'
-    : 'TASK'
-  ));
-  const computedIcon = iconByTag(computedTag);
-  const computedColor = colorByTag(computedTag);
+  const computedTag = React.useMemo(() => getComputedTag(mdMeta as any), [mdMeta]);
+  const computedIcon = React.useMemo(() => iconByTag(computedTag), [computedTag]);
+  const computedColor = React.useMemo(() => colorByTag(computedTag), [computedTag]);
   const reward = 50;
   const meta = React.useMemo(() => ({
     tag: computedTag,
@@ -49,9 +40,10 @@ export const useTaskDetail = (initialTaskId?: string) => {
     validator: (s: string) => (s || '').trim().length > 0,
   }), [computedTag, computedIcon, computedColor]);
 
-  const author = React.useMemo(() => {
-    return { name: mdMeta?.authorName || 'Nick White', username: mdMeta?.authorUsername || 'n1ckwhite' };
-  }, [mdMeta]);
+  const author = React.useMemo(
+    () => ({ name: (mdMeta as any)?.authorName || 'Nick White', username: (mdMeta as any)?.authorUsername || 'n1ckwhite' }),
+    [mdMeta],
+  );
   const authorHref = mdMeta?.authorUrl || (author.username ? `https://github.com/${author.username}` : '#');
   const authorAvatar = author.username ? `https://avatars.githubusercontent.com/${author.username}?s=80` : undefined;
   const authorNote = React.useMemo(() => {
@@ -59,7 +51,7 @@ export const useTaskDetail = (initialTaskId?: string) => {
   }, [mdMeta]);
 
   const [input, setInput] = React.useState('');
-  const [result, setResult] = React.useState<CheckResult>(null);
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
   const [checking, setChecking] = React.useState(false);
   const [congratsAll, setCongratsAll] = React.useState(false);
 
@@ -81,61 +73,39 @@ export const useTaskDetail = (initialTaskId?: string) => {
     }
   }, []);
 
-  
-
   const onCheck = React.useCallback(async () => {
     const wasAlreadyDone = !!task.done;
-    setResult(null);
+    setErrorMessage(null);
     setChecking(true);
     try {
-      let ok = false as boolean;
-      if (mdMeta?.validator) {
-        const res = mdMeta.validator(input);
-        ok = typeof res === 'boolean' ? res : !!(res as any).ok;
-        if (!ok && res && typeof res === 'object' && 'msg' in (res as any)) {
-          const msg = String((res as any).msg || 'Пока не совсем. Попробуйте ещё раз.');
-          setResult({ ok: false, msg });
-          toast({
-            status: 'error',
-            title: 'Пока не совсем',
-            description: msg,
-            isClosable: true,
-            duration: 6000,
-            position: 'top',
-          });
-          return;
-        }
-      } else {
-        ok = !!meta.validator(input);
-      }
-      if (ok) {
-        const list = Array.isArray((profile as any).weeklyTasks) ? (profile as any).weeklyTasks : [];
-        const willAllDone = list.length > 0 && list.every((t: any) => (t.id === task.id ? true : !!t.done));
-
-        if (wasAlreadyDone) {
-          setCongratsAll(willAllDone);
-          onOpen();
-          return;
-        }
-
-        setCongratsAll(willAllDone);
-        setWeeklyTask(task.id, { done: true });
-        const reward = meta.reward ?? 50;
-        const xp = Math.max(0, (profile as any).xp || 0) + reward;
-        updateProfile({ xp });
-        onOpen();
-      } else {
-        const msg = 'Пока не совсем. Попробуйте ещё раз.';
-        setResult({ ok: false, msg });
+      const { ok, msg } = getValidatorResult(mdMeta as any, meta.validator, input);
+      if (!ok) {
+        const nextMsg = msg || 'Пока не совсем. Попробуйте ещё раз.';
+        setErrorMessage(nextMsg);
         toast({
           status: 'error',
           title: 'Пока не совсем',
-          description: msg,
+          description: nextMsg,
           isClosable: true,
           duration: 6000,
           position: 'top',
         });
+        return;
       }
+
+      const willAllDone = computeWillAllDone(profile as any, task.id);
+
+      // Успех: открываем модалку и при необходимости начисляем XP.
+      setCongratsAll(willAllDone);
+      if (wasAlreadyDone) {
+        onOpen();
+        return;
+      }
+
+      setWeeklyTask(task.id, { done: true });
+      const nextXp = Math.max(0, (profile as any).xp || 0) + (meta.reward ?? 50);
+      updateProfile({ xp: nextXp });
+      onOpen();
     } finally {
       setChecking(false);
     }
@@ -154,7 +124,9 @@ export const useTaskDetail = (initialTaskId?: string) => {
     meta,
     author, authorHref, authorAvatar, authorNote,
     input, setInput,
-    result, checking, congratsAll,
+    errorMessage,
+    checking,
+    congratsAll,
     openVSCode,
     onCheck,
     isOpen,

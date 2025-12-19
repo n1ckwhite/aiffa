@@ -30,7 +30,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
     authorNote,
     input,
     setInput,
-    result,
+    errorMessage,
     checking,
     congratsAll,
     openVSCode,
@@ -137,7 +137,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
             externalLinks={externalLinks}
             isEditorReady={isEditorReady}
           />
-          {result && !result.ok && (
+          {!!errorMessage && (
             <Box
               role="alert"
               mt={4}
@@ -157,7 +157,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
                     Проверка не прошла
                   </Text>
                   <Text mt={1} fontSize="sm" color={errorTextColor}>
-              {result.msg}
+                    {errorMessage}
                   </Text>
                 </Box>
               </HStack>

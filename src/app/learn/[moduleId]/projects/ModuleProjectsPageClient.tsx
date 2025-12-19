@@ -9,9 +9,10 @@ import type { Module } from "shared/lessons/manifest";
 type ModuleProjectsPageClientProps = {
   moduleId: string;
   initialMod?: Module | null;
+  initialPage?: number;
 };
 
-const ModuleProjectsPageClient = ({ moduleId, initialMod }: ModuleProjectsPageClientProps) => {
+const ModuleProjectsPageClient = ({ moduleId, initialMod, initialPage }: ModuleProjectsPageClientProps) => {
   const shouldLoadOnClient = !initialMod;
   const { mod: loadedMod, loading } = useModuleProjectsLoad(moduleId, shouldLoadOnClient);
   const mod = initialMod ?? loadedMod;
@@ -20,7 +21,13 @@ const ModuleProjectsPageClient = ({ moduleId, initialMod }: ModuleProjectsPageCl
     return <ModuleProjectsSkeleton />;
   }
 
-  return <ModuleProjectsView mod={mod} />;
+  return (
+    <ModuleProjectsView
+      mod={mod}
+      currentPage={initialPage}
+      getPageHref={(page) => `/learn/${mod.id}/projects?page=${page}`}
+    />
+  );
 };
 
 export default ModuleProjectsPageClient;

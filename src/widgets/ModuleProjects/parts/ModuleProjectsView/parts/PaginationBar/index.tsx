@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 import { Pagination } from "shared/ui/Pagination";
 import { PaginationBarProps } from "./types";
 
-export const PaginationBar: React.FC<PaginationBarProps> = ({ pageItems, page, canPrev, canNext, onPrev, onNext, onSelect, colors }) => {
+export const PaginationBar: React.FC<PaginationBarProps> = ({ pageItems, page, canPrev, canNext, getPageHref, colors }) => {
   return (
     <Box w="full" maxW="100%">
       <Pagination
@@ -11,9 +11,10 @@ export const PaginationBar: React.FC<PaginationBarProps> = ({ pageItems, page, c
         page={page}
         canPrev={canPrev}
         canNext={canNext}
-        onPrev={onPrev}
-        onNext={onNext}
-        onSelect={onSelect}
+        onPrev={() => {}}
+        onNext={() => {}}
+        onSelect={() => {}}
+        getPageHref={getPageHref}
         colors={colors as any}
       />
     </Box>

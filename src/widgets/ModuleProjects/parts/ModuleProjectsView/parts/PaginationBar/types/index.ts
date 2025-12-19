@@ -5,9 +5,7 @@ export type PaginationBarProps = {
   page: number;
   canPrev: boolean;
   canNext: boolean;
-  onPrev: () => void;
-  onNext: () => void;
-  onSelect: (p: number) => void;
+  getPageHref?: (page: number) => string;
   colors: ReturnType<typeof useModuleProjectsColors>;
 };
 

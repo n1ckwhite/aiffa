@@ -1,35 +1,36 @@
 "use client";
 
-import React, { useMemo } from "react";
-import { useUserProfile } from "entities/user";
+import React from "react";
 import { ModuleLessonsView } from "widgets/ModuleLessons";
-import { useModuleLessonsLoad } from "widgets/ModuleLessons/hooks/useModuleLessonsLoad";
-import { useScrollTopOnChange } from "widgets/ModuleLessons/hooks/useScrollTopOnChange";
 import ModuleLessonsSkeleton from "pages/ModuleLessonsPage/Skeleton";
 import type { Module } from "shared/lessons/manifest";
+import { useModuleLessonsPageClient } from "./hooks/useModuleLessonsPageClient";
 
 type ModuleLessonsPageClientProps = {
   moduleId: string;
   initialMod?: Module | null;
+  initialPage?: number;
 };
 
-const ModuleLessonsPageClient = ({ moduleId, initialMod }: ModuleLessonsPageClientProps) => {
-  const { profile } = useUserProfile();
-  const shouldLoadOnClient = !initialMod;
-  const { mod: loadedMod, loading } = useModuleLessonsLoad(moduleId, shouldLoadOnClient);
-  const mod = initialMod ?? loadedMod;
-  useScrollTopOnChange([mod?.id]);
+const ModuleLessonsPageClient = ({ moduleId, initialMod, initialPage }: ModuleLessonsPageClientProps) => {
+  const { mod, isLoading, solvedMap, currentPage, getPageHref } = useModuleLessonsPageClient({
+    moduleId,
+    initialMod,
+    initialPage,
+  });
 
-  const solvedMap = useMemo(
-    () => (profile as any)?.solvedTaskIds || {},
-    [profile]
-  );
-
-  if ((shouldLoadOnClient && loading) || !mod) {
+  if (isLoading || !mod) {
     return <ModuleLessonsSkeleton />;
   }
 
-  return <ModuleLessonsView mod={mod} profileSolvedTaskIds={solvedMap} />;
+  return (
+    <ModuleLessonsView
+      mod={mod}
+      profileSolvedTaskIds={solvedMap}
+      currentPage={currentPage}
+      getPageHref={getPageHref}
+    />
+  );
 };
 
 export default ModuleLessonsPageClient;

@@ -7,6 +7,9 @@ type ModuleLessonsRouteParams = {
   params: {
     moduleId: string;
   };
+  searchParams?: {
+    page?: string;
+  };
 };
 
 const SITE_URL =
@@ -41,10 +44,12 @@ export const generateMetadata = async ({
   };
 };
 
-const ModuleLessonsRoutePage = async ({ params }: ModuleLessonsRouteParams) => {
+const ModuleLessonsRoutePage = async ({ params, searchParams }: ModuleLessonsRouteParams) => {
   // SSR: отдаём контент даже без JS (иначе client-hook загрузки не сработает).
   // Для навигации внутри SPA Next всё равно подтянет эти props через RSC payload.
   const moduleId = params.moduleId;
+  const pageFromQuery = Number(searchParams?.page ?? "1");
+  const initialPage = Number.isFinite(pageFromQuery) && pageFromQuery > 0 ? pageFromQuery : 1;
   const manifest = await loadManifest();
   const initialMod =
     manifest.modules.find((m) => m.id === moduleId) ?? manifest.modules[0] ?? null;
@@ -53,6 +58,7 @@ const ModuleLessonsRoutePage = async ({ params }: ModuleLessonsRouteParams) => {
       moduleId={moduleId}
       // Важно: если модуль не найден — берём первый, чтобы не показывать вечный скелетон.
       initialMod={initialMod}
+      initialPage={initialPage}
     />
   );
 };

@@ -2,11 +2,11 @@ import { keyframes } from '@emotion/react';
 
 export type PaginationBarProps = {
   page: number;
-  setPage: (p: number | ((p: number) => number)) => void;
   canPrev: boolean;
   canNext: boolean;
   totalPages: number;
   pageItems: Array<number | string>;
+  getPageHref?: (page: number) => string;
   colors: any;
 };
 

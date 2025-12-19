@@ -2,11 +2,15 @@ import React from 'react';
 import type { Module } from 'shared/lessons/manifest';
 import { loadManifest } from 'shared/lessons/api';
 
-export const useModuleProjectsLoad = (moduleId?: string) => {
+export const useModuleProjectsLoad = (moduleId?: string, enabled: boolean = true) => {
   const [mod, setMod] = React.useState<Module | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
+    if (!enabled) {
+      setLoading(false);
+      return;
+    }
     let cancelled = false;
     (async () => {
       setLoading(true);
@@ -22,7 +26,7 @@ export const useModuleProjectsLoad = (moduleId?: string) => {
       }
     })();
     return () => { cancelled = true; };
-  }, [moduleId]);
+  }, [moduleId, enabled]);
 
   return { mod, loading };
 };

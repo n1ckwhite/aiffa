@@ -4,15 +4,19 @@ import React from "react";
 import { ModuleProjectsView } from "widgets/ModuleProjects";
 import { useModuleProjectsLoad } from "widgets/ModuleProjects/hooks/useModuleProjectsLoad";
 import ModuleProjectsSkeleton from "pages/ModuleProjectsPage/Skeleton";
+import type { Module } from "shared/lessons/manifest";
 
 type ModuleProjectsPageClientProps = {
   moduleId: string;
+  initialMod?: Module | null;
 };
 
-const ModuleProjectsPageClient = ({ moduleId }: ModuleProjectsPageClientProps) => {
-  const { mod, loading } = useModuleProjectsLoad(moduleId);
+const ModuleProjectsPageClient = ({ moduleId, initialMod }: ModuleProjectsPageClientProps) => {
+  const shouldLoadOnClient = !initialMod;
+  const { mod: loadedMod, loading } = useModuleProjectsLoad(moduleId, shouldLoadOnClient);
+  const mod = initialMod ?? loadedMod;
 
-  if (loading || !mod) {
+  if ((shouldLoadOnClient && loading) || !mod) {
     return <ModuleProjectsSkeleton />;
   }
 

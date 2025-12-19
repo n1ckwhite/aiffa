@@ -41,8 +41,13 @@ export const generateMetadata = async ({
   };
 };
 
-const ModuleProjectsRoutePage = ({ params }: ModuleProjectsRouteParams) => {
-  return <ModuleProjectsPageClient moduleId={params.moduleId} />;
+const ModuleProjectsRoutePage = async ({ params }: ModuleProjectsRouteParams) => {
+  const moduleId = params.moduleId;
+  const manifest = await loadManifest();
+  const initialMod =
+    manifest.modules.find((m) => m.id === moduleId) ?? manifest.modules[0] ?? null;
+
+  return <ModuleProjectsPageClient moduleId={moduleId} initialMod={initialMod} />;
 };
 
 export default ModuleProjectsRoutePage;

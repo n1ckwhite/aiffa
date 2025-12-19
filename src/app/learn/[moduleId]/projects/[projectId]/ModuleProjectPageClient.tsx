@@ -12,7 +12,11 @@ import { AuthorCard } from "widgets/LessonPageView/ui/LessonPageView/parts/Autho
 import LessonFeedback from "widgets/Lessons/LessonFeedback";
 import { useModuleProjectPageClientColors } from "./colors/useModuleProjectPageClientColors";
 import { useProjectAuthorSupport } from "widgets/ModuleProjectView/parts/ModuleProjectView/features/useProjectAuthorSupport";
-import type { ModuleProjectPageClientProps } from "./types";
+
+export type ModuleProjectPageClientProps = {
+  moduleId: string;
+  projectId: string;
+};
 
 const ModuleProjectPageClient = ({ moduleId, projectId }: ModuleProjectPageClientProps) => {
   const { mod, project, loading } = useModuleProjectLoad(moduleId, projectId);

@@ -14,15 +14,10 @@ const LessonPageSkeleton: React.FC = () => {
             <Box w="100%" maxW="840px" mx="auto">
               {/* Хлебные крошки */}
               <HStack spacing={2} mb={4} align="center">
-                <Skeleton h="10px" w="80px" borderRadius="full" />
+                <Skeleton h="35px" w="188px" borderRadius="full" />
                 <Skeleton h="10px" w="6px" borderRadius="full" />
                 <Skeleton h="10px" w="120px" borderRadius="full" />
               </HStack>
-
-              {/* Заголовок урока */}
-              <Skeleton h={{ base: "28px", md: "34px" }} w={{ base: "82%", md: "70%" }} borderRadius="md" mb={4} />
-
-              {/* Автор карточка (в стиле WeeklyTaskDetailSkeleton) */}
               <Box
                 borderRadius="xl"
                 p={{ base: 3, md: 4 }}

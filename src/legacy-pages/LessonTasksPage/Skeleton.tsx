@@ -7,7 +7,7 @@ const LessonTasksSkeleton: React.FC = () => {
       <Box maxW="1200px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
         {/* Хлебные крошки (StageBreadcrumb) */}
         <HStack spacing={2} mb={4} align="center">
-          <Skeleton h="10px" w="80px" borderRadius="full" />
+          <Skeleton h="35px" w="188px" borderRadius="full" />
           <Skeleton h="10px" w="6px" borderRadius="full" />
           <Skeleton h="10px" w="120px" borderRadius="full" />
           <Skeleton h="10px" w="6px" borderRadius="full" />
@@ -15,7 +15,7 @@ const LessonTasksSkeleton: React.FC = () => {
         </HStack>
 
         {/* Карточка с заголовком, задачами и прогрессом */}
-        <Box borderRadius="xl" borderWidth="1px" borderColor="whiteAlpha.200" p={{ base: 4, md: 5 }}>
+        <Box>
           {/* Header с иконкой, заголовком и прогресс‑бейджем + кнопка "К материалу" */}
           <HStack
             spacing={3}
@@ -33,20 +33,13 @@ const LessonTasksSkeleton: React.FC = () => {
                 alignItems="center"
                 justifyContent="center"
               >
-                <SkeletonCircle boxSize={{ base: "28px", md: "32px" }} />
+                <SkeletonCircle boxSize={{ base: "44px", md: "44px" }} />
               </Box>
-              <Skeleton h="20px" w="120px" borderRadius="md" />
-              <Skeleton h="18px" w="72px" borderRadius="full" />
+              <Skeleton h="30px" w="104px" borderRadius="md" />
             </HStack>
             <HStack spacing={2}>
               <Skeleton h="32px" w="160px" borderRadius="full" />
             </HStack>
-          </HStack>
-
-          {/* Подзаголовок / фильтры */}
-          <HStack spacing={2} mb={4} flexWrap="wrap">
-            <Skeleton h="22px" w="140px" borderRadius="full" />
-            <Skeleton h="22px" w="110px" borderRadius="full" />
           </HStack>
 
           {/* Карточки задач (структура одинаковая для разных типов задач) */}
@@ -56,6 +49,7 @@ const LessonTasksSkeleton: React.FC = () => {
                 // eslint-disable-next-line react/no-array-index-key
                 key={i}
                 borderRadius="2xl"
+                 borderWidth="1px" borderColor="whiteAlpha.200"
                 p={{ base: 4, md: 5 }}
               >
                 {/* Заголовок задачи с номером и текстом */}

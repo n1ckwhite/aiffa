@@ -1,22 +1,25 @@
 import React from 'react';
-import { Box, VStack, HStack, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, Icon } from '@chakra-ui/react';
+import { Box, HStack, Heading, Icon, Text, VStack } from '@chakra-ui/react';
 import { AddIcon, QuestionOutlineIcon } from '@chakra-ui/icons';
-import { useAppColors } from 'shared/theme/colors';
 import SupportBlock from 'widgets/SupportBlock';
 import type { ModulesFAQProps } from './types/ModulesFAQ.types';
 import { modulesFaqConfig } from './data';
+import { useModulesFaqColors } from './colors/useModulesFaqColors';
+import { useModulesFaqController } from './hooks/useModulesFaqController';
+import { getFaqAnswerId, getFaqQuestionId, getFaqSectionTitleId } from './helpers/ids';
 
 const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = true }) => {
-  const theme = useAppColors();
-  const faqHeadingColor = theme.blue.accent;
-  const faqBorderColor = theme.borderColor;
-  const faqTitleColor = theme.blue.accent;
-  const faqTextColor = theme.descColor;
+  const { headingColor, titleColor, textColor, sectionBg, focusShadow } = useModulesFaqColors();
   const key = variant ?? 'materials';
   const { items: list, title: defaultHeading } = modulesFaqConfig[key];
   const heading = title || defaultHeading;
   const supportVariant = key === 'blog' ? 'blog' : 'modules';
-  const sectionTitleId = `faq-${key}-title`;
+  const sectionTitleId = getFaqSectionTitleId(key);
+
+  const { openIdx, toggleIdx, registerBodyRef, getMeasuredHeight } = useModulesFaqController({
+    variantKey: key,
+    itemsCount: list.length,
+  });
 
   return (
       <VStack
@@ -28,7 +31,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
         maxW={{ base: '100%', md: '900px' }}
         mx="auto"
       >
-        <HStack mb={2} spacing={3} color={faqHeadingColor} align="center">
+        <HStack mb={2} spacing={3} color={headingColor} align="center">
           <Icon as={QuestionOutlineIcon} boxSize={{ base: 4, md: 5 }} />
           <Heading
             as="h2"
@@ -41,77 +44,89 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
         </HStack>
         <Box
           borderWidth="1px"
-          borderColor={faqBorderColor}
           borderRadius="2xl"
           p={{ base: 3, md: 4, lg: 5 }}
-          bg={theme.cardBgFAQ}
+          bg={sectionBg}
         >
-          <Accordion allowToggle defaultIndex={0}>
-            {list.map((it, idx) => (
-              <AccordionItem key={idx} border="none">
-                {({ isExpanded }) => (
-                  <>
-                    <h2>
-                      <AccordionButton
-                        px={0}
-                        py={{ base: 2.5, md: 3 }}
-                        borderRadius="xl"
-                        borderBottomRadius={isExpanded ? 0 : 'xl'}
-                        borderWidth={0}
-                        bg="transparent"
-                        _hover={{ bg: 'transparent' }}
-                        _expanded={{ bg: 'transparent' }}
-                        _focus={{ boxShadow: 'none', bg: 'transparent' }}
-                        _active={{ bg: 'transparent' }}
-                        mb={isExpanded ? 0 : 2}
-                        justifyContent="space-between"
-                        alignItems="flex-start"
+          <VStack align="stretch" spacing={0}>
+            {list.map((it, idx) => {
+              const isOpen = openIdx === idx;
+              const measuredHeight = getMeasuredHeight(idx);
+              const buttonId = getFaqQuestionId(key, idx);
+              const panelId = getFaqAnswerId(key, idx);
+
+              return (
+                <Box
+                  key={idx}
+                >
+                  <Box
+                    as="button"
+                    id={buttonId}
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => toggleIdx(idx)}
+                    w="100%"
+                    textAlign="left"
+                    px={0}
+                    py={{ base: 2.5, md: 3 }}
+                    borderRadius="xl"
+                    bg={isOpen ? 'transparent' : 'transparent'}
+                    _hover={{ bg: 'transparent' }}
+                    _focusVisible={{ boxShadow: focusShadow }}
+                    transition="background-color 160ms ease"
+                    display="block"
+                    cursor="pointer"
+                  >
+                    <HStack justify="space-between" align="flex-start" gap={3}>
+                      <Text
+                        as="span"
+                        fontWeight="semibold"
+                        fontSize={{ base: 'md', md: 'lg' }}
+                        lineHeight={1.35}
+                        flex="1 1 auto"
+                        minW={0}
                       >
-                        <HStack flex="1" spacing={3}>
-                          <Box
-                            as="span"
-                            fontWeight="semibold"
-                            fontSize={{ base: 'md', md: 'lg' }}
-                            textAlign="left"
-                          >
-                            {it.title}
-                          </Box>
-                        </HStack>
-                        <Box
-                          w="22px"
-                          h="22px"
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="center"
-                          flexShrink={0}
-                          ml={{ base: 2, md: 3 }}
-                          mt={{ base: 1, md: 1.5 }}
-                          transform={isExpanded ? 'rotate(45deg)' : 'rotate(0deg)'}
-                          transition="transform 180ms ease"
-                        >
-                          <AddIcon boxSize={{ base: 2.5, md: 3 }} color={faqTitleColor} />
-                        </Box>
-                      </AccordionButton>
-                    </h2>
-                    <AccordionPanel
-                      px={0}
-                      pt={0}
-                      pb={3}
-                      fontSize="sm"
-                      lineHeight={1.8}
-                      color={faqTextColor}
-                      bg="transparent"
-                      borderWidth={0}
-                      mb={2}
-                      textAlign="left"
-                    >
-                      {it.content}
-                    </AccordionPanel>
-                  </>
-                )}
-              </AccordionItem>
-            ))}
-          </Accordion>
+                        {it.title}
+                      </Text>
+                      <Box
+                        w="28px"
+                        h="28px"
+                        borderRadius="full"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        flexShrink={0}
+                        mt={{ base: 0.5, md: 1 }}
+                        transition="transform 180ms ease, background-color 160ms ease"
+                        transform={isOpen ? 'rotate(45deg)' : 'rotate(0deg)'}
+                      >
+                        <AddIcon boxSize={{ base: 3, md: 3.5 }} color={titleColor} />
+                      </Box>
+                    </HStack>
+                  </Box>
+
+                  <Box
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    aria-hidden={!isOpen}
+                    overflow="hidden"
+                    maxH={isOpen ? (measuredHeight != null ? `${measuredHeight}px` : 'none') : '0px'}
+                    opacity={isOpen ? 1 : 0}
+                    transition={isOpen && measuredHeight == null ? 'none' : 'max-height 220ms ease, opacity 160ms ease'}
+                    willChange="max-height, opacity"
+                  >
+                    <Box ref={(el) => registerBodyRef(idx, el)} px={0} pt={0} pb={3}>
+                      <Text fontSize="sm" lineHeight={1.8} color={textColor} textAlign="left">
+                        {it.content}
+                      </Text>
+                    </Box>
+                  </Box>
+                </Box>
+              );
+            })}
+          </VStack>
         </Box>
         {showSupportBlock && <SupportBlock variant={supportVariant} />}
       </VStack>

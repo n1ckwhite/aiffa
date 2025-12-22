@@ -13,10 +13,10 @@ const CreatorsJoinSection: React.FC = () => {
     <Box as="section" id="how-to-join" scrollMarginTop="90px" aria-labelledby={headingId}>
       <VStack align="stretch" spacing={4}>
         <VStack align="center" spacing={3} textAlign="center">
-          <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
+          <Heading id={headingId} as="h2" size={{base: "md", md: "lg"}} letterSpacing="-0.02em">
             Как попасть в создатели AIFFA
           </Heading>
-          <Text fontSize="md" color={pageDescriptionColor} textAlign="center" maxW={{ base: "full", md: "840px" }} mx="auto">
+          <Text fontSize={{base: "md", md: "lg"}} color={pageDescriptionColor} textAlign="center" maxW={{ base: "full", md: "840px" }} mx="auto">
             Мы отмечаем людей, которые делают вклад в экосистему: делятся материалами и задачами недели, мейнтейнтят проекты, пишут статьи, помогают на
             хакатонах и поддерживают комьюнити. Присоединиться может любой, кто создаёт пользу и готов делиться опытом.
           </Text>

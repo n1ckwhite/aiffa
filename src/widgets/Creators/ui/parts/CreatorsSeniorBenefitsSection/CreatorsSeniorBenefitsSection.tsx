@@ -15,10 +15,10 @@ const CreatorsSeniorBenefitsSection: React.FC = () => {
       <SeniorTeamIcon />
       <VStack spacing={3} align="center" textAlign="center">
         <VStack spacing={3} align="center">
-          <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
+          <Heading id={headingId} as="h2" size={{base: "md", md: "lg"}}>
             Как это делает вас сильнее
           </Heading>
-          <Text fontSize="md" color={seniorTextColor} maxW={{ base: "full", md: "880px" }}>
+          <Text fontSize={{base: "md", md: "lg"}} color={seniorTextColor} maxW={{ base: "full", md: "880px" }}>
             Делитесь опытом, чтобы создать поток знаний для комьюнити: люди, которым вы помогаете, позже смогут усилить ваши проекты, принести новые
             идеи и закрыть сложные задачи вместе с вами.
           </Text>

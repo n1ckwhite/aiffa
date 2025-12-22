@@ -46,7 +46,7 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
         </Heading>
         <Text
           mt={3}
-          fontSize="md"
+          fontSize={{base: "md", md: "lg"}}
           color={mutedTextColor}
         >
           Все встречи проходят онлайн, по московскому времени.

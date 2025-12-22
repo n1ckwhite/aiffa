@@ -26,10 +26,10 @@ const FormatsSection: React.FC = () => {
   return (
     <VStack as="section" aria-labelledby="partners-formats-heading" align="center" spacing={3}>
       <PartnersLottieIcon />
-        <Heading as="h2" id="partners-formats-heading" size="md" letterSpacing="-0.02em">
+        <Heading as="h2" id="partners-formats-heading" size={{base: "md", md: "lg"}} letterSpacing="-0.02em">
           Форматы партнёрства
         </Heading>
-        <Text fontSize="md" color={mutedTextColor} align="center">
+        <Text fontSize={{base: "md", md: "lg"}} color={mutedTextColor} align="center">
           Мы подбираем формат под задачи компании: от HR и бренда до продвижения
           технологий и инструментов.
         </Text>
@@ -250,10 +250,10 @@ const FormatsSection: React.FC = () => {
           textAlign="center"
         >
           <BusinessWorkshopIcon />
-          <Heading as="h2" size="md" letterSpacing="-0.02em">
+          <Heading as="h2" size={{base: "md", md: "lg"}} letterSpacing="-0.02em">
             Пакеты по уровню вовлечения
           </Heading>
-          <Text fontSize="md" color={mutedTextColor} mt={3}>
+          <Text fontSize={{base: "md", md: "lg"}} color={mutedTextColor} mt={3}>
             Примеры форматов: финальный scope и стоимость обсуждаем индивидуально под вашу задачу.
           </Text>
           <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, md: 4 }} mt={3}>

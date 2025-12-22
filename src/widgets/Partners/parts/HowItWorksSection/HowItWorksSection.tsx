@@ -55,12 +55,12 @@ const HowItWorksSection: React.FC = () => {
           flexDirection="column"
           gap={3}
         >
-          <Heading as="h2" size="md" letterSpacing="-0.02em">
+          <Heading as="h2" size={{base: "md", md: "lg"}} letterSpacing="-0.02em">
             Как проходит партнёрство
           </Heading>
           <Text
             align="center"
-            fontSize="md"
+            fontSize={{base: "md", md: "lg"}}
             color={mutedTextColor}
             maxW={{ base: "100%", md: "720px" }}
           >

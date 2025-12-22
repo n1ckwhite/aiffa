@@ -36,7 +36,7 @@ const SessionsFirstSessionDetailsSection: React.FC = () => {
         </Heading>
         <Text
           mt={3}
-          fontSize="md"
+          fontSize={{base: "md", md: "lg"}}
           color={mutedTextColor}
         >
           Коротко о том, что будет на знакомстве и как к нему подключиться.

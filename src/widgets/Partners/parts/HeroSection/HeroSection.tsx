@@ -60,9 +60,8 @@ const HeroSection: React.FC = () => {
           от хакатонов до Weekly‑челленджей.
         </Text>
         <Text
-          fontSize="md"
+          fontSize={{base: "md", md: "lg"}}
           color={mutedTextColor}
-          lineHeight="1.6"
         >
           Если вам нужны бренд, найм или продвижение технологий среди разработчиков — здесь вы
           получаете понятные результаты, а мы берём на себя весь продакшн.

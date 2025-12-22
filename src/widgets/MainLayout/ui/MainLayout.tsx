@@ -29,8 +29,12 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       display="flex"
       flexDirection="column"
       sx={{
-        // Fallback for browsers without dvh support (prevents header/footer jumps on mobile)
-        minHeight: "100vh",
+        // Use a safe fallback without `vh` (mobile browser bars),
+        // then upgrade to dvh when supported.
+        minHeight: "100%",
+        "@supports (-webkit-touch-callout: none)": {
+          minHeight: "-webkit-fill-available",
+        },
         "@supports (height: 100dvh)": {
           minHeight: "100dvh",
         },

@@ -19,7 +19,10 @@ export const LearnLayoutView: React.FC = () => {
       position="relative"
       w="100%"
       sx={{
-        minHeight: "100vh",
+        minHeight: "100%",
+        "@supports (-webkit-touch-callout: none)": {
+          minHeight: "-webkit-fill-available",
+        },
         "@supports (height: 100dvh)": {
           minHeight: "100dvh",
         },

@@ -9,7 +9,10 @@ const LearnLayoutSkeleton: React.FC = () => {
       px={{ base: 4, md: 6 }}
       pt={{ base: 8, md: 10 }}
       sx={{
-        minHeight: "100vh",
+        minHeight: "100%",
+        "@supports (-webkit-touch-callout: none)": {
+          minHeight: "-webkit-fill-available",
+        },
         "@supports (height: 100dvh)": {
           minHeight: "100dvh",
         },

@@ -89,7 +89,7 @@ const HackathonsHeroSection: React.FC = () => {
 
           <Text
             id="hackathons-hero-description"
-            mt={4}
+            mt={3}
             fontSize={{ base: "sm", md: "lg" }}
             color={mutedTextColor}
           >

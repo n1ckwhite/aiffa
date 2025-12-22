@@ -9,7 +9,7 @@ import { useModulesFaqController } from './hooks/useModulesFaqController';
 import { getFaqAnswerId, getFaqQuestionId, getFaqSectionTitleId } from './helpers/ids';
 
 const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = true }) => {
-  const { headingColor, titleColor, textColor, sectionBg, focusShadow } = useModulesFaqColors();
+  const { headingColor, borderColor, titleColor, textColor, sectionBg, focusShadow } = useModulesFaqColors();
   const key = variant ?? 'materials';
   const { items: list, title: defaultHeading } = modulesFaqConfig[key];
   const heading = title || defaultHeading;
@@ -44,6 +44,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
         </HStack>
         <Box
           borderWidth="1px"
+          borderColor={borderColor}
           borderRadius="2xl"
           p={{ base: 3, md: 4, lg: 5 }}
           bg={sectionBg}

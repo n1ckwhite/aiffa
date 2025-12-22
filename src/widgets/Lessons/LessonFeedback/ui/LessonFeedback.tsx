@@ -1,15 +1,17 @@
 import React from 'react';
-import { Box, HStack, Text, IconButton, Fade, Portal } from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
+import { Box, Fade, Portal } from '@chakra-ui/react';
 import useLessonFeedbackColors from './colors/useLessonFeedBackColors';
-import { pressDown, pressUp } from '../animations';
-import { useFeedbackController } from '../hooks/useFeedbackController';
 import { useMinWidthViewport } from '../hooks/useViewport';
-import { ThumbDown } from './parts/ThumbDown';
-import { ThumbUp } from './parts/ThumbUp';
 import { Props } from './types';
+import { useFeedbackController } from '../hooks/useFeedbackController';
+import { useFeedbackVisibility } from '../hooks/useFeedbackVisibility';
+import { useImprovementTexts } from '../hooks/useImprovementTexts';
+import { QuestionRow } from './parts/QuestionRow';
+import { DownImproveBlock } from './parts/DownImproveBlock';
+import { UpThanksBlock } from './parts/UpThanksBlock';
+import { GenericThanks } from './parts/GenericThanks';
 
-const LessonFeedback: React.FC<Props> = ({ lessonKey, questionText }) => {
+const LessonFeedback: React.FC<Props> = ({ lessonKey, questionText, onVoteChange, onSupportClick }) => {
   const {
     cardBg,
     cardShadow,
@@ -24,12 +26,17 @@ const LessonFeedback: React.FC<Props> = ({ lessonKey, questionText }) => {
     thanksColor,
   } = useLessonFeedbackColors();
   const isWide = useMinWidthViewport(1025);
-  const { choice, mounted, visible, showThanks, pulsing, vote } = useFeedbackController(lessonKey, {
-    thanksDelayMs: 250,
-    autoHideDelayMs: 1600,
-  });
+  const { choice, mounted, visible, showThanks, pulsing, vote } = useFeedbackController(lessonKey);
+  const [improveReason, setImproveReason] = React.useState<'short' | 'hard' | 'errors' | null>(null);
+  const { context, shouldShowQuestion, shouldShowThanks } = useFeedbackVisibility(lessonKey, isWide, showThanks);
+  const improveTexts = useImprovementTexts(context);
 
-  if (!mounted || !isWide) return null;
+  if (!mounted) return null;
+
+  // If user hasn't reached the trigger and no "thanks" state yet — render nothing.
+  if (!shouldShowQuestion && !shouldShowThanks) {
+    return null;
+  }
 
   return (
     <Portal>
@@ -47,45 +54,47 @@ const LessonFeedback: React.FC<Props> = ({ lessonKey, questionText }) => {
           py={3}
           boxShadow={cardShadow}
         >
-          {!showThanks ? (
-            <HStack spacing={3} align="center">
-              <Text fontSize="md" fontWeight="semibold" color={textCol} pr={2}>
-                {questionText || 'Эта страница была полезна?'}
-              </Text>
-              <HStack spacing={2}>
-                <IconButton
-                  aria-label="Полезно"
-                  icon={<ThumbUp />}
-                  variant="ghost"
-                  borderRadius="12px"
-                  bg={choice === 'up' ? upColor : chipBg}
-                  color={choice === 'up' ? selectedThumbColor : thumbIdleColor}
-                  _hover={{ bg: choice === 'up' ? upColor : chipHover }}
-                  _active={{ transform: 'scale(0.96)' }}
-                  animation={pulsing === 'up' ? `${pressUp} 0.45s ease` : undefined}
-                  onClick={() => vote('up')}
-                  transition="all 0.15s ease"
-                />
-                <IconButton
-                  aria-label="Не полезно"
-                  icon={<ThumbDown />}
-                  variant="ghost"
-                  borderRadius="12px"
-                  bg={choice === 'down' ? downColor : chipBg}
-                  color={choice === 'down' ? selectedThumbColor : thumbIdleColor}
-                  _hover={{ bg: choice === 'down' ? downColor : chipHover }}
-                  _active={{ transform: 'scale(0.96)' }}
-                  animation={pulsing === 'down' ? `${pressDown} 0.45s ease` : undefined}
-                  onClick={() => vote('down')}
-                  transition="all 0.15s ease"
-                />
-              </HStack>
-            </HStack>
+          {!shouldShowThanks ? (
+            shouldShowQuestion ? (
+              <QuestionRow
+                text={questionText || 'Эта страница была полезна?'}
+                choice={choice}
+                pulsing={pulsing}
+                onVoteUp={() => {
+                  vote('up');
+                  if (onVoteChange) {
+                    onVoteChange('up');
+                  }
+                }}
+                onVoteDown={() => {
+                  vote('down');
+                  if (onVoteChange) {
+                    onVoteChange('down');
+                  }
+                }}
+                textCol={textCol}
+                upColor={upColor}
+                downColor={downColor}
+                chipBg={chipBg}
+                chipHover={chipHover}
+                thumbIdleColor={thumbIdleColor}
+              />
+            ) : null
+          ) : choice === 'down' ? (
+            <DownImproveBlock
+              improveReason={improveReason}
+              onChangeReason={setImproveReason}
+              texts={improveTexts}
+              thanksColor={thanksColor}
+              textCol={textCol}
+              chipBg={chipBg}
+              chipHover={chipHover}
+              border={border}
+            />
+          ) : choice === 'up' ? (
+            <UpThanksBlock thanksColor={thanksColor} textCol={textCol} upColor={upColor} onSupportClick={onSupportClick} />
           ) : (
-            <HStack spacing={2} align="center">
-              <CheckCircleIcon color={thanksColor} />
-              <Text fontSize="md" fontWeight="semibold" color={thanksColor}>Спасибо за ваш отзыв!</Text>
-            </HStack>
+            <GenericThanks thanksColor={thanksColor} />
           )}
         </Box>
       </Fade>

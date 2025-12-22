@@ -65,7 +65,6 @@ const LessonTasksSkeleton: React.FC = () => {
             mb={4}
             display={{ base: 'flex', md: 'none' }}
           />
-
           {/* Tasks list (mirrors spacing + card anatomy) */}
           <VStack align="stretch" spacing={{ base: 6, md: 8 }} mt={{ base: 2, md: 4 }}>
             {Array.from({ length: 2 }).map((_, i) => (
@@ -85,7 +84,6 @@ const LessonTasksSkeleton: React.FC = () => {
                 <HStack justify="space-between" align="center" mb={3}>
                   <HStack>
                     <SkeletonCircle boxSize="36px" />
-                    <Skeleton h="18px" w={{ base: '70%', md: '55%' }} borderRadius="md" />
                   </HStack>
                 </HStack>
 
@@ -103,7 +101,7 @@ const LessonTasksSkeleton: React.FC = () => {
                   <Box borderRadius="12px" overflow="hidden">
                     <Box px={3} pb={3}>
                       <HStack spacing={2}>
-                        <Skeleton h="16px" w="12px" borderRadius="md" />
+                        <SkeletonCircle boxSize="12px" />
                         <Skeleton h="16px" w="70%" borderRadius="md" />
                       </HStack>
                     </Box>

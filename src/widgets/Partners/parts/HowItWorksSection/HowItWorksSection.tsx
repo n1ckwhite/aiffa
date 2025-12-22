@@ -60,7 +60,7 @@ const HowItWorksSection: React.FC = () => {
           </Heading>
           <Text
             align="center"
-            fontSize="sm"
+            fontSize="md"
             color={mutedTextColor}
             maxW={{ base: "100%", md: "720px" }}
           >

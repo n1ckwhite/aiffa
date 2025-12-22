@@ -58,7 +58,7 @@ const OverviewSection: React.FC = () => {
         >
           <VStack
             align={{ base: "center", md: "flex-start" }}
-            spacing={4}
+            spacing={{ base: 3, md: 4 }}
             flex={{ base: "none", md: 2 }}
             textAlign={{ base: "center", md: "left" }}
             maxW={{ base: "100%", md: "420px" }}

@@ -60,7 +60,7 @@ const HeroSection: React.FC = () => {
           от хакатонов до Weekly‑челленджей.
         </Text>
         <Text
-          fontSize={{ base: "sm", md: "md" }}
+          fontSize="md"
           color={mutedTextColor}
           lineHeight="1.6"
         >

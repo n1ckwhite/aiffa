@@ -45,7 +45,7 @@ const BrandFitSection: React.FC = () => {
               id="partners-brandfit-heading"
               size="md"
               letterSpacing="-0.02em"
-              mt={2}
+              mt={3}
             >
               Кому и зачем подходит спонсорство
             </Heading>

@@ -46,7 +46,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
           borderWidth="1px"
           borderColor={borderColor}
           borderRadius="2xl"
-          p={{ base: 3, md: 4, lg: 5 }}
+          p={{ base: 2, md: 3, lg: 4 }}
           bg={sectionBg}
         >
           <VStack align="stretch" spacing={0}>
@@ -69,7 +69,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
                     w="100%"
                     textAlign="left"
                     px={0}
-                    py={{ base: 2.5, md: 3 }}
+                    py={{ base: 2, md: 2.5 }}
                     borderRadius="xl"
                     bg={isOpen ? 'transparent' : 'transparent'}
                     _hover={{ bg: 'transparent' }}
@@ -97,7 +97,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
                         alignItems="center"
                         justifyContent="center"
                         flexShrink={0}
-                        mt={{ base: 0.5, md: 1 }}
+                        mt={{ base: 0.25, md: 0.5 }}
                         transition="transform 180ms ease, background-color 160ms ease"
                         transform={isOpen ? 'rotate(45deg)' : 'rotate(0deg)'}
                       >
@@ -119,7 +119,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
                     overflow="hidden"
                   >
                     {/* minH=0 is critical for 0fr -> 1fr animation */}
-                    <Box minH={0} px={0} pt={0} pb={3} overflow="hidden">
+                    <Box minH={0} px={0} pt={0} pb={2} overflow="hidden">
                       <Text fontSize="sm" lineHeight={1.8} color={textColor} textAlign="left">
                         {it.content}
                       </Text>

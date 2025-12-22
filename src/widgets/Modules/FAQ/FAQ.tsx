@@ -16,7 +16,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
   const supportVariant = key === 'blog' ? 'blog' : 'modules';
   const sectionTitleId = getFaqSectionTitleId(key);
 
-  const { openIdx, toggleIdx, registerBodyRef, getMeasuredHeight } = useModulesFaqController({
+  const { openIdx, toggleIdx } = useModulesFaqController({
     variantKey: key,
     itemsCount: list.length,
   });
@@ -51,7 +51,6 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
           <VStack align="stretch" spacing={0}>
             {list.map((it, idx) => {
               const isOpen = openIdx === idx;
-              const measuredHeight = getMeasuredHeight(idx);
               const buttonId = getFaqQuestionId(key, idx);
               const panelId = getFaqAnswerId(key, idx);
 
@@ -111,13 +110,15 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
                     role="region"
                     aria-labelledby={buttonId}
                     aria-hidden={!isOpen}
-                    overflow="hidden"
-                    maxH={isOpen ? (measuredHeight != null ? `${measuredHeight}px` : 'none') : '0px'}
+                    display="grid"
+                    gridTemplateRows={isOpen ? '1fr' : '0fr'}
                     opacity={isOpen ? 1 : 0}
-                    transition={isOpen && measuredHeight == null ? 'none' : 'max-height 220ms ease, opacity 160ms ease'}
-                    willChange="max-height, opacity"
+                    transition="grid-template-rows 220ms ease, opacity 160ms ease"
+                    willChange="grid-template-rows, opacity"
+                    overflow="hidden"
                   >
-                    <Box ref={(el) => registerBodyRef(idx, el)} px={0} pt={0} pb={3}>
+                    {/* minH=0 is critical for 0fr -> 1fr animation */}
+                    <Box minH={0} px={0} pt={0} pb={3} overflow="hidden">
                       <Text fontSize="sm" lineHeight={1.8} color={textColor} textAlign="left">
                         {it.content}
                       </Text>

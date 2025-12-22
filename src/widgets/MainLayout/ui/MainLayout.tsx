@@ -23,7 +23,19 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   const { appBg } = useLayoutColors();
 
   return (
-    <Box bg={appBg} minH="100dvh" position="relative" display="flex" flexDirection="column">
+    <Box
+      bg={appBg}
+      position="relative"
+      display="flex"
+      flexDirection="column"
+      sx={{
+        // Fallback for browsers without dvh support (prevents header/footer jumps on mobile)
+        minHeight: "100vh",
+        "@supports (height: 100dvh)": {
+          minHeight: "100dvh",
+        },
+      }}
+    >
       {showGlobalBg && <GlobalBackground />}
 
       <Suspense fallback={<HeaderFallback />}>

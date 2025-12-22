@@ -10,7 +10,7 @@ export const BlogHeroHeading: React.FC<BlogHeroHeadingProps> = ({ theme, isEmpty
       <Heading id="blog-title" as="h1" fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold" color={theme.titleColor}>
         Блог AIFFA
       </Heading>
-      <Text fontSize={{ base: "sm", md: "lg" }} color={theme.descColor} maxW={{ base: "100%", md: "820px" }}>
+      <Text fontSize={{ base: "md", md: "lg" }} color={theme.descColor} maxW={{ base: "100%", md: "820px" }}>
         Читай разборы и практику от участников AIFFA — и делись своим опытом. Здесь ценят вклад: кейсы, ошибки, находки и решения,
         которые помогают сообществу расти.
       </Text>

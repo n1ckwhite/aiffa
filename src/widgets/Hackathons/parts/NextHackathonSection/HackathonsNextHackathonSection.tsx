@@ -46,7 +46,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
         </Stack>
         <Text
           mt={3}
-          fontSize={{ base: "sm", md: "md" }}
+          fontSize="md"
           color={mutedTextColor}
           textAlign="center"
           maxW={{ base: "full", md: "720px" }}

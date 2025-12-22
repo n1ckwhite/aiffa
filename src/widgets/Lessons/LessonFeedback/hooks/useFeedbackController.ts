@@ -1,38 +1,59 @@
 import React from 'react';
 import type { VoteChoice } from '../types';
 
-export const useFeedbackController = (lessonKey: string) => {
+export type UseFeedbackControllerOptions = {
+  thanksDelayMs?: number;
+  autoHideDelayMs?: number;
+};
+
+export const useFeedbackController = (lessonKey: string, options?: UseFeedbackControllerOptions) => {
   const [choice, setChoice] = React.useState<VoteChoice | null>(null);
   const [mounted, setMounted] = React.useState(false);
   const [visible, setVisible] = React.useState(true);
   const [showThanks, setShowThanks] = React.useState(false);
   const [pulsing, setPulsing] = React.useState<VoteChoice | null>(null);
 
+  const timersRef = React.useRef<{ thanks?: number; hide?: number }>({});
+
+  const thanksDelayMs = options?.thanksDelayMs ?? 300;
+  const autoHideDelayMs = options?.autoHideDelayMs ?? 4500;
+
+  const clearTimers = React.useCallback(() => {
+    if (timersRef.current.thanks != null) {
+      window.clearTimeout(timersRef.current.thanks);
+    }
+    if (timersRef.current.hide != null) {
+      window.clearTimeout(timersRef.current.hide);
+    }
+    timersRef.current = {};
+  }, []);
+
   React.useEffect(() => {
+    return () => {
+      clearTimers();
+    };
+  }, [clearTimers]);
+
+  React.useEffect(() => {
+    clearTimers();
     setChoice(null);
     setVisible(true);
     setShowThanks(false);
     setMounted(true);
-  }, [lessonKey]);
-
-  React.useEffect(() => {
-    let t1: number | undefined;
-    let t2: number | undefined;
-    return () => {
-      if (t1) window.clearTimeout(t1);
-      if (t2) window.clearTimeout(t2);
-    };
-  }, []);
+    setPulsing(null);
+  }, [lessonKey, clearTimers]);
 
   const vote = (v: VoteChoice) => {
+    clearTimers();
     setChoice(v);
     setPulsing(v);
-    const t1 = window.setTimeout(() => { setShowThanks(true); }, 300);
-    const t2 = window.setTimeout(() => {
+    timersRef.current.thanks = window.setTimeout(() => {
+      setShowThanks(true);
+    }, thanksDelayMs);
+    timersRef.current.hide = window.setTimeout(() => {
       setVisible(false);
       setPulsing(null);
-    }, 4500);
-    return { t1, t2 };
+    }, autoHideDelayMs);
   };
 
   return { choice, mounted, visible, showThanks, pulsing, vote };

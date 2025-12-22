@@ -1,5 +1,5 @@
 import React from 'react';
-import { HStack, Text, IconButton } from '@chakra-ui/react';
+import { HStack, Text, IconButton, useColorModeValue } from '@chakra-ui/react';
 import { pressDown, pressUp } from '../../../animations';
 import { ThumbUp } from '../ThumbUp';
 import { ThumbDown } from '../ThumbDown';
@@ -18,6 +18,7 @@ export const QuestionRow: React.FC<QuestionRowProps> = ({
   chipHover,
   thumbIdleColor,
 }) => {
+  const selectedThumbColor = useColorModeValue('gray.900', 'white');
   return (
     <HStack spacing={3} align="center" justifyContent="space-between">
       <Text fontSize="md" fontWeight="semibold" color={textCol} pr={2}>
@@ -30,7 +31,7 @@ export const QuestionRow: React.FC<QuestionRowProps> = ({
           variant="ghost"
           borderRadius="12px"
           bg={choice === 'up' ? upColor : chipBg}
-          color={choice === 'up' ? 'white' : thumbIdleColor}
+          color={choice === 'up' ? selectedThumbColor : thumbIdleColor}
           _hover={{ bg: choice === 'up' ? upColor : chipHover }}
           _active={{ transform: 'scale(0.96)' }}
           animation={pulsing === 'up' ? `${pressUp} 0.45s ease` : undefined}
@@ -43,7 +44,7 @@ export const QuestionRow: React.FC<QuestionRowProps> = ({
           variant="ghost"
           borderRadius="12px"
           bg={choice === 'down' ? downColor : chipBg}
-          color={choice === 'down' ? 'white' : thumbIdleColor}
+          color={choice === 'down' ? selectedThumbColor : thumbIdleColor}
           _hover={{ bg: choice === 'down' ? downColor : chipHover }}
           _active={{ transform: 'scale(0.96)' }}
           animation={pulsing === 'down' ? `${pressDown} 0.45s ease` : undefined}

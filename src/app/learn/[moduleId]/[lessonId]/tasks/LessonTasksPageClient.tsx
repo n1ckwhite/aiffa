@@ -4,10 +4,10 @@ import React from "react";
 import { VStack } from "@chakra-ui/react";
 import LessonTasksSkeleton from "pages/LessonTasksPage/Skeleton";
 import { useUserProfile } from "entities/user";
-import LessonFeedback from "widgets/Lessons/LessonFeedback";
 import { LessonTasksView } from "widgets/LessonTasksView";
 import { useLessonTasksLoad } from "widgets/LessonTasksView/hooks/useLessonTasksLoad";
 import { useScrollTopOnChange } from "widgets/LessonTasksView/hooks/useScrollTopOnChange";
+import LessonFeedback from "@/widgets/Lessons/LessonFeedback";
 
 type LessonTasksPageClientProps = {
   moduleId: string;

@@ -1,3 +1,3 @@
-export { default } from './ui/LessonFeedback/index';
+export { default } from './ui/LessonFeedback';
 
 

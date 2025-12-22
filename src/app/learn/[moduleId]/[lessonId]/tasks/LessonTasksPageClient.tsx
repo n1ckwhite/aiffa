@@ -20,16 +20,24 @@ const LessonTasksPageClient = ({ moduleId, lessonId }: LessonTasksPageClientProp
 
   const { markTaskSolved } = useUserProfile();
 
+  const wrapperProps = {
+    align: "stretch",
+    gap: 6,
+    pb: "32px",
+    px: { base: 4, md: 6 },
+    py: { base: 8, md: 10 },
+  } as const;
+
   if (loading || !lesson || !currentModule) {
     return (
-      <VStack align="stretch" gap={6} pb="32px">
+      <VStack {...wrapperProps}>
         <LessonTasksSkeleton />
       </VStack>
     );
   }
 
   return (
-    <VStack align="stretch" gap={6} pb="32px" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <VStack {...wrapperProps}>
       <LessonTasksView
         mod={currentModule}
         lesson={lesson}

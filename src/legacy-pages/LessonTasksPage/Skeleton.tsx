@@ -3,120 +3,170 @@ import { Box, VStack, HStack, Skeleton, SkeletonCircle, SkeletonText } from '@ch
 
 const LessonTasksSkeleton: React.FC = () => {
   return (
-    <Box as="main" pb="32px">
-      <Box maxW="1200px" mx="auto" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
-        {/* Хлебные крошки (StageBreadcrumb) */}
+    <VStack align="stretch" gap={6} pb="32px">
+      {/* Main container: mirrors LessonTasksView */}
+      <Box maxW="1280px" mx="auto" w="100%" px={0}>
+        {/* StageBreadcrumb */}
         <HStack spacing={2} mb={4} align="center">
-          <Skeleton h="35px" w="188px" borderRadius="full" />
+          <Skeleton h="28px" w="180px" borderRadius="full" />
           <Skeleton h="10px" w="6px" borderRadius="full" />
           <Skeleton h="10px" w="120px" borderRadius="full" />
           <Skeleton h="10px" w="6px" borderRadius="full" />
           <Skeleton h="10px" w="90px" borderRadius="full" />
         </HStack>
 
-        {/* Карточка с заголовком, задачами и прогрессом */}
-        <Box>
-          {/* Header с иконкой, заголовком и прогресс‑бейджем + кнопка "К материалу" */}
+        {/* Card wrapper (same as LessonTasksView header/list container) */}
+        <Box
+          bg="transparent"
+          borderWidth={0}
+          borderRadius="xl"
+          px={0}
+          position="relative"
+          boxShadow="none"
+        >
+          {/* Header (mirrors TasksHeader layout + responsive buttons) */}
           <HStack
-            spacing={3}
-            mb={3}
             justify="space-between"
             align="center"
-            flexWrap="wrap"
+            spacing={{ base: 2, md: 3 }}
+            mb={4}
+            mt={4}
           >
             <HStack spacing={3} align="center">
               <Box
-                w={{ base: "44px", md: "56px" }}
-                h={{ base: "44px", md: "56px" }}
+                w={{ base: '44px', md: '56px' }}
+                h={{ base: '44px', md: '56px' }}
                 borderRadius="xl"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
               >
-                <SkeletonCircle boxSize={{ base: "44px", md: "44px" }} />
+                <SkeletonCircle boxSize={{ base: '44px', md: '56px' }} />
               </Box>
-              <Skeleton h="30px" w="104px" borderRadius="md" />
+              <Skeleton h="26px" w={{ base: '96px', md: '120px' }} borderRadius="md" />
+              <Skeleton h="24px" w="64px" borderRadius="full" display={{ base: 'none', md: 'block' }} />
             </HStack>
-            <HStack spacing={2}>
-              <Skeleton h="32px" w="160px" borderRadius="full" />
-            </HStack>
+
+            <Skeleton
+              h="40px"
+              w="150px"
+              borderRadius="full"
+              mt={2}
+              mb={4}
+              display={{ base: 'none', md: 'inline-flex' }}
+            />
           </HStack>
 
-          {/* Карточки задач (структура одинаковая для разных типов задач) */}
-          <VStack align="stretch" spacing={5}>
+          <Skeleton
+            h="40px"
+            w="170px"
+            borderRadius="full"
+            mt={2}
+            mb={4}
+            display={{ base: 'flex', md: 'none' }}
+          />
+
+          {/* Tasks list (mirrors spacing + card anatomy) */}
+          <VStack align="stretch" spacing={{ base: 6, md: 8 }} mt={{ base: 2, md: 4 }}>
             {Array.from({ length: 2 }).map((_, i) => (
               <Box
                 // eslint-disable-next-line react/no-array-index-key
                 key={i}
+                position="relative"
+                borderWidth="1px"
+                borderColor="blackAlpha.200"
                 borderRadius="2xl"
-                 borderWidth="1px" borderColor="whiteAlpha.200"
-                p={{ base: 4, md: 5 }}
+                py={{ base: 4, md: 5 }}
+                px={{ base: 4, md: 5 }}
+                bg="transparent"
+                boxShadow="none"
               >
-                {/* Заголовок задачи с номером и текстом */}
-                <HStack spacing={3} align="center" mb={3}>
-                  <SkeletonCircle boxSize="28px" />
-                  <VStack align="stretch" spacing={2} flex={1}>
-                    <Skeleton h="16px" w={{ base: "80%", md: "65%" }} borderRadius="md" />
-                    <Skeleton h="12px" w={{ base: "60%", md: "40%" }} borderRadius="md" />
-                  </VStack>
+                {/* TaskHeader */}
+                <HStack justify="space-between" align="center" mb={3}>
+                  <HStack>
+                    <SkeletonCircle boxSize="36px" />
+                    <Skeleton h="18px" w={{ base: '70%', md: '55%' }} borderRadius="md" />
+                  </HStack>
                 </HStack>
 
-                {/* Метаданные задачи: тип, сложность, время */}
-                <HStack spacing={2} mb={3} flexWrap="wrap">
-                  <Skeleton h="20px" w="90px" borderRadius="full" />
-                  <Skeleton h="20px" w="80px" borderRadius="full" />
-                  <Skeleton h="20px" w="70px" borderRadius="full" />
-                </HStack>
+                {/* Description */}
+                <SkeletonText noOfLines={2} spacing="3" mb={3} />
 
-                {/* Подсказка / описание формата задачи */}
-                <VStack align="stretch" spacing={2} mb={4}>
-                  <HStack spacing={3}>
-                    <SkeletonCircle boxSize="12px" />
-                    <Skeleton h="12px" w="82%" borderRadius="md" />
-                  </HStack>
-                  <HStack spacing={3}>
-                    <SkeletonCircle boxSize="12px" />
-                    <Skeleton h="12px" w="76%" borderRadius="md" />
-                  </HStack>
+                {/* TaskMeta (single line) */}
+                <Skeleton h="12px" w="180px" borderRadius="md" mb={2} />
+
+                {/* TaskHint button */}
+                <Skeleton h="24px" w="110px" borderRadius="full" mb={3} />
+
+                {/* TaskRenderer (terminal-like block + button) */}
+                <VStack align="stretch" spacing={{ base: 4, md: 3 }}>
+                  <Box borderRadius="12px" overflow="hidden">
+                    <Box px={3} pb={3}>
+                      <HStack spacing={2}>
+                        <Skeleton h="16px" w="12px" borderRadius="md" />
+                        <Skeleton h="16px" w="70%" borderRadius="md" />
+                      </HStack>
+                    </Box>
+                  </Box>
+                  <Skeleton
+                    alignSelf="flex-start"
+                    mt={{ base: 5, md: 3 }}
+                    h="32px"
+                    w="110px"
+                    borderRadius="md"
+                  />
                 </VStack>
-
-                {/* Зона интерактивного блока задачи (код, поля ввода и т.п.) */}
-                <Box
-                  borderRadius="xl"
-                  h={{ base: "140px", md: "160px" }}
-                  mb={4}
-                >
-                  <Skeleton h="100%" w="100%" borderRadius="xl" />
-                </Box>
-
-                {/* Кнопки действий */}
-                <HStack spacing={3}>
-                  <Skeleton h="40px" w="140px" borderRadius="full" />
-                  <Skeleton h="32px" w="110px" borderRadius="full" />
-                </HStack>
               </Box>
             ))}
           </VStack>
         </Box>
-
-        {/* Скелетон блока обратной связи "Эти задачи были полезны?" */}
-        <Box
-          mt={{ base: 6, md: 8 }}
-          borderRadius="2xl"
-          p={{ base: 4, md: 5 }}
-        >
-          <HStack spacing={3} mb={3}>
-            <SkeletonCircle boxSize="18px" />
-            <Skeleton h="16px" w="220px" borderRadius="md" />
-          </HStack>
-          <SkeletonText noOfLines={2} spacing="3" />
-          <HStack spacing={3} mt={3}>
-            <Skeleton h="36px" w="110px" borderRadius="full" />
-            <Skeleton h="36px" w="110px" borderRadius="full" />
-          </HStack>
-        </Box>
       </Box>
-    </Box>
+
+      {/* FAQ block placeholder (mirrors ModulesFAQ + SupportBlock layout constraints) */}
+      <Box px={0} id="tasks-faq-anchor">
+        <VStack align="stretch" gap={{ base: 5, md: 7 }} maxW={{ base: '100%', md: '900px' }} mx="auto">
+          {/* FAQ heading row */}
+          <HStack mb={2} spacing={3} align="center">
+            <SkeletonCircle boxSize={{ base: '18px', md: '20px' }} />
+            <Skeleton h="22px" w={{ base: '220px', md: '280px' }} borderRadius="md" />
+          </HStack>
+          {/* FAQ accordion card */}
+          <Box borderWidth="1px" borderColor="blackAlpha.200" borderRadius="2xl" p={{ base: 3, md: 4, lg: 5 }}>
+            <VStack align="stretch" spacing={3}>
+              {/* First item (expanded-like) */}
+              <HStack justify="space-between" align="flex-start" py={{ base: 2.5, md: 3 }}>
+                <Skeleton h="18px" w={{ base: '78%', md: '70%' }} borderRadius="md" />
+                <SkeletonCircle boxSize="22px" />
+              </HStack>
+              <SkeletonText noOfLines={3} spacing="3" mb={1} />
+              {/* Next items */}
+              <HStack justify="space-between" align="flex-start" py={{ base: 2.5, md: 3 }}>
+                <Skeleton h="18px" w={{ base: '74%', md: '68%' }} borderRadius="md" />
+                <SkeletonCircle boxSize="22px" />
+              </HStack>
+              <HStack justify="space-between" align="flex-start" py={{ base: 2.5, md: 3 }}>
+                <Skeleton h="18px" w={{ base: '70%', md: '62%' }} borderRadius="md" />
+                <SkeletonCircle boxSize="22px" />
+              </HStack>
+            </VStack>
+          </Box>
+          {/* SupportBlock placeholder */}
+          <Box borderWidth="1px" borderColor="blackAlpha.200" borderRadius="2xl" py={{ base: 3, md: 4, lg: 5 }} px={{ base: 3, md: 4, lg: 5 }}>
+            <HStack spacing={5} align={{ base: 'stretch', md: 'flex-start' }} flexDirection={{ base: 'column', md: 'row' }}>
+              <SkeletonCircle boxSize="48px" />
+              <VStack align="stretch" spacing={3} flex={1}>
+                <Skeleton h="20px" w="240px" borderRadius="md" />
+                <SkeletonText noOfLines={3} spacing="3" />
+                <HStack spacing={3} flexWrap="wrap">
+                  <Skeleton h="40px" w={{ base: '100%', md: '190px' }} borderRadius="full" />
+                  <Skeleton h="40px" w={{ base: '100%', md: '190px' }} borderRadius="full" />
+                </HStack>
+              </VStack>
+            </HStack>
+          </Box>
+        </VStack>
+      </Box>
+    </VStack>
   );
 };
 

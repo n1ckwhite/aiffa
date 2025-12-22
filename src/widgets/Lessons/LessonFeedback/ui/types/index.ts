@@ -1,4 +1,3 @@
-export type Props = {
-    lessonKey: string;
-    questionText?: string;
-};
+import type { LessonFeedbackProps } from '../../types';
+
+export type Props = LessonFeedbackProps;

@@ -5,7 +5,7 @@ import { useHeaderColors } from '../../colors/useHeaderColors';
 const SubTitle: React.FC = () => {
   const { mutedTextColor } = useHeaderColors();
   return (
-    <Text fontSize="sm" color={mutedTextColor} textAlign="center">
+    <Text fontSize="md" color={mutedTextColor} textAlign="center">
       Прокачивай XP — уровень растёт, а задачи становятся сложнее и полезнее под твой текущий прогресс.
     </Text>
   );

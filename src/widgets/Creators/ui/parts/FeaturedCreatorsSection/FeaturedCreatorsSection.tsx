@@ -58,7 +58,7 @@ const FeaturedCreatorsSection: React.FC = () => {
               Авторы материалов AIFFA
             </Heading>
           </HStack>
-          <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
+          <Text fontSize="md" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
             Здесь отмечаем авторов материалов AIFFA: важен не объём публикаций, а их качество и то, сколько звёзд и благодарностей ставит комьюнити за
             пользу. Показываем топ‑3 за месяц.
           </Text>

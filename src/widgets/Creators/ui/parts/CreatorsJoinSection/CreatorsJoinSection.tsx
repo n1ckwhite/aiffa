@@ -16,7 +16,7 @@ const CreatorsJoinSection: React.FC = () => {
           <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
             Как попасть в создатели AIFFA
           </Heading>
-          <Text fontSize={{ base: "sm", md: "md" }} color={pageDescriptionColor} textAlign="center" maxW={{ base: "full", md: "840px" }} mx="auto">
+          <Text fontSize="md" color={pageDescriptionColor} textAlign="center" maxW={{ base: "full", md: "840px" }} mx="auto">
             Мы отмечаем людей, которые делают вклад в экосистему: делятся материалами и задачами недели, мейнтейнтят проекты, пишут статьи, помогают на
             хакатонах и поддерживают комьюнити. Присоединиться может любой, кто создаёт пользу и готов делиться опытом.
           </Text>

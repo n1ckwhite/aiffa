@@ -18,7 +18,7 @@ const CreatorsSeniorBenefitsSection: React.FC = () => {
           <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
             Как это делает вас сильнее
           </Heading>
-          <Text fontSize={{ base: "sm", md: "md" }} color={seniorTextColor} maxW={{ base: "full", md: "880px" }}>
+          <Text fontSize="md" color={seniorTextColor} maxW={{ base: "full", md: "880px" }}>
             Делитесь опытом, чтобы создать поток знаний для комьюнити: люди, которым вы помогаете, позже смогут усилить ваши проекты, принести новые
             идеи и закрыть сложные задачи вместе с вами.
           </Text>

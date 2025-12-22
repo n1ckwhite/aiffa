@@ -52,11 +52,11 @@ const SupportersSection: React.FC = () => {
             >
               <Icon as={FiHeart} boxSize={3.5} aria-hidden="true" color={iconColor} />
             </Box>
-            <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em">
+            <Heading as="h2" id={headingId} size="md" letterSpacing="-0.02em">
               Поддержка AIFFA
             </Heading>
           </HStack>
-          <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
+          <Text fontSize="md" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
             Здесь — люди, благодаря которым AIFFA ощущается живым местом, а не просто платформой: они поддерживают в чатах, помогают с первыми шагами,
             делятся опытом и возвращают мотивацию, когда она теряется. Это не рейтинг, а тихое «спасибо» всем, кто вкладывается в сообщество сердцем и
             временем.

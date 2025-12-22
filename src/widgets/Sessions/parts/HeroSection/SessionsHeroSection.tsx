@@ -36,7 +36,7 @@ const SessionsHeroSection: React.FC = () => {
           <Text
             id="sessions-hero-description"
             mt={3}
-            fontSize={{ base: "sm", md: "lg" }}
+            fontSize={{ base: "md", md: "lg" }}
             color={mutedTextColor}
           >
             Встречи, консультации, разборы проектов и AMA‑сессии, где можно задать вопросы,

@@ -41,7 +41,7 @@ const ArticleAuthorsSection: React.FC = () => {
               Авторы статей AIFFA
             </Heading>
           </HStack>
-          <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
+          <Text fontSize="md" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
             Здесь отмечаем авторов статей: важна глубина и польза материалов, а оцениваем мы по звёздам и благодарностям,
             которые читатели ставят за вклад и качество. Показываем топ‑3 по любви аудитории.
           </Text>

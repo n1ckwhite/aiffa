@@ -41,7 +41,7 @@ const HackathonWinnersSection: React.FC = () => {
               Победители Хакатона
             </Heading>
           </HStack>
-          <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
+          <Text fontSize="md" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
             Здесь мы отмечаем команды, которые заняли призовые места в последнем AIFFA Hackathon #1 — Задача старта. В рамках одного общего задания
             они предложили решения, которые особенно помогли продукту и комьюнити.
           </Text>

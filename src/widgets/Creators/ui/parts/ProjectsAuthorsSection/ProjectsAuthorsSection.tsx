@@ -42,7 +42,7 @@ const ProjectsAuthorsSection: React.FC = () => {
               Авторы проектов AIFFA
             </Heading>
           </HStack>
-          <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
+          <Text fontSize="md" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
             Здесь мы отмечаем авторов и мейнтейнеров проектов AIFFA: ценим не просто число проектов, а их качество и звёзды, которые ставит сообщество
             за вклад и полезность.
           </Text>

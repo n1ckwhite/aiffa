@@ -58,7 +58,7 @@ const WeeklyAuthorsSection: React.FC = () => {
               Авторы задач недели AIFFA
             </Heading>
           </HStack>
-          <Text fontSize="sm" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
+          <Text fontSize="md" color={subtitleColor} maxW={{ base: "full", md: "640px" }}>
             Здесь мы отмечаем авторов задач недели: ценим не количество, а практичность задач и отклик — сколько звёзд и благодарностей даёт комьюнити
             за то, что weekly помогают не выпадать из практики. Это топ‑3 за текущую неделю.
           </Text>

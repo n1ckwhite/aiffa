@@ -57,7 +57,7 @@ const SessionsFirstSessionSection: React.FC = () => {
               letterSpacing="0.12em"
               color={sectionLabelColor}
               fontWeight="semibold"
-              mb={1}
+              mb={2}
             >
               Ближайшая сессия
             </Text>

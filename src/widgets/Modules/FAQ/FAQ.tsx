@@ -46,7 +46,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
           borderWidth="1px"
           borderColor={borderColor}
           borderRadius="2xl"
-          p={{ base: 2, md: 3, lg: 4 }}
+          p={{ base: 3, md: 4}}
           bg={sectionBg}
         >
           <VStack align="stretch" spacing={0}>

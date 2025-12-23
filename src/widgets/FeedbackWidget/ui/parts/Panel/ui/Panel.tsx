@@ -27,6 +27,7 @@ export const Panel: React.FC<PanelProps> = ({ isOpen, onClose, onSubmit, panelRe
             transform={isOpen ? 'translateY(0) scale(1)' : 'translateY(4px) scale(0.98)'}
             transformOrigin="bottom right"
             willChange="transform"
+            color={colors.titleColor}
           >
             <VStack spacing={3} align="stretch">
               <HStack justify="space-between">

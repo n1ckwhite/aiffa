@@ -18,6 +18,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
   } = props;
 
   const {
+    titleColor,
     paletteTopBg,
     resultActiveBg,
     resultHoverBg,
@@ -125,6 +126,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
           <Portal>
             <Box
               position="fixed"
+              color={titleColor}
               left={8}
               right={8}
               top={{ base: '72px', md: '64px' }}

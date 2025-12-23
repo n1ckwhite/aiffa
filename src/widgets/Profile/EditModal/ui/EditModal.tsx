@@ -17,11 +17,11 @@ const EditModal: React.FC<EditModalProps> = ({
   resetHoverBgDark,
   resetActiveBgDark,
 }) => {
-  const { borderColor } = useEditModalColors()
+  const { titleColor, borderColor } = useEditModalColors()
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset="scale" blockScrollOnMount={true} scrollBehavior="inside">
       <ModalOverlay />
-      <ModalContent mx={{ base: 4, sm: 6 }} w={{ base: '100%', sm: '90%', md: '560px' }} maxH="calc(100dvh - 24px)" overflow="hidden" borderRadius={{ base: 'md', md: 'lg' }}>
+      <ModalContent color={titleColor} mx={{ base: 4, sm: 6 }} w={{ base: '100%', sm: '90%', md: '560px' }} maxH="calc(100dvh - 24px)" overflow="hidden" borderRadius={{ base: 'md', md: 'lg' }}>
         <ModalHeader>Редактирование профиля</ModalHeader>
         <ModalCloseButton />
         <ModalBody overflowY="auto" py={{ base: 3, md: 4 }}>

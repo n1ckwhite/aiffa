@@ -27,6 +27,7 @@ const ActionsRow: React.FC<ActionsRowProps> = ({
         variant="ghost"
         onClick={onReset}
         color={resetColor}
+        _hover={{ bg: resetHoverBg }}
         _light={{ _hover: { bg: resetHoverBg }, _active: { bg: resetActiveBg } }}
         _dark={{ _hover: { bg: resetHoverBgDark }, _active: { bg: resetActiveBgDark } }}
       >

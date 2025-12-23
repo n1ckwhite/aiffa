@@ -3,8 +3,10 @@ import { Box, Input, List, Portal, Text, VStack } from '@chakra-ui/react';
 import type { MobileSearchProps } from './types';
 import { ClearButton } from './parts/ClearButton';
 import { ResultItem } from './parts/ResultItem';
+import { useAppColors } from '@/shared/theme/colors';
 
 export const MobileSearch: React.FC<MobileSearchProps> = (props) => {
+  const { titleColor } = useAppColors();
   const {
     isOpen, searchQuery, setSearchQuery, searchOpen, setSearchOpen, onInputKeyDown,
     searchBg, searchHoverBg, searchFocusBg, searchPlaceholder, searchIconColor, searchIconHoverColor, searchIconHoverBg,
@@ -89,7 +91,7 @@ export const MobileSearch: React.FC<MobileSearchProps> = (props) => {
             <Portal>
               <Box position="fixed" left={0} right={0} bottom={0} top={mobileDropdownTop} zIndex={90000} className="search-overlay" onClick={() => setSearchOpen(false)} />
               <Box position="fixed" left={{ base: 4, md: 0 }} right={{ base: 4, md: 0 }} top={mobileDropdownTop} bg={dropdownBg} borderWidth="1px" borderColor={dropdownBorder} borderRadius="lg" boxShadow={dropdownShadow} zIndex={200100} overflow="hidden">
-                <List role="listbox" maxH={{ base: 'min(64dvh, 520px)', md: 'min(60vh, 520px)' }} overflowY="auto" overflowX="hidden" sx={{ scrollbarWidth: 'thin', scrollbarColor: `${scrollThumb} transparent`, '&::-webkit-scrollbar': { width: '6px', height: '6px' }, '&::-webkit-scrollbar-thumb': { background: scrollThumb, borderRadius: '8px' }, '&::-webkit-scrollbar-thumb:hover': { background: scrollThumbHover }, '&::-webkit-scrollbar-track': { background: 'transparent' }, '@media (orientation: landscape) and (max-width: 900px)': { maxHeight: '48vh' } }}>
+                <List color={titleColor} role="listbox" maxH={{ base: 'min(64dvh, 520px)', md: 'min(60vh, 520px)' }} overflowY="auto" overflowX="hidden" sx={{ scrollbarWidth: 'thin', scrollbarColor: `${scrollThumb} transparent`, '&::-webkit-scrollbar': { width: '6px', height: '6px' }, '&::-webkit-scrollbar-thumb': { background: scrollThumb, borderRadius: '8px' }, '&::-webkit-scrollbar-thumb:hover': { background: scrollThumbHover }, '&::-webkit-scrollbar-track': { background: 'transparent' }, '@media (orientation: landscape) and (max-width: 900px)': { maxHeight: '48vh' } }}>
                   {results.length === 0 && searchQuery.trim().length >= 2 && (
                     <Box as="li" px={3} py={6} color={emptyStateColor} listStyleType="none">
                       <VStack spacing={1} align="center" justify="center">

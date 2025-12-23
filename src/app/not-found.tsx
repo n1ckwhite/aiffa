@@ -77,7 +77,7 @@ const NotFound = () => {
               variant="ghost"
               borderRadius="full"
               size="lg"
-              _light={{ _hover: { bg: "blackAlpha.50" } }}
+              _hover={{ bg: "blackAlpha.50" }}
               _dark={{ _hover: { bg: "whiteAlpha.100" } }}
               w={{ base: "full", sm: "auto" }}
             >

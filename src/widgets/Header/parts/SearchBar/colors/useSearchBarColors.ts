@@ -1,6 +1,8 @@
+import { useAppColors } from '@/shared/theme/colors';
 import { useColorModeValue } from '@chakra-ui/react';
 
 export const useSearchBarColors = () => {
+  const { titleColor } = useAppColors();
   const paletteTopBg = useColorModeValue(
     'linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.75))',
     'linear-gradient(180deg, rgba(26,32,44,0.95), rgba(26,32,44,0.75))'
@@ -15,6 +17,7 @@ export const useSearchBarColors = () => {
   const resultHoverBorder = useColorModeValue('blue.100', 'whiteAlpha.300');
 
   return {
+    titleColor,
     paletteTopBg,
     resultActiveBg,
     resultHoverBg,

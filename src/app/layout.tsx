@@ -8,6 +8,7 @@ import MainLayout from "@/widgets/MainLayout";
 import { PROFILE_COOKIE_KEY, DEFAULT_PROFILE } from "@/entities/user/model/constants";
 import type { UserProfile } from "@/entities/user/model/types";
 import { sanitizeProfileFromUnknown } from "@/entities/user/model/storage";
+import { ViewportHeightFix } from "@/shared/ui/ViewportHeightFix/ViewportHeightFix";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
@@ -111,6 +112,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
       </head>
       <body>
         <ChakraRootProvider cookies={cookieHeader} initialProfile={initialProfile}>
+          <ViewportHeightFix />
           <MainLayout>{children}</MainLayout>
         </ChakraRootProvider>
       </body>

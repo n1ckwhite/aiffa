@@ -64,6 +64,10 @@ html, body {
   background-color: #ffffff;
 }
 
+:root {
+  --vh: 1vh;
+}
+
 @media (prefers-color-scheme: dark) {
   html, body {
     background-color: #0f172a;

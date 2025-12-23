@@ -11,7 +11,15 @@ const Content: React.FC<ContentProps> = ({ completed = true, onClose, onContinue
   const { title, description } = useTaskCompletionContent({ completed, context });
 
   return (
-    <VStack position="relative" zIndex={1} height="100dvh" align="center" justify="center" spacing={6} px={6}>
+    <VStack
+      position="relative"
+      zIndex={1}
+      height="calc(var(--vh, 1vh) * 100)"
+      align="center"
+      justify="center"
+      spacing={6}
+      px={6}
+    >
       <Box
         bg={cardBg}
         borderRadius="2xl"

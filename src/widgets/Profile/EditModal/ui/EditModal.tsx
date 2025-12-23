@@ -21,7 +21,14 @@ const EditModal: React.FC<EditModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset="scale" blockScrollOnMount={true} scrollBehavior="inside">
       <ModalOverlay />
-      <ModalContent color={titleColor} mx={{ base: 4, sm: 6 }} w={{ base: '100%', sm: '90%', md: '560px' }} maxH="calc(100dvh - 24px)" overflow="hidden" borderRadius={{ base: 'md', md: 'lg' }}>
+      <ModalContent
+        color={titleColor}
+        mx={{ base: 4, sm: 6 }}
+        w={{ base: '100%', sm: '90%', md: '560px' }}
+        maxH="calc(var(--vh, 1vh) * 100 - 24px)"
+        overflow="hidden"
+        borderRadius={{ base: 'md', md: 'lg' }}
+      >
         <ModalHeader>Редактирование профиля</ModalHeader>
         <ModalCloseButton />
         <ModalBody overflowY="auto" py={{ base: 3, md: 4 }}>

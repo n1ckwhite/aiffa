@@ -27,7 +27,7 @@ const MobileMenu: React.FC<MobileMenuProps> = (props) => {
         borderTop="1px"
         borderColor={borderColor}
         p={4}
-        maxH="calc(100dvh - 56px)"
+        maxH="calc(var(--vh, 1vh) * 100 - 56px)"
         overflowY="auto"
         className="mobile-menu"
         sx={scrollbarStyles}

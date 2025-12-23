@@ -60,17 +60,17 @@ const HackathonsHeroSection: React.FC = () => {
         </Box>
 
       <Stack
-        direction={{ base: "column", md: "row" }}
-        spacing={{ base: 4, md: 10 }}
-        align={{ base: "flex-start", md: "center" }}
+        direction={{ base: "column", lg: "row" }}
+        spacing={{ base: 4, lg: 10 }}
+        align={{ base: "flex-start", lg: "center" }}
         position="relative"
         zIndex={1}
       >
         <Box
           as="header"
           flex="1"
-          maxW={{ base: "full", md: "60%" }}
-          textAlign={{ base: "center", md: "left" }}
+          maxW={{ base: "full", lg: "60%" }}
+          textAlign={{ base: "center", lg: "left" }}
         >
           <Box mb={3}>
             <PillBadge colorScheme="blue" variant="outline" uppercase>
@@ -102,12 +102,13 @@ const HackathonsHeroSection: React.FC = () => {
             direction="column"
             spacing={{ base: 3, md: 4 }}
             mt={{ base: 4, md: 8 }}
-            align="flex-start"
+            align={{ base: "stretch", md: "center", lg: "flex-start" }}
           >
             <Box
               position="relative"
               display="inline-flex"
               w={{ base: "100%", md: "360px" }}
+              mx={{ md: "auto", lg: 0 }}
             >
               <Box
                 position="absolute"
@@ -165,6 +166,7 @@ const HackathonsHeroSection: React.FC = () => {
               px={{ base: 4, md: 6 }}
               py={{ base: 2.5, md: 3 }}
               w={{ base: "100%", md: "360px" }}
+              mx={{ md: "auto", lg: 0 }}
               borderRadius="full"
               aria-describedby="hackathons-hero-description"
             >
@@ -175,9 +177,11 @@ const HackathonsHeroSection: React.FC = () => {
 
         <Box
           as="aside"
-          flex={{ base: "none", md: 1 }}
-          w={{ base: "100%", md: "auto" }}
-          maxW={{ base: "full", md: "40%" }}
+          flex={{ base: "none", lg: 1 }}
+          w={{ base: "100%", lg: "auto" }}
+          maxW={{ base: "full", lg: "40%" }}
+          minW={{ lg: "320px" }}
+          flexShrink={0}
           bg={heroAsideBg}
           borderRadius="2xl"
           borderWidth="1px"

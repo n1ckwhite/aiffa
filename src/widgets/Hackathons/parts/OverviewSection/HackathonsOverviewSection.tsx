@@ -68,9 +68,12 @@ const HackathonsOverviewSection: React.FC = () => {
           role="list"
           listStyleType="none"
           pl={0}
-          columns={{ base: 1, md: 3 }}
+          minChildWidth={{ base: "100%", sm: "360px" }}
           spacing={{ base: 4, md: 6 }}
           mt={{ base: 4, md: 6 }}
+          w="full"
+          maxW="1200px"
+          mx="auto"
         >
           {overviewCards.map((card, index) => {
             const animationDurationSeconds = 18 + index * 2;

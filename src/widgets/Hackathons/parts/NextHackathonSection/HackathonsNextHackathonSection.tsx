@@ -254,10 +254,11 @@ const HackathonsNextHackathonSection: React.FC = () => {
 
           <Box
             flexShrink={0}
-            w={{ base: "100%", sm: "75%", md: "260px" }}
+            w={{ base: "100%", md: "260px" }}
             display="flex"
-            justifyContent={{ base: "center", md: "flex-end" }}
-            mx={{ base: "auto", md: 0 }}
+            alignItems="center"
+            justifyContent="center"
+            mx="auto"
           >
             <RewardsLottieIcon />
           </Box>

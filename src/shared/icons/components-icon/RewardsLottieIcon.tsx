@@ -11,9 +11,9 @@ const SuccessStoriesLottieIcon: React.FC = () => {
     <LazyLottieIcon
       animationData={rewardsAnimation}
       boxProps={{
-        w: { base: "250px", md: "250px" },
+        w: { base: "180px", sm: "220px", md: "250px" },
         aspectRatio: 1,
-        mx: "auto",
+        pointerEvents: "none",
       }}
       fallback={
         <OptimizedIconImage

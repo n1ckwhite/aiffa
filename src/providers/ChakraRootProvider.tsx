@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { CacheProvider } from "@chakra-ui/next-js";
+import { useEmotionCache } from "@chakra-ui/next-js/use-emotion-cache";
 import {
   ChakraProvider,
-  cookieStorageManager,
   cookieStorageManagerSSR,
 } from "@chakra-ui/react";
+import { CacheProvider as EmotionCacheProvider } from "@emotion/react";
 import theme from "shared/theme/theme";
 import { UserProfileProvider } from "entities/user";
 import type { UserProfile } from "entities/user/model/types";
@@ -22,10 +22,11 @@ export const ChakraRootProvider = ({
   cookies,
   initialProfile
 }: ChakraRootProviderProps) => {
-  const colorModeManager =
-    typeof document === "undefined"
-      ? cookieStorageManagerSSR(cookies ?? "")
-      : cookieStorageManager;
+  const emotionCache = useEmotionCache();
+
+  // Важно: используем один и тот же менеджер и на сервере, и на клиенте (первый рендер),
+  // иначе возможны hydration mismatch в React 19 из-за различий в вычислении color mode.
+  const colorModeManager = cookieStorageManagerSSR(cookies ?? "");
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
@@ -44,7 +45,7 @@ export const ChakraRootProvider = ({
   }, []);
 
   return (
-    <CacheProvider>
+    <EmotionCacheProvider value={emotionCache}>
       <ChakraProvider
         theme={theme}
         cssVarsRoot="body"
@@ -54,7 +55,7 @@ export const ChakraRootProvider = ({
           {children}
         </UserProfileProvider>
       </ChakraProvider>
-    </CacheProvider>
+    </EmotionCacheProvider>
   );
 };
 

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import React from "react";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { ColorModeScript } from "@chakra-ui/react";
 import theme from "@/shared/theme/theme";
 import { ChakraRootProvider } from "../providers/ChakraRootProvider";
@@ -54,12 +54,10 @@ type RootLayoutProps = {
   children: React.ReactNode;
 };
 
-const RootLayout = ({ children }: RootLayoutProps) => {
-  const cookieStore = cookies();
-  const cookieString = cookieStore
-    .getAll()
-    .map((cookie) => `${cookie.name}=${cookie.value}`)
-    .join("; ");
+const RootLayout = async ({ children }: RootLayoutProps) => {
+  const headersList = await headers();
+  const cookieHeader = headersList.get("cookie") ?? "";
+  const cookieStore = await cookies();
 
   let initialProfile: UserProfile = DEFAULT_PROFILE;
   const profileCookie = cookieStore.get(PROFILE_COOKIE_KEY)?.value;
@@ -112,7 +110,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         />
       </head>
       <body>
-        <ChakraRootProvider cookies={cookieString} initialProfile={initialProfile}>
+        <ChakraRootProvider cookies={cookieHeader} initialProfile={initialProfile}>
           <MainLayout>{children}</MainLayout>
         </ChakraRootProvider>
       </body>

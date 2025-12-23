@@ -13,6 +13,16 @@ const nextConfig = {
     imageSizes: [64, 96, 128, 160, 192, 256, 320, 384],
     formats: ["image/avif", "image/webp"]
   },
+  // Next.js 16 использует Turbopack по умолчанию. Если в проекте есть алиасы из webpack,
+  // их нужно продублировать в конфиге Turbopack, иначе `next build` упадёт.
+  turbopack: {
+    resolveAlias: {
+      // В Turbopack алиасы должны быть заданы как пути относительно корня проекта.
+      "react-router-dom": "./src/react-router-dom.tsx",
+      pages: "./src/legacy-pages",
+      utils: "./src/utils",
+    },
+  },
   webpack: (config) => {
     config.resolve.alias["react-router-dom"] = path.resolve(
       process.cwd(),

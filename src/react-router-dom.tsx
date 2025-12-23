@@ -13,10 +13,8 @@ type LinkProps = React.PropsWithChildren<
 export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
   ({ to, children, ...rest }, ref) => {
     return (
-      <NextLink href={to} legacyBehavior>
-        <a ref={ref} {...rest}>
-          {children}
-        </a>
+      <NextLink href={to} ref={ref} {...rest}>
+        {children}
       </NextLink>
     );
   }

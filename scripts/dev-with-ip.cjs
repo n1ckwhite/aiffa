@@ -33,7 +33,7 @@ if (localIps.length > 0) {
 
 const devProcess = spawn(
   "next",
-  ["dev", "-H", host, "-p", String(port)],
+  ["dev", "--turbo", "-H", host, "-p", String(port)],
   {
     stdio: "inherit",
     env: process.env,

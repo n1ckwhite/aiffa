@@ -11,7 +11,14 @@ export const BlogArticlesSkeletonGrid: React.FC<BlogArticlesSkeletonGridProps> =
   cardBg,
 }) => {
   return (
-    <SimpleGrid as="ul" columns={{ base: 1, md: 2, xl: 3 }} spacing={{ base: 6, md: 7 }} listStyleType="none" m={0} p={0}>
+    <SimpleGrid
+      as="ul"
+      minChildWidth={{ base: "100%", sm: "320px" }}
+      spacing={{ base: 6, md: 7 }}
+      listStyleType="none"
+      m={0}
+      p={0}
+    >
       {Array.from({ length: pageSize }).map((_, i) => (
         <Box
           key={i}

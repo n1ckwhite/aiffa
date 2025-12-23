@@ -63,16 +63,20 @@ const HackathonsHeroSection: React.FC = () => {
         direction={{ base: "column", lg: "row" }}
         spacing={{ base: 4, lg: 10 }}
         align={{ base: "center", lg: "center" }}
+        justify="center"
         position="relative"
         zIndex={1}
         w="full"
+        // If the container is not wide enough for two columns, wrap instead of squeezing (Safari).
+        flexWrap={{ base: "nowrap", lg: "wrap" }}
       >
         <Box
           as="header"
-          flex="1"
+          flex={{ base: "none", lg: "1 1 640px" }}
           w="full"
-          maxW={{ base: "full", md: "720px", lg: "60%" }}
-          textAlign={{ base: "center", lg: "left" }}
+          maxW={{ base: "full", md: "720px", lg: "720px" }}
+          textAlign="center"
+          mx="auto"
         >
           <Box mb={3}>
             <PillBadge colorScheme="blue" variant="outline" uppercase>
@@ -104,13 +108,13 @@ const HackathonsHeroSection: React.FC = () => {
             direction="column"
             spacing={{ base: 3, md: 4 }}
             mt={{ base: 4, md: 8 }}
-            align={{ base: "stretch", md: "center", lg: "flex-start" }}
+            align="center"
           >
             <Box
               position="relative"
               display="inline-flex"
               w={{ base: "100%", md: "360px" }}
-              mx={{ md: "auto", lg: 0 }}
+              mx="auto"
             >
               <Box
                 position="absolute"
@@ -168,7 +172,7 @@ const HackathonsHeroSection: React.FC = () => {
               px={{ base: 4, md: 6 }}
               py={{ base: 2.5, md: 3 }}
               w={{ base: "100%", md: "360px" }}
-              mx={{ md: "auto", lg: 0 }}
+              mx="auto"
               borderRadius="full"
               aria-describedby="hackathons-hero-description"
             >
@@ -179,10 +183,10 @@ const HackathonsHeroSection: React.FC = () => {
 
         <Box
           as="aside"
-          flex={{ base: "none", lg: 1 }}
+          flex={{ base: "none", lg: "1 1 360px" }}
           w="full"
-          maxW={{ base: "full", md: "720px", lg: "40%" }}
-          minW={{ lg: "320px" }}
+          maxW={{ base: "full", md: "720px", lg: "520px" }}
+          minW={{ lg: "360px" }}
           flexShrink={0}
           bg={heroAsideBg}
           borderRadius="2xl"
@@ -193,6 +197,7 @@ const HackathonsHeroSection: React.FC = () => {
           boxShadow="lg"
           animation={`${heroAsideFloat} 18s ease-in-out infinite`}
           aria-labelledby="hackathons-hero-benefits-title"
+          mx="auto"
         >
           <Text
             as="h2"

@@ -101,10 +101,10 @@ const theme: Theme = {
   },
   styles: {
     ...baseTheme.styles,
-    global: (props: any) => ({
+    global: () => ({
       body: {
-        bg: props.colorMode === "dark" ? "gray.900" : "white",
-        color: props.colorMode === "dark" ? "white" : "gray.800",
+        bg: "chakra-body-bg",
+        color: "chakra-body-text",
         transition: "background-color 0.25s ease, color 0.25s ease"
       },
       "*, *::before, *::after": {

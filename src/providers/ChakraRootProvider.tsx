@@ -55,7 +55,6 @@ export const ChakraRootProvider = ({
     <EmotionCacheProvider value={emotionCache}>
       <ChakraProvider
         theme={theme}
-        cssVarsRoot="body"
         colorModeManager={colorModeManager}
       >
         <UserProfileProvider initialProfile={initialProfile}>

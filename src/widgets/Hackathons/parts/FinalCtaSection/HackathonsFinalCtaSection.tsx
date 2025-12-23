@@ -25,6 +25,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
       aria-labelledby="hackathons-final-cta-title"
       display="flex"
       justifyContent="center"
+      w="full"
     >
       <Box
         position="relative"
@@ -37,6 +38,8 @@ const HackathonsFinalCtaSection: React.FC = () => {
         py={{ base: 5, md: 8 }}
         maxW="1200px"
         mx="auto"
+        w="full"
+        flex="1 1 auto"
       >
         <Box
           position="absolute"
@@ -103,13 +106,13 @@ const HackathonsFinalCtaSection: React.FC = () => {
           </Box>
 
           <Stack
-            direction={{ base: "column", sm: "row" }}
+            direction={{ base: "column", md: "row" }}
             spacing={4}
-            w={{ base: "full", md: "auto" }}
-            justify={{ base: "center", md: "flex-end" }}
-            align={{ base: "stretch", sm: "center" }}
-            maxW={{ base: "480px", md: "unset" }}
-            mx={{ base: "auto", md: 0 }}
+            w="full"
+            justify="center"
+            align={{ base: "stretch", md: "center" }}
+            maxW={{ base: "full", md: "unset" }}
+            mx="auto"
           >
             <Button
               as="a"
@@ -120,8 +123,8 @@ const HackathonsFinalCtaSection: React.FC = () => {
               fontWeight="semibold"
               px={{ base: 6, md: 8 }}
               py={{ base: 3, md: 3.5 }}
-              w={{ base: "100%", sm: "auto" }}
-              minW={{ sm: "220px" }}
+              w={{ base: "100%", md: "auto" }}
+              minW={{ md: "220px" }}
               bgGradient="linear(to-r, blue.600, blue.700)"
               color="white"
               transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
@@ -148,8 +151,8 @@ const HackathonsFinalCtaSection: React.FC = () => {
               fontWeight="semibold"
               px={{ base: 6, md: 8 }}
               py={{ base: 3, md: 3.5 }}
-              w={{ base: "100%", sm: "auto" }}
-              minW={{ sm: "220px" }}
+              w={{ base: "100%", md: "auto" }}
+              minW={{ md: "220px" }}
               borderColor={partnerBorderColor}
               bg={partnerBg}
               _hover={{

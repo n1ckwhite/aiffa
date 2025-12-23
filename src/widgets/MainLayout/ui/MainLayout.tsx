@@ -19,11 +19,12 @@ type MainLayoutProps = {
 const MainLayout = ({ children }: MainLayoutProps) => {
   const pathname = usePathname();
   const showGlobalBg = useMemo(() => getShowGlobalBg(pathname ?? ""), [pathname]);
-  const { appBg } = useLayoutColors();
+  const { appBg, color } = useLayoutColors();
 
   return (
     <Box
       bg={appBg}
+      color={color}
       position="relative"
       display="flex"
       flexDirection="column"

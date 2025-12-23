@@ -101,7 +101,7 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
             role="list"
             listStyleType="none"
             pl={0}
-            columns={{ base: 1, sm: 3 }}
+            minChildWidth={{ base: "100%", sm: "280px" }}
             spacing={{ base: 4, md: 6 }}
             mt={{ base: 2, md: 4 }}
             w="full"

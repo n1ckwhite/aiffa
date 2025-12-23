@@ -62,7 +62,6 @@ const HackathonsHeroSection: React.FC = () => {
       <Stack
         direction={{ base: "column", lg: "row" }}
         spacing={{ base: 4, lg: 10 }}
-        // Center items in the stacked layout to avoid "squeezed" feeling on mid widths (Safari).
         align={{ base: "center", lg: "center" }}
         position="relative"
         zIndex={1}

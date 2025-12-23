@@ -104,7 +104,10 @@ const HackathonsPrizeSection: React.FC = () => {
             role="list"
             listStyleType="none"
             pl={0}
-            columns={{ base: 1, md: 3 }}
+            minChildWidth={{ base: "100%", sm: "300px" }}
+            w="full"
+            maxW="980px"
+            mx="auto"
             spacing={{ base: 4, md: 6 }}
           >
             {prizeTiers.map((tier) => (

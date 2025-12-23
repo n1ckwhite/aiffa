@@ -68,6 +68,10 @@ export const useBlogScreenController = ({
   const [query, setQuery] = React.useState<string>(safeInitialQuery);
   const [debouncedQuery, setDebouncedQuery] = React.useState<string>(safeInitialQuery);
   const [tagFilter, setTagFilter] = React.useState<BlogTagFilter>(safeInitialTag);
+  const prevFiltersRef = React.useRef<{ query: string; tagFilter: BlogTagFilter }>({
+    query: safeInitialQuery,
+    tagFilter: safeInitialTag,
+  });
 
   const articles = React.useMemo(() => items.slice().sort((a, b) => (a.date < b.date ? 1 : -1)), [items]);
   const normalizedQuery = React.useMemo(() => debouncedQuery.trim().toLowerCase(), [debouncedQuery]);
@@ -126,6 +130,11 @@ export const useBlogScreenController = ({
   React.useEffect(() => {
     // query/tag меняются только с JS, поэтому URL-синк тут — “прогрессивное улучшение”.
     // При изменении фильтров сбрасываем страницу на 1.
+    const prev = prevFiltersRef.current;
+    const hasFilterChanged = prev.query !== query || prev.tagFilter !== tagFilter;
+    prevFiltersRef.current = { query, tagFilter };
+    if (!hasFilterChanged) return;
+
     const desiredHref = buildBlogHref({ page: 1, q: query, tag: tagFilter });
     const currentHref =
       typeof window !== "undefined" ? `${window.location.pathname}${window.location.search}` : "";

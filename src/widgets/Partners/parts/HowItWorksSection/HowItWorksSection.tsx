@@ -1,47 +1,16 @@
 import React from "react";
 import { Box, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { usePartnersColors } from "widgets/Partners/colors/usePartnersColors";
+import { steps } from "./data/index";
 
 const HowItWorksSection: React.FC = () => {
   const {
     mutedTextColor,
-    stepLineColor,
     stepNumberBg,
     stepNumberColor,
     stepCardBg,
     stepCardBorder,
   } = usePartnersColors();
-
-  const steps = [
-    {
-      id: "brief",
-      number: 1,
-      title: "Вы рассказываете задачу и продукт",
-      description:
-        "Коротко описываете продукт, цели партнёрства, аудиторию и ограничения. Мы помогаем превратить это в понятный бриф без лишней бюрократии.",
-    },
-    {
-      id: "format",
-      number: 2,
-      title: "Мы собираем формат под ваши цели",
-      description:
-        "Предлагаем связку из хакатона, Weekly‑задач, материалов и сессий — под нужные метрики: найм, узнаваемость, экспертиза или запуск нового продукта.",
-    },
-    {
-      id: "launch",
-      number: 3,
-      title: "Запускаем хакатон / Weekly / интеграцию",
-      description:
-        "Готовим лендинги, задачи, коммуникации и модерацию. Комьюнити получает понятный таймлайн и задачи, бренд — органичное присутствие в формате.",
-    },
-    {
-      id: "results",
-      number: 4,
-      title: "Вы получаете отчёт, решения и метрики",
-      description:
-        "Собираем результаты: решения команд, вовлечённость, охваты и качественный фидбек. По итогам даём рекомендации по следующим шагам.",
-    },
-  ];
 
   return (
     <Box as="section" aria-label="Как проходит партнёрство" zIndex={100}>
@@ -93,8 +62,6 @@ const HowItWorksSection: React.FC = () => {
                   boxSize={9}
                   borderRadius="full"
                   bg={stepNumberBg}
-                  borderWidth="1px"
-                  borderColor={stepLineColor}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"

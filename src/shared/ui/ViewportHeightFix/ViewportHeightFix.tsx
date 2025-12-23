@@ -18,9 +18,21 @@ export const ViewportHeightFix: React.FC = () => {
       return document.documentElement.clientHeight || window.innerHeight;
     };
 
+    const getViewportBottomOverlay = () => {
+      const vv = window.visualViewport;
+      const layoutHeight = window.innerHeight || document.documentElement.clientHeight;
+      if (!vv) return 0;
+      // On iOS Chrome/Safari, browser UI can cover part of the layout viewport.
+      // The covered bottom area can be approximated by:
+      // layoutHeight - visualHeight - offsetTop
+      const raw = layoutHeight - vv.height - vv.offsetTop;
+      return Math.max(0, Math.round(raw));
+    };
+
     const update = () => {
       const vh = getViewportHeight() * 0.01;
       document.documentElement.style.setProperty("--vh", `${vh}px`);
+      document.documentElement.style.setProperty("--vvb", `${getViewportBottomOverlay()}px`);
     };
 
     const handleResize = () => {

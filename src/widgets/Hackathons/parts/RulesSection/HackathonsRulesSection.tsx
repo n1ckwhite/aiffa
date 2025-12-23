@@ -62,9 +62,11 @@ const HackathonsRulesSection: React.FC = () => {
           role="list"
           listStyleType="none"
           pl={0}
-          columns={{ base: 1, md: 2 }}
+          minChildWidth={{ base: "100%", sm: "360px" }}
           spacing={{ base: 4, md: 6 }}
           w="full"
+          maxW="1100px"
+          mx="auto"
         >
           {ruleCards.map((card, index) => {
             const animationDurationSeconds = 20 + index * 2;

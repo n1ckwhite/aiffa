@@ -42,7 +42,14 @@ const InteractiveFeaturesSection: React.FC = () => {
 
           </VStack>
 
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} w="full" alignItems="stretch">
+          <SimpleGrid
+            // Safari tends to "squeeze" cards when columns are forced.
+            // Using `minChildWidth` makes cards wrap instead of shrinking below the minimum.
+            minChildWidth={{ base: "100%", sm: "320px" }}
+            spacing={6}
+            w="full"
+            alignItems="stretch"
+          >
             {features.map((feature, index) => {
               const rgb = colorRgbMap[feature.color] ?? '59, 130, 246';
               const spotlight = `radial-gradient(420px 160px at 0% 0%, rgba(${rgb}, ${spotlightAlpha}), transparent 60%), radial-gradient(420px 160px at 100% 100%, rgba(${rgb}, ${spotlightAlpha}), transparent 60%)`;

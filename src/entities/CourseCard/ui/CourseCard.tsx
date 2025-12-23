@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { Box, Text, VStack, HStack, useColorModeValue } from '@chakra-ui/react';
+import { Box, Text, VStack, HStack, useColorModeValue, type BoxProps } from '@chakra-ui/react';
 import { type CourseCardProps } from './types/CourseCard.types';
 import { getLevelColor } from '../model';
 import { fadeInUp } from '../animations';
@@ -8,6 +7,7 @@ import { HeaderIcon, LessonsPill, StudyTimePill, CTAArrow } from './parts';
 import PillBadge from 'shared/ui/PillBadge';
 import { useCourseCardColors } from './colors/useCourseCardColors';
 import { useCourseProgress } from './hooks/useCourseProgress';
+import { AppBoxLink } from 'shared/ui/AppLink';
 
 const CourseCard: React.FC<CourseCardProps> = React.memo(({
   moduleId,
@@ -41,68 +41,73 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
 
   const { completedLessonsCount } = useCourseProgress({ moduleId, lessonsCount });
 
-  return (
-    <Box
-      display="block"
-      bg={isActive ? cardHoverBg : cardBg}
-      border="1px"
-      borderColor={isActive ? accentColor : borderColor}
-      borderRadius="24px"
-      p={{ base: 6, md: 8 }}
-      cursor="pointer"
-      transition="all 0.35s cubic-bezier(0.4, 0, 0.2, 1)"
-      animation={`${fadeInUp} 0.6s ease-out ${delay}ms both`}
-      position="relative"
-      overflow="hidden"
-      h="100%"
-      _focusVisible={{ boxShadow: focusRing, outline: 'none' }}
-      transform={isActive ? 'translateY(-10px) scale(1.02)' : undefined}
-      boxShadow={isActive ? `0 18px 40px ${hoverShadowColor}, 0 0 0 1px ${accentColor}20` : `0 8px 28px ${shadowColor}`}
-      _active={{ transform: 'translateY(-6px) scale(1.01)' }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onTouchStart={() => setIsHovered(false)}
-      onTouchEnd={() => setIsHovered(false)}
-      onTouchCancel={() => setIsHovered(false)}
-      _hover={{
-        transform: ['none', null, 'translateY(-12px) scale(1.03)'],
-        boxShadow: ['0 8px 28px ' + shadowColor, null, `0 25px 50px ${hoverShadowColor}, 0 0 0 1px ${accentColor}20`],
-        borderColor: [borderColor, null, accentColor],
-        bg: [cardBg, null, cardHoverBg],
-        textDecoration: 'none',
-      }}
-      _before={{
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '5px',
-        bg: `linear-gradient(90deg, ${accentColor}, ${topGradientEnd}, ${accentColor})`,
-        transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
-        transformOrigin: 'left',
-        transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-        borderRadius: '24px 24px 0 0',
-      }}
-      _after={{
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        bg: isActive ? `linear-gradient(135deg, ${accentColor}08, transparent)` : 'transparent',
-        transition: 'background 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-        pointerEvents: 'none',
-        borderRadius: '24px',
-      }}
-      className="course-card"
-      as={to ? (RouterLink as any) : 'div'}
-      to={to as any}
-      style={{ textDecoration: 'none' }}
-      aria-label={to ? `Открыть материал: ${title}` : undefined}
-    >
-      <VStack align="stretch" spacing={4} h="full" justify="space-between">
+  const commonProps: Omit<BoxProps, "as" | "href"> = {
+    display: "block",
+    bg: isActive ? cardHoverBg : cardBg,
+    border: "1px",
+    borderColor: isActive ? accentColor : borderColor,
+    borderRadius: "24px",
+    p: { base: 6, md: 8 },
+    cursor: "pointer",
+    transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+    animation: `${fadeInUp} 0.6s ease-out ${delay}ms both`,
+    position: "relative",
+    overflow: "hidden",
+    h: "100%",
+    _focusVisible: { boxShadow: focusRing, outline: "none" },
+    transform: isActive ? "translateY(-10px) scale(1.02)" : undefined,
+    boxShadow: isActive
+      ? `0 18px 40px ${hoverShadowColor}, 0 0 0 1px ${accentColor}20`
+      : `0 8px 28px ${shadowColor}`,
+    _active: { transform: "translateY(-6px) scale(1.01)" },
+    onMouseEnter: () => setIsHovered(true),
+    onMouseLeave: () => setIsHovered(false),
+    onTouchStart: () => setIsHovered(false),
+    onTouchEnd: () => setIsHovered(false),
+    onTouchCancel: () => setIsHovered(false),
+    _hover: {
+      transform: ["none", null, "translateY(-12px) scale(1.03)"],
+      boxShadow: [
+        "0 8px 28px " + shadowColor,
+        null,
+        `0 25px 50px ${hoverShadowColor}, 0 0 0 1px ${accentColor}20`,
+      ],
+      borderColor: [borderColor, null, accentColor],
+      bg: [cardBg, null, cardHoverBg],
+      textDecoration: "none",
+    },
+    _before: {
+      content: '""',
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      height: "5px",
+      bg: `linear-gradient(90deg, ${accentColor}, ${topGradientEnd}, ${accentColor})`,
+      transform: isActive ? "scaleX(1)" : "scaleX(0)",
+      transformOrigin: "left",
+      transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+      borderRadius: "24px 24px 0 0",
+    },
+    _after: {
+      content: '""',
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      bg: isActive ? `linear-gradient(135deg, ${accentColor}08, transparent)` : "transparent",
+      transition: "background 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+      pointerEvents: "none",
+      borderRadius: "24px",
+    },
+    className: "course-card",
+    style: { textDecoration: "none" },
+    "aria-label": to ? `Открыть материал: ${title}` : undefined,
+  };
+
+  const content = (
+    <VStack align="stretch" spacing={4} h="full" justify="space-between">
         <HStack align="start" spacing={4}>
           <HeaderIcon icon={icon} accentColor={accentColor} isActive={isActive} />
           <Box flex={1}>
@@ -160,8 +165,17 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
 
         <CTAArrow isActive={isActive} accentColor={accentColor} arrowHoverColor={arrowHoverColor} hoverShadowColor={hoverShadowColor} />
       </VStack>
-    </Box>
   );
+
+  if (to) {
+    return (
+      <AppBoxLink to={to} {...commonProps}>
+        {content}
+      </AppBoxLink>
+    );
+  }
+
+  return <Box {...commonProps}>{content}</Box>;
 });
 
 export default CourseCard;

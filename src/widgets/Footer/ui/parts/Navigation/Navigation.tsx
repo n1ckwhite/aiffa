@@ -1,6 +1,6 @@
 import React from 'react';
-import { VStack, Text, Link } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { VStack, Text } from '@chakra-ui/react';
+import { AppLink } from 'shared/ui/AppLink';
 import { useFooterColors } from '../../colors/useFooterColors';
 
 export const Navigation: React.FC = () => {
@@ -12,8 +12,7 @@ export const Navigation: React.FC = () => {
         Навигация
       </Text>
       <VStack align="start" spacing={2}>
-        <Link
-          as={RouterLink as any}
+        <AppLink
           to="/weekly"
           fontSize="sm"
           color={colors.textColor}
@@ -22,9 +21,8 @@ export const Navigation: React.FC = () => {
           textAlign="left"
         >
           Задачи недели
-        </Link>
-        <Link
-          as={RouterLink as any}
+        </AppLink>
+        <AppLink
           to="/learn"
           fontSize="sm"
           color={colors.textColor}
@@ -33,9 +31,8 @@ export const Navigation: React.FC = () => {
           textAlign="left"
         >
           Материалы
-        </Link>
-        <Link
-          as={RouterLink as any}
+        </AppLink>
+        <AppLink
           to="/sessions"
           fontSize="sm"
           color={colors.textColor}
@@ -44,9 +41,8 @@ export const Navigation: React.FC = () => {
           textAlign="left"
         >
           Сессии AIFFA
-        </Link>
-        <Link
-          as={RouterLink as any}
+        </AppLink>
+        <AppLink
           to="/creators"
           fontSize="sm"
           color={colors.textColor}
@@ -55,9 +51,8 @@ export const Navigation: React.FC = () => {
           textAlign="left"
         >
           Создатели
-        </Link>
-        <Link
-          as={RouterLink as any}
+        </AppLink>
+        <AppLink
           to="/partners"
           fontSize="sm"
           color={colors.textColor}
@@ -66,7 +61,7 @@ export const Navigation: React.FC = () => {
           textAlign="left"
         >
           Партнёрство
-        </Link>
+        </AppLink>
       </VStack>
     </VStack>
   );

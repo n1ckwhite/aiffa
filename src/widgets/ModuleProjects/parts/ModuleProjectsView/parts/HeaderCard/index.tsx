@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, HStack, Heading, Text, Stack, Button } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
 import { moduleIconById } from '../constants';
 import type { HeaderCardProps } from './types/types';
 import { getModuleProjectsDescription } from '../../data';
 import PillBadge from 'shared/ui/PillBadge';
+import { AppButtonLink } from 'shared/ui/AppLink';
 
 export const HeaderCard: React.FC<HeaderCardProps> = ({ mod, projectsCount, projectsLabel, levelLabel, colors }) => {
   const backgroundIcon = React.useMemo(() => {
@@ -86,14 +86,9 @@ export const HeaderCard: React.FC<HeaderCardProps> = ({ mod, projectsCount, proj
           {getModuleProjectsDescription(mod.id)}
         </Text>
         <Stack direction={{ base: 'column', sm: 'row' }} spacing={{ base: 2.5, md: 3 }} pt={3} align={{ base: 'stretch', sm: 'center' }}>
-          <Button
-            as={RouterLink}
-            to={`/learn/${mod.id}`}
-            variant="outline"
-            borderRadius="full"
-          >
+          <AppButtonLink to={`/learn/${mod.id}`} variant="outline" borderRadius="full">
             К материалам
-          </Button>
+          </AppButtonLink>
           <Button
             as="a"
             href="https://github.com/n1ckwhite/JavaScript-Universe"

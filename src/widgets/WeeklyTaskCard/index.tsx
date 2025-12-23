@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, VStack, Heading, Text, Icon } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import { FiMessageCircle, FiUserCheck } from 'react-icons/fi';
-import { Link as RouterLink } from 'react-router-dom';
 import { useWeeklyTaskCardColors } from './colors';
 import type { WeeklyTaskCardProps } from './types';
 import { getRing } from './model/ring';
@@ -13,6 +12,7 @@ import { RewardBar } from './parts/RewardBar';
 import { BackgroundDeco } from './parts/BackgroundDeco';
 import { DoneOverlay } from './parts/DoneOverlay';
 import { formatCount } from 'shared/functions/formatCount';
+import { AppBoxLink } from 'shared/ui/AppLink';
 
 const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
   label,
@@ -36,8 +36,7 @@ const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
   const effectiveSolved = typeof solvedCount === 'number' ? solvedCount : 128;
 
   return (
-    <Box
-      as={RouterLink}
+    <AppBoxLink
       to={to}
       borderRadius="20px"
       p={5}
@@ -105,7 +104,7 @@ const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
 
         <RewardBar ring={ring} borderColor={colors.taskInnerBorder} />
       </Box>
-    </Box>
+    </AppBoxLink>
   );
 };
 

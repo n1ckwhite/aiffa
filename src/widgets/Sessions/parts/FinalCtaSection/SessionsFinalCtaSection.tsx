@@ -3,8 +3,8 @@
 import React from "react";
 import { Box, Button, Heading, Icon, Stack, Text } from "@chakra-ui/react";
 import { FaLightbulb } from "react-icons/fa";
-import { Link as RouterLink } from "react-router-dom";
 import { useSessionsColors } from "@/widgets/Sessions/colors/useSessionsColors";
+import { AppButtonLink } from "shared/ui/AppLink";
 
 const SessionsFinalCtaSection: React.FC = () => {
   const {
@@ -158,8 +158,7 @@ const SessionsFinalCtaSection: React.FC = () => {
             >
               Предложить тему
             </Button>
-            <Button
-              as={RouterLink as any}
+            <AppButtonLink
               to="/partners"
               size="lg"
               fontWeight="semibold"
@@ -184,7 +183,7 @@ const SessionsFinalCtaSection: React.FC = () => {
               borderRadius="full"
             >
               Стать партнёром
-            </Button>
+            </AppButtonLink>
           </Stack>
         </Stack>
       </Box>

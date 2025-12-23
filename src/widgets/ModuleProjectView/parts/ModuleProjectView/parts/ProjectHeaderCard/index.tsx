@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Heading, Stack, Text, Button } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
 import type { ProjectHeaderCardProps } from './types';
+import { AppButtonLink } from 'shared/ui/AppLink';
 
 export const ProjectHeaderCard: React.FC<ProjectHeaderCardProps> = ({ project, borderColor, cardBg, descColor, backToListUrl }) => {
   return (
@@ -11,9 +11,9 @@ export const ProjectHeaderCard: React.FC<ProjectHeaderCardProps> = ({ project, b
         Итоговый проект закрепляет тему материала на практике. По шагам вы соберёте рабочее решение, оформите репозиторий и PR. После завершения вы увереннее применяете инструменты из материала и лучше понимаете, что происходит «под капотом».
       </Text>
       <Stack direction={{ base: 'column', sm: 'row' }} spacing={{ base: 3, md: 4 }} align={{ base: 'stretch', sm: 'center' }} pt={1}>
-        <Button as={RouterLink} to={backToListUrl} variant="outline" borderRadius="full" w={{ base: '100%', sm: 'auto' }}>
+        <AppButtonLink to={backToListUrl} variant="outline" borderRadius="full" w={{ base: '100%', sm: 'auto' }}>
           К списку проектов
-        </Button>
+        </AppButtonLink>
       </Stack>
     </Box>
   );

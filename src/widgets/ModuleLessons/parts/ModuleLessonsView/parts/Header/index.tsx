@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, HStack, Heading, Text, Stack, Button } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
 import { useModuleLevel } from '../../../../hooks/useModuleLevel';
 import { moduleDescriptions } from '../ProjectLink/data';
 import type { HeaderProps } from './types';
@@ -10,6 +9,7 @@ import { LessonsCountBadge } from './parts/LessonsCountBadge';
 import { LevelBadge } from './parts/LevelBadge';
 import { useHeaderDeco } from './model/useHeaderDeco';
 import { moduleIconById } from 'shared/lessons/moduleIcons';
+import { AppButtonLink } from 'shared/ui/AppLink';
 
 export const Header: React.FC<HeaderProps> = ({ mod, colors }) => {
   const { level, levelLabel, levelScheme } = useModuleLevel(mod?.id);
@@ -78,14 +78,9 @@ export const Header: React.FC<HeaderProps> = ({ mod, colors }) => {
           pt={3}
           align={{ base: 'stretch', sm: 'center' }}
         >
-          <Button
-            as={RouterLink}
-            to="/learn"
-            variant="outline"
-            borderRadius="full"
-          >
+          <AppButtonLink to="/learn" variant="outline" borderRadius="full">
             К материалам
-          </Button>
+          </AppButtonLink>
           <Button
             as="a"
             href="https://github.com/n1ckwhite/JavaScript-Universe"

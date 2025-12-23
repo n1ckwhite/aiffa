@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppColors } from "@/shared/theme/colors";
 import { useBlogArticles } from "../../../../hooks/useBlogArticles";
 import { useBlogScreenColors } from "../../colors/useBlogScreenColors/useBlogScreenColors";
@@ -53,7 +53,6 @@ export const useBlogScreenController = ({
 }: UseBlogScreenControllerParams): BlogScreenController => {
   const theme = useAppColors();
   const colors = useBlogScreenColors(theme);
-  const location = useLocation();
   const navigate = useNavigate();
 
   const searchInputRef = React.useRef<HTMLInputElement | null>(null);
@@ -128,11 +127,13 @@ export const useBlogScreenController = ({
     // query/tag меняются только с JS, поэтому URL-синк тут — “прогрессивное улучшение”.
     // При изменении фильтров сбрасываем страницу на 1.
     const desiredHref = buildBlogHref({ page: 1, q: query, tag: tagFilter });
-    const currentHref = `${location.pathname}${location.search}`;
+    const currentHref =
+      typeof window !== "undefined" ? `${window.location.pathname}${window.location.search}` : "";
+    if (!currentHref) return;
     if (desiredHref !== currentHref) {
       navigate(desiredHref, { replace: true, scroll: false });
     }
-  }, [query, tagFilter, location.pathname, location.search, navigate]);
+  }, [query, tagFilter, navigate]);
 
   useBlogHotkeys({ query, setQuery, searchInputRef });
 

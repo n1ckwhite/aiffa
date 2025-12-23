@@ -1,8 +1,8 @@
 import React from 'react';
-import { Avatar, Box, HStack, Link, Text, Tooltip, Icon, useColorModeValue } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Avatar, Box, HStack, Text, Tooltip, Icon, useColorModeValue } from '@chakra-ui/react';
 import { FaBookOpen, FaClipboardList, FaUserCircle, FaCode, FaComments, FaUserFriends, FaFeatherAlt } from 'react-icons/fa';
 import { useUserProfile } from 'entities/user';
+import { AppLink } from '@/shared/ui/AppLink';
 import DonateButton from '../../../DonateButton';
 import ThemeToggleButton from '../../../ThemeToggleButton';
 import type { DesktopActionsProps } from './types';
@@ -23,8 +23,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
   return (
     <HStack gap={{ base: 1, md: 1, xl: 2 }}>
       <Tooltip label="Материалы" openDelay={250} hasArrow>
-        <Link
-          as={RouterLink as any}
+        <AppLink
           to="/learn"
           aria-label="Материалы"
           onClick={() => { setIsMobileMenuOpen(false); }}
@@ -44,13 +43,12 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           >
             Материалы
           </Text>
-        </Link>
+        </AppLink>
       </Tooltip>
 
       {/* Контент */}
       <Tooltip label="Блог" openDelay={250} hasArrow>
-        <Link
-          as={RouterLink as any}
+        <AppLink
           to="/blog"
           aria-label="Блог"
           onClick={() => { setIsMobileMenuOpen(false); }}
@@ -70,13 +68,12 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           >
             Блог
           </Text>
-        </Link>
+        </AppLink>
       </Tooltip>
 
       {/* Практика */}
       <Tooltip label="Задачи" openDelay={250} hasArrow>
-        <Link
-          as={RouterLink as any}
+        <AppLink
           to="/weekly"
           aria-label="Задачи"
           onClick={() => { setIsMobileMenuOpen(false); }}
@@ -96,11 +93,10 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           >
             Задачи
           </Text>
-        </Link>
+        </AppLink>
       </Tooltip>
       <Tooltip label="Хакатоны" openDelay={250} hasArrow>
-        <Link
-          as={RouterLink as any}
+        <AppLink
           to="/hackathons"
           aria-label="Хакатоны"
           onClick={() => { setIsMobileMenuOpen(false); }}
@@ -120,13 +116,12 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           >
             Хакатоны
           </Text>
-        </Link>
+        </AppLink>
       </Tooltip>
 
       {/* Сообщество */}
       <Tooltip label="Сессии" openDelay={250} hasArrow>
-        <Link
-          as={RouterLink as any}
+        <AppLink
           to="/sessions"
           aria-label="Сессии"
           onClick={() => { setIsMobileMenuOpen(false); }}
@@ -146,11 +141,10 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           >
             Сессии
           </Text>
-        </Link>
+        </AppLink>
       </Tooltip>
       <Tooltip label="Создатели" openDelay={250} hasArrow>
-        <Link
-          as={RouterLink as any}
+        <AppLink
           to="/creators"
           aria-label="Создатели"
           onClick={() => { setIsMobileMenuOpen(false); }}
@@ -170,12 +164,11 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           >
             Создатели
           </Text>
-        </Link>
+        </AppLink>
       </Tooltip>
 
       <Tooltip label="Профиль" openDelay={250} hasArrow>
-        <Link
-          as={RouterLink as any}
+        <AppLink
           to="/profile"
           aria-label="Профиль"
           onClick={() => { setIsMobileMenuOpen(false); }}
@@ -198,7 +191,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           ) : (
             <Icon as={FaUserCircle} boxSize={5} aria-hidden="true" color={fillIcon} />
           )}
-        </Link>
+        </AppLink>
       </Tooltip>
       
       <ThemeToggleButton />

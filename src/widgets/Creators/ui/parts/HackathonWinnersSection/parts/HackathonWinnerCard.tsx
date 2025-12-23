@@ -104,7 +104,7 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({ teamName, pla
               {members.map((member: HackathonWinnerCardProps["members"][number]) => (
                 <Avatar
                   key={member.id}
-                  as={Link}
+                  as="a"
                   href={member.profileHref}
                   target="_blank"
                   rel="noopener noreferrer"

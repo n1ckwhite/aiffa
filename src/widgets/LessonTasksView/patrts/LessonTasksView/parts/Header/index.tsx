@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Button, Heading, HStack } from '@chakra-ui/react';
+import { Box, Heading, HStack } from '@chakra-ui/react';
 import { ArrowBackIcon, EditIcon } from '@chakra-ui/icons';
-import { Link as RouterLink } from 'react-router-dom';
 import type { TasksHeaderProps } from './types';
+import { AppButtonLink } from 'shared/ui/AppLink';
 
 export const TasksHeader: React.FC<TasksHeaderProps> = ({
   hasTasks,
@@ -58,8 +58,7 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
           )}
         </HStack>
         {/* Десктопная кнопка "К материалу" — стили как у "К задачам недели" */}
-        <Button
-          as={RouterLink}
+        <AppButtonLink
           to={`/learn/${moduleId}/${lessonId}`}
           variant="outline"
           colorScheme="blue"
@@ -75,10 +74,9 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
           display={{ base: "none", md: "inline-flex" }}
         >
           К материалу
-        </Button>
+        </AppButtonLink>
       </HStack>
-      <Button
-        as={RouterLink}
+      <AppButtonLink
         to={`/learn/${moduleId}/${lessonId}`}
         variant="outline"
         colorScheme="blue"
@@ -96,7 +94,7 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
         transition="background-color 0.15s ease, transform 0.1s ease"
       >
         К материалу
-      </Button>
+      </AppButtonLink>
     </>
   );
 };

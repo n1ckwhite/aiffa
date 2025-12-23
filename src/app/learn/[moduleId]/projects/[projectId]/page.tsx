@@ -4,10 +4,9 @@ import { loadManifest } from "shared/lessons/api";
 import ModuleProjectPageClient from "./ModuleProjectPageClient";
 
 type ModuleProjectRouteParams = {
-  params: {
-    moduleId: string;
-    projectId: string;
-  };
+  params:
+    | { moduleId: string; projectId: string }
+    | Promise<{ moduleId: string; projectId: string }>;
 };
 
 const SITE_URL =
@@ -16,9 +15,10 @@ const SITE_URL =
 export const generateMetadata = async ({
   params,
 }: ModuleProjectRouteParams): Promise<Metadata> => {
+  const { moduleId, projectId } = await Promise.resolve(params);
   const manifest = await loadManifest();
-  const modAny = manifest.modules.find((m) => m.id === params.moduleId) as any;
-  const project = modAny?.projects?.find((p: any) => p.id === params.projectId) as any;
+  const modAny = manifest.modules.find((m) => m.id === moduleId) as any;
+  const project = modAny?.projects?.find((p: any) => p.id === projectId) as any;
 
   const moduleTitle = modAny?.title ?? "Материал";
   const projectTitle = project?.title ?? "Проект";
@@ -27,7 +27,7 @@ export const generateMetadata = async ({
     project?.description ??
     `Практический проект «${projectTitle}» из материала «${moduleTitle}» на платформе AIFFA.`;
 
-  const url = `${SITE_URL}/learn/${params.moduleId}/projects/${params.projectId}`;
+  const url = `${SITE_URL}/learn/${moduleId}/projects/${projectId}`;
 
   return {
     title,
@@ -44,8 +44,8 @@ export const generateMetadata = async ({
   };
 };
 
-const ModuleProjectRoutePage = ({ params }: ModuleProjectRouteParams) => {
-  const { moduleId, projectId } = params;
+const ModuleProjectRoutePage = async ({ params }: ModuleProjectRouteParams) => {
+  const { moduleId, projectId } = await Promise.resolve(params);
   return <ModuleProjectPageClient moduleId={moduleId} projectId={projectId} />;
 };
 

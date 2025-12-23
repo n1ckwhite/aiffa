@@ -4,19 +4,19 @@ import { loadLesson } from "shared/lessons/api";
 import LessonTasksPageClient from "./LessonTasksPageClient";
 
 type LessonTasksRouteParams = {
-  params: {
-    moduleId: string;
-    lessonId: string;
-  };
+  params:
+    | { moduleId: string; lessonId: string }
+    | Promise<{ moduleId: string; lessonId: string }>;
 };
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
 
 export const generateMetadata = async ({ params }: LessonTasksRouteParams): Promise<Metadata> => {
-  const lesson = await loadLesson(params.moduleId, params.lessonId);
+  const { moduleId, lessonId } = await Promise.resolve(params);
+  const lesson = await loadLesson(moduleId, lessonId);
   const lessonAny = lesson as any;
-  const url = `${SITE_URL}/learn/${params.moduleId}/${params.lessonId}/tasks`;
+  const url = `${SITE_URL}/learn/${moduleId}/${lessonId}/tasks`;
 
   const baseTitle = lessonAny?.title ?? "Материал";
   const description =
@@ -39,7 +39,7 @@ export const generateMetadata = async ({ params }: LessonTasksRouteParams): Prom
 };
 
 const LessonTasksRoutePage = async ({ params }: LessonTasksRouteParams) => {
-  const { moduleId, lessonId } = params;
+  const { moduleId, lessonId } = await Promise.resolve(params);
   const url = `${SITE_URL}/learn/${moduleId}/${lessonId}/tasks`;
   const lesson = await loadLesson(moduleId, lessonId);
   const lessonAny = lesson as any;

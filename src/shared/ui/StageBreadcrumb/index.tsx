@@ -1,5 +1,4 @@
 import React from 'react';
-import NextLink from "next/link";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Text } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import HorizontalScroll from 'shared/ui/HorizontalScroll';
@@ -18,7 +17,6 @@ const StageBreadcrumb: React.FC<StageBreadcrumbProps> = ({ moduleId, moduleTitle
         <Breadcrumb separator={<ChevronRightIcon boxSize={3.5} />}>
           <BreadcrumbItem>
             <BreadcrumbLink
-              as={NextLink}
               href={rootCrumb?.to ?? `/learn/${moduleId}`}
               fontSize={{ base: 'sm', md: 'sm' }}
               textTransform="uppercase"
@@ -45,7 +43,6 @@ const StageBreadcrumb: React.FC<StageBreadcrumbProps> = ({ moduleId, moduleTitle
           {middleCrumb && (
             <BreadcrumbItem>
               <BreadcrumbLink
-                as={NextLink}
                 href={middleCrumb.to}
                 fontSize="xs"
                 color={breadcrumbColor}
@@ -69,7 +66,6 @@ const StageBreadcrumb: React.FC<StageBreadcrumbProps> = ({ moduleId, moduleTitle
               </Text>
             ) : (
               <BreadcrumbLink
-                as={NextLink}
                 href={`/learn/${moduleId}/${lessonId}`}
                 fontSize="xs"
                 color={breadcrumbColor}

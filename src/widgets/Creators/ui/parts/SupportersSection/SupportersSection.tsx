@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Heading, HStack, Icon, Link, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import { Avatar, Box, Heading, HStack, Icon, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { FiHeart } from "react-icons/fi";
 import { useCreatorsData } from "../../hooks/useCreatorsData";
 import { Creator } from "@/widgets/Creators/model/types";
@@ -80,7 +80,7 @@ const SupportersSection: React.FC = () => {
                 return (
                   <Box as="li" key={item.id} minW={0} w="full" display="flex" justifyContent="center">
                     <Box
-                      as={Link}
+                      as="a"
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"

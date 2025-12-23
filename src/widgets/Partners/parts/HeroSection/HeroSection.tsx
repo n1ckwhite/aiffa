@@ -4,17 +4,13 @@ import {
   Button,
   Heading,
   HStack,
-  Link,
   Stack,
   Text,
   VStack,
-  Icon,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import PillBadge from "shared/ui/PillBadge";
 import { TelegramIcon } from "@/widgets/Footer/icons/Telegram";
 import { MailIcon } from "@/widgets/Footer/icons/Mail";
-import { FaHandshake } from "react-icons/fa6";
 import { BusinessAnalystIcon } from "@/shared/icons/components-icon";
 import { usePartnersColors } from "widgets/Partners/colors/usePartnersColors";
 
@@ -70,9 +66,10 @@ const HeroSection: React.FC = () => {
         <BusinessAnalystIcon />
         <HStack spacing={4} flexWrap="wrap" justify="center">
           <Button
-            as={Link}
+            as="a"
             href="https://t.me/iamceob1tch"
-            isExternal
+            target="_blank"
+            rel="noopener noreferrer"
             colorScheme="blue"
             borderRadius="full"
             px={{ base: 6, md: 7 }}
@@ -84,7 +81,7 @@ const HeroSection: React.FC = () => {
             Написать в Telegram
           </Button>
           <Button
-            as={Link}
+            as="a"
             href="mailto:bbycinka@yandex.ru?subject=Запрос медиакита AIFFA"
             variant="outline"
             borderRadius="full"

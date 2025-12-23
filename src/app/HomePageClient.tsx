@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Box } from "@chakra-ui/react";
 import HeroSection from "@/widgets/HeroSection";
 import FeaturesSection from "@/widgets/FeaturesSection";

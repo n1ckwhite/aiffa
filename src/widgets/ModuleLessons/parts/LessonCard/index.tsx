@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
 import { CheckIcon } from '@chakra-ui/icons';
 import type { LessonCardProps } from './types';
 import { IndexChip } from './parts/IndexChip';
 import { TasksBadge } from './parts/Badges/TasksBadge';
 import { AuthorsBadge } from './parts/Badges/AuthorsBadge';
 import { OpenLinkBadge } from './parts/Badges/OpenLinkBadge';
+import { AppBoxLink } from 'shared/ui/AppLink';
 
 export const LessonCard: React.FC<LessonCardProps> = ({
   moduleId,
@@ -22,8 +22,7 @@ export const LessonCard: React.FC<LessonCardProps> = ({
   const authors = Array.isArray(lesson?.authors) ? lesson.authors : [];
 
   return (
-    <Box
-      as={RouterLink}
+    <AppBoxLink
       to={`/learn/${moduleId}/${lesson.id}`}
       borderWidth="2px"
       borderColor={done ? 'green.300' : colors.borderColor}
@@ -63,7 +62,7 @@ export const LessonCard: React.FC<LessonCardProps> = ({
           <OpenLinkBadge accentColor={accentColor} chipBorder={colors.chipBorder} arrowAnimation={arrowAnimation} />
         </HStack>
       </VStack>
-    </Box>
+    </AppBoxLink>
   );
 };
 

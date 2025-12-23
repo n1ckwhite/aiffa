@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box, SimpleGrid, Text, HStack, Avatar, Icon } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
 import { ChevronRightIcon, StarIcon } from '@chakra-ui/icons';
 import { FiEye, FiMessageCircle } from 'react-icons/fi';
 import { arrowLoop } from './animations';
 import type { ProjectsGridProps } from './types';
 import { formatCount } from 'shared/functions/formatCount';
+import { AppBoxLink } from 'shared/ui/AppLink';
 
 export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, colors }) => {
   if (projects.length === 0) {
@@ -18,7 +18,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
       {projects.map((p) => (
-        <Box key={p.id} as={RouterLink} to={`/learn/${modId}/projects/${p.id}`} aria-label={`Открыть проект: ${p.title}`} w="100%" borderWidth="2px" borderColor={colors.borderColor} bg={colors.cardBg} transition="all 180ms ease" p={5} borderRadius="xl" display="flex" gap={3} alignItems="flex-start" position="relative" overflow="hidden" boxShadow={'none'} _before={{ content: '""', position: 'absolute', top: 0, bottom: 0, left: 0, width: '4px', borderTopLeftRadius: '12px', borderBottomLeftRadius: '12px', background: colors.headerAccent, opacity: 0.9 }} _hover={{ background: colors.cardHoverBg, textDecoration: 'none', transform: 'translateY(-4px)', borderColor: colors.heroBorder, boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)' }}>
+        <AppBoxLink key={p.id} to={`/learn/${modId}/projects/${p.id}`} aria-label={`Открыть проект: ${p.title}`} w="100%" borderWidth="2px" borderColor={colors.borderColor} bg={colors.cardBg} transition="all 180ms ease" p={5} borderRadius="xl" display="flex" gap={3} alignItems="flex-start" position="relative" overflow="hidden" boxShadow={'none'} _before={{ content: '""', position: 'absolute', top: 0, bottom: 0, left: 0, width: '4px', borderTopLeftRadius: '12px', borderBottomLeftRadius: '12px', background: colors.headerAccent, opacity: 0.9 }} _hover={{ background: colors.cardHoverBg, textDecoration: 'none', transform: 'translateY(-4px)', borderColor: colors.heroBorder, boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)' }}>
           <Box position="relative" minW="28px" h="28px" display="flex" alignItems="center" justifyContent="center">
             <Box borderRadius="full" bg={colors.indexBg} color={colors.indexTextColor} display="flex" alignItems="center" justifyContent="center" fontSize="sm" fontWeight="bold" w="28px" h="28px" borderWidth="2px" borderColor={colors.chipBorder}>P</Box>
           </Box>
@@ -97,7 +97,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
             </HStack>
           </Box>
           <Box as={ChevronRightIcon} boxSize={5} color={colors.accent} opacity={0.7} ml={2} alignSelf="start" animation={`${arrowLoop} 1200ms ease-in-out infinite`} display={{ base: 'none', md: 'block' }} />
-        </Box>
+        </AppBoxLink>
       ))}
     </SimpleGrid>
   );

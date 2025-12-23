@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link, Text, Box } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Text, Box } from '@chakra-ui/react';
 import type { NavLinkProps } from './types';
+import { AppLink } from 'shared/ui/AppLink';
 
 const NavLinkItem: React.FC<NavLinkProps> = ({ to, label, ariaLabel, hoverBg, iconPath, onClick, showTextFrom = '2xl' }) => {
   return (
-    <Link
-      as={RouterLink as any}
+    <AppLink
       to={to}
       aria-label={ariaLabel}
       onClick={onClick}
@@ -21,7 +20,7 @@ const NavLinkItem: React.FC<NavLinkProps> = ({ to, label, ariaLabel, hoverBg, ic
         <path strokeLinecap="round" strokeLinejoin="round" d={iconPath} />
       </Box>
       <Text ml={2} display={{ base: 'none', [showTextFrom]: 'inline' }} fontSize="sm" fontWeight="semibold">{label}</Text>
-    </Link>
+    </AppLink>
   );
 };
 

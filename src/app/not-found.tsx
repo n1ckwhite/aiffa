@@ -1,8 +1,5 @@
-import React from "react";
-import NextLink from "next/link";
 import {
   Box,
-  Button,
   Heading,
   HStack,
   Stack,
@@ -10,6 +7,7 @@ import {
   VStack
 } from "@chakra-ui/react";
 import { ErrorIcon } from "@/shared/icons/components-icon";
+import { AppButtonLink } from "@/shared/ui/AppLink";
 
 const NotFound = () => {
   return (
@@ -60,9 +58,8 @@ const NotFound = () => {
             w="full"
             justify="center"
           >
-            <Button
-              as={NextLink}
-              href="/"
+            <AppButtonLink
+              to="/"
               borderRadius="full"
               size="lg"
               bg="blue.600"
@@ -74,10 +71,9 @@ const NotFound = () => {
               }}
             >
               На главную
-            </Button>
-            <Button
-              as={NextLink}
-              href="/learn"
+            </AppButtonLink>
+            <AppButtonLink
+              to="/learn"
               variant="ghost"
               borderRadius="full"
               size="lg"
@@ -86,7 +82,7 @@ const NotFound = () => {
               w={{ base: "full", sm: "auto" }}
             >
               К материалам
-            </Button>
+            </AppButtonLink>
           </Stack>
 
           <Text fontSize="sm" color="text" maxW="32rem">

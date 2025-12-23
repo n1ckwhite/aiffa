@@ -5,11 +5,9 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
 
 type BlogRoutePageProps = {
-  searchParams?: {
-    page?: string;
-    q?: string;
-    tag?: string;
-  };
+  searchParams?:
+    | { page?: string; q?: string; tag?: string }
+    | Promise<{ page?: string; q?: string; tag?: string }>;
 };
 
 const getSafePage = (raw: unknown) => {
@@ -18,7 +16,8 @@ const getSafePage = (raw: unknown) => {
 };
 
 export const generateMetadata = async ({ searchParams }: BlogRoutePageProps): Promise<Metadata> => {
-  const page = getSafePage(searchParams?.page);
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const page = getSafePage(resolvedSearchParams?.page);
   const isFirst = page <= 1;
   const canonicalUrl = isFirst ? `${SITE_URL}/blog` : `${SITE_URL}/blog?page=${page}`;
 
@@ -35,10 +34,11 @@ export const generateMetadata = async ({ searchParams }: BlogRoutePageProps): Pr
 };
 };
 
-const BlogRoutePage = ({ searchParams }: BlogRoutePageProps) => {
-  const initialPage = getSafePage(searchParams?.page);
-  const initialQuery = (searchParams?.q ?? "").toString();
-  const initialTag = (searchParams?.tag ?? "").toString();
+const BlogRoutePage = async ({ searchParams }: BlogRoutePageProps) => {
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const initialPage = getSafePage(resolvedSearchParams?.page);
+  const initialQuery = (resolvedSearchParams?.q ?? "").toString();
+  const initialTag = (resolvedSearchParams?.tag ?? "").toString();
 
   return (
     <BlogPageClient

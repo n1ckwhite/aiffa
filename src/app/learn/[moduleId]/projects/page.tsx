@@ -4,12 +4,8 @@ import { loadManifest } from "shared/lessons/api";
 import ModuleProjectsPageClient from "./ModuleProjectsPageClient";
 
 type ModuleProjectsRouteParams = {
-  params: {
-    moduleId: string;
-  };
-  searchParams?: {
-    page?: string;
-  };
+  params: { moduleId: string } | Promise<{ moduleId: string }>;
+  searchParams?: { page?: string } | Promise<{ page?: string }>;
 };
 
 const SITE_URL =
@@ -18,8 +14,9 @@ const SITE_URL =
 export const generateMetadata = async ({
   params,
 }: ModuleProjectsRouteParams): Promise<Metadata> => {
+  const { moduleId } = await Promise.resolve(params);
   const manifest = await loadManifest();
-  const moduleAny = manifest.modules.find((m) => m.id === params.moduleId) as any;
+  const moduleAny = manifest.modules.find((m) => m.id === moduleId) as any;
 
   const baseTitle = moduleAny?.title ?? "Материал";
   const title = moduleAny ? `${moduleAny.title} — проекты` : "Проекты материла";
@@ -27,7 +24,7 @@ export const generateMetadata = async ({
     moduleAny?.description ??
     `Проекты материла «${baseTitle}» на платформе AIFFA: практические мини‑проекты для закрепления материала.`;
 
-  const url = `${SITE_URL}/learn/${params.moduleId}/projects`;
+  const url = `${SITE_URL}/learn/${moduleId}/projects`;
 
   return {
     title,
@@ -45,8 +42,9 @@ export const generateMetadata = async ({
 };
 
 const ModuleProjectsRoutePage = async ({ params, searchParams }: ModuleProjectsRouteParams) => {
-  const moduleId = params.moduleId;
-  const pageFromQuery = Number(searchParams?.page ?? "1");
+  const { moduleId } = await Promise.resolve(params);
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const pageFromQuery = Number(resolvedSearchParams?.page ?? "1");
   const initialPage = Number.isFinite(pageFromQuery) && pageFromQuery > 0 ? pageFromQuery : 1;
   const manifest = await loadManifest();
   const initialMod =

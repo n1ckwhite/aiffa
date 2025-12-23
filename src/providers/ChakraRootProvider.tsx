@@ -4,6 +4,7 @@ import React from "react";
 import { useEmotionCache } from "@chakra-ui/next-js/use-emotion-cache";
 import {
   ChakraProvider,
+  cookieStorageManager,
   cookieStorageManagerSSR,
 } from "@chakra-ui/react";
 import { CacheProvider as EmotionCacheProvider } from "@emotion/react";
@@ -24,9 +25,15 @@ export const ChakraRootProvider = ({
 }: ChakraRootProviderProps) => {
   const emotionCache = useEmotionCache();
 
-  // Важно: используем один и тот же менеджер и на сервере, и на клиенте (первый рендер),
-  // иначе возможны hydration mismatch в React 19 из-за различий в вычислении color mode.
-  const colorModeManager = cookieStorageManagerSSR(cookies ?? "");
+  // Важно: для SSR используем cookieStorageManagerSSR (первый рендер совпадает и не даёт hydration mismatch),
+  // а после маунта переключаемся на cookieStorageManager, чтобы на клиенте работало чтение/запись куки.
+  const [colorModeManager, setColorModeManager] = React.useState(() =>
+    cookieStorageManagerSSR(cookies ?? "")
+  );
+
+  React.useEffect(() => {
+    setColorModeManager(cookieStorageManager);
+  }, []);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;

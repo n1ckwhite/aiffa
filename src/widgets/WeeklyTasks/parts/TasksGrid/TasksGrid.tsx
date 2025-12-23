@@ -6,7 +6,10 @@ import type { WeeklyTaskListItem } from './model/useWeeklyTasksData';
 
 const TasksGrid: React.FC<WeeklyTasksGridProps> = ({ tasks, tierLabel }) => {
   return (
-    <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} spacing={{ base: 5, md: 7, lg: 8 }}>
+    <SimpleGrid
+      minChildWidth={{ base: "100%", sm: "360px" }}
+      spacing={{ base: 5, md: 7, lg: 8 }}
+    >
       {tasks
         .filter((t: WeeklyTaskListItem) => {
           if (!t.level) return true;

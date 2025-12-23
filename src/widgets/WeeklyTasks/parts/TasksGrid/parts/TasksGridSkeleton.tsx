@@ -5,7 +5,10 @@ import { useWeeklyTaskCardColors } from '@/widgets/WeeklyTaskCard/colors';
 const TasksGridSkeleton: React.FC = () => {
   const colors = useWeeklyTaskCardColors();
   return (
-    <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} spacing={{ base: 5, md: 7, lg: 8 }}>
+    <SimpleGrid
+      minChildWidth={{ base: "100%", sm: "360px" }}
+      spacing={{ base: 5, md: 7, lg: 8 }}
+    >
       {Array.from({ length: 3 }).map((_, index) => (
         <Box
           key={index}

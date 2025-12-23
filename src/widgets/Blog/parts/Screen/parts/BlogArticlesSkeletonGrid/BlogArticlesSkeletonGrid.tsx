@@ -13,7 +13,7 @@ export const BlogArticlesSkeletonGrid: React.FC<BlogArticlesSkeletonGridProps> =
   return (
     <SimpleGrid
       as="ul"
-      minChildWidth={{ base: "100%", sm: "320px" }}
+      minChildWidth={{ base: "100%", sm: "360px" }}
       spacing={{ base: 6, md: 7 }}
       listStyleType="none"
       m={0}

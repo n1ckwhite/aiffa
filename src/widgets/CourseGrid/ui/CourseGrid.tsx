@@ -20,7 +20,7 @@ const CourseGrid: React.FC<CourseGridProps> = ({ category = 'all', showHeader = 
           )}
 
           <SimpleGrid
-            minChildWidth={{ base: "100%", sm: "320px" }}
+            minChildWidth={{ base: "100%", sm: "360px" }}
             spacing={{ base: 5, md: 6 }}
             w="full"
             alignItems="stretch"

@@ -45,7 +45,7 @@ const InteractiveFeaturesSection: React.FC = () => {
           <SimpleGrid
             // Safari tends to "squeeze" cards when columns are forced.
             // Using `minChildWidth` makes cards wrap instead of shrinking below the minimum.
-            minChildWidth={{ base: "100%", sm: "320px" }}
+            minChildWidth={{ base: "100%", sm: "360px" }}
             spacing={6}
             w="full"
             alignItems="stretch"

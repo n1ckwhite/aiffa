@@ -7,19 +7,29 @@ import { parseWeeklyTaskMd } from "shared/weekly/md";
 import WeeklyTaskDetailPageClient from "./WeeklyTaskDetailPageClient";
 
 type WeeklyTaskRouteParams = {
-  params: {
+  params: Promise<{
     taskId: string;
-  };
+  }>;
 };
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
 
+const normalizeWeeklyTaskId = (rawTaskId: string) => {
+  const trimmed = (rawTaskId || "").trim();
+  if (!trimmed) return "";
+  // Backward compatibility: allow `/weekly/1` -> `/weekly/weekly-1`
+  if (/^\d+$/.test(trimmed)) return `weekly-${trimmed}`;
+  return trimmed;
+};
+
 export const generateMetadata = async ({ params }: WeeklyTaskRouteParams): Promise<Metadata> => {
-  const info = getWeeklyInfoById(params.taskId);
+  const resolvedParams = await Promise.resolve(params);
+  const taskId = normalizeWeeklyTaskId(resolvedParams.taskId);
+  const info = getWeeklyInfoById(taskId);
   let title = "Задача недели";
   let description: string | undefined;
-  const url = `${SITE_URL}/weekly/${params.taskId}`;
+  const url = `${SITE_URL}/weekly/${taskId}`;
 
   if (info?.mdPath) {
     try {
@@ -49,9 +59,11 @@ export const generateMetadata = async ({ params }: WeeklyTaskRouteParams): Promi
   };
 };
 
-const WeeklyTaskDetailRoutePage = ({ params }: WeeklyTaskRouteParams) => {
+const WeeklyTaskDetailRoutePage = async ({ params }: WeeklyTaskRouteParams) => {
   // Пока сам TaskDetailScreen использует useParams из shim, поэтому просто монтируем client-компонент
-  const url = `${SITE_URL}/weekly/${params.taskId}`;
+  const resolvedParams = await Promise.resolve(params);
+  const taskId = normalizeWeeklyTaskId(resolvedParams.taskId);
+  const url = `${SITE_URL}/weekly/${taskId}`;
 
   return (
     <>
@@ -98,7 +110,7 @@ const WeeklyTaskDetailRoutePage = ({ params }: WeeklyTaskRouteParams) => {
           }),
         }}
       />
-      <WeeklyTaskDetailPageClient taskId={params.taskId} />
+      <WeeklyTaskDetailPageClient taskId={taskId} />
     </>
   );
 };

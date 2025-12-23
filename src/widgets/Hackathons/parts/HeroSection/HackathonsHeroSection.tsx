@@ -62,14 +62,17 @@ const HackathonsHeroSection: React.FC = () => {
       <Stack
         direction={{ base: "column", lg: "row" }}
         spacing={{ base: 4, lg: 10 }}
-        align={{ base: "flex-start", lg: "center" }}
+        // Center items in the stacked layout to avoid "squeezed" feeling on mid widths (Safari).
+        align={{ base: "center", lg: "center" }}
         position="relative"
         zIndex={1}
+        w="full"
       >
         <Box
           as="header"
           flex="1"
-          maxW={{ base: "full", lg: "60%" }}
+          w="full"
+          maxW={{ base: "full", md: "720px", lg: "60%" }}
           textAlign={{ base: "center", lg: "left" }}
         >
           <Box mb={3}>
@@ -178,8 +181,8 @@ const HackathonsHeroSection: React.FC = () => {
         <Box
           as="aside"
           flex={{ base: "none", lg: 1 }}
-          w={{ base: "100%", lg: "auto" }}
-          maxW={{ base: "full", lg: "40%" }}
+          w="full"
+          maxW={{ base: "full", md: "720px", lg: "40%" }}
           minW={{ lg: "320px" }}
           flexShrink={0}
           bg={heroAsideBg}

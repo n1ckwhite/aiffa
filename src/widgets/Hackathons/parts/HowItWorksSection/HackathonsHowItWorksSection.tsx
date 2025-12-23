@@ -53,11 +53,11 @@ const HackathonsHowItWorksSection: React.FC = () => {
           role="list"
           listStyleType="none"
           pl={0}
-          minChildWidth={{ base: "100%", sm: "360px" }}
+          minChildWidth={{ base: "100%", sm: "400px" }}
           spacing={{ base: 4, md: 6 }}
           mt={{ base: 4, md: 6 }}
           w="full"
-          maxW="1000px"
+          maxW="1200px"
           mx="auto"
         >
           {steps.map((step) => (

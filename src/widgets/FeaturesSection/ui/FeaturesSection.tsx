@@ -18,7 +18,7 @@ const FeaturesSection: React.FC = () => {
 Мы растём вместе с сообществом: обратная связь, вклад участников и ваша поддержка
 превращаются в новые материалы, проекты и улучшения платформы."
           />
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} w="full" maxW="800px">
+          <SimpleGrid minChildWidth={{ base: "100%", sm: "360px" }} spacing={8} w="full" maxW="800px">
             {features.map((item, index) => (
               <FeatureItem key={index} {...item} />
             ))}

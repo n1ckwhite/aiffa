@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
   return (
     <Box as="footer" bg={colors.bg} mt={8} borderTop="1px solid" borderColor={colors.borderColor}>
       <Container maxW="1200px" pt={6} pb={3}>
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6}>
+        <SimpleGrid minChildWidth={{ base: "100%", sm: "240px" }} spacing={6} w="full">
           <Branding />
           <Sections />
           <Support onDonate={handleDonate} />

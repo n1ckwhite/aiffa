@@ -46,7 +46,7 @@ export const LessonsGrid: React.FC<LessonsGridProps> = ({ mod, colors, solvedMap
 
   return (
     <>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
+      <SimpleGrid minChildWidth={{ base: "100%", sm: "420px" }} spacing={4} w="full">
         {visible.map((lesson: any, idx: number) => {
           const totalTasks = Array.isArray(lesson?.tasks) ? lesson.tasks.length : 0;
           const lessonPrefix = `${mod.id}/${lesson.id}/`;

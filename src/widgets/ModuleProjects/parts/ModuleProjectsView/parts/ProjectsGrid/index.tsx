@@ -16,7 +16,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
     );
   }
   return (
-    <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
+    <SimpleGrid minChildWidth={{ base: "100%", sm: "420px" }} spacing={4} w="full">
       {projects.map((p) => (
         <AppBoxLink key={p.id} to={`/learn/${modId}/projects/${p.id}`} aria-label={`Открыть проект: ${p.title}`} w="100%" borderWidth="2px" borderColor={colors.borderColor} bg={colors.cardBg} transition="all 180ms ease" p={5} borderRadius="xl" display="flex" gap={3} alignItems="flex-start" position="relative" overflow="hidden" boxShadow={'none'} _before={{ content: '""', position: 'absolute', top: 0, bottom: 0, left: 0, width: '4px', borderTopLeftRadius: '12px', borderBottomLeftRadius: '12px', background: colors.headerAccent, opacity: 0.9 }} _hover={{ background: colors.cardHoverBg, textDecoration: 'none', transform: 'translateY(-4px)', borderColor: colors.heroBorder, boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)' }}>
           <Box position="relative" minW="28px" h="28px" display="flex" alignItems="center" justifyContent="center">

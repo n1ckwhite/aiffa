@@ -66,10 +66,11 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
       <SimpleGrid
         as="ul"
         role="list"
-        columns={{ base: 1, md: 2, lg: 4 }}
+        minChildWidth={{ base: "100%", sm: "360px" }}
         spacing={{ base: 4, md: 5, lg: 6 }}
         listStyleType="none"
         pl={0}
+        w="full"
       >
         {upcomingSessions.map((session) => (
           <Box

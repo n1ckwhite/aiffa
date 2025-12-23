@@ -109,7 +109,6 @@ const HackathonsSubmissionSection: React.FC = () => {
             minChildWidth={{ base: "100%", sm: "360px" }}
             spacing={{ base: 4, md: 6 }}
             w="full"
-            maxW="1100px"
             mx="auto"
           >
             {cards.map((card) => {

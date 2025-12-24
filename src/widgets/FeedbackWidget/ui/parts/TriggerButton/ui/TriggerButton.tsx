@@ -23,7 +23,7 @@ export const TriggerButton: React.FC<TriggerButtonProps> = ({ onClick }) => {
         transform: 'scale(0.95)',
       }}
       transition="all 0.2s ease-in-out"
-      display={{ base: 'none', md: 'inline-flex' }}
+      display={{ base: 'none', lg: 'flex' }}
     />
   );
 };

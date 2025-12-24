@@ -19,7 +19,6 @@ const FeedbackWidget: React.FC = () => {
   return (
     <Portal>
       <Box
-         display={{ base: 'none', lg: 'flex' }}
         position="fixed"
         right={{ base: '16px', md: '24px' }}
         bottom={{ base: `calc(20px + env(safe-area-inset-bottom))`, md: `calc(24px + env(safe-area-inset-bottom))` }}

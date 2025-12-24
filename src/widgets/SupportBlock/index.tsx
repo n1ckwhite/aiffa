@@ -55,7 +55,14 @@ const SupportBlock: React.FC<SupportBlockProps> = ({ borderColor, containerBg, a
               Делаете <b>проект</b> и застряли — задайте вопрос в Telegram. Покажите свой PR в JS HUB, получите обратную связь и помогите другим участникам. Мы рядом, чтобы вы довели проект до результата.
             </Text>
           )}
-          <Stack direction={{ base: 'column', md: 'row' }} align={{ base: 'stretch', md: 'flex-start' }} spacing={{ base: 2.5, md: 3 }} pt={1} w="100%" flexWrap={{ base: 'nowrap', md: 'wrap' }}>
+          <Stack
+            direction={{ base: 'column', xl: 'row' }}
+            align={{ base: 'stretch', xl: 'flex-start' }}
+            spacing={{ base: 2.5, xl: 3 }}
+            pt={1}
+            w="100%"
+            flexWrap={{ base: 'nowrap', xl: 'wrap' }}
+          >
             <TelegramLink
               colors={colors}
               label={variant === 'blog' ? 'Редакция в Telegram' : undefined}

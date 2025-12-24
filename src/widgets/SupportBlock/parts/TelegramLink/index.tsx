@@ -27,7 +27,7 @@ export const TelegramLink: React.FC<TelegramLinkProps> = ({
       alignItems="center"
       justifyContent="center"
       gap={2}
-      w={{ base: '100%', sm: 'auto' }}
+      w={{ base: '100%', xl: 'auto' }}
       aria-label={ariaLabel}
     >
       <ChatIcon />

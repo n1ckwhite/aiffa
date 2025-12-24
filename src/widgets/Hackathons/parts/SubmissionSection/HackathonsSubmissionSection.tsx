@@ -106,9 +106,10 @@ const HackathonsSubmissionSection: React.FC = () => {
             role="list"
             listStyleType="none"
             pl={0}
-            minChildWidth={{ base: "100%", sm: "420px" }}
+            columns={{ base: 1, xl: 2 }}
             spacing={{ base: 4, md: 6 }}
             w="full"
+            minW={0}
             maxW="1200px"
             mx="auto"
           >

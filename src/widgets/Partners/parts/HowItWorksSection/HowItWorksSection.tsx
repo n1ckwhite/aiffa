@@ -43,7 +43,7 @@ const HowItWorksSection: React.FC = () => {
           role="list"
           listStyleType="none"
           pl={0}
-          columns={{ base: 1, md: 2 }}
+          minChildWidth={{ base: "100%", md: "400px" }}
           spacing={{ base: 4, md: 5 }}
           mt={{ base: 2, md: 3 }}
           w="full"
@@ -60,9 +60,10 @@ const HowItWorksSection: React.FC = () => {
               spacing={4}
               align="flex-start"
               w="full"
-              minW={0}
+              minW={{ base: "100%", md: "400px" }}
               maxW="100%"
               boxSizing="border-box"
+              flexShrink={0}
             >
               <Box flexShrink={0}>
                 <Box

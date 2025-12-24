@@ -16,15 +16,15 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
     );
   }
   return (
-    <SimpleGrid minChildWidth={{ base: "100%", sm: "420px" }} spacing={4} w="full">
+    <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} w="full" minW={0}>
       {projects.map((p) => (
-        <AppBoxLink key={p.id} to={`/learn/${modId}/projects/${p.id}`} aria-label={`Открыть проект: ${p.title}`} w="100%" borderWidth="2px" borderColor={colors.borderColor} bg={colors.cardBg} transition="all 180ms ease" p={5} borderRadius="xl" display="flex" gap={3} alignItems="flex-start" position="relative" overflow="hidden" boxShadow={'none'} _before={{ content: '""', position: 'absolute', top: 0, bottom: 0, left: 0, width: '4px', borderTopLeftRadius: '12px', borderBottomLeftRadius: '12px', background: colors.headerAccent, opacity: 0.9 }} _hover={{ background: colors.cardHoverBg, textDecoration: 'none', transform: 'translateY(-4px)', borderColor: colors.heroBorder, boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)' }}>
+        <AppBoxLink key={p.id} to={`/learn/${modId}/projects/${p.id}`} aria-label={`Открыть проект: ${p.title}`} w="full" minW={0} borderWidth="2px" borderColor={colors.borderColor} bg={colors.cardBg} transition="all 180ms ease" p={5} borderRadius="xl" display="flex" gap={3} alignItems="flex-start" position="relative" overflow="hidden" boxShadow={'none'} _before={{ content: '""', position: 'absolute', top: 0, bottom: 0, left: 0, width: '4px', borderTopLeftRadius: '12px', borderBottomLeftRadius: '12px', background: colors.headerAccent, opacity: 0.9 }} _hover={{ background: colors.cardHoverBg, textDecoration: 'none', transform: 'translateY(-4px)', borderColor: colors.heroBorder, boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)' }}>
           <Box position="relative" minW="28px" h="28px" display="flex" alignItems="center" justifyContent="center">
             <Box borderRadius="full" bg={colors.indexBg} color={colors.indexTextColor} display="flex" alignItems="center" justifyContent="center" fontSize="sm" fontWeight="bold" w="28px" h="28px" borderWidth="2px" borderColor={colors.chipBorder}>P</Box>
           </Box>
           <Box flex="1" minW={0}>
             <Text fontWeight="semibold" noOfLines={2} wordBreak="break-word" overflowWrap="anywhere" style={{ hyphens: 'auto' }}>{p.title}</Text>
-            <HStack spacing={3} fontSize="xs" color={colors.descColor} mt={1}>
+            <HStack spacing={3} rowGap={1} flexWrap="wrap" fontSize="xs" color={colors.descColor} mt={1} minW={0}>
               <HStack spacing={1} flexShrink={0}>
                 <Box as="span">
                   {formatCount(Number((p as any).ratingCount ?? 0))}

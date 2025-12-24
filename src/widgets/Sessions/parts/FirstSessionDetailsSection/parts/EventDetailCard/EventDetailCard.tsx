@@ -48,9 +48,13 @@ const EventDetailCard: React.FC<EventDetailCardProps & EventDetailCardUiProps> =
         boxShadow: "lg",
         transform: "translateY(-2px)",
       }}
+      w="full"
+      minW={{ base: "100%", md: "400px" }}
+      maxW="100%"
+      boxSizing="border-box"
     >
-      <Stack spacing={2} position="relative" zIndex={1}>
-        <HStack spacing={3} align="center">
+      <Stack spacing={2} position="relative" zIndex={1} w="full" minW={0}>
+        <HStack spacing={3} align="center" w="full" minW={0}>
           <Box
             borderRadius="full"
             boxSize={8}
@@ -65,14 +69,15 @@ const EventDetailCard: React.FC<EventDetailCardProps & EventDetailCardUiProps> =
               transform: "translateY(-1px) scale(1.05)",
               boxShadow: "0 0 0 2px rgba(59, 130, 246, 0.45)",
             }}
+            flexShrink={0}
           >
             {icon}
           </Box>
-          <Heading as="h3" fontSize={{ base: "md", md: "lg" }}>
+          <Heading as="h3" fontSize={{ base: "md", md: "lg" }} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
             {title}
           </Heading>
         </HStack>
-        <Text fontSize={{ base: "sm", md: "sm" }} color={mutedTextColor}>
+        <Text fontSize={{ base: "sm", md: "sm" }} color={mutedTextColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
           {description}
         </Text>
       </Stack>

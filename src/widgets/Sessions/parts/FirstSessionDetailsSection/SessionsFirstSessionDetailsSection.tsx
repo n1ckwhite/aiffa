@@ -44,8 +44,13 @@ const SessionsFirstSessionDetailsSection: React.FC = () => {
       </Box>
 
       <SimpleGrid
-        columns={{ base: 1, md: 2 }}
+        minChildWidth={{ base: "100%", md: "400px" }}
         spacing={{ base: 3, md: 4 }}
+        w="full"
+        minW={0}
+        maxW="1200px"
+        mx="auto"
+        boxSizing="border-box"
       >
         {cards.map((card) => (
           <EventDetailCard

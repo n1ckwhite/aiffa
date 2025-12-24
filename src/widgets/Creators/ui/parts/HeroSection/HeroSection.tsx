@@ -82,9 +82,9 @@ const HeroSection: React.FC = () => {
               })}
             </Stack>
           </VStack>
-          <Box flex={{ base: "none", xl: 1 }} maxW={{ base: "240px", md: "320px" }} mx={{ base: "auto", xl: 0 }}>
+          {/* <Box flex={{ base: "none", xl: 1 }} maxW={{ base: "240px", md: "320px" }} mx={{ base: "auto", xl: 0 }}>
             <BusinessManTelescop />
-          </Box>
+          </Box> */}
         </Stack>
       </Box>
     </Box>

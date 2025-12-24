@@ -103,7 +103,6 @@ const HackathonsNextHackathonSection: React.FC = () => {
                 AIFFA Hackathon #1 — Задача старта
               </Heading>
             </Box>
-            <RewardsLottieIcon />
 
             <Stack
               as="ul"
@@ -235,6 +234,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
             justifyContent="center"
             mx="auto"
           >
+            {/* <RewardsLottieIcon /> */}
           </Box>
         </Stack>
       </Box>

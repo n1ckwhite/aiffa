@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import { BusinessWorkshopIcon } from "@/shared/icons/components-icon";
-import { rulesCardFloat } from "./animations";
 import { useHackathonsRulesSectionColors } from "./colors/useHackathonsRulesSectionColors";
 import { useHackathonsRuleCards } from "./data";
 
@@ -17,7 +16,6 @@ const HackathonsRulesSection: React.FC = () => {
     mutedTextColor,
     sectionCardBg,
     cardBorderColor,
-    accentBorderColor,
     deadlinesCircleBg,
     formatCircleBg,
     codeCircleBg,
@@ -82,9 +80,7 @@ const HackathonsRulesSection: React.FC = () => {
             maxW="100%"
             boxSizing="border-box"
           >
-          {ruleCards.map((card, index) => {
-            const animationDurationSeconds = 20 + index * 2;
-
+          {ruleCards.map((card) => {
             let circleBg = deadlinesCircleBg;
             if (card.id === "format") {
               circleBg = formatCircleBg;
@@ -104,12 +100,11 @@ const HackathonsRulesSection: React.FC = () => {
                 borderWidth="1px"
                 borderColor={cardBorderColor}
                 p={{ base: 4, md: 5 }}
-                animation={`${rulesCardFloat} ${animationDurationSeconds}s ease-in-out infinite`}
-                transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
+                transition="transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out"
                 _hover={{
-                  transform: "translateY(-6px)",
+                  transform: "translateY(-4px)",
                   boxShadow: "xl",
-                  borderColor: accentBorderColor,
+                  borderColor: "blue.400",
                 }}
                 w="full"
                 minW={{ base: "100%", sm: "250px", md: "400px" }}

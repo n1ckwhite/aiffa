@@ -141,7 +141,7 @@ const HackathonsSubmissionSection: React.FC = () => {
                   borderWidth="1px"
                   borderColor={cardBorderColor}
                   p={{ base: 4, md: 5 }}
-                  transition="transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease"
+                  transition="transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out"
                   _hover={{
                     transform: "translateY(-4px)",
                     boxShadow: "xl",

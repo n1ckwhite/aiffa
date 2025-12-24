@@ -22,7 +22,7 @@ const MobileMenu: React.FC<MobileMenuProps> = (props) => {
   return (
     <Collapse in={isOpen} animateOpacity style={{ overflow: 'hidden' }}>
       <Box
-        display={{ base: 'block', md: 'none' }}
+        display={{ base: 'block', lg: 'none' }}
         bg={bg}
         borderTop="1px"
         borderColor={borderColor}

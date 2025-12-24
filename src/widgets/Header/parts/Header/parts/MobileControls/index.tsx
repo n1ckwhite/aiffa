@@ -12,7 +12,7 @@ export const MobileControls: React.FC<MobileControlsProps> = ({
   toggleColorMode,
 }) => {
   return (
-    <HStack gap={2} display={{ base: 'flex', md: 'none' }}>
+    <HStack gap={2} display={{ base: 'flex', lg: 'none' }}>
       <IconButton
         aria-label="Поиск"
         variant="ghost"

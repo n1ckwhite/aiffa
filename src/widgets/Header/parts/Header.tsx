@@ -97,11 +97,11 @@ const Header: React.FC = React.memo(() => {
 
         <HStack
           gap={{ md: 2, lg: 3, xl: 4 }}
-          display={{ base: 'none', md: 'flex' }}
+          display={{ base: 'none', lg: 'flex' }}
           flex="1"
           justify="flex-start"
         >
-          <Box flex="1">
+          <Box flex="1" minW={0}>
             <SearchBar
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}

@@ -33,6 +33,7 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({ teamName, pla
       borderRadius="2xl"
       p={{ base: 3, md: 4 }}
       w="full"
+      h="full"
       minW={{ base: "100%", md: "320px" }}
       maxW="100%"
       boxSizing="border-box"
@@ -44,6 +45,8 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({ teamName, pla
       position="relative"
       overflow="hidden"
       role="group"
+      display="flex"
+      flexDirection="column"
       transition="background-color 0.18s ease-out, box-shadow 0.2s ease-out, transform 0.16s ease-out, border-color 0.16s ease-out"
       _hover={{
         bg: pillHoverBg,
@@ -70,9 +73,9 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({ teamName, pla
           aria-hidden="true"
         />
       </Box>
-      <VStack align="flex-start" spacing={3}>
-        <HStack justify="space-between" w="full">
-          <HStack spacing={2}>
+      <VStack align="flex-start" spacing={3} w="full" minW={0} flex="1" justify="space-between">
+        <HStack justify="space-between" w="full" minW={0}>
+          <HStack spacing={2} minW={0}>
             <Box
               px={2}
               py={0.5}
@@ -84,6 +87,7 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({ teamName, pla
               alignItems="center"
               justifyContent="center"
               gap={1}
+              flexShrink={0}
             >
               <Icon as={FiAward} boxSize={3} aria-hidden="true" color={rankColor} />
               <Text as="span" fontSize="xs" fontWeight="semibold" color={rankColor}>
@@ -92,14 +96,14 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({ teamName, pla
             </Box>
           </HStack>
         </HStack>
-        <VStack align="flex-start" spacing={1} w="full">
-          <Text fontSize="xs" color={metaColor}>
+        <VStack align="flex-start" spacing={1} w="full" minW={0}>
+          <Text fontSize="xs" color={metaColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
             Хакатон:{" "}
             <Text as="span" fontWeight="semibold">
               {hackathonTitle}
             </Text>
           </Text>
-          <Text fontSize="md" fontWeight="semibold" letterSpacing="-0.02em" color={titleColor}>
+          <Text fontSize="md" fontWeight="semibold" letterSpacing="-0.02em" color={titleColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
             {teamName}
           </Text>
 
@@ -129,7 +133,7 @@ const HackathonWinnerCard: React.FC<HackathonWinnerCardProps> = ({ teamName, pla
             </AvatarGroup>
           )}
         </VStack>
-        <Text fontSize="xs" color={metaColor}>
+        <Text fontSize="xs" color={metaColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
           {description}
         </Text>
       </VStack>

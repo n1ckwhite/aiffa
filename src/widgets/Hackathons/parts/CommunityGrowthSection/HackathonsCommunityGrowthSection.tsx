@@ -106,7 +106,7 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
               role="list"
               listStyleType="none"
               pl={0}
-              minChildWidth={{ base: "100%", sm: "220px", md: "280px" }}
+              minChildWidth={{ base: "100%", sm: "180px", md: "200px" }}
               spacing={{ base: 4, md: 6 }}
               mt={{ base: 2, md: 4 }}
               w="full"
@@ -131,7 +131,7 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
                   animation={`${communityCardFloat} ${animationDurationSeconds}s ease-in-out infinite`}
                   aria-describedby="hackathons-community-growth-description"
                   w="full"
-                  minW={{ base: "100%", sm: "220px", md: "280px" }}
+                  minW={{ base: "100%", sm: "180px", md: "200px" }}
                   maxW="100%"
                   boxSizing="border-box"
                 >

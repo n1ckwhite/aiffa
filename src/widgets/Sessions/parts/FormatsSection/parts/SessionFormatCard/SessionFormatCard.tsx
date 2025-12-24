@@ -38,7 +38,7 @@ const SessionFormatCard: React.FC<SessionFormatCardComponentProps> = ({ card }) 
         borderColor: "blue.400",
       }}
       w="full"
-      minW={{ base: "100%", md: "380px" }}
+      minW={{ base: "100%", sm: "250px", md: "300px" }}
       maxW="100%"
       boxSizing="border-box"
       flexShrink={0}

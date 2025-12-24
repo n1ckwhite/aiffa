@@ -18,7 +18,7 @@ const SessionsFormatsSection: React.FC = () => {
       <SimpleGrid
         as="ul"
         role="list"
-        minChildWidth={{ base: "100%", md: "380px" }}
+        minChildWidth={{ base: "100%", sm: "250px", md: "300px" }}
         spacing={{ base: 4, md: 6 }}
         listStyleType="none"
         pl={0}

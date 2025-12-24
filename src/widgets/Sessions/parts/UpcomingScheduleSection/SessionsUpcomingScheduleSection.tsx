@@ -66,11 +66,15 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
       <SimpleGrid
         as="ul"
         role="list"
-        minChildWidth={{ base: "100%", sm: "360px" }}
+        minChildWidth={{ base: "100%", sm: "300px", md: "350px" }}
         spacing={{ base: 4, md: 5, lg: 6 }}
         listStyleType="none"
         pl={0}
         w="full"
+        minW={0}
+        maxW="1200px"
+        mx="auto"
+        boxSizing="border-box"
       >
         {upcomingSessions.map((session) => (
           <Box
@@ -91,9 +95,14 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
               boxShadow: "lg",
               borderColor: scheduleMarkerColor,
             }}
+            w="full"
+            minW={{ base: "100%", sm:"300px", md: "350px" }}
+            maxW="100%"
+            boxSizing="border-box"
+            flexShrink={0}
           >
-            <Stack spacing={3} position="relative" zIndex={1}>
-              <HStack spacing={3} align="flex-start">
+            <Stack spacing={3} position="relative" zIndex={1} w="full" minW={0}>
+              <HStack spacing={3} align="flex-start" w="full" minW={0}>
                 <Box
                   borderRadius="full"
                   boxSize={8}
@@ -105,19 +114,23 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
                   aria-hidden="true"
                   boxShadow="0 0 0 1px rgba(255, 255, 255, 0.08)"
                   transition="transform 0.18s ease, box-shadow 0.18s ease"
+                  flexShrink={0}
                 >
                   {session.icon}
                 </Box>
-                <VStack align="flex-start" spacing={1}>
+                <VStack align="flex-start" spacing={1} minW={0} flex={1}>
                   <Box
                     as="time"
                     dateTime={session.dateTime}
                     fontSize={{ base: "sm", md: "sm" }}
                     fontWeight="semibold"
+                    wordBreak="break-word"
+                    overflowWrap="anywhere"
+                    whiteSpace="normal"
                   >
                     {session.dateLabel}
                   </Box>
-                  <HStack spacing={2}>
+                  <HStack spacing={2} flexWrap="wrap">
                     <Box
                       as="span"
                       px={2.5}
@@ -129,6 +142,7 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
                       display="inline-flex"
                       alignItems="center"
                       gap={1}
+                      flexShrink={0}
                     >
                       <Icon
                         as={SiGooglemeet}
@@ -143,6 +157,9 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
               <Text
                 fontSize={{ base: "sm", md: "sm" }}
                 color={mutedTextColor}
+                wordBreak="break-word"
+                overflowWrap="anywhere"
+                whiteSpace="normal"
               >
                 {session.description}
               </Text>

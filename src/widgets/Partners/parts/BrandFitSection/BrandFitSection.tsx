@@ -28,12 +28,15 @@ const BrandFitSection: React.FC = () => {
         direction={{ base: "column", md: "row" }}
         align={{ base: "stretch", md: "flex-start" }}
         spacing={{ base: 4, md: 8 }}
+        w="full"
+        minW={0}
       >
         <VStack
           align="flex-start"
           spacing={3}
           flex={3}
           w="full"
+          minW={0}
           textAlign="left"
         >
           <Box w="full" textAlign={{ base: "center", md: "left" }}>
@@ -54,16 +57,19 @@ const BrandFitSection: React.FC = () => {
             Спонсорство AIFFA подходит компаниям, которые хотят:
           </Text>
           <SimpleGrid
-            columns={{ base: 1, md: 2 }}
-            spacingX={{ base: 0, md: 8 }}
+            columns={{ base: 1 }}
             spacingY={3}
             as="ul"
             fontSize="sm"
             color={mutedTextColor}
             listStyleType="none"
             pl={0}
+            w="full"
+            minW={0}
+            maxW="100%"
+            boxSizing="border-box"
           >
-            <HStack as="li" align="flex-start" spacing={3}>
+            <HStack as="li" align="flex-start" spacing={3} w="full" minW={0} maxW="100%" boxSizing="border-box" flexShrink={0}>
               <Box
                 as="span"
                 mt={0.5}
@@ -78,11 +84,11 @@ const BrandFitSection: React.FC = () => {
               >
                 <Icon as={FaUsers} boxSize={3.5} aria-hidden="true" />
               </Box>
-              <Text>
+              <Text wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
                 привлекать разработчиков и работать с IT-аудиторией;
               </Text>
             </HStack>
-            <HStack as="li" align="flex-start" spacing={3}>
+            <HStack as="li" align="flex-start" spacing={3} w="full" minW={0} maxW="100%" boxSizing="border-box" flexShrink={0}>
               <Box
                 as="span"
                 mt={0.5}
@@ -97,11 +103,11 @@ const BrandFitSection: React.FC = () => {
               >
                 <Icon as={FaCode} boxSize={3.5} aria-hidden="true" />
               </Box>
-              <Text>
+              <Text wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
                 продвигать свои инструменты, технологии и platform-инфраструктуру;
               </Text>
             </HStack>
-            <HStack as="li" align="flex-start" spacing={3}>
+            <HStack as="li" align="flex-start" spacing={3} w="full" minW={0} maxW="100%" boxSizing="border-box" flexShrink={0}>
               <Box
                 as="span"
                 mt={0.5}
@@ -116,11 +122,11 @@ const BrandFitSection: React.FC = () => {
               >
                 <Icon as={FaGraduationCap} boxSize={3.5} aria-hidden="true" />
               </Box>
-              <Text>
+              <Text wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
                 находить талантливых разработчиков через реальные задачи;
               </Text>
             </HStack>
-            <HStack as="li" align="flex-start" spacing={3}>
+            <HStack as="li" align="flex-start" spacing={3} w="full" minW={0} maxW="100%" boxSizing="border-box" flexShrink={0}>
               <Box
                 as="span"
                 mt={0.5}
@@ -135,11 +141,11 @@ const BrandFitSection: React.FC = () => {
               >
                 <Icon as={FaStar} boxSize={3.5} aria-hidden="true" />
               </Box>
-              <Text>
+              <Text wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
                 повышать узнаваемость бренда в профессиональной среде;
               </Text>
             </HStack>
-            <HStack as="li" align="flex-start" spacing={3}>
+            <HStack as="li" align="flex-start" spacing={3} w="full" minW={0} maxW="100%" boxSizing="border-box" flexShrink={0}>
               <Box
                 as="span"
                 mt={0.5}
@@ -154,7 +160,7 @@ const BrandFitSection: React.FC = () => {
               >
                 <Icon as={FaHeart} boxSize={3.5} aria-hidden="true" />
               </Box>
-              <Text>
+              <Text wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
                 строить долгосрочное отношение через комьюнити и формат практики.
               </Text>
             </HStack>
@@ -171,6 +177,8 @@ const BrandFitSection: React.FC = () => {
           p={{ base: 4, md: 5 }}
           boxShadow="none"
           maxW={{ base: "100%", md: "460px" }}
+          w="full"
+          minW={0}
         >
           <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
             Какие эффекты даёт партнёрство
@@ -185,8 +193,11 @@ const BrandFitSection: React.FC = () => {
             fontSize="sm"
             color={mutedTextColor}
             w="full"
+            minW={0}
+            maxW="100%"
+            boxSizing="border-box"
           >
-            <HStack as="li" align="flex-start" spacing={3}>
+            <HStack as="li" align="flex-start" spacing={3} w="full" minW={0} maxW="100%" boxSizing="border-box" flexShrink={0}>
               <Box
                 as="span"
                 mt={0.5}
@@ -201,11 +212,11 @@ const BrandFitSection: React.FC = () => {
               >
                 <Icon as={FaPuzzlePiece} boxSize={3.5} aria-hidden="true" />
               </Box>
-              <Text lineHeight="1.5">
+              <Text lineHeight="1.5" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
                 Бренд присутствует в практических задачах и решениях.
               </Text>
             </HStack>
-            <HStack as="li" align="flex-start" spacing={3}>
+            <HStack as="li" align="flex-start" spacing={3} w="full" minW={0} maxW="100%" boxSizing="border-box" flexShrink={0}>
               <Box
                 as="span"
                 mt={0.5}
@@ -220,11 +231,11 @@ const BrandFitSection: React.FC = () => {
               >
                 <Icon as={FaRocket} boxSize={3.5} aria-hidden="true" />
               </Box>
-              <Text lineHeight="1.5">
+              <Text lineHeight="1.5" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
                 Разработчики знакомятся с технологиями на реальных сценариях.
               </Text>
             </HStack>
-            <HStack as="li" align="flex-start" spacing={3}>
+            <HStack as="li" align="flex-start" spacing={3} w="full" minW={0} maxW="100%" boxSizing="border-box" flexShrink={0}>
               <Box
                 as="span"
                 mt={0.5}
@@ -239,7 +250,7 @@ const BrandFitSection: React.FC = () => {
               >
                 <Icon as={FaInfinity} boxSize={3.5} aria-hidden="true" />
               </Box>
-              <Text lineHeight="1.5">
+              <Text lineHeight="1.5" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
                 Формируется долгосрочная ассоциация бренда с ростом и обучением.
               </Text>
             </HStack>

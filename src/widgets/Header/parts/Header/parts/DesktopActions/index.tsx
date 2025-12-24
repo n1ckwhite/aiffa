@@ -1,9 +1,8 @@
 import React from 'react';
-import { Avatar, Box, HStack, Text, Tooltip, Icon, useColorModeValue } from '@chakra-ui/react';
+import { Avatar, HStack, Text, Tooltip, Icon } from '@chakra-ui/react';
 import { FaBookOpen, FaClipboardList, FaUserCircle, FaCode, FaComments, FaUserFriends, FaFeatherAlt } from 'react-icons/fa';
 import { useUserProfile } from 'entities/user';
 import { AppLink } from '@/shared/ui/AppLink';
-import DonateButton from '../../../DonateButton';
 import ThemeToggleButton from '../../../ThemeToggleButton';
 import type { DesktopActionsProps } from './types';
 import { useDesktopActionsColors } from './colors/useDeskopActionsColors';

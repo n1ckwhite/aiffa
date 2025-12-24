@@ -106,9 +106,14 @@ const SessionsForWhomSection: React.FC = () => {
           </Stack>
 
           <SimpleGrid
-            columns={{ base: 1, md: 3 }}
+            minChildWidth={{ base: "100%", sm: "200px", md: "250px" }}
             spacing={{ base: 3, md: 4 }}
             flex="1"
+            w="full"
+            minW={0}
+            maxW="1200px"
+            mx="auto"
+            boxSizing="border-box"
           >
             {cards.map((card) => (
               <Box
@@ -119,8 +124,13 @@ const SessionsForWhomSection: React.FC = () => {
                 borderColor={forWhomCardBorderColor}
                 bg={forWhomCardBg}
                 p={{ base: 3, md: 4 }}
+                w="full"
+                minW={{ base: "100%", sm: "200px", md: "250px" }}
+                maxW="100%"
+                boxSizing="border-box"
+                flexShrink={0}
               >
-                <HStack spacing={2} mb={2} align="center">
+                <HStack spacing={2} mb={2} align="center" w="full" minW={0}>
                   <Box
                     borderRadius="full"
                     boxSize={6}
@@ -130,6 +140,7 @@ const SessionsForWhomSection: React.FC = () => {
                     bg={iconCircleBg}
                     color={iconColor}
                     aria-hidden="true"
+                    flexShrink={0}
                   >
                     {card.icon}
                   </Box>
@@ -138,14 +149,18 @@ const SessionsForWhomSection: React.FC = () => {
                     textTransform="uppercase"
                     letterSpacing="0.12em"
                     color={forWhomCardTextColor}
+                    wordBreak="break-word"
+                    overflowWrap="anywhere"
+                    whiteSpace="normal"
+                    minW={0}
                   >
                     {card.subtitle}
                   </Text>
                 </HStack>
-                <Heading as="h3" fontSize="sm" mb={1} color={forWhomCardTitleColor}>
+                <Heading as="h3" fontSize="sm" mb={1} color={forWhomCardTitleColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                   {card.title}
                 </Heading>
-                <Text fontSize="xs" color={forWhomCardTextColor}>
+                <Text fontSize="xs" color={forWhomCardTextColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                   {card.description}
                 </Text>
               </Box>

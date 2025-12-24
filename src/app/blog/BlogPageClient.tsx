@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import BlogScreen from "@/widgets/Blog/parts/Screen/BlogScreen";
 
 type BlogPageClientProps = {

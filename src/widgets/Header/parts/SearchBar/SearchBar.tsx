@@ -39,7 +39,14 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
           border="none"
           w="100%"
           pl={{ base: '44px', md: '56px', lg: '60px', xl: '64px' }}
-          pr={{ base: isSearchFocused && searchQuery ? '44px' : '16px', md: isSearchFocused && searchQuery ? '40px' : '16px', lg: isSearchFocused && searchQuery ? '144px' : '120px' }}
+          pr={{
+            base: isSearchFocused && searchQuery ? '44px' : '16px',
+            md: isSearchFocused && searchQuery ? '40px' : '16px',
+            // Don't reserve space for ⌘K on borderline Safari widths — keep input flexible.
+            lg: isSearchFocused && searchQuery ? '40px' : '16px',
+            xl: isSearchFocused && searchQuery ? '40px' : '16px',
+            '2xl': isSearchFocused && searchQuery ? '144px' : '120px',
+          }}
           h={{ base: '40px', md: '34px', lg: '38px' }}
           borderRadius={{ base: '20px', md: '17px', lg: '19px' }}
           fontSize="sm"
@@ -94,18 +101,22 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
             zIndex={3}
           />
         )}
-        <HStack
-          spacing={1}
-          position="absolute"
-          right={{ md: '36px', lg: '16px' }}
-          top="50%"
-          transform="translateY(-50%)"
-          display={{ base: 'none', lg: 'flex' }}
-          opacity={0.7}
-        >
-          <Box as="kbd" px={1.5} py={0.5} borderRadius="md" borderWidth="1px" borderColor={dropdownBorder} fontSize="10px">⌘</Box>
-          <Box as="kbd" px={1.5} py={0.5} borderRadius="md" borderWidth="1px" borderColor={dropdownBorder} fontSize="10px">K</Box>
-        </HStack>
+        {!isSearchFocused && !searchQuery && (
+          <HStack
+            spacing={1}
+            position="absolute"
+            right="16px"
+            top="50%"
+            transform="translateY(-50%)"
+            display={{ base: 'none', '2xl': 'flex' }}
+            opacity={0.7}
+            pointerEvents="none"
+            aria-hidden="true"
+          >
+            <Box as="kbd" px={1.5} py={0.5} borderRadius="md" borderWidth="1px" borderColor={dropdownBorder} fontSize="10px">⌘</Box>
+            <Box as="kbd" px={1.5} py={0.5} borderRadius="md" borderWidth="1px" borderColor={dropdownBorder} fontSize="10px">K</Box>
+          </HStack>
+        )}
         {!isMobileMenuOpen && searchOpen && searchQuery.trim() && (
           <Portal>
             <Box

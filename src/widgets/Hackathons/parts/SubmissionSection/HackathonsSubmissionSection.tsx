@@ -106,9 +106,10 @@ const HackathonsSubmissionSection: React.FC = () => {
             role="list"
             listStyleType="none"
             pl={0}
-            minChildWidth={{ base: "100%", sm: "400px" }}
+            minChildWidth={{ base: "100%", sm: "420px" }}
             spacing={{ base: 4, md: 6 }}
             w="full"
+            maxW="1200px"
             mx="auto"
           >
             {cards.map((card) => {
@@ -131,6 +132,7 @@ const HackathonsSubmissionSection: React.FC = () => {
                   key={card.id}
                   as="li"
                   role="listitem"
+                  minW={0}
                   bg={sectionCardBg}
                   borderRadius="2xl"
                   borderWidth="1px"

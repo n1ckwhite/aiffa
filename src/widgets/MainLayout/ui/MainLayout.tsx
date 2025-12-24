@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, ReactNode, useMemo } from "react";
+import { memo, ReactNode } from "react";
 import { Box } from "@chakra-ui/react";
 import { useLayoutColors } from "../colors/useLayoutColors";
 import { LayoutErrorBoundary } from "../lib/LayoutErrorBoundary";

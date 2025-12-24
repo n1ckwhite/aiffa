@@ -43,7 +43,7 @@ export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
         </Box>
       )}
 
-      <VStack spacing={0} align="start" minW={0}>
+      <VStack spacing={0} align="start" minW={0} gap={1}>
         {authorHref ? (
           <Link
             href={authorHref}
@@ -65,7 +65,7 @@ export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
           </Text>
         )}
 
-        <Box mt={1}>
+        <Box>
           <PillBadge colorScheme={authorBadge.colorScheme as any} variant="outline" uppercase={false}>
             {authorBadge.label}
           </PillBadge>

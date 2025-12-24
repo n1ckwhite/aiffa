@@ -49,12 +49,12 @@ const RoadmapCta: React.FC = () => {
           <Stack
             position="relative"
             zIndex={1}
-            direction={{ base: "column", md: "row" }}
-            spacing={{ base: 4, md: 6 }}
-            align={{ base: "stretch", md: "center" }}
-            justify="space-between"
+            direction={{ base: "column", xl: "row" }}
+            spacing={{ base: 4, xl: 6 }}
+            align={{ base: "stretch", xl: "center" }}
+            justify={{ base: "flex-start", xl: "space-between" }}
           >
-            <HStack spacing={3} align="flex-start">
+            <HStack spacing={3} align="flex-start" minW={0}>
               <Box
                 w={{ base: "40px", md: "44px" }}
                 h={{ base: "40px", md: "44px" }}
@@ -69,7 +69,7 @@ const RoadmapCta: React.FC = () => {
               >
                 <Icon as={FiNavigation} boxSize={5} color={theme.blue.accent} aria-hidden="true" />
               </Box>
-              <VStack align="start" spacing={1} flex={1}>
+              <VStack align="start" spacing={1} flex={1} minW={0}>
                 <Heading id={headingId} as="h2" size="md" letterSpacing="-0.02em" color={theme.titleColor}>
                   Постройте дорожку развития под себя
                 </Heading>
@@ -85,8 +85,8 @@ const RoadmapCta: React.FC = () => {
               borderRadius="full"
               colorScheme="blue"
               px={{ base: 6, md: 7 }}
-              minW={{ base: "auto", md: "190px" }}
-              alignSelf={{ base: "stretch", md: "center" }}
+              minW={{ base: "auto", xl: "190px" }}
+              alignSelf={{ base: "stretch", xl: "center" }}
               aria-label="Построить роудмэп развития"
             >
               Построить роудмэп

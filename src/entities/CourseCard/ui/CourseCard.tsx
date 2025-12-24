@@ -110,18 +110,21 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
 
   const content = (
     <VStack align="stretch" spacing={4} h="full" justify="space-between">
-        <HStack align="start" spacing={4}>
+        <HStack align="start" spacing={4} minW={0}>
           <HeaderIcon icon={icon} accentColor={accentColor} isActive={isActive} />
-          <Box flex={1}>
+          <Box flex={1} minW={0}>
             <Text
               fontSize="xl"
               fontWeight="800"
               color={titleColor}
               letterSpacing="-0.03em"
-              lineHeight="1.1"
+              lineHeight="1.2"
               mb={level ? 2 : 0}
               transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
               _hover={{ color: accentColor }}
+              wordBreak="break-word"
+              overflowWrap="anywhere"
+              whiteSpace="normal"
             >
               {title}
             </Text>

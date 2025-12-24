@@ -73,10 +73,10 @@ export const Header: React.FC<HeaderProps> = ({ mod, colors }) => {
           {moduleDescriptions[mod.id] || 'Короткий материал с объяснениями и практикой по теме.'}
         </Text>
         <Stack
-          direction={{ base: 'column', sm: 'row' }}
+          direction={{ base: 'column', xl: 'row' }}
           spacing={{ base: 2.5, md: 3 }}
           pt={3}
-          align={{ base: 'stretch', sm: 'center' }}
+          align={{ base: 'stretch', xl: 'center' }}
         >
           <AppButtonLink to="/learn" variant="outline" borderRadius="full">
             К материалам

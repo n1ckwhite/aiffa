@@ -85,7 +85,12 @@ export const HeaderCard: React.FC<HeaderCardProps> = ({ mod, projectsCount, proj
         >
           {getModuleProjectsDescription(mod.id)}
         </Text>
-        <Stack direction={{ base: 'column', sm: 'row' }} spacing={{ base: 2.5, md: 3 }} pt={3} align={{ base: 'stretch', sm: 'center' }}>
+        <Stack
+          direction={{ base: 'column', xl: 'row' }}
+          spacing={{ base: 2.5, md: 3 }}
+          pt={3}
+          align={{ base: 'stretch', xl: 'center' }}
+        >
           <AppButtonLink to={`/learn/${mod.id}`} variant="outline" borderRadius="full">
             К материалам
           </AppButtonLink>

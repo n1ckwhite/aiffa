@@ -90,6 +90,7 @@ const Header: React.FC = React.memo(() => {
         align="center"
         justify="space-between"
         gap={{ base: 3, md: 4, lg: 6 }}
+        sx={{ containerType: "inline-size" }}
       >
         <Flex align="center" gap={3} flexShrink={0}>
           <Logo />

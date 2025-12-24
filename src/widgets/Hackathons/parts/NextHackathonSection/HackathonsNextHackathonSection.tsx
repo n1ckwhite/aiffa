@@ -104,16 +104,20 @@ const HackathonsNextHackathonSection: React.FC = () => {
           zIndex={1}
         />
         <Stack
-          direction={{ base: "column", md: "row" }}
-          spacing={{ base: 4, md: 8 }}
-          align={{ base: "flex-start", md: "center" }}
+          // Don't squeeze text on borderline Safari widths: switch to row only when there's enough space.
+          direction={{ base: "column", xl: "row" }}
+          spacing={{ base: 4, xl: 8 }}
+          align={{ base: "center", xl: "center" }}
+          justify={{ base: "center", xl: "space-between" }}
           position="relative"
           zIndex={2}
+          w="full"
         >
           <Stack
             spacing={{ base: 3, md: 5 }}
-            align="flex-start"
+            align={{ base: "center", xl: "flex-start" }}
             flex="1"
+            minW={0}
           >
             <Box>
               <Text
@@ -122,6 +126,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
                 letterSpacing="0.08em"
                 color={mutedTextColor}
                 mb={1}
+                textAlign={{ base: "center", xl: "left" }}
               >
                 Ближайший хакатон
               </Text>
@@ -129,6 +134,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
                 id="hackathons-next-title"
                 as="h3"
                 fontSize={{ base: "lg", sm: "xl", md: "2xl" }}
+                textAlign={{ base: "center", xl: "left" }}
               >
                 AIFFA Hackathon #1 — Задача старта
               </Heading>
@@ -140,8 +146,11 @@ const HackathonsNextHackathonSection: React.FC = () => {
               spacing={2}
               fontSize={{ base: "xs", md: "sm" }}
               color={mutedTextColor}
+              alignSelf={{ base: "center", xl: "flex-start" }}
+              textAlign={{ base: "center", xl: "left" }}
+              align={{ base: "center", xl: "flex-start" }}
             >
-              <Stack as="li" role="listitem" direction="row" align="center" spacing={2}>
+              <Stack as="li" role="listitem" direction="row" align="center" spacing={2} justify={{ base: "center", xl: "flex-start" }}>
                 <Box as={CalendarIcon} color="blue.400" boxSize={{ base: 3, md: 4 }} />
                 <Text
                   as="time"
@@ -153,13 +162,13 @@ const HackathonsNextHackathonSection: React.FC = () => {
                   Май 2025
                 </Text>
               </Stack>
-              <Stack as="li" role="listitem" direction="row" align="center" spacing={2}>
+              <Stack as="li" role="listitem" direction="row" align="center" spacing={2} justify={{ base: "center", xl: "flex-start" }}>
                 <Box as={StarIcon} color="yellow.400" boxSize={{ base: 3, md: 4 }} />
                 <Text as="span" fontStyle="italic" fontWeight="semibold" color={useColorModeValue("yellow.700", "yellow.200")}>
                   Призовой фонд: 100&nbsp;000&nbsp;₽
                 </Text>
               </Stack>
-              <Stack as="li" role="listitem" direction="row" align="center" spacing={2}>
+              <Stack as="li" role="listitem" direction="row" align="center" spacing={2} justify={{ base: "center", xl: "flex-start" }}>
                 <Box as={QuestionOutlineIcon} color="purple.300" boxSize={{ base: 3, md: 4 }} />
                 <Text as="span" fontStyle="italic" fontWeight="semibold" color={useColorModeValue("purple.600", "purple.200")}>
                   Тема: будет объявлена позже
@@ -172,6 +181,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
               role="status"
               aria-live="polite"
               id="hackathons-next-countdown"
+              textAlign={{ base: "center", xl: "left" }}
             >
               {countdown.isStarted ? (
                 <Text
@@ -199,8 +209,8 @@ const HackathonsNextHackathonSection: React.FC = () => {
             <Box
               w="full"
               display="flex"
-              justifyContent={{ base: "center", md: "flex-start" }}
-              mt={{ base: 3, md: 5 }}
+              justifyContent={{ base: "center", xl: "flex-start" }}
+              mt={{ base: 3, xl: 5 }}
             >
               <Box position="relative" display="inline-flex">
                 <Box
@@ -254,7 +264,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
 
           <Box
             flexShrink={0}
-            w={{ base: "100%", md: "260px" }}
+            w={{ base: "100%", xl: "260px" }}
             display="flex"
             alignItems="center"
             justifyContent="center"

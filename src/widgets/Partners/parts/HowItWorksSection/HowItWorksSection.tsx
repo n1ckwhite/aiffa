@@ -47,6 +47,9 @@ const HowItWorksSection: React.FC = () => {
           spacing={{ base: 4, md: 5 }}
           mt={{ base: 2, md: 3 }}
           w="full"
+          minW={0}
+          maxW="100%"
+          boxSizing="border-box"
         >
           {steps.map((step) => (
             <Stack
@@ -56,8 +59,12 @@ const HowItWorksSection: React.FC = () => {
               direction="row"
               spacing={4}
               align="flex-start"
+              w="full"
+              minW={0}
+              maxW="100%"
+              boxSizing="border-box"
             >
-              <Box>
+              <Box flexShrink={0}>
                 <Box
                   boxSize={9}
                   borderRadius="full"
@@ -80,11 +87,13 @@ const HowItWorksSection: React.FC = () => {
                 borderWidth="1px"
                 borderColor={stepCardBorder}
                 p={{ base: 3, md: 4 }}
+                minW={0}
+                w="full"
               >
-                <Heading as="h3" size="sm" mb={1}>
+                <Heading as="h3" size="sm" mb={1} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                   {step.title}
                 </Heading>
-                <Text fontSize="sm" color={mutedTextColor}>
+                <Text fontSize="sm" color={mutedTextColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                   {step.description}
                 </Text>
               </Box>

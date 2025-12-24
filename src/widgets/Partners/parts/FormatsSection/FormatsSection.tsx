@@ -286,7 +286,7 @@ const FormatsSection: React.FC = () => {
           <Text fontSize={{base: "md", md: "lg"}} color={mutedTextColor} mt={3}>
             Примеры форматов: финальный scope и стоимость обсуждаем индивидуально под вашу задачу.
           </Text>
-          <SimpleGrid minChildWidth={{ base: "100%", sm: "280px", md: "320px" }} spacing={{ base: 3, md: 4 }} mt={3} w="full" minW={0} maxW="100%" alignItems="stretch">
+          <SimpleGrid minChildWidth={{ base: "100%", sm: "260px", md: "320px" }} spacing={{ base: 3, md: 4 }} mt={3} w="full" minW={0} maxW="100%" alignItems="stretch">
             <Box
               borderRadius="xl"
               borderWidth="1px"
@@ -296,7 +296,7 @@ const FormatsSection: React.FC = () => {
               boxShadow={{ base: "sm", md: "md" }}
               h="100%"
               w="full"
-              minW={{ base: "100%", sm: "280px", md: "320px" }}
+              minW={{ base: "100%", sm: "260px", md: "320px" }}
               maxW="100%"
               boxSizing="border-box"
               flexShrink={0}
@@ -319,7 +319,7 @@ const FormatsSection: React.FC = () => {
               boxShadow={{ base: "sm", md: "md" }}
               h="100%"
               w="full"
-              minW={{ base: "100%", sm: "280px", md: "320px" }}
+              minW={{ base: "100%", sm: "260px", md: "320px" }}
               maxW="100%"
               boxSizing="border-box"
               flexShrink={0}
@@ -342,7 +342,7 @@ const FormatsSection: React.FC = () => {
               boxShadow={{ base: "sm", md: "md" }}
               h="100%"
               w="full"
-              minW={{ base: "100%", sm: "280px", md: "320px" }}
+              minW={{ base: "100%", sm: "260px", md: "320px" }}
               maxW="100%"
               boxSizing="border-box"
               flexShrink={0}

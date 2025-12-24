@@ -66,7 +66,7 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
       <SimpleGrid
         as="ul"
         role="list"
-        minChildWidth={{ base: "100%", sm: "300px", md: "350px" }}
+        minChildWidth={{ base: "100%", sm: "250px", md: "350px" }}
         spacing={{ base: 4, md: 5, lg: 6 }}
         listStyleType="none"
         pl={0}
@@ -96,7 +96,7 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
               borderColor: scheduleMarkerColor,
             }}
             w="full"
-            minW={{ base: "100%", sm:"300px", md: "350px" }}
+            minW={{ base: "100%", sm:"250px", md: "350px" }}
             maxW="100%"
             boxSizing="border-box"
             flexShrink={0}

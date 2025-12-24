@@ -44,7 +44,7 @@ const LessonFeedback: React.FC<Props> = ({ lessonKey, questionText, onVoteChange
         <Box
           position="fixed"
           left={{ base: '16px', md: '24px' }}
-          bottom={{ base: `calc(24px + env(safe-area-inset-bottom))`, md: `calc(32px + env(safe-area-inset-bottom))` }}
+          bottom={{ base: `calc(24px + env(safe-area-inset-bottom) + var(--vvb, 0px))`, md: `calc(32px + env(safe-area-inset-bottom) + var(--vvb, 0px))` }}
           zIndex={1200}
           bg={cardBg}
           borderWidth="1px"
@@ -53,6 +53,8 @@ const LessonFeedback: React.FC<Props> = ({ lessonKey, questionText, onVoteChange
           px={4}
           py={3}
           boxShadow={cardShadow}
+          maxW={{ base: 'calc(100vw - 32px)', md: 'calc(100vw - 48px)' }}
+          w="auto"
         >
           {!shouldShowThanks ? (
             shouldShowQuestion ? (

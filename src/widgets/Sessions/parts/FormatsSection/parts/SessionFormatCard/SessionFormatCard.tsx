@@ -37,8 +37,13 @@ const SessionFormatCard: React.FC<SessionFormatCardComponentProps> = ({ card }) 
         boxShadow: "lg",
         borderColor: "blue.400",
       }}
+      w="full"
+      minW={{ base: "100%", md: "380px" }}
+      maxW="100%"
+      boxSizing="border-box"
+      flexShrink={0}
     >
-      <Stack spacing={3} position="relative" zIndex={1}>
+      <Stack spacing={3} position="relative" zIndex={1} w="full" minW={0}>
         <Box
           borderRadius="full"
           boxSize={8}
@@ -54,13 +59,14 @@ const SessionFormatCard: React.FC<SessionFormatCardComponentProps> = ({ card }) 
             transform: "translateY(-1px) scale(1.05)",
             boxShadow: "0 0 0 2px rgba(59, 130, 246, 0.45)",
           }}
+          flexShrink={0}
         >
           {icon}
         </Box>
-        <Heading as="h3" fontSize={{ base: "md", md: "lg" }}>
+        <Heading as="h3" fontSize={{ base: "md", md: "lg" }} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
           {title}
         </Heading>
-        <Text fontSize={{ base: "sm", md: "sm" }} color={mutedTextColor}>
+        <Text fontSize={{ base: "sm", md: "sm" }} color={mutedTextColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
           {description}
         </Text>
       </Stack>

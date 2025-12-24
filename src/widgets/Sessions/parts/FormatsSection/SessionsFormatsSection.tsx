@@ -18,10 +18,15 @@ const SessionsFormatsSection: React.FC = () => {
       <SimpleGrid
         as="ul"
         role="list"
-        columns={{ base: 1, md: 2, lg: 3 }}
+        minChildWidth={{ base: "100%", md: "380px" }}
         spacing={{ base: 4, md: 6 }}
         listStyleType="none"
         pl={0}
+        w="full"
+        minW={0}
+        maxW="1200px"
+        mx="auto"
+        boxSizing="border-box"
       >
         {cards.map((card) => (
           <SessionFormatCard

@@ -62,6 +62,10 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator, index, mode = "mater
       borderRadius="2xl"
       p={{ base: 3, md: 4 }}
       w="full"
+      minW={{ base: "100%", md: "320px" }}
+      maxW="100%"
+      boxSizing="border-box"
+      flexShrink={0}
       bg={cardBg}
       boxShadow="sm"
       borderWidth="1px"

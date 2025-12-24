@@ -36,32 +36,6 @@ const SessionsFinalCtaSection: React.FC = () => {
         maxW="1200px"
         mx="auto"
       >
-        <Box
-          position="absolute"
-          inset="-40px"
-          opacity={0.35}
-          filter="blur(42px)"
-          pointerEvents="none"
-          aria-hidden="true"
-        >
-          <Box
-            position="absolute"
-            top="-10%"
-            left="-12%"
-            w={{ base: "240px", md: "280px" }}
-            h={{ base: "240px", md: "280px" }}
-            bgGradient="radial(circle at 30% 30%, rgba(59,130,246,0.6), transparent)"
-          />
-          <Box
-            position="absolute"
-            bottom="-18%"
-            right="-8%"
-            w={{ base: "260px", md: "320px" }}
-            h={{ base: "260px", md: "320px" }}
-            bgGradient="radial(circle at 70% 70%, rgba(244,114,182,0.5), transparent)"
-          />
-        </Box>
-
         <Stack
           direction="column"
           spacing={{ base: 5, md: 6 }}

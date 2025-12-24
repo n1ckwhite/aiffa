@@ -14,18 +14,12 @@ const HeroSection: React.FC = () => {
     pillHoverBg,
     cardBgGradient,
     cardBorderColor,
-    leftGlowGradient,
-    rightGlowGradient,
     bulletPalettes,
   } = useHeroColors();
 
   return (
     <Box as="section" aria-label="Создатели AIFFA">
       <Box position="relative" overflow="hidden" bgGradient={cardBgGradient} borderRadius="3xl" borderWidth="1px" borderColor={cardBorderColor} px={{ base: 4, md: 7 }} py={{ base: 5, md: 7 }}>
-        <Box position="absolute" inset="-40px" opacity={{ base: 0.45, md: 0.6 }} filter="blur(42px)" pointerEvents="none">
-          <Box position="absolute" top={{ base: "55%", md: "25%" }} left="-10%" w={{ base: "220px", md: "260px" }} h={{ base: "220px", md: "260px" }} bgGradient={leftGlowGradient} />
-          <Box position="absolute" bottom="-15%" right="-5%" w={{ base: "260px", md: "320px" }} h={{ base: "260px", md: "320px" }} bgGradient={rightGlowGradient} />
-        </Box>
 
         <Stack direction={{ base: "column", xl: "row" }} spacing={{ base: 5, md: 8 }} align={{ base: "center", xl: "center" }} position="relative" zIndex={1}>
           <VStack align={{ base: "center", xl: "flex-start" }} spacing={3} flex={1} textAlign={{ base: "center", xl: "left" }}>

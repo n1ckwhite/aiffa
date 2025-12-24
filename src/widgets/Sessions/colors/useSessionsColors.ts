@@ -41,7 +41,7 @@ export const useSessionsColors = () => {
 
   const ctaBgGradient = useColorModeValue(
     "linear(to-br, whiteAlpha.900, blue.50)",
-    "linear(to-br, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.96))"
+    "linear-gradient(to bottom right, rgba(15, 23, 42, 1), rgba(30, 64, 175, 0.9))"
   );
   const ctaBorderColor = useColorModeValue("blue.200", "blue.600");
 

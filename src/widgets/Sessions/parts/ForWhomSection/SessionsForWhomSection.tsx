@@ -35,32 +35,6 @@ const SessionsForWhomSection: React.FC = () => {
         px={{ base: 4, md: 6, lg: 8 }}
         py={{ base: 5, md: 7, lg: 8 }}
       >
-        <Box
-          position="absolute"
-          inset="-40px"
-          opacity={0.45}
-          filter="blur(42px)"
-          pointerEvents="none"
-          aria-hidden="true"
-        >
-          <Box
-            position="absolute"
-            top="-12%"
-            left="-18%"
-            w={{ base: "220px", md: "260px" }}
-            h={{ base: "220px", md: "260px" }}
-            bgGradient="radial(circle at 20% 20%, rgba(59,130,246,0.85), transparent)"
-          />
-          <Box
-            position="absolute"
-            bottom="-22%"
-            right="-10%"
-            w={{ base: "260px", md: "320px" }}
-            h={{ base: "260px", md: "320px" }}
-            bgGradient="radial(circle at 80% 80%, rgba(45,212,191,0.45), transparent)"
-          />
-        </Box>
-
         <Stack
           direction="column"
           spacing={4}

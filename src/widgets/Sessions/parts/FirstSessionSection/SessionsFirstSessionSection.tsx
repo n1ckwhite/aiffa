@@ -127,6 +127,8 @@ const SessionsFirstSessionSection: React.FC = () => {
             spacing={3}
             justify="center"
             align={{ base: "stretch", sm: "center" }}
+            minW={0}
+            flexWrap="wrap"
           >
             <Button
               as="a"
@@ -151,6 +153,11 @@ const SessionsFirstSessionSection: React.FC = () => {
                 boxShadow: "sm",
               }}
               leftIcon={<Icon as={FaTelegramPlane} boxSize={4} aria-hidden="true" />}
+              minW={{ base: "auto", sm: "200px" }}
+              flexShrink={0}
+              whiteSpace="normal"
+              wordBreak="break-word"
+              overflowWrap="anywhere"
             >
               Перейти в Telegram
             </Button>
@@ -182,6 +189,11 @@ const SessionsFirstSessionSection: React.FC = () => {
               leftIcon={
                 <Icon as={SiGooglemeet} boxSize={4} aria-hidden="true" />
               }
+              minW={{ base: "auto", sm: "200px" }}
+              flexShrink={0}
+              whiteSpace="normal"
+              wordBreak="break-word"
+              overflowWrap="anywhere"
             >
               Открыть Google Meet
             </Button>

@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Heading,
+  SimpleGrid,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -105,14 +106,14 @@ const HackathonsFinalCtaSection: React.FC = () => {
             </Text>
           </Box>
 
-          <Stack
-            direction={{ base: "column", md: "row" }}
+          <SimpleGrid
+            minChildWidth={{ base: "100%", sm: "220px" }}
             spacing={4}
             w="full"
-            justify="center"
-            align={{ base: "stretch", md: "center" }}
-            maxW={{ base: "full", md: "unset" }}
+            maxW="820px"
             mx="auto"
+            justifyItems="center"
+            alignItems="stretch"
           >
             <Button
               as="a"
@@ -121,10 +122,15 @@ const HackathonsFinalCtaSection: React.FC = () => {
               rel="noopener noreferrer"
               size="lg"
               fontWeight="semibold"
-              px={{ base: 6, md: 8 }}
+              px={{ base: 4, sm: 6, md: 8 }}
               py={{ base: 3, md: 3.5 }}
-              w={{ base: "100%", md: "auto" }}
-              minW={{ md: "220px" }}
+              w="full"
+              maxW={{ base: "full", sm: "360px" }}
+              minW={{ sm: "220px" }}
+              whiteSpace="normal"
+              textAlign="center"
+              lineHeight="1.2"
+              overflow="hidden"
               bgGradient="linear(to-r, blue.600, blue.700)"
               color="white"
               transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
@@ -141,7 +147,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
               borderRadius="full"
               aria-describedby="hackathons-final-cta-description"
             >
-              Участвовать в хакатоне
+              Участвовать
             </Button>
             <Button
               as="a"
@@ -149,10 +155,15 @@ const HackathonsFinalCtaSection: React.FC = () => {
               variant="outline"
               size="lg"
               fontWeight="semibold"
-              px={{ base: 6, md: 8 }}
+              px={{ base: 4, sm: 6, md: 8 }}
               py={{ base: 3, md: 3.5 }}
-              w={{ base: "100%", md: "auto" }}
-              minW={{ md: "220px" }}
+              w="full"
+              maxW={{ base: "full", sm: "360px" }}
+              minW={{ sm: "220px" }}
+              whiteSpace="normal"
+              textAlign="center"
+              lineHeight="1.2"
+              overflow="hidden"
               borderColor={partnerBorderColor}
               bg={partnerBg}
               _hover={{
@@ -164,7 +175,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
             >
               Стать партнёром
             </Button>
-          </Stack>
+          </SimpleGrid>
         </Stack>
       </Box>
     </Box>

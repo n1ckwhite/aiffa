@@ -114,7 +114,7 @@ const HackathonsPrizeSection: React.FC = () => {
               role="list"
               listStyleType="none"
               pl={0}
-              columns={{ base: 1, md: 3 }}
+              minChildWidth={{ base: "100%", sm: "220px" }}
               w="full"
               minW={0}
               maxW="100%"
@@ -133,6 +133,7 @@ const HackathonsPrizeSection: React.FC = () => {
                 p={{ base: 4, md: 5 }}
                 textAlign="center"
                 w="full"
+                minW={{ base: "100%", sm: "220px" }}
                 maxW="100%"
                 boxSizing="border-box"
                 flexShrink={0}

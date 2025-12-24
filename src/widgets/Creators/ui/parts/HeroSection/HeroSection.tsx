@@ -27,8 +27,8 @@ const HeroSection: React.FC = () => {
           <Box position="absolute" bottom="-15%" right="-5%" w={{ base: "260px", md: "320px" }} h={{ base: "260px", md: "320px" }} bgGradient={rightGlowGradient} />
         </Box>
 
-        <Stack direction={{ base: "column", md: "row" }} spacing={{ base: 5, md: 8 }} align={{ base: "center", md: "center" }} position="relative" zIndex={1}>
-          <VStack align={{ base: "center", md: "flex-start" }} spacing={3} flex={1} textAlign={{ base: "center", md: "left" }}>
+        <Stack direction={{ base: "column", xl: "row" }} spacing={{ base: 5, md: 8 }} align={{ base: "center", xl: "center" }} position="relative" zIndex={1}>
+          <VStack align={{ base: "center", xl: "flex-start" }} spacing={3} flex={1} textAlign={{ base: "center", xl: "left" }}>
             <Box>
               <Text fontSize={{ base: "xs", md: "sm" }} textTransform="uppercase" letterSpacing="0.08em" color={secondaryTextColor} mb={1}>
                 Команда создателей
@@ -43,7 +43,7 @@ const HeroSection: React.FC = () => {
             <Text fontSize="sm" color={secondaryTextColor} lineHeight={1.9} maxW={{ base: "full", sm: "420px", md: "520px" }}>
               AIFFA — это экосистема, которую создают авторы материалов и задач недели, мейнтейнеры проектов, авторы статей, участники хакатонов и те, кто поддерживает идею. Здесь можно найти людей, с которыми вы будете расти, запускать проекты и усиливать комьюнити.
             </Text>
-            <Stack as="ul" aria-label="Чем занимаются создатели AIFFA" direction={{ base: "column", lg: "row" }} spacing={{ base: 3, lg: 4 }} pt={2} w="full" wrap="wrap" textAlign="left" justify={{ base: "center", lg: "flex-start" }}>
+            <Stack as="ul" aria-label="Чем занимаются создатели AIFFA" direction="column" spacing={{ base: 3, md: 4 }} pt={2} w="full" textAlign="left">
               {heroBullets.map((bullet: HeroBullet) => {
                 const palette = bulletPalettes[bullet.paletteIndex];
                 return (
@@ -58,10 +58,7 @@ const HeroSection: React.FC = () => {
                     borderColor={pillBorderColor}
                     px={3.5}
                     py={3}
-                    flex={1}
-                    minW={{ base: "100%", md: "260px" }}
-                    maxW={{ base: "420px", lg: "auto" }}
-                    mx={{ base: "auto", lg: 0 }}
+                    w="full"
                     boxShadow="sm"
                     transition="background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease"
                     _hover={{
@@ -83,7 +80,7 @@ const HeroSection: React.FC = () => {
                     >
                       <Box as={bullet.icon} aria-hidden="true" boxSize={{ base: 5, md: 5 }} color={palette.iconColor} />
                     </Box>
-                    <Text fontSize="sm" color={secondaryTextColor}>
+                    <Text fontSize="sm" color={secondaryTextColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" flex={1} minW={0}>
                       {bullet.text}
                     </Text>
                   </HStack>
@@ -91,7 +88,7 @@ const HeroSection: React.FC = () => {
               })}
             </Stack>
           </VStack>
-          <Box flex={{ base: "none", md: 1 }} maxW={{ base: "240px", md: "320px" }} mx={{ base: "auto", md: 0 }}>
+          <Box flex={{ base: "none", xl: 1 }} maxW={{ base: "240px", md: "320px" }} mx={{ base: "auto", xl: 0 }}>
             <BusinessManTelescop />
           </Box>
         </Stack>

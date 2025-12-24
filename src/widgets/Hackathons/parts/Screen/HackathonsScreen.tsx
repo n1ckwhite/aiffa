@@ -21,8 +21,8 @@ const HackathonsScreen: React.FC = () => {
       px={{ base: 4, md: 6 }}
       transition="none"
     >
-      <Box maxW="1200px" mx="auto">
-        <VStack align="stretch" spacing={{ base: 10, md: 14 }}>
+      <Box maxW="1200px" mx="auto" w="full" minW={0}>
+        <VStack align="stretch" spacing={{ base: 10, md: 14 }} w="full" minW={0}>
           <HackathonsNextHackathonSection />
           <HackathonsPrizeSection />
           <HackathonsHeroSection />

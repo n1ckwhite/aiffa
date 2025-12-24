@@ -29,15 +29,20 @@ const HackathonsRulesSection: React.FC = () => {
     <Box
       as="section"
       aria-labelledby="hackathons-rules-title"
+      w="full"
+      minW={0}
+      maxW="100%"
     >
       <Box aria-hidden="true">
         <BusinessWorkshopIcon />
       </Box>
-      <Stack spacing={{ base: 4, md: 6 }} align="center">
+      <Stack spacing={{ base: 4, md: 6 }} align="center" w="full" minW={0}>
         <Box
           as="header"
           maxW={{ base: "full", md: "720px" }}
           textAlign="center"
+          w="full"
+          minW={0}
         >
           <Heading
             id="hackathons-rules-title"
@@ -57,17 +62,26 @@ const HackathonsRulesSection: React.FC = () => {
           </Text>
         </Box>
 
-        <SimpleGrid
-          as="ul"
-          role="list"
-          listStyleType="none"
-          pl={0}
-          minChildWidth={{ base: "100%", sm: "400px" }}
-          spacing={{ base: 4, md: 6 }}
-          w="full"
-          maxW="1200px"
-          mx="auto"
+        <Box 
+          w="full" 
+          maxW="1200px" 
+          mx="auto" 
+          minW={0} 
+          px={{ base: 0, md: 0 }}
+          boxSizing="border-box"
         >
+          <SimpleGrid
+            as="ul"
+            role="list"
+            listStyleType="none"
+            pl={0}
+            minChildWidth={{ base: "100%", sm: "360px", md: "400px" }}
+            spacing={{ base: 4, md: 6 }}
+            w="full"
+            minW={0}
+            maxW="100%"
+            boxSizing="border-box"
+          >
           {ruleCards.map((card, index) => {
             const animationDurationSeconds = 20 + index * 2;
 
@@ -97,9 +111,13 @@ const HackathonsRulesSection: React.FC = () => {
                   boxShadow: "xl",
                   borderColor: accentBorderColor,
                 }}
+                w="full"
+                minW={0}
+                maxW="100%"
+                boxSizing="border-box"
               >
-                <Stack spacing={2}>
-                  <Stack direction="row" align="center" spacing={3}>
+                <Stack spacing={2} w="full" minW={0}>
+                  <Stack direction="row" align="center" spacing={3} w="full" minW={0}>
                     <Box
                       borderRadius="full"
                       bg={circleBg}
@@ -108,19 +126,21 @@ const HackathonsRulesSection: React.FC = () => {
                       alignItems="center"
                       justifyContent="center"
                       aria-hidden="true"
+                      flexShrink={0}
                     >
                       <CheckCircleIcon color="white" boxSize={4} />
                     </Box>
-                    <Text fontWeight="semibold">{card.title}</Text>
+                    <Text fontWeight="semibold" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>{card.title}</Text>
                   </Stack>
-                  <Text fontSize={{ base: "sm", md: "md" }} color={mutedTextColor}>
+                  <Text fontSize={{ base: "sm", md: "md" }} color={mutedTextColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                     {card.description}
                   </Text>
                 </Stack>
               </Box>
             );
           })}
-        </SimpleGrid>
+          </SimpleGrid>
+        </Box>
       </Stack>
     </Box>
   );

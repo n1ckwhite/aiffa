@@ -23,11 +23,13 @@ const HackathonsHowItWorksSection: React.FC = () => {
       <Box aria-hidden="true">
         <BusinessAnalyticsIcon />
       </Box>
-      <Stack spacing={{ base: 4, md: 6 }} align="center">
+      <Stack spacing={{ base: 4, md: 6 }} align="center" w="full" minW={0}>
         <Box
           as="header"
           maxW={{ base: "full", md: "720px" }}
           textAlign="center"
+          w="full"
+          minW={0}
         >
           <Heading
             id="hackathons-how-title"
@@ -48,18 +50,18 @@ const HackathonsHowItWorksSection: React.FC = () => {
           </Text>
         </Box>
 
-        <SimpleGrid
-          as="ol"
-          role="list"
-          listStyleType="none"
-          pl={0}
-          minChildWidth={{ base: "100%", sm: "400px" }}
-          spacing={{ base: 4, md: 6 }}
-          mt={{ base: 4, md: 6 }}
-          w="full"
-          maxW="1200px"
-          mx="auto"
-        >
+        <Box w="full" maxW="1200px" mx="auto" minW={0} px={{ base: 0, md: 0 }}>
+          <SimpleGrid
+            as="ol"
+            role="list"
+            listStyleType="none"
+            pl={0}
+            minChildWidth={{ base: "100%", sm: "360px", md: "400px" }}
+            spacing={{ base: 4, md: 6 }}
+            mt={{ base: 4, md: 6 }}
+            w="full"
+            minW={0}
+          >
           {steps.map((step) => (
             <Stack
               key={step.id}
@@ -68,6 +70,8 @@ const HackathonsHowItWorksSection: React.FC = () => {
               direction="row"
               spacing={4}
               align="flex-start"
+              w="full"
+              minW={0}
             >
               <Box
                 position="relative"
@@ -91,17 +95,20 @@ const HackathonsHowItWorksSection: React.FC = () => {
                 borderWidth="1px"
                 borderColor={stepLineColor}
                 p={{ base: 3, md: 4 }}
+                minW={0}
+                w="full"
               >
-                <Heading as="h3" size="sm" mb={1}>
+                <Heading as="h3" size="sm" mb={1} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                   {step.title}
                 </Heading>
-                <Text fontSize="sm" color={mutedTextColor}>
+                <Text fontSize="sm" color={mutedTextColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                   {step.description}
                 </Text>
               </Box>
             </Stack>
           ))}
-        </SimpleGrid>
+          </SimpleGrid>
+        </Box>
 
         <Box mt={{ base: 4, md: 6 }}>
           <Heading

@@ -68,12 +68,13 @@ const HackathonsOverviewSection: React.FC = () => {
           role="list"
           listStyleType="none"
           pl={0}
-          minChildWidth={{ base: "100%", sm: "360px" }}
+          minChildWidth={{ base: "100%", md: "360px" }}
           spacing={{ base: 4, md: 6 }}
           mt={{ base: 4, md: 6 }}
           w="full"
           maxW="1200px"
           mx="auto"
+          minW={0}
         >
           {overviewCards.map((card, index) => {
             const animationDurationSeconds = 18 + index * 2;
@@ -104,8 +105,13 @@ const HackathonsOverviewSection: React.FC = () => {
                   boxShadow: "xl",
                   borderColor: accentBorderColor,
                 }}
+                w="full"
+                minW={{ base: "100%", md: "360px" }}
+                maxW="100%"
+                boxSizing="border-box"
+                flexShrink={0}
               >
-                <HStack align="flex-start" spacing={3} mb={2.5}>
+                <HStack align="flex-start" spacing={3} mb={2.5} w="full" minW={0}>
                   <Box
                     borderRadius="full"
                     bg={iconCircleBg}
@@ -118,11 +124,11 @@ const HackathonsOverviewSection: React.FC = () => {
                   >
                     {iconNode}
                   </Box>
-                  <Heading as="h3" size="md">
+                  <Heading as="h3" size="md" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
                     {card.title}
                   </Heading>
                 </HStack>
-                <Text fontSize="sm" color={mutedTextColor}>
+                <Text fontSize="sm" color={mutedTextColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                   {card.description}
                 </Text>
               </Box>

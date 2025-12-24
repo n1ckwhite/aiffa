@@ -15,6 +15,9 @@ const HackathonsPrizeSection: React.FC = () => {
     <Box
       as="section"
       aria-labelledby="hackathons-prize-title"
+      w="full"
+      minW={0}
+      maxW="100%"
     >
       <Box
         position="relative"
@@ -26,6 +29,10 @@ const HackathonsPrizeSection: React.FC = () => {
         px={{ base: 5, md: 8 }}
         pt={{ base: 6, md: 8 }}
         pb={{ base: 6, md: 8 }}
+        w="full"
+        minW={0}
+        maxW="100%"
+        boxSizing="border-box"
       >
         <Box
           position="absolute"
@@ -69,8 +76,10 @@ const HackathonsPrizeSection: React.FC = () => {
           align="center"
           position="relative"
           zIndex={2}
+          w="full"
+          minW={0}
         >
-          <Box textAlign="center">
+          <Box textAlign="center" w="full" minW={0}>
             <Box mb={3}>
             <PillBadge colorScheme="purple" variant="outline">
               Призовой фонд
@@ -99,17 +108,19 @@ const HackathonsPrizeSection: React.FC = () => {
             <BusinessTeamLottieIcon />
           </Box>
 
-          <SimpleGrid
-            as="ul"
-            role="list"
-            listStyleType="none"
-            pl={0}
-            minChildWidth={{ base: "100%", sm: "300px" }}
-            w="full"
-            maxW="980px"
-            mx="auto"
-            spacing={{ base: 4, md: 6 }}
-          >
+          <Box w="full" maxW="980px" mx="auto" minW={0} boxSizing="border-box" px={{ base: 0, md: 0 }}>
+            <SimpleGrid
+              as="ul"
+              role="list"
+              listStyleType="none"
+              pl={0}
+              columns={{ base: 1, md: 3 }}
+              w="full"
+              minW={0}
+              maxW="100%"
+              spacing={{ base: 4, md: 6 }}
+              boxSizing="border-box"
+            >
             {prizeTiers.map((tier) => (
               <Box
                 key={tier.id}
@@ -121,6 +132,10 @@ const HackathonsPrizeSection: React.FC = () => {
                 borderColor={cardBorderColor}
                 p={{ base: 4, md: 5 }}
                 textAlign="center"
+                w="full"
+                maxW="100%"
+                boxSizing="border-box"
+                flexShrink={0}
               >
                 <Stack
                   direction="row"
@@ -128,14 +143,20 @@ const HackathonsPrizeSection: React.FC = () => {
                   justify="center"
                   spacing={2}
                   mb={2}
+                  w="full"
+                  minW={0}
                 >
-                  <StarIcon color={tier.accentColor} />
+                  <StarIcon color={tier.accentColor} flexShrink={0} />
                   <Heading
                     as="h3"
                     fontSize="sm"
                     fontWeight="semibold"
                     textTransform="uppercase"
                     letterSpacing="0.08em"
+                    wordBreak="break-word"
+                    overflowWrap="anywhere"
+                    whiteSpace="normal"
+                    minW={0}
                   >
                     {tier.placeLabel}
                   </Heading>
@@ -143,6 +164,9 @@ const HackathonsPrizeSection: React.FC = () => {
                 <Text
                   fontSize={{ base: "2xl", md: "3xl" }}
                   fontWeight="bold"
+                  wordBreak="break-word"
+                  overflowWrap="anywhere"
+                  whiteSpace="normal"
                 >
                   {tier.amountLabel}
                 </Text>
@@ -150,12 +174,16 @@ const HackathonsPrizeSection: React.FC = () => {
                   mt={2}
                   fontSize="sm"
                   color={mutedTextColor}
+                  wordBreak="break-word"
+                  overflowWrap="anywhere"
+                  whiteSpace="normal"
                 >
                   {tier.description}
                 </Text>
               </Box>
             ))}
-          </SimpleGrid>
+            </SimpleGrid>
+          </Box>
         </Stack>
       </Box>
     </Box>

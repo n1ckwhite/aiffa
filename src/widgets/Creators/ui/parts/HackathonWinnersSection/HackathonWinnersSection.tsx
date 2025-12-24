@@ -47,10 +47,10 @@ const HackathonWinnersSection: React.FC = () => {
           </Text>
         </VStack>
 
-        <Box w="full">
-          <SimpleGrid as="ul" listStyleType="none" m={0} p={0} columns={{ base: 1, md: 3 }} spacing={{ base: 4, md: 5 }} alignItems="stretch">
+        <Box w="full" minW={0} maxW="100%">
+          <SimpleGrid as="ul" listStyleType="none" m={0} p={0} minChildWidth={{ base: "100%", md: "320px" }} spacing={{ base: 4, md: 5 }} alignItems="stretch" w="full" minW={0} maxW="100%">
             {sorted.map((winner) => (
-              <Box as="li" key={winner.id} minW={0}>
+              <Box as="li" key={winner.id} minW={0} w="full">
                 <HackathonWinnerCard {...winner} />
               </Box>
             ))}

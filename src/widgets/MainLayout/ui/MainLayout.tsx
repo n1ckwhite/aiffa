@@ -2,23 +2,18 @@
 
 import { memo, ReactNode, useMemo } from "react";
 import { Box } from "@chakra-ui/react";
-import { usePathname } from "next/navigation";
 import { useLayoutColors } from "../colors/useLayoutColors";
-import { getShowGlobalBg } from "../lib/getShowGlobalBg";
 import { LayoutErrorBoundary } from "../lib/LayoutErrorBoundary";
 import HeaderSpacer from "./HeaderSpacer";
 import Header from "widgets/Header";
 import Footer from "widgets/Footer";
 import FeedbackWidget from "widgets/FeedbackWidget";
-import GlobalBackground from "shared/ui/GlobalBackground";
 
 type MainLayoutProps = {
   children: ReactNode;
 };
 
 const MainLayout = ({ children }: MainLayoutProps) => {
-  const pathname = usePathname();
-  const showGlobalBg = useMemo(() => getShowGlobalBg(pathname ?? ""), [pathname]);
   const { appBg, color } = useLayoutColors();
 
   return (
@@ -38,8 +33,6 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         },
       }}
     >
-      {showGlobalBg && <GlobalBackground />}
-
       <Header />
       <HeaderSpacer />
 

@@ -100,6 +100,8 @@ const SessionsFinalCtaSection: React.FC = () => {
             justify="center"
             align="stretch"
             mx="auto"
+            minW={0}
+            flexWrap="wrap"
           >
             <Button
               as="a"
@@ -110,7 +112,9 @@ const SessionsFinalCtaSection: React.FC = () => {
               fontWeight="semibold"
               px={{ base: 6, md: 8 }}
               py={{ base: 3, md: 3.5 }}
-              w="100%"
+              w={{ base: "100%", md: "auto" }}
+              minW={{ base: "auto", md: "200px" }}
+              flexShrink={0}
               bgGradient="linear(to-r, blue.600, blue.700)"
               color="white"
               transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
@@ -125,6 +129,9 @@ const SessionsFinalCtaSection: React.FC = () => {
                 boxShadow: "md",
               }}
               borderRadius="full"
+              whiteSpace="normal"
+              wordBreak="break-word"
+              overflowWrap="anywhere"
             >
               Написать в Telegram
             </Button>
@@ -137,7 +144,9 @@ const SessionsFinalCtaSection: React.FC = () => {
               fontWeight="semibold"
               px={{ base: 6, md: 8 }}
               py={{ base: 3, md: 3.5 }}
-              w="100%"
+              w={{ base: "100%", md: "auto" }}
+              minW={{ base: "auto", md: "200px" }}
+              flexShrink={0}
               borderColor={ctaBorderColor}
               borderWidth="1px"
               bg={partnerCtaBg}
@@ -155,6 +164,9 @@ const SessionsFinalCtaSection: React.FC = () => {
                 boxShadow: "md",
               }}
               borderRadius="full"
+              whiteSpace="normal"
+              wordBreak="break-word"
+              overflowWrap="anywhere"
             >
               Предложить тему
             </Button>
@@ -164,7 +176,9 @@ const SessionsFinalCtaSection: React.FC = () => {
               fontWeight="semibold"
               px={{ base: 6, md: 8 }}
               py={{ base: 3, md: 3.5 }}
-              w="100%"
+              w={{ base: "100%", md: "auto" }}
+              minW={{ base: "auto", md: "200px" }}
+              flexShrink={0}
               borderColor={partnerCtaBorder}
               borderWidth="1px"
               bg={partnerCtaBg}
@@ -181,6 +195,9 @@ const SessionsFinalCtaSection: React.FC = () => {
                 boxShadow: "md",
               }}
               borderRadius="full"
+              whiteSpace="normal"
+              wordBreak="break-word"
+              overflowWrap="anywhere"
             >
               Стать партнёром
             </AppButtonLink>

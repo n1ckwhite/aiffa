@@ -4,9 +4,6 @@ import { BusinessManTelescop } from "@/shared/icons/components-icon";
 import { useHeroColors } from "./colors/useHeroColors";
 import { heroBullets } from "./data/bullets";
 import type { HeroBullet } from "./types";
-import OptimizedIconImage from "@/shared/icons/components-icon/OptimizedIconImage";
-import businessManTelescopIcon from "@/shared/icons/webp-icons/businessman-telescop.webp";
-
 
 const HeroSection: React.FC = () => {
   const {
@@ -86,16 +83,7 @@ const HeroSection: React.FC = () => {
             </Stack>
           </VStack>
           <Box flex={{ base: "none", xl: 1 }} maxW={{ base: "240px", md: "320px" }} mx={{ base: "auto", xl: 0 }}>
-          <OptimizedIconImage
-          width={1012}
-          height={832}
-          style={{ width: "100%", height: "auto", aspectRatio: "1012 / 832", objectFit: "contain", display: "block" }}
-          src={businessManTelescopIcon}
-          alt="Иконка команды бизнеса"
-          sizes="(max-width: 768px) 90vw, 320px"
-          priority
-        />
-            {/* <BusinessManTelescop /> */}
+            <BusinessManTelescop />
           </Box>
         </Stack>
       </Box>

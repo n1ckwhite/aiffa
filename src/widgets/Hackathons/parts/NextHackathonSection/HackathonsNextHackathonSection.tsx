@@ -12,9 +12,6 @@ import { telegramHref } from "../../../Footer/model/links";
 import { RewardsLottieIcon } from "@/shared/icons/components-icon";
 import { useNextHackathonCountdown } from "./hooks";
 import { useNextHackathonSectionColors } from "./colors/useHackathonsNextHackathonSectionColors";
-import OptimizedIconImage from "@/shared/icons/components-icon/OptimizedIconImage";
-import rewardsIcon from "@/shared/icons/webp-icons/rewards-icon.webp";
-
 
 const HackathonsNextHackathonSection: React.FC = () => {
   const { cardBorderColor, mutedTextColor, cardBgGradient } = useNextHackathonSectionColors();
@@ -237,18 +234,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
             justifyContent="center"
             mx="auto"
           >
-            <Box w={{ base: "180px", sm: "220px", md: "250px" }}>
-            <OptimizedIconImage
-          src={rewardsIcon}
-          alt="Иконка успешных историй"
-          width={250}
-          height={250}
-          sizes="250px"
-          fetchPriority="high"
-          priority
-        />
-            </Box>
-            {/* <RewardsLottieIcon /> */}
+            <RewardsLottieIcon />
           </Box>
         </Stack>
       </Box>

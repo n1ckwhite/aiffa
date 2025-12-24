@@ -56,11 +56,13 @@ const HackathonsHowItWorksSection: React.FC = () => {
             role="list"
             listStyleType="none"
             pl={0}
-            minChildWidth={{ base: "100%", sm: "360px", md: "400px" }}
+            minChildWidth={{ base: "100%", md: "400px" }}
             spacing={{ base: 4, md: 6 }}
             mt={{ base: 4, md: 6 }}
             w="full"
             minW={0}
+            maxW="100%"
+            boxSizing="border-box"
           >
           {steps.map((step) => (
             <Stack
@@ -71,7 +73,9 @@ const HackathonsHowItWorksSection: React.FC = () => {
               spacing={4}
               align="flex-start"
               w="full"
-              minW={0}
+              minW={{ base: "100%", md: "400px" }}
+              maxW="100%"
+              boxSizing="border-box"
             >
               <Box
                 position="relative"

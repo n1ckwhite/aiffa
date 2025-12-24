@@ -33,8 +33,8 @@ const FormatsSection: React.FC = () => {
           Мы подбираем формат под задачи компании: от HR и бренда до продвижения
           технологий и инструментов.
         </Text>
-      <VStack spacing={4} align="stretch">
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 4, md: 5 }}>
+      <VStack spacing={4} align="stretch" w="full" minW={0}>
+        <SimpleGrid minChildWidth={{ base: "100%", sm: "280px", md: "350px" }} spacing={{ base: 4, md: 5 }} w="full" minW={0} maxW="100%">
           <Box
             borderRadius="2xl"
             borderWidth="1px"
@@ -42,9 +42,14 @@ const FormatsSection: React.FC = () => {
             bg={useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)")}
             p={{ base: 5, md: 6 }}
             boxShadow={formatShadow}
+            w="full"
+            minW={{ base: "100%", sm: "280px", md: "350px" }}
+            maxW="100%"
+            boxSizing="border-box"
+            flexShrink={0}
           >
-            <VStack align="flex-start" spacing={3}>
-              <HStack spacing={3} align="center">
+            <VStack align="flex-start" spacing={3} w="full" minW={0}>
+              <HStack spacing={3} align="center" w="full" minW={0}>
                 <Box
                   as="span"
                   boxSize={9}
@@ -54,11 +59,12 @@ const FormatsSection: React.FC = () => {
                   alignItems="center"
                   justifyContent="center"
                   color="green.400"
+                  flexShrink={0}
                 >
                   <Icon as={FaRocket} boxSize={5} aria-hidden="true" />
                 </Box>
-                <VStack align="flex-start" spacing={1}>
-                  <Heading as="h3" size="sm">
+                <VStack align="flex-start" spacing={1} minW={0} flex={1}>
+                  <Heading as="h3" size="sm" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                     Спонсорство хакатонов
                   </Heading>
                   <PillBadge colorScheme="green" variant="outline" uppercase={false}>
@@ -66,11 +72,11 @@ const FormatsSection: React.FC = () => {
                   </PillBadge>
                 </VStack>
               </HStack>
-              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Команды за ограниченное время решают вашу реальную задачу и знакомятся с
                 продуктом в боевых условиях.
               </Text>
-              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Вы получаете решения, фидбек и внимание сильных разработчиков к вашему стеку.
               </Text>
             </VStack>
@@ -82,9 +88,14 @@ const FormatsSection: React.FC = () => {
             bg={useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)")}
             p={{ base: 5, md: 6 }}
             boxShadow={formatShadow}
+            w="full"
+            minW={{ base: "100%", sm: "280px", md: "350px" }}
+            maxW="100%"
+            boxSizing="border-box"
+            flexShrink={0}
           >
-            <VStack align="flex-start" spacing={3}>
-              <HStack spacing={3} align="center">
+            <VStack align="flex-start" spacing={3} w="full" minW={0}>
+              <HStack spacing={3} align="center" w="full" minW={0}>
                 <Box
                   as="span"
                   boxSize={9}
@@ -94,11 +105,12 @@ const FormatsSection: React.FC = () => {
                   alignItems="center"
                   justifyContent="center"
                   color="blue.400"
+                  flexShrink={0}
                 >
                   <Icon as={FaCalendarAlt} boxSize={5} aria-hidden="true" />
                 </Box>
-                <VStack align="flex-start" spacing={1}>
-                  <Heading as="h3" size="sm">
+                <VStack align="flex-start" spacing={1} minW={0} flex={1}>
+                  <Heading as="h3" size="sm" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                     Совместные челленджи и Weekly‑задачи
                   </Heading>
                   <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
@@ -106,11 +118,11 @@ const FormatsSection: React.FC = () => {
                   </PillBadge>
                 </VStack>
               </HStack>
-              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Регулярные задачи недели с вашим брендингом: продукт появляется в реальных
                 решениях участников, а не в баннерах.
               </Text>
-              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Формат подходит, когда важно постоянное присутствие и вовлечение, а не один
                 большой ивент.
               </Text>
@@ -123,9 +135,14 @@ const FormatsSection: React.FC = () => {
             bg={useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)")}
             p={{ base: 5, md: 6 }}
             boxShadow={formatShadow}
+            w="full"
+            minW={{ base: "100%", sm: "280px", md: "350px" }}
+            maxW="100%"
+            boxSizing="border-box"
+            flexShrink={0}
           >
-            <VStack align="flex-start" spacing={3}>
-              <HStack spacing={3} align="center">
+            <VStack align="flex-start" spacing={3} w="full" minW={0}>
+              <HStack spacing={3} align="center" w="full" minW={0}>
                 <Box
                   as="span"
                   boxSize={9}
@@ -135,11 +152,12 @@ const FormatsSection: React.FC = () => {
                   alignItems="center"
                   justifyContent="center"
                   color="purple.300"
+                  flexShrink={0}
                 >
                   <Icon as={FaBookOpen} boxSize={5} aria-hidden="true" />
                 </Box>
-                <VStack align="flex-start" spacing={1}>
-                  <Heading as="h3" size="sm">
+                <VStack align="flex-start" spacing={1} minW={0} flex={1}>
+                  <Heading as="h3" size="sm" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                     Интеграции в материалы
                   </Heading>
                   <PillBadge colorScheme="purple" variant="outline" uppercase={false}>
@@ -147,11 +165,11 @@ const FormatsSection: React.FC = () => {
                   </PillBadge>
                 </VStack>
               </HStack>
-              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Уроки, гайды и практические материалы, где продукт встроен в код и примеры, а
                 не стоит отдельным рекламным блоком.
               </Text>
-              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Подходит для библиотек, сервисов и dev‑tools, которым важно показать «как это
                 работает» на реальном сценарии.
               </Text>
@@ -166,9 +184,14 @@ const FormatsSection: React.FC = () => {
             bg={useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)")}
             p={{ base: 5, md: 6 }}
             boxShadow={formatShadow}
+            w="full"
+            minW={{ base: "100%", sm: "280px", md: "350px" }}
+            maxW="100%"
+            boxSizing="border-box"
+            flexShrink={0}
           >
-            <VStack align="flex-start" spacing={3}>
-              <HStack spacing={3} align="center">
+            <VStack align="flex-start" spacing={3} w="full" minW={0}>
+              <HStack spacing={3} align="center" w="full" minW={0}>
                 <Box
                   as="span"
                   boxSize={9}
@@ -178,11 +201,12 @@ const FormatsSection: React.FC = () => {
                   alignItems="center"
                   justifyContent="center"
                   color="orange.300"
+                  flexShrink={0}
                 >
                   <Icon as={FaNewspaper} boxSize={5} aria-hidden="true" />
                 </Box>
-                <VStack align="flex-start" spacing={1}>
-                  <Heading as="h3" size="sm">
+                <VStack align="flex-start" spacing={1} minW={0} flex={1}>
+                  <Heading as="h3" size="sm" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                     Партнёрские статьи и блог
                   </Heading>
                   <PillBadge colorScheme="yellow" variant="outline" uppercase={false}>
@@ -190,11 +214,11 @@ const FormatsSection: React.FC = () => {
                   </PillBadge>
                 </VStack>
               </HStack>
-              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Статья или обзор технологий на AIFFA с вашим брендингом, примерами и живыми
                 реакциями от сообщества.
               </Text>
-              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Подходит, когда важно объяснить продукт словами, показать экспертизу и собрать
                 социальное доказательство.
               </Text>
@@ -207,9 +231,14 @@ const FormatsSection: React.FC = () => {
             bg={useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.98)")}
             p={{ base: 5, md: 6 }}
             boxShadow={formatShadow}
+            w="full"
+            minW={{ base: "100%", sm: "280px", md: "350px" }}
+            maxW="100%"
+            boxSizing="border-box"
+            flexShrink={0}
           >
-            <VStack align="flex-start" spacing={3}>
-              <HStack spacing={3} align="center">
+            <VStack align="flex-start" spacing={3} w="full" minW={0}>
+              <HStack spacing={3} align="center" w="full" minW={0}>
                 <Box
                   as="span"
                   boxSize={9}
@@ -219,11 +248,12 @@ const FormatsSection: React.FC = () => {
                   alignItems="center"
                   justifyContent="center"
                   color="pink.300"
+                  flexShrink={0}
                 >
                   <Icon as={FaHandsHelping} boxSize={5} aria-hidden="true" />
                 </Box>
-                <VStack align="flex-start" spacing={1}>
-                  <Heading as="h3" size="sm">
+                <VStack align="flex-start" spacing={1} minW={0} flex={1}>
+                  <Heading as="h3" size="sm" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                     Поддержка авторов и гранты
                   </Heading>
                   <PillBadge colorScheme="red" variant="outline" uppercase={false}>
@@ -231,11 +261,11 @@ const FormatsSection: React.FC = () => {
                   </PillBadge>
                 </VStack>
               </HStack>
-              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Формат, в котором вы поддерживаете авторов, образовательные серии и задачи,
                 помогая развивать экосистему вокруг продукта.
               </Text>
-              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Можно финансировать выпуски, выделять гранты и подключать менторов со своей
                 стороны.
               </Text>

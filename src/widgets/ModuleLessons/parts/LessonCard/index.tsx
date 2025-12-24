@@ -24,6 +24,8 @@ export const LessonCard: React.FC<LessonCardProps> = ({
   return (
     <AppBoxLink
       to={`/learn/${moduleId}/${lesson.id}`}
+      w="full"
+      minW={0}
       borderWidth="2px"
       borderColor={done ? 'green.300' : colors.borderColor}
       bg={colors.cardBg}

@@ -39,6 +39,8 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
     <Box
       as="a"
       href={href}
+      w="full"
+      minW={0}
       borderWidth="2px"
       borderColor={done ? 'green.300' : colors.borderColor}
       bg={colors.cardBg}
@@ -75,7 +77,15 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
         {done ? <CheckIcon boxSize={3.5} /> : (start + idx + 1)}
       </IndexChip> 
       <Box flex={1} minW={0} display="flex" flexDirection="column" height="100%" justifyContent="space-between">
-        <Box fontWeight="semibold" noOfLines={2} wordBreak="break-word" overflowWrap="anywhere" style={{ hyphens: 'auto' }}>
+        <Box
+          as="div"
+          fontWeight="semibold"
+          noOfLines={2}
+          wordBreak="break-word"
+          overflowWrap="anywhere"
+          whiteSpace="normal"
+          style={{ hyphens: 'auto' }}
+        >
           {lesson.title}
         </Box>
 

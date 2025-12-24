@@ -67,11 +67,15 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
           align="center"
           position="relative"
           zIndex={1}
+          w="full"
+          minW={0}
         >
           <Box
             as="header"
             textAlign="center"
             maxW={{ base: "full", md: "640px" }}
+            w="full"
+            minW={0}
           >
             <Box mb={3}>
               <PillBadge colorScheme="blue" variant="outline" uppercase>
@@ -96,16 +100,20 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
             </Text>
           </Box>
 
-          <SimpleGrid
-            as="ul"
-            role="list"
-            listStyleType="none"
-            pl={0}
-            minChildWidth={{ base: "100%", sm: "280px" }}
-            spacing={{ base: 4, md: 6 }}
-            mt={{ base: 2, md: 4 }}
-            w="full"
-          >
+          <Box w="full" maxW="1200px" mx="auto" minW={0} boxSizing="border-box">
+            <SimpleGrid
+              as="ul"
+              role="list"
+              listStyleType="none"
+              pl={0}
+              minChildWidth={{ base: "100%", sm: "220px", md: "280px" }}
+              spacing={{ base: 4, md: 6 }}
+              mt={{ base: 2, md: 4 }}
+              w="full"
+              minW={0}
+              maxW="100%"
+              boxSizing="border-box"
+            >
             {metrics.map((metric, index) => {
               const animationDurationSeconds = 18 + index * 2;
 
@@ -122,6 +130,10 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
                   textAlign="center"
                   animation={`${communityCardFloat} ${animationDurationSeconds}s ease-in-out infinite`}
                   aria-describedby="hackathons-community-growth-description"
+                  w="full"
+                  minW={{ base: "100%", sm: "220px", md: "280px" }}
+                  maxW="100%"
+                  boxSizing="border-box"
                 >
                   <Text
                     fontSize={{ base: "2xl", md: "3xl" }}
@@ -130,6 +142,9 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
                     _dark={{ bgGradient: "linear(to-r, teal.200, blue.300)" }}
                     bgClip="text"
                     animation={`${communityMetricPulse} 7s ease-in-out infinite`}
+                    wordBreak="break-word"
+                    overflowWrap="anywhere"
+                    whiteSpace="normal"
                   >
                     {metric.valueLabel}
                   </Text>
@@ -137,13 +152,17 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
                     mt={1}
                     fontSize={{ base: "sm", md: "md" }}
                     color={mutedTextColor}
+                    wordBreak="break-word"
+                    overflowWrap="anywhere"
+                    whiteSpace="normal"
                   >
                     {metric.description}
                   </Text>
                 </Box>
               );
             })}
-          </SimpleGrid>
+            </SimpleGrid>
+          </Box>
         </Stack>
       </Box>
     </Box>

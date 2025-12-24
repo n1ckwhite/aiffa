@@ -60,23 +60,22 @@ const HackathonsHeroSection: React.FC = () => {
         </Box>
 
       <Stack
-        direction={{ base: "column", lg: "row" }}
+        direction={{ base: "column", xl: "row" }}
         spacing={{ base: 4, lg: 10 }}
-        align={{ base: "center", lg: "center" }}
-        justify="center"
+        align={{ base: "center", xl: "flex-start" }}
+        justify={{ base: "center", xl: "space-between" }}
         position="relative"
         zIndex={1}
         w="full"
-        // If the container is not wide enough for two columns, wrap instead of squeezing (Safari).
-        flexWrap={{ base: "nowrap", lg: "wrap" }}
       >
         <Box
           as="header"
-          flex={{ base: "none", lg: "1 1 640px" }}
+          flex={{ base: "none", xl: "1 1 640px" }}
           w="full"
-          maxW={{ base: "full", md: "720px", lg: "720px" }}
-          textAlign="center"
-          mx="auto"
+          minW={0}
+          maxW={{ base: "full", md: "720px", xl: "720px" }}
+          textAlign={{ base: "center", xl: "left" }}
+          mx={{ base: "auto", xl: 0 }}
         >
           <Box mb={3}>
             <PillBadge colorScheme="blue" variant="outline" uppercase>
@@ -108,13 +107,13 @@ const HackathonsHeroSection: React.FC = () => {
             direction="column"
             spacing={{ base: 3, md: 4 }}
             mt={{ base: 4, md: 8 }}
-            align="center"
+            align={{ base: "stretch", md: "center", xl: "flex-start" }}
           >
             <Box
               position="relative"
               display="inline-flex"
               w={{ base: "100%", md: "360px" }}
-              mx="auto"
+              mx={{ base: "auto", xl: 0 }}
             >
               <Box
                 position="absolute"
@@ -160,7 +159,7 @@ const HackathonsHeroSection: React.FC = () => {
                 borderRadius="full"
                 aria-describedby="hackathons-hero-description"
               >
-                Участвовать в хакатонах
+                Участвовать
               </Button>
             </Box>
             <Button
@@ -172,7 +171,7 @@ const HackathonsHeroSection: React.FC = () => {
               px={{ base: 4, md: 6 }}
               py={{ base: 2.5, md: 3 }}
               w={{ base: "100%", md: "360px" }}
-              mx="auto"
+              mx={{ base: "auto", xl: 0 }}
               borderRadius="full"
               aria-describedby="hackathons-hero-description"
             >
@@ -183,11 +182,10 @@ const HackathonsHeroSection: React.FC = () => {
 
         <Box
           as="aside"
-          flex={{ base: "none", lg: "1 1 360px" }}
+          flex={{ base: "none", xl: "1 1 340px" }}
           w="full"
-          maxW={{ base: "full", md: "720px", lg: "520px" }}
-          minW={{ lg: "360px" }}
-          flexShrink={0}
+          maxW={{ base: "full", md: "720px", xl: "520px" }}
+          minW={{ base: 0, xl: "320px" }}
           bg={heroAsideBg}
           borderRadius="2xl"
           borderWidth="1px"
@@ -197,7 +195,7 @@ const HackathonsHeroSection: React.FC = () => {
           boxShadow="lg"
           animation={`${heroAsideFloat} 18s ease-in-out infinite`}
           aria-labelledby="hackathons-hero-benefits-title"
-          mx="auto"
+          mx={{ base: "auto", xl: 0 }}
         >
           <Text
             as="h2"

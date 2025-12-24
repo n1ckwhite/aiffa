@@ -75,7 +75,7 @@ const HackathonsRulesSection: React.FC = () => {
             role="list"
             listStyleType="none"
             pl={0}
-            minChildWidth={{ base: "100%", sm: "360px", md: "400px" }}
+            minChildWidth={{ base: "100%", sm: "250px", md: "400px" }}
             spacing={{ base: 4, md: 6 }}
             w="full"
             minW={0}
@@ -112,7 +112,7 @@ const HackathonsRulesSection: React.FC = () => {
                   borderColor: accentBorderColor,
                 }}
                 w="full"
-                minW={0}
+                minW={{ base: "100%", sm: "250px", md: "400px" }}
                 maxW="100%"
                 boxSizing="border-box"
               >

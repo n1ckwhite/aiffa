@@ -6,10 +6,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { CheckCircleIcon, EditIcon, ExternalLinkIcon, ViewIcon } from "@chakra-ui/icons";
 import PillBadge from "@/shared/ui/PillBadge";
 import { useHackathonsSubmissionSectionColors } from "./colors/useHackathonsSubmissionSectionColors";
-import { useHackathonsSubmissionCards } from "./data";
+import { useHackathonsSubmissionCards, createCardConfigMap } from "./data";  
 
 const HackathonsSubmissionSection: React.FC = () => {
   const {
@@ -18,13 +17,20 @@ const HackathonsSubmissionSection: React.FC = () => {
     cardBorderColor,
     accentBorderColor,
     submissionBgGradient,
+    descriptionColor,
     requirementsCircleBg,
     githubCircleBg,
     readmeCircleBg,
     demoCircleBg,
-    descriptionColor,
   } = useHackathonsSubmissionSectionColors();
   const cards = useHackathonsSubmissionCards();
+  
+  const cardConfigMap = createCardConfigMap(
+    requirementsCircleBg,
+    githubCircleBg,
+    readmeCircleBg,
+    demoCircleBg
+  );
 
   return (
     <Box
@@ -115,19 +121,8 @@ const HackathonsSubmissionSection: React.FC = () => {
             boxSizing="border-box"
           >
             {cards.map((card) => {
-              let circleBg = requirementsCircleBg;
-              let iconNode: React.ReactNode = <CheckCircleIcon color="white" boxSize={4} />;
-
-              if (card.id === "github") {
-                circleBg = githubCircleBg;
-                iconNode = <ExternalLinkIcon color="white" boxSize={4} />;
-              } else if (card.id === "readme") {
-                circleBg = readmeCircleBg;
-                iconNode = <EditIcon color="white" boxSize={4} />;
-              } else if (card.id === "demo") {
-                circleBg = demoCircleBg;
-                iconNode = <ViewIcon color="white" boxSize={4} />;
-              }
+              const config = cardConfigMap[card.id];
+              const { circleBg, iconNode } = config;
 
               return (
                 <Box

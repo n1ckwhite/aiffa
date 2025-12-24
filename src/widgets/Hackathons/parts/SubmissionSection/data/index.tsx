@@ -1,4 +1,6 @@
 import type { SubmissionCard } from "../types";
+import { CheckCircleIcon, EditIcon, ExternalLinkIcon, ViewIcon } from "@chakra-ui/icons";
+import React from "react";
 
 export const useHackathonsSubmissionCards = (): SubmissionCard[] => [
   {
@@ -27,4 +29,27 @@ export const useHackathonsSubmissionCards = (): SubmissionCard[] => [
   },
 ];
 
+export const createCardConfigMap = (
+  requirementsCircleBg: string,
+  githubCircleBg: string,
+  readmeCircleBg: string,
+  demoCircleBg: string
+): Record<string, { circleBg: string; iconNode: React.ReactNode }> => ({
+  requirements: {
+    circleBg: requirementsCircleBg,
+    iconNode: <CheckCircleIcon color="white" boxSize={4} />,
+  },
+  github: {
+    circleBg: githubCircleBg,
+    iconNode: <ExternalLinkIcon color="white" boxSize={4} />,
+  },
+  readme: {
+    circleBg: readmeCircleBg,
+    iconNode: <EditIcon color="white" boxSize={4} />,
+  },
+  demo: {
+    circleBg: demoCircleBg,
+    iconNode: <ViewIcon color="white" boxSize={4} />,
+  },
+});
 

@@ -27,4 +27,14 @@ export const useHackathonsRuleCards = (): RuleCard[] => [
   },
 ];
 
-
+export const createCircleBgMap = (
+  deadlinesCircleBg: string,
+  formatCircleBg: string,
+  codeCircleBg: string,
+  limitsCircleBg: string
+): Record<string, string> => ({
+  deadlines: deadlinesCircleBg,
+  format: formatCircleBg,
+  code: codeCircleBg,
+  limits: limitsCircleBg,
+});

@@ -9,7 +9,7 @@ import {
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import { BusinessWorkshopIcon } from "@/shared/icons/components-icon";
 import { useHackathonsRulesSectionColors } from "./colors/useHackathonsRulesSectionColors";
-import { useHackathonsRuleCards } from "./data";
+import { useHackathonsRuleCards, createCircleBgMap } from "./data";
 
 const HackathonsRulesSection: React.FC = () => {
   const {
@@ -22,6 +22,13 @@ const HackathonsRulesSection: React.FC = () => {
     limitsCircleBg,
   } = useHackathonsRulesSectionColors();
   const ruleCards = useHackathonsRuleCards();
+  
+  const circleBgMap = createCircleBgMap(
+    deadlinesCircleBg,
+    formatCircleBg,
+    codeCircleBg,
+    limitsCircleBg
+  );
 
   return (
     <Box
@@ -81,14 +88,7 @@ const HackathonsRulesSection: React.FC = () => {
             boxSizing="border-box"
           >
           {ruleCards.map((card) => {
-            let circleBg = deadlinesCircleBg;
-            if (card.id === "format") {
-              circleBg = formatCircleBg;
-            } else if (card.id === "code") {
-              circleBg = codeCircleBg;
-            } else if (card.id === "limits") {
-              circleBg = limitsCircleBg;
-            }
+            const circleBg = circleBgMap[card.id];
 
             return (
               <Box

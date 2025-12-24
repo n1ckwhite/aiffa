@@ -54,6 +54,8 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
     position: "relative",
     overflow: "hidden",
     h: "100%",
+    w: "full",
+    minW: 0,
     _focusVisible: { boxShadow: focusRing, outline: "none" },
     transform: isActive ? "translateY(-10px) scale(1.02)" : undefined,
     boxShadow: isActive

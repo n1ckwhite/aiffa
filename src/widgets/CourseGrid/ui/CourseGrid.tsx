@@ -9,9 +9,8 @@ const CourseGrid: React.FC<CourseGridProps> = ({ category = 'all', showHeader = 
   const { courses, moduleMeta } = useCourseGridData(category);
 
   return (
-    <Box>
-      <Box maxW="1200px" mx="auto" pb="40px">
-        <VStack spacing={{ base: 8, md: 12 }} align="stretch">
+    <Box w="full" minW={0} maxW="1200px" mx="auto" pb="40px">
+      <VStack spacing={{ base: 8, md: 12 }} align="stretch" w="full" minW={0}>
           {showHeader && (
             <HeaderBlock
               title="Модули экосистемы"
@@ -20,13 +19,14 @@ const CourseGrid: React.FC<CourseGridProps> = ({ category = 'all', showHeader = 
           )}
 
           <SimpleGrid
-            minChildWidth={{ base: "100%", sm: "360px" }}
+            columns={{ base: 1, md: 2, xl: 3 }}
             spacing={{ base: 5, md: 6 }}
             w="full"
+            minW={0}
             alignItems="stretch"
           >
             {courses.map((course, index) => (
-              <Box key={course.id} data-index={index} sx={{ animation: 'none' }} h="full">
+              <Box key={course.id} data-index={index} sx={{ animation: 'none' }} h="full" w="full" minW={0}>
                 <CourseCard
                   moduleId={course.moduleId}
                   title={course.title}
@@ -50,7 +50,6 @@ const CourseGrid: React.FC<CourseGridProps> = ({ category = 'all', showHeader = 
             ))}
           </SimpleGrid>
         </VStack>
-      </Box>
     </Box>
   );
 };

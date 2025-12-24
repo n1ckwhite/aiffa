@@ -81,31 +81,35 @@ const ProfileScreen: React.FC = () => {
               hintColor={hintColor}
             />
 
-            <Box w="100%" maxW="900px" mt={4}>
-              <VStack align="stretch" spacing={4}>
-                <Box display="grid" gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={{ base: 4, md: 5 }} alignItems="stretch">
-                  <XPCard
-                    xp={xp}
-                    tier={tier}
-                    tierBadge={tierMeta as any}
-                    nextTierBadge={nextTierMeta as any}
-                    progressPct={tierProgressPct}
-                    xpBursts={xpBursts}
-                    dividerColor={dividerColor}
-                    hintColor={hintColor}
-                  />
+            <Box w="100%" maxW="900px" mt={4} minW={0}>
+              <VStack align="stretch" spacing={4} w="full" minW={0}>
+                <Box display="grid" gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={{ base: 4, md: 5 }} alignItems="stretch" w="full" minW={0}>
+                  <Box minW={0} w="full">
+                    <XPCard
+                      xp={xp}
+                      tier={tier}
+                      tierBadge={tierMeta as any}
+                      nextTierBadge={nextTierMeta as any}
+                      progressPct={tierProgressPct}
+                      xpBursts={xpBursts}
+                      dividerColor={dividerColor}
+                      hintColor={hintColor}
+                    />
+                  </Box>
 
-                  <StudyCard
-                    isManifestLoaded={isManifestLoaded}
-                    studyProgressPct={studyProgressPct}
-                    ringTrack={ringTrack}
-                    ringColor={ringColor}
-                    skeletonBg={skeletonBg}
-                    skeletonRingBorder={skeletonRingBorder}
-                    skeletonRingTop={skeletonRingTop}
-                    dividerColor={dividerColor}
-                    hintColor={hintColor}
-                  />
+                  <Box minW={0} w="full">
+                    <StudyCard
+                      isManifestLoaded={isManifestLoaded}
+                      studyProgressPct={studyProgressPct}
+                      ringTrack={ringTrack}
+                      ringColor={ringColor}
+                      skeletonBg={skeletonBg}
+                      skeletonRingBorder={skeletonRingBorder}
+                      skeletonRingTop={skeletonRingTop}
+                      dividerColor={dividerColor}
+                      hintColor={hintColor}
+                    />
+                  </Box>
                 </Box>
               </VStack>
             </Box>

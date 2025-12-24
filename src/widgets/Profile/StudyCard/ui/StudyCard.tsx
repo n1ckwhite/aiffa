@@ -18,8 +18,10 @@ const StudyCard: React.FC<StudyCardProps> = ({
       h="100%"
       display="flex"
       flexDirection="column"
+      w="full"
+      minW={0}
     >
-      <VStack spacing={4} align="stretch">
+      <VStack spacing={4} align="stretch" w="full" minW={0}>
         <Header />
         <Body studyProgressPct={studyProgressPct} ringTrack={ringTrack} ringColor={ringColor} />
         <FooterCTA dividerColor={dividerColor} hintColor={hintColor} />

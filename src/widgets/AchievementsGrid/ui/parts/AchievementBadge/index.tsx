@@ -13,7 +13,7 @@ export const AchievementBadge: React.FC<AchievementBadgeProps> = ({ item, index 
   const description = item.desc || achievementDescriptions[item.id] || 'Откройте за активность на платформе';
 
   return (
-    <VStack spacing={1} w={{ base: '96px', sm: '110px', md: '120px' }}>
+    <VStack spacing={1} w={{ base: '96px', sm: '110px', md: '120px' }} minW={0} flexShrink={0}>
       <Tooltip hasArrow openDelay={220} placement="top" label={
         <HStack spacing={2} maxW="200px">
           <Icon as={FaCircleInfoElement} />

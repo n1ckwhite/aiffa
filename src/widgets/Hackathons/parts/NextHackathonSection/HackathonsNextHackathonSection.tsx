@@ -67,42 +67,6 @@ const HackathonsNextHackathonSection: React.FC = () => {
         px={{ base: 6, md: 8 }}
         py={{ base: 5, md: 8 }}
       >
-        <Box
-          position="absolute"
-          inset="-40px"
-          opacity={0.65}
-          filter="blur(48px)"
-          pointerEvents="none"
-          zIndex={0}
-        >
-          <Box
-            position="absolute"
-            top={{ base: "45%", md: "20%" }}
-            left="-5%"
-            w={{ base: "220px", md: "260px" }}
-            h={{ base: "220px", md: "260px" }}
-            bgGradient="radial(blue.400, transparent)"
-          />
-          <Box
-            position="absolute"
-            bottom="-10%"
-            right="-5%"
-            w={{ base: "260px", md: "320px" }}
-            h={{ base: "260px", md: "320px" }}
-            bgGradient="radial(purple.400, transparent)"
-          />
-        </Box>
-
-        <Box
-          position="absolute"
-          top="0"
-          left="-40%"
-          h="3px"
-          w="40%"
-          bgGradient="linear(to-r, transparent, whiteAlpha.800, transparent)"
-          opacity={0.8}
-          zIndex={1}
-        />
         <Stack
           // Don't squeeze text on borderline Safari widths: switch to row only when there's enough space.
           direction={{ base: "column", xl: "row" }}

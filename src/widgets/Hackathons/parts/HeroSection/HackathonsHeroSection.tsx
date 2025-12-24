@@ -33,32 +33,6 @@ const HackathonsHeroSection: React.FC = () => {
         px={{ base: 6, md: 8 }}
         py={{ base: 5, md: 8 }}
       >
-        <Box
-          position="absolute"
-          inset="-40px"
-          opacity={0.7}
-          filter="blur(52px)"
-          pointerEvents="none"
-          aria-hidden="true"
-        >
-          <Box
-            position="absolute"
-            top={{ base: "10%", md: "0%" }}
-            left="-8%"
-            w={{ base: "220px", md: "260px" }}
-            h={{ base: "220px", md: "260px" }}
-            bgGradient="radial(circle at 30% 30%, rgba(59,130,246,0.9), transparent)"
-          />
-          <Box
-            position="absolute"
-            bottom="-10%"
-            right="-6%"
-            w={{ base: "260px", md: "320px" }}
-            h={{ base: "260px", md: "320px" }}
-            bgGradient="radial(circle at 70% 70%, rgba(244,114,182,0.85), transparent)"
-          />
-        </Box>
-
       <Stack
         direction={{ base: "column", xl: "row" }}
         spacing={{ base: 4, lg: 10 }}

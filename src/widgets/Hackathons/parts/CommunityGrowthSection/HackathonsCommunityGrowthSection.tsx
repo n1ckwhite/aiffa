@@ -35,33 +35,6 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
         px={{ base: 4, md: 8 }}
         py={{ base: 5, md: 8 }}
       >
-        <Box
-          position="absolute"
-          inset="-40px"
-          opacity={0.55}
-          filter="blur(42px)"
-          pointerEvents="none"
-          zIndex={0}
-          aria-hidden="true"
-        >
-          <Box
-            position="absolute"
-            top="-10%"
-            left="-6%"
-            w={{ base: "220px", md: "260px" }}
-            h={{ base: "220px", md: "260px" }}
-            bgGradient="radial(teal.300, transparent)"
-          />
-          <Box
-            position="absolute"
-            bottom="-14%"
-            right="-8%"
-            w={{ base: "260px", md: "320px" }}
-            h={{ base: "260px", md: "320px" }}
-            bgGradient="radial(blue.500, transparent)"
-          />
-        </Box>
-
         <Stack
           spacing={{ base: 4, md: 6 }}
           align="center"

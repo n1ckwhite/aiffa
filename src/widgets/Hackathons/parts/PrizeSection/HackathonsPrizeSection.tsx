@@ -34,43 +34,6 @@ const HackathonsPrizeSection: React.FC = () => {
         maxW="100%"
         boxSizing="border-box"
       >
-        <Box
-          position="absolute"
-          inset="-40px"
-          opacity={0.6}
-          filter="blur(44px)"
-          pointerEvents="none"
-          zIndex={0}
-        >
-          <Box
-            position="absolute"
-            top={{ base: "55%", md: "25%" }}
-            left="-8%"
-            w={{ base: "220px", md: "260px" }}
-            h={{ base: "220px", md: "260px" }}
-            bgGradient="radial(pink.400, transparent)"
-          />
-          <Box
-            position="absolute"
-            bottom="-12%"
-            right="-6%"
-            w={{ base: "260px", md: "320px" }}
-            h={{ base: "260px", md: "320px" }}
-            bgGradient="radial(purple.500, transparent)"
-          />
-        </Box>
-
-        <Box
-          position="absolute"
-          top="0"
-          left="-40%"
-          h="3px"
-          w="40%"
-          bgGradient="linear(to-r, transparent, whiteAlpha.900, transparent)"
-          opacity={0.9}
-          zIndex={1}
-        />
-
         <Stack
           spacing={0}
           align="center"

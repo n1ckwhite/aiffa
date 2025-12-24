@@ -34,9 +34,6 @@ const HeroSection: React.FC = () => {
             <Text fontSize={{ base: "sm", sm: "md", md: "lg" }} fontWeight="semibold" color={primaryTextColor} lineHeight={1.5}>
               Люди, которые делают AIFFA лучше каждый день.
             </Text>
-            <Box flex={{ base: "none", xl: 1 }} maxW={{ base: "240px", md: "320px" }} mx={{ base: "auto", xl: 0 }}>
-            <BusinessManTelescop />
-          </Box>
             <Text fontSize="sm" color={secondaryTextColor} lineHeight={1.9} maxW={{ base: "full", sm: "420px", md: "520px" }}>
               AIFFA — это экосистема, которую создают авторы материалов и задач недели, мейнтейнеры проектов, авторы статей, участники хакатонов и те, кто поддерживает идею. Здесь можно найти людей, с которыми вы будете расти, запускать проекты и усиливать комьюнити.
             </Text>
@@ -85,6 +82,9 @@ const HeroSection: React.FC = () => {
               })}
             </Stack>
           </VStack>
+          <Box flex={{ base: "none", xl: 1 }} maxW={{ base: "240px", md: "320px" }} mx={{ base: "auto", xl: 0 }}>
+            <BusinessManTelescop />
+          </Box>
         </Stack>
       </Box>
     </Box>

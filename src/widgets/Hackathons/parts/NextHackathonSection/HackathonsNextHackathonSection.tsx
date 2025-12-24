@@ -56,6 +56,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
           прозрачному таймлайну, чтобы вы заранее понимали, когда подключаться.
         </Text>
       </Stack>
+
       <Box
         position="relative"
         overflow="hidden"
@@ -102,7 +103,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
                 AIFFA Hackathon #1 — Задача старта
               </Heading>
             </Box>
-            <RewardsLottieIcon />
+
             <Stack
               as="ul"
               role="list"
@@ -233,6 +234,7 @@ const HackathonsNextHackathonSection: React.FC = () => {
             justifyContent="center"
             mx="auto"
           >
+            <RewardsLottieIcon />
           </Box>
         </Stack>
       </Box>

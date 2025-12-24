@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Heading, VStack } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid, VStack } from '@chakra-ui/react';
 import { useUserProfile } from 'entities/user';
 import ProfileHeader from '../../Header/ui/Header';
 import GitHubConnect from '../../GitHubConnect/ui/GitHubConnect';
@@ -83,34 +83,30 @@ const ProfileScreen: React.FC = () => {
 
             <Box w="100%" maxW="900px" mt={4} minW={0}>
               <VStack align="stretch" spacing={4} w="full" minW={0}>
-                <Box display="grid" gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={{ base: 4, md: 5 }} alignItems="stretch" w="full" minW={0}>
-                  <Box minW={0} w="full">
-                    <XPCard
-                      xp={xp}
-                      tier={tier}
-                      tierBadge={tierMeta as any}
-                      nextTierBadge={nextTierMeta as any}
-                      progressPct={tierProgressPct}
-                      xpBursts={xpBursts}
-                      dividerColor={dividerColor}
-                      hintColor={hintColor}
-                    />
-                  </Box>
+                <SimpleGrid minChildWidth={{ base: "100%", md: "400px" }} spacing={{ base: 4, md: 5 }} w="full" minW={0} alignItems="stretch">
+                  <XPCard
+                    xp={xp}
+                    tier={tier}
+                    tierBadge={tierMeta as any}
+                    nextTierBadge={nextTierMeta as any}
+                    progressPct={tierProgressPct}
+                    xpBursts={xpBursts}
+                    dividerColor={dividerColor}
+                    hintColor={hintColor}
+                  />
 
-                  <Box minW={0} w="full">
-                    <StudyCard
-                      isManifestLoaded={isManifestLoaded}
-                      studyProgressPct={studyProgressPct}
-                      ringTrack={ringTrack}
-                      ringColor={ringColor}
-                      skeletonBg={skeletonBg}
-                      skeletonRingBorder={skeletonRingBorder}
-                      skeletonRingTop={skeletonRingTop}
-                      dividerColor={dividerColor}
-                      hintColor={hintColor}
-                    />
-                  </Box>
-                </Box>
+                  <StudyCard
+                    isManifestLoaded={isManifestLoaded}
+                    studyProgressPct={studyProgressPct}
+                    ringTrack={ringTrack}
+                    ringColor={ringColor}
+                    skeletonBg={skeletonBg}
+                    skeletonRingBorder={skeletonRingBorder}
+                    skeletonRingTop={skeletonRingTop}
+                    dividerColor={dividerColor}
+                    hintColor={hintColor}
+                  />
+                </SimpleGrid>
               </VStack>
             </Box>
           </VStack>

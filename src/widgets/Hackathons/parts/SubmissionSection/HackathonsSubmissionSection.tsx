@@ -106,12 +106,13 @@ const HackathonsSubmissionSection: React.FC = () => {
             role="list"
             listStyleType="none"
             pl={0}
-            columns={{ base: 1, xl: 2 }}
+            minChildWidth={{ base: "100%", sm: "250px", md: "400px" }}
             spacing={{ base: 4, md: 6 }}
             w="full"
             minW={0}
             maxW="1200px"
             mx="auto"
+            boxSizing="border-box"
           >
             {cards.map((card) => {
               let circleBg = requirementsCircleBg;
@@ -133,7 +134,8 @@ const HackathonsSubmissionSection: React.FC = () => {
                   key={card.id}
                   as="li"
                   role="listitem"
-                  minW={0}
+                  minW={{ base: "100%", sm: "250px", md: "400px" }}
+                  maxW="100%"
                   bg={sectionCardBg}
                   borderRadius="2xl"
                   borderWidth="1px"
@@ -145,6 +147,8 @@ const HackathonsSubmissionSection: React.FC = () => {
                     boxShadow: "xl",
                     borderColor: "blue.400",
                   }}
+                  w="full"
+                  boxSizing="border-box"
                 >
                   <Stack spacing={2}>
                     <Stack direction="row" align="center" spacing={3}>

@@ -34,7 +34,7 @@ const FormatsSection: React.FC = () => {
           технологий и инструментов.
         </Text>
       <VStack spacing={4} align="stretch" w="full" minW={0}>
-        <SimpleGrid minChildWidth={{ base: "100%", sm: "280px", md: "350px" }} spacing={{ base: 4, md: 5 }} w="full" minW={0} maxW="100%">
+        <SimpleGrid minChildWidth={{ base: "100%", sm: "260px", md: "350px" }} spacing={{ base: 4, md: 5 }} w="full" minW={0} maxW="100%">
           <Box
             borderRadius="2xl"
             borderWidth="1px"
@@ -43,7 +43,7 @@ const FormatsSection: React.FC = () => {
             p={{ base: 5, md: 6 }}
             boxShadow={formatShadow}
             w="full"
-            minW={{ base: "100%", sm: "280px", md: "350px" }}
+            minW={{ base: "100%", sm: "260px", md: "350px" }}
             maxW="100%"
             boxSizing="border-box"
             flexShrink={0}
@@ -89,7 +89,7 @@ const FormatsSection: React.FC = () => {
             p={{ base: 5, md: 6 }}
             boxShadow={formatShadow}
             w="full"
-            minW={{ base: "100%", sm: "280px", md: "350px" }}
+            minW={{ base: "100%", sm: "260px", md: "350px" }}
             maxW="100%"
             boxSizing="border-box"
             flexShrink={0}
@@ -136,7 +136,7 @@ const FormatsSection: React.FC = () => {
             p={{ base: 5, md: 6 }}
             boxShadow={formatShadow}
             w="full"
-            minW={{ base: "100%", sm: "280px", md: "350px" }}
+            minW={{ base: "100%", sm: "260px", md: "350px" }}
             maxW="100%"
             boxSizing="border-box"
             flexShrink={0}
@@ -185,7 +185,7 @@ const FormatsSection: React.FC = () => {
             p={{ base: 5, md: 6 }}
             boxShadow={formatShadow}
             w="full"
-            minW={{ base: "100%", sm: "280px", md: "350px" }}
+            minW={{ base: "100%", sm: "260px", md: "350px" }}
             maxW="100%"
             boxSizing="border-box"
             flexShrink={0}
@@ -232,7 +232,7 @@ const FormatsSection: React.FC = () => {
             p={{ base: 5, md: 6 }}
             boxShadow={formatShadow}
             w="full"
-            minW={{ base: "100%", sm: "280px", md: "350px" }}
+            minW={{ base: "100%", sm: "260px", md: "350px" }}
             maxW="100%"
             boxSizing="border-box"
             flexShrink={0}

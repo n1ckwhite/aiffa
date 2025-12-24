@@ -286,7 +286,7 @@ const FormatsSection: React.FC = () => {
           <Text fontSize={{base: "md", md: "lg"}} color={mutedTextColor} mt={3}>
             Примеры форматов: финальный scope и стоимость обсуждаем индивидуально под вашу задачу.
           </Text>
-          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, md: 4 }} mt={3}>
+          <SimpleGrid minChildWidth={{ base: "100%", sm: "280px", md: "320px" }} spacing={{ base: 3, md: 4 }} mt={3} w="full" minW={0} maxW="100%" alignItems="stretch">
             <Box
               borderRadius="xl"
               borderWidth="1px"
@@ -295,11 +295,16 @@ const FormatsSection: React.FC = () => {
               p={{ base: 3, md: 4 }}
               boxShadow={{ base: "sm", md: "md" }}
               h="100%"
+              w="full"
+              minW={{ base: "100%", sm: "280px", md: "320px" }}
+              maxW="100%"
+              boxSizing="border-box"
+              flexShrink={0}
             >
               <PillBadge colorScheme="blue" variant="outline" uppercase={false}>
                 Lite — задачи недели
               </PillBadge>
-              <Text mt={2} fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text mt={2} fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Серия Weekly‑задач с вашим логотипом и продуктом в контексте практики. Хорошо
                 подходит для пилота и проверки гипотезы.
               </Text>
@@ -313,11 +318,16 @@ const FormatsSection: React.FC = () => {
               p={{ base: 3, md: 4 }}
               boxShadow={{ base: "sm", md: "md" }}
               h="100%"
+              w="full"
+              minW={{ base: "100%", sm: "280px", md: "320px" }}
+              maxW="100%"
+              boxSizing="border-box"
+              flexShrink={0}
             >
               <PillBadge colorScheme="green" variant="outline" uppercase={false}>
                 Pro — хакатон
               </PillBadge>
-              <Text mt={2} fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text mt={2} fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Онлайн или офлайн‑хакатон под вашу задачу: команды собирают решения,
                 а вы получаете прототипы, фидбек и пул кандидатов.
               </Text>
@@ -331,11 +341,16 @@ const FormatsSection: React.FC = () => {
               p={{ base: 3, md: 4 }}
               boxShadow={{ base: "sm", md: "md" }}
               h="100%"
+              w="full"
+              minW={{ base: "100%", sm: "280px", md: "320px" }}
+              maxW="100%"
+              boxSizing="border-box"
+              flexShrink={0}
             >
               <PillBadge colorScheme="purple" variant="outline" uppercase={false}>
                 Full — проект + менторы
               </PillBadge>
-              <Text mt={2} fontSize="sm" color={mutedTextColor} lineHeight={1.6}>
+              <Text mt={2} fontSize="sm" color={mutedTextColor} lineHeight={1.6} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
                 Долгий формат: проект или серия задач с вашими менторами, интеграцией в
                 материалы и освещением в комьюнити и соцсетях.
               </Text>

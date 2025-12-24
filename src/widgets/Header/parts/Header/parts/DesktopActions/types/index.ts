@@ -3,6 +3,7 @@ export type DesktopActionsProps = {
   scrollTop: () => void;
   onDonate: () => void;
   setIsMobileMenuOpen: (v: boolean) => void;
+  isMobileMenuOpen: boolean;
 };
 
 

@@ -143,6 +143,7 @@ const Header: React.FC = React.memo(() => {
             scrollTop={scrollTop}
             onDonate={handleDonate}
             setIsMobileMenuOpen={setIsMobileMenuOpen}
+            isMobileMenuOpen={isMobileMenuOpen}
           />
         </HStack>
 

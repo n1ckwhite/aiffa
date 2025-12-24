@@ -5,11 +5,11 @@ import { steps } from "./data/index";
 
 const HowItWorksSection: React.FC = () => {
   const {
+    socialProofBadgeBorder,
     mutedTextColor,
     stepNumberBg,
     stepNumberColor,
     stepCardBg,
-    stepCardBorder,
   } = usePartnersColors();
 
   return (
@@ -86,9 +86,9 @@ const HowItWorksSection: React.FC = () => {
                 bg={stepCardBg}
                 borderRadius="xl"
                 borderWidth="1px"
-                borderColor={stepCardBorder}
                 p={{ base: 3, md: 4 }}
                 minW={0}
+                borderColor={socialProofBadgeBorder}
                 w="full"
               >
                 <Heading as="h3" size="sm" mb={1} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">

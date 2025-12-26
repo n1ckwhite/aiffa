@@ -10,7 +10,6 @@ export type BlogScreenController = {
     // search + filters
     query: string;
     setQuery: (next: string) => void;
-    debouncedQuery: string;
     tagFilter: BlogTagFilter;
     setTagFilter: (next: BlogTagFilter) => void;
     searchInputRef: React.RefObject<HTMLInputElement | null>;

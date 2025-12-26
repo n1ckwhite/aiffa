@@ -5,7 +5,6 @@ import { useBlogArticles } from "../../../../hooks/useBlogArticles";
 import { useBlogScreenColors } from "../../colors/useBlogScreenColors/useBlogScreenColors";
 import { BLOG_TAG_FILTERS, matchesTagFilter, normalizeTag } from "../../lib/tags/tags";
 import type { BlogTagFilter } from "../../lib/tags/types";
-import { useDebouncedSetter } from "../useDebouncedSetter";
 import { useBlogHotkeys } from "../useBlogHotkeys/useBlogHotkeys";
 import { BlogScreenController } from "./types";
 
@@ -39,7 +38,9 @@ const buildBlogHref = (params: { page: number; q?: string; tag?: BlogTagFilter }
   const basePath = safePage <= 1 ? "/blog" : `/blog?page=${safePage}`;
 
   const sp = new URLSearchParams();
-  const q = (params.q ?? "").trim();
+  // Не тримаем query: иначе пользователь может “терять символы” в инпуте (например, пробелы в конце),
+  // когда состояние синхронизируется через URL.
+  const q = (params.q ?? "").toString();
   if (q) sp.set("q", q);
   if (params.tag && params.tag !== "Все") sp.set("tag", params.tag);
   const nextSearch = sp.toString();
@@ -66,7 +67,6 @@ export const useBlogScreenController = ({
 
   const { items, isLoading } = useBlogArticles();
   const [query, setQuery] = React.useState<string>(safeInitialQuery);
-  const [debouncedQuery, setDebouncedQuery] = React.useState<string>(safeInitialQuery);
   const [tagFilter, setTagFilter] = React.useState<BlogTagFilter>(safeInitialTag);
   const prevFiltersRef = React.useRef<{ query: string; tagFilter: BlogTagFilter }>({
     query: safeInitialQuery,
@@ -74,7 +74,7 @@ export const useBlogScreenController = ({
   });
 
   const articles = React.useMemo(() => items.slice().sort((a, b) => (a.date < b.date ? 1 : -1)), [items]);
-  const normalizedQuery = React.useMemo(() => debouncedQuery.trim().toLowerCase(), [debouncedQuery]);
+  const normalizedQuery = React.useMemo(() => query.trim().toLowerCase(), [query]);
 
   const filteredArticles = React.useMemo(() => {
     const base = normalizedQuery
@@ -112,14 +112,11 @@ export const useBlogScreenController = ({
   const pageItems = React.useMemo<(number | string)[]>(() => makePageItems(totalPages, page, 2, 7), [totalPages, page]);
   const pageArticles = React.useMemo(() => filteredArticles.slice(start, end), [filteredArticles, start, end]);
 
-  useDebouncedSetter(query, setDebouncedQuery, 220);
-
   React.useEffect(() => {
     // если сервер прислал другие initial props (клиентская навигация),
     // синхронизируем controlled state.
     if (safeInitialQuery !== query) {
       setQuery(safeInitialQuery);
-      setDebouncedQuery(safeInitialQuery);
     }
     if (safeInitialTag !== tagFilter) {
       setTagFilter(safeInitialTag);
@@ -156,7 +153,6 @@ export const useBlogScreenController = ({
     colors,
     query,
     setQuery,
-    debouncedQuery,
     tagFilter,
     setTagFilter,
     searchInputRef,

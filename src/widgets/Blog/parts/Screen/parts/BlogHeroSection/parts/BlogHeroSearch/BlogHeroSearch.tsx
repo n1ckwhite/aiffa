@@ -11,11 +11,11 @@ import {
   VisuallyHidden,
 } from "@chakra-ui/react";
 import { FiSearch, FiX } from "react-icons/fi";
+import { useDebouncedCallback } from "use-debounce";
 import { BlogHeroSearchProps } from "./types";
 
 export const BlogHeroSearch: React.FC<BlogHeroSearchProps> = ({
   theme,
-  isEmptyResults,
   query,
   setQuery,
   searchInputRef,
@@ -29,6 +29,29 @@ export const BlogHeroSearch: React.FC<BlogHeroSearchProps> = ({
   clearButtonHoverBg,
   clearButtonActiveBg,
 }) => {
+  const [draftQuery, setDraftQuery] = React.useState<string>(query);
+
+  // Keep input in sync with external updates (URL sync / hotkeys)
+  React.useEffect(() => {
+    const isFocused =
+      typeof document !== "undefined" &&
+      !!searchInputRef.current &&
+      document.activeElement === searchInputRef.current;
+
+    // Пока пользователь печатает (фокус в инпуте), не перетираем локальный ввод внешним state,
+    // иначе может “пропадать символ” из-за асинхронной синхронизации/навигации.
+    if (isFocused) {
+      if (!query && draftQuery) setDraftQuery("");
+      return;
+    }
+
+    setDraftQuery(query);
+  }, [query]);
+
+  const debouncedSetQuery = useDebouncedCallback((next: string) => {
+    setQuery(next);
+  }, 220);
+
   return (
     <Box
       as="form"
@@ -70,8 +93,12 @@ export const BlogHeroSearch: React.FC<BlogHeroSearchProps> = ({
 
           <Input
             ref={searchInputRef}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={draftQuery}
+            onChange={(e) => {
+              const next = e.target.value;
+              setDraftQuery(next);
+              debouncedSetQuery(next);
+            }}
             placeholder="Поиск по статьям"
             aria-label="Поиск по статьям"
             id="blog-search"
@@ -81,14 +108,14 @@ export const BlogHeroSearch: React.FC<BlogHeroSearchProps> = ({
             border="none"
             bg="transparent"
             pl="60px"
-            pr={query ? "56px" : 6}
+            pr={draftQuery ? "56px" : 6}
             fontWeight="semibold"
             color={theme.titleColor}
             _placeholder={{ color: searchPlaceholder, fontWeight: "medium" }}
             _focusVisible={{ boxShadow: "none" }}
           />
 
-          {query.trim() && (
+          {draftQuery.trim() && (
             <InputRightElement h="56px" w="56px">
               <IconButton
                 aria-label="Очистить поиск"
@@ -96,6 +123,8 @@ export const BlogHeroSearch: React.FC<BlogHeroSearchProps> = ({
                 size="sm"
                 variant="ghost"
                 onClick={() => {
+                  debouncedSetQuery.cancel();
+                  setDraftQuery("");
                   setQuery("");
                   window.setTimeout(() => searchInputRef.current?.focus(), 0);
                 }}

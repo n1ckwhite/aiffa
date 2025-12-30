@@ -58,7 +58,7 @@ const HackathonsCommunityGrowthSection: React.FC = () => {
             <Heading
               id="hackathons-community-growth-title"
               as="h2"
-              fontSize={{ base: "xl", md: "2xl" }}
+              fontSize={{ base: "xl", md: "3xl" }}
             >
               Рост коммьюнити AIFFA
             </Heading>

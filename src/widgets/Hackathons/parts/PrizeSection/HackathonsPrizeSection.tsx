@@ -51,7 +51,7 @@ const HackathonsPrizeSection: React.FC = () => {
             <Heading
               id="hackathons-prize-title"
               as="h2"
-              size="lg"
+              size={{ base: "md", md: "lg" }}
             >
               100&nbsp;000&nbsp;₽ — призы для трёх сильнейших команд
             </Heading>

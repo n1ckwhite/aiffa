@@ -124,7 +124,7 @@ const HackathonsOverviewSection: React.FC = () => {
                   >
                     {iconNode}
                   </Box>
-                  <Heading as="h3" size="md" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
+                  <Heading as="h3" size={{ base: "sm", md: "md" }} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0} flex={1}>
                     {card.title}
                   </Heading>
                 </HStack>

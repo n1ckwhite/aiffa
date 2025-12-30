@@ -66,7 +66,7 @@ const HackathonsSubmissionSection: React.FC = () => {
             <Heading
               id="hackathons-submit-title"
               as="h2"
-              size="lg"
+              size={{ base: "md", md: "lg" }}
             >
               Как подать решение
             </Heading>

@@ -52,7 +52,7 @@ const HackathonsRulesSection: React.FC = () => {
           <Heading
             id="hackathons-rules-title"
             as="h2"
-            size="lg"
+            size={{ base: "md" ,md: "lg"}}
           >
             Правила участия
           </Heading>

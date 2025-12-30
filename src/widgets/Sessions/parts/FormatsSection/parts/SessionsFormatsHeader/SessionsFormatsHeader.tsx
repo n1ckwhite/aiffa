@@ -22,7 +22,7 @@ const SessionsFormatsHeader: React.FC<SessionsFormatsHeaderProps> = ({
       <Heading
         id="sessions-formats-title"
         as="h2"
-        fontSize={{ base: "xl", md: "2xl" }}
+        fontSize={{ base: "xl", md: "3xl" }}
       >
         Форматы сессий
       </Heading>

@@ -17,7 +17,7 @@ const Header: React.FC<ModulesHeaderProps> = () => {
       <Text
         as="h1"
         id="learn-modules-title"
-        fontSize={{ base: '2xl', md: '3xl' }}
+        fontSize={{ base: '2xl', md: '4xl' }}
         fontWeight="bold"
         color={titleColor}
       >

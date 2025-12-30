@@ -98,6 +98,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
               fontWeight="semibold"
               px={{ base: 4, sm: 6, md: 8 }}
               py={{ base: 3, md: 3.5 }}
+              fontSize={{ base: "md", sm: "lg" }}
               w="full"
               maxW={{ base: "full", sm: "360px" }}
               minW={{ sm: "220px" }}
@@ -131,6 +132,7 @@ const HackathonsFinalCtaSection: React.FC = () => {
               fontWeight="semibold"
               px={{ base: 4, sm: 6, md: 8 }}
               py={{ base: 3, md: 3.5 }}
+              fontSize={{ base: "md", sm: "lg" }}
               w="full"
               maxW={{ base: "full", sm: "360px" }}
               minW={{ sm: "220px" }}

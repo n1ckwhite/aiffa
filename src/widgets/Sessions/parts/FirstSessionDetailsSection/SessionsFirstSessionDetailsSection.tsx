@@ -30,7 +30,7 @@ const SessionsFirstSessionDetailsSection: React.FC = () => {
         <Heading
           id="sessions-first-event-details-title"
           as="h2"
-          fontSize={{ base: "md", md: "2xl" }}
+          fontSize={{ base: "md", md: "3xl" }}
         >
           Как проходит первая сессия
         </Heading>

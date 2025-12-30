@@ -14,7 +14,7 @@ const Title: React.FC<TitleProps> = ({ iconColor }) => {
       id="weekly-tasks-title"
     >
       <CalendarIcon color={iconColor} boxSize={5} />
-      <Heading as="h1" size="lg" textAlign="center">Задачи недели</Heading>
+      <Heading as="h1" size={{base: "lg", md: "xl"}} textAlign="center">Задачи недели</Heading>
     </HStack>
   );
 };

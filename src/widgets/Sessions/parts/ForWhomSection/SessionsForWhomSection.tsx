@@ -58,7 +58,7 @@ const SessionsForWhomSection: React.FC = () => {
               <Heading
                 id="sessions-audience-title"
                 as="h2"
-                fontSize={{ base: "xl", md: "2xl" }}
+                fontSize={{ base: "xl", md: "3xl" }}
                 color={forWhomTitleColor}
               >
                 Если не хочется учиться в одиночку

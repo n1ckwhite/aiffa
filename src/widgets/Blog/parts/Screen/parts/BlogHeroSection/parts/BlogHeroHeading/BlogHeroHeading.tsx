@@ -7,7 +7,7 @@ import { BlogHeroHeadingProps } from "./types";
 export const BlogHeroHeading: React.FC<BlogHeroHeadingProps> = ({ theme, isEmptyResults }) => {
   return (
     <VStack as="header" spacing={3} align="center" textAlign="center">
-      <Heading id="blog-title" as="h1" fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold" color={theme.titleColor}>
+      <Heading id="blog-title" as="h1" fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold" color={theme.titleColor}>
         Блог AIFFA
       </Heading>
       <Text fontSize={{ base: "md", md: "lg" }} color={theme.descColor} maxW={{ base: "100%", md: "820px" }}>

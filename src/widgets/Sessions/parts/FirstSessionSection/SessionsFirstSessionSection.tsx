@@ -64,7 +64,7 @@ const SessionsFirstSessionSection: React.FC = () => {
             <Heading
               id="sessions-first-event-title"
               as="h2"
-              fontSize={{ base: "xl", md: "2xl" }}
+              fontSize={{ base: "xl", md: "3xl" }}
             >
               Знакомство с AIFFA: первая живая сессия
             </Heading>

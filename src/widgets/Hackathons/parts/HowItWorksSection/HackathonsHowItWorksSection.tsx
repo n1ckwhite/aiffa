@@ -34,7 +34,7 @@ const HackathonsHowItWorksSection: React.FC = () => {
           <Heading
             id="hackathons-how-title"
             as="h2"
-            size="lg"
+            fontSize={{ base: "xl", md: "3xl" }}
           >
             Как проходят хакатоны AIFFA
           </Heading>

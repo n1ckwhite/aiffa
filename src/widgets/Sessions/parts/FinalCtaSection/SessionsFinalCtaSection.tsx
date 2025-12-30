@@ -52,7 +52,7 @@ const SessionsFinalCtaSection: React.FC = () => {
             <Heading
               id="sessions-cta-title"
               as="h2"
-              fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
+              fontSize={{ base: "xl", md: "3xl" }}
             >
               Присоединяйтесь к сессиям AIFFA
             </Heading>
@@ -69,7 +69,7 @@ const SessionsFinalCtaSection: React.FC = () => {
 
           <Stack
             direction={{ base: "column", md: "row" }}
-            spacing={4}
+            spacing={3}
             w="full"
             justify="center"
             align="stretch"
@@ -84,8 +84,9 @@ const SessionsFinalCtaSection: React.FC = () => {
               rel="noopener noreferrer"
               size="lg"
               fontWeight="semibold"
-              px={{ base: 6, md: 8 }}
-              py={{ base: 3, md: 3.5 }}
+              px={{ base: 4, md: 8 }}
+              py={{ base: 2.5, md: 3.5 }}
+              fontSize={{ base: "md", md: "lg" }}
               w={{ base: "100%", md: "auto" }}
               minW={{ base: "auto", md: "200px" }}
               flexShrink={0}
@@ -116,8 +117,9 @@ const SessionsFinalCtaSection: React.FC = () => {
               rel="noopener noreferrer"
               size="lg"
               fontWeight="semibold"
-              px={{ base: 6, md: 8 }}
-              py={{ base: 3, md: 3.5 }}
+              px={{ base: 4, md: 8 }}
+              py={{ base: 2.5, md: 3.5 }}
+              fontSize={{ base: "md", md: "lg" }}
               w={{ base: "100%", md: "auto" }}
               minW={{ base: "auto", md: "200px" }}
               flexShrink={0}
@@ -148,8 +150,9 @@ const SessionsFinalCtaSection: React.FC = () => {
               to="/partners"
               size="lg"
               fontWeight="semibold"
-              px={{ base: 6, md: 8 }}
-              py={{ base: 3, md: 3.5 }}
+              px={{ base: 4, md: 8 }}
+              py={{ base: 2.5, md: 3.5 }}
+              fontSize={{ base: "md", md: "lg" }}
               w={{ base: "100%", md: "auto" }}
               minW={{ base: "auto", md: "200px" }}
               flexShrink={0}

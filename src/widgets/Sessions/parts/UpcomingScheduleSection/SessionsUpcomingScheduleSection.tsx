@@ -40,7 +40,7 @@ const SessionsUpcomingScheduleSection: React.FC = () => {
         <Heading
           id="sessions-upcoming-title"
           as="h2"
-          fontSize={{ base: "xl", md: "2xl" }}
+          fontSize={{ base: "xl", md: "3xl" }}
         >
           Расписание ближайших 4 встреч
         </Heading>

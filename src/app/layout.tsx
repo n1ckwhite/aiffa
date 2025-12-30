@@ -9,7 +9,7 @@ import { PROFILE_COOKIE_KEY, DEFAULT_PROFILE } from "@/entities/user/model/const
 import type { UserProfile } from "@/entities/user/model/types";
 import { sanitizeProfileFromUnknown } from "@/entities/user/model/storage";
 import { ViewportHeightFix } from "@/shared/ui/ViewportHeightFix/ViewportHeightFix";
-import { robotoFont } from "@/shared/fonts/roboto";
+import { interFont } from "@/shared/fonts/inter";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
@@ -111,7 +111,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
           }}
         />
       </head>
-      <body className={`${robotoFont.variable} ${robotoFont.className}`}>
+      <body className={`${interFont.variable} ${interFont.className}`}>
         <ChakraRootProvider cookies={cookieHeader} initialProfile={initialProfile}>
           <ViewportHeightFix />
           <MainLayout>{children}</MainLayout>

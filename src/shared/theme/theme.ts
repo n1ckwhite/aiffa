@@ -15,9 +15,9 @@ const theme: Theme = {
   fonts: {
     ...baseTheme.fonts,
     heading:
-      "var(--font-roboto), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'",
+      "var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'",
     body:
-      "var(--font-roboto), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'",
+      "var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'",
     mono:
       "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
   },

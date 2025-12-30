@@ -1,4 +1,3 @@
-import React from 'react';
 import { Icon } from '@chakra-ui/react';
 import type { CourseItem } from './types';
 import { FaReact, FaNodeJs, FaNpm, FaLightbulb, FaLaptopCode } from 'react-icons/fa';

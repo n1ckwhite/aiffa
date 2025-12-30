@@ -115,7 +115,7 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
           <Box flex={1} minW={0}>
             <Text
               fontSize="xl"
-              fontWeight="800"
+              fontWeight="bold"
               color={titleColor}
               letterSpacing="-0.03em"
               lineHeight="1.2"

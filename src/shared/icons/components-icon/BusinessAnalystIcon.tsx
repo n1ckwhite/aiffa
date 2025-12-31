@@ -10,6 +10,7 @@ const BusinessAnalystIcon: React.FC = () => {
   return (
     <LazyLottieIcon
       animationData={businessAnalystAnimation}
+      deferMs={2500}
       boxProps={{
         w: { base: "250px", md: "350px" },
         aspectRatio: 1080 / 720,
@@ -24,6 +25,12 @@ const BusinessAnalystIcon: React.FC = () => {
           sizes="350px"
           priority
           fetchPriority="high"
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "block",
+            objectFit: "contain",
+          }}
         />
       }
     />

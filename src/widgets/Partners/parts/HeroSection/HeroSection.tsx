@@ -6,7 +6,6 @@ import {
   HStack,
   Stack,
   Text,
-  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import PillBadge from "shared/ui/PillBadge";

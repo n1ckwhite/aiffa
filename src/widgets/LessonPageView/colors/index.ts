@@ -7,8 +7,8 @@ export const useLessonPageColors = () => {
   const descColor = theme.descColor;
   const authorBorderColor = theme.borderColor;
   const tocActiveBg = theme.blue.chipBg;
-  const tocInactiveColor = useColorModeValue('gray.700','gray.300');
-  const tocTitleColor = useColorModeValue('gray.500','gray.400');
+  const tocInactiveColor = useColorModeValue('gray.800', 'gray.200');
+  const tocTitleColor = useColorModeValue('gray.700', 'gray.300');
   const tocItemRadius = '10px';
   const tocItemPxBase = 2;
   const tocItemPxLg = 3;

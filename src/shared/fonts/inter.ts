@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 export const interFont = localFont({
   variable: "--font-inter",
   display: "swap",
+  preload: false,
   fallback: [
     "ui-sans-serif",
     "system-ui",

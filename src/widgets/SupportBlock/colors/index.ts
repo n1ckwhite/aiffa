@@ -1,8 +1,10 @@
 import { useAppColors } from 'shared/theme/colors';
-import { useColorMode } from '@chakra-ui/react';
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 export const useSupportBlockColors = () => {
   const theme = useAppColors();
+  const donateBg = useColorModeValue('pink.600', 'pink.600');
+  const donateHoverBg = useColorModeValue('pink.700', 'pink.700');
   const { colorMode } = useColorMode();
   const defaultHeaderBg = colorMode === 'light'
     ? 'linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.75))'
@@ -12,6 +14,8 @@ export const useSupportBlockColors = () => {
     : '0 8px 24px rgba(0,0,0,0.35)';
 
   return {
+    donateBg: donateBg,
+    donateHoverBg: donateHoverBg,
     defaultHeaderBg,
     defaultBorder: theme.borderColor,
     titleColor: theme.titleColor,

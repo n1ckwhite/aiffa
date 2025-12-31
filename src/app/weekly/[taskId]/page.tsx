@@ -39,8 +39,8 @@ export const generateMetadata = async ({ params }: WeeklyTaskRouteParams): Promi
       const parsed = parseWeeklyTaskMd(md);
       if (parsed.title) title = parsed.title;
       if (parsed.description) description = parsed.description;
-    } catch {
-      // игнорируем ошибки чтения md, используем fallback
+    } catch(error) {
+      console.error(error);
     }
   }
 

@@ -1,10 +1,12 @@
 import { useAppColors } from 'shared/theme/colors';
+import { useColorModeValue } from '@chakra-ui/react';
 
 export const useMetaHeaderColors = () => {
   const theme = useAppColors();
+  const doneColor =  useColorModeValue('green.700', 'green.300');
   return {
-    doneColor: 'green.400' as const,
-    titleMuted: 'text.muted' as const,
+    doneColor: doneColor,
+    titleMuted: 'text.muted',
     border: theme.borderColor,
   };
 };

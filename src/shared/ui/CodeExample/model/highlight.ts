@@ -21,8 +21,8 @@ export const ensureHljsTheme = (isDark: boolean): Promise<void> => {
   return new Promise<void>((resolve) => {
     const id = 'hljs-theme';
     const href = isDark
-      ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css'
-      : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
+    ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github-dark.min.css'
+    : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/a11y-light.min.css';
     let link = document.getElementById(id) as HTMLLinkElement | null;
     if (!link) {
       link = document.createElement('link');

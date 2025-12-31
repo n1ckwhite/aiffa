@@ -6,10 +6,12 @@ export const useCodeExampleColors = (minimal?: boolean) => {
   const isDark = useColorModeValue(false, true);
   const headerBgBase = theme.blue.chipBg;
   const headerBorderBase = theme.borderColor;
-  const darkCodeBg = useColorModeValue('#262a34', '#0f1720');
+  // Light theme should use a light code background to keep hljs colors high-contrast.
+  // Dark theme uses a dark background.
+  const codeBgBase = useColorModeValue('#f6f8fa', '#0f1720');
   const headerBg = minimal ? 'transparent' : headerBgBase;
   const headerBorder = minimal ? 'transparent' : headerBorderBase;
-  const codeBg = minimal ? 'transparent' : darkCodeBg;
+  const codeBg = minimal ? 'transparent' : codeBgBase;
   const defaultCodeTextColor = theme.titleColor;
   const langTextColor = theme.blue.accent;
   const copyIconColor = theme.descColor;

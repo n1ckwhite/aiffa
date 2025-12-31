@@ -48,6 +48,7 @@ export const CodeExample: React.FC<CodeExampleProps> = ({ code, languageHint, ti
         borderRadius={radius}
         minimal={minimal}
         defaultCodeTextColor={defaultCodeTextColor}
+        isDark={isDark}
       />
     </Box>
   );

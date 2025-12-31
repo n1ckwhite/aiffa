@@ -7,6 +7,7 @@ export type CodeBlockProps = {
   borderRadius: number;
   minimal?: boolean;
   defaultCodeTextColor: string;
+  isDark: boolean;
 };
 
 

@@ -9,7 +9,13 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   borderRadius,
   minimal,
   defaultCodeTextColor,
+  isDark,
 }) => {
+  const codeTextColor = minimal 
+  ? defaultCodeTextColor 
+  : isDark 
+    ? '#E6EDF3' 
+    : defaultCodeTextColor; 
   return (
     <Box borderBottomLeftRadius={minimal ? 0 : borderRadius} borderBottomRightRadius={minimal ? 0 : borderRadius} bg={bg}>
       <Box
@@ -23,7 +29,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
             background: 'transparent',
             fontSize: 'sm',
             lineHeight: '1.7',
-            color: minimal ? defaultCodeTextColor : 'white',
+            color: codeTextColor,
           },
         }}
       >

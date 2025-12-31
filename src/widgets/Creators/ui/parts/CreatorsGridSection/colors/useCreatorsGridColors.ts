@@ -1,7 +1,7 @@
 import { useColorModeValue } from "@chakra-ui/react";
 
 export const useCreatorsGridColors = () => {
-  const subtitleColor = useColorModeValue("gray.600", "gray.300");
+  const subtitleColor = useColorModeValue("gray.700", "gray.300");
   const buttonColor = useColorModeValue("blue.600", "blue.300");
 
   const menuBg = useColorModeValue("white", "gray.800");

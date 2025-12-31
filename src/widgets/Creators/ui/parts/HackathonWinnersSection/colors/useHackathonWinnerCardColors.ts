@@ -13,10 +13,10 @@ export const useHackathonWinnerCardColors = () => {
   const bronzeBorder = useColorModeValue("orange.400", "orange.300");
   const bronzeColor = useColorModeValue("orange.700", "orange.200");
   const defaultBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
-  const defaultColor = useColorModeValue("gray.500", "gray.300");
+  const defaultColor = useColorModeValue("gray.600", "gray.300");
 
   const rankBg = useColorModeValue("whiteAlpha.700", "whiteAlpha.100");
-  const metaColor = useColorModeValue("gray.500", "gray.300");
+  const metaColor = useColorModeValue("gray.700", "gray.300");
   const titleColor = useColorModeValue("gray.800", "gray.100");
   const bgIconColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const avatarBorder = useColorModeValue("white", "transparent");

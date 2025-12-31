@@ -2,7 +2,7 @@ import { useColorModeValue } from "@chakra-ui/react";
 
 export const useHeroColors = () => {
   const primaryTextColor = useColorModeValue("gray.800", "gray.100");
-  const secondaryTextColor = useColorModeValue("gray.600", "gray.300");
+  const secondaryTextColor = useColorModeValue("gray.700", "gray.300");
   const accentColor = useColorModeValue("blue.500", "blue.300");
   const pillBorderColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const pillHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");

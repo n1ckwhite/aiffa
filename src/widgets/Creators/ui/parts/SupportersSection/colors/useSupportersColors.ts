@@ -1,7 +1,7 @@
 import { useColorModeValue } from "@chakra-ui/react";
 
 export const useSupportersColors = () => {
-  const subtitleColor = useColorModeValue("gray.600", "gray.300");
+  const subtitleColor = useColorModeValue("gray.700", "gray.300");
   const iconBorderColor = useColorModeValue("pink.400", "pink.300");
   const iconBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.100");
   const iconColor = useColorModeValue("pink.500", "pink.300");

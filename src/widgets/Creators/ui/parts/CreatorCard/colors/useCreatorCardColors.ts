@@ -19,13 +19,14 @@ export const useCreatorCardColors = ({ role, avatarIndex }: UseCreatorCardColors
   const bronzeColor = useColorModeValue("orange.700", "orange.200");
 
   const defaultBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
-  const defaultColor = useColorModeValue("gray.500", "gray.300");
+  const defaultColor = useColorModeValue("gray.600", "gray.300");
   const accentColor = useColorModeValue("blue.500", "blue.300");
   const pillBorderColor = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const pillHoverBg = useColorModeValue("blue.50", "whiteAlpha.100");
 
   const rankBg = useColorModeValue("whiteAlpha.700", "whiteAlpha.100");
-  const metaColor = useColorModeValue("gray.500", "gray.300");
+  // Light theme: gray.500 is too low-contrast for small meta text (Lighthouse).
+  const metaColor = useColorModeValue("gray.700", "gray.300");
   const materialsIconColor = useColorModeValue("orange.400", "orange.300");
   const tasksIconColor = useColorModeValue("blue.400", "blue.300");
   const reviewsIconColor = useColorModeValue("green.500", "green.300");

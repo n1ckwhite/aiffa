@@ -17,10 +17,10 @@ export const roleIconMap: Record<Creator["role"], IconType> = {
 };
 
 export const roleColors: Record<Creator["role"], { light: string; dark: string }> = {
-  author: { light: "orange.500", dark: "orange.300" },
-  mentor: { light: "teal.500", dark: "teal.300" },
-  reviewer: { light: "purple.500", dark: "purple.300" },
-  maintainer: { light: "blue.600", dark: "blue.300" },
+  author: { light: "orange.700", dark: "orange.300" },
+  mentor: { light: "teal.700", dark: "teal.300" },
+  reviewer: { light: "purple.700", dark: "purple.300" },
+  maintainer: { light: "blue.700", dark: "blue.300" },
 };
 
 

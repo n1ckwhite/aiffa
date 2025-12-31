@@ -1,5 +1,5 @@
 import React from 'react';
-import { HStack, Input, Button } from '@chakra-ui/react';
+import { HStack, Input, Button, useColorModeValue } from '@chakra-ui/react';
 import { useColors } from './colors/useColors';
 
 export type FormProps = {
@@ -11,7 +11,8 @@ export type FormProps = {
 };
 
 const Form: React.FC<FormProps> = ({ value, onChange, onImport, isImporting, prefix }) => {
-  const { borderColor } = useColors()
+  const { borderColor, importBg, importActiveBg, importHoverBg } = useColors()
+
   return (
     <HStack>
       <Input
@@ -56,7 +57,10 @@ const Form: React.FC<FormProps> = ({ value, onChange, onImport, isImporting, pre
       <Button
         onClick={onImport}
         isLoading={isImporting}
-        colorScheme="blue"
+        bg={importBg}
+        color="white"
+        _hover={{ bg: importHoverBg }}
+        _active={{ bg: importActiveBg }}
         borderRadius="full"
         px={6}
         minWidth="100px"

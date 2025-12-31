@@ -1,5 +1,6 @@
 import React from 'react';
-import { HStack, Avatar, Text } from '@chakra-ui/react';
+import { HStack, Avatar, Link, Text } from '@chakra-ui/react';
+import { useColors } from './colors/useColors';
 
 export type UserRowProps = {
   username?: string;
@@ -8,13 +9,26 @@ export type UserRowProps = {
 };
 
 const UserRow: React.FC<UserRowProps> = ({ username, profileName, avatarUrl }) => {
+  const { githubColor } = useColors()
   if (!username) return null;
   const href = `https://github.com/${username}`;
   return (
     <HStack spacing={3} pt={1}>
       <Avatar size="sm" src={avatarUrl || undefined} name={profileName || 'User'} />
       <Text fontSize="sm" noOfLines={1}>{profileName}</Text>
-      <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: '#3182CE', fontSize: '0.875rem' }}>GitHub профиль</a>
+      <Link
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        color={githubColor}
+        fontSize="sm"
+        fontWeight="semibold"
+        textDecoration="underline"
+        textUnderlineOffset="3px"
+        _hover={{ opacity: 0.9 }}
+      >
+        GitHub профиль
+      </Link>
     </HStack>
   );
 };

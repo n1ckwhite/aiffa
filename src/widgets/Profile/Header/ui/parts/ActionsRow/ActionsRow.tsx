@@ -1,5 +1,6 @@
 import React from 'react';
-import { HStack, Button } from '@chakra-ui/react';
+import { HStack, Button, useColorModeValue } from '@chakra-ui/react';
+import { useActionsRowColors } from './colors/useActionsRowColors';
 
 export type ActionsRowProps = {
   onOpenEdit: () => void;
@@ -20,9 +21,20 @@ const ActionsRow: React.FC<ActionsRowProps> = ({
   resetHoverBgDark,
   resetActiveBgDark,
 }) => {
+
+  const { editActiveBg, editBg, editHoverBg } = useActionsRowColors()
+
   return (
     <HStack spacing={3} justify="center">
-      <Button colorScheme="blue" onClick={onOpenEdit}>Изменить</Button>
+      <Button
+        onClick={onOpenEdit}
+        bg={editBg}
+        color="white"
+        _hover={{ bg: editHoverBg }}
+        _active={{ bg: editActiveBg }}
+      >
+        Изменить
+      </Button>
       <Button
         variant="ghost"
         onClick={onReset}

@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import React from "react";
 import { cookies, headers } from "next/headers";
-import { ColorModeScript } from "@chakra-ui/react";
-import theme from "@/shared/theme/theme";
 import { ChakraRootProvider } from "../providers/ChakraRootProvider";
 import MainLayout from "@/widgets/MainLayout";
 import { PROFILE_COOKIE_KEY, DEFAULT_PROFILE } from "@/entities/user/model/constants";
@@ -76,42 +74,6 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
 
   return (
     <html lang="ru" suppressHydrationWarning>
-      <head>
-        <ColorModeScript
-          type="cookie"
-          initialColorMode={theme.config.initialColorMode}
-        />
-        <script
-          type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              url: SITE_URL,
-              name: "AIFFA — платформа для роста разработчиков",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: `${SITE_URL}/search?q={search_term_string}`,
-                "query-input": "required name=search_term_string"
-              }
-            })
-          }}
-        />
-        <script
-          type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              url: SITE_URL,
-              name: "AIFFA",
-              logo: `${SITE_URL}/icons/icon.svg`
-            })
-          }}
-        />
-      </head>
       <body className={`${interFont.variable} ${interFont.className}`}>
         <ChakraRootProvider cookies={cookieHeader} initialProfile={initialProfile}>
           <ViewportHeightFix />

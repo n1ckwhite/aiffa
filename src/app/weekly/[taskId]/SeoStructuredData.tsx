@@ -1,8 +1,5 @@
 import React from "react";
-import path from "node:path";
-import { promises as fs } from "node:fs";
-import { getWeeklyInfoById } from "shared/weekly/manifest";
-import { parseWeeklyTaskMd } from "shared/weekly/md";
+import { loadWeeklyMeta } from "./utils";
 
 type SeoStructuredDataProps = {
   taskId: string;
@@ -16,27 +13,12 @@ const SITE_URL =
  * Рендерится под <Suspense>, чтобы не блокировать первый paint основного контента.
  */
 const SeoStructuredData = async ({ taskId }: SeoStructuredDataProps) => {
-  const info = getWeeklyInfoById(taskId);
   const url = `${SITE_URL}/weekly/${taskId}`;
 
-  let title = "Задача недели";
-  let description =
-    "Еженедельная практическая задача для развития навыков программирования и инженерной культуры.";
-  let authorName: string | undefined;
-
-  if (info?.mdPath) {
-    try {
-      const relative = info.mdPath.startsWith("/") ? info.mdPath.slice(1) : info.mdPath;
-      const filePath = path.join(process.cwd(), "public", relative);
-      const md = await fs.readFile(filePath, "utf-8");
-      const parsed = parseWeeklyTaskMd(md);
-      if (parsed.title) title = parsed.title;
-      if (parsed.description) description = parsed.description;
-      if (parsed.author?.name) authorName = parsed.author.name;
-    } catch {
-      // ignore
-    }
-  }
+  const meta = await loadWeeklyMeta(taskId);
+  const title = meta.title;
+  const description = meta.description;
+  const authorName = meta.authorName;
 
   return (
     <>

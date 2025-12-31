@@ -28,7 +28,10 @@ export const generateMetadata = async ({ params }: WeeklyTaskRouteParams): Promi
   const taskId = normalizeWeeklyTaskId(resolvedParams.taskId);
   const info = getWeeklyInfoById(taskId);
   let title = "Задача недели";
-  let description: string | undefined;
+  // Lighthouse требует meta description. Даже если md не прочитался (например, в прод-окружении),
+  // отдаём безопасный fallback.
+  let description: string =
+    "Еженедельная практическая задача для развития навыков программирования и инженерной культуры.";
   const url = `${SITE_URL}/weekly/${taskId}`;
 
   if (info?.mdPath) {
@@ -39,20 +42,22 @@ export const generateMetadata = async ({ params }: WeeklyTaskRouteParams): Promi
       const parsed = parseWeeklyTaskMd(md);
       if (parsed.title) title = parsed.title;
       if (parsed.description) description = parsed.description;
-    } catch(error) {
-      console.error(error);
+    } catch {
+      // ignore
     }
   }
 
+  const fullTitle = title.includes("AIFFA") ? title : `${title} — AIFFA`;
+
   return {
-    title,
+    title: fullTitle,
     description,
     alternates: {
       canonical: url,
     },
     openGraph: {
       url,
-      title,
+      title: fullTitle,
       description,
       type: "article",
     },
@@ -75,7 +80,7 @@ const WeeklyTaskDetailRoutePage = async ({ params }: WeeklyTaskRouteParams) => {
             "@type": "Article",
             headline: "Задача недели",
             description:
-              "Практическая задача недели для прокачки навыков фронтенда и JavaScript.",
+              "Еженедельная практическая задача для развития навыков программирования и инженерной культуры.",
             url,
             inLanguage: "ru-RU",
           }),

@@ -32,6 +32,9 @@ export const usePartnersColors = () => {
 
   const socialProofBadgeBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.100");
   const socialProofBadgeBorder = useColorModeValue("gray.200", "whiteAlpha.300");
+  const telegramBg = useColorModeValue("blue.700", "blue.600");
+  const telegramHoverBg = useColorModeValue("blue.800", "blue.500");
+  const telegramActiveBg = useColorModeValue("blue.900", "blue.600");
 
   return {
     formatShadow,
@@ -54,6 +57,9 @@ export const usePartnersColors = () => {
     stepCardBorder,
     socialProofBadgeBg,
     socialProofBadgeBorder,
+    telegramBg,
+    telegramHoverBg,
+    telegramActiveBg
   };
 };
 

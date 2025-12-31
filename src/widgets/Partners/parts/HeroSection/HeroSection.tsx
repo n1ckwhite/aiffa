@@ -6,6 +6,7 @@ import {
   HStack,
   Stack,
   Text,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import PillBadge from "shared/ui/PillBadge";
@@ -15,7 +16,8 @@ import { BusinessAnalystIcon } from "@/shared/icons/components-icon";
 import { usePartnersColors } from "widgets/Partners/colors/usePartnersColors";
 
 const HeroSection: React.FC = () => {
-  const { mutedTextColor, socialProofBadgeBg, socialProofBadgeBorder } = usePartnersColors();
+  const { mutedTextColor, socialProofBadgeBg, socialProofBadgeBorder, telegramBg, telegramHoverBg, telegramActiveBg } = usePartnersColors();
+
 
   return (
     <Box as="section" transition="none" aria-labelledby="partners-hero-title">
@@ -70,7 +72,10 @@ const HeroSection: React.FC = () => {
             href="https://t.me/iamceob1tch"
             target="_blank"
             rel="noopener noreferrer"
-            colorScheme="blue"
+            bg={telegramBg}
+            color="white"
+            _hover={{ bg: telegramHoverBg }}
+            _active={{ bg: telegramActiveBg }}
             borderRadius="full"
             px={{ base: 6, md: 7 }}
             fontWeight="semibold"

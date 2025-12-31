@@ -10,6 +10,7 @@ import type { UserProfile } from "@/entities/user/model/types";
 import { sanitizeProfileFromUnknown } from "@/entities/user/model/storage";
 import { ViewportHeightFix } from "@/shared/ui/ViewportHeightFix/ViewportHeightFix";
 import { interFont } from "@/shared/fonts/inter";
+import "@/shared/ui/CodeExample/styles/hljs.css";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";

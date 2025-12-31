@@ -1,10 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import path from "node:path";
 import { promises as fs } from "node:fs";
 import { getWeeklyInfoById } from "shared/weekly/manifest";
 import { parseWeeklyTaskMd } from "shared/weekly/md";
 import WeeklyTaskDetailPageClient from "./WeeklyTaskDetailPageClient";
+import SeoStructuredData from "./SeoStructuredData";
 
 type WeeklyTaskRouteParams = {
   params: Promise<{
@@ -47,17 +49,16 @@ export const generateMetadata = async ({ params }: WeeklyTaskRouteParams): Promi
     }
   }
 
-  const fullTitle = title.includes("AIFFA") ? title : `${title} — AIFFA`;
-
   return {
-    title: fullTitle,
+    // Do not append "— AIFFA" here: the root layout already has `title.template = "%s — AIFFA"`.
+    title,
     description,
     alternates: {
       canonical: url,
     },
     openGraph: {
       url,
-      title: fullTitle,
+      title,
       description,
       type: "article",
     },
@@ -68,54 +69,13 @@ const WeeklyTaskDetailRoutePage = async ({ params }: WeeklyTaskRouteParams) => {
   // Пока сам TaskDetailScreen использует useParams из shim, поэтому просто монтируем client-компонент
   const resolvedParams = await Promise.resolve(params);
   const taskId = normalizeWeeklyTaskId(resolvedParams.taskId);
-  const url = `${SITE_URL}/weekly/${taskId}`;
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            headline: "Задача недели",
-            description:
-              "Еженедельная практическая задача для развития навыков программирования и инженерной культуры.",
-            url,
-            inLanguage: "ru-RU",
-          }),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              {
-                "@type": "ListItem",
-                position: 1,
-                name: "Главная",
-                item: SITE_URL,
-              },
-              {
-                "@type": "ListItem",
-                position: 2,
-                name: "Задачи недели",
-                item: `${SITE_URL}/weekly`,
-              },
-              {
-                "@type": "ListItem",
-                position: 3,
-                name: "Задача недели",
-                item: url,
-              },
-            ],
-          }),
-        }}
-      />
       <WeeklyTaskDetailPageClient taskId={taskId} />
+      <Suspense fallback={null}>
+        <SeoStructuredData taskId={taskId} />
+      </Suspense>
     </>
   );
 };

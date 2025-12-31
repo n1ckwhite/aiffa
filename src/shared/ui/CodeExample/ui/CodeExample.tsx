@@ -22,7 +22,7 @@ export const CodeExample: React.FC<CodeExampleProps> = ({ code, languageHint, ti
     copyActiveBg,
   } = useCodeExampleColors(minimal);
 
-  const langDetected = useCodeHighlight({ codeRef, code, languageHint, isDark });
+  const langDetected = useCodeHighlight({ codeRef, code, languageHint });
   React.useEffect(() => { if (langDetected) setLang(langDetected); }, [langDetected]);
 
   const displayLang = prettyLanguage(lang);

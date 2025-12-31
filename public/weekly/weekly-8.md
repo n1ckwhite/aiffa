@@ -29,6 +29,16 @@ function debounce(fn, delay) {
 }
 ```
 
+```example:python
+function debounce(fn, delay) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(null, args), delay);
+  };
+}
+```
+
 ```validator
 function validate(input) {
   const s = String(input || '').toLowerCase();

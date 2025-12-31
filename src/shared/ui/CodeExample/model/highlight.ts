@@ -1,54 +1,26 @@
-export const ensureHljsScript = (): Promise<void> => {
-  return new Promise<void>((resolve, reject) => {
-    if ((window as any).hljs) { resolve(); return; }
-    const existing = document.getElementById('hljs-cdn');
-    if (existing) {
-      existing.addEventListener('load', () => resolve());
-      existing.addEventListener('error', reject as any);
-      return;
-    }
-    const s = document.createElement('script');
-    s.id = 'hljs-cdn';
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js';
-    s.async = true;
-    s.onload = () => resolve();
-    s.onerror = (e) => reject(e);
-    document.body.appendChild(s);
-  });
+type HljsModule = typeof import("highlight.js");
+
+let hljsPromise: Promise<HljsModule> | null = null;
+
+const loadHljs = async (): Promise<any> => {
+  if (!hljsPromise) hljsPromise = import("highlight.js");
+  const mod: any = await hljsPromise;
+  return mod?.default ?? mod;
 };
 
-export const ensureHljsTheme = (isDark: boolean): Promise<void> => {
-  return new Promise<void>((resolve) => {
-    const id = 'hljs-theme';
-    const href = isDark
-    ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github-dark.min.css'
-    : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/a11y-light.min.css';
-    let link = document.getElementById(id) as HTMLLinkElement | null;
-    if (!link) {
-      link = document.createElement('link');
-      link.id = id;
-      link.rel = 'stylesheet';
-      link.href = href;
-      link.onload = () => resolve();
-      document.head.appendChild(link);
-      return;
-    }
-    if (link.href.includes(href)) { resolve(); return; }
-    link.onload = () => resolve();
-    link.href = href;
-  });
-};
-
-export const renderHighlight = (
+export const renderHighlight = async (
   codeEl: HTMLElement | null,
   code: string,
   languageHint?: string,
-): { resolvedLang?: string } => {
-  const hljs = (window as any).hljs;
-  if (!hljs || !codeEl) return {};
+): Promise<{ resolvedLang?: string }> => {
+  if (!codeEl) return {};
+  const hljs = await loadHljs();
+  if (!hljs) return {};
+
   try {
-    let html = '';
+    let html = "";
     let resolvedLang: string | undefined = undefined;
+
     if (languageHint) {
       const res = hljs.highlight(code, { language: languageHint });
       html = res.value;
@@ -58,11 +30,12 @@ export const renderHighlight = (
       html = res.value;
       resolvedLang = res.language || undefined;
     }
-    codeEl.className = `hljs${resolvedLang ? ` language-${resolvedLang}` : ''}`;
+
+    codeEl.className = `hljs${resolvedLang ? ` language-${resolvedLang}` : ""}`;
     codeEl.innerHTML = html;
     return { resolvedLang };
   } catch {
-    codeEl.className = 'hljs';
+    codeEl.className = "hljs";
     codeEl.textContent = code;
     return {};
   }

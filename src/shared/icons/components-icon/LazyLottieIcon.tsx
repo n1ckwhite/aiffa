@@ -15,19 +15,29 @@ const LazyLottieIcon: React.FC<LazyLottieIconProps> = ({
   boxProps,
   fallback,
   lottieStyle,
+  deferMs = 0,
 }) => {
   const { isLottieVisible, handleLottieDomLoaded, lottieRef } =
     useLottieVisibility({ autoplay });
   const mergedBoxProps = useMergedBoxProps(boxProps);
   const isLowPerformanceDevice = useIsLowPerformanceDevice();
   const shouldRenderLottie = !isLowPerformanceDevice && Boolean(animationData);
+  const [isDeferDone, setIsDeferDone] = React.useState<boolean>(deferMs <= 0);
+
+  React.useEffect(() => {
+    if (deferMs <= 0) return;
+    const t = window.setTimeout(() => setIsDeferDone(true), deferMs);
+    return () => window.clearTimeout(t);
+  }, [deferMs]);
 
   return (
     <Box aria-hidden="true" {...mergedBoxProps}>
       {fallback && (
         <Box
           sx={{
-            opacity: shouldRenderLottie && isLottieVisible ? 0 : 1,
+            // Keep the static fallback visible until Lottie is actually allowed to render.
+            // This prevents LCP from switching to an SVG (Lottie) and helps Lighthouse detect LCP correctly.
+            opacity: shouldRenderLottie && isDeferDone && isLottieVisible ? 0 : 1,
             transition: "opacity 260ms ease-out",
           }}
         >
@@ -35,7 +45,7 @@ const LazyLottieIcon: React.FC<LazyLottieIconProps> = ({
         </Box>
       )}
 
-      {shouldRenderLottie && (
+      {shouldRenderLottie && isDeferDone && (
         <Box
           sx={{
             position: "absolute",

@@ -8,6 +8,11 @@ export type LazyLottieIconProps = {
   boxProps?: BoxProps;
   fallback?: React.ReactNode;
   lottieStyle?: React.CSSProperties;
+  /**
+   * Defer rendering the actual Lottie (SVG) to keep the static fallback as LCP candidate.
+   * Useful for above-the-fold illustrations (Lighthouse LCP recommendations).
+   */
+  deferMs?: number;
 };
 
 export type UseLottieVisibilityParams = {

@@ -6,7 +6,6 @@ import { useLoadMdMeta } from '../../../hooks/useLoadMdMeta';
 import { useExternalLinks } from '../../../hooks/useExternalLinks';
 import { iconByTag } from '../../../lib/iconByTag';
 import { colorByTag } from '../../../lib/colorByTag';
-import { useScrollToTop } from 'shared/hooks/useScrollToTop';
 
 import { computeWillAllDone } from './helpers/progress';
 import { getComputedTag } from './helpers/meta';
@@ -20,7 +19,6 @@ export const useTaskDetail = (initialTaskId?: string, initialMd?: string) => {
   const { profile, setWeeklyTask, updateProfile } = useUserProfile();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  useScrollToTop();
 
   const task = React.useMemo(() => getWeeklyTask(profile as any, taskId), [profile, taskId]);
 

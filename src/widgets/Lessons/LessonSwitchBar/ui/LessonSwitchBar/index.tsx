@@ -13,7 +13,7 @@ import { setLessonNavPending, useLessonNavPending } from 'shared/hooks/useLesson
 const LessonSwitchBar: React.FC<LessonSwitchBarProps> = ({ moduleId, lessonId, inline = false }) => {
   const location = useLocation();
   const menu = useDisclosure();
-  const { onClose } = menu;
+  const prevPathRef = React.useRef(location.pathname);
   const menuButtonRef = React.useRef<HTMLButtonElement | null>(null);
   const menuListRef = React.useRef<HTMLDivElement | null>(null);
   const isNavigating = useLessonNavPending();
@@ -29,10 +29,13 @@ const LessonSwitchBar: React.FC<LessonSwitchBarProps> = ({ moduleId, lessonId, i
   useMenuScrollIntoView(menu.isOpen, currentIndex, menuButtonRef, menuListRef);
 
   React.useEffect(() => {
-    // Не дергаем close/focus, если меню не открыто — это может "подтянуть" страницу к кнопке.
-    if (menu.isOpen) onClose();
+    // Закрываем меню только при реальной смене страницы (а не при открытии самого меню),
+    // иначе меню мгновенно закрывается из-за срабатывания эффекта.
+    if (prevPathRef.current === location.pathname) return;
+    prevPathRef.current = location.pathname;
+    menu.onClose();
     setLessonNavPending(false);
-  }, [location.pathname, onClose, menu.isOpen]);
+  }, [location.pathname, menu]);
 
   const handleGoPrev = () => {
     if (!prev || !mod?.id) return;

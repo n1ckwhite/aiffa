@@ -1,5 +1,5 @@
 import React from "react";
-import { loadBlogArticles } from "shared/articles/api";
+import { blogArticles } from "@/shared/articles/manifest";
 
 /**
  * No-JS friendly: неизвестный id не должен доходить до page.tsx с notFound(),
@@ -8,8 +8,7 @@ import { loadBlogArticles } from "shared/articles/api";
 export const dynamicParams = false;
 
 export const generateStaticParams = async () => {
-  const list = await loadBlogArticles();
-  return (list || []).map((a) => ({ id: String(a.id) }));
+  return (blogArticles || []).map((a) => ({ id: String(a.id) }));
 };
 
 const BlogArticleLayout = ({ children }: { children: React.ReactNode }) => {

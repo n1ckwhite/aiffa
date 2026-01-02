@@ -42,13 +42,13 @@ export const buildComponents = (colors: any) => {
       <Heading as="h2" my={6} sx={headingSx} fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }} lineHeight={{ base: 1.25, md: 1.25, lg: 1.2 }} letterSpacing="-0.01em" {...(p as any)} />
     ),
     h2: (p) => (
-      <Heading as="h3" mt={10} mb={4} sx={headingSx} fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }} lineHeight={{ base: 1.3, md: 1.25, lg: 1.2 }} letterSpacing="-0.005em" {...(p as any)} />
+      <Heading as="h2" mt={10} mb={4} sx={headingSx} fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }} lineHeight={{ base: 1.3, md: 1.25, lg: 1.2 }} letterSpacing="-0.005em" {...(p as any)} />
     ),
     h3: (p) => (
       <Heading as="h3" mt={8} mb={3} sx={headingSx} fontSize={{ base: 'md', md: 'lg', lg: 'xl' }} lineHeight={{ base: 1.35, md: 1.3, lg: 1.25 }} {...(p as any)} />
     ),
     h4: (p) => (
-      <Heading as="h3" mt={7} mb={2.5} sx={headingSx} fontSize={{ base: 'sm', md: 'md', lg: 'lg' }} lineHeight={{ base: 1.45, md: 1.4, lg: 1.35 }} {...(p as any)} />
+      <Heading as="h4" mt={7} mb={2.5} sx={headingSx} fontSize={{ base: 'sm', md: 'md', lg: 'lg' }} lineHeight={{ base: 1.45, md: 1.4, lg: 1.35 }} {...(p as any)} />
     ),
     p: (p) => {
       return (

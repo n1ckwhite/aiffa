@@ -1,12 +1,25 @@
 "use client";
 
 import React from "react";
-import { Box, Heading, HStack, Link, Tag, Text, VStack } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Heading,
+  HStack,
+  Icon,
+  IconButton,
+  Link,
+  Text,
+  VStack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import type { BlogArticleMeta } from "@/shared/articles/manifest/types";
 import { useAppColors } from "@/shared/theme/colors";
 import { AppButtonLink } from "@/shared/ui/AppLink";
 import { MarkdownRenderer } from "@/shared/ui/MarkdownRenderer";
-import { AuthorCard } from "@/shared/ui/AuthorCard";
+import PillBadge from "@/shared/ui/PillBadge";
+import { FiBookmark, FiCalendar, FiClock, FiCopy, FiStar } from "react-icons/fi";
 
 type BlogArticlePageClientProps = {
   article: BlogArticleMeta;
@@ -24,24 +37,73 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({
   nextArticle,
 }) => {
   const theme = useAppColors();
-  const [isAuthorStarred, setIsAuthorStarred] = React.useState(false);
+  const metaRowColor = useColorModeValue("gray.600", "gray.300");
+  const metaChipBg = useColorModeValue("gray.100", "whiteAlpha.200");
+  const metaChipBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.300");
+  const metaChipText = useColorModeValue("gray.700", "whiteAlpha.900");
+  const calendarIconColor = useColorModeValue("gray.500", "whiteAlpha.700");
+  const clockIconColor = useColorModeValue("gray.500", "whiteAlpha.700");
+  const actionIconColor = useColorModeValue("gray.600", "whiteAlpha.800");
+  const ghostHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
+  const ghostActiveBg = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
+  const ghostFocusShadow = useColorModeValue("0 0 0 3px rgba(59,130,246,0.35)", "0 0 0 3px rgba(96,165,250,0.35)");
+  const starIconActiveColor = useColorModeValue("yellow.500", "yellow.300");
+  const savedIconActiveColor = useColorModeValue("blue.600", "blue.300");
+
+  const [isStarred, setIsStarred] = React.useState(false);
+  const [isSaved, setIsSaved] = React.useState(false);
+
+  const baseStars = typeof article.starsCount === "number" ? article.starsCount : 0;
+  const displayStars = baseStars + (isStarred ? 1 : 0);
 
   React.useEffect(() => {
-    const key = `blog-author-starred:${article.id}`;
     try {
-      const raw = window.localStorage.getItem(key);
-      setIsAuthorStarred(raw === "1");
+      setIsStarred(window.localStorage.getItem(`blog-starred:${article.id}`) === "1");
+      setIsSaved(window.localStorage.getItem(`blog-saved:${article.id}`) === "1");
     } catch {
-      setIsAuthorStarred(false);
+      setIsStarred(false);
+      setIsSaved(false);
     }
   }, [article.id]);
 
-  const handleToggleAuthorStar = () => {
-    const next = !isAuthorStarred;
-    setIsAuthorStarred(next);
-    const key = `blog-author-starred:${article.id}`;
+  const handleToggleStar = () => {
+    const next = !isStarred;
+    setIsStarred(next);
     try {
-      window.localStorage.setItem(key, next ? "1" : "0");
+      window.localStorage.setItem(`blog-starred:${article.id}`, next ? "1" : "0");
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleToggleSaved = () => {
+    const next = !isSaved;
+    setIsSaved(next);
+    try {
+      window.localStorage.setItem(`blog-saved:${article.id}`, next ? "1" : "0");
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleCopyShareLink = async () => {
+    const url = `${window.location.origin}/blog/${article.id}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      return;
+    } catch {
+      // fallback
+    }
+    try {
+      const el = document.createElement("textarea");
+      el.value = url;
+      el.setAttribute("readonly", "");
+      el.style.position = "fixed";
+      el.style.left = "-9999px";
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
     } catch {
       // ignore
     }
@@ -75,63 +137,152 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({
         <Box w="full" maxW="840px" mx="0">
           <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
             <HStack justify="space-between" align="center" flexWrap="wrap" gap={3}>
-              <AppButtonLink to="/blog" size="sm" variant="ghost" aria-label="Вернуться в блог">
+              <AppButtonLink
+                to="/blog"
+                size="sm"
+                variant="ghost"
+                aria-label="Вернуться в блог"
+                _hover={{ bg: ghostHoverBg }}
+                _active={{ bg: ghostActiveBg }}
+                _focusVisible={{ boxShadow: ghostFocusShadow }}
+              >
                 ← В блог
               </AppButtonLink>
             </HStack>
 
             <VStack align="stretch" spacing={3}>
-              <Heading as="h1" fontSize={{ base: "2xl", md: "4xl" }} lineHeight={1.15} color={theme.titleColor}>
+              <HStack spacing={3} flexWrap="wrap" align="center" color={metaRowColor}>
+                {Array.isArray(article.tags) &&
+                  article.tags.slice(0, 4).map((t, idx) => {
+                    const scheme = idx === 0 ? "blue" : idx === 1 ? "purple" : "gray";
+                    return (
+                      <PillBadge
+                        key={t}
+                        colorScheme={scheme as any}
+                        variant="outline"
+                        uppercase={false}
+                      >
+                        {t}
+                      </PillBadge>
+                    );
+                  })}
+
+                <HStack spacing={3} fontSize="sm" color={metaRowColor}>
+                  <HStack spacing={1.5}>
+                    <Icon as={FiCalendar} color={calendarIconColor} aria-hidden />
+                    <Text>{formattedDate}</Text>
+                  </HStack>
+                  <HStack spacing={1.5}>
+                    <Icon as={FiClock} color={clockIconColor} aria-hidden />
+                    <Text>{article.readingTime ?? "—"}</Text>
+                  </HStack>
+                </HStack>
+              </HStack>
+
+              <Heading
+                as="h1"
+                fontSize={{ base: "2xl", md: "4xl" }}
+                lineHeight={1.12}
+                color={theme.titleColor}
+                whiteSpace="pre-wrap"
+              >
                 {article.title}
               </Heading>
 
-              <HStack spacing={3} flexWrap="wrap" color={theme.descColor}>
-                <Text fontSize="sm">{formattedDate}</Text>
-                {article.readingTime ? (
-                  <>
-                    <Text fontSize="sm">•</Text>
-                    <Text fontSize="sm">{article.readingTime}</Text>
-                  </>
-                ) : null}
-              </HStack>
+              <VStack align="stretch" spacing={1}>
+                <Text color={theme.descColor} lineHeight={1.65} noOfLines={2}>
+                  {article.description}
+                </Text>
+              </VStack>
 
-              {Array.isArray(article.tags) && article.tags.length > 0 && (
-                <HStack spacing={2} flexWrap="wrap">
-                  {article.tags.map((t) => (
-                    <Tag
-                      key={t}
-                      size="sm"
-                      bg="whiteAlpha.100"
-                      borderWidth="1px"
-                      borderColor="whiteAlpha.200"
-                      color={theme.descColor}
+              <HStack
+                spacing={4}
+                flexWrap="wrap"
+                align="center"
+                pt={1}
+                color={metaRowColor}
+                fontSize="sm"
+              >
+                <HStack spacing={2}>
+                  {article.author?.github ? (
+                    <Avatar
+                      name={article.author.name}
+                      src={`https://avatars.githubusercontent.com/${article.author.github}?s=64`}
+                      boxSize="20px"
+                    />
+                  ) : null}
+                  {article.author?.github ? (
+                    <Link
+                      href={`https://github.com/${article.author.github}`}
+                      isExternal
+                      color={theme.blue.accent}
+                      fontWeight={700}
+                      aria-label={`Профиль автора ${article.author.name} на GitHub`}
                     >
-                      {t}
-                    </Tag>
-                  ))}
+                      {article.author.github}
+                    </Link>
+                  ) : (
+                    <Text fontWeight={700} color={theme.titleColor}>
+                      {article.author?.name ?? "AIFFA"}
+                    </Text>
+                  )}
                 </HStack>
-              )}
 
-              <Text color={theme.descColor} lineHeight={1.7} w="full">
-                {article.description}
-              </Text>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={handleToggleStar}
+                  aria-label={isStarred ? "Убрать оценку" : "Поставить оценку"}
+                  aria-pressed={isStarred}
+                  leftIcon={<Icon as={FiStar} />}
+                  sx={{
+                    "& .chakra-button__icon svg, & .chakra-button__icon svg *": {
+                      stroke: isStarred ? starIconActiveColor : actionIconColor,
+                      fill: "none",
+                    },
+                  }}
+                  _hover={{ bg: ghostHoverBg }}
+                  _active={{ bg: ghostActiveBg }}
+                  _focusVisible={{ boxShadow: ghostFocusShadow }}
+                >
+                  {displayStars}
+                </Button>
 
-              <AuthorCard
-                author={
-                  article.author?.github
-                    ? { username: article.author.github, name: article.author.name }
-                    : undefined
-                }
-                borderColor={theme.borderColor}
-                descColor={theme.descColor}
-                linkColor={theme.blue.accent}
-                starsCount={typeof article.starsCount === "number" ? article.starsCount : undefined}
-                viewsCount={typeof article.viewsCount === "number" ? article.viewsCount : undefined}
-                commentsCount={typeof article.commentsCount === "number" ? article.commentsCount : undefined}
-                isStarred={isAuthorStarred}
-                onToggleStar={handleToggleAuthorStar}
-                context="lesson"
-              />
+                <IconButton
+                  size="sm"
+                  variant="ghost"
+                  onClick={handleToggleSaved}
+                  aria-label={isSaved ? "Убрать из сохранённых" : "Сохранить статью"}
+                  aria-pressed={isSaved}
+                  icon={<Icon as={FiBookmark} />}
+                  sx={{
+                    "& .chakra-button__icon svg, & .chakra-button__icon svg *": {
+                      stroke: isSaved ? savedIconActiveColor : actionIconColor,
+                      fill: "none",
+                    },
+                  }}
+                  _hover={{ bg: ghostHoverBg }}
+                  _active={{ bg: ghostActiveBg }}
+                  _focusVisible={{ boxShadow: ghostFocusShadow }}
+                />
+
+                <IconButton
+                  size="sm"
+                  variant="ghost"
+                  onClick={handleCopyShareLink}
+                  aria-label="Скопировать ссылку на статью"
+                  icon={<Icon as={FiCopy} />}
+                  sx={{
+                    "& .chakra-button__icon svg, & .chakra-button__icon svg *": {
+                      stroke: actionIconColor,
+                      fill: "none",
+                    },
+                  }}
+                  _hover={{ bg: ghostHoverBg }}
+                  _active={{ bg: ghostActiveBg }}
+                  _focusVisible={{ boxShadow: ghostFocusShadow }}
+                />
+              </HStack>
             </VStack>
 
             <Box minW={0}>

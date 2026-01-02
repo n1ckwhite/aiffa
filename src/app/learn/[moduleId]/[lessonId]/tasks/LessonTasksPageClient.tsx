@@ -2,20 +2,22 @@
 
 import React from "react";
 import { VStack } from "@chakra-ui/react";
-import LessonTasksSkeleton from "pages/LessonTasksPage/Skeleton";
 import { useUserProfile } from "entities/user";
 import { LessonTasksView } from "widgets/LessonTasksView";
-import { useLessonTasksLoad } from "widgets/LessonTasksView/hooks/useLessonTasksLoad";
 import { useScrollTopOnChange } from "widgets/LessonTasksView/hooks/useScrollTopOnChange";
 import LessonFeedback from "@/widgets/Lessons/LessonFeedback";
+import type { Lesson, Module } from "shared/lessons/manifest";
 
 type LessonTasksPageClientProps = {
   moduleId: string;
   lessonId: string;
+  initialLesson?: Lesson | null;
+  initialModule?: Module | null;
 };
 
-const LessonTasksPageClient = ({ moduleId, lessonId }: LessonTasksPageClientProps) => {
-  const { lesson, mod: currentModule, loading } = useLessonTasksLoad(moduleId, lessonId);
+const LessonTasksPageClient = ({ moduleId, lessonId, initialLesson, initialModule }: LessonTasksPageClientProps) => {
+  const lesson = initialLesson ?? null;
+  const currentModule = initialModule ?? null;
   useScrollTopOnChange([moduleId, lessonId]);
 
   const { markTaskSolved } = useUserProfile();
@@ -28,13 +30,7 @@ const LessonTasksPageClient = ({ moduleId, lessonId }: LessonTasksPageClientProp
     py: { base: 8, md: 10 },
   } as const;
 
-  if (loading || !lesson || !currentModule) {
-    return (
-      <VStack {...wrapperProps}>
-        <LessonTasksSkeleton />
-      </VStack>
-    );
-  }
+  if (!lesson || !currentModule) return <VStack {...wrapperProps} />;
 
   return (
     <VStack {...wrapperProps}>

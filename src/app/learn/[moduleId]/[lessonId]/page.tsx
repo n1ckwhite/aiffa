@@ -1,6 +1,10 @@
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
+import path from "node:path";
+import { promises as fs } from "node:fs";
+import { notFound } from "next/navigation";
 import { loadLesson } from "shared/lessons/api";
+import { loadManifest } from "shared/lessons/api";
 import LessonPageClient from "./LessonPageClient";
 import SeoStructuredData from "./SeoStructuredData";
 
@@ -12,6 +16,17 @@ type LessonRouteParams = {
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";
+
+const readPublicMarkdownOrNull = async (mdPath?: string | null): Promise<string | null> => {
+  const relative = (mdPath || "").trim().replace(/^\/+/, "");
+  if (!relative) return null;
+  const filePath = path.join(process.cwd(), "public", relative);
+  try {
+    return await fs.readFile(filePath, "utf-8");
+  } catch {
+    return null;
+  }
+};
 
 export const generateMetadata = async ({ params }: LessonRouteParams): Promise<Metadata> => {
   const { moduleId, lessonId } = await Promise.resolve(params);
@@ -39,14 +54,35 @@ export const generateMetadata = async ({ params }: LessonRouteParams): Promise<M
   };
 };
 
-// Важно для скорости: не делаем тяжёлых await здесь.
-// Данные подтягиваются в client-компоненте со скелетоном (как на /learn/:id).
 const LessonRoutePage = async ({ params }: LessonRouteParams) => {
   const { moduleId, lessonId } = await Promise.resolve(params);
 
+  let lesson: any = null;
+  let mod: any = null;
+  try {
+    const [lsn, manifest] = await Promise.all([loadLesson(moduleId, lessonId), loadManifest()]);
+    lesson = lsn as any;
+    mod =
+      (manifest.modules || []).find((m: any) => m.id === moduleId) ||
+      (manifest.modules || [])[0] ||
+      null;
+  } catch {
+    return notFound();
+  }
+
+  if (!lesson || !mod) {
+    return notFound();
+  }
+
+  const initialMarkdown = await readPublicMarkdownOrNull(lesson?.mdPath);
+
   return (
     <>
-      <LessonPageClient moduleId={moduleId} lessonId={lessonId} />
+      <LessonPageClient
+        initialLesson={lesson}
+        initialModule={mod}
+        initialMarkdown={initialMarkdown}
+      />
       <Suspense fallback={null}>
         <SeoStructuredData moduleId={moduleId} lessonId={lessonId} />
       </Suspense>

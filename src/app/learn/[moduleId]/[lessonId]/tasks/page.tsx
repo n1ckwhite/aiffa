@@ -1,6 +1,8 @@
 import React from "react";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { loadLesson } from "shared/lessons/api";
+import { loadManifest } from "shared/lessons/api";
 import LessonTasksPageClient from "./LessonTasksPageClient";
 
 type LessonTasksRouteParams = {
@@ -41,7 +43,18 @@ export const generateMetadata = async ({ params }: LessonTasksRouteParams): Prom
 const LessonTasksRoutePage = async ({ params }: LessonTasksRouteParams) => {
   const { moduleId, lessonId } = await Promise.resolve(params);
   const url = `${SITE_URL}/learn/${moduleId}/${lessonId}/tasks`;
-  const lesson = await loadLesson(moduleId, lessonId);
+  let lesson: any = null;
+  let mod: any = null;
+  try {
+    const [lsn, manifest] = await Promise.all([loadLesson(moduleId, lessonId), loadManifest()]);
+    lesson = lsn as any;
+    mod =
+      (manifest.modules || []).find((m: any) => m.id === moduleId) ||
+      (manifest.modules || [])[0] ||
+      null;
+  } catch {
+    return notFound();
+  }
   const lessonAny = lesson as any;
 
   return (
@@ -99,7 +112,7 @@ const LessonTasksRoutePage = async ({ params }: LessonTasksRouteParams) => {
           }),
         }}
       />
-      <LessonTasksPageClient moduleId={moduleId} lessonId={lessonId} />
+      <LessonTasksPageClient moduleId={moduleId} lessonId={lessonId} initialLesson={lesson} initialModule={mod} />
     </>
   );
 };

@@ -1,30 +1,23 @@
 "use client";
 
-import React from "react";
 import { VStack } from "@chakra-ui/react";
-import LessonPageSkeleton from "pages/LessonPage/Skeleton";
 import { LessonPageView } from "widgets/LessonPageView";
-import { useLessonLoad } from "widgets/LessonPageView/hooks/useLessonLoad";
-import { useLessonMarkdown } from "widgets/LessonPageView/hooks/useLessonMarkdown";
+import type { Lesson, Module } from "shared/lessons/manifest";
 
 type LessonPageClientProps = {
-  moduleId: string;
-  lessonId: string;
   initialMarkdown?: string | null;
+  initialLesson?: Lesson | null;
+  initialModule?: Module | null;
 };
 
-const LessonPageClient = ({ moduleId, lessonId, initialMarkdown }: LessonPageClientProps) => {
-  const { lesson, mod, loading } = useLessonLoad(moduleId, lessonId);
-  const md = useLessonMarkdown(lesson?.mdPath, initialMarkdown ?? null);
+const LessonPageClient = ({ initialLesson, initialModule, initialMarkdown }: LessonPageClientProps) => {
+  const lesson = initialLesson;
+  const mod = initialModule;
+  const md = initialMarkdown ?? null;
 
-  const isMarkdownReady = Boolean(md) || !lesson?.mdPath;
-
-  if (loading || !lesson || !mod || !isMarkdownReady) {
-    return (
-      <VStack align="stretch" gap={6} pb="32px">
-        <LessonPageSkeleton />
-      </VStack>
-    );
+  if (!lesson || !mod) {
+    // 404 рендерится на сервере через notFound() (см. page.tsx)
+    return null;
   }
 
   return (

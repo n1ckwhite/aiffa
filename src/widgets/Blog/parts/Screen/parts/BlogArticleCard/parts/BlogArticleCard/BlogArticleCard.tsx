@@ -1,16 +1,17 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import { AppBoxLink } from "@/shared/ui/AppLink";
-import { getAuthorBadge } from "../../lib/authorBadge/authorBadge";
-import { formatCount } from "../../lib/format";
-import { getCategoryMeta } from "../../lib/tags/tags";
-import { getAuthorHref } from "./lib/getAuthorLink";
-import type { BlogArticleCardProps } from "./types";
-import { BlogArticleCategoryBadge } from "./parts/BlogArticleCategoryBadge/BlogArticleCategoryBadge";
-import { BlogArticleCover } from "./parts/BlogArticleCover/BlogArticleCover";
-import { BlogArticleTitleRow } from "./parts/BlogArticleTitleRow/BlogArticleTitleRow";
-import { BlogArticleStatsRow } from "./parts/BlogArticleStatsRow/BlogArticleStatsRow";
-import { BlogArticleAuthorRow } from "./parts/BlogArticleAuthorRow/BlogArticleAuthorRow";
+import { getAuthorBadge } from "../../../../lib/authorBadge/authorBadge";
+import { formatCount } from "../../../../lib/format";
+import { getCategoryMeta } from "../../../../lib/tags/tags";
+import { getAuthorHref } from "../../lib/getAuthorLink";
+import type { BlogArticleCardProps } from "../../types";
+import { BlogArticleCategoryBadge } from "../BlogArticleCategoryBadge/BlogArticleCategoryBadge";
+import { BlogArticleCover } from "../BlogArticleCover/BlogArticleCover";
+import { BlogArticleTitleRow } from "../BlogArticleTitleRow/BlogArticleTitleRow";
+import { BlogArticleStatsRow } from "../BlogArticleStatsRow/BlogArticleStatsRow";
+import { BlogArticleAuthorRow } from "../BlogArticleAuthorRow/BlogArticleAuthorRow";
+import { getBlogArticleCardInteractiveStyles } from "./animations";
 
 export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
   article,
@@ -30,6 +31,11 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
   const authorGithub = article.author?.github;
   const authorHref = getAuthorHref(article);
   const articleHref = `/blog/${article.id}`;
+  const interactive = getBlogArticleCardInteractiveStyles({
+    accentColor: theme.blue.accent,
+    cardHoverBorder,
+    cardHoverShadow,
+  });
 
   return (
     <Box key={article.slug} as="li" listStyleType="none">
@@ -46,42 +52,11 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
         position="relative"
         boxShadow={cardShadow}
         transition="transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease"
-        _hover={{
-          textDecoration: "none",
-          transform: "translateY(-3px)",
-          borderColor: cardHoverBorder,
-          boxShadow: cardHoverShadow,
-          _after: { opacity: 1 },
-        }}
-        _active={{
-          cursor: "pointer",
-          transform: "translateY(-1px)",
-        }}
-        _focusVisible={{
-          outline: "3px solid",
-          outlineColor: theme.blue.accent,
-          outlineOffset: "3px",
-        }}
-        _before={{
-          content: '""',
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "3px",
-          bg: `linear-gradient(90deg, ${theme.blue.accent}, rgba(59,130,246,0))`,
-          opacity: 0.65,
-          pointerEvents: "none",
-        }}
-        _after={{
-          content: '""',
-          position: "absolute",
-          inset: 0,
-          bg: `radial-gradient(600px 220px at 20% 0%, ${theme.blue.accent}14, transparent 55%)`,
-          opacity: 0,
-          transition: "opacity 180ms ease",
-          pointerEvents: "none",
-        }}
+        _hover={interactive._hover}
+        _active={interactive._active}
+        _focusVisible={interactive._focusVisible}
+        _before={interactive._before}
+        _after={interactive._after}
       >
         <Box p={cardPadding} display="flex" flexDirection="column" h="full" minW={0} position="relative" zIndex={1}>
           <BlogArticleCover title={article.title} coverImage={article.coverImage} priority={index < 3} />

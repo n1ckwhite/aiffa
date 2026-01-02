@@ -57,9 +57,6 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({
     return FiTag;
   };
   const metaRowColor = useColorModeValue("gray.600", "gray.300");
-  const metaChipBg = useColorModeValue("gray.100", "whiteAlpha.200");
-  const metaChipBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.300");
-  const metaChipText = useColorModeValue("gray.700", "whiteAlpha.900");
   const calendarMetaColor = useColorModeValue("blue.600", "blue.300");
   const clockMetaColor = useColorModeValue("purple.600", "purple.300");
   const commentsMetaColor = useColorModeValue("green.600", "green.300");

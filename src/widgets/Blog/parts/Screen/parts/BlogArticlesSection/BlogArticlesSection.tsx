@@ -2,7 +2,7 @@ import React from "react";
 import { Box, SimpleGrid, VStack } from "@chakra-ui/react";
 import { Pagination } from "shared/ui/Pagination";
 import type { BlogArticle } from "@/widgets/Blog/types";
-import { BlogArticleCard } from "../BlogArticleCard/BlogArticleCard";
+import { BlogArticleCard } from "../BlogArticleCard/parts/BlogArticleCard/BlogArticleCard";
 import { BlogArticlesSkeletonGrid } from "../BlogArticlesSkeletonGrid/BlogArticlesSkeletonGrid";
 import { BlogArticlesEmptyState } from "./parts/BlogArticlesEmptyState/BlogArticlesEmptyState";
 import type { BlogArticlesSectionProps } from "./types";

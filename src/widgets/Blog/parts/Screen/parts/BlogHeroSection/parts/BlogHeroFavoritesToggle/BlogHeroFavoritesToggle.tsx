@@ -28,7 +28,7 @@ export const BlogHeroFavoritesToggle: React.FC<BlogHeroFavoritesToggleProps> = (
         icon={<Icon as={FiBookmark} aria-hidden="true" boxSize={5} />}
         variant="outline"
         borderWidth="1px"
-        borderColor={filterButtonBorder}
+        borderColor={isActive ? theme.blue.accent : filterButtonBorder}
         bg={isActive ? filterButtonHoverBg : filterButtonBg}
         borderRadius="full"
         boxSize="45px"
@@ -38,7 +38,7 @@ export const BlogHeroFavoritesToggle: React.FC<BlogHeroFavoritesToggleProps> = (
         _hover={{ bg: filterButtonHoverBg, boxShadow: searchHoverShadow }}
         _active={{ bg: filterButtonHoverBg }}
         _focusVisible={{ boxShadow: "none" }}
-        color={theme.titleColor}
+        color={isActive ? theme.blue.accent : theme.titleColor}
       />
     </Tooltip>
   );

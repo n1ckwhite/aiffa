@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { loadManifest } from "shared/lessons/api";
 import ModuleLessonsPageClient from "./ModuleLessonsPageClient";
 
@@ -49,12 +50,11 @@ const ModuleLessonsRoutePage = async ({ params, searchParams }: ModuleLessonsRou
   const pageFromQuery = Number(resolvedSearchParams?.page ?? "1");
   const initialPage = Number.isFinite(pageFromQuery) && pageFromQuery > 0 ? pageFromQuery : 1;
   const manifest = await loadManifest();
-  const initialMod =
-    manifest.modules.find((m) => m.id === moduleId) ?? manifest.modules[0] ?? null;
+  const initialMod = manifest.modules.find((m) => m.id === moduleId) ?? null;
+  if (!initialMod) return notFound();
   return (
     <ModuleLessonsPageClient
       moduleId={moduleId}
-      // Важно: если модуль не найден — берём первый, чтобы не показывать вечный скелетон.
       initialMod={initialMod}
       initialPage={initialPage}
     />

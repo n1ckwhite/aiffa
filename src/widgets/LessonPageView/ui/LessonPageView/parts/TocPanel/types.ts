@@ -4,6 +4,7 @@ export type TocPanelProps = {
   tocItems: TocItem[];
   activeTocId: string | null;
   setActiveTocId: (id: string) => void;
+  isReady: boolean;
   colors: {
     tocTitleColor: string;
     tocItemRadius: string;

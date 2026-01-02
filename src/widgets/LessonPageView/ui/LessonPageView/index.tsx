@@ -15,7 +15,7 @@ export const LessonPageView: React.FC<LessonPageViewProps> = ({ lesson, mod, ini
   useHeaderAlign(headerAnchorRef, [lesson?.id, mod?.id]);
   const colors = useLessonPageColors();
   const firstAuthor = (lesson as any)?.authors?.[0] as { username: string; name: string } | undefined;
-  const { tocItems, activeTocId, setActiveTocId } = useTableOfContents(md);
+  const { tocItems, activeTocId, setActiveTocId, isTocReady } = useTableOfContents(md);
 
   if (!md) return (<VStack align="stretch" gap={6} pb="32px"><Box /></VStack>);
 
@@ -27,6 +27,7 @@ export const LessonPageView: React.FC<LessonPageViewProps> = ({ lesson, mod, ini
           tocItems={tocItems}
           activeTocId={activeTocId}
           setActiveTocId={(id) => setActiveTocId(id)}
+          isReady={isTocReady}
           colors={{
             tocTitleColor: colors.tocTitleColor,
             tocItemRadius: colors.tocItemRadius,

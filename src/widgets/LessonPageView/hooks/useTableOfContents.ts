@@ -4,15 +4,26 @@ import type { TocItem } from '../types';
 export const useTableOfContents = (md: string | null) => {
   const [tocItems, setTocItems] = React.useState<TocItem[]>([]);
   const [activeTocId, setActiveTocId] = React.useState<string | null>(null);
+  const [isTocReady, setIsTocReady] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    if (!md) return;
+    // Если markdown поменялся — сбрасываем, чтобы не показывать "старое" содержание
+    setIsTocReady(false);
+    setTocItems([]);
+    setActiveTocId(null);
+
+    if (!md) {
+      setIsTocReady(true);
+      return;
+    }
 
     let timeoutId: number | null = null;
     let rafId: number | null = null;
     let items: TocItem[] = [];
 
     const headerOffsetPx = 96;
+    let attempts = 0;
+    const maxAttempts = 12;
 
     const computeActiveId = () => {
       if (items.length === 0) return null;
@@ -43,7 +54,15 @@ export const useTableOfContents = (md: string | null) => {
 
     const init = () => {
       const container = document.querySelector('.md-content') as HTMLElement | null;
-      if (!container) return;
+      if (!container) {
+        attempts += 1;
+        if (attempts >= maxAttempts) {
+          setIsTocReady(true);
+          return;
+        }
+        timeoutId = window.setTimeout(init, 50);
+        return;
+      }
 
       const nodes = Array.from(container.querySelectorAll('h2, h3')) as HTMLElement[];
       items = nodes
@@ -55,6 +74,7 @@ export const useTableOfContents = (md: string | null) => {
         }));
 
       setTocItems(items);
+      setIsTocReady(true);
       if (items.length === 0) {
         setActiveTocId(null);
         return;
@@ -79,7 +99,7 @@ export const useTableOfContents = (md: string | null) => {
     };
   }, [md]);
 
-  return { tocItems, activeTocId, setActiveTocId };
+  return { tocItems, activeTocId, setActiveTocId, isTocReady };
 };
 
 

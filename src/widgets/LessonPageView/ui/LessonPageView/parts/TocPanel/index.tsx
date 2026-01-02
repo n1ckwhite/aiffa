@@ -1,8 +1,65 @@
 import React from 'react';
-import { Box, Link, Text, VStack } from '@chakra-ui/react';
+import { Box, Link, Skeleton, Text, VStack } from '@chakra-ui/react';
 import type { TocPanelProps } from './types';
+import { useLessonNavPending } from 'shared/hooks/useLessonNavPending';
 
-export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setActiveTocId, colors }) => {
+export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setActiveTocId, isReady, colors }) => {
+  const isNavigating = useLessonNavPending();
+
+  if (isNavigating) {
+    return (
+      <Box
+        w={{ base: '0', lg: '280px' }}
+        display="none"
+        position="sticky"
+        top="88px"
+        sx={{ '@media (min-width: 1440px)': { display: 'block' } }}
+      >
+        <Box>
+          <Skeleton h="10px" w="140px" borderRadius="md" mb={3} />
+          <VStack align="stretch" spacing={2}>
+            {Array.from({ length: 10 }).map((_, i) => (
+              <Skeleton
+                // eslint-disable-next-line react/no-array-index-key
+                key={i}
+                h="14px"
+                w={i % 3 === 0 ? '96%' : i % 3 === 1 ? '84%' : '72%'}
+                borderRadius="md"
+              />
+            ))}
+          </VStack>
+        </Box>
+      </Box>
+    );
+  }
+
+  if (!isReady) {
+    return (
+      <Box
+        w={{ base: '0', lg: '280px' }}
+        display="none"
+        position="sticky"
+        top="88px"
+        sx={{ '@media (min-width: 1440px)': { display: 'block' } }}
+      >
+        <Box>
+          <Skeleton h="10px" w="140px" borderRadius="md" mb={3} />
+          <VStack align="stretch" spacing={2}>
+            {Array.from({ length: 10 }).map((_, i) => (
+              <Skeleton
+                // eslint-disable-next-line react/no-array-index-key
+                key={i}
+                h="14px"
+                w={i % 3 === 0 ? '96%' : i % 3 === 1 ? '84%' : '72%'}
+                borderRadius="md"
+              />
+            ))}
+          </VStack>
+        </Box>
+      </Box>
+    );
+  }
+
   if (!tocItems.length) return null;
   const {
     tocTitleColor, tocItemRadius, tocItemPxBase, tocItemPxLg, tocItemPyBase, tocItemPyLg,

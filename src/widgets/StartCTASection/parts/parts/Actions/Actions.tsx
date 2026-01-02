@@ -2,7 +2,6 @@ import React from 'react';
 import { HStack, Button, Link, Icon } from '@chakra-ui/react';
 import { ArrowForwardIcon, ChatIcon } from '@chakra-ui/icons';
 import { useStartCTAColors } from '../../../colors/useStartCTAColors';
-import { useStartCTAHandlers } from '../../../hooks/useStartCTAHandlers';
 import type { ActionsProps } from './types';
 
 const Actions: React.FC<ActionsProps> = () => {
@@ -21,7 +20,6 @@ const Actions: React.FC<ActionsProps> = () => {
     donateBtnText,
     heartIconColor,
   } = useStartCTAColors();
-  const { handleDonate, openModules } = useStartCTAHandlers();
 
   return (
     <HStack spacing={4} flexWrap="wrap" justify="center" w="full" maxW="720px">
@@ -36,7 +34,6 @@ const Actions: React.FC<ActionsProps> = () => {
         fontWeight="bold"
         _hover={{ bg: startBtnHoverBg }}
         w={{ base: '100%', sm: 'auto' }}
-        onClick={openModules}
       >
         <ArrowForwardIcon boxSize="1em" mr={2} aria-hidden />
         Начать изучение
@@ -73,7 +70,6 @@ const Actions: React.FC<ActionsProps> = () => {
         borderColor={donateBtnBorder}
         _hover={{ bg: donateBtnHoverBg }}
         w={{ base: '100%', sm: 'auto' }}
-        onClick={handleDonate}
       >
         <Icon viewBox="0 0 24 24" boxSize="20px" mr={2} aria-hidden color={heartIconColor}>
           <path

@@ -75,6 +75,9 @@ const LessonRoutePage = async ({ params }: LessonRouteParams) => {
   }
 
   const initialMarkdown = await readPublicMarkdownOrNull(lesson?.mdPath);
+  if (lesson?.mdPath && !initialMarkdown) {
+    return notFound();
+  }
 
   return (
     <>

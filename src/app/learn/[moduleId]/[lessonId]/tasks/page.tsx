@@ -56,6 +56,9 @@ const LessonTasksRoutePage = async ({ params }: LessonTasksRouteParams) => {
     return notFound();
   }
   const lessonAny = lesson as any;
+  if (!lesson || !mod) {
+    return notFound();
+  }
 
   return (
     <>

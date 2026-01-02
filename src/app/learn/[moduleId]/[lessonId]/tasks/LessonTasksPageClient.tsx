@@ -30,7 +30,7 @@ const LessonTasksPageClient = ({ moduleId, lessonId, initialLesson, initialModul
     py: { base: 8, md: 10 },
   } as const;
 
-  if (!lesson || !currentModule) return <VStack {...wrapperProps} />;
+  if (!lesson || !currentModule) return null;
 
   return (
     <VStack {...wrapperProps}>

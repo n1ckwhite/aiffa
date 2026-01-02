@@ -29,7 +29,15 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({ ar
         <Box
           w="full"
           maxW="100%"
-          mx="0">
+          mx="0"
+          sx={{
+            ".md-content": {
+              maxWidth: "100%",
+              marginLeft: "0",
+              marginRight: "0",
+            },
+          }}
+        >
           <VStack align="stretch" spacing={{ base: 4, md: 6 }}>
             <BlogArticleHeader
               article={article}

@@ -6,14 +6,17 @@ import { FaHandshake } from 'react-icons/fa6';
 import { useDesktopActionsColors } from '../../../Header/parts/DesktopActions/colors/useDeskopActionsColors';
 import { useUserProfile } from 'entities/user';
 import { AppLink } from 'shared/ui/AppLink';
+import { withGithubAvatarSize } from '@/shared/lib/github/withGithubAvatarSize';
 
 export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, donateBg, donateHoverBg, onDonate }) => {
   const { fillIcon } = useDesktopActionsColors();
   const avatarBorderColor = useColorModeValue('blackAlpha.200', 'whiteAlpha.200');
   const avatarBg = useColorModeValue('whiteAlpha.900', 'whiteAlpha.200');
   const { profile } = useUserProfile();
-  const githubAvatarUrl =
-    profile.avatarUrl || (profile.githubUsername ? `https://github.com/${profile.githubUsername}.png?size=96` : '');
+  const githubAvatarUrl = withGithubAvatarSize(
+    profile.avatarUrl || (profile.githubUsername ? `https://github.com/${profile.githubUsername}.png` : ''),
+    96
+  );
   const hasGithubConnected = Boolean(profile.githubUsername);
   return (
     <VStack gap={2} align="stretch">

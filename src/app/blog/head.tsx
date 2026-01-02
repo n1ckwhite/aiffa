@@ -1,14 +1,6 @@
 import { blogArticles } from "@/shared/articles/manifest";
 import { BLOG_CARD_COVER_SIZES, buildUnsplashSrcSet, normalizeUnsplashUrl } from "@/shared/articles/unsplash";
-
-const isLocalPublicImage = (src: string) => {
-  const safeSrc = (src || "").trim();
-  return (
-    safeSrc.startsWith("/") &&
-    !safeSrc.startsWith("/_next/") &&
-    !safeSrc.startsWith("//")
-  );
-};
+import { buildLocalBlogCoverCandidates, isLocalPublicImage } from "@/shared/articles/localPublicImages";
 
 const BlogHead = () => {
   const sorted = (blogArticles || []).slice().sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -21,13 +13,16 @@ const BlogHead = () => {
     <>
       {unique.map((href) => {
         const unsplashSrcSet = buildUnsplashSrcSet(href);
-        const imageSrcSet = unsplashSrcSet ?? undefined;
+        const localCoverCandidates = buildLocalBlogCoverCandidates(href);
+        const imageSrcSet = unsplashSrcSet ?? localCoverCandidates?.srcSet ?? undefined;
 
         const normalizedHref = unsplashSrcSet
           ? normalizeUnsplashUrl(href, { width: 680 })
-          : isLocalPublicImage(href)
-            ? href
-            : href;
+          : localCoverCandidates
+            ? localCoverCandidates.src
+            : isLocalPublicImage(href)
+              ? href
+              : href;
 
         return (
           <link

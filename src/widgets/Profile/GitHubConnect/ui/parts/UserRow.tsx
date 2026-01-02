@@ -1,6 +1,7 @@
 import React from 'react';
 import { HStack, Avatar, Link, Text } from '@chakra-ui/react';
 import { useColors } from './colors/useColors';
+import { withGithubAvatarSize } from '@/shared/lib/github/withGithubAvatarSize';
 
 export type UserRowProps = {
   username?: string;
@@ -14,7 +15,7 @@ const UserRow: React.FC<UserRowProps> = ({ username, profileName, avatarUrl }) =
   const href = `https://github.com/${username}`;
   return (
     <HStack spacing={3} pt={1}>
-      <Avatar size="sm" src={avatarUrl || undefined} name={profileName || 'User'} />
+      <Avatar size="sm" src={withGithubAvatarSize(avatarUrl, 48)} name={profileName || 'User'} />
       <Text fontSize="sm" noOfLines={1}>{profileName}</Text>
       <Link
         href={href}

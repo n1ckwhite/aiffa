@@ -3,6 +3,7 @@ import { Avatar, HStack, Text, Tooltip, Icon } from '@chakra-ui/react';
 import { FaBookOpen, FaClipboardList, FaUserCircle, FaCode, FaComments, FaUserFriends, FaFeatherAlt } from 'react-icons/fa';
 import { useUserProfile } from 'entities/user';
 import { AppLink } from '@/shared/ui/AppLink';
+import { withGithubAvatarSize } from '@/shared/lib/github/withGithubAvatarSize';
 import ThemeToggleButton from '../../../ThemeToggleButton';
 import type { DesktopActionsProps } from './types';
 import { useDesktopActionsColors } from './colors/useDeskopActionsColors';
@@ -14,8 +15,10 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
   const { fillIcon, avatarBorderColor, avatarBg } = useDesktopActionsColors();
 
   const { profile } = useUserProfile();
-  const githubAvatarUrl =
-    profile.avatarUrl || (profile.githubUsername ? `https://github.com/${profile.githubUsername}.png?size=96` : '');
+  const githubAvatarUrl = withGithubAvatarSize(
+    profile.avatarUrl || (profile.githubUsername ? `https://github.com/${profile.githubUsername}.png` : ''),
+    96
+  );
   const hasGithubConnected = Boolean(profile.githubUsername);
 
   return (

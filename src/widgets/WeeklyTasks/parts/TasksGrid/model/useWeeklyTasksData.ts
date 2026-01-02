@@ -5,6 +5,7 @@ import { useUserProfile } from 'entities/user';
 import { FaHtml5, FaJs, FaReact } from 'react-icons/fa6';
 import { SiGo, SiCss3, SiTypescript, SiNodedotjs, SiGit, SiReact } from 'react-icons/si';
 import { createAsyncCache } from 'utils/cache';
+import type { WeeklyTasksInitialData } from 'shared/weekly/types/initial';
 
 type WeeklyTaskMeta = {
   title: string;
@@ -93,12 +94,37 @@ export type WeeklyTaskListItem = {
   solvedCount?: number;
 };
 
-export const useWeeklyTasksData = () => {
+export const useWeeklyTasksData = (initial?: WeeklyTasksInitialData) => {
   const { profile } = useUserProfile();
-  const [mdData, setMdData] = React.useState<Record<string, WeeklyTaskMeta>>({});
+  const [mdData, setMdData] = React.useState<Record<string, WeeklyTaskMeta>>(() => {
+    const tasks = Array.isArray(initial?.tasks) ? initial!.tasks : [];
+    if (tasks.length === 0) return {};
+    const map: Record<string, WeeklyTaskMeta> = {};
+    for (const t of tasks) {
+      map[t.id] = {
+        title: t.title,
+        description: t.description,
+        authorName: t.authorName,
+        authorUrl: t.authorUrl,
+        tag: t.tag,
+        level: t.level,
+        parsedId: t.parsedId,
+        starsCount: t.starsCount,
+        commentsCount: t.commentsCount,
+        solvedCount: t.solvedCount,
+      };
+    }
+    return map;
+  });
 
-  const [weeklyList, setWeeklyList] = React.useState<Array<{ id: string; mdPath: string; editorLanguage: string }>>([]);
+  const [weeklyList, setWeeklyList] = React.useState<Array<{ id: string; mdPath: string; editorLanguage: string }>>(() => {
+    const tasks = Array.isArray(initial?.tasks) ? initial!.tasks : [];
+    if (tasks.length === 0) return [];
+    return tasks.map((t) => ({ id: t.id, mdPath: t.mdPath, editorLanguage: t.editorLanguage }));
+  });
   React.useEffect(() => {
+    // Если сервер уже передал мету — скелетон не нужен, ничего не догружаем.
+    if (weeklyList.length > 0 && Object.keys(mdData).length > 0) return;
     let cancelled = false;
     (async () => {
       try {
@@ -142,7 +168,7 @@ export const useWeeklyTasksData = () => {
       }
     })();
     return () => { cancelled = true; };
-  }, []);
+  }, [mdData, weeklyList.length]);
 
   const isReady = React.useMemo(() => weeklyList.length > 0 && weeklyList.every((w) => !!mdData[w.id]), [mdData, weeklyList]);
 

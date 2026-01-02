@@ -12,14 +12,15 @@ import SupportBlock from 'widgets/SupportBlock';
 import WeeklyTaskDetailSkeleton from 'pages/WeeklyTaskDetailPage/Skeleton';
 import { useTaskDetailColors } from './colors/useTaskDetailColors';
 import LessonFeedback from 'widgets/Lessons/LessonFeedback';
+import { AppButtonLink } from 'shared/ui/AppLink';
 
 type TaskDetailScreenProps = {
   taskId?: string;
+  initialMd?: string;
 };
 
-const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTaskId }) => {
+const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTaskId, initialMd }) => {
   const {
-    navigate,
     taskId,
     task,
     mdMeta,
@@ -39,7 +40,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
     onClose,
     externalLinks,
     handleContinueAfterCompletion,
-  } = useTaskDetail(initialTaskId);
+  } = useTaskDetail(initialTaskId, initialMd);
 
   const [isEditorReady, setIsEditorReady] = React.useState(false);
   const { errorBg, errorBorder, errorTitleColor, errorTextColor, errorIconColor } = useTaskDetailColors();
@@ -76,11 +77,12 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
             done={!!task.done}
           />
           <Button
+            as={AppButtonLink as any}
             variant="outline"
             colorScheme="blue"
             mt={2}
             mb={4}
-            onClick={() => navigate("/weekly")}
+            to="/weekly"
             leftIcon={<ArrowBackIcon />}
             borderRadius="full"
             px={5}

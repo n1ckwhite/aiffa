@@ -12,6 +12,7 @@ export const useWeeklyTaskCardColors = () => {
     authorLink: theme.blue.accent,
     taskInnerCircleBg: theme.cardBg,
     taskInnerBorder: theme.borderColor,
+    descriptionTask: theme.descColor,
     taskCardShadow,
     taskCardShadowHover,
     solvedIconColor: useColorModeValue('green.600', 'green.300'),

@@ -13,7 +13,7 @@ import { getComputedTag } from './helpers/meta';
 import { getWeeklyTask } from './helpers/task';
 import { getValidatorResult } from './helpers/validator';
 
-export const useTaskDetail = (initialTaskId?: string) => {
+export const useTaskDetail = (initialTaskId?: string, initialMd?: string) => {
   const params = useParams();
   const taskId = initialTaskId || (params as any)?.taskId || '';
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const useTaskDetail = (initialTaskId?: string) => {
 
   const task = React.useMemo(() => getWeeklyTask(profile as any, taskId), [profile, taskId]);
 
-  const mdMeta = useLoadMdMeta(taskId, task.label, task.description);
+  const mdMeta = useLoadMdMeta(taskId, task.label, task.description, initialMd);
   const externalLinks = useExternalLinks(taskId);
 
   const computedTag = React.useMemo(() => getComputedTag(mdMeta as any), [mdMeta]);

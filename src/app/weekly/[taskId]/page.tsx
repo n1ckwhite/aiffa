@@ -24,18 +24,19 @@ const WeeklyTaskDetailRoutePage = async ({ params }: WeeklyTaskRouteParams) => {
   const info = getWeeklyInfoById(taskId);
   if (!info?.mdPath) return notFound();
 
-  // Гарантируем, что md существует, иначе на клиенте будет вечный скелетон.
+  // Читаем md на сервере и передаем в client, чтобы страница рендерилась без скелетона.
+  let initialMd = "";
   try {
     const relative = info.mdPath.startsWith("/") ? info.mdPath.slice(1) : info.mdPath;
     const filePath = path.join(process.cwd(), "public", relative);
-    await fs.readFile(filePath, "utf-8");
+    initialMd = await fs.readFile(filePath, "utf-8");
   } catch {
     return notFound();
   }
 
   return (
     <>
-      <WeeklyTaskDetailPageClient taskId={taskId} />
+      <WeeklyTaskDetailPageClient taskId={taskId} initialMd={initialMd} />
       <Suspense fallback={null}>
         <SeoStructuredData taskId={taskId} />
       </Suspense>

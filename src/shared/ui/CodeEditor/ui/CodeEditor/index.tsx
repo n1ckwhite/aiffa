@@ -20,8 +20,10 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
 }) => {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const { isDark, placeholderColor } = useCodeEditorColors();
-  const inputId = React.useMemo(() => `code-editor-input-${Math.random().toString(36).slice(2, 10)}`, []);
-  const inputName = React.useMemo(() => `code-editor-input`, []);
+  // Важно: id должен совпадать между SSR и клиентом, иначе будет hydration mismatch.
+  const reactId = React.useId();
+  const inputId = `code-editor-input-${reactId.replace(/[:]/g, '')}`;
+  const inputName = 'code-editor-input';
   const isCoarse = usePointerCoarse();
   const isReady = useMonacoLoader(!(preferNative || !enabled) && enabled);
   useCodeEditorReady({ enabled, preferNative, isReady, onReady });

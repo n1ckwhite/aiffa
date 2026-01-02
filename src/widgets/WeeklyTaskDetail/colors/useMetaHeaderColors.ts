@@ -8,6 +8,7 @@ export const useMetaHeaderColors = () => {
     doneColor: doneColor,
     titleMuted: 'text.muted',
     border: theme.borderColor,
+    descriptioText: theme.descColor
   };
 };
 

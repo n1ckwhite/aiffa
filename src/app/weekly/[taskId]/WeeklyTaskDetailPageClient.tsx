@@ -5,10 +5,11 @@ import React from "react";
 
 type WeeklyTaskDetailPageClientProps = {
   taskId: string;
+  initialMd?: string;
 };
 
-const WeeklyTaskDetailPageClient = ({ taskId }: WeeklyTaskDetailPageClientProps) => {
-  return <TaskDetailScreen taskId={taskId} />;
+const WeeklyTaskDetailPageClient = ({ taskId, initialMd }: WeeklyTaskDetailPageClientProps) => {
+  return <TaskDetailScreen taskId={taskId} initialMd={initialMd} />;
 };
 
 export default WeeklyTaskDetailPageClient;

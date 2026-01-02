@@ -63,7 +63,7 @@ const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
 
         <Box display="flex" alignItems="center" justifyContent="center" flexDir="column" textAlign="center" gap={2}>
           <Heading size="md" fontWeight="semibold" noOfLines={2} textAlign="center">{label}</Heading>
-          {description && (<Text fontSize={{ base: 'sm', md: 'sm' }} color="text.muted" noOfLines={4} textAlign="center">{description}</Text>)}
+          {description && (<Text fontSize={{ base: 'sm', md: 'sm' }} color={colors.descriptionTask} noOfLines={4} textAlign="center">{description}</Text>)}
           <AuthorInfo
             authorName={authorName}
             authorUrl={authorUrl}

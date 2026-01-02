@@ -6,7 +6,7 @@ import { MetaHeaderProps } from './types';
 import PillBadge from 'shared/ui/PillBadge';
 
 const MetaHeader: React.FC<MetaHeaderProps> = ({ tag, icon, color, title, description, done }) => {
-  const { doneColor } = useMetaHeaderColors();
+  const { doneColor, descriptioText } = useMetaHeaderColors();
   return (
     <Box>
       <HStack spacing={3} mb={2} align="center" flexWrap="wrap">
@@ -25,7 +25,7 @@ const MetaHeader: React.FC<MetaHeaderProps> = ({ tag, icon, color, title, descri
       </HStack>
       <Heading size="lg" mb={3}>{title}</Heading>
       {description && description.length > 0 && (
-        <Text fontSize="md" color="text.muted" mb={4}>{description}</Text>
+        <Text fontSize="md" color={descriptioText} mb={4}>{description}</Text>
       )}
     </Box>
   );

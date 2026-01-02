@@ -28,7 +28,9 @@ export const TagsAndMetaRow: React.FC<TagsAndMetaRowProps> = ({ article, formatt
       <HStack spacing={3} fontSize="sm" color={colors.metaRowColor}>
         <HStack spacing={1.5}>
           <Icon as={FiCalendar} color={colors.calendarMetaColor} aria-hidden />
-          <Text>{formattedDate}</Text>
+          <Text as="time" dateTime={article.date}>
+            {formattedDate}
+          </Text>
         </HStack>
         <HStack spacing={1.5}>
           <Icon as={FiClock} color={colors.clockMetaColor} aria-hidden />

@@ -24,7 +24,7 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({ ar
   }, [article.title, markdown]);
 
   return (
-    <Box as="main" id="main-content" w="full" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
+    <Box as="article" aria-labelledby="blog-article-title" w="full" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
       <Box w="full" maxW="1120px" mx="auto">
         <Box
           w="full"

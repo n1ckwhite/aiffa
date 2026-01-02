@@ -9,6 +9,7 @@ export const TitleAndDescription: React.FC<TitleAndDescriptionProps> = ({ title,
     <>
       <Heading
         as="h1"
+        id="blog-article-title"
         fontSize={{ base: "2xl", md: "4xl" }}
         lineHeight={1.12}
         color={theme.titleColor}

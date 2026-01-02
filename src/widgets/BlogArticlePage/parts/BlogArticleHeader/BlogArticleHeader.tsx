@@ -14,8 +14,8 @@ export const BlogArticleHeader: React.FC<BlogArticleHeaderProps> = ({
   commentsCount,
 }) => {
   return (
-    <VStack align="stretch" spacing={{ base: 4, md: 6 }}>
-      <HStack justify="space-between" align="center" flexWrap="wrap" gap={3}>
+    <VStack as="header" align="stretch" spacing={{ base: 4, md: 6 }}>
+      <HStack as="nav" aria-label="Навигация статьи" justify="space-between" align="center" flexWrap="wrap" gap={3}>
         <BackToBlogLink />
       </HStack>
 

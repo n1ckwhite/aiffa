@@ -7,7 +7,7 @@ import { BlogArticleContentProps } from "./types";
 
 export const BlogArticleContent: React.FC<BlogArticleContentProps> = ({ content, borderTopColor }) => {
   return (
-    <Box borderTopWidth="1px" borderTopColor={borderTopColor}>
+    <Box as="section" aria-label="Содержание статьи" borderTopWidth="1px" borderTopColor={borderTopColor}>
       <MarkdownRenderer content={content} />
     </Box>
   );

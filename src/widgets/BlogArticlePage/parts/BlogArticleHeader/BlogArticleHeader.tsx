@@ -16,11 +16,7 @@ export const BlogArticleHeader: React.FC<BlogArticleHeaderProps> = ({
   return (
     <VStack align="stretch" spacing={{ base: 4, md: 6 }}>
       <HStack justify="space-between" align="center" flexWrap="wrap" gap={3}>
-        <BackToBlogLink
-          ghostHoverBg={colors.ghostHoverBg}
-          ghostActiveBg={colors.ghostActiveBg}
-          ghostFocusShadow={colors.ghostFocusShadow}
-        />
+        <BackToBlogLink />
       </HStack>
 
       <VStack align="stretch" spacing={2}>

@@ -2,23 +2,13 @@ import React from "react";
 import { buildUnsplashSrcSet, normalizeUnsplashUrl } from "@/shared/articles/unsplash";
 import { UseBlogCoverImageStateResult } from "./types";
 
-
-
-const buildNextImageUrl = (src: string, width: number, quality = 70) => {
+const isLocalPublicImage = (src: string) => {
   const safeSrc = (src || "").trim();
-  const safeWidth = Number.isFinite(width) && width > 0 ? width : 640;
-  const safeQuality = Number.isFinite(quality) && quality > 0 ? quality : 70;
-  return `/_next/image?url=${encodeURIComponent(safeSrc)}&w=${safeWidth}&q=${safeQuality}`;
-};
-
-const buildNextImageSrcSet = (
-  src: string,
-  widths: number[] = [320, 360, 414, 440, 500, 640, 768, 1024, 1280],
-  quality = 70
-) => {
-  const safeSrc = (src || "").trim();
-  if (!safeSrc.startsWith("/") || safeSrc.startsWith("/_next/image")) return undefined;
-  return widths.map((w) => `${buildNextImageUrl(safeSrc, w, quality)} ${w}w`).join(", ");
+  return (
+    safeSrc.startsWith("/") &&
+    !safeSrc.startsWith("/_next/") &&
+    !safeSrc.startsWith("//")
+  );
 };
 
 export const useBlogCoverImageState = (src: string): UseBlogCoverImageStateResult => {
@@ -26,14 +16,13 @@ export const useBlogCoverImageState = (src: string): UseBlogCoverImageStateResul
   const imgRef = React.useRef<HTMLImageElement | null>(null);
 
   const unsplashSrcSet = React.useMemo(() => buildUnsplashSrcSet(src), [src]);
-  const localSrcSet = React.useMemo(() => buildNextImageSrcSet(src), [src]);
-  const srcSet = unsplashSrcSet ?? localSrcSet;
+  const srcSet = unsplashSrcSet ?? undefined;
 
   const normalizedSrc = React.useMemo(() => {
     if (unsplashSrcSet) return normalizeUnsplashUrl(src, { width: 680 });
-    if (localSrcSet) return buildNextImageUrl(src, 640);
+    if (isLocalPublicImage(src)) return src;
     return src;
-  }, [src, unsplashSrcSet, localSrcSet]);
+  }, [src, unsplashSrcSet]);
 
   React.useEffect(() => {
     const img = imgRef.current;

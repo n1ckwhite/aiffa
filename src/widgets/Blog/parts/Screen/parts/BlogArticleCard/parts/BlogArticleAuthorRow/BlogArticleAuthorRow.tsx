@@ -99,6 +99,13 @@ export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
             fontSize="sm"
             fontWeight="semibold"
             textAlign="left"
+            // Make touch target >= 44px without affecting layout:
+            // padding increases interactive box, negative margins cancel layout shift.
+            py="10px"
+            my="-10px"
+            px="8px"
+            mx="-8px"
+            borderRadius="8px"
             _hover={{ color: accentColor }}
             _focusVisible={{ boxShadow: "0 0 0 3px rgba(66,153,225,0.6)", borderRadius: "6px" }}
             aria-label={avatarLabel}

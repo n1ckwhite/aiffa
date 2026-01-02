@@ -1,22 +1,11 @@
-import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { blogArticles } from "@/shared/articles/manifest";
-import BlogArticlePageClient from "./BlogArticlePageClient";
 import SeoStructuredData from "./SeoStructuredData";
 import { formatRuDate, getBlogArticleOrNull, readPublicMarkdownOrNull, SITE_URL } from "./utils";
+import BlogArticlePageClient from "@/widgets/BlogArticlePage";
 
 type BlogArticleRouteParams = {
   params: { id: string } | Promise<{ id: string }>;
-};
-
-const getNeighbors = (id: string) => {
-  const sorted = (blogArticles || []).slice().sort((a, b) => (a.date < b.date ? 1 : -1));
-  const idx = sorted.findIndex((a) => String(a.id) === String(id));
-  if (idx < 0) return { prev: null, next: null };
-  const next = idx > 0 ? sorted[idx - 1] : null;
-  const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
-  return { prev, next };
 };
 
 export const generateMetadata = async ({ params }: BlogArticleRouteParams): Promise<Metadata> => {

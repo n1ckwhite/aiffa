@@ -1,0 +1,2 @@
+export { useBlogArticlePageClientColors } from "./useBlogArticlePageClientColors";
+

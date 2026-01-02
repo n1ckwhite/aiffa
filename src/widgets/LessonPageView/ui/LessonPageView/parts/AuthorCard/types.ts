@@ -1,14 +1,3 @@
-export type AuthorCardProps = {
-  author?: { username: string; name: string };
-  borderColor: string;
-  descColor: string;
-  linkColor: string;
-  starsCount?: number;
-  viewsCount?: number;
-  commentsCount?: number;
-  isStarred?: boolean;
-  onToggleStar?: () => void;
-  context?: 'lesson' | 'project';
-};
+export type { AuthorCardProps } from "shared/ui/AuthorCard";
 
 

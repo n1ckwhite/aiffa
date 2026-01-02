@@ -2,6 +2,7 @@ import type { BlogArticleMeta } from "./types";
 
 export const blogArticles: BlogArticleMeta[] = [
   {
+    id: "1",
     slug: "kak-pisat-poleznye-stati-v-aiffa",
     title: "Как писать полезные статьи в AIFFA",
     description:
@@ -18,6 +19,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/kak-pisat-poleznye-stati-v-aiffa.md",
   },
   {
+    id: "2",
     slug: "git-pull-vs-fetch-na-praktike",
     title: "Git pull vs fetch — на практике и без мифов",
     description:
@@ -34,6 +36,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/git-pull-vs-fetch-na-praktike.md",
   },
   {
+    id: "3",
     slug: "react-memo-kogda-i-zachem",
     title: "React.memo: когда он реально нужен (и когда мешает)",
     description:
@@ -49,6 +52,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/react-memo-kogda-i-zachem.md",
   },
   {
+    id: "4",
     slug: "typescript-generics-prosto",
     title: "TypeScript Generics — просто и по делу",
     description: "Как читать и писать дженерики, чтобы типы помогали, а не мешали.",
@@ -63,6 +67,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/typescript-generics-prosto.md",
   },
   {
+    id: "5",
     slug: "nextjs-metadata-seo",
     title: "Next.js Metadata: как сделать SEO без боли",
     description: "Что реально важно: title/description, canonical, openGraph и структурированные данные.",
@@ -77,6 +82,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/nextjs-metadata-seo.md",
   },
   {
+    id: "6",
     slug: "chakra-ui-patterny-kartochek",
     title: "Chakra UI: паттерны карточек и сеток для продакшена",
     description: "Как собирать UI из простых блоков: сетки, карточки, hover и типографика.",
@@ -91,6 +97,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/chakra-ui-patterny-kartochek.md",
   },
   {
+    id: "7",
     slug: "a11y-focus-visible",
     title: "A11y: focus-visible без боли",
     description: "Как сделать фокус заметным и не раздражающим: практические советы и примеры.",
@@ -105,6 +112,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/a11y-focus-visible.md",
   },
   {
+    id: "8",
     slug: "nodejs-event-loop-na-palcah",
     title: "Node.js event loop — на пальцах",
     description: "Очереди, microtasks и почему setTimeout(0) не всегда \"сразу\".",
@@ -119,6 +127,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/nodejs-event-loop-na-palcah.md",
   },
   {
+    id: "9",
     slug: "css-grid-shpargalka",
     title: "CSS Grid — короткая шпаргалка",
     description: "Самые нужные свойства и 3 шаблона сетки для реальных экранов.",
@@ -133,6 +142,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/css-grid-shpargalka.md",
   },
   {
+    id: "10",
     slug: "git-rebase-bez-paniki",
     title: "Git rebase без паники",
     description: "Когда rebase уместен, как чинить конфликты и не потерять историю.",
@@ -147,6 +157,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/git-rebase-bez-paniki.md",
   },
   {
+    id: "11",
     slug: "testy-react-minimum",
     title: "Тесты в React: минимальный набор, который реально нужен",
     description: "Что тестировать в первую очередь и как не превратить тесты в ад.",
@@ -161,6 +172,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/testy-react-minimum.md",
   },
   {
+    id: "12",
     slug: "docker-dev-setup",
     title: "Docker для разработки: быстрый сетап без лишнего",
     description: "Как сделать окружение воспроизводимым и не убить скорость разработки.",
@@ -175,6 +187,7 @@ export const blogArticles: BlogArticleMeta[] = [
     mdPath: "/articles/docker-dev-setup.md",
   },
   {
+    id: "13",
     slug: "perf-react-render-loop",
     title: "Почему компонент рендерится 100 раз: чек-лист",
     description: "Типовые причины рендер-лупов и как быстро локализовать источник.",
@@ -192,6 +205,12 @@ export const blogArticles: BlogArticleMeta[] = [
 
 export const getBlogArticleBySlug = (slug: string): BlogArticleMeta | undefined => {
   return blogArticles.find((a) => a.slug === slug);
+};
+
+export const getBlogArticleById = (id: string): BlogArticleMeta | undefined => {
+  const safeId = String(id ?? "").trim();
+  if (!safeId) return undefined;
+  return blogArticles.find((a) => String(a.id) === safeId);
 };
 
 

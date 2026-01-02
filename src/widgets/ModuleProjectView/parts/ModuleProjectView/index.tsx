@@ -6,7 +6,7 @@ import { ProjectMarkdown } from './parts/ProjectMarkdown';
 import { ProjectSupport } from './parts/ProjectSupport';
 import type { ModuleProjectViewProps } from './types';
 import { useModuleProjectViewColors } from './colors/useModuleProjectViewColors';
-import { AuthorCard } from 'widgets/LessonPageView/ui/LessonPageView/parts/AuthorCard';
+import { AuthorCard } from 'shared/ui/AuthorCard';
 import { useProjectAuthorSupport } from './features/useProjectAuthorSupport';
 import { useModuleProjectViewData } from './data/useModuleProjectViewData';
 

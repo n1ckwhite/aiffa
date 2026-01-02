@@ -8,7 +8,7 @@ import { ProjectBreadcrumbHeader } from "widgets/ModuleProjectView/parts/ModuleP
 import { ProjectHeaderCard } from "widgets/ModuleProjectView/parts/ModuleProjectView/parts/ProjectHeaderCard";
 import { ProjectMarkdown } from "widgets/ModuleProjectView/parts/ModuleProjectView/parts/ProjectMarkdown";
 import { ProjectSupport } from "widgets/ModuleProjectView/parts/ModuleProjectView/parts/ProjectSupport";
-import { AuthorCard } from "widgets/LessonPageView/ui/LessonPageView/parts/AuthorCard";
+import { AuthorCard } from "shared/ui/AuthorCard";
 import LessonFeedback from "@/widgets/Lessons/LessonFeedback";
 import { useModuleProjectPageClientColors } from "./colors/useModuleProjectPageClientColors";
 import { useProjectAuthorSupport } from "widgets/ModuleProjectView/parts/ModuleProjectView/features/useProjectAuthorSupport";

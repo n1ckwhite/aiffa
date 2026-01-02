@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import { getAuthorBadge } from "../../lib/authorBadge/authorBadge";
 import { formatCount } from "../../lib/format";
 import { getCategoryMeta } from "../../lib/tags/tags";
@@ -28,11 +29,32 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
   const authorBadge = getAuthorBadge(article);
   const authorGithub = article.author?.github;
   const authorHref = getAuthorHref(article);
+  const articleHref = `/blog/${article.id}`;
+  const router = useRouter();
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (e.defaultPrevented) return;
+    const target = e.target as HTMLElement | null;
+    if (target?.closest("a,button")) return;
+    router.push(articleHref);
+  };
+
+  const handleCardKeyDown = (e: React.KeyboardEvent) => {
+    if (e.defaultPrevented) return;
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    router.push(articleHref);
+  };
 
   return (
     <Box key={article.slug} as="li" listStyleType="none">
       <Box
-        cursor="default"
+        role="link"
+        tabIndex={0}
+        aria-label={`Открыть статью: ${article.title}`}
+        cursor="pointer"
+        onClick={handleCardClick}
+        onKeyDown={handleCardKeyDown}
         borderWidth="1px"
         borderColor={cardBorder}
         borderRadius={cardRadius}
@@ -48,6 +70,15 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
           borderColor: cardHoverBorder,
           boxShadow: cardHoverShadow,
           _after: { opacity: 1 },
+        }}
+        _active={{
+          cursor: "pointer",
+          transform: "translateY(-1px)",
+        }}
+        _focusVisible={{
+          outline: "3px solid",
+          outlineColor: theme.blue.accent,
+          outlineOffset: "3px",
         }}
         _before={{
           content: '""',

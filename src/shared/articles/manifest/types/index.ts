@@ -6,6 +6,7 @@ export type BlogAuthor = {
   };
   
   export type BlogArticleMeta = {
+    id: string;
     slug: string;
     title: string;
     description: string;

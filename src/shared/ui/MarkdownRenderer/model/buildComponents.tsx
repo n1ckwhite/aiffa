@@ -37,8 +37,6 @@ export const buildComponents = (colors: any) => {
     scrollMarginTop: '90px',
   } as const;
 
-  let isFirstParagraph = true;
-
   const components: Components = {
     h1: (p) => (
       <Heading as="h2" my={6} sx={headingSx} fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }} lineHeight={{ base: 1.25, md: 1.25, lg: 1.2 }} letterSpacing="-0.01em" {...(p as any)} />
@@ -53,10 +51,14 @@ export const buildComponents = (colors: any) => {
       <Heading as="h3" mt={7} mb={2.5} sx={headingSx} fontSize={{ base: 'sm', md: 'md', lg: 'lg' }} lineHeight={{ base: 1.45, md: 1.4, lg: 1.35 }} {...(p as any)} />
     ),
     p: (p) => {
-      const lead = isFirstParagraph;
-      isFirstParagraph = false;
       return (
-        <Text my={lead ? 4 : 3.5} lineHeight={lead ? 2 : 1.9} fontSize={lead ? { base: 'lg', md: 'xl' } : { base: 'md', md: 'lg' }} color={textColor} opacity={lead ? 0.9 : 1} {...(p as any)} />
+        <Text
+          my={3.5}
+          lineHeight={1.9}
+          fontSize={{ base: 'md', md: 'lg' }}
+          color={textColor}
+          {...(p as any)}
+        />
       );
     },
     a: (p) => {

@@ -1,6 +1,5 @@
 import React from 'react';
-import { useAuthorSupportTexts } from 'widgets/LessonPageView/ui/LessonPageView/parts/AuthorCard/features/useAuthorSupportTexts';
-import { useAuthorCardColors } from 'widgets/LessonPageView/ui/LessonPageView/parts/AuthorCard/colors/useAuthorCardColors';
+import { useAuthorCardColors, useAuthorSupportTexts } from 'shared/ui/AuthorCard';
 
 export const useAuthorNoteSupport = (baseStars: number) => {
   const [isStarred, setIsStarred] = React.useState(false);

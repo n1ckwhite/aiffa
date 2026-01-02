@@ -26,6 +26,7 @@ type LocalImageCandidates = {
  * Expected generated variants:
  * - `/images/blog/<name>-320.webp`
  * - `/images/blog/<name>-640.webp`
+ * - `/images/blog/<name>-720.webp`
  * - `/images/blog/<name>-960.webp`
  */
 export const buildLocalBlogCoverCandidates = (rawSrc: string): LocalImageCandidates | null => {
@@ -36,7 +37,7 @@ export const buildLocalBlogCoverCandidates = (rawSrc: string): LocalImageCandida
   if (!match) return null;
 
   const base = `/images/blog/${match[1]}`;
-  const srcSet = `${base}-320.webp 320w, ${base}-640.webp 640w, ${base}-960.webp 960w`;
+  const srcSet = `${base}-320.webp 320w, ${base}-640.webp 640w, ${base}-720.webp 720w, ${base}-960.webp 960w`;
 
   // Use a sensible fallback (good for most card sizes, including DPR 2).
   return { src: `${base}-640.webp`, srcSet };

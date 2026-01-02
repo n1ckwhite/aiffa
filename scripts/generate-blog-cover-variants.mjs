@@ -5,7 +5,7 @@ import sharp from "sharp";
 const ROOT = process.cwd();
 const BLOG_DIR = path.join(ROOT, "public", "images", "blog");
 
-const TARGET_WIDTHS = [320, 640, 960];
+const TARGET_WIDTHS = [320, 640, 720, 960];
 
 const isWebp = (fileName) => fileName.toLowerCase().endsWith(".webp");
 

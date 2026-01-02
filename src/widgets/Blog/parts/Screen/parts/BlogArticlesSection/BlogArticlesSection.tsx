@@ -11,6 +11,7 @@ export const BlogArticlesSection: React.FC<BlogArticlesSectionProps> = ({
   theme,
   isLoading,
   isEmptyResults,
+  emptyStateVariant,
   query,
   pageSize,
   pageArticles,
@@ -45,7 +46,7 @@ export const BlogArticlesSection: React.FC<BlogArticlesSectionProps> = ({
   return (
     <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
       {isEmptyResults && (
-        <BlogArticlesEmptyState theme={theme} query={query} />
+        <BlogArticlesEmptyState theme={theme} query={query} variant={emptyStateVariant} />
       )}
 
       <SimpleGrid

@@ -26,6 +26,9 @@ export type BlogHeroSectionProps = {
   filterButtonHoverBg: string;
   filterMenuBorder: string;
   filterMenuShadow: string;
+
+  favoritesOnly: boolean;
+  setFavoritesOnly: (next: boolean) => void;
 };
 
 

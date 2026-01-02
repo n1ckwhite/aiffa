@@ -68,6 +68,8 @@ export const useBlogScreenController = ({
   const { items, isLoading } = useBlogArticles();
   const [query, setQuery] = React.useState<string>(safeInitialQuery);
   const [tagFilter, setTagFilter] = React.useState<BlogTagFilter>(safeInitialTag);
+  const [favoritesOnly, setFavoritesOnly] = React.useState<boolean>(false);
+  const [favoriteIds, setFavoriteIds] = React.useState<Set<string>>(() => new Set());
   const prevFiltersRef = React.useRef<{ query: string; tagFilter: BlogTagFilter }>({
     query: safeInitialQuery,
     tagFilter: safeInitialTag,
@@ -75,6 +77,40 @@ export const useBlogScreenController = ({
 
   const articles = React.useMemo(() => items.slice().sort((a, b) => (a.date < b.date ? 1 : -1)), [items]);
   const normalizedQuery = React.useMemo(() => query.trim().toLowerCase(), [query]);
+
+  const refreshFavorites = React.useCallback(() => {
+    if (typeof window === "undefined") return;
+    const next = new Set<string>();
+    for (const a of items) {
+      try {
+        if (window.localStorage.getItem(`blog-saved:${a.id}`) === "1") next.add(String(a.id));
+      } catch {
+        // ignore
+      }
+    }
+    setFavoriteIds(next);
+  }, [items]);
+
+  React.useEffect(() => {
+    refreshFavorites();
+  }, [refreshFavorites]);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleFocus = () => refreshFavorites();
+    const handleStorage = (e: StorageEvent) => {
+      if (!e.key) return refreshFavorites();
+      if (e.key.startsWith("blog-saved:")) refreshFavorites();
+    };
+    window.addEventListener("focus", handleFocus);
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, [refreshFavorites]);
+
+  const favoritesCount = favoriteIds.size;
 
   const filteredArticles = React.useMemo(() => {
     const base = normalizedQuery
@@ -93,11 +129,18 @@ export const useBlogScreenController = ({
         })
       : articles;
 
-    if (tagFilter === "Все") return base;
-    return base.filter((a) => matchesTagFilter(a, tagFilter));
-  }, [articles, normalizedQuery, tagFilter]);
+    const byTag = tagFilter === "Все" ? base : base.filter((a) => matchesTagFilter(a, tagFilter));
+    if (!favoritesOnly) return byTag;
+    return byTag.filter((a) => favoriteIds.has(String(a.id)));
+  }, [articles, normalizedQuery, tagFilter, favoritesOnly, favoriteIds]);
 
   const isEmptyResults = !isLoading && filteredArticles.length === 0;
+  const emptyStateVariant = React.useMemo<BlogScreenController["emptyStateVariant"]>(() => {
+    if (!isEmptyResults) return "search";
+    if (!favoritesOnly) return "search";
+    if (favoritesCount <= 0) return "favoritesEmpty";
+    return "favoritesSearch";
+  }, [favoritesOnly, favoritesCount, isEmptyResults]);
 
   const pageSize = 6;
   const totalPages = React.useMemo(
@@ -155,9 +198,13 @@ export const useBlogScreenController = ({
     setQuery,
     tagFilter,
     setTagFilter,
+    favoritesOnly,
+    setFavoritesOnly,
+    favoritesCount,
     searchInputRef,
     isLoading,
     isEmptyResults,
+    emptyStateVariant,
     pageArticles,
     pageSize,
     page,

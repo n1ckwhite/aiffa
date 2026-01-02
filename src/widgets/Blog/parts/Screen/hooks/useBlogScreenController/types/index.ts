@@ -12,11 +12,15 @@ export type BlogScreenController = {
     setQuery: (next: string) => void;
     tagFilter: BlogTagFilter;
     setTagFilter: (next: BlogTagFilter) => void;
+    favoritesOnly: boolean;
+    setFavoritesOnly: (next: boolean) => void;
+    favoritesCount: number;
     searchInputRef: React.RefObject<HTMLInputElement | null>;
   
     // data
     isLoading: boolean;
     isEmptyResults: boolean;
+    emptyStateVariant: "search" | "favoritesEmpty" | "favoritesSearch";
     pageArticles: BlogArticle[];
     pageSize: number;
   

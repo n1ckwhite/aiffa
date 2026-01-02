@@ -59,9 +59,9 @@ export const BlogHeroSearch: React.FC<BlogHeroSearchProps> = ({
       aria-label="Поиск и фильтры статей"
       onSubmit={(e: React.FormEvent) => e.preventDefault()}
       w="full"
-      maxW={{ base: "100%", sm: "560px" }}
+      maxW="560px"
     >
-      <HStack spacing={3} justify="center" flexWrap="wrap">
+      <HStack spacing={3} justify="center" flexWrap="wrap" w="full">
         <InputGroup
           size="lg"
           h="56px"
@@ -72,7 +72,8 @@ export const BlogHeroSearch: React.FC<BlogHeroSearchProps> = ({
           boxShadow={searchShadow}
           transition="box-shadow 180ms ease, border-color 180ms ease, transform 180ms ease"
           _hover={{ boxShadow: searchHoverShadow, borderColor: searchHoverBorder }}
-          maxW={{ base: "100%", sm: "440px" }}
+          w="full"
+          maxW="full"
         >
           <VisuallyHidden as="label" htmlFor="blog-search">
             Поиск по статьям

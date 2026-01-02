@@ -5,6 +5,7 @@ export type BlogHeroFiltersProps = {
     theme: ReturnType<typeof useAppColors>;
     tagFilter: BlogTagFilter;
     setTagFilter: (next: BlogTagFilter) => void;
+    rightAddon?: React.ReactNode;
     filterButtonBg: string;
     filterButtonBorder: string;
     filterButtonHoverBg: string;

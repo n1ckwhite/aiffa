@@ -7,6 +7,7 @@ export type BlogArticlesSectionProps = {
 
   isLoading: boolean;
   isEmptyResults: boolean;
+  emptyStateVariant: "search" | "favoritesEmpty" | "favoritesSearch";
   query: string;
 
   pageSize: number;

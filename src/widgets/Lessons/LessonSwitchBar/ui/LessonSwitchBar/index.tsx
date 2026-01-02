@@ -29,9 +29,10 @@ const LessonSwitchBar: React.FC<LessonSwitchBarProps> = ({ moduleId, lessonId, i
   useMenuScrollIntoView(menu.isOpen, currentIndex, menuButtonRef, menuListRef);
 
   React.useEffect(() => {
-    onClose();
+    // Не дергаем close/focus, если меню не открыто — это может "подтянуть" страницу к кнопке.
+    if (menu.isOpen) onClose();
     setLessonNavPending(false);
-  }, [location.pathname, onClose]);
+  }, [location.pathname, onClose, menu.isOpen]);
 
   const handleGoPrev = () => {
     if (!prev || !mod?.id) return;
@@ -69,7 +70,14 @@ const LessonSwitchBar: React.FC<LessonSwitchBarProps> = ({ moduleId, lessonId, i
         <Flex align="center" gap={{ base: 1, md: 4 }}>
           <IconButton aria-label="Предыдущий урок" icon={<ArrowBackIcon />} size="sm" variant="ghost" color={accent} isDisabled={!prev || !mod?.id} onClick={handleGoPrev} _hover={{ bg: itemHover }} display={{ base: 'none', md: 'inline-flex' }} />
           <Box flex="1">
-            <Menu autoSelect={false} placement="top" strategy="fixed" isOpen={menu.isOpen} onOpen={menu.onOpen} onClose={menu.onClose}>
+            <Menu
+              autoSelect={false}
+              placement="top"
+              strategy="fixed"
+              isOpen={menu.isOpen}
+              onOpen={menu.onOpen}
+              onClose={menu.onClose}
+            >
               {({ isOpen }) => (
                 <>
                   <MenuButton ref={menuButtonRef} as={Button} variant="ghost" w="100%" maxW="100%" px={{ base: 2, md: 3 }} py={{ base: inline ? 1 : 1.5, md: inline ? 1.5 : 2 }} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} borderRadius="lg">

@@ -13,48 +13,73 @@ import {
   Text,
   VStack,
   useColorModeValue,
+  Tooltip,
 } from "@chakra-ui/react";
 import type { BlogArticleMeta } from "@/shared/articles/manifest/types";
 import { useAppColors } from "@/shared/theme/colors";
 import { AppButtonLink } from "@/shared/ui/AppLink";
 import { MarkdownRenderer } from "@/shared/ui/MarkdownRenderer";
 import PillBadge from "@/shared/ui/PillBadge";
-import { FiBookmark, FiCalendar, FiClock, FiCopy, FiStar } from "react-icons/fi";
+import { formatCount } from "@/shared/functions/formatCount";
+import {
+  FiBookmark,
+  FiCalendar,
+  FiCheck,
+  FiClock,
+  FiCode,
+  FiCopy,
+  FiHash,
+  FiLayers,
+  FiMessageCircle,
+  FiSearch,
+  FiStar,
+  FiTag,
+} from "react-icons/fi";
 
 type BlogArticlePageClientProps = {
   article: BlogArticleMeta;
   markdown: string;
   formattedDate: string;
-  prevArticle: Pick<BlogArticleMeta, "id" | "title"> | null;
-  nextArticle: Pick<BlogArticleMeta, "id" | "title"> | null;
 };
 
 export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({
   article,
   markdown,
   formattedDate,
-  prevArticle,
-  nextArticle,
 }) => {
   const theme = useAppColors();
+  const getTagIcon = (tag: string) => {
+    const t = (tag || "").toLowerCase();
+    if (t === "react") return FiCode;
+    if (t === "typescript") return FiHash;
+    if (t === "next.js" || t === "nextjs") return FiLayers;
+    if (t === "seo") return FiSearch;
+    return FiTag;
+  };
   const metaRowColor = useColorModeValue("gray.600", "gray.300");
   const metaChipBg = useColorModeValue("gray.100", "whiteAlpha.200");
   const metaChipBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.300");
   const metaChipText = useColorModeValue("gray.700", "whiteAlpha.900");
-  const calendarIconColor = useColorModeValue("gray.500", "whiteAlpha.700");
-  const clockIconColor = useColorModeValue("gray.500", "whiteAlpha.700");
+  const calendarMetaColor = useColorModeValue("blue.600", "blue.300");
+  const clockMetaColor = useColorModeValue("purple.600", "purple.300");
+  const commentsMetaColor = useColorModeValue("green.600", "green.300");
   const actionIconColor = useColorModeValue("gray.600", "whiteAlpha.800");
+  const copiedIconColor = useColorModeValue("green.600", "green.300");
   const ghostHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
   const ghostActiveBg = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
   const ghostFocusShadow = useColorModeValue("0 0 0 3px rgba(59,130,246,0.35)", "0 0 0 3px rgba(96,165,250,0.35)");
   const starIconActiveColor = useColorModeValue("yellow.500", "yellow.300");
   const savedIconActiveColor = useColorModeValue("blue.600", "blue.300");
+  const mdTopBorderColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
 
   const [isStarred, setIsStarred] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
+  const [isShareCopied, setIsShareCopied] = React.useState(false);
+  const shareCopyTimeoutRef = React.useRef<number | null>(null);
 
   const baseStars = typeof article.starsCount === "number" ? article.starsCount : 0;
   const displayStars = baseStars + (isStarred ? 1 : 0);
+  const commentsCount = typeof article.commentsCount === "number" ? article.commentsCount : null;
 
   React.useEffect(() => {
     try {
@@ -90,6 +115,9 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({
     const url = `${window.location.origin}/blog/${article.id}`;
     try {
       await navigator.clipboard.writeText(url);
+      setIsShareCopied(true);
+      if (shareCopyTimeoutRef.current != null) window.clearTimeout(shareCopyTimeoutRef.current);
+      shareCopyTimeoutRef.current = window.setTimeout(() => setIsShareCopied(false), 1500);
       return;
     } catch {
       // fallback
@@ -104,10 +132,21 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({
       el.select();
       document.execCommand("copy");
       document.body.removeChild(el);
+      setIsShareCopied(true);
+      if (shareCopyTimeoutRef.current != null) window.clearTimeout(shareCopyTimeoutRef.current);
+      shareCopyTimeoutRef.current = window.setTimeout(() => setIsShareCopied(false), 1500);
     } catch {
       // ignore
     }
   };
+
+  React.useEffect(() => {
+    return () => {
+      if (shareCopyTimeoutRef.current != null) {
+        window.clearTimeout(shareCopyTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const normalizedMarkdown = React.useMemo(() => {
     const raw = (markdown || "").replace(/\r\n/g, "\n");
@@ -134,8 +173,19 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({
   return (
     <Box as="main" id="main-content" w="full" px={{ base: 4, md: 6 }} py={{ base: 8, md: 10 }}>
       <Box w="full" maxW="1120px" mx="auto">
-        <Box w="full" maxW="840px" mx="0">
-          <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
+        <Box
+          w="full"
+          maxW="100%"
+          mx="0"
+          sx={{
+            ".md-content": {
+              maxWidth: "100% !important",
+              marginLeft: "0 !important",
+              marginRight: "0 !important",
+            },
+          }}
+        >
+          <VStack align="stretch" spacing={{ base: 4, md: 6 }}>
             <HStack justify="space-between" align="center" flexWrap="wrap" gap={3}>
               <AppButtonLink
                 to="/blog"
@@ -150,32 +200,43 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({
               </AppButtonLink>
             </HStack>
 
-            <VStack align="stretch" spacing={3}>
+            <VStack align="stretch" spacing={2}>
               <HStack spacing={3} flexWrap="wrap" align="center" color={metaRowColor}>
-                {Array.isArray(article.tags) &&
-                  article.tags.slice(0, 4).map((t, idx) => {
-                    const scheme = idx === 0 ? "blue" : idx === 1 ? "purple" : "gray";
-                    return (
-                      <PillBadge
-                        key={t}
-                        colorScheme={scheme as any}
-                        variant="outline"
-                        uppercase={false}
-                      >
-                        {t}
-                      </PillBadge>
-                    );
-                  })}
+                {Array.isArray(article.tags) && article.tags.length > 0 && (
+                  <HStack as="span" spacing={2} flexWrap="wrap" align="center">
+                    {article.tags.slice(0, 4).map((t, idx) => {
+                      const scheme = idx === 0 ? "blue" : idx === 1 ? "purple" : "gray";
+                      const TagIcon = getTagIcon(t);
+                      return (
+                        <PillBadge
+                          key={t}
+                          colorScheme={scheme as any}
+                          variant="outline"
+                          uppercase={false}
+                          icon={TagIcon}
+                        >
+                          {t}
+                        </PillBadge>
+                      );
+                    })}
+                  </HStack>
+                )}
 
                 <HStack spacing={3} fontSize="sm" color={metaRowColor}>
                   <HStack spacing={1.5}>
-                    <Icon as={FiCalendar} color={calendarIconColor} aria-hidden />
+                    <Icon as={FiCalendar} color={calendarMetaColor} aria-hidden />
                     <Text>{formattedDate}</Text>
                   </HStack>
                   <HStack spacing={1.5}>
-                    <Icon as={FiClock} color={clockIconColor} aria-hidden />
+                    <Icon as={FiClock} color={clockMetaColor} aria-hidden />
                     <Text>{article.readingTime ?? "—"}</Text>
                   </HStack>
+                  {typeof commentsCount === "number" && (
+                    <HStack spacing={1.5}>
+                      <Icon as={FiMessageCircle} color={commentsMetaColor} aria-hidden />
+                      <Text>{formatCount(commentsCount)}</Text>
+                    </HStack>
+                  )}
                 </HStack>
               </HStack>
 
@@ -189,27 +250,34 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({
                 {article.title}
               </Heading>
 
-              <VStack align="stretch" spacing={1}>
+              <VStack align="stretch" spacing={0.5}>
                 <Text color={theme.descColor} lineHeight={1.65} noOfLines={2}>
                   {article.description}
                 </Text>
               </VStack>
 
               <HStack
-                spacing={4}
+                spacing={2}
                 flexWrap="wrap"
                 align="center"
                 pt={1}
                 color={metaRowColor}
                 fontSize="sm"
               >
-                <HStack spacing={2}>
+                <HStack spacing={1.5}>
                   {article.author?.github ? (
-                    <Avatar
-                      name={article.author.name}
-                      src={`https://avatars.githubusercontent.com/${article.author.github}?s=64`}
-                      boxSize="20px"
-                    />
+                    <Link
+                      href={`https://github.com/${article.author.github}`}
+                      isExternal
+                      aria-label={`Профиль автора ${article.author.name} на GitHub`}
+                      _hover={{ textDecoration: "none", opacity: 0.9 }}
+                    >
+                      <Avatar
+                        name={article.author.name}
+                        src={`https://avatars.githubusercontent.com/${article.author.github}?s=64`}
+                        boxSize="20px"
+                      />
+                    </Link>
                   ) : null}
                   {article.author?.github ? (
                     <Link
@@ -228,91 +296,95 @@ export const BlogArticlePageClient: React.FC<BlogArticlePageClientProps> = ({
                   )}
                 </HStack>
 
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={handleToggleStar}
-                  aria-label={isStarred ? "Убрать оценку" : "Поставить оценку"}
-                  aria-pressed={isStarred}
-                  leftIcon={<Icon as={FiStar} />}
-                  sx={{
-                    "& .chakra-button__icon svg, & .chakra-button__icon svg *": {
-                      stroke: isStarred ? starIconActiveColor : actionIconColor,
-                      fill: "none",
-                    },
-                  }}
-                  _hover={{ bg: ghostHoverBg }}
-                  _active={{ bg: ghostActiveBg }}
-                  _focusVisible={{ boxShadow: ghostFocusShadow }}
+                <Tooltip
+                  label={isStarred ? "Убрать оценку" : "Поставить оценку"}
+                  hasArrow
+                  placement="top"
+                  openDelay={250}
                 >
-                  {displayStars}
-                </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={handleToggleStar}
+                    aria-label={isStarred ? "Убрать оценку" : "Поставить оценку"}
+                    aria-pressed={isStarred}
+                    h="32px"
+                    px={2}
+                    minW="auto"
+                    sx={{
+                      "& svg, & svg *": {
+                        stroke: isStarred ? starIconActiveColor : actionIconColor,
+                        fill: "none",
+                      },
+                    }}
+                    _hover={{ bg: ghostHoverBg }}
+                    _active={{ bg: ghostActiveBg }}
+                    _focusVisible={{ boxShadow: ghostFocusShadow }}
+                  >
+                    <HStack spacing={1.5} align="center">
+                      <Icon as={FiStar} boxSize={4} aria-hidden />
+                      <Text as="span" fontWeight={600}>
+                        {displayStars}
+                      </Text>
+                    </HStack>
+                  </Button>
+                </Tooltip>
 
-                <IconButton
-                  size="sm"
-                  variant="ghost"
-                  onClick={handleToggleSaved}
-                  aria-label={isSaved ? "Убрать из сохранённых" : "Сохранить статью"}
-                  aria-pressed={isSaved}
-                  icon={<Icon as={FiBookmark} />}
-                  sx={{
-                    "& .chakra-button__icon svg, & .chakra-button__icon svg *": {
-                      stroke: isSaved ? savedIconActiveColor : actionIconColor,
-                      fill: "none",
-                    },
-                  }}
-                  _hover={{ bg: ghostHoverBg }}
-                  _active={{ bg: ghostActiveBg }}
-                  _focusVisible={{ boxShadow: ghostFocusShadow }}
-                />
+                <Tooltip
+                  label={isSaved ? "Убрать из сохранённых" : "Сохранить"}
+                  hasArrow
+                  placement="top"
+                  openDelay={250}
+                >
+                  <IconButton
+                    size="sm"
+                    variant="ghost"
+                    onClick={handleToggleSaved}
+                    aria-label={isSaved ? "Убрать из сохранённых" : "Сохранить статью"}
+                    aria-pressed={isSaved}
+                    w="32px"
+                    h="32px"
+                    icon={<Icon as={FiBookmark} />}
+                    sx={{
+                      "& svg, & svg *": {
+                        stroke: isSaved ? savedIconActiveColor : actionIconColor,
+                        fill: "none",
+                      },
+                    }}
+                    _hover={{ bg: ghostHoverBg }}
+                    _active={{ bg: ghostActiveBg }}
+                    _focusVisible={{ boxShadow: ghostFocusShadow }}
+                  />
+                </Tooltip>
 
-                <IconButton
-                  size="sm"
-                  variant="ghost"
-                  onClick={handleCopyShareLink}
-                  aria-label="Скопировать ссылку на статью"
-                  icon={<Icon as={FiCopy} />}
-                  sx={{
-                    "& .chakra-button__icon svg, & .chakra-button__icon svg *": {
-                      stroke: actionIconColor,
-                      fill: "none",
-                    },
-                  }}
-                  _hover={{ bg: ghostHoverBg }}
-                  _active={{ bg: ghostActiveBg }}
-                  _focusVisible={{ boxShadow: ghostFocusShadow }}
-                />
+                <Tooltip label={isShareCopied ? "Скопировано!" : "Скопировать ссылку"} hasArrow placement="top" openDelay={250}>
+                  <IconButton
+                    size="sm"
+                    variant="ghost"
+                    onClick={handleCopyShareLink}
+                    aria-label={isShareCopied ? "Скопировано" : "Скопировать ссылку на статью"}
+                    w="32px"
+                    h="32px"
+                    icon={<Icon as={isShareCopied ? FiCheck : FiCopy} />}
+                    sx={{
+                      "& svg, & svg *": {
+                        stroke: isShareCopied ? copiedIconColor : actionIconColor,
+                        fill: "none",
+                      },
+                    }}
+                    _hover={{ bg: ghostHoverBg }}
+                    _active={{ bg: ghostActiveBg }}
+                    _focusVisible={{ boxShadow: ghostFocusShadow }}
+                  />
+                </Tooltip>
               </HStack>
             </VStack>
 
-            <Box minW={0}>
+            <Box
+              borderTopWidth="1px"
+              borderTopColor={mdTopBorderColor}
+            >
               <MarkdownRenderer content={normalizedMarkdown} />
-
-              <HStack mt={{ base: 8, md: 10 }} justify="space-between" flexWrap="wrap" gap={3}>
-                {prevArticle ? (
-                  <AppButtonLink
-                    to={`/blog/${prevArticle.id}`}
-                    variant="outline"
-                    aria-label={`Предыдущая статья: ${prevArticle.title}`}
-                  >
-                    ← {prevArticle.title}
-                  </AppButtonLink>
-                ) : (
-                  <Box />
-                )}
-
-                {nextArticle ? (
-                  <AppButtonLink
-                    to={`/blog/${nextArticle.id}`}
-                    variant="outline"
-                    aria-label={`Следующая статья: ${nextArticle.title}`}
-                  >
-                    {nextArticle.title} →
-                  </AppButtonLink>
-                ) : (
-                  <Box />
-                )}
-              </HStack>
             </Box>
           </VStack>
         </Box>

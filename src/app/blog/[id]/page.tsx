@@ -62,7 +62,6 @@ const BlogArticleRoutePage = async ({ params }: BlogArticleRouteParams) => {
   if (!md) return notFound();
 
   const formattedDate = formatRuDate(article.date);
-  const { prev, next } = getNeighbors(article.id);
 
   return (
     <>
@@ -71,8 +70,6 @@ const BlogArticleRoutePage = async ({ params }: BlogArticleRouteParams) => {
         article={article}
         markdown={md}
         formattedDate={formattedDate}
-        prevArticle={prev ? { id: prev.id, title: prev.title } : null}
-        nextArticle={next ? { id: next.id, title: next.title } : null}
       />
     </>
   );

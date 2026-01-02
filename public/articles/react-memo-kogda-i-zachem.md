@@ -29,4 +29,3 @@ export const Counter = React.memo(({ value }: Props) => {
 
 Сначала — данные/архитектура/стабильность props. Потом — `memo` как точечная оптимизация.
 
-

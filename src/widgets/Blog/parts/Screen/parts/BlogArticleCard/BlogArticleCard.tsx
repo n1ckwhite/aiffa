@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { AppBoxLink } from "@/shared/ui/AppLink";
 import { getAuthorBadge } from "../../lib/authorBadge/authorBadge";
 import { formatCount } from "../../lib/format";
 import { getCategoryMeta } from "../../lib/tags/tags";
@@ -30,31 +30,13 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
   const authorGithub = article.author?.github;
   const authorHref = getAuthorHref(article);
   const articleHref = `/blog/${article.id}`;
-  const router = useRouter();
-
-  const handleCardClick = (e: React.MouseEvent) => {
-    if (e.defaultPrevented) return;
-    const target = e.target as HTMLElement | null;
-    if (target?.closest("a,button")) return;
-    router.push(articleHref);
-  };
-
-  const handleCardKeyDown = (e: React.KeyboardEvent) => {
-    if (e.defaultPrevented) return;
-    if (e.key !== "Enter" && e.key !== " ") return;
-    e.preventDefault();
-    router.push(articleHref);
-  };
 
   return (
     <Box key={article.slug} as="li" listStyleType="none">
-      <Box
-        role="link"
-        tabIndex={0}
+      <AppBoxLink
+        to={articleHref}
         aria-label={`Открыть статью: ${article.title}`}
         cursor="pointer"
-        onClick={handleCardClick}
-        onKeyDown={handleCardKeyDown}
         borderWidth="1px"
         borderColor={cardBorder}
         borderRadius={cardRadius}
@@ -131,9 +113,10 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
             authorHref={authorHref}
             authorBadge={authorBadge}
             dateIso={article.date}
+            disableLinks
           />
         </Box>
-      </Box>
+      </AppBoxLink>
     </Box>
   );
 };

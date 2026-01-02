@@ -3,8 +3,7 @@ import { Avatar, Box, HStack, Link, Text, VStack } from "@chakra-ui/react";
 import PillBadge from "shared/ui/PillBadge";
 import { getDateLabel, getGithubAvatarUrl } from "../../../../lib/format";
 import { BlogArticleAuthorRowProps } from "./types";
-
-
+import { openAuthorProfile } from "./lib/openAuthorProfile";
 
 export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
   themeTitleColor,
@@ -15,12 +14,17 @@ export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
   authorHref,
   authorBadge,
   dateIso,
+  disableLinks,
 }) => {
   const avatarLabel = `Открыть профиль автора в GitHub: ${authorName || authorGithub || "автор"}`;
+  const canLink = Boolean(authorHref) && !disableLinks;
+  const canOpenProfile = Boolean(authorHref) && !!disableLinks;
+
+  const handleOpenProfile = (e: React.MouseEvent | React.KeyboardEvent) => openAuthorProfile(e, authorHref);
 
   return (
     <HStack spacing={3} mt="auto" pt={6} minH="56px" align="center">
-      {authorHref ? (
+      {canLink ? (
         <Link
           href={authorHref}
           isExternal
@@ -37,6 +41,26 @@ export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
         >
           <Avatar name={authorName || "Автор"} src={getGithubAvatarUrl(authorGithub, 96)} boxSize="38px" />
         </Link>
+      ) : canOpenProfile ? (
+        <Box
+          as="button"
+          type="button"
+          aria-label={avatarLabel}
+          onClick={handleOpenProfile}
+          position="relative"
+          zIndex={3}
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
+          boxSize="48px"
+          minW="48px"
+          borderRadius="full"
+          cursor="pointer"
+          _hover={{ textDecoration: "none", opacity: 0.9 }}
+          _focusVisible={{ boxShadow: "0 0 0 3px rgba(66,153,225,0.6)" }}
+        >
+          <Avatar name={authorName || "Автор"} src={getGithubAvatarUrl(authorGithub, 96)} boxSize="38px" />
+        </Box>
       ) : (
         <Box display="inline-flex" alignItems="center" justifyContent="center" boxSize="48px" minW="48px">
           <Avatar name={authorName || "Автор"} src={getGithubAvatarUrl(authorGithub, 96)} boxSize="38px" />
@@ -44,7 +68,7 @@ export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
       )}
 
       <VStack spacing={0} align="start" minW={0} gap={1}>
-        {authorHref ? (
+        {canLink ? (
           <Link
             href={authorHref}
             isExternal
@@ -59,6 +83,28 @@ export const BlogArticleAuthorRow: React.FC<BlogArticleAuthorRowProps> = ({
           >
             {authorName || "—"}
           </Link>
+        ) : canOpenProfile ? (
+          <Box
+            as="button"
+            type="button"
+            onClick={handleOpenProfile}
+          onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key !== "Enter" && e.key !== " ") return;
+              handleOpenProfile(e);
+            }}
+            display="inline-flex"
+            alignItems="center"
+            cursor="pointer"
+            color={themeTitleColor}
+            fontSize="sm"
+            fontWeight="semibold"
+            textAlign="left"
+            _hover={{ color: accentColor }}
+            _focusVisible={{ boxShadow: "0 0 0 3px rgba(66,153,225,0.6)", borderRadius: "6px" }}
+            aria-label={avatarLabel}
+          >
+            {authorName || "—"}
+          </Box>
         ) : (
           <Text fontSize="sm" fontWeight="semibold" noOfLines={1} color={themeTitleColor}>
             {authorName || "—"}

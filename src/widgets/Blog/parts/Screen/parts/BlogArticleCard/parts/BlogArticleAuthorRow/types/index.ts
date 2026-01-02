@@ -11,4 +11,5 @@ export type BlogArticleAuthorRowProps = {
   
     authorBadge: ReturnType<typeof getAuthorBadge>;
     dateIso: string;
+    disableLinks?: boolean;
   };

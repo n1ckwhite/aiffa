@@ -59,8 +59,8 @@ header {
 }
 
 html, body {
-  height: 100dvh; /* или -webkit-fill-available */
-  padding-bottom: env(safe-area-inset-bottom);
+  height: 100%;
+  min-height: 100%;
   min-height: -webkit-fill-available;
   overscroll-behavior-y: none;
   background-color: #ffffff;

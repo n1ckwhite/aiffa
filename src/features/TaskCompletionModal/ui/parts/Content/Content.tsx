@@ -14,7 +14,17 @@ const Content: React.FC<ContentProps> = ({ completed = true, onClose, onContinue
     <VStack
       position="relative"
       zIndex={1}
-      height="calc(var(--vh, 1vh) * 100)"
+      minH="calc(var(--vh, 1vh) * 100)"
+      h="calc(var(--vh, 1vh) * 100)"
+      sx={{
+        '@supports (height: 100dvh)': {
+          minHeight: '100dvh',
+          height: '100dvh',
+        },
+        '@supports (-webkit-touch-callout: none)': {
+          minHeight: '-webkit-fill-available',
+        },
+      }}
       align="center"
       justify="center"
       spacing={6}

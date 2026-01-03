@@ -8,7 +8,7 @@ export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setAc
   const panelTop = 88;
   const panelBottomGap = 24;
   // Keep TOC from covering too much of the screen: cap by 60vh, but also respect header offset.
-  const panelMaxH = `min(calc(100vh - ${panelTop + panelBottomGap}px), 30vh)`;
+  const panelMaxH = `min(calc(100vh - ${panelTop + panelBottomGap}px), 32vh)`;
   const listRef = React.useRef<HTMLDivElement | null>(null);
   const hiddenScrollbarSx = {
     scrollbarWidth: 'none',

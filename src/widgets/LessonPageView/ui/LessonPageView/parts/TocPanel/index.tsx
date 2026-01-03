@@ -165,15 +165,10 @@ export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setAc
                 }}
               >
                 <Box
-                  pl={{ base: tocItemPxBase, lg: tocItemPxLg }}
-                  pr={{ base: isActive ? 0 : tocItemPxBase, lg: isActive ? 0 : tocItemPxLg }}
+                  px= {{ base: tocItemPxBase, lg: tocItemPxLg }}
                   py={{ base: tocItemPyBase, lg: tocItemPyLg }}
                   ml={0}
-                  // borderRadius={tocItemRadius}
-                  borderTopLeftRadius={tocItemRadius}
-                  borderBottomLeftRadius={tocItemRadius}
-                  borderTopRightRadius="0"
-                  borderBottomRightRadius="0"
+                  borderRadius={tocItemRadius}
                   minH={{ base: tocItemMinHBase, lg: tocItemMinHLg }}
                   display="flex"
                   alignItems="center"

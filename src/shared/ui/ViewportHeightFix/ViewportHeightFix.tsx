@@ -9,13 +9,12 @@ export const ViewportHeightFix: React.FC = () => {
     let rafId = 0;
 
     const getViewportHeight = () => {
-      const vv = window.visualViewport;
-      // `visualViewport.height` reacts to mobile browser UI (URL bar) changes.
-      if (vv && typeof vv.height === "number" && vv.height > 0) {
-        return vv.height;
+      // IMPORTANT: use layout viewport height (`window.innerHeight`) as requested.
+      // This is the most common approach to make `vh` react to mobile URL bar show/hide.
+      if (typeof window.innerHeight === "number" && window.innerHeight > 0) {
+        return window.innerHeight;
       }
-      // Fallbacks.
-      return document.documentElement.clientHeight || window.innerHeight;
+      return document.documentElement.clientHeight || 0;
     };
 
     const getViewportBottomOverlay = () => {
@@ -43,7 +42,7 @@ export const ViewportHeightFix: React.FC = () => {
     update();
     window.addEventListener("resize", handleResize, { passive: true } as AddEventListenerOptions);
     window.addEventListener("orientationchange", handleResize, { passive: true } as AddEventListenerOptions);
-    // iOS Chrome/Safari: URL bar show/hide often triggers `visualViewport` changes instead of `window.resize`.
+    // iOS Chrome/Safari: URL bar show/hide can trigger scroll/visualViewport events instead of `window.resize`.
     window.addEventListener("scroll", handleResize, { passive: true } as AddEventListenerOptions);
 
     const vv = window.visualViewport;

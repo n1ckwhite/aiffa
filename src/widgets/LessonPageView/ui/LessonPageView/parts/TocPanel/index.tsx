@@ -5,53 +5,6 @@ import { useLessonNavPending } from 'shared/hooks/useLessonNavPending';
 
 export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setActiveTocId, isReady, colors }) => {
   const isNavigating = useLessonNavPending();
-  const panelTop = 88;
-  const panelBottomGap = 24;
-  // Keep TOC from covering too much of the screen: cap by 60vh, but also respect header offset.
-  const panelMaxH = `min(calc(100vh - ${panelTop + panelBottomGap}px), 32vh)`;
-  const listRef = React.useRef<HTMLDivElement | null>(null);
-  const hiddenScrollbarSx = {
-    scrollbarWidth: 'none',
-    msOverflowStyle: 'none',
-    '&::-webkit-scrollbar': { display: 'none' },
-  } as const;
-
-  const escapeAttr = (value: string) => value.replace(/["\\]/g, '\\$&');
-
-  React.useLayoutEffect(() => {
-    if (!activeTocId) return;
-    const container = listRef.current;
-    if (!container) return;
-
-    const selector = `[data-toc-id="${escapeAttr(activeTocId)}"]`;
-    const target = container.querySelector<HTMLElement>(selector);
-    if (!target) return;
-
-    // Run after layout so sizes/scrollHeight are stable.
-    const rafId = window.requestAnimationFrame(() => {
-      const cTop = container.scrollTop;
-      const cBottom = cTop + container.clientHeight;
-      const tTop = target.offsetTop;
-      const tBottom = tTop + target.offsetHeight;
-
-      const isVisible = tTop >= cTop && tBottom <= cBottom;
-      if (isVisible) return;
-
-      // Prefer native nearest scroll inside the container.
-      try {
-        target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
-      } catch {
-        // Fallback: center it.
-        const nextTop = tTop - (container.clientHeight / 2 - target.offsetHeight / 2);
-        const maxTop = Math.max(0, container.scrollHeight - container.clientHeight);
-        container.scrollTop = Math.max(0, Math.min(nextTop, maxTop));
-      }
-    });
-
-    return () => {
-      window.cancelAnimationFrame(rafId);
-    };
-  }, [activeTocId]);
 
   if (isNavigating) {
     return (
@@ -62,18 +15,9 @@ export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setAc
         top="88px"
         sx={{ '@media (min-width: 1440px)': { display: 'block' } }}
       >
-        <Box maxH={panelMaxH} display="flex" flexDirection="column" minH={0} overflow="hidden">
+        <Box>
           <Skeleton h="10px" w="140px" borderRadius="md" mb={3} />
-          <VStack
-            ref={listRef}
-            align="stretch"
-            spacing={2}
-            flex="1 1 auto"
-            minH={0}
-            overflowY="auto"
-            overscrollBehavior="contain"
-            sx={hiddenScrollbarSx}
-          >
+          <VStack align="stretch" spacing={2}>
             {Array.from({ length: 10 }).map((_, i) => (
               <Skeleton
                 // eslint-disable-next-line react/no-array-index-key
@@ -98,18 +42,9 @@ export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setAc
         top="88px"
         sx={{ '@media (min-width: 1440px)': { display: 'block' } }}
       >
-        <Box maxH={panelMaxH} display="flex" flexDirection="column" minH={0} overflow="hidden">
+        <Box>
           <Skeleton h="10px" w="140px" borderRadius="md" mb={3} />
-          <VStack
-            ref={listRef}
-            align="stretch"
-            spacing={2}
-            flex="1 1 auto"
-            minH={0}
-            overflowY="auto"
-            overscrollBehavior="contain"
-            sx={hiddenScrollbarSx}
-          >
+          <VStack align="stretch" spacing={2}>
             {Array.from({ length: 10 }).map((_, i) => (
               <Skeleton
                 // eslint-disable-next-line react/no-array-index-key
@@ -132,27 +67,17 @@ export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setAc
   } = colors;
   return (
     <Box w={{ base: '0', lg: '280px' }} display="none" position="sticky" top="88px" sx={{ '@media (min-width: 1440px)': { display: 'block' } }}>
-      <Box maxH={panelMaxH} display="flex" flexDirection="column" minH={0} overflow="hidden">
+      <Box>
         <Text fontSize="xs" fontWeight="bold" letterSpacing="wider" textTransform="uppercase" mb={3} color={tocTitleColor}>
           На этой странице
         </Text>
-        <VStack
-          ref={listRef}
-          align="stretch"
-          gap={tocItemGap}
-          flex="1 1 auto"
-          minH={0}
-          overflowY="auto"
-          overscrollBehavior="contain"
-          sx={hiddenScrollbarSx}
-        >
+        <VStack align="stretch" gap={tocItemGap}>
           {tocItems.map((item) => {
             const isActive = activeTocId === item.id;
             return (
               <Link
                 key={item.id}
                 href={`#${item.id}`}
-                data-toc-id={item.id}
                 _hover={{ textDecoration: 'none' }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -165,10 +90,14 @@ export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setAc
                 }}
               >
                 <Box
-                  px= {{ base: tocItemPxBase, lg: tocItemPxLg }}
+                  pl={{ base: tocItemPxBase, lg: tocItemPxLg }}
+                  pr={{ base: isActive ? 0 : tocItemPxBase, lg: isActive ? 0 : tocItemPxLg }}
                   py={{ base: tocItemPyBase, lg: tocItemPyLg }}
                   ml={0}
-                  borderRadius={tocItemRadius}
+                  borderTopLeftRadius={tocItemRadius}
+                  borderBottomLeftRadius={tocItemRadius}
+                  borderTopRightRadius="0"
+                  borderBottomRightRadius="0"
                   minH={{ base: tocItemMinHBase, lg: tocItemMinHLg }}
                   display="flex"
                   alignItems="center"
@@ -187,5 +116,3 @@ export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setAc
     </Box>
   );
 };
-
-

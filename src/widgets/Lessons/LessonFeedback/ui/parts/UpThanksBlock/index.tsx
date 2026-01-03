@@ -14,7 +14,7 @@ export const UpThanksBlock: React.FC<UpThanksBlockProps> = ({
       <HStack align="center" spacing={2}>
         <CheckCircleIcon boxSize={4} color={thanksColor} />
         <Text fontSize="sm" fontWeight="semibold" color={thanksColor}>
-          Спасибо! За ваш отзыв!
+          Спасибо за обратную связь!
         </Text>
       </HStack>
       <VStack align="flex-start" spacing={0.5} fontSize="xs" color={textCol}>

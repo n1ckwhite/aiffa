@@ -16,17 +16,4 @@ export const useFeedbackContext = (lessonKey: string): FeedbackContext => {
   }, [lessonKey]);
 };
 
-export const getAnchorIdForContext = (context: FeedbackContext): string => {
-  if (context === 'weekly') {
-    return 'weekly-support-anchor';
-  }
-  if (context === 'tasks') {
-    return 'tasks-faq-anchor';
-  }
-  if (context === 'project') {
-    return 'project-support-anchor';
-  }
-  return 'lesson-tasks-cta-anchor';
-};
-
 

@@ -8,7 +8,6 @@ export type UseFeedbackControllerOptions = {
 
 export const useFeedbackController = (lessonKey: string, options?: UseFeedbackControllerOptions) => {
   const [choice, setChoice] = React.useState<VoteChoice | null>(null);
-  const [mounted, setMounted] = React.useState(false);
   const [visible, setVisible] = React.useState(true);
   const [showThanks, setShowThanks] = React.useState(false);
   const [pulsing, setPulsing] = React.useState<VoteChoice | null>(null);
@@ -39,14 +38,15 @@ export const useFeedbackController = (lessonKey: string, options?: UseFeedbackCo
     setChoice(null);
     setVisible(true);
     setShowThanks(false);
-    setMounted(true);
     setPulsing(null);
   }, [lessonKey, clearTimers]);
 
-  const vote = (v: VoteChoice) => {
+  const vote = React.useCallback((v: VoteChoice) => {
     clearTimers();
     setChoice(v);
     setPulsing(v);
+    setVisible(true);
+    setShowThanks(false);
     timersRef.current.thanks = window.setTimeout(() => {
       setShowThanks(true);
     }, thanksDelayMs);
@@ -54,9 +54,9 @@ export const useFeedbackController = (lessonKey: string, options?: UseFeedbackCo
       setVisible(false);
       setPulsing(null);
     }, autoHideDelayMs);
-  };
+  }, [autoHideDelayMs, clearTimers, thanksDelayMs]);
 
-  return { choice, mounted, visible, showThanks, pulsing, vote };
+  return { choice, visible, showThanks, pulsing, vote };
 };
 
 

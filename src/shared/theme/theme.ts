@@ -102,6 +102,15 @@ const theme: Theme = {
   styles: {
     ...baseTheme.styles,
     global: () => ({
+      "html, body": {
+        height: "100dvh",
+        minHeight: "100dvh",
+        // iOS Safari/Chrome fallback for dynamic browser UI.
+        "@supports (-webkit-touch-callout: none)": {
+          minHeight: "-webkit-fill-available"
+        }
+      },
+      "#__next": { minHeight: "100dvh" },
       body: {
         bg: "chakra-body-bg",
         color: "chakra-body-text",

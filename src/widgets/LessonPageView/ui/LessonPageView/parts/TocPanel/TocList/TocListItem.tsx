@@ -1,7 +1,18 @@
 import React from 'react';
 import { Box, Link, Text } from '@chakra-ui/react';
-import { handleTocLinkClick } from '../../helpers';
-import { TocListItemProps } from './types';
+import type { TocItem } from '../../../../../types';
+import type { TocPanelColors } from '../types';
+import { handleTocLinkClick } from '../helpers';
+
+type TocListItemProps = {
+  item: TocItem;
+  isActive: boolean;
+  setActiveTocId: (id: string) => void;
+  colors: Pick<
+    TocPanelColors,
+    'tocItemRadius' | 'tocItemPxBase' | 'tocItemPxLg' | 'tocItemPyBase' | 'tocItemPyLg' | 'tocItemMinHBase' | 'tocItemMinHLg' | 'tocActiveBg' | 'tocInactiveColor' | 'linkColor'
+  >;
+};
 
 export const TocListItem: React.FC<TocListItemProps> = ({ item, isActive, setActiveTocId, colors }) => {
   const {

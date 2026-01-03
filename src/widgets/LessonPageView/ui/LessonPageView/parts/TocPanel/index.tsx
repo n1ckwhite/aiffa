@@ -11,7 +11,7 @@ import {
 import { TocTitle } from './parts/TocTitle';
 import { TocSkeletonList } from './parts/TocSkeletonList/TocSkeletonList';
 import { TocList } from './parts/TocList/TocList';
-import { getTocListMaxHeight, getTocScrollSx } from './helpers/helpers';
+import { getTocListMaxHeight, getTocScrollSx } from './helpers';
 
 export const TocPanel: React.FC<TocPanelProps> = ({ tocItems, activeTocId, setActiveTocId, isReady, colors }) => {
   const isNavigating = useLessonNavPending();

@@ -543,6 +543,41 @@ const ProfileScreen: React.FC = () => {
                   />
                 ))}
               </SimpleGrid>
+              <Box
+                mt={{ base: 4, md: 5 }}
+                borderWidth="1px"
+                borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")}
+                bg={useColorModeValue("blackAlpha.50", "whiteAlpha.50")}
+                borderRadius="16px"
+                px={{ base: 3, md: 4 }}
+                py={{ base: 3, md: 3.5 }}
+              >
+                <HStack spacing={2} align="start">
+                  <Box
+                    aria-hidden="true"
+                    mt="2px"
+                    w="26px"
+                    h="26px"
+                    borderRadius="10px"
+                    bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    flexShrink={0}
+                    color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                  >
+                    <Icon as={FiAward} boxSize="14px" />
+                  </Box>
+                  <Box>
+                    <Text fontSize="sm" fontWeight="semibold" color={useColorModeValue("gray.900", "whiteAlpha.900")}>
+                      Спасибо за вклад в сообщество
+                    </Text>
+                    <Text fontSize="sm" color={muted} mt={1}>
+                      Любое авторство и активность помогают AIFFA становиться лучше для всех.
+                    </Text>
+                  </Box>
+                </HStack>
+              </Box>
             </SectionCard>
             </VStack>
           </GridItem>

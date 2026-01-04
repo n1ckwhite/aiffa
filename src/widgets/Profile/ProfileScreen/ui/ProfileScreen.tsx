@@ -293,8 +293,6 @@ const ProfileScreen: React.FC = () => {
     // Variant A: Glass (no gradients)
     const glassBg = useColorModeValue("whiteAlpha.900", "blackAlpha.300");
     const glassBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
-    const shadow = useColorModeValue("0 10px 30px rgba(0, 0, 0, 0.08)", "0 16px 60px rgba(0, 0, 0, 0.55)");
-    const hoverShadow = useColorModeValue("0 14px 40px rgba(0, 0, 0, 0.12)", "0 18px 70px rgba(0, 0, 0, 0.65)");
     const accent = useColorModeValue("blue.600", "blue.300");
     const headerIconBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
 
@@ -307,9 +305,8 @@ const ProfileScreen: React.FC = () => {
         p={{ base: 4, md: 7 }}
         position="relative"
         overflow="hidden"
-        boxShadow={shadow}
-        transition="transform 160ms ease, box-shadow 160ms ease"
-        _hover={{ transform: "translateY(-1px)", boxShadow: hoverShadow }}
+        boxShadow="none"
+        transition="none"
         sx={{
           backdropFilter: "blur(12px) saturate(160%)",
           WebkitBackdropFilter: "blur(12px) saturate(160%)",

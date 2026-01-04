@@ -608,130 +608,132 @@ const ProfileScreen: React.FC = () => {
                     </PillBadge>
                   </Box>
                 </HStack>
-                <Divider borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")} />
+                <Box w="full" maxW={{ base: "300px", lg: "full" }} mx={{ base: "auto", lg: 0 }}>
+                  <Divider borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")} />
 
-                <VStack align="start" spacing={2} w="full" textAlign="left">
-                  <SectionLabel>Контакты</SectionLabel>
+                  <VStack align="start" spacing={2} w="full" textAlign="left">
+                    <SectionLabel>Контакты</SectionLabel>
 
-                  <HStack spacing={2} minW={0} justify="flex-start" w="full">
-                    <Icon as={FiBriefcase} color={leftIconColors.work} />
-                    <Text
-                      fontSize="sm"
-                      fontWeight="semibold"
-                      color={useColorModeValue("gray.800", "whiteAlpha.900")}
-                      noOfLines={1}
-                    >
-                      {workplace}
-                    </Text>
-                  </HStack>
-
-                  <HStack spacing={2} minW={0} justify="flex-start" w="full">
-                    <Icon as={FiMapPin} color={leftIconColors.location} />
-                    <Text
-                      fontSize="sm"
-                      fontWeight="semibold"
-                      color={useColorModeValue("gray.800", "whiteAlpha.900")}
-                      noOfLines={1}
-                    >
-                      {locationLabel}
-                    </Text>
-                  </HStack>
-
-                  <HStack spacing={2} minW={0} justify="flex-start" w="full">
-                    <Icon as={FiMail} boxSize="18px" color={leftIconColors.mail} />
-                    <ChakraLink
-                      href={`mailto:${emailValue}`}
-                      color={useColorModeValue("blue.700", "blue.300")}
-                      fontWeight="semibold"
-                      maxW="360px"
-                      noOfLines={1}
-                      sx={{ overflowWrap: "anywhere" }}
-                      aria-label={`Email: ${emailValue}`}
-                    >
-                      {emailValue}
-                    </ChakraLink>
-                  </HStack>
-
-                  <SectionLabel>Ссылки</SectionLabel>
-
-                  <VStack align="start" spacing={1.5} w="full" pt={1}>
-                    {displayLinks.slice(0, 6).map((l) => {
-                      const kind = String((l as any)?.kind ?? "custom");
-                      const href = buildLinkHref(l);
-                      const label = getLinkLabel(l);
-                      const IconEl = getLinkIcon(kind);
-                      const isBranded = kind === "github";
-                      const value = String((l as any)?.value ?? "").trim();
-
-                      return (
-                        <HStack
-                          key={l.id}
-                          spacing={2}
-                          minW={0}
-                          justify="flex-start"
-                          w="full"
-                        >
-                          {isBranded ? (
-                            <Icon as={FaGithub} boxSize="18px" color={leftIconColors.github} />
-                          ) : (
-                            <Icon as={IconEl} color={leftIconColors.link} />
-                          )}
-                          <ChakraLink
-                            href={href}
-                            isExternal
-                            color={useColorModeValue("blue.700", "blue.300")}
-                            fontWeight="semibold"
-                            maxW="360px"
-                            noOfLines={1}
-                            sx={{ overflowWrap: "anywhere" }}
-                            aria-label={label}
-                          >
-                            {value}
-                          </ChakraLink>
-                        </HStack>
-                      );
-                    })}
-
-                    {extraLinks
-                      .filter((u) => {
-                        const normalized = String(u).trim();
-                        if (!normalized) return false;
-                        return !displayLinks.some((l) => String((l as any)?.value ?? "").trim() === normalized);
-                      })
-                      .map((href) => (
-                        <HStack
-                          key={href}
-                          spacing={2}
-                          minW={0}
-                          justify="flex-start"
-                          w="full"
-                        >
-                          <Icon as={FiLink} color={leftIconColors.link} />
-                          <ChakraLink
-                            href={href}
-                            isExternal
-                            color={useColorModeValue("blue.700", "blue.300")}
-                            fontWeight="semibold"
-                            maxW="360px"
-                            noOfLines={1}
-                            sx={{ overflowWrap: "anywhere" }}
-                            aria-label={href}
-                          >
-                            {href}
-                          </ChakraLink>
-                        </HStack>
-                      ))}
-                  </VStack>
-                </VStack>
-                {achievedItems.length > 0 && (
-                <VStack align="start" spacing={2} w="full" textAlign="left">
-                  <Text fontWeight="semibold">Достижения</Text>
-                    <HStack spacing={2} flexWrap="wrap" justify="flex-start">
-                      {achievedItems.map((it: any) => (
-                        <CompactAchievement key={it.id} item={it} />
-                      ))}
+                    <HStack spacing={2} minW={0} justify="flex-start" w="full">
+                      <Icon as={FiBriefcase} color={leftIconColors.work} />
+                      <Text
+                        fontSize="sm"
+                        fontWeight="semibold"
+                        color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                        noOfLines={1}
+                      >
+                        {workplace}
+                      </Text>
                     </HStack>
-                </VStack>)}
+
+                    <HStack spacing={2} minW={0} justify="flex-start" w="full">
+                      <Icon as={FiMapPin} color={leftIconColors.location} />
+                      <Text
+                        fontSize="sm"
+                        fontWeight="semibold"
+                        color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                        noOfLines={1}
+                      >
+                        {locationLabel}
+                      </Text>
+                    </HStack>
+
+                    <HStack spacing={2} minW={0} justify="flex-start" w="full">
+                      <Icon as={FiMail} boxSize="18px" color={leftIconColors.mail} />
+                      <ChakraLink
+                        href={`mailto:${emailValue}`}
+                        color={useColorModeValue("blue.700", "blue.300")}
+                        fontWeight="semibold"
+                        maxW="360px"
+                        noOfLines={1}
+                        sx={{ overflowWrap: "anywhere" }}
+                        aria-label={`Email: ${emailValue}`}
+                      >
+                        {emailValue}
+                      </ChakraLink>
+                    </HStack>
+
+                    <SectionLabel>Ссылки</SectionLabel>
+
+                    <VStack align="start" spacing={1.5} w="full" pt={1}>
+                      {displayLinks.slice(0, 6).map((l) => {
+                        const kind = String((l as any)?.kind ?? "custom");
+                        const href = buildLinkHref(l);
+                        const label = getLinkLabel(l);
+                        const IconEl = getLinkIcon(kind);
+                        const isBranded = kind === "github";
+                        const value = String((l as any)?.value ?? "").trim();
+
+                        return (
+                          <HStack
+                            key={l.id}
+                            spacing={2}
+                            minW={0}
+                            justify="flex-start"
+                            w="full"
+                          >
+                            {isBranded ? (
+                              <Icon as={FaGithub} boxSize="18px" color={leftIconColors.github} />
+                            ) : (
+                              <Icon as={IconEl} color={leftIconColors.link} />
+                            )}
+                            <ChakraLink
+                              href={href}
+                              isExternal
+                              color={useColorModeValue("blue.700", "blue.300")}
+                              fontWeight="semibold"
+                              maxW="360px"
+                              noOfLines={1}
+                              sx={{ overflowWrap: "anywhere" }}
+                              aria-label={label}
+                            >
+                              {value}
+                            </ChakraLink>
+                          </HStack>
+                        );
+                      })}
+
+                      {extraLinks
+                        .filter((u) => {
+                          const normalized = String(u).trim();
+                          if (!normalized) return false;
+                          return !displayLinks.some((l) => String((l as any)?.value ?? "").trim() === normalized);
+                        })
+                        .map((href) => (
+                          <HStack
+                            key={href}
+                            spacing={2}
+                            minW={0}
+                            justify="flex-start"
+                            w="full"
+                          >
+                            <Icon as={FiLink} color={leftIconColors.link} />
+                            <ChakraLink
+                              href={href}
+                              isExternal
+                              color={useColorModeValue("blue.700", "blue.300")}
+                              fontWeight="semibold"
+                              maxW="360px"
+                              noOfLines={1}
+                              sx={{ overflowWrap: "anywhere" }}
+                              aria-label={href}
+                            >
+                              {href}
+                            </ChakraLink>
+                          </HStack>
+                        ))}
+                    </VStack>
+                  </VStack>
+                  {achievedItems.length > 0 && (
+                  <VStack align="start" spacing={2} w="full" textAlign="left">
+                    <Text fontWeight="semibold">Достижения</Text>
+                      <HStack spacing={2} flexWrap="wrap" justify="flex-start">
+                        {achievedItems.map((it: any) => (
+                          <CompactAchievement key={it.id} item={it} />
+                        ))}
+                      </HStack>
+                  </VStack>)}
+                </Box>
               </VStack>
             </HStack>
             </Box>

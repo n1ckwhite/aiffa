@@ -370,7 +370,8 @@ const ProfileScreen: React.FC = () => {
     const watermarkColor = useColorModeValue("blackAlpha.150", "whiteAlpha.120");
     const hoverBorder = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
     const focusRing = useColorModeValue("0 0 0 3px rgba(66,153,225,0.45)", "0 0 0 3px rgba(66,153,225,0.45)");
-    const hoverAccent = accentColor ?? useColorModeValue("blue.400", "blue.200");
+    // Colorful watermark by default (to highlight the tile), then de-accent on hover.
+    const baseAccent = accentColor ?? useColorModeValue("blue.400", "blue.200");
 
     const tile = (
       <Box
@@ -391,17 +392,17 @@ const ProfileScreen: React.FC = () => {
         _hover={{ borderColor: hoverBorder, transform: "translateY(-1px)" }}
         sx={{
           "& .stat-tile-watermark": {
-            transition: "transform 180ms ease, opacity 180ms ease",
+            transition: "transform 180ms ease, opacity 180ms ease, color 180ms ease",
           },
           "&:hover .stat-tile-watermark": {
             transform: "translate(6px, -4px) rotate(-10deg) scale(1.06)",
-            opacity: 0.18,
-            color: hoverAccent,
+            opacity: 0.12,
+            color: watermarkColor,
           },
           "&:focus-visible .stat-tile-watermark": {
             transform: "translate(6px, -4px) rotate(-10deg) scale(1.06)",
-            opacity: 0.18,
-            color: hoverAccent,
+            opacity: 0.12,
+            color: watermarkColor,
           },
         }}
       >
@@ -411,8 +412,8 @@ const ProfileScreen: React.FC = () => {
             position="absolute"
             top={{ base: 2, md: 4 }}
             right={{ base: 2, md: 4 }}
-            opacity={0.1}
-            color={watermarkColor}
+            opacity={0.14}
+            color={baseAccent}
             transform="rotate(-6deg)"
             pointerEvents="none"
             className="stat-tile-watermark"

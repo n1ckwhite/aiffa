@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Badge,
   Box,
   Button,
   Grid,
@@ -41,7 +40,6 @@ const ProfileScreen: React.FC = () => {
   const { profile } = useUserProfile();
   const name = typeof profile?.name === "string" ? profile.name : "";
   const bio = typeof profile?.bio === "string" ? profile.bio : "";
-  const direction = typeof (profile as any).direction === "string" ? (profile as any).direction.trim() : "";
   const placeholderAvatarUrl = "https://avatars.githubusercontent.com/u/249125545?v=4";
   const avatarUrl = typeof (profile as any)?.avatarUrl === "string" && (profile as any).avatarUrl.trim()
     ? (profile as any).avatarUrl.trim()
@@ -388,11 +386,6 @@ const ProfileScreen: React.FC = () => {
                   <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} noOfLines={1}>
                     {name || "Пользователь"}
                   </Text>
-                  {!!direction && (
-                    <Badge colorScheme="blue" borderRadius="full" px={3} py={1}>
-                      {direction}
-                    </Badge>
-                  )}
                 </HStack>
 
                 <Text
@@ -494,20 +487,15 @@ const ProfileScreen: React.FC = () => {
                       })}
                     </VStack>
                 </VStack>
+                {achievedItems.length > 0 && (
                 <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
-                  <Text fontWeight="semibold">Достижения</Text>
-                  {achievedItems.length > 0 ? (
+                  <Text fontWeight="semibold" mb={2}>Достижения</Text>
                     <HStack spacing={2} flexWrap="wrap" justify={{ base: "center", lg: "flex-start" }}>
                       {achievedItems.map((it: any) => (
                         <CompactAchievement key={it.id} item={it} />
                       ))}
                     </HStack>
-                  ) : (
-                    <Text fontSize="sm" color={muted}>
-                      Пока нет достижений
-                    </Text>
-                  )}
-                </VStack>
+                </VStack>)}
               </VStack>
             </HStack>
             </Box>

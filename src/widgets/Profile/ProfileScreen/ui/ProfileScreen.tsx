@@ -673,13 +673,23 @@ const ProfileScreen: React.FC = () => {
                     objectFit="cover"
                     bg="transparent"
                     alt={name || "Пользователь"}
-                    src={withGithubAvatarSize(avatarUrl, 416)}
+                    // Use responsive `srcSet` so we don't download 416×416 when the container is 208×208.
+                    src={withGithubAvatarSize(avatarUrl, 208)}
+                    srcSet={[
+                      `${withGithubAvatarSize(avatarUrl, 132)} 132w`,
+                      `${withGithubAvatarSize(avatarUrl, 152)} 152w`,
+                      `${withGithubAvatarSize(avatarUrl, 184)} 184w`,
+                      `${withGithubAvatarSize(avatarUrl, 208)} 208w`,
+                      `${withGithubAvatarSize(avatarUrl, 416)} 416w`,
+                    ].join(", ")}
+                    sizes="(min-width: 62em) 208px, (min-width: 48em) 184px, (min-width: 30em) 152px, 132px"
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
                     onError={(e: any) => {
                       try {
-                        e.currentTarget.src = PLACEHOLDER_AVATAR_URL;
+                        e.currentTarget.src = withGithubAvatarSize(PLACEHOLDER_AVATAR_URL, 208);
+                        e.currentTarget.removeAttribute("srcset");
                       } catch {}
                     }}
                   />

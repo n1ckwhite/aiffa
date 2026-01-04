@@ -599,9 +599,16 @@ const ProfileScreen: React.FC = () => {
                       Редактировать профиль
                     </Button>
 
-                    <VStack align="start" spacing={2} w="full" pt={1}>
-                      <LeftRow icon={FiUsers as any} iconColor={leftIconColors.people} spacing={2}>
-                        <Text color={muted}>
+                    <VStack spacing={2} w="full" pt={1} align={{ base: "center", md: "start" }}>
+                      <HStack
+                        spacing={2}
+                        justify={{ base: "center", md: "flex-start" }}
+                        w="full"
+                        color={muted}
+                        flexWrap="wrap"
+                      >
+                        <Icon as={FiUsers} color={leftIconColors.people} />
+                        <Text>
                           <Text as="span" fontWeight="semibold" color="inherit">
                             {followersCount}
                           </Text>{" "}
@@ -611,27 +618,34 @@ const ProfileScreen: React.FC = () => {
                           </Text>{" "}
                           подписан
                         </Text>
-                      </LeftRow>
+                      </HStack>
 
-                      <LeftRow icon={FiAward as any} iconColor={leftIconColors.xp}>
-                        <HStack spacing={3} flexWrap="wrap" justify="flex-start" w="full" minW={0}>
-                          <Text fontSize="sm" color={muted}>
+                      <HStack
+                        spacing={3}
+                        justify={{ base: "center", md: "flex-start" }}
+                        w="full"
+                        flexWrap="wrap"
+                        align="center"
+                      >
+                        <HStack spacing={1.5} color={muted}>
+                          <Icon as={FiAward} color={leftIconColors.xp} />
+                          <Text fontSize="sm">
                             <Text as="span" fontWeight="semibold" color="inherit">
                               {xp}
                             </Text>{" "}
                             XP
                           </Text>
-                          <Box>
-                            <PillBadge
-                              colorScheme={profileBadge.colorScheme as any}
-                              variant="outline"
-                              uppercase={false}
-                            >
-                              {profileBadge.label}
-                            </PillBadge>
-                          </Box>
                         </HStack>
-                      </LeftRow>
+                        <Box>
+                          <PillBadge
+                            colorScheme={profileBadge.colorScheme as any}
+                            variant="outline"
+                            uppercase={false}
+                          >
+                            {profileBadge.label}
+                          </PillBadge>
+                        </Box>
+                      </HStack>
                     </VStack>
                   </VStack>
                 </VStack>
@@ -720,9 +734,11 @@ const ProfileScreen: React.FC = () => {
                               isExternal
                               color={useColorModeValue("blue.700", "blue.300")}
                               fontWeight="semibold"
-                              maxW="360px"
-                              noOfLines={1}
-                              sx={{ overflowWrap: "anywhere" }}
+                              flex={1}
+                              minW={0}
+                              display="block"
+                              whiteSpace="normal"
+                              sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}
                               aria-label={label}
                             >
                               {value}
@@ -762,9 +778,11 @@ const ProfileScreen: React.FC = () => {
                               isExternal
                               color={useColorModeValue("blue.700", "blue.300")}
                               fontWeight="semibold"
-                              maxW="360px"
-                              noOfLines={1}
-                              sx={{ overflowWrap: "anywhere" }}
+                              flex={1}
+                              minW={0}
+                              display="block"
+                              whiteSpace="normal"
+                              sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}
                               aria-label={href}
                             >
                               {href}

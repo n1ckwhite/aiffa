@@ -610,10 +610,10 @@ const ProfileScreen: React.FC = () => {
                 </HStack>
                 <Divider borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")} />
 
-                <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
+                <VStack align="start" spacing={2} w="full" textAlign="left">
                   <SectionLabel>Контакты</SectionLabel>
 
-                  <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
+                  <HStack spacing={2} minW={0} justify="flex-start" w="full">
                     <Icon as={FiBriefcase} color={leftIconColors.work} />
                     <Text
                       fontSize="sm"
@@ -625,7 +625,7 @@ const ProfileScreen: React.FC = () => {
                     </Text>
                   </HStack>
 
-                  <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
+                  <HStack spacing={2} minW={0} justify="flex-start" w="full">
                     <Icon as={FiMapPin} color={leftIconColors.location} />
                     <Text
                       fontSize="sm"
@@ -637,7 +637,7 @@ const ProfileScreen: React.FC = () => {
                     </Text>
                   </HStack>
 
-                  <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
+                  <HStack spacing={2} minW={0} justify="flex-start" w="full">
                     <Icon as={FiMail} boxSize="18px" color={leftIconColors.mail} />
                     <ChakraLink
                       href={`mailto:${emailValue}`}
@@ -654,7 +654,7 @@ const ProfileScreen: React.FC = () => {
 
                   <SectionLabel>Ссылки</SectionLabel>
 
-                  <VStack align={{ base: "center", lg: "start" }} spacing={1.5} w="full" pt={1}>
+                  <VStack align="start" spacing={1.5} w="full" pt={1}>
                     {displayLinks.slice(0, 6).map((l) => {
                       const kind = String((l as any)?.kind ?? "custom");
                       const href = buildLinkHref(l);
@@ -668,7 +668,7 @@ const ProfileScreen: React.FC = () => {
                           key={l.id}
                           spacing={2}
                           minW={0}
-                          justify={{ base: "center", lg: "flex-start" }}
+                          justify="flex-start"
                           w="full"
                         >
                           {isBranded ? (
@@ -703,7 +703,7 @@ const ProfileScreen: React.FC = () => {
                           key={href}
                           spacing={2}
                           minW={0}
-                          justify={{ base: "center", lg: "flex-start" }}
+                          justify="flex-start"
                           w="full"
                         >
                           <Icon as={FiLink} color={leftIconColors.link} />
@@ -724,9 +724,9 @@ const ProfileScreen: React.FC = () => {
                   </VStack>
                 </VStack>
                 {achievedItems.length > 0 && (
-                <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
+                <VStack align="start" spacing={2} w="full" textAlign="left">
                   <Text fontWeight="semibold">Достижения</Text>
-                    <HStack spacing={2} flexWrap="wrap" justify={{ base: "center", lg: "flex-start" }}>
+                    <HStack spacing={2} flexWrap="wrap" justify="flex-start">
                       {achievedItems.map((it: any) => (
                         <CompactAchievement key={it.id} item={it} />
                       ))}

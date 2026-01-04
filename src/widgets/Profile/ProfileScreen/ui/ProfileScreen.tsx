@@ -1023,6 +1023,7 @@ const ProfileScreen: React.FC = () => {
                   variant="outline"
                   borderRadius="full"
                   leftIcon={<Icon as={FaBookOpen} color={headerNavIconColor} />}
+                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
                   aria-label="Перейти к материалам"
                 >
                   К материалам
@@ -1033,6 +1034,7 @@ const ProfileScreen: React.FC = () => {
                   variant="outline"
                   borderRadius="full"
                   leftIcon={<Icon as={FaClipboardList} color={headerNavIconColor} />}
+                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
                   aria-label="Перейти к задачам недели"
                 >
                   Задачи недели
@@ -1043,6 +1045,7 @@ const ProfileScreen: React.FC = () => {
                   variant="outline"
                   borderRadius="full"
                   leftIcon={<Icon as={FaFeatherAlt} color={headerNavIconColor} />}
+                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
                   aria-label="Перейти к блогу"
                 >
                   Блог
@@ -1059,7 +1062,7 @@ const ProfileScreen: React.FC = () => {
                   >
                     <HStack w="full" justify="space-between">
                       <Text fontWeight="semibold">Как улучшить статистику</Text>
-                      <AccordionIcon />
+                      <AccordionIcon color={headerNavIconColor} />
                     </HStack>
                   </AccordionButton>
                   <AccordionPanel px={0} pt={2}>
@@ -1172,6 +1175,7 @@ const ProfileScreen: React.FC = () => {
                   variant="outline"
                   borderRadius="full"
                   leftIcon={<Icon as={FaFeatherAlt} color={headerNavIconColor} />}
+                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
                   aria-label="Перейти в блог"
                 >
                   Написать
@@ -1182,6 +1186,7 @@ const ProfileScreen: React.FC = () => {
                   variant="outline"
                   borderRadius="full"
                   leftIcon={<Icon as={FaBookOpen} color={headerNavIconColor} />}
+                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
                   aria-label="Перейти к материалам"
                 >
                   Материалы
@@ -1192,6 +1197,7 @@ const ProfileScreen: React.FC = () => {
                   variant="outline"
                   borderRadius="full"
                   leftIcon={<Icon as={FaClipboardList} color={headerNavIconColor} />}
+                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
                   aria-label="Перейти к задачам недели"
                 >
                   Задачи недели
@@ -1202,6 +1208,7 @@ const ProfileScreen: React.FC = () => {
                   variant="outline"
                   borderRadius="full"
                   leftIcon={<Icon as={FaCode} color={headerNavIconColor} />}
+                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
                   aria-label="Перейти к хакатонам"
                 >
                   Хакатоны
@@ -1212,6 +1219,7 @@ const ProfileScreen: React.FC = () => {
                   variant="outline"
                   borderRadius="full"
                   leftIcon={<Icon as={FaComments} color={headerNavIconColor} />}
+                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
                   aria-label="Перейти к сессиям"
                 >
                   Сессии
@@ -1228,7 +1236,7 @@ const ProfileScreen: React.FC = () => {
                   >
                     <HStack w="full" justify="space-between">
                       <Text fontWeight="semibold">Как увеличить вклад</Text>
-                      <AccordionIcon />
+                      <AccordionIcon color={headerNavIconColor} />
                     </HStack>
                   </AccordionButton>
                   <AccordionPanel px={0} pt={2}>

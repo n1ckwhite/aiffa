@@ -268,6 +268,7 @@ const ProfileScreen: React.FC = () => {
     tooltip?: string;
   }> = ({ label, value, hint, icon, tooltip }) => {
     const watermarkColor = useColorModeValue("blackAlpha.150", "whiteAlpha.120");
+    const hoverBorder = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
     const focusRing = useColorModeValue("0 0 0 3px rgba(66,153,225,0.45)", "0 0 0 3px rgba(66,153,225,0.45)");
 
     const tile = (
@@ -285,6 +286,21 @@ const ProfileScreen: React.FC = () => {
         gridTemplateRows="auto 1fr auto"
         tabIndex={tooltip ? 0 : undefined}
         _focusVisible={tooltip ? { boxShadow: focusRing, outline: "none" } : undefined}
+        transition="border-color 160ms ease, transform 160ms ease"
+        _hover={{ borderColor: hoverBorder, transform: "translateY(-1px)" }}
+        sx={{
+          "& .stat-tile-watermark": {
+            transition: "transform 180ms ease, opacity 180ms ease",
+          },
+          "&:hover .stat-tile-watermark": {
+            transform: "translate(6px, -4px) rotate(-10deg) scale(1.06)",
+            opacity: 0.14,
+          },
+          "&:focus-visible .stat-tile-watermark": {
+            transform: "translate(6px, -4px) rotate(-10deg) scale(1.06)",
+            opacity: 0.14,
+          },
+        }}
       >
         {!!icon && (
           <Box
@@ -296,6 +312,7 @@ const ProfileScreen: React.FC = () => {
             color={watermarkColor}
             transform="rotate(-6deg)"
             pointerEvents="none"
+            className="stat-tile-watermark"
           >
             <Icon as={icon} boxSize={{ base: "38px", md: "56px" }} />
           </Box>

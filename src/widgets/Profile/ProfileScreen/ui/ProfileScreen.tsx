@@ -2,6 +2,7 @@ import React from "react";
 import {
   Box,
   Button,
+  Divider,
   Grid,
   GridItem,
   Heading,
@@ -251,6 +252,19 @@ const ProfileScreen: React.FC = () => {
     if (kind === "github") return "GitHub";
     return "Ссылка";
   }, []);
+
+  const SectionLabel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <Text
+      fontSize="xs"
+      letterSpacing="0.08em"
+      textTransform="uppercase"
+      fontWeight="bold"
+      color={useColorModeValue("gray.700", "whiteAlpha.700")}
+      pt={2}
+    >
+      {children}
+    </Text>
+  );
 
   const workplace = typeof (profile as any)?.workplace === "string" && (profile as any).workplace.trim()
     ? (profile as any).workplace.trim()
@@ -594,18 +608,31 @@ const ProfileScreen: React.FC = () => {
                     </PillBadge>
                   </Box>
                 </HStack>
-                <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full" pt={1}>
-                  {/* Workplace / location / email */}
+                <Divider borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")} />
+
+                <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
+                  <SectionLabel>Контакты</SectionLabel>
+
                   <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
                     <Icon as={FiBriefcase} color={muted} />
-                    <Text fontSize="sm" fontWeight="semibold" color={useColorModeValue("gray.800", "whiteAlpha.900")} noOfLines={1}>
+                    <Text
+                      fontSize="sm"
+                      fontWeight="semibold"
+                      color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                      noOfLines={1}
+                    >
                       {workplace}
                     </Text>
                   </HStack>
 
                   <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
                     <Icon as={FiMapPin} color={muted} />
-                    <Text fontSize="sm" fontWeight="semibold" color={useColorModeValue("gray.800", "whiteAlpha.900")} noOfLines={1}>
+                    <Text
+                      fontSize="sm"
+                      fontWeight="semibold"
+                      color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                      noOfLines={1}
+                    >
                       {locationLabel}
                     </Text>
                   </HStack>
@@ -625,52 +652,42 @@ const ProfileScreen: React.FC = () => {
                     </ChakraLink>
                   </HStack>
 
-                  {/* Links */}
-                  {displayLinks.length > 0 && (
-                    <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full" pt={1}>
-                      {displayLinks.slice(0, 6).map((l) => {
-                        const kind = String((l as any)?.kind ?? "custom");
-                        const href = buildLinkHref(l);
-                        const label = getLinkLabel(l);
-                        const IconEl = getLinkIcon(kind);
+                  <SectionLabel>Ссылки</SectionLabel>
 
-                        const isBranded = kind === "github";
-                        return (
-                          <HStack
-                            key={l.id}
-                            spacing={2}
-                            minW={0}
-                            justify={{ base: "center", lg: "flex-start" }}
-                            w="full"
+                  <VStack align={{ base: "center", lg: "start" }} spacing={1.5} w="full" pt={1}>
+                    {displayLinks.slice(0, 6).map((l) => {
+                      const kind = String((l as any)?.kind ?? "custom");
+                      const href = buildLinkHref(l);
+                      const label = getLinkLabel(l);
+                      const IconEl = getLinkIcon(kind);
+                      const isBranded = kind === "github";
+                      const value = String((l as any)?.value ?? "").trim();
+
+                      return (
+                        <HStack
+                          key={l.id}
+                          spacing={2}
+                          minW={0}
+                          justify={{ base: "center", lg: "flex-start" }}
+                          w="full"
+                        >
+                          {isBranded ? <Icon as={FaGithub} boxSize="18px" color={muted} /> : <Icon as={IconEl} color={muted} />}
+                          <ChakraLink
+                            href={href}
+                            isExternal
+                            color={useColorModeValue("blue.700", "blue.300")}
+                            fontWeight="semibold"
+                            maxW="360px"
+                            noOfLines={1}
+                            sx={{ overflowWrap: "anywhere" }}
+                            aria-label={label}
                           >
-                            {isBranded ? (
-                              <Icon
-                                as={FaGithub}
-                                boxSize="18px"
-                                color={muted}
-                              />
-                            ) : (
-                              <Icon as={IconEl} color={muted} />
-                            )}
-                            <ChakraLink
-                              href={href}
-                              isExternal
-                              color={useColorModeValue("blue.700", "blue.300")}
-                              fontWeight="semibold"
-                              maxW="360px"
-                              noOfLines={1}
-                              sx={{ overflowWrap: "anywhere" }}
-                              aria-label={label}
-                            >
-                              {String(l.value || "").trim()}
-                            </ChakraLink>
-                          </HStack>
-                        );
-                      })}
-                    </VStack>
-                  )}
+                            {value}
+                          </ChakraLink>
+                        </HStack>
+                      );
+                    })}
 
-                  <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full" pt={1}>
                     {extraLinks
                       .filter((u) => {
                         const normalized = String(u).trim();

@@ -62,8 +62,8 @@ const ProfileScreen: React.FC = () => {
     () => [
       { label: "Пройдено материалов", value: completedLessons, icon: FiBookOpen },
       { label: "Задач недели решено", value: solvedThisWeek, icon: FiCheckCircle },
-      { label: "Проектов решено", value: solvedProjectsCount, icon: FiCode },
-      { label: "Статей прочитано", value: readArticlesCount, icon: FiFileText },
+      { label: "Пройдено проектов", value: solvedProjectsCount, icon: FiCode },
+      { label: "Прочтено статей", value: readArticlesCount, icon: FiFileText },
       { label: "Участие в хакатонах", value: hackathonsParticipationCount, icon: FiAward },
       { label: "Участие на сессиях", value: sessionsParticipationCount, icon: FiVideo },
     ],
@@ -207,9 +207,9 @@ const ProfileScreen: React.FC = () => {
       <Box
         borderWidth="1px"
         borderColor={cardBorder}
-        borderRadius="16px"
+        borderRadius={{ base: "14px", md: "16px" }}
         bg={cardBg}
-        p={{ base: 4, md: 5 }}
+        p={{ base: 3, md: 5 }}
         minW={0}
         minH={{ base: "112px", md: "124px" }}
         position="relative"
@@ -221,19 +221,19 @@ const ProfileScreen: React.FC = () => {
           <Box
             aria-hidden="true"
             position="absolute"
-            top={{ base: 3, md: 4 }}
-            right={{ base: 3, md: 4 }}
+            top={{ base: 2, md: 4 }}
+            right={{ base: 2, md: 4 }}
             opacity={0.1}
             color={watermarkColor}
             transform="rotate(-6deg)"
             pointerEvents="none"
           >
-            <Icon as={icon} boxSize={{ base: "44px", md: "56px" }} />
+            <Icon as={icon} boxSize={{ base: "38px", md: "56px" }} />
           </Box>
         )}
 
         {/* Fixed header height so values align across columns even when label wraps */}
-        <Box pr={{ base: 10, md: 12 }}>
+        <Box pr={{ base: 8, md: 12 }}>
           <Text
             fontSize="sm"
             color={muted}
@@ -247,7 +247,7 @@ const ProfileScreen: React.FC = () => {
         </Box>
 
         {/* Value is centered vertically between label and hint */}
-        <Box display="flex" alignItems="center" pr={{ base: 10, md: 12 }}>
+        <Box display="flex" alignItems="center" pr={{ base: 8, md: 12 }}>
           <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} lineHeight="1.1">
             {value}
           </Text>
@@ -255,7 +255,7 @@ const ProfileScreen: React.FC = () => {
 
         {/* Keep a consistent bottom row so the value stays centered even when hint is missing */}
         <Box
-          pr={{ base: 10, md: 12 }}
+          pr={{ base: 8, md: 12 }}
           display="flex"
           alignItems="flex-end"
         >
@@ -275,8 +275,8 @@ const ProfileScreen: React.FC = () => {
       role="main"
       position="relative"
       overflow="hidden"
-      px={{ base: 4, md: 6 }}
-      py={{ base: 8, md: 10 }}
+      px={{ base: 3, md: 6 }}
+      py={{ base: 6, md: 10 }}
       aria-labelledby="profile-page-title"
     >
       <Box maxW={{ base: "100%", md: "1000px", lg: "1180px" }} mx="auto">
@@ -296,19 +296,25 @@ const ProfileScreen: React.FC = () => {
         >
           <GridItem>
             <Box
-              p={{ base: 5, md: 7 }}
+              p={{ base: 4, md: 7 }}
               h={{ base: "auto", lg: "full" }}
             >
-            <HStack spacing={4} align="start" flexDirection="column">
+            <HStack
+              spacing={4}
+              align={{ base: "center", lg: "start" }}
+              flexDirection="column"
+              w="full"
+              textAlign={{ base: "center", lg: "left" }}
+            >
               <Avatar
                 size="xl"
                 name={name || "User"}
                 src={withGithubAvatarSize((profile as any).avatarUrl || undefined, 160)}
                 bg={(profile as any).avatarUrl ? "transparent" : "green.400"}
               />
-              <VStack align="start" spacing={2} minW={0} flex={1}>
+              <VStack align={{ base: "center", lg: "start" }} spacing={2} minW={0} flex={1} w="full">
                 {/* Фото → Имя → Описание → Редактировать → Подписчики/Подписан → Ссылки → Достижения */}
-                <HStack spacing={2} flexWrap="wrap">
+                <HStack spacing={2} flexWrap="wrap" justify={{ base: "center", lg: "flex-start" }}>
                   <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} noOfLines={1}>
                     {name || "Пользователь"}
                   </Text>
@@ -319,7 +325,11 @@ const ProfileScreen: React.FC = () => {
                   )}
                 </HStack>
 
-                <Text color={muted} sx={{ wordBreak: "break-word", overflowWrap: "anywhere" }}>
+                <Text
+                  color={muted}
+                  sx={{ wordBreak: "break-word", overflowWrap: "anywhere" }}
+                  textAlign={{ base: "center", lg: "left" }}
+                >
                   {bio || "Описание"}
                 </Text>
 
@@ -329,6 +339,7 @@ const ProfileScreen: React.FC = () => {
                   aria-label="Редактировать профиль"
                   w="full"
                   maxW="360px"
+                  mx={{ base: "auto", lg: 0 }}
                   h="44px"
                   borderRadius="md"
                   variant="outline"
@@ -336,7 +347,14 @@ const ProfileScreen: React.FC = () => {
                   Редактировать профиль
                 </Button>
 
-                <HStack spacing={2} color={muted} pt={1} flexWrap="wrap">
+                <HStack
+                  spacing={2}
+                  color={muted}
+                  pt={1}
+                  flexWrap="wrap"
+                  justify={{ base: "center", lg: "flex-start" }}
+                  w="full"
+                >
                   <Icon as={FiUsers} />
                   <Text>
                     <Text as="span" fontWeight="semibold" color="inherit">
@@ -350,17 +368,21 @@ const ProfileScreen: React.FC = () => {
                   </Text>
                 </HStack>
 
-                <VStack align="start" spacing={2} pt={2} w="full">
-                  <Text fontWeight="semibold">Ссылки</Text>
-                  {profileLinks.length > 0 ? (
-                    <VStack align="start" spacing={2} w="full">
+                <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
+                    <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
                       {profileLinks.slice(0, 6).map((l) => {
                         const kind = String((l as any)?.kind ?? "custom");
                         const href = buildLinkHref(l);
                         const label = getLinkLabel(l);
                         const IconEl = getLinkIcon(kind);
                         return (
-                          <HStack key={l.id} spacing={2} minW={0}>
+                          <HStack
+                            key={l.id}
+                            spacing={2}
+                            minW={0}
+                            justify={{ base: "center", lg: "flex-start" }}
+                            w="full"
+                          >
                             <Icon as={IconEl} color={muted} />
                             <ChakraLink
                               href={href}
@@ -378,16 +400,11 @@ const ProfileScreen: React.FC = () => {
                         );
                       })}
                     </VStack>
-                  ) : (
-                    <Text fontSize="sm" color={muted}>
-                      Пока нет ссылок
-                    </Text>
-                  )}
                 </VStack>
-                <VStack align="start" spacing={2} pt={2} w="full">
+                <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
                   <Text fontWeight="semibold">Достижения</Text>
                   {achievedItems.length > 0 ? (
-                    <HStack spacing={2} flexWrap="wrap">
+                    <HStack spacing={2} flexWrap="wrap" justify={{ base: "center", lg: "flex-start" }}>
                       {achievedItems.map((it: any) => (
                         <CompactAchievement key={it.id} item={it} />
                       ))}
@@ -405,28 +422,32 @@ const ProfileScreen: React.FC = () => {
 
           <GridItem minW={0}>
             <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
-            <Box borderWidth="1px" borderColor={cardBorder} borderRadius="20px" bg={cardBg} p={{ base: 5, md: 7 }}>
+            <Box borderWidth="1px" borderColor={cardBorder} borderRadius="20px" bg={cardBg} p={{ base: 4, md: 7 }}>
               <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }} mb={2}>
                 Статистика
               </Text>
               <Text color={muted} mb={4}>
                 Короткий срез по вашему прогрессу и активности.
               </Text>
-              <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={{ base: 3, md: 4 }}>
+              {/* Prefer 3 columns on desktop, but never "squeeze" tiles on narrower widths */}
+              <SimpleGrid
+                minChildWidth={{ base: "100%", sm: "200px", md: "250px" }}
+                spacing={{ base: 3, md: 4 }}
+              >
                 {progressTiles.map((t) => (
                   <StatTile key={t.label} label={t.label} value={t.value} icon={(t as any).icon} />
                 ))}
               </SimpleGrid>
             </Box>
 
-            <Box borderWidth="1px" borderColor={cardBorder} borderRadius="20px" bg={cardBg} p={{ base: 5, md: 7 }}>
+            <Box borderWidth="1px" borderColor={cardBorder} borderRadius="20px" bg={cardBg} p={{ base: 4, md: 7 }}>
               <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }} mb={2}>
                 Вклад в сообщество
               </Text>
               <Text color={muted} mb={4}>
                 Счётчики собираются из вашего прогресса, задач недели и авторства материалов.
               </Text>
-              <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={3}>
+              <SimpleGrid minChildWidth={{ base: "100%", sm: "260px", md: "320px" }} spacing={3}>
                 {contributionTiles.map((t) => (
                   <StatTile
                     key={t.label}

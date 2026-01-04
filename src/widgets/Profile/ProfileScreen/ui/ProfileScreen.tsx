@@ -211,9 +211,11 @@ const ProfileScreen: React.FC = () => {
         bg={cardBg}
         p={{ base: 4, md: 5 }}
         minW={0}
-        minH={{ base: "104px", md: "116px" }}
+        minH={{ base: "112px", md: "124px" }}
         position="relative"
         overflow="hidden"
+        display="grid"
+        gridTemplateRows="auto 1fr auto"
       >
         {!!icon && (
           <Box
@@ -231,7 +233,7 @@ const ProfileScreen: React.FC = () => {
         )}
 
         {/* Fixed header height so values align across columns even when label wraps */}
-        <Box minH={{ base: "36px", md: "40px" }} mb={2} pr={{ base: 10, md: 12 }}>
+        <Box pr={{ base: 10, md: 12 }}>
           <Text
             fontSize="sm"
             color={muted}
@@ -243,14 +245,26 @@ const ProfileScreen: React.FC = () => {
             {label}
           </Text>
         </Box>
-        <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} lineHeight="1.1">
-          {value}
-        </Text>
-        {!!hint && (
-          <Text fontSize="sm" color={muted} mt={2}>
-            {hint}
+
+        {/* Value is centered vertically between label and hint */}
+        <Box display="flex" alignItems="center" pr={{ base: 10, md: 12 }}>
+          <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} lineHeight="1.1">
+            {value}
           </Text>
-        )}
+        </Box>
+
+        {/* Keep a consistent bottom row so the value stays centered even when hint is missing */}
+        <Box
+          pr={{ base: 10, md: 12 }}
+          display="flex"
+          alignItems="flex-end"
+        >
+          {!!hint ? (
+            <Text fontSize="sm" color={muted}>
+              {hint}
+            </Text>
+          ) : null}
+        </Box>
       </Box>
     );
   };

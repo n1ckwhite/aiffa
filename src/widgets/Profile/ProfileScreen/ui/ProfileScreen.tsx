@@ -489,6 +489,42 @@ const ProfileScreen: React.FC = () => {
                   <StatTile key={t.label} label={t.label} value={t.value} icon={(t as any).icon} />
                 ))}
               </SimpleGrid>
+
+              <Box
+                mt={{ base: 4, md: 5 }}
+                borderWidth="1px"
+                borderColor={useColorModeValue("orange.200", "whiteAlpha.200")}
+                bg={useColorModeValue("orange.50", "whiteAlpha.50")}
+                borderRadius="16px"
+                px={{ base: 3, md: 4 }}
+                py={{ base: 3, md: 3.5 }}
+              >
+                <HStack spacing={2} align="start">
+                  <Box
+                    aria-hidden="true"
+                    mt="2px"
+                    w="26px"
+                    h="26px"
+                    borderRadius="10px"
+                    bg={useColorModeValue("orange.100", "whiteAlpha.100")}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    flexShrink={0}
+                    color={useColorModeValue("orange.700", "orange.200")}
+                  >
+                    <Icon as={FiAward} boxSize="14px" />
+                  </Box>
+                  <Box>
+                    <Text fontSize="sm" color={useColorModeValue("orange.900", "whiteAlpha.900")} fontWeight="semibold">
+                      Ты активнее <Text as="span" color="inherit">62%</Text> пользователей этой недели
+                    </Text>
+                    <Text fontSize="sm" color={useColorModeValue("orange.800", muted)} mt={1}>
+                      Ещё <Text as="span" fontWeight="semibold" color="inherit">2</Text> задачи — и откроется новое достижение
+                    </Text>
+                  </Box>
+                </HStack>
+              </Box>
             </SectionCard>
 
             <SectionCard

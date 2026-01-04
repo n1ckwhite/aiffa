@@ -166,18 +166,24 @@ const ProfileScreen: React.FC = () => {
   const cardBg = useColorModeValue("white", "gray.900");
   const cardBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const muted = useColorModeValue("gray.600", "whiteAlpha.700");
-  const leftIconColors = React.useMemo(
-    () => ({
-      people: useColorModeValue("blue.600", "blue.300"),
-      xp: useColorModeValue("orange.600", "orange.300"),
-      work: useColorModeValue("purple.600", "purple.300"),
-      location: useColorModeValue("green.600", "green.300"),
-      mail: useColorModeValue("pink.600", "pink.300"),
-      github: useColorModeValue("gray.700", "whiteAlpha.800"),
-      link: useColorModeValue("cyan.600", "cyan.300"),
-    }),
-    [],
-  );
+  // Colors for left-side icons (must NOT call hooks inside useMemo).
+  const peopleIconColor = useColorModeValue("blue.600", "blue.300");
+  const xpIconColor = useColorModeValue("orange.600", "orange.300");
+  const workIconColor = useColorModeValue("purple.600", "purple.300");
+  const locationIconColor = useColorModeValue("green.600", "green.300");
+  const mailIconColor = useColorModeValue("pink.600", "pink.300");
+  const githubIconColor = useColorModeValue("gray.700", "whiteAlpha.800");
+  const linkIconColor = useColorModeValue("cyan.600", "cyan.300");
+
+  const leftIconColors = {
+    people: peopleIconColor,
+    xp: xpIconColor,
+    work: workIconColor,
+    location: locationIconColor,
+    mail: mailIconColor,
+    github: githubIconColor,
+    link: linkIconColor,
+  };
 
   const xp =
     typeof (profile as any).xp === "number" && Number.isFinite((profile as any).xp) && (profile as any).xp >= 0

@@ -64,12 +64,42 @@ const ProfileScreen: React.FC = () => {
 
   const progressTiles = React.useMemo(
     () => [
-      { label: "Пройдено материалов", value: completedLessons, icon: FiBookOpen },
-      { label: "Задач недели решено", value: solvedThisWeek, icon: FiCheckCircle },
-      { label: "Пройдено проектов", value: solvedProjectsCount, icon: FiCode },
-      { label: "Прочтено статей", value: readArticlesCount, icon: FiFileText },
-      { label: "Участие в хакатонах", value: hackathonsParticipationCount, icon: FiAward },
-      { label: "Участие на сессиях", value: sessionsParticipationCount, icon: FiVideo },
+      {
+        label: "Пройдено материалов",
+        value: completedLessons,
+        icon: FiBookOpen,
+        tooltip: "Сколько материалов вы уже изучили на платформе.",
+      },
+      {
+        label: "Задач недели решено",
+        value: solvedThisWeek,
+        icon: FiCheckCircle,
+        tooltip: "Сколько задач недели вы решили всего",
+      },
+      {
+        label: "Пройдено проектов",
+        value: solvedProjectsCount,
+        icon: FiCode,
+        tooltip: "Сколько проектов вы завершили на платформе.",
+      },
+      {
+        label: "Прочтено статей",
+        value: readArticlesCount,
+        icon: FiFileText,
+        tooltip: "Сколько статей из блога вы прочитали (по вашему прогрессу).",
+      },
+      {
+        label: "Участие в хакатонах",
+        value: hackathonsParticipationCount,
+        icon: FiAward,
+        tooltip: "Ваше участие в хакатонах",
+      },
+      {
+        label: "Участие на сессиях",
+        value: sessionsParticipationCount,
+        icon: FiVideo,
+        tooltip: "Сколько сессий вы посетили (созвоны/разборы/встречи).",
+      },
     ],
     [
       completedLessons,
@@ -83,10 +113,30 @@ const ProfileScreen: React.FC = () => {
 
   const contributionTiles = React.useMemo(
     () => [
-      { label: "Вложено материалов", value: contributedMaterialsCount, icon: FiBookOpen },
-      { label: "Вложено проектов", value: contributedProjectsCount, icon: FiPackage },
-      { label: "Вложено задач недели", value: totalSolvedEver, icon: FiTarget },
-      { label: "Написано статей", value: authoredArticlesCount, icon: FiEdit3 },
+      {
+        label: "Вложено материалов",
+        value: contributedMaterialsCount,
+        icon: FiBookOpen,
+        tooltip: "Сколько материалов вы вложили в базу AIFFA (по авторству).",
+      },
+      {
+        label: "Вложено проектов",
+        value: contributedProjectsCount,
+        icon: FiPackage,
+        tooltip: "Сколько проектов вы добавили или улучшили (по авторству).",
+      },
+      {
+        label: "Вложено задач недели",
+        value: totalSolvedEver,
+        icon: FiTarget,
+        tooltip: "Сколько задач недели вы выложили (по авторству)",
+      },
+      {
+        label: "Написано статей",
+        value: authoredArticlesCount,
+        icon: FiEdit3,
+        tooltip: "Сколько статей вы опубликовали в блоге AIFFA.",
+      },
     ],
     [authoredArticlesCount, contributedMaterialsCount, contributedProjectsCount, totalSolvedEver],
   );
@@ -215,10 +265,12 @@ const ProfileScreen: React.FC = () => {
     value: React.ReactNode;
     hint?: string;
     icon?: React.ComponentType<any>;
-  }> = ({ label, value, hint, icon }) => {
+    tooltip?: string;
+  }> = ({ label, value, hint, icon, tooltip }) => {
     const watermarkColor = useColorModeValue("blackAlpha.150", "whiteAlpha.120");
+    const focusRing = useColorModeValue("0 0 0 3px rgba(66,153,225,0.45)", "0 0 0 3px rgba(66,153,225,0.45)");
 
-    return (
+    const tile = (
       <Box
         borderWidth="1px"
         borderColor={cardBorder}
@@ -231,6 +283,8 @@ const ProfileScreen: React.FC = () => {
         overflow="hidden"
         display="grid"
         gridTemplateRows="auto 1fr auto"
+        tabIndex={tooltip ? 0 : undefined}
+        _focusVisible={tooltip ? { boxShadow: focusRing, outline: "none" } : undefined}
       >
         {!!icon && (
           <Box
@@ -281,6 +335,14 @@ const ProfileScreen: React.FC = () => {
           ) : null}
         </Box>
       </Box>
+    );
+
+    if (!tooltip) return tile;
+
+    return (
+      <Tooltip hasArrow openDelay={240} placement="top" label={tooltip} shouldWrapChildren>
+        {tile}
+      </Tooltip>
     );
   };
 
@@ -513,7 +575,13 @@ const ProfileScreen: React.FC = () => {
                 spacing={{ base: 3, md: 4 }}
               >
                 {progressTiles.map((t) => (
-                  <StatTile key={t.label} label={t.label} value={t.value} icon={(t as any).icon} />
+                  <StatTile
+                    key={t.label}
+                    label={t.label}
+                    value={t.value}
+                    icon={(t as any).icon}
+                    tooltip={(t as any).tooltip}
+                  />
                 ))}
               </SimpleGrid>
 
@@ -567,6 +635,7 @@ const ProfileScreen: React.FC = () => {
                     value={t.value}
                     hint={contributionHint}
                     icon={(t as any).icon}
+                    tooltip={(t as any).tooltip}
                   />
                 ))}
               </SimpleGrid>

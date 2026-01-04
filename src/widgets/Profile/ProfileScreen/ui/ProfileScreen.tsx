@@ -55,7 +55,6 @@ import {
   FaRegCalendarAlt,
   FaTelegramPlane,
 } from "react-icons/fa";
-import { Avatar } from "@chakra-ui/react";
 
 const PLACEHOLDER_AVATAR_URL = "https://avatars.githubusercontent.com/u/89804687?v=4";
 const GLOBAL_GITHUB_LINK: ProfileLink = {
@@ -399,7 +398,7 @@ const ProfileScreen: React.FC = () => {
     : "AIFFA";
   const locationLabel = typeof (profile as any)?.location === "string" && (profile as any).location.trim()
     ? (profile as any).location.trim()
-    : "Moscow";
+    : "Москва";
 
   const emailValue =
     profileLinks.find((l) => String((l as any)?.kind ?? "") === "email")?.value?.trim?.() ||
@@ -666,12 +665,23 @@ const ProfileScreen: React.FC = () => {
                   minW={0}
                   textAlign={{ base: "center", md: "left" }}
                 >
-                  <Avatar
+                  <Box
+                    as="img"
                     // Responsive avatar size: small phones -> smaller, desktop -> bigger.
                     boxSize={{ base: "132px", sm: "152px", md: "184px", lg: "208px" }}
-                    name={name || "User"}
-                    src={withGithubAvatarSize(avatarUrl, 416)}
+                    borderRadius="full"
+                    objectFit="cover"
                     bg="transparent"
+                    alt={name || "Пользователь"}
+                    src={withGithubAvatarSize(avatarUrl, 416)}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    onError={(e: any) => {
+                      try {
+                        e.currentTarget.src = PLACEHOLDER_AVATAR_URL;
+                      } catch {}
+                    }}
                   />
 
                   <VStack align={{ base: "center", md: "start" }} spacing={2} w="full" minW={0}>

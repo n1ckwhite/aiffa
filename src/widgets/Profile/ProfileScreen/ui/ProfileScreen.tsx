@@ -19,6 +19,7 @@ import { useUserProfile, type ProfileLink } from "entities/user";
 import { useAchievementsData } from "../hooks/useAchievementsData";
 import { withGithubAvatarSize } from "@/shared/lib/github/withGithubAvatarSize";
 import PillBadge from "shared/ui/PillBadge";
+import { formatCount } from "shared/functions/formatCount";
 import {
   FiAward,
   FiBarChart2,
@@ -372,6 +373,7 @@ const ProfileScreen: React.FC = () => {
     const focusRing = useColorModeValue("0 0 0 3px rgba(66,153,225,0.45)", "0 0 0 3px rgba(66,153,225,0.45)");
     // Colorful watermark by default (to highlight the tile), then de-accent on hover.
     const baseAccent = accentColor ?? useColorModeValue("blue.400", "blue.200");
+    const formattedValue = typeof value === "number" ? formatCount(value) : value;
 
     const tile = (
       <Box
@@ -439,7 +441,7 @@ const ProfileScreen: React.FC = () => {
         {/* Value is centered vertically between label and hint */}
         <Box display="flex" alignItems="center" pr={{ base: 8, md: 12 }}>
           <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} lineHeight="1.1">
-            {value}
+            {formattedValue}
           </Text>
         </Box>
 
@@ -610,11 +612,11 @@ const ProfileScreen: React.FC = () => {
                         <Icon as={FiUsers} color={leftIconColors.people} />
                         <Text>
                           <Text as="span" fontWeight="semibold" color="inherit">
-                            10
+                            {formatCount(10)}
                           </Text>{" "}
                           подписчики ·{" "}
                           <Text as="span" fontWeight="semibold" color="inherit">
-                          10
+                            {formatCount(10)}
                           </Text>{" "}
                           подписан
                         </Text>
@@ -631,7 +633,7 @@ const ProfileScreen: React.FC = () => {
                           <Icon as={FiAward} color={leftIconColors.xp} />
                           <Text fontSize="sm">
                             <Text as="span" fontWeight="semibold" color="inherit">
-                              {xp}
+                              {formatCount(xp)}
                             </Text>{" "}
                             XP
                           </Text>
@@ -823,7 +825,7 @@ const ProfileScreen: React.FC = () => {
                         bg={achievementsCountBg}
                       >
                         <Text fontSize="xs" fontWeight="bold" color={achievementsIconColor}>
-                          {achievedItems.length}
+                          {formatCount(achievedItems.length)}
                         </Text>
                       </Box>
                     </HStack>

@@ -43,6 +43,9 @@ const ProfileScreen: React.FC = () => {
   const bio = typeof profile?.bio === "string" ? profile.bio : "";
   const direction = typeof (profile as any).direction === "string" ? (profile as any).direction.trim() : "";
   const placeholderAvatarUrl = "https://avatars.githubusercontent.com/u/249125545?v=4";
+  const avatarUrl = typeof (profile as any)?.avatarUrl === "string" && (profile as any).avatarUrl.trim()
+    ? (profile as any).avatarUrl.trim()
+    : placeholderAvatarUrl;
 
   const { items } = useAchievementsData(profile as any);
 
@@ -373,9 +376,10 @@ const ProfileScreen: React.FC = () => {
               textAlign={{ base: "center", lg: "left" }}
             >
               <Avatar
-                boxSize={{ base: "160px", md: "184px" }}
+                // Responsive avatar size: small phones -> smaller, desktop -> bigger.
+                boxSize={{ base: "132px", sm: "152px", md: "184px", lg: "208px" }}
                 name={name || "User"}
-                src={withGithubAvatarSize(placeholderAvatarUrl, 304)}
+                src={withGithubAvatarSize(avatarUrl, 416)}
                 bg="transparent"
               />
               <VStack align={{ base: "center", lg: "start" }} spacing={2} minW={0} flex={1} w="full">

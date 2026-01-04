@@ -401,8 +401,8 @@ const ProfileScreen: React.FC = () => {
                   onClick={() => {}}
                   aria-label="Редактировать профиль"
                   w="full"
-                  maxW="360px"
-                  mx={{ base: "auto", lg: 0 }}
+                  mx="auto"
+                  alignSelf="center"
                   h="44px"
                   borderRadius="md"
                   variant="outline"
@@ -453,7 +453,7 @@ const ProfileScreen: React.FC = () => {
                     </PillBadge>
                   </Box>
                 </HStack>
-
+                {profileLinks.length > 0 && (
                 <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
                     <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
                       {profileLinks.slice(0, 6).map((l) => {
@@ -486,7 +486,7 @@ const ProfileScreen: React.FC = () => {
                         );
                       })}
                     </VStack>
-                </VStack>
+                </VStack>)}
                 {achievedItems.length > 0 && (
                 <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
                   <Text fontWeight="semibold" mb={2}>Достижения</Text>

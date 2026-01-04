@@ -547,90 +547,105 @@ const ProfileScreen: React.FC = () => {
               py={{base: 0, lg: 4}}
               h={{ base: "auto", lg: "full" }}
             >
-            <HStack
-              spacing={4}
-              align="start"
-              flexDirection="column"
+            <Grid
               w="full"
-              textAlign="left"
+              // Outer layout becomes 2 columns at `lg` (left column is ~420px),
+              // so inner 2-column hero must NOT be active there, otherwise it squeezes.
+              templateColumns={{
+                base: "1fr",
+                md: "minmax(260px, 320px) 1fr", // use space on wider single-column layouts
+                lg: "1fr", // back to single column when outer grid switches to 2 columns
+              }}
+              columnGap={{ base: 0, md: 10, lg: 0 }}
+              rowGap={{ base: 4, md: 0, lg: 4 }}
+              alignItems="start"
             >
-              <Avatar
-                // Responsive avatar size: small phones -> smaller, desktop -> bigger.
-                boxSize={{ base: "132px", sm: "152px", md: "184px", lg: "208px" }}
-                name={name || "User"}
-                src={withGithubAvatarSize(avatarUrl, 416)}
-                bg="transparent"
-              />
-              <VStack align="start" spacing={2} minW={0} flex={1} w="full">
-                {/* Фото → Имя → Описание → Редактировать → Подписчики/Подписан → Ссылки → Достижения */}
-                <HStack spacing={2} flexWrap="wrap" justify="flex-start">
-                  <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} noOfLines={1}>
-                    {name || "Пользователь"}
-                  </Text>
-                </HStack>
-
-                <Text
-                  color={muted}
-                  sx={{ wordBreak: "break-word", overflowWrap: "anywhere" }}
-                  textAlign="left"
-                >
-                  {bio || "Описание"}
-                </Text>
-
-                <Button
-                  type="button"
-                  onClick={() => {}}
-                  aria-label="Редактировать профиль"
+              <GridItem>
+                <VStack
+                  align={{ base: "center", md: "start" }}
+                  spacing={3}
                   w="full"
-                  maxW={{ base: "300px", lg: "250px" }}
-                  mx={0}
-                  alignSelf="flex-start"
-                  h="44px"
-                  borderRadius="md"
-                  variant="outline"
+                  minW={0}
+                  textAlign={{ base: "center", md: "left" }}
                 >
-                  Редактировать профиль
-                </Button>
+                  <Avatar
+                    // Responsive avatar size: small phones -> smaller, desktop -> bigger.
+                    boxSize={{ base: "132px", sm: "152px", md: "184px", lg: "208px" }}
+                    name={name || "User"}
+                    src={withGithubAvatarSize(avatarUrl, 416)}
+                    bg="transparent"
+                  />
 
-                <Box w="full" maxW="full" mx={0}>
-                  <VStack align="start" spacing={2} w="full" pt={1}>
-                    <LeftRow icon={FiUsers as any} iconColor={leftIconColors.people} spacing={2}>
-                      <Text color={muted}>
-                        <Text as="span" fontWeight="semibold" color="inherit">
-                          {followersCount}
-                        </Text>{" "}
-                        подписчики ·{" "}
-                        <Text as="span" fontWeight="semibold" color="inherit">
-                          {followingCount}
-                        </Text>{" "}
-                        подписан
-                      </Text>
-                    </LeftRow>
+                  <VStack align={{ base: "center", md: "start" }} spacing={2} w="full" minW={0}>
+                    <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} noOfLines={1}>
+                      {name || "Пользователь"}
+                    </Text>
 
-                    <LeftRow icon={FiAward as any} iconColor={leftIconColors.xp}>
-                      <HStack spacing={3} flexWrap="wrap" justify="flex-start" w="full" minW={0}>
-                        <Text fontSize="sm" color={muted}>
+                    <Text color={muted} sx={{ wordBreak: "break-word", overflowWrap: "anywhere" }}>
+                      {bio || "Описание"}
+                    </Text>
+
+                    <Button
+                      type="button"
+                      onClick={() => {}}
+                      aria-label="Редактировать профиль"
+                      w="full"
+                      maxW={{ base: "360px", md: "300px", lg: "250px" }}
+                      alignSelf={{ base: "center", md: "flex-start" }}
+                      h="44px"
+                      borderRadius="md"
+                      variant="outline"
+                    >
+                      Редактировать профиль
+                    </Button>
+
+                    <VStack align="start" spacing={2} w="full" pt={1}>
+                      <LeftRow icon={FiUsers as any} iconColor={leftIconColors.people} spacing={2}>
+                        <Text color={muted}>
                           <Text as="span" fontWeight="semibold" color="inherit">
-                            {xp}
+                            {followersCount}
                           </Text>{" "}
-                          XP
+                          подписчики ·{" "}
+                          <Text as="span" fontWeight="semibold" color="inherit">
+                            {followingCount}
+                          </Text>{" "}
+                          подписан
                         </Text>
-                        <Box>
-                          <PillBadge
-                            colorScheme={profileBadge.colorScheme as any}
-                            variant="outline"
-                            uppercase={false}
-                          >
-                            {profileBadge.label}
-                          </PillBadge>
-                        </Box>
-                      </HStack>
-                    </LeftRow>
+                      </LeftRow>
+
+                      <LeftRow icon={FiAward as any} iconColor={leftIconColors.xp}>
+                        <HStack spacing={3} flexWrap="wrap" justify="flex-start" w="full" minW={0}>
+                          <Text fontSize="sm" color={muted}>
+                            <Text as="span" fontWeight="semibold" color="inherit">
+                              {xp}
+                            </Text>{" "}
+                            XP
+                          </Text>
+                          <Box>
+                            <PillBadge
+                              colorScheme={profileBadge.colorScheme as any}
+                              variant="outline"
+                              uppercase={false}
+                            >
+                              {profileBadge.label}
+                            </PillBadge>
+                          </Box>
+                        </HStack>
+                      </LeftRow>
+                    </VStack>
                   </VStack>
+                </VStack>
+              </GridItem>
 
-                  <Divider mt={3} borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")} />
+              <GridItem minW={0}>
+                <Box
+                  w="full"
+                  maxW={{ base: "360px", md: "full", lg: "full" }}
+                  mx={{ base: "auto", md: 0, lg: 0 }}
+                >
+                  <Divider borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")} />
 
-                  <VStack align="start" spacing={2} w="full" textAlign="left">
+                  <VStack align="start" spacing={2} w="full" textAlign="left" pt={3}>
                     <SectionLabel>Контакты</SectionLabel>
 
                     <LeftRow icon={FiBriefcase as any} iconColor={leftIconColors.work}>
@@ -770,8 +785,8 @@ const ProfileScreen: React.FC = () => {
                       </HStack>
                   </VStack>)}
                 </Box>
-              </VStack>
-            </HStack>
+              </GridItem>
+            </Grid>
             </Box>
           </GridItem>
 

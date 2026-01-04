@@ -40,14 +40,37 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { Avatar } from "@chakra-ui/react";
 
+const PLACEHOLDER_AVATAR_URL = "https://avatars.githubusercontent.com/u/89804687?v=4";
+const GLOBAL_GITHUB_LINK: ProfileLink = {
+  id: "global-github-n1ckwhite",
+  kind: "github",
+  label: "GitHub",
+  value: "n1ckwhite",
+};
+const EXTRA_LINKS = [
+  "https://t.me/iamceob1tch",
+  "https://gitlab.com/nickwhite22",
+  "https://www.codewars.com/users/n1ckwhite",
+] as const;
+
+type StatTileModel = {
+  label: string;
+  value: React.ReactNode;
+  hint?: string;
+  icon?: React.ComponentType<any>;
+  tooltip?: string;
+  accentColor?: string;
+};
+
 const ProfileScreen: React.FC = () => {
   const { profile } = useUserProfile();
+  const profileAny = profile as any;
   const name = typeof profile?.name === "string" ? profile.name : "";
   const bio = typeof profile?.bio === "string" ? profile.bio : "";
-  const placeholderAvatarUrl = "https://avatars.githubusercontent.com/u/89804687?v=4";
-  const avatarUrl = typeof (profile as any)?.avatarUrl === "string" && (profile as any).avatarUrl.trim()
-    ? (profile as any).avatarUrl.trim()
-    : placeholderAvatarUrl;
+  const avatarUrl =
+    typeof profileAny?.avatarUrl === "string" && profileAny.avatarUrl.trim()
+      ? profileAny.avatarUrl.trim()
+      : PLACEHOLDER_AVATAR_URL;
 
   const { items } = useAchievementsData(profile as any);
 
@@ -62,98 +85,83 @@ const ProfileScreen: React.FC = () => {
   const contributedProjectsCount = 0;
   const totalSolvedEver = 3;
   const authoredArticlesCount = 0;
-  const isContributionLoaded = true;
-  const isArticlesLoaded = true;
   const contributionHint = "По авторству в базе AIFFA";
 
-  const progressTiles = React.useMemo(
-    () => [
-      {
-        label: "Пройдено материалов",
-        value: completedLessons,
-        icon: FiBookOpen,
-        accentColor: "blue.400",
-        tooltip: "Сколько материалов вы уже изучили на платформе.",
-      },
-      {
-        label: "Задач недели решено",
-        value: solvedThisWeek,
-        icon: FiCheckCircle,
-        accentColor: "green.400",
-        tooltip: "Сколько задач недели вы решили всего",
-      },
-      {
-        label: "Пройдено проектов",
-        value: solvedProjectsCount,
-        icon: FiCode,
-        accentColor: "purple.400",
-        tooltip: "Сколько проектов вы завершили на платформе.",
-      },
-      {
-        label: "Прочтено статей",
-        value: readArticlesCount,
-        icon: FiFileText,
-        accentColor: "orange.400",
-        tooltip: "Сколько статей из блога вы прочитали (по вашему прогрессу).",
-      },
-      {
-        label: "Участие в хакатонах",
-        value: hackathonsParticipationCount,
-        icon: FiAward,
-        accentColor: "pink.400",
-        tooltip: "Ваше участие в хакатонах",
-      },
-      {
-        label: "Участие на сессиях",
-        value: sessionsParticipationCount,
-        icon: FiVideo,
-        accentColor: "cyan.400",
-        tooltip: "Сколько сессий вы посетили (созвоны/разборы/встречи).",
-      },
-    ],
-    [
-      completedLessons,
-      hackathonsParticipationCount,
-      readArticlesCount,
-      sessionsParticipationCount,
-      solvedProjectsCount,
-      solvedThisWeek,
-    ],
-  );
+  const progressTiles: StatTileModel[] = [
+    {
+      label: "Пройдено материалов",
+      value: completedLessons,
+      icon: FiBookOpen,
+      accentColor: "blue.400",
+      tooltip: "Сколько материалов вы уже изучили на платформе.",
+    },
+    {
+      label: "Задач недели решено",
+      value: solvedThisWeek,
+      icon: FiCheckCircle,
+      accentColor: "green.400",
+      tooltip: "Сколько задач недели вы решили всего",
+    },
+    {
+      label: "Пройдено проектов",
+      value: solvedProjectsCount,
+      icon: FiCode,
+      accentColor: "purple.400",
+      tooltip: "Сколько проектов вы завершили на платформе.",
+    },
+    {
+      label: "Прочтено статей",
+      value: readArticlesCount,
+      icon: FiFileText,
+      accentColor: "orange.400",
+      tooltip: "Сколько статей из блога вы прочитали (по вашему прогрессу).",
+    },
+    {
+      label: "Участие в хакатонах",
+      value: hackathonsParticipationCount,
+      icon: FiAward,
+      accentColor: "pink.400",
+      tooltip: "Ваше участие в хакатонах",
+    },
+    {
+      label: "Участие на сессиях",
+      value: sessionsParticipationCount,
+      icon: FiVideo,
+      accentColor: "cyan.400",
+      tooltip: "Сколько сессий вы посетили (созвоны/разборы/встречи).",
+    },
+  ];
 
-  const contributionTiles = React.useMemo(
-    () => [
-      {
-        label: "Вложено материалов",
-        value: contributedMaterialsCount,
-        icon: FiBookOpen,
-        accentColor: "blue.400",
-        tooltip: "Сколько материалов вы вложили в базу AIFFA (по авторству).",
-      },
-      {
-        label: "Вложено проектов",
-        value: contributedProjectsCount,
-        icon: FiPackage,
-        accentColor: "purple.400",
-        tooltip: "Сколько проектов вы добавили или улучшили (по авторству).",
-      },
-      {
-        label: "Вложено задач недели",
-        value: totalSolvedEver,
-        icon: FiTarget,
-        accentColor: "green.400",
-        tooltip: "Сколько задач недели вы выложили (по авторству)",
-      },
-      {
-        label: "Написано статей",
-        value: authoredArticlesCount,
-        icon: FiEdit3,
-        accentColor: "orange.400",
-        tooltip: "Сколько статей вы опубликовали в блоге AIFFA.",
-      },
-    ],
-    [authoredArticlesCount, contributedMaterialsCount, contributedProjectsCount, totalSolvedEver],
-  );
+  const contributionTiles: StatTileModel[] = [
+    {
+      label: "Вложено материалов",
+      value: contributedMaterialsCount,
+      icon: FiBookOpen,
+      accentColor: "blue.400",
+      tooltip: "Сколько материалов вы вложили в базу AIFFA (по авторству).",
+    },
+    {
+      label: "Вложено проектов",
+      value: contributedProjectsCount,
+      icon: FiPackage,
+      accentColor: "purple.400",
+      tooltip: "Сколько проектов вы добавили или улучшили (по авторству).",
+    },
+    {
+      label: "Вложено задач недели",
+      value: totalSolvedEver,
+      icon: FiTarget,
+      accentColor: "green.400",
+      tooltip: "Сколько задач недели вы выложили (по авторству)",
+    },
+    {
+      label: "Написано статей",
+      value: authoredArticlesCount,
+      icon: FiEdit3,
+      accentColor: "orange.400",
+      tooltip: "Сколько статей вы опубликовали в блоге AIFFA.",
+    },
+  ];
 
   const followersCount =
     typeof (profile as any).followersCount === "number" && isFinite((profile as any).followersCount) && (profile as any).followersCount >= 0
@@ -186,52 +194,36 @@ const ProfileScreen: React.FC = () => {
   };
 
   const xp =
-    typeof (profile as any).xp === "number" && Number.isFinite((profile as any).xp) && (profile as any).xp >= 0
-      ? Math.trunc((profile as any).xp)
+    typeof profileAny.xp === "number" && Number.isFinite(profileAny.xp) && profileAny.xp >= 0
+      ? Math.trunc(profileAny.xp)
       : 0;
 
-  const profileLinks = React.useMemo<ProfileLink[]>(() => {
-    const raw = Array.isArray((profile as any).links) ? ((profile as any).links as any[]) : [];
-    return raw
-      .filter(Boolean)
-      .map((l: any) => ({
-        id: String(l?.id ?? ""),
-        kind:
-          l?.kind === "email" || l?.kind === "telegram" || l?.kind === "github" || l?.kind === "website" || l?.kind === "custom"
-            ? l.kind
-            : "custom",
-        label: typeof l?.label === "string" ? l.label : "",
-        value: typeof l?.value === "string" ? l.value : "",
-      }))
-      .filter((l: any) => !!l.id && !!String(l.value || "").trim()) as ProfileLink[];
-  }, [profile]);
+  const rawLinks = Array.isArray(profileAny.links) ? (profileAny.links as any[]) : [];
+  const profileLinks: ProfileLink[] = rawLinks
+    .filter(Boolean)
+    .map((l: any) => ({
+      id: String(l?.id ?? ""),
+      kind:
+        l?.kind === "email" || l?.kind === "telegram" || l?.kind === "github" || l?.kind === "website" || l?.kind === "custom"
+          ? l.kind
+          : "custom",
+      label: typeof l?.label === "string" ? l.label : "",
+      value: typeof l?.value === "string" ? l.value : "",
+    }))
+    .filter((l: any) => !!l.id && !!String(l.value || "").trim()) as ProfileLink[];
 
-  const displayLinks = React.useMemo<ProfileLink[]>(() => {
-    const globalGithub: ProfileLink = {
-      id: "global-github-n1ckwhite",
-      kind: "github",
-      label: "GitHub",
-      value: "n1ckwhite",
-    };
+  const normalized = (v: string) => v.trim().toLowerCase();
+  const existing = new Set(profileLinks.map((l) => normalized(String((l as any)?.value ?? ""))));
+  const displayLinks: ProfileLink[] = existing.has(normalized(GLOBAL_GITHUB_LINK.value))
+    ? profileLinks
+    : [...profileLinks, GLOBAL_GITHUB_LINK];
 
-    const normalized = (v: string) => v.trim().toLowerCase();
-    const existing = new Set(profileLinks.map((l) => normalized(String((l as any)?.value ?? ""))));
-    const merged = [...profileLinks];
-    if (!existing.has(normalized(globalGithub.value))) {
-      merged.push(globalGithub);
-    }
-    return merged;
-  }, [profileLinks]);
+  const hasRealGithub = profileLinks.some((l) => String((l as any)?.kind ?? "") === "github");
+  const profileBadge = hasRealGithub
+    ? ({ label: "Контрибьютор", colorScheme: "purple" as const } as const)
+    : ({ label: "Автор AIFFA", colorScheme: "blue" as const } as const);
 
-  const profileBadge = React.useMemo(() => {
-    const hasGithub = profileLinks.some(
-      (l) => String((l as any)?.kind ?? "") === "github" && !String((l as any)?.id ?? "").startsWith("global-"),
-    );
-    if (hasGithub) return { label: "Контрибьютор", colorScheme: "purple" as const };
-    return { label: "Автор AIFFA", colorScheme: "blue" as const };
-  }, [profileLinks]);
-
-  const buildLinkHref = React.useCallback((link: ProfileLink): string => {
+  const buildLinkHref = (link: ProfileLink): string => {
     const kind = String((link as any)?.kind ?? "custom");
     const rawValue = String((link as any)?.value ?? "").trim();
     if (!rawValue) return "#";
@@ -252,16 +244,16 @@ const ProfileScreen: React.FC = () => {
     }
     if (/^https?:\/\//i.test(rawValue)) return rawValue;
     return `https://${rawValue}`;
-  }, []);
+  };
 
-  const getLinkIcon = React.useCallback((kind: string) => {
+  const getLinkIcon = (kind: string) => {
     if (kind === "email") return FiMail as any;
     if (kind === "telegram") return FaTelegramPlane as any;
     if (kind === "github") return FaGithub as any;
     return FiLink as any;
-  }, []);
+  };
 
-  const getLinkLabel = React.useCallback((link: ProfileLink) => {
+  const getLinkLabel = (link: ProfileLink) => {
     const label = typeof (link as any)?.label === "string" ? (link as any).label.trim() : "";
     if (label) return label;
     const kind = String((link as any)?.kind ?? "custom");
@@ -269,7 +261,7 @@ const ProfileScreen: React.FC = () => {
     if (kind === "telegram") return "Telegram";
     if (kind === "github") return "GitHub";
     return "Ссылка";
-  }, []);
+  };
 
   const SectionLabel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <Text
@@ -295,19 +287,9 @@ const ProfileScreen: React.FC = () => {
     profileLinks.find((l) => String((l as any)?.kind ?? "") === "email")?.value?.trim?.() ||
     "bbycinka@yandex.ru";
 
-  const extraLinks = React.useMemo(
-    () => [
-      "https://t.me/iamceob1tch",
-      "https://gitlab.com/nickwhite22",
-      "https://www.codewars.com/users/n1ckwhite",
-    ],
-    [],
-  );
+  const extraLinks = EXTRA_LINKS;
 
-  const achievedItems = React.useMemo(() => {
-    const list = Array.isArray(items) ? items : [];
-    return list.filter((i: any) => i?.achieved).slice(0, 6);
-  }, [items]);
+  const achievedItems = (Array.isArray(items) ? items : []).filter((i: any) => i?.achieved).slice(0, 6);
 
   const CompactAchievement: React.FC<{ item: any }> = ({ item }) => {
     const ring = `conic-gradient(${item.from} 0 50%, ${item.to} 50% 100%)`;

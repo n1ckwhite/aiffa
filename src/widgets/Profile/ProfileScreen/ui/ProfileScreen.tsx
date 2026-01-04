@@ -766,8 +766,10 @@ const ProfileScreen: React.FC = () => {
                     </VStack>
                   </VStack>
                   {achievedItems.length > 0 && (
-                  <VStack align="start" spacing={2} w="full" textAlign="left">
-                    <Text fontWeight="semibold">Достижения</Text>
+                  <VStack align="start" spacing={2} w="full" textAlign="left" mt={4}>
+                    <Text fontWeight="semibold" textAlign="left" w="full">
+                      Достижения
+                    </Text>
                       <HStack spacing={2} flexWrap="wrap" justify="flex-start">
                         {achievedItems.map((it: any) => (
                           <CompactAchievement key={it.id} item={it} />

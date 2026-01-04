@@ -21,6 +21,7 @@ import PillBadge from "shared/ui/PillBadge";
 import {
   FiAward,
   FiBarChart2,
+  FiBriefcase,
   FiBookOpen,
   FiCheckCircle,
   FiCode,
@@ -28,12 +29,14 @@ import {
   FiFileText,
   FiLink,
   FiMail,
+  FiMapPin,
   FiPackage,
   FiTarget,
   FiUsers,
   FiVideo,
 } from "react-icons/fi";
 import { FaTelegramPlane } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { Avatar } from "@chakra-ui/react";
 
 const ProfileScreen: React.FC = () => {
@@ -204,6 +207,11 @@ const ProfileScreen: React.FC = () => {
       const v = rawValue.replace(/^@/, "").replace(/^t\.me\//i, "");
       return `https://t.me/${v}`;
     }
+    if (kind === "github") {
+      if (/^https?:\/\//i.test(rawValue)) return rawValue;
+      const v = rawValue.replace(/^@/, "").replace(/^github\.com\//i, "").trim();
+      return `https://github.com/${v}`;
+    }
     if (/^https?:\/\//i.test(rawValue)) return rawValue;
     return `https://${rawValue}`;
   }, []);
@@ -211,6 +219,7 @@ const ProfileScreen: React.FC = () => {
   const getLinkIcon = React.useCallback((kind: string) => {
     if (kind === "email") return FiMail as any;
     if (kind === "telegram") return FaTelegramPlane as any;
+    if (kind === "github") return FaGithub as any;
     return FiLink as any;
   }, []);
 
@@ -220,8 +229,20 @@ const ProfileScreen: React.FC = () => {
     const kind = String((link as any)?.kind ?? "custom");
     if (kind === "email") return "Email";
     if (kind === "telegram") return "Telegram";
+    if (kind === "github") return "GitHub";
     return "Ссылка";
   }, []);
+
+  const workplace = typeof (profile as any)?.workplace === "string" && (profile as any).workplace.trim()
+    ? (profile as any).workplace.trim()
+    : "AIFFA";
+  const locationLabel = typeof (profile as any)?.location === "string" && (profile as any).location.trim()
+    ? (profile as any).location.trim()
+    : "Moscow";
+
+  const emailValue =
+    profileLinks.find((l) => String((l as any)?.kind ?? "") === "email")?.value?.trim?.() ||
+    "bbycinka@yandex.ru";
 
   const achievedItems = React.useMemo(() => {
     const list = Array.isArray(items) ? items : [];
@@ -545,14 +566,47 @@ const ProfileScreen: React.FC = () => {
                     </PillBadge>
                   </Box>
                 </HStack>
-                {profileLinks.length > 0 && (
-                <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
-                    <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
+                <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full" pt={1}>
+                  {/* Workplace / location / email */}
+                  <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
+                    <Icon as={FiBriefcase} color={muted} />
+                    <Text fontSize="sm" fontWeight="semibold" color={useColorModeValue("gray.800", "whiteAlpha.900")} noOfLines={1}>
+                      {workplace}
+                    </Text>
+                  </HStack>
+
+                  <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
+                    <Icon as={FiMapPin} color={muted} />
+                    <Text fontSize="sm" fontWeight="semibold" color={useColorModeValue("gray.800", "whiteAlpha.900")} noOfLines={1}>
+                      {locationLabel}
+                    </Text>
+                  </HStack>
+
+                  <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
+                    <Icon as={FiMail} boxSize="18px" color={muted} />
+                    <ChakraLink
+                      href={`mailto:${emailValue}`}
+                      color={useColorModeValue("blue.700", "blue.300")}
+                      fontWeight="semibold"
+                      maxW="360px"
+                      noOfLines={1}
+                      sx={{ overflowWrap: "anywhere" }}
+                      aria-label={`Email: ${emailValue}`}
+                    >
+                      {emailValue}
+                    </ChakraLink>
+                  </HStack>
+
+                  {/* Links */}
+                  {profileLinks.length > 0 && (
+                    <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full" pt={1}>
                       {profileLinks.slice(0, 6).map((l) => {
                         const kind = String((l as any)?.kind ?? "custom");
                         const href = buildLinkHref(l);
                         const label = getLinkLabel(l);
                         const IconEl = getLinkIcon(kind);
+
+                        const isBranded = kind === "github";
                         return (
                           <HStack
                             key={l.id}
@@ -561,7 +615,15 @@ const ProfileScreen: React.FC = () => {
                             justify={{ base: "center", lg: "flex-start" }}
                             w="full"
                           >
-                            <Icon as={IconEl} color={muted} />
+                            {isBranded ? (
+                              <Icon
+                                as={FaGithub}
+                                boxSize="18px"
+                                color={muted}
+                              />
+                            ) : (
+                              <Icon as={IconEl} color={muted} />
+                            )}
                             <ChakraLink
                               href={href}
                               isExternal
@@ -578,7 +640,8 @@ const ProfileScreen: React.FC = () => {
                         );
                       })}
                     </VStack>
-                </VStack>)}
+                  )}
+                </VStack>
                 {achievedItems.length > 0 && (
                 <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
                   <Text fontWeight="semibold">Достижения</Text>

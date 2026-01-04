@@ -14,7 +14,7 @@ export const AchievementsHeader: React.FC = () => {
         <Heading size="sm" textAlign="center">Достижения</Heading>
       </HStack>
       <Text fontSize="xs" textAlign="center" mb={4} color={descColor}>
-        Собирайте значки за активность: решайте задачи, держите серии, изучайте модули и делитесь обратной связью.
+        Собирайте значки за активность: решайте задачи, держите серии, изучайте материалы и делитесь обратной связью.
       </Text>
     </>
   );

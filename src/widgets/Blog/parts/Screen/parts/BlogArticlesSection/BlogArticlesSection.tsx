@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, SimpleGrid, VStack } from "@chakra-ui/react";
 import { Pagination } from "shared/ui/Pagination";
+import { ResultsEmptyState } from "shared/ui/ResultsEmptyState";
 import type { BlogArticle } from "@/widgets/Blog/types";
 import { BlogArticleCard } from "../BlogArticleCard/parts/BlogArticleCard/BlogArticleCard";
 import { BlogArticlesSkeletonGrid } from "../BlogArticlesSkeletonGrid/BlogArticlesSkeletonGrid";
-import { BlogArticlesEmptyState } from "./parts/BlogArticlesEmptyState/BlogArticlesEmptyState";
 import type { BlogArticlesSectionProps } from "./types";
 
 export const BlogArticlesSection: React.FC<BlogArticlesSectionProps> = ({
@@ -46,7 +46,7 @@ export const BlogArticlesSection: React.FC<BlogArticlesSectionProps> = ({
   return (
     <VStack align="stretch" spacing={{ base: 6, md: 8 }}>
       {isEmptyResults && (
-        <BlogArticlesEmptyState theme={theme} query={query} variant={emptyStateVariant} />
+        <ResultsEmptyState colors={theme} query={query} variant={emptyStateVariant} allItemsLabel="статьи" />
       )}
 
       <SimpleGrid

@@ -1,9 +1,18 @@
 import React from "react";
 import { Box, Text, VStack } from "@chakra-ui/react";
 import { QuestioningLottieIcon } from "@/shared/icons/components-icon";
-import { BlogArticlesEmptyStateProps } from "./types";
+import { useAppColors } from "@/shared/theme/colors";
+import { ResultsEmptyStateProps } from "./types";
 
-export const BlogArticlesEmptyState: React.FC<BlogArticlesEmptyStateProps> = ({ theme, query, variant }) => {
+export const ResultsEmptyState: React.FC<ResultsEmptyStateProps> = ({
+  colors,
+  query = "",
+  variant = "search",
+  allItemsLabel = "результаты",
+}) => {
+  const theme = colors ?? useAppColors();
+  const safeQuery = query.trim();
+
   if (variant === "favoritesEmpty") {
     return (
       <Box w="full" textAlign="center" mt={0} role="status" aria-live="polite">
@@ -48,11 +57,11 @@ export const BlogArticlesEmptyState: React.FC<BlogArticlesEmptyStateProps> = ({ 
         <Text color={theme.descColor}>
           По запросу:{" "}
           <Text as="span" fontWeight="semibold" color={theme.blue.accent}>
-            {query.trim() || "—"}
+            {safeQuery || "—"}
           </Text>
         </Text>
         <Text color={theme.descColor} fontSize="sm">
-          Попробуйте изменить запрос или очистить поиск — мы покажем все статьи.
+          Попробуйте изменить запрос или очистить поиск — мы покажем все {allItemsLabel}.
         </Text>
       </VStack>
     </Box>

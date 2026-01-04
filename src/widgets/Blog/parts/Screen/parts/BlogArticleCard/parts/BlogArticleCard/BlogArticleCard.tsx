@@ -57,6 +57,7 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
         _focusVisible={interactive._focusVisible}
         _before={interactive._before}
         _after={interactive._after}
+        maxWidth="377px"
       >
         <Box p={cardPadding} display="flex" flexDirection="column" h="full" minW={0} position="relative" zIndex={1}>
           <BlogArticleCover title={article.title} coverImage={article.coverImage} priority={index < 3} />

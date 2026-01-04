@@ -5,7 +5,7 @@ import ModulesPageClient from "./ModulesPageClient";
 
 export const metadata: Metadata = {
   title: "Материалы",
-  description: "Список модулей платформы AIFFA"
+  description: "Список материалов платформы AIFFA"
 };
 
 const LearnRootRoute = async () => {

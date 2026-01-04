@@ -20,6 +20,7 @@ import { useAchievementsData } from "../hooks/useAchievementsData";
 import { withGithubAvatarSize } from "@/shared/lib/github/withGithubAvatarSize";
 import {
   FiAward,
+  FiBarChart2,
   FiBookOpen,
   FiCheckCircle,
   FiCode,
@@ -269,6 +270,67 @@ const ProfileScreen: React.FC = () => {
     );
   };
 
+  const SectionCard: React.FC<{
+    title: string;
+    description: string;
+    icon: React.ComponentType<any>;
+    children: React.ReactNode;
+  }> = ({ title, description, icon, children }) => {
+    // Variant A: Glass (no gradients)
+    const glassBg = useColorModeValue("whiteAlpha.900", "blackAlpha.300");
+    const glassBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
+    const shadow = useColorModeValue("0 10px 30px rgba(0, 0, 0, 0.08)", "0 16px 60px rgba(0, 0, 0, 0.55)");
+    const hoverShadow = useColorModeValue("0 14px 40px rgba(0, 0, 0, 0.12)", "0 18px 70px rgba(0, 0, 0, 0.65)");
+    const accent = useColorModeValue("blue.600", "blue.300");
+    const headerIconBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
+
+    return (
+      <Box
+        borderWidth="1px"
+        borderColor={glassBorder}
+        borderRadius="24px"
+        bg={glassBg}
+        p={{ base: 4, md: 7 }}
+        position="relative"
+        overflow="hidden"
+        boxShadow={shadow}
+        transition="transform 160ms ease, box-shadow 160ms ease"
+        _hover={{ transform: "translateY(-1px)", boxShadow: hoverShadow }}
+        sx={{
+          backdropFilter: "blur(12px) saturate(160%)",
+          WebkitBackdropFilter: "blur(12px) saturate(160%)",
+        }}
+      >
+        <Box position="relative">
+          <HStack spacing={3} mb={2} align="center">
+            <Box
+              aria-hidden="true"
+              w="36px"
+              h="36px"
+              borderRadius="14px"
+              bg={headerIconBg}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              color={accent}
+              flexShrink={0}
+            >
+              <Icon as={icon} boxSize="18px" />
+            </Box>
+            <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }}>
+              {title}
+            </Text>
+          </HStack>
+          <Text color={muted} mb={4}>
+            {description}
+          </Text>
+
+          {children}
+        </Box>
+      </Box>
+    );
+  };
+
   return (
     <Box
       as="main"
@@ -280,15 +342,6 @@ const ProfileScreen: React.FC = () => {
       aria-labelledby="profile-page-title"
     >
       <Box maxW={{ base: "100%", md: "1000px", lg: "1180px" }} mx="auto">
-        <Heading
-          as="h1"
-          id="profile-page-title"
-          size="lg"
-          mb={6}
-          textAlign="center"
-        >
-          Профиль
-        </Heading>
         <Grid
           templateColumns={{ base: "1fr", lg: "minmax(320px, 420px) 1fr" }}
           gap={{ base: 4, md: 6 }}
@@ -422,13 +475,11 @@ const ProfileScreen: React.FC = () => {
 
           <GridItem minW={0}>
             <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
-            <Box borderWidth="1px" borderColor={cardBorder} borderRadius="20px" bg={cardBg} p={{ base: 4, md: 7 }}>
-              <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }} mb={2}>
-                Статистика
-              </Text>
-              <Text color={muted} mb={4}>
-                Короткий срез по вашему прогрессу и активности.
-              </Text>
+            <SectionCard
+              title="Статистика"
+              description="Короткий срез по вашему прогрессу и активности."
+              icon={FiBarChart2 as any}
+            >
               {/* Prefer 3 columns on desktop, but never "squeeze" tiles on narrower widths */}
               <SimpleGrid
                 minChildWidth={{ base: "100%", sm: "200px", md: "250px" }}
@@ -438,15 +489,13 @@ const ProfileScreen: React.FC = () => {
                   <StatTile key={t.label} label={t.label} value={t.value} icon={(t as any).icon} />
                 ))}
               </SimpleGrid>
-            </Box>
+            </SectionCard>
 
-            <Box borderWidth="1px" borderColor={cardBorder} borderRadius="20px" bg={cardBg} p={{ base: 4, md: 7 }}>
-              <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }} mb={2}>
-                Вклад в сообщество
-              </Text>
-              <Text color={muted} mb={4}>
-                Счётчики собираются из вашего прогресса, задач недели и авторства материалов.
-              </Text>
+            <SectionCard
+              title="Вклад в сообщество"
+              description="Счётчики собираются из вашего прогресса, задач недели и авторства материалов."
+              icon={FiUsers as any}
+            >
               <SimpleGrid minChildWidth={{ base: "100%", sm: "260px", md: "320px" }} spacing={3}>
                 {contributionTiles.map((t) => (
                   <StatTile
@@ -458,7 +507,7 @@ const ProfileScreen: React.FC = () => {
                   />
                 ))}
               </SimpleGrid>
-            </Box>
+            </SectionCard>
             </VStack>
           </GridItem>
         </Grid>

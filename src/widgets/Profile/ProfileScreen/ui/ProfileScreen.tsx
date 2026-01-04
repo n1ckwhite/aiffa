@@ -363,7 +363,8 @@ const ProfileScreen: React.FC = () => {
         >
           <GridItem>
             <Box
-              p={{ base: 4, md: 7 }}
+              px={{base: 0, lg: 4}}
+              py={{base: 0, lg: 4}}
               h={{ base: "auto", lg: "full" }}
             >
             <HStack
@@ -401,8 +402,9 @@ const ProfileScreen: React.FC = () => {
                   onClick={() => {}}
                   aria-label="Редактировать профиль"
                   w="full"
-                  mx="auto"
-                  alignSelf="center"
+                  maxW={{base: "300px", lg: "250px"}}
+                  mx={0}
+                  alignSelf={{base: "center", lg: "flex-start"}}
                   h="44px"
                   borderRadius="md"
                   variant="outline"
@@ -489,7 +491,7 @@ const ProfileScreen: React.FC = () => {
                 </VStack>)}
                 {achievedItems.length > 0 && (
                 <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
-                  <Text fontWeight="semibold" mb={2}>Достижения</Text>
+                  <Text fontWeight="semibold">Достижения</Text>
                     <HStack spacing={2} flexWrap="wrap" justify={{ base: "center", lg: "flex-start" }}>
                       {achievedItems.map((it: any) => (
                         <CompactAchievement key={it.id} item={it} />

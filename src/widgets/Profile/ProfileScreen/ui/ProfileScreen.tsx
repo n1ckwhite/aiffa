@@ -90,6 +90,11 @@ const ProfileScreen: React.FC = () => {
       ? profileAny.avatarUrl.trim()
       : PLACEHOLDER_AVATAR_URL;
 
+  const avatarProxyUrl = (rawUrl: string, size: number) => {
+    const encoded = encodeURIComponent(rawUrl);
+    return `/api/avatar?url=${encoded}&s=${size}`;
+  };
+
   const { items } = useAchievementsData(profile as any);
 
   // NOTE: По просьбе — без вычислений через хуки. Ставим цифры напрямую (по диапазонам тоже — хардкод).
@@ -674,13 +679,12 @@ const ProfileScreen: React.FC = () => {
                     bg="transparent"
                     alt={name || "Пользователь"}
                     // Use responsive `srcSet` so we don't download 416×416 when the container is 208×208.
-                    src={withGithubAvatarSize(avatarUrl, 208)}
+                    src={avatarProxyUrl(avatarUrl, 208)}
                     srcSet={[
-                      `${withGithubAvatarSize(avatarUrl, 132)} 132w`,
-                      `${withGithubAvatarSize(avatarUrl, 152)} 152w`,
-                      `${withGithubAvatarSize(avatarUrl, 184)} 184w`,
-                      `${withGithubAvatarSize(avatarUrl, 208)} 208w`,
-                      `${withGithubAvatarSize(avatarUrl, 416)} 416w`,
+                      `${avatarProxyUrl(avatarUrl, 132)} 132w`,
+                      `${avatarProxyUrl(avatarUrl, 152)} 152w`,
+                      `${avatarProxyUrl(avatarUrl, 184)} 184w`,
+                      `${avatarProxyUrl(avatarUrl, 208)} 208w`,
                     ].join(", ")}
                     sizes="(min-width: 62em) 208px, (min-width: 48em) 184px, (min-width: 30em) 152px, 132px"
                     loading="eager"
@@ -688,7 +692,7 @@ const ProfileScreen: React.FC = () => {
                     decoding="async"
                     onError={(e: any) => {
                       try {
-                        e.currentTarget.src = withGithubAvatarSize(PLACEHOLDER_AVATAR_URL, 208);
+                        e.currentTarget.src = avatarProxyUrl(PLACEHOLDER_AVATAR_URL, 208);
                         e.currentTarget.removeAttribute("srcset");
                       } catch {}
                     }}

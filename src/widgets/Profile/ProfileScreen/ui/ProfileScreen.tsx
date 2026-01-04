@@ -187,8 +187,27 @@ const ProfileScreen: React.FC = () => {
       .filter((l: any) => !!l.id && !!String(l.value || "").trim()) as ProfileLink[];
   }, [profile]);
 
+  const displayLinks = React.useMemo<ProfileLink[]>(() => {
+    const globalGithub: ProfileLink = {
+      id: "global-github-n1ckwhite",
+      kind: "github",
+      label: "GitHub",
+      value: "n1ckwhite",
+    };
+
+    const normalized = (v: string) => v.trim().toLowerCase();
+    const existing = new Set(profileLinks.map((l) => normalized(String((l as any)?.value ?? ""))));
+    const merged = [...profileLinks];
+    if (!existing.has(normalized(globalGithub.value))) {
+      merged.push(globalGithub);
+    }
+    return merged;
+  }, [profileLinks]);
+
   const profileBadge = React.useMemo(() => {
-    const hasGithub = profileLinks.some((l) => String((l as any)?.kind ?? "") === "github");
+    const hasGithub = profileLinks.some(
+      (l) => String((l as any)?.kind ?? "") === "github" && !String((l as any)?.id ?? "").startsWith("global-"),
+    );
     if (hasGithub) return { label: "Контрибьютор", colorScheme: "purple" as const };
     return { label: "Автор AIFFA", colorScheme: "blue" as const };
   }, [profileLinks]);
@@ -243,6 +262,15 @@ const ProfileScreen: React.FC = () => {
   const emailValue =
     profileLinks.find((l) => String((l as any)?.kind ?? "") === "email")?.value?.trim?.() ||
     "bbycinka@yandex.ru";
+
+  const extraLinks = React.useMemo(
+    () => [
+      "https://t.me/iamceob1tch",
+      "https://gitlab.com/nickwhite22",
+      "https://www.codewars.com/users/n1ckwhite",
+    ],
+    [],
+  );
 
   const achievedItems = React.useMemo(() => {
     const list = Array.isArray(items) ? items : [];
@@ -598,9 +626,9 @@ const ProfileScreen: React.FC = () => {
                   </HStack>
 
                   {/* Links */}
-                  {profileLinks.length > 0 && (
+                  {displayLinks.length > 0 && (
                     <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full" pt={1}>
-                      {profileLinks.slice(0, 6).map((l) => {
+                      {displayLinks.slice(0, 6).map((l) => {
                         const kind = String((l as any)?.kind ?? "custom");
                         const href = buildLinkHref(l);
                         const label = getLinkLabel(l);
@@ -641,6 +669,38 @@ const ProfileScreen: React.FC = () => {
                       })}
                     </VStack>
                   )}
+
+                  <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full" pt={1}>
+                    {extraLinks
+                      .filter((u) => {
+                        const normalized = String(u).trim();
+                        if (!normalized) return false;
+                        return !displayLinks.some((l) => String((l as any)?.value ?? "").trim() === normalized);
+                      })
+                      .map((href) => (
+                        <HStack
+                          key={href}
+                          spacing={2}
+                          minW={0}
+                          justify={{ base: "center", lg: "flex-start" }}
+                          w="full"
+                        >
+                          <Icon as={FiLink} color={muted} />
+                          <ChakraLink
+                            href={href}
+                            isExternal
+                            color={useColorModeValue("blue.700", "blue.300")}
+                            fontWeight="semibold"
+                            maxW="360px"
+                            noOfLines={1}
+                            sx={{ overflowWrap: "anywhere" }}
+                            aria-label={href}
+                          >
+                            {href}
+                          </ChakraLink>
+                        </HStack>
+                      ))}
+                  </VStack>
                 </VStack>
                 {achievedItems.length > 0 && (
                 <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">

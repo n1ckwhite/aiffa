@@ -40,7 +40,7 @@ const ProfileScreen: React.FC = () => {
   const { profile } = useUserProfile();
   const name = typeof profile?.name === "string" ? profile.name : "";
   const bio = typeof profile?.bio === "string" ? profile.bio : "";
-  const placeholderAvatarUrl = "https://avatars.githubusercontent.com/u/249125545?v=4";
+  const placeholderAvatarUrl = "https://avatars.githubusercontent.com/u/89804687?v=4";
   const avatarUrl = typeof (profile as any)?.avatarUrl === "string" && (profile as any).avatarUrl.trim()
     ? (profile as any).avatarUrl.trim()
     : placeholderAvatarUrl;
@@ -68,36 +68,42 @@ const ProfileScreen: React.FC = () => {
         label: "Пройдено материалов",
         value: completedLessons,
         icon: FiBookOpen,
+        accentColor: "blue.400",
         tooltip: "Сколько материалов вы уже изучили на платформе.",
       },
       {
         label: "Задач недели решено",
         value: solvedThisWeek,
         icon: FiCheckCircle,
+        accentColor: "green.400",
         tooltip: "Сколько задач недели вы решили всего",
       },
       {
         label: "Пройдено проектов",
         value: solvedProjectsCount,
         icon: FiCode,
+        accentColor: "purple.400",
         tooltip: "Сколько проектов вы завершили на платформе.",
       },
       {
         label: "Прочтено статей",
         value: readArticlesCount,
         icon: FiFileText,
+        accentColor: "orange.400",
         tooltip: "Сколько статей из блога вы прочитали (по вашему прогрессу).",
       },
       {
         label: "Участие в хакатонах",
         value: hackathonsParticipationCount,
         icon: FiAward,
+        accentColor: "pink.400",
         tooltip: "Ваше участие в хакатонах",
       },
       {
         label: "Участие на сессиях",
         value: sessionsParticipationCount,
         icon: FiVideo,
+        accentColor: "cyan.400",
         tooltip: "Сколько сессий вы посетили (созвоны/разборы/встречи).",
       },
     ],
@@ -117,24 +123,28 @@ const ProfileScreen: React.FC = () => {
         label: "Вложено материалов",
         value: contributedMaterialsCount,
         icon: FiBookOpen,
+        accentColor: "blue.400",
         tooltip: "Сколько материалов вы вложили в базу AIFFA (по авторству).",
       },
       {
         label: "Вложено проектов",
         value: contributedProjectsCount,
         icon: FiPackage,
+        accentColor: "purple.400",
         tooltip: "Сколько проектов вы добавили или улучшили (по авторству).",
       },
       {
         label: "Вложено задач недели",
         value: totalSolvedEver,
         icon: FiTarget,
+        accentColor: "green.400",
         tooltip: "Сколько задач недели вы выложили (по авторству)",
       },
       {
         label: "Написано статей",
         value: authoredArticlesCount,
         icon: FiEdit3,
+        accentColor: "orange.400",
         tooltip: "Сколько статей вы опубликовали в блоге AIFFA.",
       },
     ],
@@ -266,10 +276,12 @@ const ProfileScreen: React.FC = () => {
     hint?: string;
     icon?: React.ComponentType<any>;
     tooltip?: string;
-  }> = ({ label, value, hint, icon, tooltip }) => {
+    accentColor?: string;
+  }> = ({ label, value, hint, icon, tooltip, accentColor }) => {
     const watermarkColor = useColorModeValue("blackAlpha.150", "whiteAlpha.120");
     const hoverBorder = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
     const focusRing = useColorModeValue("0 0 0 3px rgba(66,153,225,0.45)", "0 0 0 3px rgba(66,153,225,0.45)");
+    const hoverAccent = accentColor ?? useColorModeValue("blue.400", "blue.200");
 
     const tile = (
       <Box
@@ -294,11 +306,13 @@ const ProfileScreen: React.FC = () => {
           },
           "&:hover .stat-tile-watermark": {
             transform: "translate(6px, -4px) rotate(-10deg) scale(1.06)",
-            opacity: 0.14,
+            opacity: 0.18,
+            color: hoverAccent,
           },
           "&:focus-visible .stat-tile-watermark": {
             transform: "translate(6px, -4px) rotate(-10deg) scale(1.06)",
-            opacity: 0.14,
+            opacity: 0.18,
+            color: hoverAccent,
           },
         }}
       >
@@ -598,6 +612,7 @@ const ProfileScreen: React.FC = () => {
                     value={t.value}
                     icon={(t as any).icon}
                     tooltip={(t as any).tooltip}
+                    accentColor={(t as any).accentColor}
                   />
                 ))}
               </SimpleGrid>
@@ -653,6 +668,7 @@ const ProfileScreen: React.FC = () => {
                     hint={contributionHint}
                     icon={(t as any).icon}
                     tooltip={(t as any).tooltip}
+                    accentColor={(t as any).accentColor}
                   />
                 ))}
               </SimpleGrid>

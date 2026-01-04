@@ -18,6 +18,7 @@ import {
 import { useUserProfile, type ProfileLink } from "entities/user";
 import { useAchievementsData } from "../hooks/useAchievementsData";
 import { withGithubAvatarSize } from "@/shared/lib/github/withGithubAvatarSize";
+import PillBadge from "shared/ui/PillBadge";
 import {
   FiAward,
   FiBarChart2,
@@ -41,6 +42,7 @@ const ProfileScreen: React.FC = () => {
   const name = typeof profile?.name === "string" ? profile.name : "";
   const bio = typeof profile?.bio === "string" ? profile.bio : "";
   const direction = typeof (profile as any).direction === "string" ? (profile as any).direction.trim() : "";
+  const placeholderAvatarUrl = "https://avatars.githubusercontent.com/u/249125545?v=4";
 
   const { items } = useAchievementsData(profile as any);
 
@@ -100,6 +102,11 @@ const ProfileScreen: React.FC = () => {
   const cardBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const muted = useColorModeValue("gray.600", "whiteAlpha.700");
 
+  const xp =
+    typeof (profile as any).xp === "number" && Number.isFinite((profile as any).xp) && (profile as any).xp >= 0
+      ? Math.trunc((profile as any).xp)
+      : 0;
+
   const profileLinks = React.useMemo<ProfileLink[]>(() => {
     const raw = Array.isArray((profile as any).links) ? ((profile as any).links as any[]) : [];
     return raw
@@ -115,6 +122,12 @@ const ProfileScreen: React.FC = () => {
       }))
       .filter((l: any) => !!l.id && !!String(l.value || "").trim()) as ProfileLink[];
   }, [profile]);
+
+  const profileBadge = React.useMemo(() => {
+    const hasGithub = profileLinks.some((l) => String((l as any)?.kind ?? "") === "github");
+    if (hasGithub) return { label: "Контрибьютор", colorScheme: "purple" as const };
+    return { label: "Автор AIFFA", colorScheme: "blue" as const };
+  }, [profileLinks]);
 
   const buildLinkHref = React.useCallback((link: ProfileLink): string => {
     const kind = String((link as any)?.kind ?? "custom");
@@ -360,10 +373,10 @@ const ProfileScreen: React.FC = () => {
               textAlign={{ base: "center", lg: "left" }}
             >
               <Avatar
-                size="xl"
+                boxSize={{ base: "160px", md: "184px" }}
                 name={name || "User"}
-                src={withGithubAvatarSize((profile as any).avatarUrl || undefined, 160)}
-                bg={(profile as any).avatarUrl ? "transparent" : "green.400"}
+                src={withGithubAvatarSize(placeholderAvatarUrl, 304)}
+                bg="transparent"
               />
               <VStack align={{ base: "center", lg: "start" }} spacing={2} minW={0} flex={1} w="full">
                 {/* Фото → Имя → Описание → Редактировать → Подписчики/Подписан → Ссылки → Достижения */}
@@ -419,6 +432,29 @@ const ProfileScreen: React.FC = () => {
                     </Text>{" "}
                     подписан
                   </Text>
+                </HStack>
+
+                <HStack
+                  spacing={3}
+                  pt={1}
+                  flexWrap="wrap"
+                  justify={{ base: "center", lg: "flex-start" }}
+                  w="full"
+                >
+                  <HStack spacing={1.5} color={muted}>
+                    <Icon as={FiAward} />
+                    <Text fontSize="sm">
+                      <Text as="span" fontWeight="semibold" color="inherit">
+                        {xp}
+                      </Text>{" "}
+                      XP
+                    </Text>
+                  </HStack>
+                  <Box>
+                    <PillBadge colorScheme={profileBadge.colorScheme as any} variant="outline" uppercase={false}>
+                      {profileBadge.label}
+                    </PillBadge>
+                  </Box>
                 </HStack>
 
                 <VStack align={{ base: "center", lg: "start" }} spacing={2} w="full">
@@ -546,8 +582,8 @@ const ProfileScreen: React.FC = () => {
               <Box
                 mt={{ base: 4, md: 5 }}
                 borderWidth="1px"
-                borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")}
-                bg={useColorModeValue("blackAlpha.50", "whiteAlpha.50")}
+                borderColor={useColorModeValue("orange.200", "whiteAlpha.200")}
+                bg={useColorModeValue("orange.50", "whiteAlpha.50")}
                 borderRadius="16px"
                 px={{ base: 3, md: 4 }}
                 py={{ base: 3, md: 3.5 }}
@@ -559,20 +595,20 @@ const ProfileScreen: React.FC = () => {
                     w="26px"
                     h="26px"
                     borderRadius="10px"
-                    bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
+                    bg={useColorModeValue("orange.100", "whiteAlpha.100")}
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                     flexShrink={0}
-                    color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                    color={useColorModeValue("orange.700", "orange.200")}
                   >
                     <Icon as={FiAward} boxSize="14px" />
                   </Box>
                   <Box>
-                    <Text fontSize="sm" fontWeight="semibold" color={useColorModeValue("gray.900", "whiteAlpha.900")}>
+                    <Text fontSize="sm" fontWeight="semibold" color={useColorModeValue("orange.900", "whiteAlpha.900")}>
                       Спасибо за вклад в сообщество
                     </Text>
-                    <Text fontSize="sm" color={muted} mt={1}>
+                    <Text fontSize="sm" color={useColorModeValue("orange.800", muted)} mt={1}>
                       Любое авторство и активность помогают AIFFA становиться лучше для всех.
                     </Text>
                   </Box>

@@ -166,6 +166,18 @@ const ProfileScreen: React.FC = () => {
   const cardBg = useColorModeValue("white", "gray.900");
   const cardBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const muted = useColorModeValue("gray.600", "whiteAlpha.700");
+  const leftIconColors = React.useMemo(
+    () => ({
+      people: useColorModeValue("blue.600", "blue.300"),
+      xp: useColorModeValue("orange.600", "orange.300"),
+      work: useColorModeValue("purple.600", "purple.300"),
+      location: useColorModeValue("green.600", "green.300"),
+      mail: useColorModeValue("pink.600", "pink.300"),
+      github: useColorModeValue("gray.700", "whiteAlpha.800"),
+      link: useColorModeValue("cyan.600", "cyan.300"),
+    }),
+    [],
+  );
 
   const xp =
     typeof (profile as any).xp === "number" && Number.isFinite((profile as any).xp) && (profile as any).xp >= 0
@@ -573,7 +585,7 @@ const ProfileScreen: React.FC = () => {
                   justify={{ base: "center", lg: "flex-start" }}
                   w="full"
                 >
-                  <Icon as={FiUsers} />
+                  <Icon as={FiUsers} color={leftIconColors.people} />
                   <Text>
                     <Text as="span" fontWeight="semibold" color="inherit">
                       {followersCount}
@@ -594,7 +606,7 @@ const ProfileScreen: React.FC = () => {
                   w="full"
                 >
                   <HStack spacing={1.5} color={muted}>
-                    <Icon as={FiAward} />
+                    <Icon as={FiAward} color={leftIconColors.xp} />
                     <Text fontSize="sm">
                       <Text as="span" fontWeight="semibold" color="inherit">
                         {xp}
@@ -614,7 +626,7 @@ const ProfileScreen: React.FC = () => {
                   <SectionLabel>Контакты</SectionLabel>
 
                   <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
-                    <Icon as={FiBriefcase} color={muted} />
+                    <Icon as={FiBriefcase} color={leftIconColors.work} />
                     <Text
                       fontSize="sm"
                       fontWeight="semibold"
@@ -626,7 +638,7 @@ const ProfileScreen: React.FC = () => {
                   </HStack>
 
                   <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
-                    <Icon as={FiMapPin} color={muted} />
+                    <Icon as={FiMapPin} color={leftIconColors.location} />
                     <Text
                       fontSize="sm"
                       fontWeight="semibold"
@@ -638,7 +650,7 @@ const ProfileScreen: React.FC = () => {
                   </HStack>
 
                   <HStack spacing={2} minW={0} justify={{ base: "center", lg: "flex-start" }} w="full">
-                    <Icon as={FiMail} boxSize="18px" color={muted} />
+                    <Icon as={FiMail} boxSize="18px" color={leftIconColors.mail} />
                     <ChakraLink
                       href={`mailto:${emailValue}`}
                       color={useColorModeValue("blue.700", "blue.300")}
@@ -671,7 +683,11 @@ const ProfileScreen: React.FC = () => {
                           justify={{ base: "center", lg: "flex-start" }}
                           w="full"
                         >
-                          {isBranded ? <Icon as={FaGithub} boxSize="18px" color={muted} /> : <Icon as={IconEl} color={muted} />}
+                          {isBranded ? (
+                            <Icon as={FaGithub} boxSize="18px" color={leftIconColors.github} />
+                          ) : (
+                            <Icon as={IconEl} color={leftIconColors.link} />
+                          )}
                           <ChakraLink
                             href={href}
                             isExternal
@@ -702,7 +718,7 @@ const ProfileScreen: React.FC = () => {
                           justify={{ base: "center", lg: "flex-start" }}
                           w="full"
                         >
-                          <Icon as={FiLink} color={muted} />
+                          <Icon as={FiLink} color={leftIconColors.link} />
                           <ChakraLink
                             href={href}
                             isExternal

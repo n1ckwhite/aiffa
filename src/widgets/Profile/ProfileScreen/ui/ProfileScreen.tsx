@@ -10,7 +10,6 @@ import {
   Divider,
   Grid,
   GridItem,
-  Heading,
   HStack,
   Icon,
   Link as ChakraLink,

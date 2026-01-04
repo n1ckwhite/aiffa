@@ -92,7 +92,9 @@ const ProfileScreen: React.FC = () => {
   const { items } = useAchievementsData(profile as any);
 
   // NOTE: По просьбе — без вычислений через хуки. Ставим цифры напрямую (по диапазонам тоже — хардкод).
+  // Each block owns its own range (do NOT sync).
   const [statsRange, setStatsRange] = React.useState<StatsRange>("week");
+  const [contributionRange, setContributionRange] = React.useState<StatsRange>("week");
 
   const rangeLabels: Record<StatsRange, string> = {
     week: "Неделя",
@@ -109,10 +111,6 @@ const ProfileScreen: React.FC = () => {
       readArticlesCount: number;
       hackathonsParticipationCount: number;
       sessionsParticipationCount: number;
-      contributedMaterialsCount: number;
-      contributedProjectsCount: number;
-      totalSolvedEver: number;
-      authoredArticlesCount: number;
       motivationalTop: string;
       motivationalBottom: string;
     }
@@ -124,10 +122,6 @@ const ProfileScreen: React.FC = () => {
       readArticlesCount: 0,
       hackathonsParticipationCount: 0,
       sessionsParticipationCount: 0,
-      contributedMaterialsCount: 5,
-      contributedProjectsCount: 0,
-      totalSolvedEver: 3,
-      authoredArticlesCount: 0,
       motivationalTop: "Ты активнее 62% пользователей этой недели",
       motivationalBottom: "Ещё 2 задачи — и откроется новое достижение",
     },
@@ -138,10 +132,6 @@ const ProfileScreen: React.FC = () => {
       readArticlesCount: 6,
       hackathonsParticipationCount: 1,
       sessionsParticipationCount: 2,
-      contributedMaterialsCount: 7,
-      contributedProjectsCount: 1,
-      totalSolvedEver: 12,
-      authoredArticlesCount: 1,
       motivationalTop: "Ты активнее 54% пользователей этого месяца",
       motivationalBottom: "Ещё 3 активности — и откроется новое достижение",
     },
@@ -152,26 +142,39 @@ const ProfileScreen: React.FC = () => {
       readArticlesCount: 21,
       hackathonsParticipationCount: 3,
       sessionsParticipationCount: 7,
-      contributedMaterialsCount: 14,
-      contributedProjectsCount: 2,
-      totalSolvedEver: 29,
-      authoredArticlesCount: 4,
       motivationalTop: "Ты стабильно растёшь — продолжай в том же духе",
       motivationalBottom: "Выбери цель ниже — и получишь следующее достижение быстрее",
     },
   };
 
+  const contributionByRange: Record<
+    StatsRange,
+    {
+      contributedMaterialsCount: number;
+      contributedProjectsCount: number;
+      totalSolvedEver: number;
+      authoredArticlesCount: number;
+    }
+  > = {
+    week: { contributedMaterialsCount: 5, contributedProjectsCount: 0, totalSolvedEver: 3, authoredArticlesCount: 0 },
+    month: { contributedMaterialsCount: 7, contributedProjectsCount: 1, totalSolvedEver: 12, authoredArticlesCount: 1 },
+    all: { contributedMaterialsCount: 14, contributedProjectsCount: 2, totalSolvedEver: 29, authoredArticlesCount: 4 },
+  };
+
   const currentStats = statsByRange[statsRange];
+  const currentContribution = contributionByRange[contributionRange];
+
   const completedLessons = currentStats.completedLessons;
   const solvedThisWeek = currentStats.solvedThisWeek;
   const solvedProjectsCount = currentStats.solvedProjectsCount;
   const readArticlesCount = currentStats.readArticlesCount;
   const hackathonsParticipationCount = currentStats.hackathonsParticipationCount;
   const sessionsParticipationCount = currentStats.sessionsParticipationCount;
-  const contributedMaterialsCount = currentStats.contributedMaterialsCount;
-  const contributedProjectsCount = currentStats.contributedProjectsCount;
-  const totalSolvedEver = currentStats.totalSolvedEver;
-  const authoredArticlesCount = currentStats.authoredArticlesCount;
+
+  const contributedMaterialsCount = currentContribution.contributedMaterialsCount;
+  const contributedProjectsCount = currentContribution.contributedProjectsCount;
+  const totalSolvedEver = currentContribution.totalSolvedEver;
+  const authoredArticlesCount = currentContribution.authoredArticlesCount;
   const contributionHint = "По авторству в базе AIFFA";
 
   const progressTiles: StatTileModel[] = [
@@ -1104,9 +1107,9 @@ const ProfileScreen: React.FC = () => {
                     <Button
                       key={r}
                       size="sm"
-                      variant={statsRange === r ? "solid" : "outline"}
+                      variant={contributionRange === r ? "solid" : "outline"}
                       borderRadius="full"
-                      onClick={() => setStatsRange(r)}
+                      onClick={() => setContributionRange(r)}
                       aria-label={`Период: ${rangeLabels[r]}`}
                     >
                       {rangeLabels[r]}

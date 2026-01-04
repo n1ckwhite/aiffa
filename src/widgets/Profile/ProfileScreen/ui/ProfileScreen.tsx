@@ -549,10 +549,10 @@ const ProfileScreen: React.FC = () => {
             >
             <HStack
               spacing={4}
-              align={{ base: "center", lg: "start" }}
+              align="start"
               flexDirection="column"
               w="full"
-              textAlign={{ base: "center", lg: "left" }}
+              textAlign="left"
             >
               <Avatar
                 // Responsive avatar size: small phones -> smaller, desktop -> bigger.
@@ -561,9 +561,9 @@ const ProfileScreen: React.FC = () => {
                 src={withGithubAvatarSize(avatarUrl, 416)}
                 bg="transparent"
               />
-              <VStack align={{ base: "center", lg: "start" }} spacing={2} minW={0} flex={1} w="full">
+              <VStack align="start" spacing={2} minW={0} flex={1} w="full">
                 {/* Фото → Имя → Описание → Редактировать → Подписчики/Подписан → Ссылки → Достижения */}
-                <HStack spacing={2} flexWrap="wrap" justify={{ base: "center", lg: "flex-start" }}>
+                <HStack spacing={2} flexWrap="wrap" justify="flex-start">
                   <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} noOfLines={1}>
                     {name || "Пользователь"}
                   </Text>
@@ -572,7 +572,7 @@ const ProfileScreen: React.FC = () => {
                 <Text
                   color={muted}
                   sx={{ wordBreak: "break-word", overflowWrap: "anywhere" }}
-                  textAlign={{ base: "center", lg: "left" }}
+                  textAlign="left"
                 >
                   {bio || "Описание"}
                 </Text>
@@ -582,9 +582,9 @@ const ProfileScreen: React.FC = () => {
                   onClick={() => {}}
                   aria-label="Редактировать профиль"
                   w="full"
-                  maxW={{base: "300px", lg: "250px"}}
+                  maxW={{ base: "300px", lg: "250px" }}
                   mx={0}
-                  alignSelf={{base: "center", lg: "flex-start"}}
+                  alignSelf="flex-start"
                   h="44px"
                   borderRadius="md"
                   variant="outline"
@@ -592,7 +592,7 @@ const ProfileScreen: React.FC = () => {
                   Редактировать профиль
                 </Button>
 
-                <Box w="full" maxW={{ base: "300px", lg: "full" }} mx={{ base: "auto", lg: 0 }}>
+                <Box w="full" maxW="full" mx={0}>
                   <VStack align="start" spacing={2} w="full" pt={1}>
                     <LeftRow icon={FiUsers as any} iconColor={leftIconColors.people} spacing={2}>
                       <Text color={muted}>

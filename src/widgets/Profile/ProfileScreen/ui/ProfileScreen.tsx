@@ -276,6 +276,32 @@ const ProfileScreen: React.FC = () => {
     </Text>
   );
 
+  const LeftRow: React.FC<{
+    icon: React.ComponentType<any>;
+    iconColor: string;
+    children: React.ReactNode;
+  }> = ({ icon, iconColor, children }) => {
+    return (
+      <HStack spacing={3} align="center" w="full" minW={0}>
+        <Box
+          aria-hidden="true"
+          w="22px"
+          h="22px"
+          flexShrink={0}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          color={iconColor}
+        >
+          <Icon as={icon} boxSize="18px" />
+        </Box>
+        <Box minW={0} flex={1}>
+          {children}
+        </Box>
+      </HStack>
+    );
+  };
+
   const workplace = typeof (profile as any)?.workplace === "string" && (profile as any).workplace.trim()
     ? (profile as any).workplace.trim()
     : "AIFFA";
@@ -614,8 +640,7 @@ const ProfileScreen: React.FC = () => {
                   <VStack align="start" spacing={2} w="full" textAlign="left">
                     <SectionLabel>Контакты</SectionLabel>
 
-                    <HStack spacing={2} minW={0} justify="flex-start" w="full">
-                      <Icon as={FiBriefcase} color={leftIconColors.work} />
+                    <LeftRow icon={FiBriefcase as any} iconColor={leftIconColors.work}>
                       <Text
                         fontSize="sm"
                         fontWeight="semibold"
@@ -624,10 +649,9 @@ const ProfileScreen: React.FC = () => {
                       >
                         {workplace}
                       </Text>
-                    </HStack>
+                    </LeftRow>
 
-                    <HStack spacing={2} minW={0} justify="flex-start" w="full">
-                      <Icon as={FiMapPin} color={leftIconColors.location} />
+                    <LeftRow icon={FiMapPin as any} iconColor={leftIconColors.location}>
                       <Text
                         fontSize="sm"
                         fontWeight="semibold"
@@ -636,10 +660,9 @@ const ProfileScreen: React.FC = () => {
                       >
                         {locationLabel}
                       </Text>
-                    </HStack>
+                    </LeftRow>
 
-                    <HStack spacing={2} minW={0} justify="flex-start" w="full">
-                      <Icon as={FiMail} boxSize="18px" color={leftIconColors.mail} />
+                    <LeftRow icon={FiMail as any} iconColor={leftIconColors.mail}>
                       <ChakraLink
                         href={`mailto:${emailValue}`}
                         color={useColorModeValue("blue.700", "blue.300")}
@@ -651,7 +674,7 @@ const ProfileScreen: React.FC = () => {
                       >
                         {emailValue}
                       </ChakraLink>
-                    </HStack>
+                    </LeftRow>
 
                     <SectionLabel>Ссылки</SectionLabel>
 
@@ -667,16 +690,23 @@ const ProfileScreen: React.FC = () => {
                         return (
                           <HStack
                             key={l.id}
-                            spacing={2}
+                            spacing={3}
                             minW={0}
                             justify="flex-start"
                             w="full"
                           >
-                            {isBranded ? (
-                              <Icon as={FaGithub} boxSize="18px" color={leftIconColors.github} />
-                            ) : (
-                              <Icon as={IconEl} color={leftIconColors.link} />
-                            )}
+                            <Box
+                              aria-hidden="true"
+                              w="22px"
+                              h="22px"
+                              flexShrink={0}
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="center"
+                              color={isBranded ? leftIconColors.github : leftIconColors.link}
+                            >
+                              <Icon as={isBranded ? (FaGithub as any) : (IconEl as any)} boxSize="18px" />
+                            </Box>
                             <ChakraLink
                               href={href}
                               isExternal
@@ -702,12 +732,23 @@ const ProfileScreen: React.FC = () => {
                         .map((href) => (
                           <HStack
                             key={href}
-                            spacing={2}
+                          spacing={3}
                             minW={0}
                             justify="flex-start"
                             w="full"
                           >
-                            <Icon as={FiLink} color={leftIconColors.link} />
+                          <Box
+                            aria-hidden="true"
+                            w="22px"
+                            h="22px"
+                            flexShrink={0}
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            color={leftIconColors.link}
+                          >
+                            <Icon as={FiLink as any} boxSize="18px" />
+                          </Box>
                             <ChakraLink
                               href={href}
                               isExternal

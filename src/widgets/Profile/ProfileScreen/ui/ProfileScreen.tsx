@@ -1,5 +1,10 @@
 import React from "react";
 import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Button,
   Divider,
@@ -20,6 +25,7 @@ import { useAchievementsData } from "../hooks/useAchievementsData";
 import { withGithubAvatarSize } from "@/shared/lib/github/withGithubAvatarSize";
 import PillBadge from "shared/ui/PillBadge";
 import { formatCount } from "shared/functions/formatCount";
+import { AppButtonLink, AppLink } from "shared/ui/AppLink";
 import {
   FiAward,
   FiBarChart2,
@@ -38,8 +44,15 @@ import {
   FiUsers,
   FiVideo,
 } from "react-icons/fi";
-import { FaTelegramPlane } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
+import {
+  FaBookOpen,
+  FaClipboardList,
+  FaCode,
+  FaComments,
+  FaFeatherAlt,
+  FaGithub,
+  FaTelegramPlane,
+} from "react-icons/fa";
 import { Avatar } from "@chakra-ui/react";
 
 const PLACEHOLDER_AVATAR_URL = "https://avatars.githubusercontent.com/u/89804687?v=4";
@@ -64,6 +77,8 @@ type StatTileModel = {
   accentColor?: string;
 };
 
+type StatsRange = "week" | "month" | "all";
+
 const ProfileScreen: React.FC = () => {
   const { profile } = useUserProfile();
   const profileAny = profile as any;
@@ -76,17 +91,87 @@ const ProfileScreen: React.FC = () => {
 
   const { items } = useAchievementsData(profile as any);
 
-  // NOTE: По просьбе — без вычислений через хуки. Ставим цифры напрямую.
-  const completedLessons = 8;
-  const solvedThisWeek = 3;
-  const solvedProjectsCount = 0;
-  const readArticlesCount = 0;
-  const hackathonsParticipationCount = 0;
-  const sessionsParticipationCount = 0;
-  const contributedMaterialsCount = 5;
-  const contributedProjectsCount = 0;
-  const totalSolvedEver = 3;
-  const authoredArticlesCount = 0;
+  // NOTE: По просьбе — без вычислений через хуки. Ставим цифры напрямую (по диапазонам тоже — хардкод).
+  const [statsRange, setStatsRange] = React.useState<StatsRange>("week");
+
+  const rangeLabels: Record<StatsRange, string> = {
+    week: "Неделя",
+    month: "Месяц",
+    all: "Всё время",
+  };
+
+  const statsByRange: Record<
+    StatsRange,
+    {
+      completedLessons: number;
+      solvedThisWeek: number;
+      solvedProjectsCount: number;
+      readArticlesCount: number;
+      hackathonsParticipationCount: number;
+      sessionsParticipationCount: number;
+      contributedMaterialsCount: number;
+      contributedProjectsCount: number;
+      totalSolvedEver: number;
+      authoredArticlesCount: number;
+      motivationalTop: string;
+      motivationalBottom: string;
+    }
+  > = {
+    week: {
+      completedLessons: 8,
+      solvedThisWeek: 3,
+      solvedProjectsCount: 0,
+      readArticlesCount: 0,
+      hackathonsParticipationCount: 0,
+      sessionsParticipationCount: 0,
+      contributedMaterialsCount: 5,
+      contributedProjectsCount: 0,
+      totalSolvedEver: 3,
+      authoredArticlesCount: 0,
+      motivationalTop: "Ты активнее 62% пользователей этой недели",
+      motivationalBottom: "Ещё 2 задачи — и откроется новое достижение",
+    },
+    month: {
+      completedLessons: 18,
+      solvedThisWeek: 12,
+      solvedProjectsCount: 1,
+      readArticlesCount: 6,
+      hackathonsParticipationCount: 1,
+      sessionsParticipationCount: 2,
+      contributedMaterialsCount: 7,
+      contributedProjectsCount: 1,
+      totalSolvedEver: 12,
+      authoredArticlesCount: 1,
+      motivationalTop: "Ты активнее 54% пользователей этого месяца",
+      motivationalBottom: "Ещё 3 активности — и откроется новое достижение",
+    },
+    all: {
+      completedLessons: 38,
+      solvedThisWeek: 29,
+      solvedProjectsCount: 4,
+      readArticlesCount: 21,
+      hackathonsParticipationCount: 3,
+      sessionsParticipationCount: 7,
+      contributedMaterialsCount: 14,
+      contributedProjectsCount: 2,
+      totalSolvedEver: 29,
+      authoredArticlesCount: 4,
+      motivationalTop: "Ты стабильно растёшь — продолжай в том же духе",
+      motivationalBottom: "Выбери цель ниже — и получишь следующее достижение быстрее",
+    },
+  };
+
+  const currentStats = statsByRange[statsRange];
+  const completedLessons = currentStats.completedLessons;
+  const solvedThisWeek = currentStats.solvedThisWeek;
+  const solvedProjectsCount = currentStats.solvedProjectsCount;
+  const readArticlesCount = currentStats.readArticlesCount;
+  const hackathonsParticipationCount = currentStats.hackathonsParticipationCount;
+  const sessionsParticipationCount = currentStats.sessionsParticipationCount;
+  const contributedMaterialsCount = currentStats.contributedMaterialsCount;
+  const contributedProjectsCount = currentStats.contributedProjectsCount;
+  const totalSolvedEver = currentStats.totalSolvedEver;
+  const authoredArticlesCount = currentStats.authoredArticlesCount;
   const contributionHint = "По авторству в базе AIFFA";
 
   const progressTiles: StatTileModel[] = [
@@ -473,8 +558,9 @@ const ProfileScreen: React.FC = () => {
     title: string;
     description: string;
     icon: React.ComponentType<any>;
+    actions?: React.ReactNode;
     children: React.ReactNode;
-  }> = ({ title, description, icon, children }) => {
+  }> = ({ title, description, icon, actions, children }) => {
     // Variant A: Glass (no gradients)
     const glassBg = useColorModeValue("whiteAlpha.900", "blackAlpha.300");
     const glassBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
@@ -498,24 +584,28 @@ const ProfileScreen: React.FC = () => {
         }}
       >
         <Box position="relative">
-          <HStack spacing={3} mb={2} align="center">
-            <Box
-              aria-hidden="true"
-              w="36px"
-              h="36px"
-              borderRadius="14px"
-              bg={headerIconBg}
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              color={accent}
-              flexShrink={0}
-            >
-              <Icon as={icon} boxSize="18px" />
-            </Box>
-            <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }}>
-              {title}
-            </Text>
+          <HStack spacing={3} mb={2} align="center" justify="space-between" flexWrap="wrap" rowGap={2}>
+            <HStack spacing={3} align="center">
+              <Box
+                aria-hidden="true"
+                w="36px"
+                h="36px"
+                borderRadius="14px"
+                bg={headerIconBg}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                color={accent}
+                flexShrink={0}
+              >
+                <Icon as={icon} boxSize="18px" />
+              </Box>
+              <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }}>
+                {title}
+              </Text>
+            </HStack>
+
+            {!!actions ? <Box ml="auto">{actions}</Box> : null}
           </HStack>
           <Text color={muted} mb={4}>
             {description}
@@ -849,6 +939,22 @@ const ProfileScreen: React.FC = () => {
               title="Статистика"
               description="Короткий срез по вашему прогрессу и активности."
               icon={FiBarChart2 as any}
+              actions={
+                <HStack spacing={2} flexWrap="wrap" justify="flex-end">
+                  {(["week", "month", "all"] as const).map((r) => (
+                    <Button
+                      key={r}
+                      size="sm"
+                      variant={statsRange === r ? "solid" : "outline"}
+                      borderRadius="full"
+                      onClick={() => setStatsRange(r)}
+                      aria-label={`Период: ${rangeLabels[r]}`}
+                    >
+                      {rangeLabels[r]}
+                    </Button>
+                  ))}
+                </HStack>
+              }
             >
               {/* Prefer 3 columns on desktop, but never "squeeze" tiles on narrower widths */}
               <SimpleGrid
@@ -896,20 +1002,114 @@ const ProfileScreen: React.FC = () => {
                   </Box>
                   <Box>
                     <Text fontSize="sm" color={useColorModeValue("orange.900", "whiteAlpha.900")} fontWeight="semibold">
-                      Ты активнее <Text as="span" color="inherit">62%</Text> пользователей этой недели
+                      {currentStats.motivationalTop}
                     </Text>
                     <Text fontSize="sm" color={useColorModeValue("orange.800", muted)} mt={1}>
-                      Ещё <Text as="span" fontWeight="semibold" color="inherit">2</Text> задачи — и откроется новое достижение
+                      {currentStats.motivationalBottom}
                     </Text>
                   </Box>
                 </HStack>
               </Box>
+
+              <SimpleGrid
+                mt={{ base: 4, md: 5 }}
+                minChildWidth={{ base: "160px", sm: "180px" }}
+                spacing={{ base: 2.5, md: 3 }}
+              >
+                <AppButtonLink
+                  to="/learn"
+                  size="sm"
+                  variant="outline"
+                  borderRadius="full"
+                  leftIcon={<Icon as={FaBookOpen} />}
+                  aria-label="Перейти к материалам"
+                >
+                  К материалам
+                </AppButtonLink>
+                <AppButtonLink
+                  to="/weekly"
+                  size="sm"
+                  variant="outline"
+                  borderRadius="full"
+                  leftIcon={<Icon as={FaClipboardList} />}
+                  aria-label="Перейти к задачам недели"
+                >
+                  Задачи недели
+                </AppButtonLink>
+                <AppButtonLink
+                  to="/blog"
+                  size="sm"
+                  variant="outline"
+                  borderRadius="full"
+                  leftIcon={<Icon as={FaFeatherAlt} />}
+                  aria-label="Перейти к блогу"
+                >
+                  Блог
+                </AppButtonLink>
+              </SimpleGrid>
+
+              <Accordion allowToggle mt={{ base: 3, md: 4 }}>
+                <AccordionItem border="none">
+                  <AccordionButton
+                    px={0}
+                    _hover={{ bg: "transparent" }}
+                    _active={{ bg: "transparent" }}
+                    aria-label="Как улучшить статистику"
+                  >
+                    <HStack w="full" justify="space-between">
+                      <Text fontWeight="semibold">Как улучшить статистику</Text>
+                      <AccordionIcon />
+                    </HStack>
+                  </AccordionButton>
+                  <AccordionPanel px={0} pt={2}>
+                    <VStack align="start" spacing={2} color={muted}>
+                      <Text fontSize="sm">
+                        - Продолжай обучение в разделе{" "}
+                        <AppLink to="/learn" fontWeight="semibold" aria-label="Открыть материалы">
+                          Материалы
+                        </AppLink>
+                        .
+                      </Text>
+                      <Text fontSize="sm">
+                        - Решай{" "}
+                        <AppLink to="/weekly" fontWeight="semibold" aria-label="Открыть задачи недели">
+                          задачи недели
+                        </AppLink>{" "}
+                        и собирай достижения.
+                      </Text>
+                      <Text fontSize="sm">
+                        - Читай{" "}
+                        <AppLink to="/blog" fontWeight="semibold" aria-label="Открыть блог">
+                          статьи
+                        </AppLink>{" "}
+                        и прокачивай базу.
+                      </Text>
+                    </VStack>
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
             </SectionCard>
 
             <SectionCard
               title="Вклад в сообщество"
               description="Счётчики собираются из вашего прогресса, задач недели и авторства материалов."
               icon={FiUsers as any}
+              actions={
+                <HStack spacing={2} flexWrap="wrap" justify="flex-end">
+                  {(["week", "month", "all"] as const).map((r) => (
+                    <Button
+                      key={r}
+                      size="sm"
+                      variant={statsRange === r ? "solid" : "outline"}
+                      borderRadius="full"
+                      onClick={() => setStatsRange(r)}
+                      aria-label={`Период: ${rangeLabels[r]}`}
+                    >
+                      {rangeLabels[r]}
+                    </Button>
+                  ))}
+                </HStack>
+              }
             >
               <SimpleGrid minChildWidth={{ base: "100%", sm: "260px", md: "320px" }} spacing={3}>
                 {contributionTiles.map((t) => (
@@ -959,6 +1159,104 @@ const ProfileScreen: React.FC = () => {
                   </Box>
                 </HStack>
               </Box>
+
+              <SimpleGrid
+                mt={{ base: 4, md: 5 }}
+                minChildWidth={{ base: "160px", sm: "180px" }}
+                spacing={{ base: 2.5, md: 3 }}
+              >
+                <AppButtonLink
+                  to="/blog"
+                  size="sm"
+                  variant="outline"
+                  borderRadius="full"
+                  leftIcon={<Icon as={FaFeatherAlt} />}
+                  aria-label="Перейти в блог"
+                >
+                  Написать
+                </AppButtonLink>
+                <AppButtonLink
+                  to="/learn"
+                  size="sm"
+                  variant="outline"
+                  borderRadius="full"
+                  leftIcon={<Icon as={FaBookOpen} />}
+                  aria-label="Перейти к материалам"
+                >
+                  Материалы
+                </AppButtonLink>
+                <AppButtonLink
+                  to="/weekly"
+                  size="sm"
+                  variant="outline"
+                  borderRadius="full"
+                  leftIcon={<Icon as={FaClipboardList} />}
+                  aria-label="Перейти к задачам недели"
+                >
+                  Задачи недели
+                </AppButtonLink>
+                <AppButtonLink
+                  to="/hackathons"
+                  size="sm"
+                  variant="outline"
+                  borderRadius="full"
+                  leftIcon={<Icon as={FaCode} />}
+                  aria-label="Перейти к хакатонам"
+                >
+                  Хакатоны
+                </AppButtonLink>
+                <AppButtonLink
+                  to="/sessions"
+                  size="sm"
+                  variant="outline"
+                  borderRadius="full"
+                  leftIcon={<Icon as={FaComments} />}
+                  aria-label="Перейти к сессиям"
+                >
+                  Сессии
+                </AppButtonLink>
+              </SimpleGrid>
+
+              <Accordion allowToggle mt={{ base: 3, md: 4 }}>
+                <AccordionItem border="none">
+                  <AccordionButton
+                    px={0}
+                    _hover={{ bg: "transparent" }}
+                    _active={{ bg: "transparent" }}
+                    aria-label="Как увеличить вклад"
+                  >
+                    <HStack w="full" justify="space-between">
+                      <Text fontWeight="semibold">Как увеличить вклад</Text>
+                      <AccordionIcon />
+                    </HStack>
+                  </AccordionButton>
+                  <AccordionPanel px={0} pt={2}>
+                    <VStack align="start" spacing={2} color={muted}>
+                      <Text fontSize="sm">
+                        - Публикуй материалы и статьи — это учитывается как авторство в базе AIFFA.
+                      </Text>
+                      <Text fontSize="sm">
+                        - Участвуй в{" "}
+                        <AppLink to="/hackathons" fontWeight="semibold" aria-label="Открыть хакатоны">
+                          хакатонах
+                        </AppLink>{" "}
+                        и{" "}
+                        <AppLink to="/sessions" fontWeight="semibold" aria-label="Открыть сессии">
+                          сессиях
+                        </AppLink>
+                        .
+                      </Text>
+                      <Text fontSize="sm">
+                        - Решай задачи недели:{" "}
+                        <AppLink to="/weekly" fontWeight="semibold" aria-label="Открыть задачи недели">
+                          перейти в раздел
+                        </AppLink>
+                        .
+                      </Text>
+                    </VStack>
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
             </SectionCard>
             </VStack>
           </GridItem>

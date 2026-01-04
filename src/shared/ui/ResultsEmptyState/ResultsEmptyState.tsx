@@ -15,7 +15,7 @@ export const ResultsEmptyState: React.FC<ResultsEmptyStateProps> = ({
 
   if (variant === "favoritesEmpty") {
     return (
-      <Box w="full" textAlign="center" mt={0} role="status" aria-live="polite">
+      <Box w="full" textAlign="center" mt={0} role="status" aria-live="polite" overflowX="hidden">
         <VStack spacing={2} maxW="560px" mx="auto">
           <Box
             w="full"
@@ -39,7 +39,7 @@ export const ResultsEmptyState: React.FC<ResultsEmptyStateProps> = ({
   }
 
   return (
-    <Box w="full" textAlign="center" mt={0} role="status" aria-live="polite">
+    <Box w="full" textAlign="center" mt={0} role="status" aria-live="polite" overflowX="hidden">
       <VStack spacing={2} maxW="560px" mx="auto">
         <Box
           w="full"
@@ -54,9 +54,18 @@ export const ResultsEmptyState: React.FC<ResultsEmptyStateProps> = ({
         <Text fontWeight="semibold" color={theme.titleColor} fontSize={{ base: "lg", md: "xl" }}>
           {variant === "favoritesSearch" ? "В избранном ничего не нашли" : "Ничего не нашли"}
         </Text>
-        <Text color={theme.descColor}>
+        <Text color={theme.descColor} maxW="full" px={2}>
           По запросу:{" "}
-          <Text as="span" fontWeight="semibold" color={theme.blue.accent}>
+          <Text
+            as="span"
+            fontWeight="semibold"
+            color={theme.blue.accent}
+            display="inline-block"
+            maxW="full"
+            overflowWrap="anywhere"
+            wordBreak="break-word"
+            whiteSpace="normal"
+          >
             {safeQuery || "—"}
           </Text>
         </Text>

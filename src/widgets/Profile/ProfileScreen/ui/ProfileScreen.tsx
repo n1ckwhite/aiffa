@@ -32,6 +32,7 @@ import {
   FiMail,
   FiMapPin,
   FiPackage,
+  FiStar,
   FiTarget,
   FiUsers,
   FiVideo,
@@ -163,14 +164,6 @@ const ProfileScreen: React.FC = () => {
     },
   ];
 
-  const followersCount =
-    typeof (profile as any).followersCount === "number" && isFinite((profile as any).followersCount) && (profile as any).followersCount >= 0
-      ? Math.trunc((profile as any).followersCount)
-      : 0;
-  const followingCount =
-    typeof (profile as any).followingCount === "number" && isFinite((profile as any).followingCount) && (profile as any).followingCount >= 0
-      ? Math.trunc((profile as any).followingCount)
-      : 0;
   const cardBg = useColorModeValue("white", "gray.900");
   const cardBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const muted = useColorModeValue("gray.600", "whiteAlpha.700");
@@ -182,6 +175,12 @@ const ProfileScreen: React.FC = () => {
   const mailIconColor = useColorModeValue("pink.600", "pink.300");
   const githubIconColor = useColorModeValue("gray.700", "whiteAlpha.800");
   const linkIconColor = useColorModeValue("cyan.600", "cyan.300");
+
+  const achievementsCardBg = useColorModeValue("orange.50", "whiteAlpha.50");
+  const achievementsCardBorder = useColorModeValue("orange.200", "whiteAlpha.200");
+  const achievementsIconBg = useColorModeValue("orange.100", "whiteAlpha.100");
+  const achievementsIconColor = useColorModeValue("orange.700", "orange.200");
+  const achievementsCountBg = useColorModeValue("white", "whiteAlpha.50");
 
   const leftIconColors = {
     people: peopleIconColor,
@@ -610,11 +609,11 @@ const ProfileScreen: React.FC = () => {
                         <Icon as={FiUsers} color={leftIconColors.people} />
                         <Text>
                           <Text as="span" fontWeight="semibold" color="inherit">
-                            {followersCount}
+                            10
                           </Text>{" "}
                           подписчики ·{" "}
                           <Text as="span" fontWeight="semibold" color="inherit">
-                            {followingCount}
+                          10
                           </Text>{" "}
                           подписан
                         </Text>
@@ -792,15 +791,48 @@ const ProfileScreen: React.FC = () => {
                     </VStack>
                   </VStack>
                   {achievedItems.length > 0 && (
-                  <VStack align="start" spacing={2} w="full" textAlign="left" mt={4}>
-                    <Text fontWeight="semibold" textAlign="left" w="full">
-                      Достижения
-                    </Text>
+                  <VStack align="start" spacing={2.5} w="full" textAlign="left" mt={5}>
+                    <HStack w="full" justify="space-between" align="center">
+                      <HStack spacing={2} align="center">
+                        <Box
+                          aria-hidden="true"
+                          w="28px"
+                          h="28px"
+                          borderRadius="10px"
+                          bg={achievementsIconBg}
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          color={achievementsIconColor}
+                          flexShrink={0}
+                        >
+                          <Icon as={FiStar} boxSize="15px" />
+                        </Box>
+                        <Text fontWeight="bold" textAlign="left" w="full">
+                          Достижения
+                        </Text>
+                      </HStack>
+
+                      <Box
+                        px={2.5}
+                        py={1}
+                        borderRadius="full"
+                        borderWidth="1px"
+                        borderColor={achievementsCardBorder}
+                        bg={achievementsCountBg}
+                      >
+                        <Text fontSize="xs" fontWeight="bold" color={achievementsIconColor}>
+                          {achievedItems.length}
+                        </Text>
+                      </Box>
+                    </HStack>
+                    <Box>
                       <HStack spacing={2} flexWrap="wrap" justify="flex-start">
                         {achievedItems.map((it: any) => (
                           <CompactAchievement key={it.id} item={it} />
                         ))}
                       </HStack>
+                    </Box>
                   </VStack>)}
                 </Box>
               </GridItem>

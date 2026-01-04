@@ -18,7 +18,20 @@ import {
 import { useUserProfile, type ProfileLink } from "entities/user";
 import { useAchievementsData } from "../hooks/useAchievementsData";
 import { withGithubAvatarSize } from "@/shared/lib/github/withGithubAvatarSize";
-import { FiLink, FiMail, FiUsers } from "react-icons/fi";
+import {
+  FiAward,
+  FiBookOpen,
+  FiCheckCircle,
+  FiCode,
+  FiEdit3,
+  FiFileText,
+  FiLink,
+  FiMail,
+  FiPackage,
+  FiTarget,
+  FiUsers,
+  FiVideo,
+} from "react-icons/fi";
 import { FaTelegramPlane } from "react-icons/fa";
 import { Avatar } from "@chakra-ui/react";
 
@@ -33,6 +46,10 @@ const ProfileScreen: React.FC = () => {
   // NOTE: По просьбе — без вычислений через хуки. Ставим цифры напрямую.
   const completedLessons = 8;
   const solvedThisWeek = 3;
+  const solvedProjectsCount = 0;
+  const readArticlesCount = 0;
+  const hackathonsParticipationCount = 0;
+  const sessionsParticipationCount = 0;
   const contributedMaterialsCount = 5;
   const contributedProjectsCount = 0;
   const totalSolvedEver = 3;
@@ -41,12 +58,31 @@ const ProfileScreen: React.FC = () => {
   const isArticlesLoaded = true;
   const contributionHint = "По авторству в базе AIFFA";
 
+  const progressTiles = React.useMemo(
+    () => [
+      { label: "Пройдено материалов", value: completedLessons, icon: FiBookOpen },
+      { label: "Задач недели решено", value: solvedThisWeek, icon: FiCheckCircle },
+      { label: "Проектов решено", value: solvedProjectsCount, icon: FiCode },
+      { label: "Статей прочитано", value: readArticlesCount, icon: FiFileText },
+      { label: "Участие в хакатонах", value: hackathonsParticipationCount, icon: FiAward },
+      { label: "Участие на сессиях", value: sessionsParticipationCount, icon: FiVideo },
+    ],
+    [
+      completedLessons,
+      hackathonsParticipationCount,
+      readArticlesCount,
+      sessionsParticipationCount,
+      solvedProjectsCount,
+      solvedThisWeek,
+    ],
+  );
+
   const contributionTiles = React.useMemo(
     () => [
-      { label: "Вложено материалов", value: contributedMaterialsCount },
-      { label: "Вложено проектов", value: contributedProjectsCount },
-      { label: "Вложено задач недели", value: totalSolvedEver },
-      { label: "Написано статей", value: authoredArticlesCount },
+      { label: "Вложено материалов", value: contributedMaterialsCount, icon: FiBookOpen },
+      { label: "Вложено проектов", value: contributedProjectsCount, icon: FiPackage },
+      { label: "Вложено задач недели", value: totalSolvedEver, icon: FiTarget },
+      { label: "Написано статей", value: authoredArticlesCount, icon: FiEdit3 },
     ],
     [authoredArticlesCount, contributedMaterialsCount, contributedProjectsCount, totalSolvedEver],
   );
@@ -159,7 +195,14 @@ const ProfileScreen: React.FC = () => {
     );
   };
 
-  const StatTile: React.FC<{ label: string; value: React.ReactNode; hint?: string }> = ({ label, value, hint }) => {
+  const StatTile: React.FC<{
+    label: string;
+    value: React.ReactNode;
+    hint?: string;
+    icon?: React.ComponentType<any>;
+  }> = ({ label, value, hint, icon }) => {
+    const watermarkColor = useColorModeValue("blackAlpha.150", "whiteAlpha.120");
+
     return (
       <Box
         borderWidth="1px"
@@ -168,10 +211,38 @@ const ProfileScreen: React.FC = () => {
         bg={cardBg}
         p={{ base: 4, md: 5 }}
         minW={0}
+        minH={{ base: "104px", md: "116px" }}
+        position="relative"
+        overflow="hidden"
       >
-        <Text fontSize="sm" color={muted} mb={1}>
-          {label}
-        </Text>
+        {!!icon && (
+          <Box
+            aria-hidden="true"
+            position="absolute"
+            top={{ base: 3, md: 4 }}
+            right={{ base: 3, md: 4 }}
+            opacity={0.1}
+            color={watermarkColor}
+            transform="rotate(-6deg)"
+            pointerEvents="none"
+          >
+            <Icon as={icon} boxSize={{ base: "44px", md: "56px" }} />
+          </Box>
+        )}
+
+        {/* Fixed header height so values align across columns even when label wraps */}
+        <Box minH={{ base: "36px", md: "40px" }} mb={2} pr={{ base: 10, md: 12 }}>
+          <Text
+            fontSize="sm"
+            color={muted}
+            lineHeight="1.25"
+            whiteSpace="normal"
+            overflowWrap="anywhere"
+            wordBreak="break-word"
+          >
+            {label}
+          </Text>
+        </Box>
         <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} lineHeight="1.1">
           {value}
         </Text>
@@ -211,10 +282,6 @@ const ProfileScreen: React.FC = () => {
         >
           <GridItem>
             <Box
-              borderWidth="1px"
-              borderColor={cardBorder}
-              borderRadius="20px"
-              bg={cardBg}
               p={{ base: 5, md: 7 }}
               h={{ base: "auto", lg: "full" }}
             >
@@ -324,13 +391,19 @@ const ProfileScreen: React.FC = () => {
 
           <GridItem minW={0}>
             <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
-            <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={{ base: 3, md: 4 }}>
-              <StatTile
-                label="Пройдено материалов"
-                value={completedLessons}
-              />
-              <StatTile label="Задач недели решено" value={solvedThisWeek} />
-            </SimpleGrid>
+            <Box borderWidth="1px" borderColor={cardBorder} borderRadius="20px" bg={cardBg} p={{ base: 5, md: 7 }}>
+              <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }} mb={2}>
+                Статистика
+              </Text>
+              <Text color={muted} mb={4}>
+                Короткий срез по вашему прогрессу и активности.
+              </Text>
+              <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={{ base: 3, md: 4 }}>
+                {progressTiles.map((t) => (
+                  <StatTile key={t.label} label={t.label} value={t.value} icon={(t as any).icon} />
+                ))}
+              </SimpleGrid>
+            </Box>
 
             <Box borderWidth="1px" borderColor={cardBorder} borderRadius="20px" bg={cardBg} p={{ base: 5, md: 7 }}>
               <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }} mb={2}>
@@ -341,7 +414,13 @@ const ProfileScreen: React.FC = () => {
               </Text>
               <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={3}>
                 {contributionTiles.map((t) => (
-                  <StatTile key={t.label} label={t.label} value={t.value} hint={contributionHint} />
+                  <StatTile
+                    key={t.label}
+                    label={t.label}
+                    value={t.value}
+                    hint={contributionHint}
+                    icon={(t as any).icon}
+                  />
                 ))}
               </SimpleGrid>
             </Box>

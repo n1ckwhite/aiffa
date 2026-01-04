@@ -46,11 +46,14 @@ import {
 } from "react-icons/fi";
 import {
   FaBookOpen,
+  FaCalendarAlt,
   FaClipboardList,
   FaCode,
   FaComments,
   FaFeatherAlt,
   FaGithub,
+  FaInfinity,
+  FaRegCalendarAlt,
   FaTelegramPlane,
 } from "react-icons/fa";
 import { Avatar } from "@chakra-ui/react";
@@ -951,6 +954,15 @@ const ProfileScreen: React.FC = () => {
                       size="sm"
                       variant={statsRange === r ? "solid" : "outline"}
                       borderRadius="full"
+                      leftIcon={
+                        r === "week" ? (
+                          <Icon as={FaRegCalendarAlt} color={headerNavIconColor} />
+                        ) : r === "month" ? (
+                          <Icon as={FaCalendarAlt} color={headerNavIconColor} />
+                        ) : (
+                          <Icon as={FaInfinity} color={headerNavIconColor} />
+                        )
+                      }
                       onClick={() => setStatsRange(r)}
                       aria-label={`Период: ${rangeLabels[r]}`}
                     >
@@ -1109,6 +1121,15 @@ const ProfileScreen: React.FC = () => {
                       size="sm"
                       variant={contributionRange === r ? "solid" : "outline"}
                       borderRadius="full"
+                      leftIcon={
+                        r === "week" ? (
+                          <Icon as={FaRegCalendarAlt} color={headerNavIconColor} />
+                        ) : r === "month" ? (
+                          <Icon as={FaCalendarAlt} color={headerNavIconColor} />
+                        ) : (
+                          <Icon as={FaInfinity} color={headerNavIconColor} />
+                        )
+                      }
                       onClick={() => setContributionRange(r)}
                       aria-label={`Период: ${rangeLabels[r]}`}
                     >

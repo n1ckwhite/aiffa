@@ -279,10 +279,11 @@ const ProfileScreen: React.FC = () => {
   const LeftRow: React.FC<{
     icon: React.ComponentType<any>;
     iconColor: string;
+    spacing?: number;
     children: React.ReactNode;
-  }> = ({ icon, iconColor, children }) => {
+  }> = ({ icon, iconColor, spacing = 3, children }) => {
     return (
-      <HStack spacing={3} align="center" w="full" minW={0}>
+      <HStack spacing={spacing} align="center" w="full" minW={0}>
         <Box
           aria-hidden="true"
           w="22px"
@@ -591,51 +592,43 @@ const ProfileScreen: React.FC = () => {
                   Редактировать профиль
                 </Button>
 
-                <HStack
-                  spacing={2}
-                  color={muted}
-                  pt={1}
-                  flexWrap="wrap"
-                  justify={{ base: "center", lg: "flex-start" }}
-                  w="full"
-                >
-                  <Icon as={FiUsers} color={leftIconColors.people} />
-                  <Text>
-                    <Text as="span" fontWeight="semibold" color="inherit">
-                      {followersCount}
-                    </Text>{" "}
-                    подписчики ·{" "}
-                    <Text as="span" fontWeight="semibold" color="inherit">
-                      {followingCount}
-                    </Text>{" "}
-                    подписан
-                  </Text>
-                </HStack>
-
-                <HStack
-                  spacing={3}
-                  pt={1}
-                  flexWrap="wrap"
-                  justify={{ base: "center", lg: "flex-start" }}
-                  w="full"
-                >
-                  <HStack spacing={1.5} color={muted}>
-                    <Icon as={FiAward} color={leftIconColors.xp} />
-                    <Text fontSize="sm">
-                      <Text as="span" fontWeight="semibold" color="inherit">
-                        {xp}
-                      </Text>{" "}
-                      XP
-                    </Text>
-                  </HStack>
-                  <Box>
-                    <PillBadge colorScheme={profileBadge.colorScheme as any} variant="outline" uppercase={false}>
-                      {profileBadge.label}
-                    </PillBadge>
-                  </Box>
-                </HStack>
                 <Box w="full" maxW={{ base: "300px", lg: "full" }} mx={{ base: "auto", lg: 0 }}>
-                  <Divider borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")} />
+                  <VStack align="start" spacing={2} w="full" pt={1}>
+                    <LeftRow icon={FiUsers as any} iconColor={leftIconColors.people} spacing={2}>
+                      <Text color={muted}>
+                        <Text as="span" fontWeight="semibold" color="inherit">
+                          {followersCount}
+                        </Text>{" "}
+                        подписчики ·{" "}
+                        <Text as="span" fontWeight="semibold" color="inherit">
+                          {followingCount}
+                        </Text>{" "}
+                        подписан
+                      </Text>
+                    </LeftRow>
+
+                    <LeftRow icon={FiAward as any} iconColor={leftIconColors.xp}>
+                      <HStack spacing={3} flexWrap="wrap" justify="flex-start" w="full" minW={0}>
+                        <Text fontSize="sm" color={muted}>
+                          <Text as="span" fontWeight="semibold" color="inherit">
+                            {xp}
+                          </Text>{" "}
+                          XP
+                        </Text>
+                        <Box>
+                          <PillBadge
+                            colorScheme={profileBadge.colorScheme as any}
+                            variant="outline"
+                            uppercase={false}
+                          >
+                            {profileBadge.label}
+                          </PillBadge>
+                        </Box>
+                      </HStack>
+                    </LeftRow>
+                  </VStack>
+
+                  <Divider mt={3} borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")} />
 
                   <VStack align="start" spacing={2} w="full" textAlign="left">
                     <SectionLabel>Контакты</SectionLabel>
@@ -791,7 +784,9 @@ const ProfileScreen: React.FC = () => {
             >
               {/* Prefer 3 columns on desktop, but never "squeeze" tiles on narrower widths */}
               <SimpleGrid
-                minChildWidth={{ base: "100%", sm: "200px", md: "250px" }}
+                // Important: breakpoints depend on viewport width, but this grid can be narrow inside the layout.
+                // Use a larger minChildWidth on `sm` to avoid "squeezing" when container is ~400px wide.
+                minChildWidth={{ base: "100%", sm: "240px", md: "250px" }}
                 spacing={{ base: 3, md: 4 }}
               >
                 {progressTiles.map((t) => (

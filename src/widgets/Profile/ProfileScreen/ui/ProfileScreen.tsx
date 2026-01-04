@@ -253,6 +253,7 @@ const ProfileScreen: React.FC = () => {
   const cardBg = useColorModeValue("white", "gray.900");
   const cardBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const muted = useColorModeValue("gray.600", "whiteAlpha.700");
+  const headerNavIconColor = useColorModeValue("blue.700", "whiteAlpha.900");
   // Colors for left-side icons (must NOT call hooks inside useMemo).
   const peopleIconColor = useColorModeValue("blue.600", "blue.300");
   const xpIconColor = useColorModeValue("orange.600", "orange.300");
@@ -1021,7 +1022,7 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaBookOpen} />}
+                  leftIcon={<Icon as={FaBookOpen} color={headerNavIconColor} />}
                   aria-label="Перейти к материалам"
                 >
                   К материалам
@@ -1031,7 +1032,7 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaClipboardList} />}
+                  leftIcon={<Icon as={FaClipboardList} color={headerNavIconColor} />}
                   aria-label="Перейти к задачам недели"
                 >
                   Задачи недели
@@ -1041,7 +1042,7 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaFeatherAlt} />}
+                  leftIcon={<Icon as={FaFeatherAlt} color={headerNavIconColor} />}
                   aria-label="Перейти к блогу"
                 >
                   Блог
@@ -1170,7 +1171,7 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaFeatherAlt} />}
+                  leftIcon={<Icon as={FaFeatherAlt} color={headerNavIconColor} />}
                   aria-label="Перейти в блог"
                 >
                   Написать
@@ -1180,7 +1181,7 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaBookOpen} />}
+                  leftIcon={<Icon as={FaBookOpen} color={headerNavIconColor} />}
                   aria-label="Перейти к материалам"
                 >
                   Материалы
@@ -1190,7 +1191,7 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaClipboardList} />}
+                  leftIcon={<Icon as={FaClipboardList} color={headerNavIconColor} />}
                   aria-label="Перейти к задачам недели"
                 >
                   Задачи недели
@@ -1200,7 +1201,7 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaCode} />}
+                  leftIcon={<Icon as={FaCode} color={headerNavIconColor} />}
                   aria-label="Перейти к хакатонам"
                 >
                   Хакатоны
@@ -1210,7 +1211,7 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaComments} />}
+                  leftIcon={<Icon as={FaComments} color={headerNavIconColor} />}
                   aria-label="Перейти к сессиям"
                 >
                   Сессии

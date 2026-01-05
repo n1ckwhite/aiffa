@@ -1,13 +1,7 @@
 import React from "react";
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Box,
   Button,
-  Divider,
   Grid,
   GridItem,
   HStack,
@@ -75,6 +69,7 @@ type StatTileModel = {
   icon?: React.ComponentType<any>;
   tooltip?: string;
   accentColor?: string;
+  emphasis?: boolean;
 };
 
 type StatsRange = "week" | "month" | "all";
@@ -196,6 +191,7 @@ const ProfileScreen: React.FC = () => {
       icon: FiCheckCircle,
       accentColor: "green.400",
       tooltip: "Сколько задач недели вы решили всего",
+      emphasis: true,
     },
     {
       label: "Пройдено проектов",
@@ -461,13 +457,15 @@ const ProfileScreen: React.FC = () => {
     icon?: React.ComponentType<any>;
     tooltip?: string;
     accentColor?: string;
-  }> = ({ label, value, hint, icon, tooltip, accentColor }) => {
+    emphasis?: boolean;
+  }> = ({ label, value, hint, icon, tooltip, accentColor, emphasis }) => {
     const watermarkColor = useColorModeValue("blackAlpha.150", "whiteAlpha.120");
     const hoverBorder = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
     const focusRing = useColorModeValue("0 0 0 3px rgba(66,153,225,0.45)", "0 0 0 3px rgba(66,153,225,0.45)");
     // Colorful watermark by default (to highlight the tile), then de-accent on hover.
     const baseAccent = accentColor ?? useColorModeValue("blue.400", "blue.200");
     const formattedValue = typeof value === "number" ? formatCount(value) : value;
+    const valueFontSize = emphasis ? ({ base: "2xl", md: "3xl" } as const) : ({ base: "xl", md: "2xl" } as const);
 
     const tile = (
       <Box
@@ -534,7 +532,7 @@ const ProfileScreen: React.FC = () => {
 
         {/* Value is centered vertically between label and hint */}
         <Box display="flex" alignItems="center" pr={{ base: 8, md: 12 }}>
-          <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} lineHeight="1.1">
+          <Text fontWeight="bold" fontSize={valueFontSize} lineHeight="1.1">
             {formattedValue}
           </Text>
         </Box>
@@ -614,7 +612,7 @@ const ProfileScreen: React.FC = () => {
               </Text>
             </HStack>
 
-            {!!actions ? <Box ml="auto">{actions}</Box> : null}
+            {!!actions ? <Box>{actions}</Box> : null}
           </HStack>
           <Text color={muted} mb={4}>
             {description}
@@ -698,7 +696,7 @@ const ProfileScreen: React.FC = () => {
                   />
 
                   <VStack align={{ base: "center", md: "start" }} spacing={2} w="full" minW={0}>
-                    <Text fontWeight="bold" fontSize={{ base: "xl", md: "2xl" }} noOfLines={1}>
+                    <Text fontWeight="bold" fontSize={{ base: "2xl", md: "3xl" }} lineHeight="1.15" noOfLines={1}>
                       {name || "Пользователь"}
                     </Text>
 
@@ -715,7 +713,20 @@ const ProfileScreen: React.FC = () => {
                       alignSelf={{ base: "center", md: "flex-start" }}
                       h="44px"
                       borderRadius="md"
-                      variant="outline"
+                      fontWeight="semibold"
+                      bg={useColorModeValue("blue.600", "blue.400")}
+                      color="white"
+                      transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                      _hover={{
+                        transform: "translateY(-1px)",
+                        bg: useColorModeValue("blue.700", "blue.500"),
+                        boxShadow: "md",
+                      }}
+                      _active={{
+                        transform: "translateY(0px)",
+                        bg: useColorModeValue("blue.800", "blue.600"),
+                        boxShadow: "sm",
+                      }}
                     >
                       Редактировать профиль
                     </Button>
@@ -750,8 +761,13 @@ const ProfileScreen: React.FC = () => {
                       >
                         <HStack spacing={1.5} color={muted}>
                           <Icon as={FiAward} color={leftIconColors.xp} />
-                          <Text fontSize="sm">
-                            <Text as="span" fontWeight="semibold" color="inherit">
+                          <Text fontSize={{ base: "md", md: "lg" }}>
+                            <Text
+                              as="span"
+                              fontWeight="bold"
+                              color={useColorModeValue("gray.900", "whiteAlpha.900")}
+                              fontSize={{ base: "md", md: "lg" }}
+                            >
                               {formatCount(xp)}
                             </Text>{" "}
                             XP
@@ -967,7 +983,7 @@ const ProfileScreen: React.FC = () => {
               description="Короткий срез по вашему прогрессу и активности."
               icon={FiBarChart2 as any}
               actions={
-                <HStack spacing={2} flexWrap="wrap" justify="flex-end">
+                <HStack spacing={2} flexWrap="wrap" justify="flex-start">
                   {(["week", "month", "all"] as const).map((r) => (
                     <Button
                       key={r}
@@ -1007,6 +1023,7 @@ const ProfileScreen: React.FC = () => {
                     icon={(t as any).icon}
                     tooltip={(t as any).tooltip}
                     accentColor={(t as any).accentColor}
+                    emphasis={(t as any).emphasis}
                   />
                 ))}
               </SimpleGrid>
@@ -1090,10 +1107,17 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/learn"
                   size="sm"
-                  variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaBookOpen} color={headerNavIconColor} />}
-                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
+                  fontWeight="semibold"
+                  bg={useColorModeValue("blue.600", "blue.500")}
+                  color="white"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("blue.600", "blue.300")}
+                  leftIcon={<Icon as={FaBookOpen} color="white" />}
+                  sx={{ "& .chakra-button__icon": { color: "white" } }}
+                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                  _hover={{ bg: useColorModeValue("blue.700", "blue.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("blue.800", "blue.700"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к материалам"
                 >
                   К материалам
@@ -1101,10 +1125,17 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/weekly"
                   size="sm"
-                  variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaClipboardList} color={headerNavIconColor} />}
-                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
+                  fontWeight="semibold"
+                  bg={useColorModeValue("green.600", "green.500")}
+                  color="white"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("green.600", "green.300")}
+                  leftIcon={<Icon as={FaClipboardList} color="white" />}
+                  sx={{ "& .chakra-button__icon": { color: "white" } }}
+                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                  _hover={{ bg: useColorModeValue("green.700", "green.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("green.800", "green.700"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к задачам недели"
                 >
                   Задачи недели
@@ -1112,10 +1143,17 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/blog"
                   size="sm"
-                  variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaFeatherAlt} color={headerNavIconColor} />}
-                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
+                  fontWeight="semibold"
+                  bg={useColorModeValue("purple.600", "purple.500")}
+                  color="white"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("purple.600", "purple.300")}
+                  leftIcon={<Icon as={FaFeatherAlt} color="white" />}
+                  sx={{ "& .chakra-button__icon": { color: "white" } }}
+                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                  _hover={{ bg: useColorModeValue("purple.700", "purple.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("purple.800", "purple.700"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к блогу"
                 >
                   Блог
@@ -1238,10 +1276,17 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/blog"
                   size="sm"
-                  variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaFeatherAlt} color={headerNavIconColor} />}
-                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
+                  fontWeight="semibold"
+                  bg={useColorModeValue("orange.500", "orange.400")}
+                  color="white"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("orange.500", "orange.300")}
+                  leftIcon={<Icon as={FaFeatherAlt} color="white" />}
+                  sx={{ "& .chakra-button__icon": { color: "white" } }}
+                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                  _hover={{ bg: useColorModeValue("orange.600", "orange.500"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("orange.700", "orange.600"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти в блог"
                 >
                   Написать
@@ -1249,10 +1294,17 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/learn"
                   size="sm"
-                  variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaBookOpen} color={headerNavIconColor} />}
-                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
+                  fontWeight="semibold"
+                  bg={useColorModeValue("blue.600", "blue.500")}
+                  color="white"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("blue.600", "blue.300")}
+                  leftIcon={<Icon as={FaBookOpen} color="white" />}
+                  sx={{ "& .chakra-button__icon": { color: "white" } }}
+                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                  _hover={{ bg: useColorModeValue("blue.700", "blue.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("blue.800", "blue.700"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к материалам"
                 >
                   Материалы
@@ -1260,10 +1312,17 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/weekly"
                   size="sm"
-                  variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaClipboardList} color={headerNavIconColor} />}
-                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
+                  fontWeight="semibold"
+                  bg={useColorModeValue("green.600", "green.500")}
+                  color="white"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("green.600", "green.300")}
+                  leftIcon={<Icon as={FaClipboardList} color="white" />}
+                  sx={{ "& .chakra-button__icon": { color: "white" } }}
+                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                  _hover={{ bg: useColorModeValue("green.700", "green.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("green.800", "green.700"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к задачам недели"
                 >
                   Задачи недели
@@ -1271,10 +1330,17 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/hackathons"
                   size="sm"
-                  variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaCode} color={headerNavIconColor} />}
-                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
+                  fontWeight="semibold"
+                  bg={useColorModeValue("pink.500", "pink.400")}
+                  color="white"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("pink.500", "pink.300")}
+                  leftIcon={<Icon as={FaCode} color="white" />}
+                  sx={{ "& .chakra-button__icon": { color: "white" } }}
+                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                  _hover={{ bg: useColorModeValue("pink.600", "pink.500"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("pink.700", "pink.600"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к хакатонам"
                 >
                   Хакатоны
@@ -1282,10 +1348,17 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/sessions"
                   size="sm"
-                  variant="outline"
                   borderRadius="full"
-                  leftIcon={<Icon as={FaComments} color={headerNavIconColor} />}
-                  sx={{ "& .chakra-button__icon": { color: headerNavIconColor } }}
+                  fontWeight="semibold"
+                  bg={useColorModeValue("cyan.600", "cyan.500")}
+                  color="white"
+                  borderWidth="1px"
+                  borderColor={useColorModeValue("cyan.600", "cyan.300")}
+                  leftIcon={<Icon as={FaComments} color="white" />}
+                  sx={{ "& .chakra-button__icon": { color: "white" } }}
+                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                  _hover={{ bg: useColorModeValue("cyan.700", "cyan.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("cyan.800", "cyan.700"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к сессиям"
                 >
                   Сессии

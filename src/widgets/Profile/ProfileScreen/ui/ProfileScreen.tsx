@@ -354,6 +354,24 @@ const ProfileScreen: React.FC = () => {
     links: [string, string, string, string];
   } | null>(null);
 
+  /**
+   * Normalizes user-entered custom links on submit.
+   * If a user enters `example.com` or `123`, we persist it as `https://example.com` / `https://123`.
+   * If a scheme already exists (e.g. `https://`, `http://`, `mailto:`), we keep it as-is.
+   */
+  const normalizeCustomLinkValue = (raw: string): string => {
+    const trimmed = String(raw ?? "").trim();
+    if (!trimmed) return "";
+
+    // Already has a scheme: https://, http://, mailto:, tg:, etc.
+    if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return trimmed;
+
+    // Scheme-relative URLs like //example.com
+    if (trimmed.startsWith("//")) return `https:${trimmed}`;
+
+    return `https://${trimmed}`;
+  };
+
   const [saveState, saveAction, isSaving] = React.useActionState(
     async (_prev: { ok: boolean; error?: string } | null, formData: FormData) => {
       try {
@@ -361,10 +379,10 @@ const ProfileScreen: React.FC = () => {
         const nextBio = String(formData.get("profileBio") ?? "").trim();
         const nextWorkplace = String(formData.get("profileWorkplace") ?? "").trim();
         const nextLocation = String(formData.get("profileLocation") ?? "").trim();
-        const link1 = String(formData.get("profileLink1") ?? "").trim();
-        const link2 = String(formData.get("profileLink2") ?? "").trim();
-        const link3 = String(formData.get("profileLink3") ?? "").trim();
-        const link4 = String(formData.get("profileLink4") ?? "").trim();
+        const link1 = normalizeCustomLinkValue(String(formData.get("profileLink1") ?? ""));
+        const link2 = normalizeCustomLinkValue(String(formData.get("profileLink2") ?? ""));
+        const link3 = normalizeCustomLinkValue(String(formData.get("profileLink3") ?? ""));
+        const link4 = normalizeCustomLinkValue(String(formData.get("profileLink4") ?? ""));
 
         const nextLinks: ProfileLink[] = [];
         const trimmedEmail = String(emailValue || "").trim();

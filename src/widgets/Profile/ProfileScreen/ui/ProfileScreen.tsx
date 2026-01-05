@@ -1126,6 +1126,17 @@ const ProfileScreen: React.FC = () => {
                         </AppLink>{" "}
                         и прокачивай базу.
                       </Text>
+                      <Text fontSize="sm">
+                        - Участвуй в{" "}
+                        <AppLink to="/hackathons" fontWeight="semibold" aria-label="Открыть хакатоны">
+                          хакатонах
+                        </AppLink>{" "}
+                        и{" "}
+                        <AppLink to="/sessions" fontWeight="semibold" aria-label="Открыть сессии">
+                          сессиях
+                        </AppLink>
+                        .
+                      </Text>
                     </VStack>
                   </AccordionPanel>
                 </AccordionItem>
@@ -1290,24 +1301,6 @@ const ProfileScreen: React.FC = () => {
                     <VStack align="start" spacing={2} color={muted}>
                       <Text fontSize="sm">
                         - Публикуй материалы и статьи — это учитывается как авторство в базе AIFFA.
-                      </Text>
-                      <Text fontSize="sm">
-                        - Участвуй в{" "}
-                        <AppLink to="/hackathons" fontWeight="semibold" aria-label="Открыть хакатоны">
-                          хакатонах
-                        </AppLink>{" "}
-                        и{" "}
-                        <AppLink to="/sessions" fontWeight="semibold" aria-label="Открыть сессии">
-                          сессиях
-                        </AppLink>
-                        .
-                      </Text>
-                      <Text fontSize="sm">
-                        - Решай задачи недели:{" "}
-                        <AppLink to="/weekly" fontWeight="semibold" aria-label="Открыть задачи недели">
-                          перейти в раздел
-                        </AppLink>
-                        .
                       </Text>
                     </VStack>
                   </AccordionPanel>

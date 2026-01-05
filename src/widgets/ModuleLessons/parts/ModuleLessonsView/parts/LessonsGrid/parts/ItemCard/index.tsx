@@ -9,36 +9,20 @@ import { OpenLinkBadge } from '../../../../../LessonCard/parts/Badges/OpenLinkBa
 import { AuthorsBadge } from '../../../ProjectLink/parts/AuthorsBadge';
 import { getItemCardMeta } from './data';
 import { formatCount } from 'shared/functions/formatCount';
+import { buildTopBefore, getLessonDateLabel } from './helpers';
 
 export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, colors, levelAccent, arrowAnimationCss, done }) => {
-  const topBefore = {
-    content: '""',
-    position: 'absolute' as const,
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '3px',
-    bg: levelAccent,
-    transform: 'scaleX(0)',
-    transformOrigin: 'left',
-    transition: 'transform 0.3s ease-in-out',
-  };
-
-  const {
-    totalTasks,
-    authors,
-    starsCount,
-    views,
-    commentsCount,
-    metaColor,
-    accentColor,
-    chipBorder,
-  } = getItemCardMeta(lesson, colors);
+  const topBefore = buildTopBefore(levelAccent);
+  const { totalTasks, authors, starsCount, views, commentsCount, metaColor, accentColor, chipBorder } =
+    getItemCardMeta(lesson, colors);
+  const dateLabel = getLessonDateLabel(lesson);
+  const cardIndexLabel = done ? <CheckIcon boxSize={3.5} /> : (start + idx + 1);
 
   return (
     <Box
       as="a"
       href={href}
+      aria-label={lesson?.title ? `Открыть материал: ${lesson.title}` : "Открыть материал"}
       w="full"
       minW={0}
       borderWidth="2px"
@@ -68,55 +52,68 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
       }}
       _before={done ? undefined : topBefore}
     >
-      {done && (<Box position="absolute" inset={0} borderRadius="16px" bg="green.500" opacity={0.06} pointerEvents="none" zIndex={0} />)}
+      {done && (
+        <Box position="absolute" inset={0} borderRadius="16px" bg="green.500" opacity={0.06} pointerEvents="none" zIndex={0} />
+      )}
       <IndexChip
         done={done}
-        indexBg={(colors as any).indexBg ?? (colors as any).blue?.indexBg ?? 'blue.50'}
+        indexBg={colors?.indexBg ?? colors?.blue?.indexBg ?? 'blue.50'}
         accentColor={accentColor}
       >
-        {done ? <CheckIcon boxSize={3.5} /> : (start + idx + 1)}
+        {cardIndexLabel}
       </IndexChip> 
       <Box flex={1} minW={0} display="flex" flexDirection="column" height="100%" justifyContent="space-between">
-        <Box
-          as="div"
-          fontWeight="semibold"
-          noOfLines={2}
-          wordBreak="break-word"
-          overflowWrap="anywhere"
-          whiteSpace="normal"
-          style={{ hyphens: 'auto' }}
-        >
-          {lesson.title}
+        <Box display="flex" alignItems="flex-start" justifyContent="space-between" gap={3} minW={0}>
+          <Box
+            as="div"
+            fontWeight="semibold"
+            noOfLines={2}
+            wordBreak="break-word"
+            overflowWrap="anywhere"
+            whiteSpace="normal"
+            style={{ hyphens: 'auto' }}
+            flex={1}
+            minW={0}
+          >
+            {lesson?.title ?? ""}
+          </Box>
         </Box>
 
-        <Box mt={1} display="flex" alignItems="center" gap={3} fontSize="xs" color={metaColor}>
-          <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
-            <Box as="span">
-              {formatCount(starsCount)}
+        <Box
+          mt={1}
+          display="flex"
+          alignItems="center"
+          gap={3}
+          fontSize="xs"
+          color={metaColor}
+        >
+          <Box display="inline-flex" alignItems="center" gap={3} rowGap={1} flexWrap="wrap" minW={0}>
+            <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
+              <Box as="span">{formatCount(starsCount)}</Box>
+              <StarIcon boxSize={3} color="yellow.400" />
             </Box>
-            <StarIcon boxSize={3} color="yellow.400" />
-          </Box>
-          <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
-            <Box as="span">
-              {formatCount(views)}
+            <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
+              <Box as="span">{formatCount(views)}</Box>
+              <Icon as={FiEye} boxSize={3.5} flexShrink={0} />
             </Box>
-            <Icon as={FiEye} boxSize={3.5} flexShrink={0} />
-          </Box>
-          <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
-            <Box as="span">
-              {formatCount(commentsCount)}
+            <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
+              <Box as="span">{formatCount(commentsCount)}</Box>
+              <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} />
             </Box>
-            <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} />
           </Box>
         </Box>
 
         <Box as="div" className="badges-row">
-          <Box as="span" display="inline-flex" alignItems="center" gap={2} flexWrap="wrap" mt="auto" pt={1}>
-            <TasksBadge total={totalTasks} accentColor={accentColor} chipBorder={chipBorder} />
-            {Array.isArray(authors) && authors.length > 0 && (
-              <AuthorsBadge authors={authors} colors={colors} />
-            )}
-            <OpenLinkBadge accentColor={accentColor} chipBorder={chipBorder} arrowAnimation={arrowAnimationCss} />
+          <Box mt="auto" pt={1} display="flex" flexDirection="column" gap={1} minW={0}>
+            <Box as="span" display="inline-flex" alignItems="center" gap={2} flexWrap="wrap" minW={0}>
+              <TasksBadge total={totalTasks} accentColor={accentColor} chipBorder={chipBorder} />
+              {authors.length > 0 ? <AuthorsBadge authors={authors} colors={colors} /> : null}
+            </Box>
+            {dateLabel ? (
+              <Box as="span" display="inline-flex" alignItems="center" minW={0}>
+                <OpenLinkBadge accentColor={accentColor} chipBorder={chipBorder} dateLabel={dateLabel} />
+              </Box>
+            ) : null}
           </Box>
         </Box>
       </Box>

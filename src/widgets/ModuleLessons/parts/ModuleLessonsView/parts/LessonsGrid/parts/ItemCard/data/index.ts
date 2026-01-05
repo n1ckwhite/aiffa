@@ -1,32 +1,23 @@
-export const getItemCardMeta = (lesson: any, colors: any) => {
-  const totalTasks = ((lesson as any).tasks?.length ?? 0) as number;
+import type { LessonCardItem, LessonAuthor } from "../types";
 
-  const authors = (lesson as any).authors as
-    | Array<{ username: string; name?: string }>
-    | undefined;
+const toNumber = (value: unknown, fallback = 0) => {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : fallback;
+};
 
-  const starsCount = Number((lesson as any).ratingCount ?? 0);
-  const views = Number((lesson as any).views ?? 0);
-  const commentsCount = Number((lesson as any).commentsCount ?? 0);
+export const getItemCardMeta = (lesson: LessonCardItem, colors: any) => {
+  const totalTasks = Array.isArray(lesson?.tasks) ? lesson.tasks.length : 0;
+  const authors: LessonAuthor[] = Array.isArray(lesson?.authors) ? lesson.authors : [];
 
-  const metaColor = (colors as any).descColor ?? "gray.500";
-  const accentColor =
-    (colors as any).accent ?? (colors as any).blue?.accent ?? "blue.400";
-  const chipBorder =
-    (colors as any).chipBorder ??
-    (colors as any).blue?.chipBorder ??
-    "blackAlpha.200";
+  const starsCount = toNumber(lesson?.ratingCount, 0);
+  const views = toNumber(lesson?.views, 0);
+  const commentsCount = toNumber(lesson?.commentsCount, 0);
 
-  return {
-    totalTasks,
-    authors,
-    starsCount,
-    views,
-    commentsCount,
-    metaColor,
-    accentColor,
-    chipBorder,
-  };
+  const metaColor = colors?.descColor ?? "gray.500";
+  const accentColor = colors?.accent ?? colors?.blue?.accent ?? "blue.400";
+  const chipBorder = colors?.chipBorder ?? colors?.blue?.chipBorder ?? "blackAlpha.200";
+
+  return { totalTasks, authors, starsCount, views, commentsCount, metaColor, accentColor, chipBorder };
 };
 
 

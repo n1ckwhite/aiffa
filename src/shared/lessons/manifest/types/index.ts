@@ -34,6 +34,8 @@ export type Lesson = {
   ratingCount?: number;
   views?: number;
   commentsCount?: number;
+  updatedAt?: string;
+  createdAt?: string;
 };
 
 export type ModuleProject = {
@@ -45,6 +47,8 @@ export type ModuleProject = {
   ratingCount?: number;
   views?: number;
   commentsCount?: number;
+  updatedAt?: string;
+  createdAt?: string;
 };
 
 export type Module = {

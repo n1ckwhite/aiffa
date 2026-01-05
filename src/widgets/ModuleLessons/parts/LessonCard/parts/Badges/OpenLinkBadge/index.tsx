@@ -1,12 +1,16 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { FiCalendar } from 'react-icons/fi';
 import type { OpenLinkBadgeProps } from './types';
 import { useOpenLinkBadgeColors } from './colors/useOpenLinkBadgeColor';
 
-export const OpenLinkBadge: React.FC<OpenLinkBadgeProps> = ({ accentColor, chipBorder, arrowAnimation }) => {
+export const OpenLinkBadge: React.FC<OpenLinkBadgeProps> = ({
+  accentColor,
+  chipBorder,
+  dateLabel,
+}) => {
   
-  const {pillBg} = useOpenLinkBadgeColors();
+  const { pillBg } = useOpenLinkBadgeColors();
   return (
     <Box
       as="span"
@@ -20,10 +24,13 @@ export const OpenLinkBadge: React.FC<OpenLinkBadgeProps> = ({ accentColor, chipB
       borderRadius="full"
       display="inline-flex"
       alignItems="center"
+      justifyContent="center"
       gap={1}
+      whiteSpace="nowrap"
+      aria-hidden="true"
     >
-      Открыть материал
-      <Box as={ChevronRightIcon} boxSize={3.5} ml={0.5} animation={arrowAnimation} />
+      <Box as={FiCalendar} boxSize={3.5} mr={0.5} />
+      { dateLabel }
     </Box>
   );
 };

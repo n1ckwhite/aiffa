@@ -282,7 +282,7 @@ const CourseGrid: React.FC<CourseGridProps> = ({ category = 'all', showHeader = 
               alignItems="stretch"
             >
               {paginatedCourses.map((course, index) => (
-                <Box key={course.id} data-index={index} sx={{ animation: 'none' }} h="full" w="full" minW={0} maxW="380px">
+                <Box key={course.id} data-index={index} sx={{ animation: 'none' }} h="full" w="full" minW={0}>
                   <CourseCard
                     moduleId={course.moduleId}
                     title={course.title}

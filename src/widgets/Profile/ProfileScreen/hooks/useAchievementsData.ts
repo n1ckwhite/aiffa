@@ -12,7 +12,6 @@ import {
   FaMessage,
   FaBookOpen,
   FaCalendarCheck,
-  FaUserPen,
 } from 'react-icons/fa6';
 import type { IconType } from 'react-icons';
 
@@ -33,8 +32,6 @@ export const useAchievementsData = (profile: any) => {
   );
 
   const items = React.useMemo(() => {
-    const profileEdited = (profile.name?.trim() !== 'Пользователь') || (profile.bio?.trim() !== 'Описание');
-
     // Эволюция одного бейджа задач: 1 → 5 → 10 → 15 → 25 → 50
     type TaskStage = {
       threshold: number;
@@ -76,15 +73,6 @@ export const useAchievementsData = (profile: any) => {
     };
 
     return [
-      {
-        id: 'profile-edited',
-        label: 'Изменил профиль',
-        achieved: profileEdited,
-        color: '#60a5fa',
-        icon: FaUserPen,
-        from: '#93c5fd',
-        to: '#3b82f6',
-      },
       {
         id: 'first-weekly',
         label: '1-я задача недели',

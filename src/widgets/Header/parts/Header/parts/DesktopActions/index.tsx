@@ -30,10 +30,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           <Icon as={FaBookOpen} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text
             ml={2}
-            display="none"
-            sx={{
-              "@container (min-width: 70rem)": { display: "inline" }
-            }}
+            display={{ base: "none", xl: "inline" }}
             fontSize="sm"
             fontWeight="semibold"
           >
@@ -58,10 +55,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           <Icon as={FaFeatherAlt} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text
             ml={2}
-            display="none"
-            sx={{
-              "@container (min-width: 70rem)": { display: "inline" }
-            }}
+            display={{ base: "none", xl: "inline" }}
             fontSize="sm"
             fontWeight="semibold"
           >
@@ -86,10 +80,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           <Icon as={FaClipboardList} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text
             ml={2}
-            display="none"
-            sx={{
-              "@container (min-width: 70rem)": { display: "inline" }
-            }}
+            display={{ base: "none", xl: "inline" }}
             fontSize="sm"
             fontWeight="semibold"
           >
@@ -112,10 +103,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           <Icon as={FaCode} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text
             ml={2}
-            display="none"
-            sx={{
-              "@container (min-width: 70rem)": { display: "inline" }
-            }}
+            display={{ base: "none", xl: "inline" }}
             fontSize="sm"
             fontWeight="semibold"
           >
@@ -140,10 +128,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           <Icon as={FaComments} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text
             ml={2}
-            display="none"
-            sx={{
-              "@container (min-width: 70rem)": { display: "inline" }
-            }}
+            display={{ base: "none", xl: "inline" }}
             fontSize="sm"
             fontWeight="semibold"
           >
@@ -166,10 +151,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           <Icon as={FaUserFriends} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text
             ml={2}
-            display="none"
-            sx={{
-              "@container (min-width: 70rem)": { display: "inline" }
-            }}
+            display={{ base: "none", xl: "inline" }}
             fontSize="sm"
             fontWeight="semibold"
           >

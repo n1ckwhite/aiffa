@@ -73,13 +73,14 @@ const Header: React.FC = React.memo(() => {
       backdropFilter={{ base: 'none', md: 'blur(10px)' }}
       bgColor={`${bg}CC`}
       pointerEvents={isAnyModalOpen ? 'none' : 'auto'}
+      overflow="visible"
       sx={{
         transform: 'translateZ(0)',
         willChange: 'transform',
         WebkitTransform: 'translateZ(0)',
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
-        contain: 'paint layout style',
+        contain: 'layout style',
       }}
     >
       <Flex
@@ -91,6 +92,7 @@ const Header: React.FC = React.memo(() => {
         justify="space-between"
         gap={{ base: 3, md: 4, lg: 6 }}
         sx={{ containerType: "inline-size" }}
+        overflow="visible"
       >
         <Flex align="center" gap={3} flexShrink={0}>
           <Logo />

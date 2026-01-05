@@ -714,17 +714,17 @@ const ProfileScreen: React.FC = () => {
                       h="44px"
                       borderRadius="md"
                       fontWeight="semibold"
-                      bg={useColorModeValue("blue.600", "blue.400")}
+                      bg={useColorModeValue("blue.600", "blue.600")}
                       color="white"
                       transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
                       _hover={{
                         transform: "translateY(-1px)",
-                        bg: useColorModeValue("blue.700", "blue.500"),
+                        bg: useColorModeValue("blue.700", "blue.700"),
                         boxShadow: "md",
                       }}
                       _active={{
                         transform: "translateY(0px)",
-                        bg: useColorModeValue("blue.800", "blue.600"),
+                        bg: useColorModeValue("blue.800", "blue.800"),
                         boxShadow: "sm",
                       }}
                     >
@@ -1109,15 +1109,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="full"
                   fontWeight="semibold"
-                  bg={useColorModeValue("blue.600", "blue.500")}
+                  bg={useColorModeValue("blue.700", "blue.700")}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("blue.600", "blue.300")}
+                  borderColor={useColorModeValue("blue.600", "blue.600")}
                   leftIcon={<Icon as={FaBookOpen} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("blue.700", "blue.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("blue.800", "blue.700"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: useColorModeValue("blue.700", "blue.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("blue.800", "blue.900"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к материалам"
                 >
                   К материалам
@@ -1127,15 +1127,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="full"
                   fontWeight="semibold"
-                  bg={useColorModeValue("green.600", "green.500")}
+                  bg={useColorModeValue("green.700", "green.700")}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("green.600", "green.300")}
+                  borderColor={useColorModeValue("green.600", "green.600")}
                   leftIcon={<Icon as={FaClipboardList} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("green.700", "green.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("green.800", "green.700"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: useColorModeValue("green.700", "green.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("green.800", "green.900"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к задачам недели"
                 >
                   Задачи недели
@@ -1145,15 +1145,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="full"
                   fontWeight="semibold"
-                  bg={useColorModeValue("purple.600", "purple.500")}
+                  bg={useColorModeValue("purple.700", "purple.700")}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("purple.600", "purple.300")}
+                  borderColor={useColorModeValue("purple.600", "purple.600")}
                   leftIcon={<Icon as={FaFeatherAlt} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("purple.700", "purple.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("purple.800", "purple.700"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: useColorModeValue("purple.700", "purple.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("purple.800", "purple.900"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к блогу"
                 >
                   Блог
@@ -1278,15 +1278,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="full"
                   fontWeight="semibold"
-                  bg={useColorModeValue("orange.500", "orange.400")}
+                  bg={useColorModeValue("orange.600", "orange.600")}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("orange.500", "orange.300")}
+                  borderColor={useColorModeValue("orange.500", "orange.500")}
                   leftIcon={<Icon as={FaFeatherAlt} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("orange.600", "orange.500"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("orange.700", "orange.600"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: useColorModeValue("orange.600", "orange.700"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("orange.700", "orange.800"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти в блог"
                 >
                   Написать
@@ -1296,15 +1296,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="full"
                   fontWeight="semibold"
-                  bg={useColorModeValue("blue.600", "blue.500")}
+                  bg={useColorModeValue("blue.700", "blue.700")}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("blue.600", "blue.300")}
+                  borderColor={useColorModeValue("blue.600", "blue.600")}
                   leftIcon={<Icon as={FaBookOpen} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("blue.700", "blue.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("blue.800", "blue.700"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: useColorModeValue("blue.700", "blue.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("blue.800", "blue.900"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к материалам"
                 >
                   Материалы
@@ -1314,15 +1314,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="full"
                   fontWeight="semibold"
-                  bg={useColorModeValue("green.600", "green.500")}
+                  bg={useColorModeValue("green.700", "green.700")}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("green.600", "green.300")}
+                  borderColor={useColorModeValue("green.600", "green.600")}
                   leftIcon={<Icon as={FaClipboardList} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("green.700", "green.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("green.800", "green.700"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: useColorModeValue("green.700", "green.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("green.800", "green.900"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к задачам недели"
                 >
                   Задачи недели
@@ -1332,15 +1332,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="full"
                   fontWeight="semibold"
-                  bg={useColorModeValue("pink.500", "pink.400")}
+                  bg={useColorModeValue("pink.600", "pink.600")}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("pink.500", "pink.300")}
+                  borderColor={useColorModeValue("pink.500", "pink.500")}
                   leftIcon={<Icon as={FaCode} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("pink.600", "pink.500"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("pink.700", "pink.600"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: useColorModeValue("pink.600", "pink.700"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("pink.700", "pink.800"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к хакатонам"
                 >
                   Хакатоны
@@ -1350,15 +1350,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="full"
                   fontWeight="semibold"
-                  bg={useColorModeValue("cyan.600", "cyan.500")}
+                  bg={useColorModeValue("cyan.800", "cyan.800")}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("cyan.600", "cyan.300")}
+                  borderColor={useColorModeValue("cyan.600", "cyan.600")}
                   leftIcon={<Icon as={FaComments} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("cyan.700", "cyan.600"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("cyan.800", "cyan.700"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: useColorModeValue("cyan.700", "cyan.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: useColorModeValue("cyan.800", "cyan.900"), transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к сессиям"
                 >
                   Сессии

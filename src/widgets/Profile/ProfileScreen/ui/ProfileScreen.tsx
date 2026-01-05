@@ -255,10 +255,8 @@ const ProfileScreen: React.FC = () => {
   const workIconColor = useColorModeValue("purple.600", "purple.300");
   const locationIconColor = useColorModeValue("green.600", "green.300");
   const mailIconColor = useColorModeValue("pink.600", "pink.300");
-  const githubIconColor = useColorModeValue("gray.700", "whiteAlpha.800");
   const linkIconColor = useColorModeValue("cyan.600", "cyan.300");
 
-  const achievementsCardBg = useColorModeValue("orange.50", "whiteAlpha.50");
   const achievementsCardBorder = useColorModeValue("orange.200", "whiteAlpha.200");
   const achievementsIconBg = useColorModeValue("orange.100", "whiteAlpha.100");
   const achievementsIconColor = useColorModeValue("orange.700", "orange.200");
@@ -270,7 +268,6 @@ const ProfileScreen: React.FC = () => {
     work: workIconColor,
     location: locationIconColor,
     mail: mailIconColor,
-    github: githubIconColor,
     link: linkIconColor,
   };
 
@@ -285,7 +282,7 @@ const ProfileScreen: React.FC = () => {
     .map((l: any) => ({
       id: String(l?.id ?? ""),
       kind:
-        l?.kind === "email" || l?.kind === "telegram" || l?.kind === "github" || l?.kind === "website" || l?.kind === "custom"
+        l?.kind === "email" || l?.kind === "website" || l?.kind === "custom"
           ? l.kind
           : "custom",
       label: typeof l?.label === "string" ? l.label : "",
@@ -293,15 +290,12 @@ const ProfileScreen: React.FC = () => {
     }))
     .filter((l: any) => !!l.id && !!String(l.value || "").trim()) as ProfileLink[];
 
-  const normalized = (v: string) => v.trim().toLowerCase();
-  const existing = new Set(profileLinks.map((l) => normalized(String((l as any)?.value ?? ""))));
-  // Show only real user links (no global defaults).
   const displayLinks: ProfileLink[] = profileLinks;
 
-  const hasRealGithub = profileLinks.some((l) => String((l as any)?.kind ?? "") === "github");
-  const profileBadge = hasRealGithub
-    ? ({ label: "Контрибьютор", colorScheme: "purple" as const } as const)
-    : ({ label: "Автор AIFFA", colorScheme: "blue" as const } as const);
+  const profileBadge =
+    displayLinks.length > 0
+      ? ({ label: "Контрибьютор", colorScheme: "purple" as const } as const)
+      : ({ label: "Автор AIFFA", colorScheme: "blue" as const } as const);
 
   const [isEditing, setIsEditing] = React.useState<boolean>(false);
   const [draftName, setDraftName] = React.useState<string>(name);
@@ -344,15 +338,10 @@ const ProfileScreen: React.FC = () => {
     if (trimmedEmail) nextLinks.push({ id: "link-email", kind: "email", label: "Email", value: trimmedEmail });
     cleaned.forEach((v, idx) => {
       if (!v) return;
-      const isGithub =
-        /^https?:\/\/(www\.)?github\.com\//i.test(v) ||
-        /^github\.com\//i.test(v) ||
-        // username-like (keep it as github for icon)
-        /^[a-zA-Z0-9-]{1,39}$/.test(v);
       nextLinks.push({
         id: `link-${idx + 1}`,
-        kind: isGithub ? "github" : "custom",
-        label: isGithub ? "GitHub" : "Ссылка",
+        kind: "custom",
+        label: "Ссылка",
         value: v,
       });
     });
@@ -382,35 +371,8 @@ const ProfileScreen: React.FC = () => {
       const v = rawValue.replace(/^mailto:/i, "");
       return `mailto:${v}`;
     }
-    if (kind === "telegram") {
-      if (/^https?:\/\//i.test(rawValue)) return rawValue;
-      const v = rawValue.replace(/^@/, "").replace(/^t\.me\//i, "");
-      return `https://t.me/${v}`;
-    }
-    if (kind === "github") {
-      if (/^https?:\/\//i.test(rawValue)) return rawValue;
-      const v = rawValue.replace(/^@/, "").replace(/^github\.com\//i, "").trim();
-      return `https://github.com/${v}`;
-    }
     if (/^https?:\/\//i.test(rawValue)) return rawValue;
     return `https://${rawValue}`;
-  };
-
-  const getLinkIcon = (kind: string) => {
-    if (kind === "email") return FiMail as any;
-    if (kind === "telegram") return FaTelegramPlane as any;
-    if (kind === "github") return FaGithub as any;
-    return FiLink as any;
-  };
-
-  const getLinkLabel = (link: ProfileLink) => {
-    const label = typeof (link as any)?.label === "string" ? (link as any).label.trim() : "";
-    if (label) return label;
-    const kind = String((link as any)?.kind ?? "custom");
-    if (kind === "email") return "Email";
-    if (kind === "telegram") return "Telegram";
-    if (kind === "github") return "GitHub";
-    return "Ссылка";
   };
 
   const SectionLabel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -753,12 +715,15 @@ const ProfileScreen: React.FC = () => {
                     {isEditing ? (
                       <VStack
                         w="full"
-                        maxW={{ base: "360px", md: "360px" }}
+                        maxW={{ base: "360px", md: "390px" }}
                         spacing={3}
                         align={{ base: "center", md: "start" }}
                         alignSelf={{ base: "center", md: "flex-start" }}
                       >
                         <Input
+                          id="profile-name"
+                          name="profileName"
+                          autoComplete="name"
                           value={draftName}
                           onChange={(e) => setDraftName(e.target.value)}
                           onKeyDownCapture={handleStopHotkeys}
@@ -772,6 +737,9 @@ const ProfileScreen: React.FC = () => {
                           focusBorderColor={formFocusBorder}
                         />
                         <Textarea
+                          id="profile-bio"
+                          name="profileBio"
+                          autoComplete="off"
                           value={draftBio}
                           onChange={(e) => setDraftBio(e.target.value)}
                           onKeyDownCapture={handleStopHotkeys}
@@ -912,6 +880,9 @@ const ProfileScreen: React.FC = () => {
                     {isEditing ? (
                       <LeftRow icon={FiBriefcase as any} iconColor={leftIconColors.work}>
                         <Input
+                          id="profile-workplace"
+                          name="profileWorkplace"
+                          autoComplete="organization"
                           value={draftWorkplace}
                           onChange={(e) => setDraftWorkplace(e.target.value)}
                           onKeyDownCapture={handleStopHotkeys}
@@ -939,6 +910,9 @@ const ProfileScreen: React.FC = () => {
                     {isEditing ? (
                       <LeftRow icon={FiMapPin as any} iconColor={leftIconColors.location}>
                         <Input
+                          id="profile-location"
+                          name="profileLocation"
+                          autoComplete="address-level2"
                           value={draftLocation}
                           onChange={(e) => setDraftLocation(e.target.value)}
                           onKeyDownCapture={handleStopHotkeys}
@@ -977,84 +951,84 @@ const ProfileScreen: React.FC = () => {
                       </ChakraLink>
                     </LeftRow>
 
-                    <SectionLabel>Ссылки</SectionLabel>
+                    {(() => {
+                      const nonEmailLinks = displayLinks.filter((l) => String((l as any)?.kind ?? "") !== "email");
+                      const shouldShowLinks = isEditing || nonEmailLinks.length > 0;
+                      if (!shouldShowLinks) return null;
 
-                    <VStack align="start" spacing={1.5} w="full" pt={1}>
-                      {isEditing ? (
-                        <VStack align="start" spacing={2} w="full">
-                          {draftLinks.map((val, idx) => (
-                            <LeftRow key={idx} icon={FiLink as any} iconColor={leftIconColors.link}>
-                              <Input
-                                value={val}
-                                onChange={(e) => {
-                                  const next = [...draftLinks] as [string, string, string, string];
-                                  next[idx] = e.target.value;
-                                  setDraftLinks(next);
-                                }}
-                                onKeyDownCapture={handleStopHotkeys}
-                                size="sm"
-                                placeholder={`Ссылка ${idx + 1}`}
-                                aria-label={`Ссылка ${idx + 1}`}
-                                borderRadius="sm"
-                                borderColor={formBorder}
-                                bg={formBg}
-                                focusBorderColor={formFocusBorder}
-                              />
-                            </LeftRow>
-                          ))}
-                        </VStack>
-                      ) : null}
+                      return (
+                        <>
+                          <SectionLabel>Ссылки</SectionLabel>
 
-                      {displayLinks
-                        .filter((l) => String((l as any)?.kind ?? "") !== "email")
-                        .slice(0, 6)
-                        .map((l) => {
-                        if (isEditing) return null;
-                        const kind = String((l as any)?.kind ?? "custom");
-                        const href = buildLinkHref(l);
-                        const label = getLinkLabel(l);
-                        const IconEl = getLinkIcon(kind);
-                        const isBranded = kind === "github";
-                        const value = String((l as any)?.value ?? "").trim();
+                          <VStack align="start" spacing={1.5} w="full" pt={1}>
+                            {isEditing ? (
+                              <VStack align="start" spacing={2} w="full">
+                                {draftLinks.map((val, idx) => (
+                                  <LeftRow key={idx} icon={FiLink as any} iconColor={leftIconColors.link}>
+                                    <Input
+                                      id={`profile-link-${idx + 1}`}
+                                      name={`profileLink${idx + 1}`}
+                                      autoComplete="url"
+                                      value={val}
+                                      onChange={(e) => {
+                                        const next = [...draftLinks] as [string, string, string, string];
+                                        next[idx] = e.target.value;
+                                        setDraftLinks(next);
+                                      }}
+                                      onKeyDownCapture={handleStopHotkeys}
+                                      size="sm"
+                                      placeholder={`Ссылка ${idx + 1}`}
+                                      aria-label={`Ссылка ${idx + 1}`}
+                                      borderRadius="sm"
+                                      borderColor={formBorder}
+                                      bg={formBg}
+                                      focusBorderColor={formFocusBorder}
+                                    />
+                                  </LeftRow>
+                                ))}
+                              </VStack>
+                            ) : null}
 
-                        return (
-                          <HStack
-                            key={l.id}
-                            spacing={3}
-                            minW={0}
-                            justify="flex-start"
-                            w="full"
-                          >
-                            <Box
-                              aria-hidden="true"
-                              w="22px"
-                              h="22px"
-                              flexShrink={0}
-                              display="flex"
-                              alignItems="center"
-                              justifyContent="center"
-                              color={isBranded ? leftIconColors.github : leftIconColors.link}
-                            >
-                              <Icon as={isBranded ? (FaGithub as any) : (IconEl as any)} boxSize="18px" />
-                            </Box>
-                            <ChakraLink
-                              href={href}
-                              isExternal
-                              color={useColorModeValue("blue.700", "blue.300")}
-                              fontWeight="semibold"
-                              flex={1}
-                              minW={0}
-                              display="block"
-                              whiteSpace="normal"
-                              sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}
-                              aria-label={label}
-                            >
-                              {value}
-                            </ChakraLink>
-                          </HStack>
-                        );
-                      })}
-                    </VStack>
+                            {nonEmailLinks.slice(0, 6).map((l) => {
+                              if (isEditing) return null;
+                              const href = buildLinkHref(l);
+                              const value = String((l as any)?.value ?? "").trim();
+
+                              return (
+                                <HStack key={l.id} spacing={3} minW={0} justify="flex-start" w="full">
+                                  <Box
+                                    aria-hidden="true"
+                                    w="22px"
+                                    h="22px"
+                                    flexShrink={0}
+                                    display="flex"
+                                    alignItems="center"
+                                    justifyContent="center"
+                                    color={leftIconColors.link}
+                                  >
+                                    <Icon as={FiLink as any} boxSize="18px" />
+                                  </Box>
+                                  <ChakraLink
+                                    href={href}
+                                    isExternal
+                                    color={useColorModeValue("blue.700", "blue.300")}
+                                    fontWeight="semibold"
+                                    flex={1}
+                                    minW={0}
+                                    display="block"
+                                    whiteSpace="normal"
+                                    sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}
+                                    aria-label={`Открыть ссылку: ${value}`}
+                                  >
+                                    {value}
+                                  </ChakraLink>
+                                </HStack>
+                              );
+                            })}
+                          </VStack>
+                        </>
+                      );
+                    })()}
 
                     {isEditing ? (
                       <HStack

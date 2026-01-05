@@ -1011,6 +1011,41 @@ const ProfileScreen: React.FC = () => {
                 ))}
               </SimpleGrid>
 
+              <VStack align="start" spacing={2} color={muted} mt={{ base: 3, md: 4 }}>
+                <Text fontSize="sm">
+                  - Продолжай обучение в разделе{" "}
+                  <AppLink to="/learn" fontWeight="semibold" aria-label="Открыть материалы">
+                    Материалы
+                  </AppLink>
+                  .
+                </Text>
+                <Text fontSize="sm">
+                  - Решай{" "}
+                  <AppLink to="/weekly" fontWeight="semibold" aria-label="Открыть задачи недели">
+                    задачи недели
+                  </AppLink>{" "}
+                  и собирай достижения.
+                </Text>
+                <Text fontSize="sm">
+                  - Читай{" "}
+                  <AppLink to="/blog" fontWeight="semibold" aria-label="Открыть блог">
+                    статьи
+                  </AppLink>{" "}
+                  и прокачивай базу.
+                </Text>
+                <Text fontSize="sm">
+                  - Участвуй в{" "}
+                  <AppLink to="/hackathons" fontWeight="semibold" aria-label="Открыть хакатоны">
+                    хакатонах
+                  </AppLink>{" "}
+                  и{" "}
+                  <AppLink to="/sessions" fontWeight="semibold" aria-label="Открыть сессии">
+                    сессиях
+                  </AppLink>
+                  .
+                </Text>
+              </VStack>
+
               <Box
                 mt={{ base: 4, md: 5 }}
                 borderWidth="1px"
@@ -1086,58 +1121,6 @@ const ProfileScreen: React.FC = () => {
                   Блог
                 </AppButtonLink>
               </SimpleGrid>
-
-              <Accordion allowToggle mt={{ base: 3, md: 4 }}>
-                <AccordionItem border="none">
-                  <AccordionButton
-                    px={0}
-                    _hover={{ bg: "transparent" }}
-                    _active={{ bg: "transparent" }}
-                    aria-label="Как улучшить статистику"
-                  >
-                    <HStack w="full" justify="space-between">
-                      <Text fontWeight="semibold">Как улучшить статистику</Text>
-                      <AccordionIcon color={headerNavIconColor} />
-                    </HStack>
-                  </AccordionButton>
-                  <AccordionPanel px={0} pt={2}>
-                    <VStack align="start" spacing={2} color={muted}>
-                      <Text fontSize="sm">
-                        - Продолжай обучение в разделе{" "}
-                        <AppLink to="/learn" fontWeight="semibold" aria-label="Открыть материалы">
-                          Материалы
-                        </AppLink>
-                        .
-                      </Text>
-                      <Text fontSize="sm">
-                        - Решай{" "}
-                        <AppLink to="/weekly" fontWeight="semibold" aria-label="Открыть задачи недели">
-                          задачи недели
-                        </AppLink>{" "}
-                        и собирай достижения.
-                      </Text>
-                      <Text fontSize="sm">
-                        - Читай{" "}
-                        <AppLink to="/blog" fontWeight="semibold" aria-label="Открыть блог">
-                          статьи
-                        </AppLink>{" "}
-                        и прокачивай базу.
-                      </Text>
-                      <Text fontSize="sm">
-                        - Участвуй в{" "}
-                        <AppLink to="/hackathons" fontWeight="semibold" aria-label="Открыть хакатоны">
-                          хакатонах
-                        </AppLink>{" "}
-                        и{" "}
-                        <AppLink to="/sessions" fontWeight="semibold" aria-label="Открыть сессии">
-                          сессиях
-                        </AppLink>
-                        .
-                      </Text>
-                    </VStack>
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
             </SectionCard>
 
             <SectionCard

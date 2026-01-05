@@ -1,22 +1,5 @@
 import type { ItemCardProps } from "./types";
-
-export const formatRuDate = (iso?: string) => {
-  if (!iso) return "";
-  const d = new Date(iso);
-  if (!Number.isFinite(d.getTime())) return "";
-  try {
-    return new Intl.DateTimeFormat("ru-RU", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }).format(d);
-  } catch {
-    const dd = String(d.getDate()).padStart(2, "0");
-    const mm = String(d.getMonth() + 1).padStart(2, "0");
-    const yyyy = String(d.getFullYear());
-    return `${dd}.${mm}.${yyyy}`;
-  }
-};
+import { formatRuDate } from "shared/functions/formatRuDate";
 
 export const getLessonDateLabel = (lesson: ItemCardProps["lesson"]) => {
   const iso =

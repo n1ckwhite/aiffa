@@ -7,7 +7,7 @@ import type { ProjectsGridProps } from './types';
 import { formatCount } from 'shared/functions/formatCount';
 import { AppBoxLink } from 'shared/ui/AppLink';
 import { OpenLinkBadge } from 'widgets/ModuleLessons/parts/LessonCard/parts/Badges/OpenLinkBadge';
-import { formatRuDate } from 'widgets/ModuleLessons/parts/ModuleLessonsView/parts/LessonsGrid/parts/ItemCard/helpers';
+import { formatRuDate } from 'shared/functions/formatRuDate';
 
 export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, colors }) => {
   if (projects.length === 0) {

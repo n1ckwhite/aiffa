@@ -779,9 +779,7 @@ const ProfileScreen: React.FC = () => {
                   maxW={{ base: "360px", md: "full", lg: "full" }}
                   mx={{ base: "auto", md: 0, lg: 0 }}
                 >
-                  <Divider borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.200")} />
-
-                  <VStack align="start" spacing={2} w="full" textAlign="left" pt={3}>
+                  <VStack align="start" spacing={2} w="full" textAlign="left">
                     <SectionLabel>Контакты</SectionLabel>
 
                     <LeftRow icon={FiBriefcase as any} iconColor={leftIconColors.work}>

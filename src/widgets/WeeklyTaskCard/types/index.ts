@@ -15,6 +15,8 @@ export type WeeklyTaskCardProps = {
   starsCount?: number;
   commentsCount?: number;
   solvedCount?: number;
+  updatedAt?: string;
+  createdAt?: string;
 };
 
 export type Ring = { from: string; to: string };

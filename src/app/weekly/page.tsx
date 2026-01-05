@@ -45,6 +45,7 @@ const loadWeeklyTaskInitialMeta = async (task: any): Promise<WeeklyTaskInitialMe
     const relative = fallback.mdPath.startsWith("/") ? fallback.mdPath.slice(1) : fallback.mdPath;
     const filePath = path.join(process.cwd(), "public", relative);
     const md = await fs.readFile(filePath, "utf-8");
+    const stat = await fs.stat(filePath);
     const parsed = parseWeeklyTaskMd(md);
 
     const authorUrl =
@@ -65,6 +66,8 @@ const loadWeeklyTaskInitialMeta = async (task: any): Promise<WeeklyTaskInitialMe
       starsCount: parsed.stars,
       commentsCount: parsed.comments,
       solvedCount: parsed.solvedCount,
+      updatedAt: new Date(stat.mtimeMs).toISOString(),
+      createdAt: new Date(stat.birthtimeMs).toISOString(),
     };
   } catch {
     return fallback;

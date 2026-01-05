@@ -13,11 +13,12 @@ type WeeklyTaskMeta = {
   authorName?: string;
   authorUrl?: string;
   tag?: string;
-  level?: 'Начальный' | 'Средний' | 'Продвинутый';
   parsedId?: string;
   starsCount?: number;
   commentsCount?: number;
   solvedCount?: number;
+  updatedAt?: string;
+  createdAt?: string;
 };
 
 const parsedMdCache = createAsyncCache<string, WeeklyTaskMeta>();
@@ -92,6 +93,8 @@ export type WeeklyTaskListItem = {
   starsCount?: number;
   commentsCount?: number;
   solvedCount?: number;
+  updatedAt?: string;
+  createdAt?: string;
 };
 
 export const useWeeklyTasksData = (initial?: WeeklyTasksInitialData) => {
@@ -107,11 +110,12 @@ export const useWeeklyTasksData = (initial?: WeeklyTasksInitialData) => {
         authorName: t.authorName,
         authorUrl: t.authorUrl,
         tag: t.tag,
-        level: t.level,
         parsedId: t.parsedId,
         starsCount: t.starsCount,
         commentsCount: t.commentsCount,
         solvedCount: t.solvedCount,
+        updatedAt: t.updatedAt,
+        createdAt: t.createdAt,
       };
     }
     return map;
@@ -185,10 +189,11 @@ export const useWeeklyTasksData = (initial?: WeeklyTasksInitialData) => {
       const tag = m?.tag || inferTag((w as any).editorLanguage);
       const icon = iconByTag(tag);
       const color = colorByTag(tag);
-      const level = m?.level;
       const starsCount = m?.starsCount;
       const commentsCount = m?.commentsCount;
       const solvedCount = m?.solvedCount;
+      const updatedAt = m?.updatedAt;
+      const createdAt = m?.createdAt;
       return {
         id: effectiveId,
         label,
@@ -199,10 +204,11 @@ export const useWeeklyTasksData = (initial?: WeeklyTasksInitialData) => {
         tag: (tag || 'TASK') as string,
         icon,
         color,
-        level,
         starsCount,
         commentsCount,
         solvedCount,
+        updatedAt,
+        createdAt,
       };
     });
   }, [mdData, profile, weeklyList]);

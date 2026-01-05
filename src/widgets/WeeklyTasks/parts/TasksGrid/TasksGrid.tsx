@@ -34,6 +34,8 @@ const TasksGrid: React.FC<WeeklyTasksGridProps> = ({ tasks, tierLabel }) => {
               starsCount={t.starsCount}
               commentsCount={t.commentsCount}
               solvedCount={t.solvedCount}
+              updatedAt={t.updatedAt}
+              createdAt={t.createdAt}
             />
           );
         })}

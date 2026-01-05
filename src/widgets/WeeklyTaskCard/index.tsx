@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, VStack, Heading, Text, Icon } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
-import { FiMessageCircle, FiUserCheck } from 'react-icons/fi';
+import { FiCalendar, FiMessageCircle, FiUserCheck } from 'react-icons/fi';
 import { useWeeklyTaskCardColors } from './colors';
 import type { WeeklyTaskCardProps } from './types';
 import { getRing } from './model/ring';
@@ -12,6 +12,7 @@ import { RewardBar } from './parts/RewardBar';
 import { BackgroundDeco } from './parts/BackgroundDeco';
 import { DoneOverlay } from './parts/DoneOverlay';
 import { formatCount } from 'shared/functions/formatCount';
+import { formatRuDate } from 'shared/functions/formatRuDate';
 import { AppBoxLink } from 'shared/ui/AppLink';
 
 const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
@@ -28,12 +29,21 @@ const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
   starsCount,
   commentsCount,
   solvedCount,
+  updatedAt,
+  createdAt,
 }) => {
   const colors = useWeeklyTaskCardColors();
   const ring = getRing(colorScheme);
   const effectiveStars = typeof starsCount === 'number' ? starsCount : 37;
   const effectiveComments = typeof commentsCount === 'number' ? commentsCount : 12;
   const effectiveSolved = typeof solvedCount === 'number' ? solvedCount : 128;
+  const dateLabel = formatRuDate(
+    typeof updatedAt === "string" && updatedAt.trim()
+      ? updatedAt.trim()
+      : typeof createdAt === "string" && createdAt.trim()
+        ? createdAt.trim()
+        : undefined,
+  );
 
   return (
     <AppBoxLink
@@ -100,6 +110,22 @@ const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
               <Icon as={FiUserCheck} boxSize={3.5} color={colors.solvedIconColor} />
             </Box>
           </Box>
+
+          {dateLabel ? (
+            <Box
+              mt={1}
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+              gap={1.5}
+              fontSize="xs"
+              color={colors.descColor}
+              opacity={0.9}
+            >
+              <Icon as={FiCalendar} boxSize={3.5} />
+              <Box as="span">{dateLabel}</Box>
+            </Box>
+          ) : null}
         </Box>
 
         <RewardBar ring={ring} borderColor={colors.taskInnerBorder} />

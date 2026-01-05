@@ -21,7 +21,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
   hoverBg,
   setIsMobileMenuOpen,
 }) => {
-  const { fillIcon, avatarBorderColor, avatarBg, menuBg, menuText, menuBorder, menuItemHoverBg } =
+  const { fillIcon, avatarBorderColor, avatarBg, menuBg, menuText, menuBorder, menuShadow, menuItemHoverBg } =
     useDesktopActionsColors();
   const router = useRouter();
   const { profile, resetProfile } = useUserProfile();
@@ -83,7 +83,8 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
         color={menuText}
         borderWidth="1px"
         borderColor={menuBorder}
-        borderRadius="md"
+        borderRadius="xl"
+        boxShadow={menuShadow}
         py={0}
         zIndex={2000}
       >
@@ -95,6 +96,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
           px={3}
           _hover={{ bg: menuItemHoverBg }}
           _focus={{ bg: menuItemHoverBg }}
+          _active={{ bg: menuItemHoverBg }}
         >
           Профиль
         </MenuItem>
@@ -107,6 +109,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
           px={3}
           _hover={{ bg: menuItemHoverBg }}
           _focus={{ bg: menuItemHoverBg }}
+          _active={{ bg: menuItemHoverBg }}
         >
           Выйти
         </MenuItem>

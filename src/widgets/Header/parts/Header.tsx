@@ -102,7 +102,7 @@ const Header: React.FC = React.memo(() => {
           flex="1"
           justify="flex-start"
         >
-          <Box flex="1" minW={0}>
+          <Box flex="1" minW={0} w="full">
             <SearchBar
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
@@ -138,13 +138,15 @@ const Header: React.FC = React.memo(() => {
             />
           </Box>
 
-          <DesktopActions
-            hoverBg={hoverBg}
-            scrollTop={scrollTop}
-            onDonate={handleDonate}
-            setIsMobileMenuOpen={setIsMobileMenuOpen}
-            isMobileMenuOpen={isMobileMenuOpen}
-          />
+          <Box flexShrink={0}>
+            <DesktopActions
+              hoverBg={hoverBg}
+              scrollTop={scrollTop}
+              onDonate={handleDonate}
+              setIsMobileMenuOpen={setIsMobileMenuOpen}
+              isMobileMenuOpen={isMobileMenuOpen}
+            />
+          </Box>
         </HStack>
 
         <MobileControls

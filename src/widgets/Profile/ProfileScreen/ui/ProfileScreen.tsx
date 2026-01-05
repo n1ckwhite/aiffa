@@ -21,7 +21,6 @@ import {
 } from "@chakra-ui/react";
 import { useUserProfile, type ProfileLink } from "entities/user";
 import { useAchievementsData } from "../hooks/useAchievementsData";
-import { withGithubAvatarSize } from "@/shared/lib/github/withGithubAvatarSize";
 import PillBadge from "shared/ui/PillBadge";
 import { formatCount } from "shared/functions/formatCount";
 import { AppButtonLink, AppLink } from "shared/ui/AppLink";
@@ -56,7 +55,7 @@ import {
   FaTelegramPlane,
 } from "react-icons/fa";
 
-const PLACEHOLDER_AVATAR_URL = "https://avatars.githubusercontent.com/u/89804687?v=4";
+const PLACEHOLDER_AVATAR_URL = "https://avatars.githubusercontent.com/u/100159537?v=4";
 const GLOBAL_GITHUB_LINK: ProfileLink = {
   id: "global-github-n1ckwhite",
   kind: "github",
@@ -633,8 +632,8 @@ const ProfileScreen: React.FC = () => {
       role="main"
       position="relative"
       overflow="hidden"
-      px={{ base: 3, md: 6 }}
-      py={{ base: 6, md: 10 }}
+      px={{ base: 4, md: 6 }}
+      py={{ base: 8, md: 10 }}
       aria-labelledby="profile-page-title"
     >
       <Box maxW={{ base: "100%", md: "1000px", lg: "1180px" }} mx="auto">

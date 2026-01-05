@@ -274,63 +274,37 @@ const CourseGrid: React.FC<CourseGridProps> = ({ category = 'all', showHeader = 
           {filteredCourses.length === 0 ? (
             <ResultsEmptyState colors={theme} query={rawQueryFromUrl} variant="search" allItemsLabel="материалы" />
           ) : (
-            paginatedCourses.length === 1 ? (
-              <Box w="full" minW={0} display="flex" justifyContent="center">
-                <Box w="full" maxW={{ base: "100%", md: "420px", xl: "460px" }} minW={0}>
+            <SimpleGrid
+              minChildWidth={{ base: "100%", md: "360px", xl: "384px" }}
+              spacing={{ base: 5, md: 6 }}
+              w="full"
+              minW={0}
+              alignItems="stretch"
+            >
+              {paginatedCourses.map((course, index) => (
+                <Box key={course.id} data-index={index} sx={{ animation: 'none' }} h="full" w="full" minW={0}>
                   <CourseCard
-                    moduleId={paginatedCourses[0]!.moduleId}
-                    title={paginatedCourses[0]!.title}
-                    description={paginatedCourses[0]!.description}
-                    lessonsCount={paginatedCourses[0]!.lessonsCount}
-                    studyTime={paginatedCourses[0]!.studyTime}
-                    starsCount={moduleMeta[paginatedCourses[0]!.moduleId]?.stars ?? 0}
-                    views={moduleMeta[paginatedCourses[0]!.moduleId]?.views ?? 0}
-                    commentsCount={moduleMeta[paginatedCourses[0]!.moduleId]?.comments ?? 0}
-                    topAuthors={(moduleMeta[paginatedCourses[0]!.moduleId]?.authors ?? []).slice(0, 3)}
+                    moduleId={course.moduleId}
+                    title={course.title}
+                    description={course.description}
+                    lessonsCount={course.lessonsCount}
+                    studyTime={course.studyTime}
+                    starsCount={moduleMeta[course.moduleId]?.stars ?? 0}
+                    views={moduleMeta[course.moduleId]?.views ?? 0}
+                    commentsCount={moduleMeta[course.moduleId]?.comments ?? 0}
+                    topAuthors={(moduleMeta[course.moduleId]?.authors ?? []).slice(0, 3)}
                     otherAuthorsCount={Math.max(
                       0,
-                      (moduleMeta[paginatedCourses[0]!.moduleId]?.authors?.length ?? 0) -
-                        (moduleMeta[paginatedCourses[0]!.moduleId]?.authors ?? []).slice(0, 3).length,
+                      (moduleMeta[course.moduleId]?.authors?.length ?? 0) -
+                        (moduleMeta[course.moduleId]?.authors ?? []).slice(0, 3).length,
                     )}
-                    level={paginatedCourses[0]!.level}
-                    icon={paginatedCourses[0]!.icon}
-                    to={`/learn/${paginatedCourses[0]!.moduleId}`}
+                    level={course.level}
+                    icon={course.icon}
+                    to={`/learn/${course.moduleId}`}
                   />
                 </Box>
-              </Box>
-            ) : (
-              <SimpleGrid
-                minChildWidth={{ base: "100%", md: "384px" }}
-                spacing={{ base: 5, md: 6 }}
-                w="full"
-                minW={0}
-                alignItems="stretch"
-              >
-                {paginatedCourses.map((course, index) => (
-                  <Box key={course.id} data-index={index} sx={{ animation: 'none' }} h="full" w="full" minW={0}>
-                    <CourseCard
-                      moduleId={course.moduleId}
-                      title={course.title}
-                      description={course.description}
-                      lessonsCount={course.lessonsCount}
-                      studyTime={course.studyTime}
-                      starsCount={moduleMeta[course.moduleId]?.stars ?? 0}
-                      views={moduleMeta[course.moduleId]?.views ?? 0}
-                      commentsCount={moduleMeta[course.moduleId]?.comments ?? 0}
-                      topAuthors={(moduleMeta[course.moduleId]?.authors ?? []).slice(0, 3)}
-                      otherAuthorsCount={Math.max(
-                        0,
-                        (moduleMeta[course.moduleId]?.authors?.length ?? 0) -
-                          (moduleMeta[course.moduleId]?.authors ?? []).slice(0, 3).length,
-                      )}
-                      level={course.level}
-                      icon={course.icon}
-                      to={`/learn/${course.moduleId}`}
-                    />
-                  </Box>
-                ))}
-              </SimpleGrid>
-            )
+              ))}
+            </SimpleGrid>
           )}
 
           {filteredCourses.length > 0 && totalPages > 1 && (

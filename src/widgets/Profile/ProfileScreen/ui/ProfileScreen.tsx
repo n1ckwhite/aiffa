@@ -1166,6 +1166,34 @@ const ProfileScreen: React.FC = () => {
                   />
                 ))}
               </SimpleGrid>
+
+              <VStack align="start" spacing={2} color={muted} mt={{ base: 3, md: 4 }}>
+                <Text fontWeight="semibold">Как увеличить вклад</Text>
+                <Text fontSize="sm">
+                  - Публикуй{" "}
+                  <AppLink to="/learn" fontWeight="semibold" aria-label="Открыть материалы">
+                    материалы
+                  </AppLink>{" "}
+                  — это учитывается как авторство в базе AIFFA.
+                </Text>
+                <Text fontSize="sm">
+                  - Публикуй проекты — это учитывается как авторство проектов.
+                </Text>
+                <Text fontSize="sm">
+                  - Добавляй{" "}
+                  <AppLink to="/weekly" fontWeight="semibold" aria-label="Открыть задачи недели">
+                    задачи недели
+                  </AppLink>{" "}
+                  — это учитывается как авторство задач недели.
+                </Text>
+                <Text fontSize="sm">
+                  - Пиши{" "}
+                  <AppLink to="/blog" fontWeight="semibold" aria-label="Открыть блог">
+                    статьи
+                  </AppLink>{" "}
+                  — это учитывается как авторство статей.
+                </Text>
+              </VStack>
               <Box
                 mt={{ base: 4, md: 5 }}
                 borderWidth="1px"
@@ -1263,29 +1291,6 @@ const ProfileScreen: React.FC = () => {
                   Сессии
                 </AppButtonLink>
               </SimpleGrid>
-
-              <Accordion allowToggle mt={{ base: 3, md: 4 }}>
-                <AccordionItem border="none">
-                  <AccordionButton
-                    px={0}
-                    _hover={{ bg: "transparent" }}
-                    _active={{ bg: "transparent" }}
-                    aria-label="Как увеличить вклад"
-                  >
-                    <HStack w="full" justify="space-between">
-                      <Text fontWeight="semibold">Как увеличить вклад</Text>
-                      <AccordionIcon color={headerNavIconColor} />
-                    </HStack>
-                  </AccordionButton>
-                  <AccordionPanel px={0} pt={2}>
-                    <VStack align="start" spacing={2} color={muted}>
-                      <Text fontSize="sm">
-                        - Публикуй материалы и статьи — это учитывается как авторство в базе AIFFA.
-                      </Text>
-                    </VStack>
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
             </SectionCard>
             </VStack>
           </GridItem>

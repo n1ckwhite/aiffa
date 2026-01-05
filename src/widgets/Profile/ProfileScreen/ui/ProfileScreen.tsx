@@ -6,9 +6,11 @@ import {
   GridItem,
   HStack,
   Icon,
+  Input,
   Link as ChakraLink,
   SimpleGrid,
   Text,
+  Textarea,
   Tooltip,
   VStack,
   useColorModeValue,
@@ -43,25 +45,11 @@ import {
   FaCode,
   FaComments,
   FaFeatherAlt,
-  FaGithub,
   FaInfinity,
   FaRegCalendarAlt,
-  FaTelegramPlane,
 } from "react-icons/fa";
 
 const PLACEHOLDER_AVATAR_URL = "https://avatars.githubusercontent.com/u/100159537?v=4";
-const GLOBAL_GITHUB_LINK: ProfileLink = {
-  id: "global-github-n1ckwhite",
-  kind: "github",
-  label: "GitHub",
-  value: "n1ckwhite",
-};
-const EXTRA_LINKS = [
-  "https://t.me/iamceob1tch",
-  "https://gitlab.com/nickwhite22",
-  "https://www.codewars.com/users/n1ckwhite",
-] as const;
-
 type StatTileModel = {
   label: string;
   value: React.ReactNode;
@@ -75,7 +63,7 @@ type StatTileModel = {
 type StatsRange = "week" | "month" | "all";
 
 const ProfileScreen: React.FC = () => {
-  const { profile } = useUserProfile();
+  const { profile, updateProfile } = useUserProfile();
   const profileAny = profile as any;
   const name = typeof profile?.name === "string" ? profile.name : "";
   const bio = typeof profile?.bio === "string" ? profile.bio : "";
@@ -257,6 +245,9 @@ const ProfileScreen: React.FC = () => {
   const cardBg = useColorModeValue("white", "gray.900");
   const cardBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const muted = useColorModeValue("gray.600", "whiteAlpha.700");
+  const formBorder = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
+  const formFocusBorder = useColorModeValue("blue.500", "blue.300");
+  const formBg = useColorModeValue("white", "blackAlpha.200");
   const headerNavIconColor = useColorModeValue("blue.700", "whiteAlpha.900");
   // Colors for left-side icons (must NOT call hooks inside useMemo).
   const peopleIconColor = useColorModeValue("blue.600", "blue.300");
@@ -304,14 +295,83 @@ const ProfileScreen: React.FC = () => {
 
   const normalized = (v: string) => v.trim().toLowerCase();
   const existing = new Set(profileLinks.map((l) => normalized(String((l as any)?.value ?? ""))));
-  const displayLinks: ProfileLink[] = existing.has(normalized(GLOBAL_GITHUB_LINK.value))
-    ? profileLinks
-    : [...profileLinks, GLOBAL_GITHUB_LINK];
+  // Show only real user links (no global defaults).
+  const displayLinks: ProfileLink[] = profileLinks;
 
   const hasRealGithub = profileLinks.some((l) => String((l as any)?.kind ?? "") === "github");
   const profileBadge = hasRealGithub
     ? ({ label: "Контрибьютор", colorScheme: "purple" as const } as const)
     : ({ label: "Автор AIFFA", colorScheme: "blue" as const } as const);
+
+  const [isEditing, setIsEditing] = React.useState<boolean>(false);
+  const [draftName, setDraftName] = React.useState<string>(name);
+  const [draftBio, setDraftBio] = React.useState<string>(bio);
+  const [draftWorkplace, setDraftWorkplace] = React.useState<string>(profile.workplace ?? "");
+  const [draftLocation, setDraftLocation] = React.useState<string>(profile.location ?? "");
+  const [draftEmail, setDraftEmail] = React.useState<string>("");
+  const [draftLinks, setDraftLinks] = React.useState<[string, string, string, string]>(["", "", "", ""]);
+
+  const handleStartEdit = () => {
+    setDraftName(name || "");
+    setDraftBio(bio || "");
+    // Use the *current UI values* (with fallbacks), so inputs are never empty unexpectedly.
+    setDraftWorkplace(profile.workplace ?? "");
+    setDraftLocation(profile.location ?? "");
+    setDraftEmail(emailValue || "");
+    const existingNonEmail = displayLinks
+      .filter((l) => String((l as any)?.kind ?? "") !== "email")
+      .map((l) => String((l as any)?.value ?? "").trim())
+      .filter(Boolean);
+    setDraftLinks([
+      existingNonEmail[0] ?? "",
+      existingNonEmail[1] ?? "",
+      existingNonEmail[2] ?? "",
+      existingNonEmail[3] ?? "",
+    ]);
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+  };
+
+  const handleSaveEdit = () => {
+    const nextLinks: ProfileLink[] = [];
+    // Email is not editable (keep current value as-is).
+    const trimmedEmail = String(emailValue || "").trim();
+    const cleaned = draftLinks.map((v) => String(v ?? "").trim());
+
+    if (trimmedEmail) nextLinks.push({ id: "link-email", kind: "email", label: "Email", value: trimmedEmail });
+    cleaned.forEach((v, idx) => {
+      if (!v) return;
+      const isGithub =
+        /^https?:\/\/(www\.)?github\.com\//i.test(v) ||
+        /^github\.com\//i.test(v) ||
+        // username-like (keep it as github for icon)
+        /^[a-zA-Z0-9-]{1,39}$/.test(v);
+      nextLinks.push({
+        id: `link-${idx + 1}`,
+        kind: isGithub ? "github" : "custom",
+        label: isGithub ? "GitHub" : "Ссылка",
+        value: v,
+      });
+    });
+
+    updateProfile({
+      name: draftName.trim() || "Пользователь",
+      bio: draftBio.trim(),
+      workplace: draftWorkplace.trim(),
+      location: draftLocation.trim(),
+      links: nextLinks,
+    });
+
+    setIsEditing(false);
+  };
+
+  // Prevent global hotkeys / document keydown handlers from stealing focus while typing.
+  const handleStopHotkeys = (e: React.KeyboardEvent) => {
+    e.stopPropagation();
+  };
 
   const buildLinkHref = (link: ProfileLink): string => {
     const kind = String((link as any)?.kind ?? "custom");
@@ -393,18 +453,12 @@ const ProfileScreen: React.FC = () => {
     );
   };
 
-  const workplace = typeof (profile as any)?.workplace === "string" && (profile as any).workplace.trim()
-    ? (profile as any).workplace.trim()
-    : "AIFFA";
-  const locationLabel = typeof (profile as any)?.location === "string" && (profile as any).location.trim()
-    ? (profile as any).location.trim()
-    : "Москва";
+  const workplace = typeof profile.workplace === "string" ? profile.workplace.trim() : "";
+  const locationLabel = typeof profile.location === "string" ? profile.location.trim() : "";
 
   const emailValue =
     profileLinks.find((l) => String((l as any)?.kind ?? "") === "email")?.value?.trim?.() ||
     "bbycinka@yandex.ru";
-
-  const extraLinks = EXTRA_LINKS;
 
   const achievedItems = (Array.isArray(items) ? items : []).filter((i: any) => i?.achieved).slice(0, 6);
 
@@ -696,40 +750,98 @@ const ProfileScreen: React.FC = () => {
                   />
 
                   <VStack align={{ base: "center", md: "start" }} spacing={2} w="full" minW={0}>
-                    <Text fontWeight="bold" fontSize={{ base: "2xl", md: "3xl" }} lineHeight="1.15" noOfLines={1}>
-                      {name || "Пользователь"}
-                    </Text>
+                    {isEditing ? (
+                      <VStack
+                        w="full"
+                        maxW={{ base: "360px", md: "360px" }}
+                        spacing={3}
+                        align={{ base: "center", md: "start" }}
+                        alignSelf={{ base: "center", md: "flex-start" }}
+                      >
+                        <Input
+                          value={draftName}
+                          onChange={(e) => setDraftName(e.target.value)}
+                          onKeyDownCapture={handleStopHotkeys}
+                          maxLength={250}
+                          w="full"
+                          h="40px"
+                          aria-label="Имя"
+                          borderRadius="sm"
+                          borderColor={formBorder}
+                          bg={formBg}
+                          focusBorderColor={formFocusBorder}
+                        />
+                        <Textarea
+                          value={draftBio}
+                          onChange={(e) => setDraftBio(e.target.value)}
+                          onKeyDownCapture={handleStopHotkeys}
+                          resize="none"
+                          rows={2}
+                          w="full"
+                          minH="72px"
+                          aria-label="Bio"
+                          maxLength={250}
+                          borderRadius="sm"
+                          borderColor={formBorder}
+                          bg={formBg}
+                          focusBorderColor={formFocusBorder}
+                        />
+                      </VStack>
+                    ) : (
+                      <>
+                        <Text
+                          fontWeight="bold"
+                          fontSize={{ base: "2xl", md: "3xl" }}
+                          lineHeight="1.15"
+                          whiteSpace="normal"
+                          overflowWrap="anywhere"
+                          wordBreak="break-word"
+                        >
+                          {name || "Пользователь"}
+                        </Text>
 
-                    <Text color={muted} sx={{ wordBreak: "break-word", overflowWrap: "anywhere" }}>
-                      {bio || "Описание"}
-                    </Text>
+                        <Text
+                          color={muted}
+                          whiteSpace="normal"
+                          overflowWrap="anywhere"
+                          wordBreak="break-word"
+                        >
+                          {bio || "Описание"}
+                        </Text>
+                      </>
+                    )}
 
-                    <Button
-                      type="button"
-                      onClick={() => {}}
-                      aria-label="Редактировать профиль"
-                      w="full"
-                      maxW={{ base: "360px", md: "300px", lg: "250px" }}
-                      alignSelf={{ base: "center", md: "flex-start" }}
-                      h="44px"
-                      borderRadius="md"
-                      fontWeight="semibold"
-                      bg={useColorModeValue("blue.600", "blue.600")}
-                      color="white"
-                      transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                      _hover={{
-                        transform: "translateY(-1px)",
-                        bg: useColorModeValue("blue.700", "blue.700"),
-                        boxShadow: "md",
-                      }}
-                      _active={{
-                        transform: "translateY(0px)",
-                        bg: useColorModeValue("blue.800", "blue.800"),
-                        boxShadow: "sm",
-                      }}
-                    >
-                      Редактировать профиль
-                    </Button>
+                    {isEditing ? (
+                      // Actions are rendered lower, right before Achievements (see below).
+                      <Box />
+                    ) : (
+                      <Button
+                        type="button"
+                        onClick={handleStartEdit}
+                        aria-label="Редактировать профиль"
+                        w="full"
+                        maxW={{ base: "360px", md: "300px", lg: "250px" }}
+                        alignSelf={{ base: "center", md: "flex-start" }}
+                        h="44px"
+                        borderRadius="md"
+                        fontWeight="semibold"
+                        bg={useColorModeValue("blue.600", "blue.600")}
+                        color="white"
+                        transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
+                        _hover={{
+                          transform: "translateY(-1px)",
+                          bg: useColorModeValue("blue.700", "blue.700"),
+                          boxShadow: "md",
+                        }}
+                        _active={{
+                          transform: "translateY(0px)",
+                          bg: useColorModeValue("blue.800", "blue.800"),
+                          boxShadow: "sm",
+                        }}
+                      >
+                        Редактировать профиль
+                      </Button>
+                    )}
 
                     <VStack spacing={2} w="full" pt={1} align={{ base: "center", md: "start" }}>
                       <HStack
@@ -742,11 +854,11 @@ const ProfileScreen: React.FC = () => {
                         <Icon as={FiUsers} color={leftIconColors.people} />
                         <Text>
                           <Text as="span" fontWeight="semibold" color="inherit">
-                            {formatCount(10)}
+                            {formatCount(0)}
                           </Text>{" "}
                           подписчики ·{" "}
                           <Text as="span" fontWeight="semibold" color="inherit">
-                            {formatCount(10)}
+                            {formatCount(0)}
                           </Text>{" "}
                           подписан
                         </Text>
@@ -797,27 +909,59 @@ const ProfileScreen: React.FC = () => {
                   <VStack align="start" spacing={2} w="full" textAlign="left">
                     <SectionLabel>Контакты</SectionLabel>
 
-                    <LeftRow icon={FiBriefcase as any} iconColor={leftIconColors.work}>
-                      <Text
-                        fontSize="sm"
-                        fontWeight="semibold"
-                        color={useColorModeValue("gray.800", "whiteAlpha.900")}
-                        noOfLines={1}
-                      >
-                        {workplace}
-                      </Text>
-                    </LeftRow>
+                    {isEditing ? (
+                      <LeftRow icon={FiBriefcase as any} iconColor={leftIconColors.work}>
+                        <Input
+                          value={draftWorkplace}
+                          onChange={(e) => setDraftWorkplace(e.target.value)}
+                          onKeyDownCapture={handleStopHotkeys}
+                          size="sm"
+                          aria-label="Компания / место работы"
+                          borderRadius="sm"
+                          borderColor={formBorder}
+                          bg={formBg}
+                          focusBorderColor={formFocusBorder}
+                        />
+                      </LeftRow>
+                    ) : workplace ? (
+                      <LeftRow icon={FiBriefcase as any} iconColor={leftIconColors.work}>
+                        <Text
+                          fontSize="sm"
+                          fontWeight="semibold"
+                          color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                          noOfLines={1}
+                        >
+                          {workplace}
+                        </Text>
+                      </LeftRow>
+                    ) : null}
 
-                    <LeftRow icon={FiMapPin as any} iconColor={leftIconColors.location}>
-                      <Text
-                        fontSize="sm"
-                        fontWeight="semibold"
-                        color={useColorModeValue("gray.800", "whiteAlpha.900")}
-                        noOfLines={1}
-                      >
-                        {locationLabel}
-                      </Text>
-                    </LeftRow>
+                    {isEditing ? (
+                      <LeftRow icon={FiMapPin as any} iconColor={leftIconColors.location}>
+                        <Input
+                          value={draftLocation}
+                          onChange={(e) => setDraftLocation(e.target.value)}
+                          onKeyDownCapture={handleStopHotkeys}
+                          size="sm"
+                          aria-label="Локация"
+                          borderRadius="sm"
+                          borderColor={formBorder}
+                          bg={formBg}
+                          focusBorderColor={formFocusBorder}
+                        />
+                      </LeftRow>
+                    ) : locationLabel ? (
+                      <LeftRow icon={FiMapPin as any} iconColor={leftIconColors.location}>
+                        <Text
+                          fontSize="sm"
+                          fontWeight="semibold"
+                          color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                          noOfLines={1}
+                        >
+                          {locationLabel}
+                        </Text>
+                      </LeftRow>
+                    ) : null}
 
                     <LeftRow icon={FiMail as any} iconColor={leftIconColors.mail}>
                       <ChakraLink
@@ -836,7 +980,36 @@ const ProfileScreen: React.FC = () => {
                     <SectionLabel>Ссылки</SectionLabel>
 
                     <VStack align="start" spacing={1.5} w="full" pt={1}>
-                      {displayLinks.slice(0, 6).map((l) => {
+                      {isEditing ? (
+                        <VStack align="start" spacing={2} w="full">
+                          {draftLinks.map((val, idx) => (
+                            <LeftRow key={idx} icon={FiLink as any} iconColor={leftIconColors.link}>
+                              <Input
+                                value={val}
+                                onChange={(e) => {
+                                  const next = [...draftLinks] as [string, string, string, string];
+                                  next[idx] = e.target.value;
+                                  setDraftLinks(next);
+                                }}
+                                onKeyDownCapture={handleStopHotkeys}
+                                size="sm"
+                                placeholder={`Ссылка ${idx + 1}`}
+                                aria-label={`Ссылка ${idx + 1}`}
+                                borderRadius="sm"
+                                borderColor={formBorder}
+                                bg={formBg}
+                                focusBorderColor={formFocusBorder}
+                              />
+                            </LeftRow>
+                          ))}
+                        </VStack>
+                      ) : null}
+
+                      {displayLinks
+                        .filter((l) => String((l as any)?.kind ?? "") !== "email")
+                        .slice(0, 6)
+                        .map((l) => {
+                        if (isEditing) return null;
                         const kind = String((l as any)?.kind ?? "custom");
                         const href = buildLinkHref(l);
                         const label = getLinkLabel(l);
@@ -881,50 +1054,47 @@ const ProfileScreen: React.FC = () => {
                           </HStack>
                         );
                       })}
-
-                      {extraLinks
-                        .filter((u) => {
-                          const normalized = String(u).trim();
-                          if (!normalized) return false;
-                          return !displayLinks.some((l) => String((l as any)?.value ?? "").trim() === normalized);
-                        })
-                        .map((href) => (
-                          <HStack
-                            key={href}
-                          spacing={3}
-                            minW={0}
-                            justify="flex-start"
-                            w="full"
-                          >
-                          <Box
-                            aria-hidden="true"
-                            w="22px"
-                            h="22px"
-                            flexShrink={0}
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
-                            color={leftIconColors.link}
-                          >
-                            <Icon as={FiLink as any} boxSize="18px" />
-                          </Box>
-                            <ChakraLink
-                              href={href}
-                              isExternal
-                              color={useColorModeValue("blue.700", "blue.300")}
-                              fontWeight="semibold"
-                              flex={1}
-                              minW={0}
-                              display="block"
-                              whiteSpace="normal"
-                              sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}
-                              aria-label={href}
-                            >
-                              {href}
-                            </ChakraLink>
-                          </HStack>
-                        ))}
                     </VStack>
+
+                    {isEditing ? (
+                      <HStack
+                        w="full"
+                        maxW="full"
+                        justify="flex-start"
+                        spacing={2}
+                        pt={2}
+                      >
+                        <Button
+                          type="button"
+                          onClick={handleSaveEdit}
+                          aria-label="Сохранить изменения профиля"
+                          size="sm"
+                          h="36px"
+                          px={5}
+                          borderRadius="md"
+                          fontWeight="semibold"
+                          bg={useColorModeValue("blue.600", "blue.600")}
+                          color="white"
+                          transition="background 0.2s ease"
+                          _hover={{ bg: useColorModeValue("blue.700", "blue.700") }}
+                          _active={{ bg: useColorModeValue("blue.800", "blue.800") }}
+                        >
+                          Сохранить
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={handleCancelEdit}
+                          aria-label="Отмена редактирования"
+                          size="sm"
+                          h="36px"
+                          px={5}
+                          borderRadius="md"
+                          variant="outline"
+                        >
+                          Отмена
+                        </Button>
+                      </HStack>
+                    ) : null}
                   </VStack>
                   {achievedItems.length > 0 && (
                   <VStack align="start" spacing={2.5} w="full" textAlign="left" mt={5}>
@@ -1107,7 +1277,7 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/learn"
                   size="sm"
-                  borderRadius="full"
+                  borderRadius="md"
                   fontWeight="semibold"
                   bg={useColorModeValue("blue.700", "blue.700")}
                   color="white"
@@ -1125,7 +1295,7 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/weekly"
                   size="sm"
-                  borderRadius="full"
+                  borderRadius="md"
                   fontWeight="semibold"
                   bg={useColorModeValue("green.700", "green.700")}
                   color="white"
@@ -1143,7 +1313,7 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/blog"
                   size="sm"
-                  borderRadius="full"
+                  borderRadius="md"
                   fontWeight="semibold"
                   bg={useColorModeValue("purple.700", "purple.700")}
                   color="white"
@@ -1276,7 +1446,7 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/blog"
                   size="sm"
-                  borderRadius="full"
+                  borderRadius="md"
                   fontWeight="semibold"
                   bg={useColorModeValue("orange.600", "orange.600")}
                   color="white"
@@ -1294,7 +1464,7 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/learn"
                   size="sm"
-                  borderRadius="full"
+                  borderRadius="md"
                   fontWeight="semibold"
                   bg={useColorModeValue("blue.700", "blue.700")}
                   color="white"
@@ -1312,7 +1482,7 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/weekly"
                   size="sm"
-                  borderRadius="full"
+                  borderRadius="md"
                   fontWeight="semibold"
                   bg={useColorModeValue("green.700", "green.700")}
                   color="white"
@@ -1330,7 +1500,7 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/hackathons"
                   size="sm"
-                  borderRadius="full"
+                  borderRadius="md"
                   fontWeight="semibold"
                   bg={useColorModeValue("pink.600", "pink.600")}
                   color="white"
@@ -1348,7 +1518,7 @@ const ProfileScreen: React.FC = () => {
                 <AppButtonLink
                   to="/sessions"
                   size="sm"
-                  borderRadius="full"
+                  borderRadius="md"
                   fontWeight="semibold"
                   bg={useColorModeValue("cyan.800", "cyan.800")}
                   color="white"

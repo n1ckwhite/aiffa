@@ -10,6 +10,8 @@ export const DEFAULT_PROFILE: UserProfile = {
   githubUrl: 'https://github.com/n1cikwhite',
   githubUsername: 'n1ckwhite',
   direction: '',
+  workplace: '',
+  location: '',
   links: [],
   followersCount: 0,
   followingCount: 0,

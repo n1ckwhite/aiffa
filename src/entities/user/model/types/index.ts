@@ -27,6 +27,8 @@ export type UserProfile = {
   githubUrl?: string;
   githubUsername?: string;
   direction?: string;
+  workplace?: string;
+  location?: string;
   links?: ProfileLink[];
   followersCount?: number;
   followingCount?: number;

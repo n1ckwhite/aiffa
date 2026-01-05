@@ -11,8 +11,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
   hoverBg,
   setIsMobileMenuOpen,
 }) => {
-  const { fillIcon, avatarBorderColor, avatarBg, menuBg, menuText, menuBorder, menuItemHoverBg, menuShadow } =
-    useDesktopActionsColors();
+  const { fillIcon } = useDesktopActionsColors();
 
   return (
     <HStack gap={{ base: 1, md: 1, xl: 2 }}>
@@ -182,14 +181,6 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
       <ProfileMenu
         hoverBg={hoverBg}
         setIsMobileMenuOpen={setIsMobileMenuOpen}
-        fillIcon={fillIcon}
-        avatarBorderColor={avatarBorderColor}
-        avatarBg={avatarBg}
-        menuBg={menuBg}
-        menuText={menuText}
-        menuBorder={menuBorder}
-        menuItemHoverBg={menuItemHoverBg}
-        menuShadow={menuShadow}
       />
       
       <ThemeToggleButton />

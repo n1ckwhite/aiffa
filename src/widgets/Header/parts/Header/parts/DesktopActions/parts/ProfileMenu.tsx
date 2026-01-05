@@ -15,19 +15,14 @@ import { useRouter } from "next/navigation";
 import { useUserProfile } from "entities/user";
 import { withGithubAvatarSize } from "@/shared/lib/github/withGithubAvatarSize";
 import { ProfileMenuProps } from "./types";
+import { useDesktopActionsColors } from "../colors/useDeskopActionsColors";
 
 export const ProfileMenu: React.FC<ProfileMenuProps> = ({
   hoverBg,
   setIsMobileMenuOpen,
-  fillIcon,
-  avatarBorderColor,
-  avatarBg,
-  menuBg,
-  menuText,
-  menuBorder,
-  menuItemHoverBg,
-  menuShadow,
 }) => {
+  const { fillIcon, avatarBorderColor, avatarBg, menuBg, menuText, menuBorder, menuItemHoverBg, menuShadow } =
+    useDesktopActionsColors();
   const router = useRouter();
   const { profile, resetProfile } = useUserProfile();
 

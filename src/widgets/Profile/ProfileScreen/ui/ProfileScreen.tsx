@@ -275,6 +275,7 @@ const ProfileScreen: React.FC = () => {
   const textStrong = useColorModeValue("gray.800", "whiteAlpha.900");
   const xpNumberColor = useColorModeValue("gray.900", "whiteAlpha.900");
   const linkTextColor = useColorModeValue("blue.700", "blue.300");
+  const sectionLabelColor = useColorModeValue("gray.700", "whiteAlpha.700");
 
   const primaryBtnBg = useColorModeValue("blue.600", "blue.600");
   const primaryBtnHoverBg = useColorModeValue("blue.700", "blue.700");
@@ -434,7 +435,7 @@ const ProfileScreen: React.FC = () => {
       letterSpacing="0.08em"
       textTransform="uppercase"
       fontWeight="bold"
-      color={useColorModeValue("gray.700", "whiteAlpha.700")}
+      color={sectionLabelColor}
       pt={2}
     >
       {children}
@@ -851,17 +852,17 @@ const ProfileScreen: React.FC = () => {
                         h="44px"
                         borderRadius="md"
                         fontWeight="semibold"
-                        bg={useColorModeValue("blue.600", "blue.600")}
+                        bg={primaryBtnBg}
                         color="white"
                         transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
                         _hover={{
                           transform: "translateY(-1px)",
-                          bg: useColorModeValue("blue.700", "blue.700"),
+                          bg: primaryBtnHoverBg,
                           boxShadow: "md",
                         }}
                         _active={{
                           transform: "translateY(0px)",
-                          bg: useColorModeValue("blue.800", "blue.800"),
+                          bg: primaryBtnActiveBg,
                           boxShadow: "sm",
                         }}
                       >
@@ -903,7 +904,7 @@ const ProfileScreen: React.FC = () => {
                             <Text
                               as="span"
                               fontWeight="bold"
-                              color={useColorModeValue("gray.900", "whiteAlpha.900")}
+                            color={xpNumberColor}
                               fontSize={{ base: "md", md: "lg" }}
                             >
                               {formatCount(xp)}
@@ -958,7 +959,7 @@ const ProfileScreen: React.FC = () => {
                         <Text
                           fontSize="sm"
                           fontWeight="semibold"
-                          color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                          color={textStrong}
                           noOfLines={1}
                         >
                           {workplace}
@@ -989,7 +990,7 @@ const ProfileScreen: React.FC = () => {
                         <Text
                           fontSize="sm"
                           fontWeight="semibold"
-                          color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                          color={textStrong}
                           noOfLines={1}
                         >
                           {locationLabel}
@@ -1000,7 +1001,7 @@ const ProfileScreen: React.FC = () => {
                     <LeftRow icon={FiMail as any} iconColor={leftIconColors.mail}>
                       <ChakraLink
                         href={`mailto:${emailValue}`}
-                        color={useColorModeValue("blue.700", "blue.300")}
+                        color={linkTextColor}
                         fontWeight="semibold"
                         maxW="360px"
                         noOfLines={1}
@@ -1067,7 +1068,7 @@ const ProfileScreen: React.FC = () => {
                                   <ChakraLink
                                     href={href}
                                     isExternal
-                                    color={useColorModeValue("blue.700", "blue.300")}
+                                    color={linkTextColor}
                                     fontWeight="semibold"
                                     flex={1}
                                     minW={0}
@@ -1103,11 +1104,11 @@ const ProfileScreen: React.FC = () => {
                           px={5}
                           borderRadius="md"
                           fontWeight="semibold"
-                          bg={useColorModeValue("blue.600", "blue.600")}
+                          bg={primaryBtnBg}
                           color="white"
                           transition="background 0.2s ease"
-                          _hover={{ bg: useColorModeValue("blue.700", "blue.700") }}
-                          _active={{ bg: useColorModeValue("blue.800", "blue.800") }}
+                          _hover={{ bg: primaryBtnHoverBg }}
+                          _active={{ bg: primaryBtnActiveBg }}
                           isLoading={isSaving}
                         >
                           Сохранить
@@ -1268,8 +1269,8 @@ const ProfileScreen: React.FC = () => {
               <Box
                 mt={{ base: 4, md: 5 }}
                 borderWidth="1px"
-                borderColor={useColorModeValue("orange.200", "whiteAlpha.200")}
-                bg={useColorModeValue("orange.50", "whiteAlpha.50")}
+                borderColor={calloutBorder}
+                bg={calloutBg}
                 borderRadius="16px"
                 px={{ base: 3, md: 4 }}
                 py={{ base: 3, md: 3.5 }}
@@ -1281,20 +1282,20 @@ const ProfileScreen: React.FC = () => {
                     w="26px"
                     h="26px"
                     borderRadius="10px"
-                    bg={useColorModeValue("orange.100", "whiteAlpha.100")}
+                    bg={calloutIconBg}
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                     flexShrink={0}
-                    color={useColorModeValue("orange.700", "orange.200")}
+                    color={calloutIconColor}
                   >
                     <Icon as={FiAward} boxSize="14px" />
                   </Box>
                   <Box>
-                    <Text fontSize="sm" color={useColorModeValue("orange.900", "whiteAlpha.900")} fontWeight="semibold">
+                    <Text fontSize="sm" color={calloutTitleColor} fontWeight="semibold">
                       {currentStats.motivationalTop}
                     </Text>
-                    <Text fontSize="sm" color={useColorModeValue("orange.800", muted)} mt={1}>
+                    <Text fontSize="sm" color={calloutBodyColor} mt={1}>
                       {currentStats.motivationalBottom}
                     </Text>
                   </Box>
@@ -1311,15 +1312,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="md"
                   fontWeight="semibold"
-                  bg={useColorModeValue("blue.700", "blue.700")}
+                  bg={qaMaterialsBg}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("blue.600", "blue.600")}
+                  borderColor={qaMaterialsBorder}
                   leftIcon={<Icon as={FaBookOpen} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("blue.700", "blue.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("blue.800", "blue.900"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: qaMaterialsHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: qaMaterialsActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к материалам"
                 >
                   К материалам
@@ -1329,15 +1330,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="md"
                   fontWeight="semibold"
-                  bg={useColorModeValue("green.700", "green.700")}
+                  bg={qaWeeklyBg}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("green.600", "green.600")}
+                  borderColor={qaWeeklyBorder}
                   leftIcon={<Icon as={FaClipboardList} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("green.700", "green.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("green.800", "green.900"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: qaWeeklyHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: qaWeeklyActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к задачам недели"
                 >
                   Задачи недели
@@ -1347,15 +1348,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="md"
                   fontWeight="semibold"
-                  bg={useColorModeValue("purple.700", "purple.700")}
+                  bg={qaBlogBg}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("purple.600", "purple.600")}
+                  borderColor={qaBlogBorder}
                   leftIcon={<Icon as={FaFeatherAlt} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("purple.700", "purple.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("purple.800", "purple.900"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: qaBlogHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: qaBlogActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к блогу"
                 >
                   Блог
@@ -1437,8 +1438,8 @@ const ProfileScreen: React.FC = () => {
               <Box
                 mt={{ base: 4, md: 5 }}
                 borderWidth="1px"
-                borderColor={useColorModeValue("orange.200", "whiteAlpha.200")}
-                bg={useColorModeValue("orange.50", "whiteAlpha.50")}
+                borderColor={calloutBorder}
+                bg={calloutBg}
                 borderRadius="16px"
                 px={{ base: 3, md: 4 }}
                 py={{ base: 3, md: 3.5 }}
@@ -1450,20 +1451,20 @@ const ProfileScreen: React.FC = () => {
                     w="26px"
                     h="26px"
                     borderRadius="10px"
-                    bg={useColorModeValue("orange.100", "whiteAlpha.100")}
+                    bg={calloutIconBg}
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                     flexShrink={0}
-                    color={useColorModeValue("orange.700", "orange.200")}
+                    color={calloutIconColor}
                   >
                     <Icon as={FiAward} boxSize="14px" />
                   </Box>
                   <Box>
-                    <Text fontSize="sm" fontWeight="semibold" color={useColorModeValue("orange.900", "whiteAlpha.900")}>
+                    <Text fontSize="sm" fontWeight="semibold" color={calloutTitleColor}>
                       Спасибо за вклад в сообщество
                     </Text>
-                    <Text fontSize="sm" color={useColorModeValue("orange.800", muted)} mt={1}>
+                    <Text fontSize="sm" color={calloutBodyColor} mt={1}>
                       Любое авторство и активность помогают AIFFA становиться лучше для всех.
                     </Text>
                   </Box>
@@ -1480,15 +1481,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="md"
                   fontWeight="semibold"
-                  bg={useColorModeValue("orange.600", "orange.600")}
+                  bg={qaWriteBg}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("orange.500", "orange.500")}
+                  borderColor={qaWriteBorder}
                   leftIcon={<Icon as={FaFeatherAlt} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("orange.600", "orange.700"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("orange.700", "orange.800"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: qaWriteHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: qaWriteActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти в блог"
                 >
                   Написать
@@ -1498,15 +1499,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="md"
                   fontWeight="semibold"
-                  bg={useColorModeValue("blue.700", "blue.700")}
+                  bg={qaMaterialsBg}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("blue.600", "blue.600")}
+                  borderColor={qaMaterialsBorder}
                   leftIcon={<Icon as={FaBookOpen} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("blue.700", "blue.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("blue.800", "blue.900"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: qaMaterialsHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: qaMaterialsActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к материалам"
                 >
                   Материалы
@@ -1516,15 +1517,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="md"
                   fontWeight="semibold"
-                  bg={useColorModeValue("green.700", "green.700")}
+                  bg={qaWeeklyBg}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("green.600", "green.600")}
+                  borderColor={qaWeeklyBorder}
                   leftIcon={<Icon as={FaClipboardList} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("green.700", "green.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("green.800", "green.900"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: qaWeeklyHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: qaWeeklyActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к задачам недели"
                 >
                   Задачи недели
@@ -1534,15 +1535,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="md"
                   fontWeight="semibold"
-                  bg={useColorModeValue("pink.600", "pink.600")}
+                  bg={qaHackathonsBg}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("pink.500", "pink.500")}
+                  borderColor={qaHackathonsBorder}
                   leftIcon={<Icon as={FaCode} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("pink.600", "pink.700"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("pink.700", "pink.800"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: qaHackathonsHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: qaHackathonsActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к хакатонам"
                 >
                   Хакатоны
@@ -1552,15 +1553,15 @@ const ProfileScreen: React.FC = () => {
                   size="sm"
                   borderRadius="md"
                   fontWeight="semibold"
-                  bg={useColorModeValue("cyan.800", "cyan.800")}
+                  bg={qaSessionsBg}
                   color="white"
                   borderWidth="1px"
-                  borderColor={useColorModeValue("cyan.600", "cyan.600")}
+                  borderColor={qaSessionsBorder}
                   leftIcon={<Icon as={FaComments} color="white" />}
                   sx={{ "& .chakra-button__icon": { color: "white" } }}
                   transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: useColorModeValue("cyan.700", "cyan.800"), transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: useColorModeValue("cyan.800", "cyan.900"), transform: "translateY(0px)", boxShadow: "xs" }}
+                  _hover={{ bg: qaSessionsHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
+                  _active={{ bg: qaSessionsActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
                   aria-label="Перейти к сессиям"
                 >
                   Сессии

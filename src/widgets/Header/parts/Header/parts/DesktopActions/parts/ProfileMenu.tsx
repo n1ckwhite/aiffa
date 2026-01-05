@@ -93,7 +93,6 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
           fontWeight="semibold"
           py={2.5}
           px={3}
-          bg={menuBg}
           _hover={{ bg: menuItemHoverBg }}
           _focus={{ bg: menuItemHoverBg }}
         >
@@ -106,7 +105,6 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
           fontWeight="semibold"
           py={2.5}
           px={3}
-          bg={menuBg}
           _hover={{ bg: menuItemHoverBg }}
           _focus={{ bg: menuItemHoverBg }}
         >

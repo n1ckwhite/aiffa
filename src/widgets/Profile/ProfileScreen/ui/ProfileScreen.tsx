@@ -724,6 +724,7 @@ const ProfileScreen: React.FC = () => {
                           id="profile-name"
                           name="profileName"
                           autoComplete="name"
+                          placeholder="Имя (до 250 символов)"
                           value={draftName}
                           onChange={(e) => setDraftName(e.target.value)}
                           onKeyDownCapture={handleStopHotkeys}
@@ -740,6 +741,7 @@ const ProfileScreen: React.FC = () => {
                           id="profile-bio"
                           name="profileBio"
                           autoComplete="off"
+                          placeholder="О себе (до 250 символов)"
                           value={draftBio}
                           onChange={(e) => setDraftBio(e.target.value)}
                           onKeyDownCapture={handleStopHotkeys}
@@ -883,6 +885,7 @@ const ProfileScreen: React.FC = () => {
                           id="profile-workplace"
                           name="profileWorkplace"
                           autoComplete="organization"
+                          placeholder="Компания / место работы"
                           value={draftWorkplace}
                           onChange={(e) => setDraftWorkplace(e.target.value)}
                           onKeyDownCapture={handleStopHotkeys}
@@ -913,6 +916,7 @@ const ProfileScreen: React.FC = () => {
                           id="profile-location"
                           name="profileLocation"
                           autoComplete="address-level2"
+                          placeholder="Город / локация"
                           value={draftLocation}
                           onChange={(e) => setDraftLocation(e.target.value)}
                           onKeyDownCapture={handleStopHotkeys}
@@ -977,7 +981,7 @@ const ProfileScreen: React.FC = () => {
                                       }}
                                       onKeyDownCapture={handleStopHotkeys}
                                       size="sm"
-                                      placeholder={`Ссылка ${idx + 1}`}
+                                      placeholder={`Ссылка ${idx + 1} (https://...)`}
                                       aria-label={`Ссылка ${idx + 1}`}
                                       borderRadius="sm"
                                       borderColor={formBorder}

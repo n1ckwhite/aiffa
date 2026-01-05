@@ -1,6 +1,16 @@
 import React from 'react';
 
-export type ProjectItem = { id: string; title: string; authors?: Array<{ username: string; name: string }> };
+export type ProjectItem = {
+  id: string;
+  title: string;
+  mdPath?: string;
+  authors?: Array<{ username: string; name: string }>;
+  ratingCount?: number;
+  views?: number;
+  commentsCount?: number;
+  updatedAt?: string;
+  createdAt?: string;
+};
 
 export const useProjects = (mod: any) => {
   const projects = React.useMemo<ProjectItem[]>(() => {

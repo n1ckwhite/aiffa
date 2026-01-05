@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { loadManifest } from "shared/lessons/api";
 import ModuleProjectsPageClient from "./ModuleProjectsPageClient";
+import { stat } from "node:fs/promises";
+import path from "node:path";
 
 type ModuleProjectsRouteParams = {
   params: { moduleId: string } | Promise<{ moduleId: string }>;
@@ -51,7 +53,30 @@ const ModuleProjectsRoutePage = async ({ params, searchParams }: ModuleProjectsR
   const initialMod = manifest.modules.find((m) => m.id === moduleId) ?? null;
   if (!initialMod) return notFound();
 
-  return <ModuleProjectsPageClient moduleId={moduleId} initialMod={initialMod} initialPage={initialPage} />;
+  const addDatesFromMarkdown = async <T extends { mdPath?: string }>(item: T): Promise<T> => {
+    const mdPath = typeof item?.mdPath === "string" ? item.mdPath.trim() : "";
+    if (!mdPath || !mdPath.startsWith("/")) return item;
+
+    try {
+      const abs = path.join(process.cwd(), "public", mdPath.replace(/^\/+/, ""));
+      const info = await stat(abs);
+      const updatedAt = new Date(info.mtimeMs).toISOString();
+      const createdAt = new Date(info.birthtimeMs).toISOString();
+      return { ...item, updatedAt, createdAt };
+    } catch {
+      return item;
+    }
+  };
+
+  const initialModWithDates = {
+    ...initialMod,
+    projects: Array.isArray((initialMod as any).projects)
+      ? await Promise.all(((initialMod as any).projects as any[]).map((p) => addDatesFromMarkdown(p)))
+      : (initialMod as any).projects,
+    project: (initialMod as any).project ? await addDatesFromMarkdown((initialMod as any).project) : undefined,
+  };
+
+  return <ModuleProjectsPageClient moduleId={moduleId} initialMod={initialModWithDates} initialPage={initialPage} />;
 };
 
 export default ModuleProjectsRoutePage;

@@ -298,64 +298,71 @@ const ProfileScreen: React.FC = () => {
       : ({ label: "Автор AIFFA", colorScheme: "blue" as const } as const);
 
   const [isEditing, setIsEditing] = React.useState<boolean>(false);
-  const [draftName, setDraftName] = React.useState<string>(name);
-  const [draftBio, setDraftBio] = React.useState<string>(bio);
-  const [draftWorkplace, setDraftWorkplace] = React.useState<string>(profile.workplace ?? "");
-  const [draftLocation, setDraftLocation] = React.useState<string>(profile.location ?? "");
-  const [draftEmail, setDraftEmail] = React.useState<string>("");
-  const [draftLinks, setDraftLinks] = React.useState<[string, string, string, string]>(["", "", "", ""]);
+  const [editSessionId, setEditSessionId] = React.useState<number>(0);
+  const [editInitial, setEditInitial] = React.useState<{
+    name: string;
+    bio: string;
+    workplace: string;
+    location: string;
+    links: [string, string, string, string];
+  } | null>(null);
+
+  const [saveState, saveAction, isSaving] = React.useActionState(
+    async (_prev: { ok: boolean; error?: string } | null, formData: FormData) => {
+      try {
+        const nextName = String(formData.get("profileName") ?? "").trim();
+        const nextBio = String(formData.get("profileBio") ?? "").trim();
+        const nextWorkplace = String(formData.get("profileWorkplace") ?? "").trim();
+        const nextLocation = String(formData.get("profileLocation") ?? "").trim();
+        const link1 = String(formData.get("profileLink1") ?? "").trim();
+        const link2 = String(formData.get("profileLink2") ?? "").trim();
+        const link3 = String(formData.get("profileLink3") ?? "").trim();
+        const link4 = String(formData.get("profileLink4") ?? "").trim();
+
+        const nextLinks: ProfileLink[] = [];
+        const trimmedEmail = String(emailValue || "").trim();
+        if (trimmedEmail) nextLinks.push({ id: "link-email", kind: "email", label: "Email", value: trimmedEmail });
+
+        [link1, link2, link3, link4].forEach((v, idx) => {
+          if (!v) return;
+          nextLinks.push({ id: `link-${idx + 1}`, kind: "custom", label: "Ссылка", value: v });
+        });
+
+        updateProfile({
+          name: nextName || "Пользователь",
+          bio: nextBio,
+          workplace: nextWorkplace,
+          location: nextLocation,
+          links: nextLinks,
+        });
+
+        setIsEditing(false);
+        return { ok: true };
+      } catch (e: any) {
+        return { ok: false, error: String(e?.message ?? "Не удалось сохранить") };
+      }
+    },
+    null,
+  );
 
   const handleStartEdit = () => {
-    setDraftName(name || "");
-    setDraftBio(bio || "");
-    // Use the *current UI values* (with fallbacks), so inputs are never empty unexpectedly.
-    setDraftWorkplace(profile.workplace ?? "");
-    setDraftLocation(profile.location ?? "");
-    setDraftEmail(emailValue || "");
-    const existingNonEmail = displayLinks
+    const nonEmail = displayLinks
       .filter((l) => String((l as any)?.kind ?? "") !== "email")
       .map((l) => String((l as any)?.value ?? "").trim())
       .filter(Boolean);
-    setDraftLinks([
-      existingNonEmail[0] ?? "",
-      existingNonEmail[1] ?? "",
-      existingNonEmail[2] ?? "",
-      existingNonEmail[3] ?? "",
-    ]);
+
+    setEditSessionId((s) => s + 1);
+    setEditInitial({
+      name: name || "",
+      bio: bio || "",
+      workplace: profile.workplace ?? "",
+      location: profile.location ?? "",
+      links: [nonEmail[0] ?? "", nonEmail[1] ?? "", nonEmail[2] ?? "", nonEmail[3] ?? ""],
+    });
     setIsEditing(true);
   };
 
-  const handleCancelEdit = () => {
-    setIsEditing(false);
-  };
-
-  const handleSaveEdit = () => {
-    const nextLinks: ProfileLink[] = [];
-    // Email is not editable (keep current value as-is).
-    const trimmedEmail = String(emailValue || "").trim();
-    const cleaned = draftLinks.map((v) => String(v ?? "").trim());
-
-    if (trimmedEmail) nextLinks.push({ id: "link-email", kind: "email", label: "Email", value: trimmedEmail });
-    cleaned.forEach((v, idx) => {
-      if (!v) return;
-      nextLinks.push({
-        id: `link-${idx + 1}`,
-        kind: "custom",
-        label: "Ссылка",
-        value: v,
-      });
-    });
-
-    updateProfile({
-      name: draftName.trim() || "Пользователь",
-      bio: draftBio.trim(),
-      workplace: draftWorkplace.trim(),
-      location: draftLocation.trim(),
-      links: nextLinks,
-    });
-
-    setIsEditing(false);
-  };
+  const handleCancelEdit = () => setIsEditing(false);
 
   // Prevent global hotkeys / document keydown handlers from stealing focus while typing.
   const handleStopHotkeys = (e: React.KeyboardEvent) => {
@@ -714,20 +721,23 @@ const ProfileScreen: React.FC = () => {
                   <VStack align={{ base: "center", md: "start" }} spacing={2} w="full" minW={0}>
                     {isEditing ? (
                       <VStack
+                        key={editSessionId}
                         w="full"
                         maxW={{ base: "360px", md: "390px" }}
                         spacing={3}
                         align={{ base: "center", md: "start" }}
                         alignSelf={{ base: "center", md: "flex-start" }}
                       >
+                        {/* Client action form (React 19) */}
+                        <Box as="form" id="profile-edit-form" action={saveAction} display="none" />
                         <Input
                           id="profile-name"
                           name="profileName"
                           autoComplete="name"
                           placeholder="Имя (до 250 символов)"
-                          value={draftName}
-                          onChange={(e) => setDraftName(e.target.value)}
+                          defaultValue={editInitial?.name ?? ""}
                           onKeyDownCapture={handleStopHotkeys}
+                          form="profile-edit-form"
                           maxLength={250}
                           w="full"
                           h="40px"
@@ -742,9 +752,9 @@ const ProfileScreen: React.FC = () => {
                           name="profileBio"
                           autoComplete="off"
                           placeholder="О себе (до 250 символов)"
-                          value={draftBio}
-                          onChange={(e) => setDraftBio(e.target.value)}
+                          defaultValue={editInitial?.bio ?? ""}
                           onKeyDownCapture={handleStopHotkeys}
+                          form="profile-edit-form"
                           resize="none"
                           rows={2}
                           w="full"
@@ -886,9 +896,9 @@ const ProfileScreen: React.FC = () => {
                           name="profileWorkplace"
                           autoComplete="organization"
                           placeholder="Компания / место работы"
-                          value={draftWorkplace}
-                          onChange={(e) => setDraftWorkplace(e.target.value)}
+                          defaultValue={editInitial?.workplace ?? ""}
                           onKeyDownCapture={handleStopHotkeys}
+                          form="profile-edit-form"
                           size="sm"
                           aria-label="Компания / место работы"
                           borderRadius="sm"
@@ -917,9 +927,9 @@ const ProfileScreen: React.FC = () => {
                           name="profileLocation"
                           autoComplete="address-level2"
                           placeholder="Город / локация"
-                          value={draftLocation}
-                          onChange={(e) => setDraftLocation(e.target.value)}
+                          defaultValue={editInitial?.location ?? ""}
                           onKeyDownCapture={handleStopHotkeys}
+                          form="profile-edit-form"
                           size="sm"
                           aria-label="Локация"
                           borderRadius="sm"
@@ -967,19 +977,15 @@ const ProfileScreen: React.FC = () => {
                           <VStack align="start" spacing={1.5} w="full" pt={1}>
                             {isEditing ? (
                               <VStack align="start" spacing={2} w="full">
-                                {draftLinks.map((val, idx) => (
+                                {(editInitial?.links ?? ["", "", "", ""]).map((val, idx) => (
                                   <LeftRow key={idx} icon={FiLink as any} iconColor={leftIconColors.link}>
                                     <Input
                                       id={`profile-link-${idx + 1}`}
                                       name={`profileLink${idx + 1}`}
                                       autoComplete="url"
-                                      value={val}
-                                      onChange={(e) => {
-                                        const next = [...draftLinks] as [string, string, string, string];
-                                        next[idx] = e.target.value;
-                                        setDraftLinks(next);
-                                      }}
+                                      defaultValue={val}
                                       onKeyDownCapture={handleStopHotkeys}
+                                      form="profile-edit-form"
                                       size="sm"
                                       placeholder={`Ссылка ${idx + 1} (https://...)`}
                                       aria-label={`Ссылка ${idx + 1}`}
@@ -1043,8 +1049,8 @@ const ProfileScreen: React.FC = () => {
                         pt={2}
                       >
                         <Button
-                          type="button"
-                          onClick={handleSaveEdit}
+                          type="submit"
+                          form="profile-edit-form"
                           aria-label="Сохранить изменения профиля"
                           size="sm"
                           h="36px"
@@ -1056,6 +1062,7 @@ const ProfileScreen: React.FC = () => {
                           transition="background 0.2s ease"
                           _hover={{ bg: useColorModeValue("blue.700", "blue.700") }}
                           _active={{ bg: useColorModeValue("blue.800", "blue.800") }}
+                          isLoading={isSaving}
                         >
                           Сохранить
                         </Button>
@@ -1068,6 +1075,7 @@ const ProfileScreen: React.FC = () => {
                           px={5}
                           borderRadius="md"
                           variant="outline"
+                          isDisabled={isSaving}
                         >
                           Отмена
                         </Button>

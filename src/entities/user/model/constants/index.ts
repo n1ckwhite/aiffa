@@ -4,11 +4,11 @@ export const STORAGE_KEY = 'aiffa:userProfile';
 export const PROFILE_COOKIE_KEY = 'aiffa_profile';
 
 export const DEFAULT_PROFILE: UserProfile = {
-  name: 'Nick White',
-  bio: 'Senior student Yandex & front-end developer',
+  name: '',
+  bio: '',
   avatarUrl: '',
   githubUrl: 'https://github.com/n1cikwhite',
-  githubUsername: 'n1ckwhite',
+  githubUsername: '',
   direction: '',
   workplace: '',
   location: '',

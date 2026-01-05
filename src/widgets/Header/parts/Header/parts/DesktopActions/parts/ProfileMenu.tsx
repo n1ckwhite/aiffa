@@ -57,17 +57,13 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
           display="inline-flex"
           alignItems="center"
           justifyContent="center"
-          h="32px"
-          minH="32px"
-          w="36px"
-          minW="36px"
           lineHeight="1"
         >
-          <Box w="26px" h="26px" display="flex" alignItems="center" justifyContent="center">
+          <Box w="32px" h="32px" display="flex" alignItems="center" justifyContent="center">
             <Avatar
               name={profile.name || "Профиль"}
               src={avatarSrc}
-              boxSize="26px"
+              boxSize="32px"
               borderWidth="1px"
               borderColor={avatarBorderColor}
               bg={avatarBg}

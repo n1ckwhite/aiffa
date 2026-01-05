@@ -49,7 +49,6 @@ export const DetailsBlock: React.FC<DetailsBlockProps> = ({ summary, body, bodyN
         <Button
           size="md"
           onClick={onToggle}
-          w={{ base: '160px', md: '170px' }}
           borderRadius="full"
           px={5}
           bg="blue.600"
@@ -58,7 +57,7 @@ export const DetailsBlock: React.FC<DetailsBlockProps> = ({ summary, body, bodyN
           _hover={{ bg: 'blue.700', boxShadow: 'none' }}
           _active={{ bg: 'blue.800', boxShadow: 'none' }}
           aria-expanded={open}
-          sx={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+          sx={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'flex-start', gap: '4px' }}
         >
           <Icon as={ChevronDownIcon} color="white" transform={open ? 'rotate(180deg)' : 'rotate(0deg)'} transition="transform 300ms cubic-bezier(0.22, 1, 0.36, 1)" />
           <Text as="span">{open ? 'Скрыть' : 'Подробнее'}</Text>

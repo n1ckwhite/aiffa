@@ -793,7 +793,6 @@ const ProfileScreen: React.FC = () => {
                         align={{ base: "center", md: "start" }}
                         alignSelf={{ base: "center", md: "flex-start" }}
                       >
-                        {/* Client action form (React 19) */}
                         <Box as="form" id="profile-edit-form" action={saveAction} display="none" />
                         <Input
                           id="profile-name"

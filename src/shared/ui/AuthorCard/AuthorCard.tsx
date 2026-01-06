@@ -1,12 +1,11 @@
 import React from "react";
 import { Avatar, Box, HStack, Icon, Link, Text, Tooltip, VStack } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
 import { FiEye, FiMessageCircle } from "react-icons/fi";
-import { FiStar } from "react-icons/fi";
 import { formatCount } from "shared/functions/formatCount";
 import type { AuthorCardProps } from "./types";
 import { useAuthorCardColors } from "./colors/useAuthorCardColors";
 import { useAuthorSupportTexts } from "./features/useAuthorSupportTexts";
+import { StarRatingIcon } from "shared/ui/StarRatingIcon";
 
 export const AuthorCard: React.FC<AuthorCardProps> = ({
   author,
@@ -32,7 +31,6 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
     activeBg,
     tooltipBg,
     tooltipTextColor,
-    starMetaColor,
     bgBlock,
   } = useAuthorCardColors(isStarred ?? false);
 
@@ -67,11 +65,7 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
               <>
                 <HStack spacing={1} flexShrink={0}>
                   <Box as="span">{formatCount(starsCount)}</Box>
-                  {isStarred ? (
-                    <StarIcon boxSize={3} color={starMetaColor} flexShrink={0} />
-                  ) : (
-                    <Icon as={FiStar} boxSize={3.5} color={starMetaColor} flexShrink={0} />
-                  )}
+                  <StarRatingIcon isActive={!!isStarred} activeBoxSize={3} inactiveBoxSize={3.5} />
                 </HStack>
                 <Tooltip
                   label={tooltipLabel}

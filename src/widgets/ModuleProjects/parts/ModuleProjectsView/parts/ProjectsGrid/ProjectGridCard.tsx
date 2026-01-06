@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Avatar, Box, HStack, Icon, Text } from "@chakra-ui/react";
-import { ChevronRightIcon, StarIcon } from "@chakra-ui/icons";
-import { FiEye, FiMessageCircle, FiStar } from "react-icons/fi";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+import { FiEye, FiMessageCircle } from "react-icons/fi";
 import { AppBoxLink } from "shared/ui/AppLink";
 import { formatCount } from "shared/functions/formatCount";
 import { formatRuDate } from "shared/functions/formatRuDate";
@@ -12,6 +12,7 @@ import { OpenLinkBadge } from "widgets/ModuleLessons/parts/LessonCard/parts/Badg
 import type { ProjectItem } from "../../../../hooks/useProjects";
 import { arrowLoop } from "./animations";
 import { ProjectGridCardProps } from "./types";
+import { StarRatingIcon } from "shared/ui/StarRatingIcon";
 
 const getProjectDateLabel = (project: ProjectItem): string => {
   const iso = typeof project.updatedAt === "string" && project.updatedAt.trim()
@@ -36,8 +37,8 @@ export const ProjectGridCard: React.FC<ProjectGridCardProps> = ({ modId, project
 
     try {
       window.open(`https://github.com/${firstAuthor.username}`, "_blank", "noopener,noreferrer");
-    } catch {
-      // ignore
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -112,11 +113,7 @@ export const ProjectGridCard: React.FC<ProjectGridCardProps> = ({ modId, project
         <HStack spacing={3} rowGap={1} flexWrap="wrap" fontSize="xs" color={colors.descColor} mt={1} minW={0}>
           <HStack spacing={1} flexShrink={0}>
             <Box as="span">{formatCount(Number(project.ratingCount ?? 0))}</Box>
-            {isStarred ? (
-              <StarIcon boxSize={3} color="yellow.400" />
-            ) : (
-              <Icon as={FiStar} boxSize={3.5} color={colors.descColor} flexShrink={0} />
-            )}
+            <StarRatingIcon isActive={isStarred} activeBoxSize={3} inactiveBoxSize={3.5} />
           </HStack>
 
           <HStack spacing={1} flexShrink={0}>

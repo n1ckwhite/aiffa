@@ -18,7 +18,6 @@ export type AuthorActionsRowProps = {
     | "ghostHoverBg"
     | "ghostActiveBg"
     | "ghostFocusShadow"
-    | "starIconActiveColor"
     | "savedIconActiveColor"
   >;
   interactions: BlogArticleInteractions;

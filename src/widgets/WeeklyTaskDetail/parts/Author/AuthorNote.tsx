@@ -1,11 +1,11 @@
 import React from 'react';
 import { HStack, Text, Avatar, Box, Link as ChakraLink, Icon, Tooltip } from '@chakra-ui/react';
-import { StarIcon } from '@chakra-ui/icons';
-import { FiMessageCircle, FiStar, FiUserCheck } from 'react-icons/fi';
+import { FiMessageCircle, FiUserCheck } from 'react-icons/fi';
 import { useAuthorColors } from '../../colors/useAuthorColors';
 import { AuthorNoteProps } from './types';
 import { useAuthorNoteData } from './hooks/useAuthorNoteData';
 import { useAuthorNoteSupport } from './hooks/useAuthorNoteSupport';
+import { StarRatingIcon } from 'shared/ui/StarRatingIcon';
 
 const AuthorNote: React.FC<AuthorNoteProps> = ({
   name,
@@ -81,11 +81,13 @@ const AuthorNote: React.FC<AuthorNoteProps> = ({
             <>
               <HStack spacing={1} flexShrink={0}>
                 <Box as="span">{displayStars}</Box>
-                {isStarred ? (
-                  <StarIcon boxSize={3} color={starActive} flexShrink={0} />
-                ) : (
-                  <Icon as={FiStar} boxSize={3.5} color={starInactive} flexShrink={0} />
-                )}
+                <StarRatingIcon
+                  isActive={isStarred}
+                  activeBoxSize={3}
+                  inactiveBoxSize={3.5}
+                  activeColor={starActive}
+                  inactiveColor={starInactive}
+                />
               </HStack>
               <Tooltip
                 label={tooltipLabel}

@@ -9,8 +9,8 @@ export const useAuthorColors = () => {
     noteBg: useColorModeValue('transparent','whiteAlpha.100'),
     noteBorder: theme.borderColor,
     noteColor: useColorModeValue('gray.800','gray.100'),
-    starInactive: useColorModeValue('gray.400', 'gray.500'),
-    starActive: 'yellow.400',
+    starInactive: useColorModeValue('gray.500', 'gray.500'),
+    starActive: useColorModeValue('yellow.500', 'yellow.300'),
   };
 };
 

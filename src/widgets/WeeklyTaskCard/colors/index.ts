@@ -16,8 +16,6 @@ export const useWeeklyTaskCardColors = () => {
     taskCardShadow,
     taskCardShadowHover,
     solvedIconColor: useColorModeValue('green.600', 'green.300'),
-    starActiveColor: useColorModeValue('yellow.500', 'yellow.300'),
-    starInactiveColor: useColorModeValue('gray.500', 'gray.500'),
   };
 };
 

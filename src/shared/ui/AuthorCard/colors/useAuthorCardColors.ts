@@ -18,8 +18,6 @@ export const useAuthorCardColors = (isStarred: boolean) => {
 
   const bgBlock = useColorModeValue("transparent", "whiteAlpha.100");
 
-  const starMetaColor = useColorModeValue(isStarred ? "yellow.400" : "gray.400", isStarred ? "yellow.300" : "gray.500");
-
   return {
     badgeBg,
     badgeBorder,
@@ -28,7 +26,6 @@ export const useAuthorCardColors = (isStarred: boolean) => {
     activeBg,
     tooltipBg,
     tooltipTextColor,
-    starMetaColor,
     bgBlock,
   };
 };

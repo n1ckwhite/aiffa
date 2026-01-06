@@ -17,7 +17,6 @@ export const useBlogArticlePageClientColors = (): BlogArticlePageClientColors =>
     "0 0 0 3px rgba(59,130,246,0.35)",
     "0 0 0 3px rgba(96,165,250,0.35)",
   );
-  const starIconActiveColor = useColorModeValue("yellow.500", "yellow.300");
   const savedIconActiveColor = useColorModeValue("blue.600", "blue.300");
 
   const mdTopBorderColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
@@ -32,7 +31,6 @@ export const useBlogArticlePageClientColors = (): BlogArticlePageClientColors =>
     ghostHoverBg,
     ghostActiveBg,
     ghostFocusShadow,
-    starIconActiveColor,
     savedIconActiveColor,
     mdTopBorderColor,
   };

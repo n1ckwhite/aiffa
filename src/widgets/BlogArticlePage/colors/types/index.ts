@@ -9,7 +9,6 @@ export type BlogArticlePageClientColors = {
     ghostHoverBg: string;
     ghostActiveBg: string;
     ghostFocusShadow: string;
-    starIconActiveColor: string;
     savedIconActiveColor: string;
   
     mdTopBorderColor: string;

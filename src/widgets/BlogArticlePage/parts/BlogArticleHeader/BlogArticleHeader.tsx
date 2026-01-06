@@ -44,7 +44,6 @@ export const BlogArticleHeader: React.FC<BlogArticleHeaderProps> = ({
             ghostHoverBg: colors.ghostHoverBg,
             ghostActiveBg: colors.ghostActiveBg,
             ghostFocusShadow: colors.ghostFocusShadow,
-            starIconActiveColor: colors.starIconActiveColor,
             savedIconActiveColor: colors.savedIconActiveColor,
           }}
           interactions={interactions}

@@ -2,9 +2,8 @@
 
 import React from 'react';
 import { Box, Icon } from '@chakra-ui/react';
-import { ChevronRightIcon, CheckIcon, StarIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon, CheckIcon } from '@chakra-ui/icons';
 import { FiEye, FiMessageCircle } from 'react-icons/fi';
-import { FiStar } from 'react-icons/fi';
 import type { ItemCardProps } from './types';
 import { IndexChip } from '../../../../../LessonCard/parts/IndexChip';
 import { TasksBadge } from '../../../../../LessonCard/parts/Badges/TasksBadge';
@@ -14,6 +13,7 @@ import { getItemCardMeta } from './data';
 import { formatCount } from 'shared/functions/formatCount';
 import { buildTopBefore, getLessonDateLabel } from './helpers';
 import { useLocalStorageFlag } from 'shared/hooks/useLocalStorageFlag';
+import { StarRatingIcon } from 'shared/ui/StarRatingIcon';
 
 export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, colors, levelAccent, arrowAnimationCss, done }) => {
   const topBefore = buildTopBefore(levelAccent);
@@ -96,11 +96,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
           <Box display="inline-flex" alignItems="center" gap={3} rowGap={1} flexWrap="wrap" minW={0}>
             <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
               <Box as="span">{formatCount(starsCount)}</Box>
-              {isStarred ? (
-                <StarIcon boxSize={3} color="yellow.400" />
-              ) : (
-                <Icon as={FiStar} boxSize={3.5} color={metaColor} flexShrink={0} />
-              )}
+              <StarRatingIcon isActive={isStarred} activeBoxSize={3} inactiveBoxSize={3.5} />
             </Box>
             <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
               <Box as="span">{formatCount(views)}</Box>

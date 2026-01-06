@@ -1,8 +1,8 @@
 import React from "react";
-import { HStack, Icon, Text, useColorModeValue } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
-import { FiClock, FiEye, FiMessageCircle, FiStar } from "react-icons/fi";
+import { HStack, Icon, Text } from "@chakra-ui/react";
+import { FiClock, FiEye, FiMessageCircle } from "react-icons/fi";
 import { BlogArticleStatsRowProps } from "./types";
+import { StarRatingIcon } from "shared/ui/StarRatingIcon";
 
 export const BlogArticleStatsRow: React.FC<BlogArticleStatsRowProps> = ({
   descColor,
@@ -14,7 +14,6 @@ export const BlogArticleStatsRow: React.FC<BlogArticleStatsRowProps> = ({
   readingTime,
   formatCount,
 }) => {
-  const starActiveColor = useColorModeValue("yellow.500", "yellow.300");
   return (
     <HStack spacing={4} color={descColor} fontSize="sm" mt={4}>
       <HStack spacing={1.5}>
@@ -22,11 +21,7 @@ export const BlogArticleStatsRow: React.FC<BlogArticleStatsRowProps> = ({
         <Text as="span">{formatCount(views)}</Text>
       </HStack>
       <HStack spacing={1.5}>
-        {isStarred ? (
-          <StarIcon boxSize={3} color={starActiveColor} aria-hidden="true" />
-        ) : (
-          <Icon as={FiStar} aria-hidden="true" color={descColor} />
-        )}
+        <StarRatingIcon isActive={!!isStarred} activeBoxSize={3} inactiveBoxSize={3.5} />
         <Text as="span">{formatCount(stars)}</Text>
       </HStack>
       <HStack spacing={1.5}>

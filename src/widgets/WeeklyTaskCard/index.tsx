@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, VStack, Heading, Text, Icon } from '@chakra-ui/react';
-import { StarIcon } from '@chakra-ui/icons';
-import { FiCalendar, FiMessageCircle, FiStar, FiUserCheck } from 'react-icons/fi';
+import { FiCalendar, FiMessageCircle, FiUserCheck } from 'react-icons/fi';
 import { useWeeklyTaskCardColors } from './colors';
 import type { WeeklyTaskCardProps } from './types';
 import { getRing } from './model/ring';
@@ -15,6 +14,7 @@ import { formatCount } from 'shared/functions/formatCount';
 import { formatRuDate } from 'shared/functions/formatRuDate';
 import { AppBoxLink } from 'shared/ui/AppLink';
 import { useLocalStorageFlag } from 'shared/hooks/useLocalStorageFlag';
+import { StarRatingIcon } from 'shared/ui/StarRatingIcon';
 
 const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
   taskId,
@@ -98,11 +98,7 @@ const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
               <Box as="span">
                 {formatCount(effectiveStars)}
               </Box>
-              {isStarred ? (
-                <StarIcon boxSize={3} color={colors.starActiveColor} />
-              ) : (
-                <Icon as={FiStar} boxSize={3.5} color={colors.starInactiveColor} />
-              )}
+              <StarRatingIcon isActive={isStarred} activeBoxSize={3} inactiveBoxSize={3.5} />
             </Box>
             <Box as="span" display="inline-flex" alignItems="center" gap={1}>
               <Box as="span">

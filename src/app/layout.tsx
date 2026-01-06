@@ -7,7 +7,7 @@ import { PROFILE_COOKIE_KEY, DEFAULT_PROFILE } from "@/entities/user/model/const
 import type { UserProfile } from "@/entities/user/model/types";
 import { sanitizeProfileFromUnknown } from "@/entities/user/model/storage";
 import { ViewportHeightFix } from "@/shared/ui/ViewportHeightFix/ViewportHeightFix";
-import { interFont } from "@/shared/fonts/inter";
+import { interFont, interRegularPreloadHref } from "@/shared/fonts/inter";
 import "@/shared/ui/CodeExample/styles/hljs.css";
 
 const SITE_URL =
@@ -74,6 +74,15 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
 
   return (
     <html lang="ru" suppressHydrationWarning>
+      <head>
+        <link
+          rel="preload"
+          as="font"
+          href={interRegularPreloadHref}
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={`${interFont.variable} ${interFont.className}`}>
         <ChakraRootProvider cookies={cookieHeader} initialProfile={initialProfile}>
           <ViewportHeightFix />

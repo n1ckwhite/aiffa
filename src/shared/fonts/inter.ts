@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
+import interRegularWoff2 from "./library/Inter_28pt-Regular.woff2";
 
+export const interRegularPreloadHref = interRegularWoff2;
 
 export const interFont = localFont({
   variable: "--font-inter",

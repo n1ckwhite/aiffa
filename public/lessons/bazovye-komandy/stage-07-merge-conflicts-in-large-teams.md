@@ -99,9 +99,9 @@
 
 ##  Полезные ссылки
 
-- Atlassian — Pull requests: https://www.atlassian.com/git/tutorials/making-a-pull-request
-- Pro Git — Workflows: https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows
-- Conventional Commits: https://www.conventionalcommits.org/
+- [Atlassian — Pull requests](https://www.atlassian.com/git/tutorials/making-a-pull-request)
+- [Pro Git — Workflows](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows)
+- [Conventional Commits](https://www.conventionalcommits.org/)
 
 ---
 

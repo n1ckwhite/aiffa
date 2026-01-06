@@ -79,8 +79,8 @@ git merge --abort
 
 ##  Полезные ссылки
 
-- Git — merge: https://git-scm.com/docs/git-merge
-- Git — revert: https://git-scm.com/docs/git-revert
+- [Git — merge](https://git-scm.com/docs/git-merge)
+- [Git — revert](https://git-scm.com/docs/git-revert)
 
 ---
 

@@ -39,8 +39,8 @@ git commit -m "resolve: merge conflict in path/to/file"  # или git rebase --c
 
 ##  Полезные ссылки
 
-- Git — merge conflicts: https://git-scm.com/docs/git-merge#_how_conflicts_are_presented
-- Pro Git — Basic Branching: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+- [Git — merge conflicts](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented)
+- [Pro Git — Basic Branching](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 
 ---
 

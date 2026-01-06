@@ -149,8 +149,8 @@ git commit -m "feat: add user authentication
 
 ##  Полезные ссылки
 
-- Руководство по git flow: https://habr.com/ru/articles/106912/
-- Про код‑ревью: https://habr.com/ru/companies/yandex_praktikum/articles/728820/
+- [Руководство по git flow](https://habr.com/ru/articles/106912/)
+- [Про код‑ревью](https://habr.com/ru/companies/yandex_praktikum/articles/728820/)
 
 ---
 

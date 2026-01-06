@@ -108,14 +108,14 @@ git commit -m "Resolve merge conflicts"
 
 ##  Полезные ссылки
 
-- Git — mergetool: https://git-scm.com/docs/git-mergetool
-- Git — rerere (reuse recorded resolution): https://git-scm.com/docs/git-rerere
-- Atlassian — Merge strategies: https://www.atlassian.com/git/tutorials/using-branches/merge-strategy
-- VS Code — Resolve merge conflicts: https://code.visualstudio.com/docs/sourcecontrol/overview#_merge-conflicts
-- ТОП‑7 лучших курсов по Git: https://tutortop.ru/courses_selection/rabota-s-git/
-- ТОП‑24: Курсы Git [Обзор 2025] + Бесплатные: https://dtf.ru/eddu/3338265-top-24-kursy-git-obzor-2025-besplatnye
-- 7 достойных курсов по изучению Git и GitHub: https://habr.com/ru/articles/510126/
-- Дайджест: 300 ссылок на обучающие ресурсы: https://proglib.io/p/300-programming-urls
+- [Git — mergetool](https://git-scm.com/docs/git-mergetool)
+- [Git — rerere (reuse recorded resolution)](https://git-scm.com/docs/git-rerere)
+- [Atlassian — Merge strategies](https://www.atlassian.com/git/tutorials/using-branches/merge-strategy)
+- [VS Code — Resolve merge conflicts](https://code.visualstudio.com/docs/sourcecontrol/overview#_merge-conflicts)
+- [ТОП‑7 лучших курсов по Git](https://tutortop.ru/courses_selection/rabota-s-git/)
+- [ТОП‑24: Курсы Git [Обзор 2025] + Бесплатные](https://dtf.ru/eddu/3338265-top-24-kursy-git-obzor-2025-besplatnye)
+- [7 достойных курсов по изучению Git и GitHub](https://habr.com/ru/articles/510126/)
+- [Дайджест: 300 ссылок на обучающие ресурсы](https://proglib.io/p/300-programming-urls)
 
 ---
 

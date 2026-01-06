@@ -92,8 +92,8 @@ function greeting() {
 
 ##  Полезные ссылки
 
-- Git — resolve conflicts: https://git-scm.com/docs/git-merge#_how_conflicts_are_presented
-- VS Code — Resolve conflicts: https://code.visualstudio.com/docs/sourcecontrol/overview#_merge-conflicts
+- [Git — resolve conflicts](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented)
+- [VS Code — Resolve conflicts](https://code.visualstudio.com/docs/sourcecontrol/overview#_merge-conflicts)
 
 ---
 

@@ -88,8 +88,8 @@
 
 ##  Полезные ссылки
 
-- ADR: https://habr.com/ru/companies/oleg-bunin/articles/422965/
-- Руководство по ведению технической документации: https://habr.com/ru/companies/otus/articles/659763/
+- [ADR](https://habr.com/ru/companies/oleg-bunin/articles/422965/)
+- [Руководство по ведению технической документации](https://habr.com/ru/companies/otus/articles/659763/)
 
 ---
 

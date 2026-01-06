@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Components } from 'react-markdown';
-import { Box, Divider, Heading, HStack, Icon, Image, Link as ChakraLink, ListItem, OrderedList, Text, UnorderedList, useColorModeValue } from '@chakra-ui/react';
+import { Box, Divider, Heading, HStack, Icon, Image, Link as ChakraLink, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/react';
 import { ChevronDownIcon, InfoOutlineIcon, LinkIcon, StarIcon, WarningIcon } from '@chakra-ui/icons';
 import { Link } from '@chakra-ui/react';
 import { CodeBlock } from '../ui/parts/CodeBlock';
@@ -22,6 +22,19 @@ export const buildComponents = (colors: any) => {
     anchorIdle,
     anchorHover,
   } = colors as any;
+
+  const linkBaseProps = {
+    color: linkColor,
+    fontWeight: 'semibold',
+    textDecoration: 'underline',
+    textDecorationColor: 'transparent',
+    textUnderlineOffset: '2px',
+    textDecorationThickness: '1px',
+    transition: 'color 160ms ease, text-decoration-color 160ms ease',
+    _hover: { color: linkColor, textDecorationColor: underlineColor },
+    _active: { textDecorationColor: underlineColor },
+    _focusVisible: { boxShadow: '0 0 0 3px rgba(66,153,225,0.6)', borderRadius: '2px' },
+  } as const;
 
   const headingSx = {
     'a.md-anchor': {
@@ -76,31 +89,8 @@ export const buildComponents = (colors: any) => {
       }
       return (
         <Link
-          color={linkColor}
-          textDecoration="none"
-          position="relative"
-          transition="color 160ms ease"
-          _hover={{ textDecoration: 'none' }}
           isExternal
-          sx={{
-            '&::after': {
-              content: '""',
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              bottom: '-1px',
-              height: '1px',
-              backgroundColor: underlineColor,
-              width: '0%',
-              transition: 'width 180ms ease',
-              borderRadius: '1px',
-            },
-            '&:hover::after': {
-              width: '100%',
-            },
-          }}
-          fontWeight="semibold"
-          _focusVisible={{ boxShadow: '0 0 0 3px rgba(66,153,225,0.6)', borderRadius: '2px' }}
+          {...linkBaseProps}
           {...(p as any)}
         />
       );
@@ -124,7 +114,7 @@ export const buildComponents = (colors: any) => {
           const href = String(last.properties.href);
           return (
             <ListItem my={2}>
-              <ChakraLink href={href} color={linkColor} isExternal>
+              <ChakraLink href={href} isExternal {...linkBaseProps}>
                 {label}
               </ChakraLink>
             </ListItem>

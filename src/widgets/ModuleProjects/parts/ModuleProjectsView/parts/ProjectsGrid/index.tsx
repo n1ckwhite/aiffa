@@ -54,7 +54,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
                 <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} />
               </HStack>
             </HStack>
-            <Box mt="auto" pt={1} display="flex" flexDirection="column" gap={1} minW={0}>
+            <Box mt="auto" pt={1} display="flex" flexDirection="column" gap={2} minW={0}>
               <HStack spacing={2} flexWrap="wrap" minW={0}>
                 {Array.isArray(p.authors) && p.authors.length > 0 && p.authors[0] && (
                   <Box
@@ -101,10 +101,6 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ modId, projects, col
                     Автор
                   </Box>
                 )}
-                <Box as="span" fontSize="xs" color={colors.accent} bg={colors.chipBg} borderWidth="1px" borderColor={colors.chipBorder} px={2.5} py={1} borderRadius="full" display="inline-flex" alignItems="center" gap={1} whiteSpace="nowrap">
-                  Открыть проект
-                  <Box as={ChevronRightIcon} boxSize={3.5} ml={0.5} animation={`${arrowLoop} 900ms ease-in-out infinite`} />
-                </Box>
               </HStack>
               {dateLabel ? (
                 <Box as="span" display="inline-flex" alignItems="center" minW={0}>

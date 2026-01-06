@@ -17,10 +17,9 @@ const ModuleProjectsPageClient = ({ moduleId, initialMod, initialPage }: ModuleP
   const { mod: loadedMod, loading } = useModuleProjectsLoad(moduleId, shouldLoadOnClient);
   const mod = initialMod ?? loadedMod;
 
-  if ((shouldLoadOnClient && loading) || !mod) {
-    return <ModuleProjectsSkeleton />;
+  if (!mod || !mod) {
+    return null;
   }
-
   return (
     <ModuleProjectsView
       mod={mod}

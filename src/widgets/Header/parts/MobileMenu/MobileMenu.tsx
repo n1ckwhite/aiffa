@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Collapse, VStack, useColorMode } from '@chakra-ui/react';
+import { Box, Collapse, VStack, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { moduleLevelById } from '../../model/levels';
 import { getChipColors } from '../../lib/chips';
 import type { MobileMenuProps } from './types';
@@ -17,10 +17,14 @@ const MobileMenu: React.FC<MobileMenuProps> = (props) => {
   } = props;
 
   const { colorMode } = useColorMode();
-  const { resultActiveBg, resultHoverBg, donateBg, donateHoverBg, scrollbarStyles } = useMobileMenuColors();
+  const { resultActiveBg, resultHoverBg, donateBg, donateHoverBg, scrollbarStyles, mobileMenuShadow } = useMobileMenuColors();
 
   return (
-    <Collapse in={isOpen} animateOpacity style={{ overflow: 'hidden' }}>
+    <Collapse
+      in={isOpen}
+      animateOpacity
+      style={{ overflow: 'visible' }}
+    >
       <Box
         display={{ base: 'block', lg: 'none' }}
         bg={bg}
@@ -31,6 +35,7 @@ const MobileMenu: React.FC<MobileMenuProps> = (props) => {
         overflowY="auto"
         className="mobile-menu"
         sx={scrollbarStyles}
+        boxShadow={mobileMenuShadow}
       >
         <VStack gap={4} align="stretch">
           <MobileSearch

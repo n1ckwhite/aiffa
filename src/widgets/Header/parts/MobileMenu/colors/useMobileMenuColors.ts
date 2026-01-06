@@ -7,6 +7,10 @@ export const useMobileMenuColors = () => {
   const donateHoverBg = useColorModeValue('blue.800', 'blue.500');
   const scrollThumb = useColorModeValue('rgba(148,163,184,0.7)', 'rgba(148,163,184,0.7)');
   const scrollThumbHover = useColorModeValue('rgba(148,163,184,0.95)', 'rgba(148,163,184,1)');
+  const mobileMenuShadow = useColorModeValue(
+    '0 14px 28px rgba(15, 23, 42, 0.20)',
+    '0 18px 44px rgba(0, 0, 0, 0.45)',
+  );
 
   const scrollbarStyles = {
     scrollbarWidth: 'thin' as const,
@@ -26,7 +30,7 @@ export const useMobileMenuColors = () => {
     },
   };
 
-  return { resultActiveBg, resultHoverBg, donateBg, donateHoverBg, scrollbarStyles };
+  return { resultActiveBg, resultHoverBg, donateBg, donateHoverBg, scrollbarStyles, mobileMenuShadow };
 };
 
 

@@ -9,8 +9,8 @@ export const MobileSearch: React.FC<MobileSearchProps> = (props) => {
   const { titleColor } = useAppColors();
   const {
     isOpen, searchQuery, setSearchQuery, searchOpen, setSearchOpen, onInputKeyDown,
-    searchBg, searchHoverBg, searchFocusBg, searchPlaceholder, searchIconColor, searchIconHoverColor, searchIconHoverBg,
-    ringShadow, mobileDropdownTop, dropdownBg, dropdownBorder, dropdownShadow, scrollThumb, scrollThumbHover,
+    searchBg, searchHoverBg, searchPlaceholder, searchIconColor, searchIconHoverColor, searchIconHoverBg,
+    mobileDropdownTop, dropdownBg, dropdownBorder, dropdownShadow, scrollThumb, scrollThumbHover,
     emptyStateColor, chevronColor, chevronHoverColor, moduleChipOpacity, markBg,
     results, highlightIndex, setHighlightIndex, onResultClick,
     getChipColors, getLevelByModuleId, resultActiveBg, resultHoverBg,
@@ -89,8 +89,7 @@ export const MobileSearch: React.FC<MobileSearchProps> = (props) => {
         {isOpen && searchOpen && searchQuery.trim() && (
           <>
             <Portal>
-              <Box position="fixed" left={0} right={0} bottom={0} top={mobileDropdownTop} zIndex={90000} className="search-overlay" onClick={() => setSearchOpen(false)} />
-              <Box position="fixed" left={{ base: 4, md: 0 }} right={{ base: 4, md: 0 }} top={mobileDropdownTop} bg={dropdownBg} borderWidth="1px" borderColor={dropdownBorder} borderRadius="lg" boxShadow={dropdownShadow} zIndex={200100} overflow="hidden">
+              <Box position="fixed" left={4} right={4} top={mobileDropdownTop} bg={dropdownBg} borderWidth="1px" borderColor={dropdownBorder} borderRadius="lg" boxShadow={dropdownShadow} zIndex={200100} overflow="hidden">
                 <List color={titleColor} role="listbox" maxH={{ base: 'min(64dvh, 520px)', md: 'min(60vh, 520px)' }} overflowY="auto" overflowX="hidden" sx={{ scrollbarWidth: 'thin', scrollbarColor: `${scrollThumb} transparent`, '&::-webkit-scrollbar': { width: '6px', height: '6px' }, '&::-webkit-scrollbar-thumb': { background: scrollThumb, borderRadius: '8px' }, '&::-webkit-scrollbar-thumb:hover': { background: scrollThumbHover }, '&::-webkit-scrollbar-track': { background: 'transparent' }, '@media (orientation: landscape) and (max-width: 900px)': { maxHeight: '48vh' } }}>
                   {results.length === 0 && searchQuery.trim().length >= 2 && (
                     <Box as="li" px={3} py={6} color={emptyStateColor} listStyleType="none">

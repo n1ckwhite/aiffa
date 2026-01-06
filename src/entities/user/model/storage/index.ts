@@ -43,6 +43,8 @@ export const sanitizeProfileFromUnknown = (data: unknown): UserProfile => {
     githubUrl: typeof parsed.githubUrl === 'string' ? parsed.githubUrl : '',
     githubUsername: typeof parsed.githubUsername === 'string' ? parsed.githubUsername : '',
     direction: typeof parsed.direction === "string" ? parsed.direction : "",
+    workplace: typeof parsed.workplace === "string" ? parsed.workplace : "",
+    location: typeof parsed.location === "string" ? parsed.location : "",
     links,
     followersCount: safeFollowers,
     followingCount: safeFollowing,

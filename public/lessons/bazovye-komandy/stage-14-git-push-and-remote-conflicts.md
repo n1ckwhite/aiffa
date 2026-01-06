@@ -86,8 +86,8 @@ git push origin main
 
 ##  Полезные ссылки
 
-- Git — push: https://git-scm.com/docs/git-push
-- О защите веток в GitHub: https://docs.github.com/ru/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches
+- [Git — push](https://git-scm.com/docs/git-push)
+- [О защите веток в GitHub](https://docs.github.com/ru/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches)
 
 ---
 

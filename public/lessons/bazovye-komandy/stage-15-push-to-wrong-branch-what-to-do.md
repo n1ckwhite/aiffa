@@ -102,9 +102,9 @@ git push origin <имя-ветки>
 
 ##  Полезные ссылки
 
-- Git — reset: https://git-scm.com/docs/git-reset
-- Git — revert: https://git-scm.com/docs/git-revert
-- О защищённых ветках в GitHub: https://docs.github.com/ru/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches
+- [Git — reset](https://git-scm.com/docs/git-reset)
+- [Git — revert](https://git-scm.com/docs/git-revert)
+- [О защищённых ветках в GitHub](https://docs.github.com/ru/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches)
 
 ---
 

@@ -12,4 +12,12 @@ export type StatTileModel = {
   emphasis?: boolean;
 };
 
+export type ProfileEditInitial = {
+  name: string;
+  bio: string;
+  workplace: string;
+  location: string;
+  links: [string, string, string, string];
+};
+
 

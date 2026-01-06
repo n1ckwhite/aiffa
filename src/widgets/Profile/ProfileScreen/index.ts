@@ -1,3 +1,1 @@
-export { default } from './ui/ProfileScreen';
-
-
+export { default } from "./ui/ProfileScreen";

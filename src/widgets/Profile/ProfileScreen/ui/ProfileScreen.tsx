@@ -1,81 +1,38 @@
 import React from "react";
 import {
   Box,
-  Button,
   Grid,
   GridItem,
   HStack,
   Icon,
-  Input,
-  Link as ChakraLink,
-  SimpleGrid,
-  Text,
-  Textarea,
-  Tooltip,
+  SimpleGrid, 
+  Text, 
   VStack,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { useUserProfile, type ProfileLink } from "entities/user";
 import { useAchievementsData } from "../hooks/useAchievementsData";
-import PillBadge from "shared/ui/PillBadge";
-import { formatCount } from "shared/functions/formatCount";
-import { AppButtonLink, AppLink } from "shared/ui/AppLink";
-import {
-  FiAward,
-  FiBarChart2,
-  FiBriefcase,
-  FiBookOpen,
-  FiCheckCircle,
-  FiCode,
-  FiEdit3,
-  FiFileText,
-  FiLink,
-  FiMail,
-  FiMapPin,
-  FiPackage,
-  FiStar,
-  FiTarget,
-  FiUsers,
-  FiVideo,
-} from "react-icons/fi";
-import {
-  FaBookOpen,
-  FaCalendarAlt,
-  FaClipboardList,
-  FaCode,
-  FaComments,
-  FaFeatherAlt,
-  FaInfinity,
-  FaRegCalendarAlt,
-} from "react-icons/fa";
-
-const PLACEHOLDER_AVATAR_URL = "https://avatars.githubusercontent.com/u/100159537?v=4";
-type StatTileModel = {
-  label: string;
-  value: React.ReactNode;
-  hint?: string;
-  icon?: React.ComponentType<any>;
-  tooltip?: string;
-  accentColor?: string;
-  emphasis?: boolean;
-};
-
-type StatsRange = "week" | "month" | "all";
+import { ProfileSidebar, RangeButtons, SectionCard, StatTile, HelpList, QuickActionsGrid } from "./parts";
+import { useProfileEdit } from "../model/hooks";
+import type { StatTileModel, StatsRange } from "../model/types";
+import { contributionStatsByRange, DEFAULT_PROFILE_EMAIL, PLACEHOLDER_AVATAR_URL, progressStatsByRange } from "../model/constants";
+import { useProfileScreenUiColors } from "../colors/useProfileScreenUiColors";
+import { FiAward, FiBarChart2, FiUsers } from "react-icons/fi";
+import { buildContributionTiles, buildProgressTiles, CONTRIBUTION_HINT, contributionHelpList, progressHelpList } from "./data";
 
 const ProfileScreen: React.FC = () => {
   const { profile, updateProfile } = useUserProfile();
   const profileAny = profile as any;
-  const name = typeof profile?.name === "string" ? profile.name : "";
-  const bio = typeof profile?.bio === "string" ? profile.bio : "";
-  const avatarUrl =
-    typeof profileAny?.avatarUrl === "string" && profileAny.avatarUrl.trim()
-      ? profileAny.avatarUrl.trim()
-      : PLACEHOLDER_AVATAR_URL;
+  let name = "";
+  if (typeof (profile as any)?.name === "string") name = (profile as any).name;
 
-  const avatarProxyUrl = (rawUrl: string, size: number) => {
-    const encoded = encodeURIComponent(rawUrl);
-    return `/api/avatar?url=${encoded}&s=${size}`;
-  };
+  let bio = "";
+  if (typeof (profile as any)?.bio === "string") bio = (profile as any).bio;
+
+  let avatarUrl = PLACEHOLDER_AVATAR_URL;
+  if (typeof profileAny?.avatarUrl === "string") {
+    const trimmed = profileAny.avatarUrl.trim();
+    if (trimmed) avatarUrl = trimmed;
+  }
 
   const { items } = useAchievementsData(profile as any);
 
@@ -84,633 +41,86 @@ const ProfileScreen: React.FC = () => {
   const [statsRange, setStatsRange] = React.useState<StatsRange>("week");
   const [contributionRange, setContributionRange] = React.useState<StatsRange>("week");
 
-  const rangeLabels: Record<StatsRange, string> = {
-    week: "Неделя",
-    month: "Месяц",
-    all: "Всё время",
-  };
+  const currentStats = progressStatsByRange[statsRange];
+  const currentContribution = contributionStatsByRange[contributionRange];
 
-  const statsByRange: Record<
-    StatsRange,
-    {
-      completedLessons: number;
-      solvedThisWeek: number;
-      solvedProjectsCount: number;
-      readArticlesCount: number;
-      hackathonsParticipationCount: number;
-      sessionsParticipationCount: number;
-      motivationalTop: string;
-      motivationalBottom: string;
-    }
-  > = {
-    week: {
-      completedLessons: 8,
-      solvedThisWeek: 3,
-      solvedProjectsCount: 0,
-      readArticlesCount: 0,
-      hackathonsParticipationCount: 0,
-      sessionsParticipationCount: 0,
-      motivationalTop: "Ты активнее 62% пользователей этой недели",
-      motivationalBottom: "Ещё 2 задачи — и откроется новое достижение",
-    },
-    month: {
-      completedLessons: 18,
-      solvedThisWeek: 12,
-      solvedProjectsCount: 1,
-      readArticlesCount: 6,
-      hackathonsParticipationCount: 1,
-      sessionsParticipationCount: 2,
-      motivationalTop: "Ты активнее 54% пользователей этого месяца",
-      motivationalBottom: "Ещё 3 активности — и откроется новое достижение",
-    },
-    all: {
-      completedLessons: 38,
-      solvedThisWeek: 29,
-      solvedProjectsCount: 4,
-      readArticlesCount: 21,
-      hackathonsParticipationCount: 3,
-      sessionsParticipationCount: 7,
-      motivationalTop: "Ты стабильно растёшь — продолжай в том же духе",
-      motivationalBottom: "Выбери цель ниже — и получишь следующее достижение быстрее",
-    },
-  };
+  const progressTiles: StatTileModel[] = buildProgressTiles(currentStats);
+  const contributionTiles: StatTileModel[] = buildContributionTiles(currentContribution);
 
-  const contributionByRange: Record<
-    StatsRange,
-    {
-      contributedMaterialsCount: number;
-      contributedProjectsCount: number;
-      totalSolvedEver: number;
-      authoredArticlesCount: number;
-    }
-  > = {
-    week: { contributedMaterialsCount: 5, contributedProjectsCount: 0, totalSolvedEver: 3, authoredArticlesCount: 0 },
-    month: { contributedMaterialsCount: 7, contributedProjectsCount: 1, totalSolvedEver: 12, authoredArticlesCount: 1 },
-    all: { contributedMaterialsCount: 14, contributedProjectsCount: 2, totalSolvedEver: 29, authoredArticlesCount: 4 },
-  };
+  const {
+    muted,
+    calloutBorder,
+    calloutBg,
+    calloutIconBg,
+    calloutIconColor,
+    calloutTitleColor,
+    calloutBodyColor,
+  } = useProfileScreenUiColors();
 
-  const currentStats = statsByRange[statsRange];
-  const currentContribution = contributionByRange[contributionRange];
+  let xp = 0;
+  if (typeof profileAny.xp === "number" && Number.isFinite(profileAny.xp) && profileAny.xp >= 0) {
+    xp = Math.trunc(profileAny.xp);
+  }
 
-  const completedLessons = currentStats.completedLessons;
-  const solvedThisWeek = currentStats.solvedThisWeek;
-  const solvedProjectsCount = currentStats.solvedProjectsCount;
-  const readArticlesCount = currentStats.readArticlesCount;
-  const hackathonsParticipationCount = currentStats.hackathonsParticipationCount;
-  const sessionsParticipationCount = currentStats.sessionsParticipationCount;
-
-  const contributedMaterialsCount = currentContribution.contributedMaterialsCount;
-  const contributedProjectsCount = currentContribution.contributedProjectsCount;
-  const totalSolvedEver = currentContribution.totalSolvedEver;
-  const authoredArticlesCount = currentContribution.authoredArticlesCount;
-  const contributionHint = "По авторству в базе AIFFA";
-
-  const progressTiles: StatTileModel[] = [
-    {
-      label: "Пройдено материалов",
-      value: completedLessons,
-      icon: FiBookOpen,
-      accentColor: "blue.400",
-      tooltip: "Сколько материалов вы уже изучили на платформе.",
-    },
-    {
-      label: "Задач недели решено",
-      value: solvedThisWeek,
-      icon: FiCheckCircle,
-      accentColor: "green.400",
-      tooltip: "Сколько задач недели вы решили всего",
-      emphasis: true,
-    },
-    {
-      label: "Пройдено проектов",
-      value: solvedProjectsCount,
-      icon: FiCode,
-      accentColor: "purple.400",
-      tooltip: "Сколько проектов вы завершили на платформе.",
-    },
-    {
-      label: "Прочтено статей",
-      value: readArticlesCount,
-      icon: FiFileText,
-      accentColor: "orange.400",
-      tooltip: "Сколько статей из блога вы прочитали (по вашему прогрессу).",
-    },
-    {
-      label: "Участие в хакатонах",
-      value: hackathonsParticipationCount,
-      icon: FiAward,
-      accentColor: "pink.400",
-      tooltip: "Ваше участие в хакатонах",
-    },
-    {
-      label: "Участие на сессиях",
-      value: sessionsParticipationCount,
-      icon: FiVideo,
-      accentColor: "cyan.400",
-      tooltip: "Сколько сессий вы посетили (созвоны/разборы/встречи).",
-    },
-  ];
-
-  const contributionTiles: StatTileModel[] = [
-    {
-      label: "Вложено материалов",
-      value: contributedMaterialsCount,
-      icon: FiBookOpen,
-      accentColor: "blue.400",
-      tooltip: "Сколько материалов вы вложили в базу AIFFA (по авторству).",
-    },
-    {
-      label: "Вложено проектов",
-      value: contributedProjectsCount,
-      icon: FiPackage,
-      accentColor: "purple.400",
-      tooltip: "Сколько проектов вы добавили или улучшили (по авторству).",
-    },
-    {
-      label: "Вложено задач недели",
-      value: totalSolvedEver,
-      icon: FiTarget,
-      accentColor: "green.400",
-      tooltip: "Сколько задач недели вы выложили (по авторству)",
-    },
-    {
-      label: "Написано статей",
-      value: authoredArticlesCount,
-      icon: FiEdit3,
-      accentColor: "orange.400",
-      tooltip: "Сколько статей вы опубликовали в блоге AIFFA.",
-    },
-  ];
-
-  const cardBg = useColorModeValue("white", "gray.900");
-  const cardBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
-  const muted = useColorModeValue("gray.600", "whiteAlpha.700");
-  const formBorder = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
-  const formFocusBorder = useColorModeValue("blue.500", "blue.300");
-  const formBg = useColorModeValue("white", "blackAlpha.200");
-  const headerNavIconColor = useColorModeValue("blue.700", "whiteAlpha.900");
-  // Colors for left-side icons (must NOT call hooks inside useMemo).
-  const peopleIconColor = useColorModeValue("blue.600", "blue.300");
-  const xpIconColor = useColorModeValue("orange.600", "orange.300");
-  const workIconColor = useColorModeValue("purple.600", "purple.300");
-  const locationIconColor = useColorModeValue("green.600", "green.300");
-  const mailIconColor = useColorModeValue("pink.600", "pink.300");
-  const linkIconColor = useColorModeValue("cyan.600", "cyan.300");
-
-  const achievementsCardBorder = useColorModeValue("orange.200", "whiteAlpha.200");
-  const achievementsIconBg = useColorModeValue("orange.100", "whiteAlpha.100");
-  const achievementsIconColor = useColorModeValue("orange.700", "orange.200");
-  const achievementsCountBg = useColorModeValue("white", "whiteAlpha.50");
-
-  const leftIconColors = {
-    people: peopleIconColor,
-    xp: xpIconColor,
-    work: workIconColor,
-    location: locationIconColor,
-    mail: mailIconColor,
-    link: linkIconColor,
-  };
-
-  // Hoist all theme hooks out of JSX branches to keep hooks order stable.
-  const textStrong = useColorModeValue("gray.800", "whiteAlpha.900");
-  const xpNumberColor = useColorModeValue("gray.900", "whiteAlpha.900");
-  const linkTextColor = useColorModeValue("blue.700", "blue.300");
-  const sectionLabelColor = useColorModeValue("gray.700", "whiteAlpha.700");
-
-  const primaryBtnBg = useColorModeValue("blue.600", "blue.600");
-  const primaryBtnHoverBg = useColorModeValue("blue.700", "blue.700");
-  const primaryBtnActiveBg = useColorModeValue("blue.800", "blue.800");
-
-  const calloutBorder = useColorModeValue("orange.200", "whiteAlpha.200");
-  const calloutBg = useColorModeValue("orange.50", "whiteAlpha.50");
-  const calloutIconBg = useColorModeValue("orange.100", "whiteAlpha.100");
-  const calloutIconColor = useColorModeValue("orange.700", "orange.200");
-  const calloutTitleColor = useColorModeValue("orange.900", "whiteAlpha.900");
-  const calloutBodyColor = useColorModeValue("orange.800", muted);
-
-  const qaMaterialsBg = useColorModeValue("blue.700", "blue.700");
-  const qaMaterialsBorder = useColorModeValue("blue.600", "blue.600");
-  const qaMaterialsHoverBg = useColorModeValue("blue.700", "blue.800");
-  const qaMaterialsActiveBg = useColorModeValue("blue.800", "blue.900");
-
-  const qaWeeklyBg = useColorModeValue("green.700", "green.700");
-  const qaWeeklyBorder = useColorModeValue("green.600", "green.600");
-  const qaWeeklyHoverBg = useColorModeValue("green.700", "green.800");
-  const qaWeeklyActiveBg = useColorModeValue("green.800", "green.900");
-
-  const qaBlogBg = useColorModeValue("purple.700", "purple.700");
-  const qaBlogBorder = useColorModeValue("purple.600", "purple.600");
-  const qaBlogHoverBg = useColorModeValue("purple.700", "purple.800");
-  const qaBlogActiveBg = useColorModeValue("purple.800", "purple.900");
-
-  const qaWriteBg = useColorModeValue("orange.600", "orange.600");
-  const qaWriteBorder = useColorModeValue("orange.500", "orange.500");
-  const qaWriteHoverBg = useColorModeValue("orange.600", "orange.700");
-  const qaWriteActiveBg = useColorModeValue("orange.700", "orange.800");
-
-  const qaHackathonsBg = useColorModeValue("pink.600", "pink.600");
-  const qaHackathonsBorder = useColorModeValue("pink.500", "pink.500");
-  const qaHackathonsHoverBg = useColorModeValue("pink.600", "pink.700");
-  const qaHackathonsActiveBg = useColorModeValue("pink.700", "pink.800");
-
-  const qaSessionsBg = useColorModeValue("cyan.800", "cyan.800");
-  const qaSessionsBorder = useColorModeValue("cyan.600", "cyan.600");
-  const qaSessionsHoverBg = useColorModeValue("cyan.700", "cyan.800");
-  const qaSessionsActiveBg = useColorModeValue("cyan.800", "cyan.900");
-
-  const xp =
-    typeof profileAny.xp === "number" && Number.isFinite(profileAny.xp) && profileAny.xp >= 0
-      ? Math.trunc(profileAny.xp)
-      : 0;
-
-  const rawLinks = Array.isArray(profileAny.links) ? (profileAny.links as any[]) : [];
+  let rawLinks: any[] = [];
+  if (Array.isArray(profileAny.links)) rawLinks = profileAny.links as any[];
   const profileLinks: ProfileLink[] = rawLinks
     .filter(Boolean)
-    .map((l: any) => ({
-      id: String(l?.id ?? ""),
-      kind:
-        l?.kind === "email" || l?.kind === "website" || l?.kind === "custom"
-          ? l.kind
-          : "custom",
-      label: typeof l?.label === "string" ? l.label : "",
-      value: typeof l?.value === "string" ? l.value : "",
-    }))
+    .map((l: any) => {
+      const id = String(l?.id ?? "");
+      let kind = "custom";
+      if (l?.kind === "email" || l?.kind === "website" || l?.kind === "custom") kind = l.kind;
+
+      let label = "";
+      if (typeof l?.label === "string") label = l.label;
+
+      let value = "";
+      if (typeof l?.value === "string") value = l.value;
+
+      return { id, kind, label, value } as ProfileLink;
+    })
     .filter((l: any) => !!l.id && !!String(l.value || "").trim()) as ProfileLink[];
 
   const displayLinks: ProfileLink[] = profileLinks;
 
-  const profileBadge =
-    displayLinks.length > 0
-      ? ({ label: "Контрибьютор", colorScheme: "purple" as const } as const)
-      : ({ label: "Автор AIFFA", colorScheme: "blue" as const } as const);
-
-  const [isEditing, setIsEditing] = React.useState<boolean>(false);
-  const [editSessionId, setEditSessionId] = React.useState<number>(0);
-  const [editInitial, setEditInitial] = React.useState<{
-    name: string;
-    bio: string;
-    workplace: string;
-    location: string;
-    links: [string, string, string, string];
-  } | null>(null);
-
-  /**
-   * Normalizes user-entered custom links on submit.
-   * If a user enters `example.com` or `123`, we persist it as `https://example.com` / `https://123`.
-   * If a scheme already exists (e.g. `https://`, `http://`, `mailto:`), we keep it as-is.
-   */
-  const normalizeCustomLinkValue = (raw: string): string => {
-    const trimmed = String(raw ?? "").trim();
-    if (!trimmed) return "";
-
-    // Already has a scheme: https://, http://, mailto:, tg:, etc.
-    if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return trimmed;
-
-    // Scheme-relative URLs like //example.com
-    if (trimmed.startsWith("//")) return `https:${trimmed}`;
-
-    return `https://${trimmed}`;
-  };
-
-  const [saveState, saveAction, isSaving] = React.useActionState(
-    async (_prev: { ok: boolean; error?: string } | null, formData: FormData) => {
-      try {
-        const nextName = String(formData.get("profileName") ?? "").trim();
-        const nextBio = String(formData.get("profileBio") ?? "").trim();
-        const nextWorkplace = String(formData.get("profileWorkplace") ?? "").trim();
-        const nextLocation = String(formData.get("profileLocation") ?? "").trim();
-        const link1 = normalizeCustomLinkValue(String(formData.get("profileLink1") ?? ""));
-        const link2 = normalizeCustomLinkValue(String(formData.get("profileLink2") ?? ""));
-        const link3 = normalizeCustomLinkValue(String(formData.get("profileLink3") ?? ""));
-        const link4 = normalizeCustomLinkValue(String(formData.get("profileLink4") ?? ""));
-
-        const nextLinks: ProfileLink[] = [];
-        const trimmedEmail = String(emailValue || "").trim();
-        if (trimmedEmail) nextLinks.push({ id: "link-email", kind: "email", label: "Email", value: trimmedEmail });
-
-        [link1, link2, link3, link4].forEach((v, idx) => {
-          if (!v) return;
-          nextLinks.push({ id: `link-${idx + 1}`, kind: "custom", label: "Ссылка", value: v });
-        });
-
-        updateProfile({
-          name: nextName || "Пользователь",
-          bio: nextBio,
-          workplace: nextWorkplace,
-          location: nextLocation,
-          links: nextLinks,
-        });
-
-        setIsEditing(false);
-        return { ok: true };
-      } catch (e: any) {
-        return { ok: false, error: String(e?.message ?? "Не удалось сохранить") };
-      }
-    },
-    null,
-  );
-
-  const handleStartEdit = () => {
-    const nonEmail = displayLinks
-      .filter((l) => String((l as any)?.kind ?? "") !== "email")
-      .map((l) => String((l as any)?.value ?? "").trim())
-      .filter(Boolean);
-
-    setEditSessionId((s) => s + 1);
-    setEditInitial({
-      name: name || "",
-      bio: bio || "",
-      workplace: profile.workplace ?? "",
-      location: profile.location ?? "",
-      links: [nonEmail[0] ?? "", nonEmail[1] ?? "", nonEmail[2] ?? "", nonEmail[3] ?? ""],
-    });
-    setIsEditing(true);
-  };
-
-  const handleCancelEdit = () => setIsEditing(false);
-
-  // Prevent global hotkeys / document keydown handlers from stealing focus while typing.
-  const handleStopHotkeys = (e: React.KeyboardEvent) => {
-    e.stopPropagation();
-  };
-
-  const buildLinkHref = (link: ProfileLink): string => {
-    const kind = String((link as any)?.kind ?? "custom");
-    const rawValue = String((link as any)?.value ?? "").trim();
-    if (!rawValue) return "#";
-
-    if (kind === "email") {
-      const v = rawValue.replace(/^mailto:/i, "");
-      return `mailto:${v}`;
-    }
-    if (/^https?:\/\//i.test(rawValue)) return rawValue;
-    return `https://${rawValue}`;
-  };
-
-  const SectionLabel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <Text
-      fontSize="xs"
-      letterSpacing="0.08em"
-      textTransform="uppercase"
-      fontWeight="bold"
-      color={sectionLabelColor}
-      pt={2}
-    >
-      {children}
-    </Text>
-  );
-
-  const LeftRow: React.FC<{
-    icon: React.ComponentType<any>;
-    iconColor: string;
-    spacing?: number;
-    children: React.ReactNode;
-  }> = ({ icon, iconColor, spacing = 3, children }) => {
-    return (
-      <HStack spacing={spacing} align="center" w="full" minW={0}>
-        <Box
-          aria-hidden="true"
-          w="22px"
-          h="22px"
-          flexShrink={0}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          color={iconColor}
-        >
-          <Icon as={icon} boxSize="18px" />
-        </Box>
-        <Box minW={0} flex={1}>
-          {children}
-        </Box>
-      </HStack>
-    );
-  };
-
-  const workplace = typeof profile.workplace === "string" ? profile.workplace.trim() : "";
-  const locationLabel = typeof profile.location === "string" ? profile.location.trim() : "";
+  let profileBadge: { label: string; colorScheme: string } = { label: "Автор AIFFA", colorScheme: "blue" };
+  if (displayLinks.length > 0) {
+    profileBadge = { label: "Контрибьютор", colorScheme: "purple" };
+  }
 
   const emailValue =
     profileLinks.find((l) => String((l as any)?.kind ?? "") === "email")?.value?.trim?.() ||
-    "bbycinka@yandex.ru";
+    DEFAULT_PROFILE_EMAIL;
 
-  const achievedItems = (Array.isArray(items) ? items : []).filter((i: any) => i?.achieved).slice(0, 6);
+  const {
+    isEditing,
+    editSessionId,
+    editInitial,
+    isSaving,
+    saveState,
+    saveAction,
+    handleStartEdit,
+    handleCancelEdit,
+    handleStopHotkeys,
+  } = useProfileEdit({
+    profile,
+    displayLinks,
+    emailValue,
+    updateProfile,
+  });
 
-  const CompactAchievement: React.FC<{ item: any }> = ({ item }) => {
-    const ring = `conic-gradient(${item.from} 0 50%, ${item.to} 50% 100%)`;
-    const bg = useColorModeValue("white", "gray.900");
-    const label = String(item?.label ?? "Достижение");
-    return (
-      <Tooltip hasArrow openDelay={220} placement="top" label={label}>
-        <Box
-          as="button"
-          type="button"
-          aria-label={label}
-          tabIndex={0}
-          h="44px"
-          w="44px"
-          borderRadius="full"
-          position="relative"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          transition="transform 160ms ease"
-          _hover={{ transform: "translateY(-1px)" }}
-        >
-          <Box position="absolute" inset={0} borderRadius="full" bg={ring} />
-          <Box position="absolute" inset="4px" borderRadius="full" bg={bg} borderWidth="1px" borderColor={item.color} />
-          <Box
-            position="relative"
-            w="24px"
-            h="24px"
-            borderRadius="full"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            bgGradient={`linear(to-br, ${item.from}, ${item.to})`}
-            color="white"
-            fontSize="14px"
-          >
-            {item?.icon ? React.createElement(item.icon) : null}
-          </Box>
-        </Box>
-      </Tooltip>
-    );
-  };
+  // (moved) SectionLabel, LeftRow, StatTile, SectionCard, CompactAchievement live in `ui/parts/*`
 
-  const StatTile: React.FC<{
-    label: string;
-    value: React.ReactNode;
-    hint?: string;
-    icon?: React.ComponentType<any>;
-    tooltip?: string;
-    accentColor?: string;
-    emphasis?: boolean;
-  }> = ({ label, value, hint, icon, tooltip, accentColor, emphasis }) => {
-    const watermarkColor = useColorModeValue("blackAlpha.150", "whiteAlpha.120");
-    const hoverBorder = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
-    const focusRing = useColorModeValue("0 0 0 3px rgba(66,153,225,0.45)", "0 0 0 3px rgba(66,153,225,0.45)");
-    // Colorful watermark by default (to highlight the tile), then de-accent on hover.
-    const baseAccent = accentColor ?? useColorModeValue("blue.400", "blue.200");
-    const formattedValue = typeof value === "number" ? formatCount(value) : value;
-    const valueFontSize = emphasis ? ({ base: "2xl", md: "3xl" } as const) : ({ base: "xl", md: "2xl" } as const);
+  let workplace = "";
+  if (typeof (profile as any)?.workplace === "string") workplace = String((profile as any).workplace).trim();
 
-    const tile = (
-      <Box
-        borderWidth="1px"
-        borderColor={cardBorder}
-        borderRadius={{ base: "14px", md: "16px" }}
-        bg={cardBg}
-        p={{ base: 3, md: 5 }}
-        minW={0}
-        minH={{ base: "112px", md: "124px" }}
-        position="relative"
-        overflow="hidden"
-        display="grid"
-        gridTemplateRows="auto 1fr auto"
-        tabIndex={tooltip ? 0 : undefined}
-        _focusVisible={tooltip ? { boxShadow: focusRing, outline: "none" } : undefined}
-        transition="border-color 160ms ease, transform 160ms ease"
-        _hover={{ borderColor: hoverBorder, transform: "translateY(-1px)" }}
-        sx={{
-          "& .stat-tile-watermark": {
-            transition: "transform 180ms ease, opacity 180ms ease, color 180ms ease",
-          },
-          "&:hover .stat-tile-watermark": {
-            transform: "translate(6px, -4px) rotate(-10deg) scale(1.06)",
-            opacity: 0.12,
-            color: watermarkColor,
-          },
-          "&:focus-visible .stat-tile-watermark": {
-            transform: "translate(6px, -4px) rotate(-10deg) scale(1.06)",
-            opacity: 0.12,
-            color: watermarkColor,
-          },
-        }}
-      >
-        {!!icon && (
-          <Box
-            aria-hidden="true"
-            position="absolute"
-            top={{ base: 2, md: 4 }}
-            right={{ base: 2, md: 4 }}
-            opacity={0.14}
-            color={baseAccent}
-            transform="rotate(-6deg)"
-            pointerEvents="none"
-            className="stat-tile-watermark"
-          >
-            <Icon as={icon} boxSize={{ base: "38px", md: "56px" }} />
-          </Box>
-        )}
+  let locationLabel = "";
+  if (typeof (profile as any)?.location === "string") locationLabel = String((profile as any).location).trim();
 
-        {/* Fixed header height so values align across columns even when label wraps */}
-        <Box pr={{ base: 8, md: 12 }}>
-          <Text
-            fontSize="sm"
-            color={muted}
-            lineHeight="1.25"
-            whiteSpace="normal"
-            overflowWrap="anywhere"
-            wordBreak="break-word"
-          >
-            {label}
-          </Text>
-        </Box>
+  let allAchievementItems: any[] = [];
+  if (Array.isArray(items)) allAchievementItems = items as any[];
+  const achievedItems = allAchievementItems.filter((i: any) => i?.achieved).slice(0, 6);
 
-        {/* Value is centered vertically between label and hint */}
-        <Box display="flex" alignItems="center" pr={{ base: 8, md: 12 }}>
-          <Text fontWeight="bold" fontSize={valueFontSize} lineHeight="1.1">
-            {formattedValue}
-          </Text>
-        </Box>
-
-        {/* Keep a consistent bottom row so the value stays centered even when hint is missing */}
-        <Box
-          pr={{ base: 8, md: 12 }}
-          display="flex"
-          alignItems="flex-end"
-        >
-          {!!hint ? (
-            <Text fontSize="sm" color={muted}>
-              {hint}
-            </Text>
-          ) : null}
-        </Box>
-      </Box>
-    );
-
-    if (!tooltip) return tile;
-
-    return (
-      <Tooltip hasArrow openDelay={240} placement="top" label={tooltip} shouldWrapChildren>
-        {tile}
-      </Tooltip>
-    );
-  };
-
-  const SectionCard: React.FC<{
-    title: string;
-    description: string;
-    icon: React.ComponentType<any>;
-    actions?: React.ReactNode;
-    children: React.ReactNode;
-  }> = ({ title, description, icon, actions, children }) => {
-    // Variant A: Glass (no gradients)
-    const glassBg = useColorModeValue("whiteAlpha.900", "blackAlpha.300");
-    const glassBorder = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
-    const accent = useColorModeValue("blue.600", "blue.300");
-    const headerIconBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
-
-    return (
-      <Box
-        borderWidth="1px"
-        borderColor={glassBorder}
-        borderRadius="24px"
-        bg={glassBg}
-        p={{ base: 4, md: 7 }}
-        position="relative"
-        overflow="hidden"
-        boxShadow="none"
-        transition="none"
-        sx={{
-          backdropFilter: "blur(12px) saturate(160%)",
-          WebkitBackdropFilter: "blur(12px) saturate(160%)",
-        }}
-      >
-        <Box position="relative">
-          <HStack spacing={3} mb={2} align="center" justify="space-between" flexWrap="wrap" rowGap={2}>
-            <HStack spacing={3} align="center">
-              <Box
-                aria-hidden="true"
-                w="36px"
-                h="36px"
-                borderRadius="14px"
-                bg={headerIconBg}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                color={accent}
-                flexShrink={0}
-              >
-                <Icon as={icon} boxSize="18px" />
-              </Box>
-              <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }}>
-                {title}
-              </Text>
-            </HStack>
-
-            {!!actions ? <Box>{actions}</Box> : null}
-          </HStack>
-          <Text color={muted} mb={4}>
-            {description}
-          </Text>
-
-          {children}
-        </Box>
-      </Box>
-    );
-  };
 
   return (
     <Box
@@ -734,483 +144,26 @@ const ProfileScreen: React.FC = () => {
               py={{base: 0, lg: 4}}
               h={{ base: "auto", lg: "full" }}
             >
-            <Grid
-              w="full"
-              // Outer layout becomes 2 columns at `lg` (left column is ~420px),
-              // so inner 2-column hero must NOT be active there, otherwise it squeezes.
-              templateColumns={{
-                base: "1fr",
-                md: "minmax(260px, 320px) 1fr", // use space on wider single-column layouts
-                lg: "1fr", // back to single column when outer grid switches to 2 columns
-              }}
-              columnGap={{ base: 0, md: 10, lg: 0 }}
-              rowGap={{ base: 4, md: 0, lg: 4 }}
-              alignItems="start"
-            >
-              <GridItem>
-                <VStack
-                  align={{ base: "center", md: "start" }}
-                  spacing={3}
-                  w="full"
-                  minW={0}
-                  textAlign={{ base: "center", md: "left" }}
-                >
-                  <Box
-                    as="img"
-                    // Responsive avatar size: small phones -> smaller, desktop -> bigger.
-                    boxSize={{ base: "132px", sm: "152px", md: "184px", lg: "208px" }}
-                    borderRadius="full"
-                    objectFit="cover"
-                    bg="transparent"
-                    alt={name || "Пользователь"}
-                    // Use responsive `srcSet` so we don't download 416×416 when the container is 208×208.
-                    src={avatarProxyUrl(avatarUrl, 208)}
-                    srcSet={[
-                      `${avatarProxyUrl(avatarUrl, 132)} 132w`,
-                      `${avatarProxyUrl(avatarUrl, 152)} 152w`,
-                      `${avatarProxyUrl(avatarUrl, 184)} 184w`,
-                      `${avatarProxyUrl(avatarUrl, 208)} 208w`,
-                    ].join(", ")}
-                    sizes="(min-width: 62em) 208px, (min-width: 48em) 184px, (min-width: 30em) 152px, 132px"
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    onError={(e: any) => {
-                      try {
-                        e.currentTarget.src = avatarProxyUrl(PLACEHOLDER_AVATAR_URL, 208);
-                        e.currentTarget.removeAttribute("srcset");
-                      } catch {}
-                    }}
-                  />
-
-                  <VStack align={{ base: "center", md: "start" }} spacing={2} w="full" minW={0}>
-                    {isEditing ? (
-                      <VStack
-                        key={editSessionId}
-                        w="full"
-                        maxW={{ base: "360px", md: "390px" }}
-                        spacing={3}
-                        align={{ base: "center", md: "start" }}
-                        alignSelf={{ base: "center", md: "flex-start" }}
-                      >
-                        <Box as="form" id="profile-edit-form" action={saveAction} display="none" />
-                        <Input
-                          id="profile-name"
-                          name="profileName"
-                          autoComplete="name"
-                          placeholder="Имя (до 250 символов)"
-                          defaultValue={editInitial?.name ?? ""}
-                          onKeyDownCapture={handleStopHotkeys}
-                          form="profile-edit-form"
-                          maxLength={250}
-                          w="full"
-                          h="40px"
-                          fontSize={{ base: "md", md: "sm" }}
-                          aria-label="Имя"
-                          borderRadius="sm"
-                          borderColor={formBorder}
-                          bg={formBg}
-                          focusBorderColor={formBorder}
-                          _focus={{ boxShadow: "none", outline: "none" }}
-                          _focusVisible={{ boxShadow: "none", outline: "none" }}
-                        />
-                        <Textarea
-                          id="profile-bio"
-                          name="profileBio"
-                          autoComplete="off"
-                          placeholder="О себе (до 250 символов)"
-                          defaultValue={editInitial?.bio ?? ""}
-                          onKeyDownCapture={handleStopHotkeys}
-                          form="profile-edit-form"
-                          resize="none"
-                          rows={2}
-                          w="full"
-                          minH="72px"
-                          fontSize={{ base: "md", md: "sm" }}
-                          aria-label="Bio"
-                          maxLength={250}
-                          borderRadius="sm"
-                          borderColor={formBorder}
-                          bg={formBg}
-                          focusBorderColor={formBorder}
-                          _focus={{ boxShadow: "none", outline: "none" }}
-                          _focusVisible={{ boxShadow: "none", outline: "none" }}
-                        />
-                      </VStack>
-                    ) : (
-                      <>
-                        <Text
-                          fontWeight="bold"
-                          fontSize={{ base: "2xl", md: "3xl" }}
-                          lineHeight="1.15"
-                          whiteSpace="normal"
-                          overflowWrap="anywhere"
-                          wordBreak="break-word"
-                        >
-                          {name || "Пользователь"}
-                        </Text>
-
-                        <Text
-                          color={muted}
-                          whiteSpace="normal"
-                          overflowWrap="anywhere"
-                          wordBreak="break-word"
-                        >
-                          {bio || "Описание"}
-                        </Text>
-                      </>
-                    )}
-
-                    {isEditing ? (
-                      // Actions are rendered lower, right before Achievements (see below).
-                      <Box />
-                    ) : (
-                      <Button
-                        type="button"
-                        onClick={handleStartEdit}
-                        aria-label="Редактировать профиль"
-                        w="full"
-                        maxW={{ base: "360px", md: "300px", lg: "250px" }}
-                        alignSelf={{ base: "center", md: "flex-start" }}
-                        h="44px"
-                        borderRadius="md"
-                        fontWeight="semibold"
-                        bg={primaryBtnBg}
-                        color="white"
-                        transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                        _hover={{
-                          transform: "translateY(-1px)",
-                          bg: primaryBtnHoverBg,
-                          boxShadow: "md",
-                        }}
-                        _active={{
-                          transform: "translateY(0px)",
-                          bg: primaryBtnActiveBg,
-                          boxShadow: "sm",
-                        }}
-                      >
-                        Редактировать профиль
-                      </Button>
-                    )}
-
-                    <VStack spacing={2} w="full" pt={1} align={{ base: "center", md: "start" }}>
-                      <HStack
-                        spacing={2}
-                        justify={{ base: "center", md: "flex-start" }}
-                        w="full"
-                        color={muted}
-                        flexWrap="wrap"
-                      >
-                        <Icon as={FiUsers} color={leftIconColors.people} />
-                        <Text>
-                          <Text as="span" fontWeight="semibold" color="inherit">
-                            {formatCount(0)}
-                          </Text>{" "}
-                          подписчики ·{" "}
-                          <Text as="span" fontWeight="semibold" color="inherit">
-                            {formatCount(0)}
-                          </Text>{" "}
-                          подписан
-                        </Text>
-                      </HStack>
-
-                      <HStack
-                        spacing={3}
-                        justify={{ base: "center", md: "flex-start" }}
-                        w="full"
-                        flexWrap="wrap"
-                        align="center"
-                      >
-                        <HStack spacing={1.5} color={muted}>
-                          <Icon as={FiAward} color={leftIconColors.xp} />
-                          <Text fontSize={{ base: "md", md: "lg" }}>
-                            <Text
-                              as="span"
-                              fontWeight="bold"
-                            color={xpNumberColor}
-                              fontSize={{ base: "md", md: "lg" }}
-                            >
-                              {formatCount(xp)}
-                            </Text>{" "}
-                            XP
-                          </Text>
-                        </HStack>
-                        <Box>
-                          <PillBadge
-                            colorScheme={profileBadge.colorScheme as any}
-                            variant="outline"
-                            uppercase={false}
-                          >
-                            {profileBadge.label}
-                          </PillBadge>
-                        </Box>
-                      </HStack>
-                    </VStack>
-                  </VStack>
-                </VStack>
-              </GridItem>
-
-              <GridItem minW={0}>
-                <Box
-                  w="full"
-                  maxW={{ base: "360px", md: "full", lg: "full" }}
-                  mx={{ base: "auto", md: 0, lg: 0 }}
-                >
-                  <VStack align="start" spacing={2} w="full" textAlign="left">
-                    <SectionLabel>Контакты</SectionLabel>
-
-                    {isEditing ? (
-                      <LeftRow icon={FiBriefcase as any} iconColor={leftIconColors.work}>
-                        <Input
-                          id="profile-workplace"
-                          name="profileWorkplace"
-                          autoComplete="organization"
-                          placeholder="Компания / место работы"
-                          defaultValue={editInitial?.workplace ?? ""}
-                          onKeyDownCapture={handleStopHotkeys}
-                          form="profile-edit-form"
-                          size="sm"
-                          h={{ base: "40px", md: "32px" }}
-                          fontSize={{ base: "md", md: "sm" }}
-                          aria-label="Компания / место работы"
-                          borderRadius="sm"
-                          borderColor={formBorder}
-                          bg={formBg}
-                          focusBorderColor={formBorder}
-                          _focus={{ boxShadow: "none", outline: "none" }}
-                          _focusVisible={{ boxShadow: "none", outline: "none" }}
-                        />
-                      </LeftRow>
-                    ) : workplace ? (
-                      <LeftRow icon={FiBriefcase as any} iconColor={leftIconColors.work}>
-                        <Text
-                          fontSize="sm"
-                          fontWeight="semibold"
-                          color={textStrong}
-                          noOfLines={1}
-                        >
-                          {workplace}
-                        </Text>
-                      </LeftRow>
-                    ) : null}
-
-                    {isEditing ? (
-                      <LeftRow icon={FiMapPin as any} iconColor={leftIconColors.location}>
-                        <Input
-                          id="profile-location"
-                          name="profileLocation"
-                          autoComplete="address-level2"
-                          placeholder="Город / локация"
-                          defaultValue={editInitial?.location ?? ""}
-                          onKeyDownCapture={handleStopHotkeys}
-                          form="profile-edit-form"
-                          size="sm"
-                          h={{ base: "40px", md: "32px" }}
-                          fontSize={{ base: "md", md: "sm" }}
-                          aria-label="Локация"
-                          borderRadius="sm"
-                          borderColor={formBorder}
-                          bg={formBg}
-                          focusBorderColor={formBorder}
-                          _focus={{ boxShadow: "none", outline: "none" }}
-                          _focusVisible={{ boxShadow: "none", outline: "none" }}
-                        />
-                      </LeftRow>
-                    ) : locationLabel ? (
-                      <LeftRow icon={FiMapPin as any} iconColor={leftIconColors.location}>
-                        <Text
-                          fontSize="sm"
-                          fontWeight="semibold"
-                          color={textStrong}
-                          noOfLines={1}
-                        >
-                          {locationLabel}
-                        </Text>
-                      </LeftRow>
-                    ) : null}
-
-                    <LeftRow icon={FiMail as any} iconColor={leftIconColors.mail}>
-                      <ChakraLink
-                        href={`mailto:${emailValue}`}
-                        color={linkTextColor}
-                        fontWeight="semibold"
-                        maxW="360px"
-                        noOfLines={1}
-                        sx={{ overflowWrap: "anywhere" }}
-                        aria-label={`Email: ${emailValue}`}
-                      >
-                        {emailValue}
-                      </ChakraLink>
-                    </LeftRow>
-
-                    {(() => {
-                      const nonEmailLinks = displayLinks.filter((l) => String((l as any)?.kind ?? "") !== "email");
-                      const shouldShowLinks = isEditing || nonEmailLinks.length > 0;
-                      if (!shouldShowLinks) return null;
-
-                      return (
-                        <>
-                          <SectionLabel>Ссылки</SectionLabel>
-
-                          <VStack align="start" spacing={1.5} w="full" pt={1}>
-                            {isEditing ? (
-                              <VStack align="start" spacing={2} w="full">
-                                {(editInitial?.links ?? ["", "", "", ""]).map((val, idx) => (
-                                  <LeftRow key={idx} icon={FiLink as any} iconColor={leftIconColors.link}>
-                                    <Input
-                                      id={`profile-link-${idx + 1}`}
-                                      name={`profileLink${idx + 1}`}
-                                      autoComplete="url"
-                                      defaultValue={val}
-                                      onKeyDownCapture={handleStopHotkeys}
-                                      form="profile-edit-form"
-                                      size="sm"
-                                      h={{ base: "40px", md: "32px" }}
-                                      fontSize={{ base: "md", md: "sm" }}
-                                      placeholder={`Ссылка ${idx + 1} (https://...)`}
-                                      aria-label={`Ссылка ${idx + 1}`}
-                                      borderRadius="sm"
-                                      borderColor={formBorder}
-                                      bg={formBg}
-                                      focusBorderColor={formBorder}
-                                      _focus={{ boxShadow: "none", outline: "none" }}
-                                      _focusVisible={{ boxShadow: "none", outline: "none" }}
-                                    />
-                                  </LeftRow>
-                                ))}
-                              </VStack>
-                            ) : null}
-
-                            {nonEmailLinks.slice(0, 6).map((l) => {
-                              if (isEditing) return null;
-                              const href = buildLinkHref(l);
-                              const value = String((l as any)?.value ?? "").trim();
-
-                              return (
-                                <HStack key={l.id} spacing={3} minW={0} justify="flex-start" w="full">
-                                  <Box
-                                    aria-hidden="true"
-                                    w="22px"
-                                    h="22px"
-                                    flexShrink={0}
-                                    display="flex"
-                                    alignItems="center"
-                                    justifyContent="center"
-                                    color={leftIconColors.link}
-                                  >
-                                    <Icon as={FiLink as any} boxSize="18px" />
-                                  </Box>
-                                  <ChakraLink
-                                    href={href}
-                                    isExternal
-                                    color={linkTextColor}
-                                    fontWeight="semibold"
-                                    flex={1}
-                                    minW={0}
-                                    display="block"
-                                    whiteSpace="normal"
-                                    sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}
-                                    aria-label={`Открыть ссылку: ${value}`}
-                                  >
-                                    {value}
-                                  </ChakraLink>
-                                </HStack>
-                              );
-                            })}
-                          </VStack>
-                        </>
-                      );
-                    })()}
-
-                    {isEditing ? (
-                      <HStack
-                        w="full"
-                        maxW="full"
-                        justify="flex-start"
-                        spacing={2}
-                        pt={2}
-                      >
-                        <Button
-                          type="submit"
-                          form="profile-edit-form"
-                          aria-label="Сохранить изменения профиля"
-                          size="sm"
-                          h="36px"
-                          px={5}
-                          borderRadius="md"
-                          fontWeight="semibold"
-                          bg={primaryBtnBg}
-                          color="white"
-                          transition="background 0.2s ease"
-                          _hover={{ bg: primaryBtnHoverBg }}
-                          _active={{ bg: primaryBtnActiveBg }}
-                          isLoading={isSaving}
-                        >
-                          Сохранить
-                        </Button>
-                        <Button
-                          type="button"
-                          onClick={handleCancelEdit}
-                          aria-label="Отмена редактирования"
-                          size="sm"
-                          h="36px"
-                          px={5}
-                          borderRadius="md"
-                          variant="outline"
-                          isDisabled={isSaving}
-                        >
-                          Отмена
-                        </Button>
-                      </HStack>
-                    ) : null}
-                  </VStack>
-                  {achievedItems.length > 0 && (
-                  <VStack align="start" spacing={2.5} w="full" textAlign="left" mt={5}>
-                    <HStack w="full" justify="space-between" align="center">
-                      <HStack spacing={2} align="center">
-                        <Box
-                          aria-hidden="true"
-                          w="28px"
-                          h="28px"
-                          borderRadius="10px"
-                          bg={achievementsIconBg}
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="center"
-                          color={achievementsIconColor}
-                          flexShrink={0}
-                        >
-                          <Icon as={FiStar} boxSize="15px" />
-                        </Box>
-                        <Text fontWeight="bold" textAlign="left" w="full">
-                          Достижения
-                        </Text>
-                      </HStack>
-
-                      <Box
-                        px={2.5}
-                        py={1}
-                        borderRadius="full"
-                        borderWidth="1px"
-                        borderColor={achievementsCardBorder}
-                        bg={achievementsCountBg}
-                      >
-                        <Text fontSize="xs" fontWeight="bold" color={achievementsIconColor}>
-                          {formatCount(achievedItems.length)}
-                        </Text>
-                      </Box>
-                    </HStack>
-                    <Box>
-                      <HStack spacing={2} flexWrap="wrap" justify="flex-start">
-                        {achievedItems.map((it: any) => (
-                          <CompactAchievement key={it.id} item={it} />
-                        ))}
-                      </HStack>
-                    </Box>
-                  </VStack>)}
-                </Box>
-              </GridItem>
-            </Grid>
+            <ProfileSidebar
+              avatarUrl={avatarUrl}
+              name={name}
+              bio={bio}
+              xp={xp}
+              profileBadge={profileBadge}
+              workplace={workplace}
+              locationLabel={locationLabel}
+              emailValue={emailValue}
+              displayLinks={displayLinks}
+              isEditing={isEditing}
+              editSessionId={editSessionId}
+              editInitial={editInitial}
+              saveAction={saveAction}
+              isSaving={isSaving}
+              handleStartEdit={handleStartEdit}
+              handleCancelEdit={handleCancelEdit}
+              handleStopHotkeys={handleStopHotkeys}
+              achievedItems={achievedItems}
+            />
             </Box>
           </GridItem>
 
@@ -1221,29 +174,11 @@ const ProfileScreen: React.FC = () => {
               description="Короткий срез по вашему прогрессу и активности."
               icon={FiBarChart2 as any}
               actions={
-                <HStack spacing={2} flexWrap="wrap" justify="flex-start">
-                  {(["week", "month", "all"] as const).map((r) => (
-                    <Button
-                      key={r}
-                      size="sm"
-                      variant={statsRange === r ? "solid" : "outline"}
-                      borderRadius="full"
-                      leftIcon={
-                        r === "week" ? (
-                          <Icon as={FaRegCalendarAlt} color={headerNavIconColor} />
-                        ) : r === "month" ? (
-                          <Icon as={FaCalendarAlt} color={headerNavIconColor} />
-                        ) : (
-                          <Icon as={FaInfinity} color={headerNavIconColor} />
-                        )
-                      }
-                      onClick={() => setStatsRange(r)}
-                      aria-label={`Период: ${rangeLabels[r]}`}
-                    >
-                      {rangeLabels[r]}
-                    </Button>
-                  ))}
-                </HStack>
+                <RangeButtons
+                  value={statsRange}
+                  onChange={setStatsRange}
+                  justify="flex-start"
+                />
               }
             >
               {/* Prefer 3 columns on desktop, but never "squeeze" tiles on narrower widths */}
@@ -1266,40 +201,7 @@ const ProfileScreen: React.FC = () => {
                 ))}
               </SimpleGrid>
 
-              <VStack align="start" spacing={2} color={muted} mt={{ base: 3, md: 4 }}>
-                <Text fontSize="sm">
-                  - Продолжай обучение в разделе{" "}
-                  <AppLink to="/learn" fontWeight="semibold" aria-label="Открыть материалы">
-                    Материалы
-                  </AppLink>
-                  .
-                </Text>
-                <Text fontSize="sm">
-                  - Решай{" "}
-                  <AppLink to="/weekly" fontWeight="semibold" aria-label="Открыть задачи недели">
-                    задачи недели
-                  </AppLink>{" "}
-                  и собирай достижения.
-                </Text>
-                <Text fontSize="sm">
-                  - Читай{" "}
-                  <AppLink to="/blog" fontWeight="semibold" aria-label="Открыть блог">
-                    статьи
-                  </AppLink>{" "}
-                  и прокачивай базу.
-                </Text>
-                <Text fontSize="sm">
-                  - Участвуй в{" "}
-                  <AppLink to="/hackathons" fontWeight="semibold" aria-label="Открыть хакатоны">
-                    хакатонах
-                  </AppLink>{" "}
-                  и{" "}
-                  <AppLink to="/sessions" fontWeight="semibold" aria-label="Открыть сессии">
-                    сессиях
-                  </AppLink>
-                  .
-                </Text>
-              </VStack>
+              <HelpList items={progressHelpList} />
 
               <Box
                 mt={{ base: 4, md: 5 }}
@@ -1337,66 +239,7 @@ const ProfileScreen: React.FC = () => {
                 </HStack>
               </Box>
 
-              <SimpleGrid
-                mt={{ base: 4, md: 5 }}
-                minChildWidth={{ base: "160px", sm: "180px" }}
-                spacing={{ base: 2.5, md: 3 }}
-              >
-                <AppButtonLink
-                  to="/learn"
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="semibold"
-                  bg={qaMaterialsBg}
-                  color="white"
-                  borderWidth="1px"
-                  borderColor={qaMaterialsBorder}
-                  leftIcon={<Icon as={FaBookOpen} color="white" />}
-                  sx={{ "& .chakra-button__icon": { color: "white" } }}
-                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: qaMaterialsHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: qaMaterialsActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
-                  aria-label="Перейти к материалам"
-                >
-                  К материалам
-                </AppButtonLink>
-                <AppButtonLink
-                  to="/weekly"
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="semibold"
-                  bg={qaWeeklyBg}
-                  color="white"
-                  borderWidth="1px"
-                  borderColor={qaWeeklyBorder}
-                  leftIcon={<Icon as={FaClipboardList} color="white" />}
-                  sx={{ "& .chakra-button__icon": { color: "white" } }}
-                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: qaWeeklyHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: qaWeeklyActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
-                  aria-label="Перейти к задачам недели"
-                >
-                  Задачи недели
-                </AppButtonLink>
-                <AppButtonLink
-                  to="/blog"
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="semibold"
-                  bg={qaBlogBg}
-                  color="white"
-                  borderWidth="1px"
-                  borderColor={qaBlogBorder}
-                  leftIcon={<Icon as={FaFeatherAlt} color="white" />}
-                  sx={{ "& .chakra-button__icon": { color: "white" } }}
-                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: qaBlogHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: qaBlogActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
-                  aria-label="Перейти к блогу"
-                >
-                  Блог
-                </AppButtonLink>
-              </SimpleGrid>
+              <QuickActionsGrid kind="progress" />
             </SectionCard>
 
             <SectionCard
@@ -1404,29 +247,11 @@ const ProfileScreen: React.FC = () => {
               description="Счётчики собираются из вашего прогресса, задач недели и авторства материалов."
               icon={FiUsers as any}
               actions={
-                <HStack spacing={2} flexWrap="wrap" justify="flex-end">
-                  {(["week", "month", "all"] as const).map((r) => (
-                    <Button
-                      key={r}
-                      size="sm"
-                      variant={contributionRange === r ? "solid" : "outline"}
-                      borderRadius="full"
-                      leftIcon={
-                        r === "week" ? (
-                          <Icon as={FaRegCalendarAlt} color={headerNavIconColor} />
-                        ) : r === "month" ? (
-                          <Icon as={FaCalendarAlt} color={headerNavIconColor} />
-                        ) : (
-                          <Icon as={FaInfinity} color={headerNavIconColor} />
-                        )
-                      }
-                      onClick={() => setContributionRange(r)}
-                      aria-label={`Период: ${rangeLabels[r]}`}
-                    >
-                      {rangeLabels[r]}
-                    </Button>
-                  ))}
-                </HStack>
+                <RangeButtons
+                  value={contributionRange}
+                  onChange={setContributionRange}
+                  justify="flex-end"
+                />
               }
             >
               <SimpleGrid minChildWidth={{ base: "100%", sm: "260px", md: "320px" }} spacing={3}>
@@ -1435,7 +260,7 @@ const ProfileScreen: React.FC = () => {
                     key={t.label}
                     label={t.label}
                     value={t.value}
-                    hint={contributionHint}
+                    hint={CONTRIBUTION_HINT}
                     icon={(t as any).icon}
                     tooltip={(t as any).tooltip}
                     accentColor={(t as any).accentColor}
@@ -1443,32 +268,11 @@ const ProfileScreen: React.FC = () => {
                 ))}
               </SimpleGrid>
 
-              <VStack align="start" spacing={2} color={muted} mt={{ base: 3, md: 4 }}>
-                <Text fontWeight="semibold">Как увеличить вклад</Text>
-                <Text fontSize="sm">
-                  - Публикуй{" "}
-                  <AppLink to="/learn" fontWeight="semibold" aria-label="Открыть материалы">
-                    материалы
-                  </AppLink>{" "}
-                  — это учитывается как авторство в базе AIFFA.
+              <VStack align="start" spacing={2} mt={{ base: 3, md: 4 }}>
+                <Text fontWeight="semibold" color={muted}>
+                  Как увеличить вклад
                 </Text>
-                <Text fontSize="sm">
-                  - Публикуй проекты — это учитывается как авторство проектов.
-                </Text>
-                <Text fontSize="sm">
-                  - Добавляй{" "}
-                  <AppLink to="/weekly" fontWeight="semibold" aria-label="Открыть задачи недели">
-                    задачи недели
-                  </AppLink>{" "}
-                  — это учитывается как авторство задач недели.
-                </Text>
-                <Text fontSize="sm">
-                  - Пиши{" "}
-                  <AppLink to="/blog" fontWeight="semibold" aria-label="Открыть блог">
-                    статьи
-                  </AppLink>{" "}
-                  — это учитывается как авторство статей.
-                </Text>
+                <HelpList items={contributionHelpList} />
               </VStack>
               <Box
                 mt={{ base: 4, md: 5 }}
@@ -1506,102 +310,7 @@ const ProfileScreen: React.FC = () => {
                 </HStack>
               </Box>
 
-              <SimpleGrid
-                mt={{ base: 4, md: 5 }}
-                minChildWidth={{ base: "160px", sm: "180px" }}
-                spacing={{ base: 2.5, md: 3 }}
-              >
-                <AppButtonLink
-                  to="/blog"
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="semibold"
-                  bg={qaWriteBg}
-                  color="white"
-                  borderWidth="1px"
-                  borderColor={qaWriteBorder}
-                  leftIcon={<Icon as={FaFeatherAlt} color="white" />}
-                  sx={{ "& .chakra-button__icon": { color: "white" } }}
-                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: qaWriteHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: qaWriteActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
-                  aria-label="Перейти в блог"
-                >
-                  Написать
-                </AppButtonLink>
-                <AppButtonLink
-                  to="/learn"
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="semibold"
-                  bg={qaMaterialsBg}
-                  color="white"
-                  borderWidth="1px"
-                  borderColor={qaMaterialsBorder}
-                  leftIcon={<Icon as={FaBookOpen} color="white" />}
-                  sx={{ "& .chakra-button__icon": { color: "white" } }}
-                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: qaMaterialsHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: qaMaterialsActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
-                  aria-label="Перейти к материалам"
-                >
-                  Материалы
-                </AppButtonLink>
-                <AppButtonLink
-                  to="/weekly"
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="semibold"
-                  bg={qaWeeklyBg}
-                  color="white"
-                  borderWidth="1px"
-                  borderColor={qaWeeklyBorder}
-                  leftIcon={<Icon as={FaClipboardList} color="white" />}
-                  sx={{ "& .chakra-button__icon": { color: "white" } }}
-                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: qaWeeklyHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: qaWeeklyActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
-                  aria-label="Перейти к задачам недели"
-                >
-                  Задачи недели
-                </AppButtonLink>
-                <AppButtonLink
-                  to="/hackathons"
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="semibold"
-                  bg={qaHackathonsBg}
-                  color="white"
-                  borderWidth="1px"
-                  borderColor={qaHackathonsBorder}
-                  leftIcon={<Icon as={FaCode} color="white" />}
-                  sx={{ "& .chakra-button__icon": { color: "white" } }}
-                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: qaHackathonsHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: qaHackathonsActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
-                  aria-label="Перейти к хакатонам"
-                >
-                  Хакатоны
-                </AppButtonLink>
-                <AppButtonLink
-                  to="/sessions"
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="semibold"
-                  bg={qaSessionsBg}
-                  color="white"
-                  borderWidth="1px"
-                  borderColor={qaSessionsBorder}
-                  leftIcon={<Icon as={FaComments} color="white" />}
-                  sx={{ "& .chakra-button__icon": { color: "white" } }}
-                  transition="background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease"
-                  _hover={{ bg: qaSessionsHoverBg, transform: "translateY(-1px)", boxShadow: "sm" }}
-                  _active={{ bg: qaSessionsActiveBg, transform: "translateY(0px)", boxShadow: "xs" }}
-                  aria-label="Перейти к сессиям"
-                >
-                  Сессии
-                </AppButtonLink>
-              </SimpleGrid>
+              <QuickActionsGrid kind="contribution" />
             </SectionCard>
             </VStack>
           </GridItem>

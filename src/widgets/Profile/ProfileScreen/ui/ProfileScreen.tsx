@@ -806,11 +806,14 @@ const ProfileScreen: React.FC = () => {
                           maxLength={250}
                           w="full"
                           h="40px"
+                          fontSize={{ base: "md", md: "sm" }}
                           aria-label="Имя"
                           borderRadius="sm"
                           borderColor={formBorder}
                           bg={formBg}
-                          focusBorderColor={formFocusBorder}
+                          focusBorderColor={formBorder}
+                          _focus={{ boxShadow: "none", outline: "none" }}
+                          _focusVisible={{ boxShadow: "none", outline: "none" }}
                         />
                         <Textarea
                           id="profile-bio"
@@ -824,12 +827,15 @@ const ProfileScreen: React.FC = () => {
                           rows={2}
                           w="full"
                           minH="72px"
+                          fontSize={{ base: "md", md: "sm" }}
                           aria-label="Bio"
                           maxLength={250}
                           borderRadius="sm"
                           borderColor={formBorder}
                           bg={formBg}
-                          focusBorderColor={formFocusBorder}
+                          focusBorderColor={formBorder}
+                          _focus={{ boxShadow: "none", outline: "none" }}
+                          _focusVisible={{ boxShadow: "none", outline: "none" }}
                         />
                       </VStack>
                     ) : (
@@ -965,11 +971,15 @@ const ProfileScreen: React.FC = () => {
                           onKeyDownCapture={handleStopHotkeys}
                           form="profile-edit-form"
                           size="sm"
+                          h={{ base: "40px", md: "32px" }}
+                          fontSize={{ base: "md", md: "sm" }}
                           aria-label="Компания / место работы"
                           borderRadius="sm"
                           borderColor={formBorder}
                           bg={formBg}
-                          focusBorderColor={formFocusBorder}
+                          focusBorderColor={formBorder}
+                          _focus={{ boxShadow: "none", outline: "none" }}
+                          _focusVisible={{ boxShadow: "none", outline: "none" }}
                         />
                       </LeftRow>
                     ) : workplace ? (
@@ -996,11 +1006,15 @@ const ProfileScreen: React.FC = () => {
                           onKeyDownCapture={handleStopHotkeys}
                           form="profile-edit-form"
                           size="sm"
+                          h={{ base: "40px", md: "32px" }}
+                          fontSize={{ base: "md", md: "sm" }}
                           aria-label="Локация"
                           borderRadius="sm"
                           borderColor={formBorder}
                           bg={formBg}
-                          focusBorderColor={formFocusBorder}
+                          focusBorderColor={formBorder}
+                          _focus={{ boxShadow: "none", outline: "none" }}
+                          _focusVisible={{ boxShadow: "none", outline: "none" }}
                         />
                       </LeftRow>
                     ) : locationLabel ? (
@@ -1052,12 +1066,16 @@ const ProfileScreen: React.FC = () => {
                                       onKeyDownCapture={handleStopHotkeys}
                                       form="profile-edit-form"
                                       size="sm"
+                                      h={{ base: "40px", md: "32px" }}
+                                      fontSize={{ base: "md", md: "sm" }}
                                       placeholder={`Ссылка ${idx + 1} (https://...)`}
                                       aria-label={`Ссылка ${idx + 1}`}
                                       borderRadius="sm"
                                       borderColor={formBorder}
                                       bg={formBg}
-                                      focusBorderColor={formFocusBorder}
+                                      focusBorderColor={formBorder}
+                                      _focus={{ boxShadow: "none", outline: "none" }}
+                                      _focusVisible={{ boxShadow: "none", outline: "none" }}
                                     />
                                   </LeftRow>
                                 ))}

@@ -9,32 +9,20 @@ import {
   Text, 
   VStack,
 } from "@chakra-ui/react";
-import { useUserProfile, type ProfileLink } from "entities/user";
+import { useUserProfile } from "entities/user";
 import { useAchievementsData } from "../hooks/useAchievementsData";
 import { ProfileSidebar, RangeButtons, SectionCard, StatTile, HelpList, QuickActionsGrid } from "./parts";
-import { useProfileEdit } from "../model/hooks";
+import { useProfileEdit, useProfileScreenViewModel } from "../model/hooks";
 import type { StatTileModel, StatsRange } from "../model/types";
-import { contributionStatsByRange, DEFAULT_PROFILE_EMAIL, PLACEHOLDER_AVATAR_URL, progressStatsByRange } from "../model/constants";
+import { contributionStatsByRange, progressStatsByRange } from "../model/constants";
 import { useProfileScreenUiColors } from "../colors/useProfileScreenUiColors";
 import { FiAward, FiBarChart2, FiUsers } from "react-icons/fi";
 import { buildContributionTiles, buildProgressTiles, CONTRIBUTION_HINT, contributionHelpList, progressHelpList } from "./data";
 
 const ProfileScreen: React.FC = () => {
   const { profile, updateProfile } = useUserProfile();
-  const profileAny = profile as any;
-  let name = "";
-  if (typeof (profile as any)?.name === "string") name = (profile as any).name;
-
-  let bio = "";
-  if (typeof (profile as any)?.bio === "string") bio = (profile as any).bio;
-
-  let avatarUrl = PLACEHOLDER_AVATAR_URL;
-  if (typeof profileAny?.avatarUrl === "string") {
-    const trimmed = profileAny.avatarUrl.trim();
-    if (trimmed) avatarUrl = trimmed;
-  }
-
   const { items } = useAchievementsData(profile as any);
+  const vm = useProfileScreenViewModel({ profile, achievementItems: items });
 
   // NOTE: По просьбе — без вычислений через хуки. Ставим цифры напрямую (по диапазонам тоже — хардкод).
   // Each block owns its own range (do NOT sync).
@@ -57,41 +45,6 @@ const ProfileScreen: React.FC = () => {
     calloutBodyColor,
   } = useProfileScreenUiColors();
 
-  let xp = 0;
-  if (typeof profileAny.xp === "number" && Number.isFinite(profileAny.xp) && profileAny.xp >= 0) {
-    xp = Math.trunc(profileAny.xp);
-  }
-
-  let rawLinks: any[] = [];
-  if (Array.isArray(profileAny.links)) rawLinks = profileAny.links as any[];
-  const profileLinks: ProfileLink[] = rawLinks
-    .filter(Boolean)
-    .map((l: any) => {
-      const id = String(l?.id ?? "");
-      let kind = "custom";
-      if (l?.kind === "email" || l?.kind === "website" || l?.kind === "custom") kind = l.kind;
-
-      let label = "";
-      if (typeof l?.label === "string") label = l.label;
-
-      let value = "";
-      if (typeof l?.value === "string") value = l.value;
-
-      return { id, kind, label, value } as ProfileLink;
-    })
-    .filter((l: any) => !!l.id && !!String(l.value || "").trim()) as ProfileLink[];
-
-  const displayLinks: ProfileLink[] = profileLinks;
-
-  let profileBadge: { label: string; colorScheme: string } = { label: "Автор AIFFA", colorScheme: "blue" };
-  if (displayLinks.length > 0) {
-    profileBadge = { label: "Контрибьютор", colorScheme: "purple" };
-  }
-
-  const emailValue =
-    profileLinks.find((l) => String((l as any)?.kind ?? "") === "email")?.value?.trim?.() ||
-    DEFAULT_PROFILE_EMAIL;
-
   const {
     isEditing,
     editSessionId,
@@ -104,22 +57,10 @@ const ProfileScreen: React.FC = () => {
     handleStopHotkeys,
   } = useProfileEdit({
     profile,
-    displayLinks,
-    emailValue,
+    displayLinks: vm.displayLinks,
+    emailValue: vm.emailValue,
     updateProfile,
   });
-
-  // (moved) SectionLabel, LeftRow, StatTile, SectionCard, CompactAchievement live in `ui/parts/*`
-
-  let workplace = "";
-  if (typeof (profile as any)?.workplace === "string") workplace = String((profile as any).workplace).trim();
-
-  let locationLabel = "";
-  if (typeof (profile as any)?.location === "string") locationLabel = String((profile as any).location).trim();
-
-  let allAchievementItems: any[] = [];
-  if (Array.isArray(items)) allAchievementItems = items as any[];
-  const achievedItems = allAchievementItems.filter((i: any) => i?.achieved).slice(0, 6);
 
 
   return (
@@ -145,15 +86,15 @@ const ProfileScreen: React.FC = () => {
               h={{ base: "auto", lg: "full" }}
             >
             <ProfileSidebar
-              avatarUrl={avatarUrl}
-              name={name}
-              bio={bio}
-              xp={xp}
-              profileBadge={profileBadge}
-              workplace={workplace}
-              locationLabel={locationLabel}
-              emailValue={emailValue}
-              displayLinks={displayLinks}
+              avatarUrl={vm.avatarUrl}
+              name={vm.name}
+              bio={vm.bio}
+              xp={vm.xp}
+              profileBadge={vm.profileBadge}
+              workplace={vm.workplace}
+              locationLabel={vm.locationLabel}
+              emailValue={vm.emailValue}
+              displayLinks={vm.displayLinks}
               isEditing={isEditing}
               editSessionId={editSessionId}
               editInitial={editInitial}
@@ -162,7 +103,7 @@ const ProfileScreen: React.FC = () => {
               handleStartEdit={handleStartEdit}
               handleCancelEdit={handleCancelEdit}
               handleStopHotkeys={handleStopHotkeys}
-              achievedItems={achievedItems}
+              achievedItems={vm.achievedItems}
             />
             </Box>
           </GridItem>

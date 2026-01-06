@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import { AppBoxLink } from "@/shared/ui/AppLink";
+import { useLocalStorageFlag } from "shared/hooks/useLocalStorageFlag";
 import { getAuthorBadge } from "../../../../lib/authorBadge/authorBadge";
 import { formatCount } from "../../../../lib/format";
 import { getCategoryMeta } from "../../../../lib/tags/tags";
@@ -31,6 +32,8 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
   const authorGithub = article.author?.github;
   const authorHref = getAuthorHref(article);
   const articleHref = `/blog/${article.id}`;
+  const { value: isStarred } = useLocalStorageFlag(`blog-starred:${String(article.id)}`);
+  const displayStars = (typeof article.starsCount === "number" ? article.starsCount : 0) + (isStarred ? 1 : 0);
   const interactive = getBlogArticleCardInteractiveStyles({
     accentColor: theme.blue.accent,
     cardHoverBorder,
@@ -73,7 +76,8 @@ export const BlogArticleCard: React.FC<BlogArticleCardProps> = ({
             descColor={theme.descColor}
             accentBlue={theme.blue.accent}
             views={article.viewsCount}
-            stars={article.starsCount}
+            stars={displayStars}
+            isStarred={isStarred}
             comments={article.commentsCount}
             readingTime={article.readingTime}
             formatCount={formatCount}

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Avatar, Button, HStack, Icon, IconButton, Link, Text, Tooltip } from "@chakra-ui/react";
+import { StarIcon } from "@chakra-ui/icons";
 import { FiBookmark, FiCheck, FiCopy, FiStar } from "react-icons/fi";
 import type { AuthorActionsRowProps } from "./types";
 
@@ -54,18 +55,16 @@ export const AuthorActionsRow: React.FC<AuthorActionsRowProps> = ({ article, the
           h="32px"
           px={2}
           minW="auto"
-          sx={{
-            "& svg, & svg *": {
-              stroke: interactions.isStarred ? colors.starIconActiveColor : colors.actionIconColor,
-              fill: "none",
-            },
-          }}
           _hover={{ bg: colors.ghostHoverBg }}
           _active={{ bg: colors.ghostActiveBg }}
           _focusVisible={{ boxShadow: colors.ghostFocusShadow }}
         >
           <HStack spacing={1.5} align="center">
-            <Icon as={FiStar} boxSize={4} aria-hidden />
+            {interactions.isStarred ? (
+              <StarIcon boxSize={4} color={colors.starIconActiveColor} aria-hidden />
+            ) : (
+              <Icon as={FiStar} boxSize={4} color={colors.actionIconColor} aria-hidden />
+            )}
             <Text as="span" fontWeight={600}>
               {interactions.displayStars}
             </Text>

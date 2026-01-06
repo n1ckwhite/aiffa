@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, VStack, Heading, Text, Icon } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
-import { FiCalendar, FiMessageCircle, FiUserCheck } from 'react-icons/fi';
+import { FiCalendar, FiMessageCircle, FiStar, FiUserCheck } from 'react-icons/fi';
 import { useWeeklyTaskCardColors } from './colors';
 import type { WeeklyTaskCardProps } from './types';
 import { getRing } from './model/ring';
@@ -14,8 +14,10 @@ import { DoneOverlay } from './parts/DoneOverlay';
 import { formatCount } from 'shared/functions/formatCount';
 import { formatRuDate } from 'shared/functions/formatRuDate';
 import { AppBoxLink } from 'shared/ui/AppLink';
+import { useLocalStorageFlag } from 'shared/hooks/useLocalStorageFlag';
 
 const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
+  taskId,
   label,
   description,
   done,
@@ -34,6 +36,7 @@ const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
 }) => {
   const colors = useWeeklyTaskCardColors();
   const ring = getRing(colorScheme);
+  const { value: isStarred } = useLocalStorageFlag(`weekly-task-starred:${String(taskId)}`);
   const effectiveStars = typeof starsCount === 'number' ? starsCount : 37;
   const effectiveComments = typeof commentsCount === 'number' ? commentsCount : 12;
   const effectiveSolved = typeof solvedCount === 'number' ? solvedCount : 128;
@@ -95,7 +98,11 @@ const WeeklyTaskCard: React.FC<WeeklyTaskCardProps> = ({
               <Box as="span">
                 {formatCount(effectiveStars)}
               </Box>
-              <StarIcon boxSize={3} color="yellow.400" />
+              {isStarred ? (
+                <StarIcon boxSize={3} color={colors.starActiveColor} />
+              ) : (
+                <Icon as={FiStar} boxSize={3.5} color={colors.starInactiveColor} />
+              )}
             </Box>
             <Box as="span" display="inline-flex" alignItems="center" gap={1}>
               <Box as="span">

@@ -94,6 +94,7 @@ const TaskDetailScreen: React.FC<TaskDetailScreenProps> = ({ taskId: initialTask
             К задачам недели
           </Button>
           <AuthorNote
+            taskId={taskId}
             name={author.name}
             href={authorHref}
             avatar={authorAvatar}

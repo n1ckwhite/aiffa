@@ -1,8 +1,9 @@
 import React from 'react';
 import { useAuthorCardColors, useAuthorSupportTexts } from 'shared/ui/AuthorCard';
+import { useLocalStorageFlag } from 'shared/hooks/useLocalStorageFlag';
 
-export const useAuthorNoteSupport = (baseStars: number) => {
-  const [isStarred, setIsStarred] = React.useState(false);
+export const useAuthorNoteSupport = (baseStars: number, storageKey: string) => {
+  const { value: isStarred, toggle: handleToggleSupport } = useLocalStorageFlag(storageKey);
 
   const displayStars = React.useMemo(
     () => baseStars + (isStarred ? 1 : 0),
@@ -19,10 +20,6 @@ export const useAuthorNoteSupport = (baseStars: number) => {
     tooltipBg,
     tooltipTextColor,
   } = useAuthorCardColors(isStarred);
-
-  const handleToggleSupport = React.useCallback(() => {
-    setIsStarred((prev) => !prev);
-  }, []);
 
   return {
     isStarred,

@@ -8,16 +8,24 @@ export type UseLocalStorageFlagResult = {
   toggle: () => void;
 };
 
-export const useLocalStorageFlag = (storageKey: string): UseLocalStorageFlagResult => {
-  const [value, setValue] = React.useState(false);
+export const useLocalStorageFlag = (
+  storageKey: string,
+  defaultValue: boolean = false,
+): UseLocalStorageFlagResult => {
+  const [value, setValue] = React.useState(defaultValue);
 
   React.useEffect(() => {
     try {
-      setValue(window.localStorage.getItem(storageKey) === "1");
+      const raw = window.localStorage.getItem(storageKey);
+      if (raw == null) {
+        setValue(defaultValue);
+        return;
+      }
+      setValue(raw === "1");
     } catch {
-      setValue(false);
+      setValue(defaultValue);
     }
-  }, [storageKey]);
+  }, [defaultValue, storageKey]);
 
   const set = React.useCallback(
     (next: boolean) => {

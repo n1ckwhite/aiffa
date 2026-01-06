@@ -1,4 +1,5 @@
 export type AuthorNoteProps = {
+  taskId?: string;
   name: string;
   href: string;
   avatar?: string;

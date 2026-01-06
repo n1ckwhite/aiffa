@@ -2,6 +2,7 @@ import React from "react";
 import { Avatar, Box, HStack, Icon, Link, Text, Tooltip, VStack } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { FiEye, FiMessageCircle } from "react-icons/fi";
+import { FiStar } from "react-icons/fi";
 import { formatCount } from "shared/functions/formatCount";
 import type { AuthorCardProps } from "./types";
 import { useAuthorCardColors } from "./colors/useAuthorCardColors";
@@ -66,7 +67,11 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
               <>
                 <HStack spacing={1} flexShrink={0}>
                   <Box as="span">{formatCount(starsCount)}</Box>
-                  <StarIcon boxSize={3} color={starMetaColor} flexShrink={0} />
+                  {isStarred ? (
+                    <StarIcon boxSize={3} color={starMetaColor} flexShrink={0} />
+                  ) : (
+                    <Icon as={FiStar} boxSize={3.5} color={starMetaColor} flexShrink={0} />
+                  )}
                 </HStack>
                 <Tooltip
                   label={tooltipLabel}

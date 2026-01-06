@@ -1,7 +1,10 @@
+"use client";
+
 import React from 'react';
 import { Box, Icon } from '@chakra-ui/react';
 import { ChevronRightIcon, CheckIcon, StarIcon } from '@chakra-ui/icons';
 import { FiEye, FiMessageCircle } from 'react-icons/fi';
+import { FiStar } from 'react-icons/fi';
 import type { ItemCardProps } from './types';
 import { IndexChip } from '../../../../../LessonCard/parts/IndexChip';
 import { TasksBadge } from '../../../../../LessonCard/parts/Badges/TasksBadge';
@@ -10,6 +13,7 @@ import { AuthorsBadge } from '../../../ProjectLink/parts/AuthorsBadge';
 import { getItemCardMeta } from './data';
 import { formatCount } from 'shared/functions/formatCount';
 import { buildTopBefore, getLessonDateLabel } from './helpers';
+import { useLocalStorageFlag } from 'shared/hooks/useLocalStorageFlag';
 
 export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, colors, levelAccent, arrowAnimationCss, done }) => {
   const topBefore = buildTopBefore(levelAccent);
@@ -17,6 +21,8 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
     getItemCardMeta(lesson, colors);
   const dateLabel = getLessonDateLabel(lesson);
   const cardIndexLabel = done ? <CheckIcon boxSize={3.5} /> : (start + idx + 1);
+  const lessonId = String((lesson as any)?.id ?? "");
+  const { value: isStarred } = useLocalStorageFlag(`lesson-starred:${lessonId}`);
 
   return (
     <Box
@@ -90,7 +96,11 @@ export const ItemCard: React.FC<ItemCardProps> = ({ lesson, href, idx, start, co
           <Box display="inline-flex" alignItems="center" gap={3} rowGap={1} flexWrap="wrap" minW={0}>
             <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
               <Box as="span">{formatCount(starsCount)}</Box>
-              <StarIcon boxSize={3} color="yellow.400" />
+              {isStarred ? (
+                <StarIcon boxSize={3} color="yellow.400" />
+              ) : (
+                <Icon as={FiStar} boxSize={3.5} color={metaColor} flexShrink={0} />
+              )}
             </Box>
             <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
               <Box as="span">{formatCount(views)}</Box>

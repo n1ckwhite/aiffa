@@ -1,3 +1,5 @@
+import { useModuleLessonsColors } from "@/widgets/ModuleLessons/colors";
+
 export type LessonAuthor = { username: string; name?: string };
 
 export type LessonCardItem = {
@@ -17,7 +19,7 @@ export type ItemCardProps = {
   href: string;
   idx: number;
   start: number;
-  colors: any;
+  colors: ReturnType<typeof useModuleLessonsColors>;
   levelAccent: string;
   arrowAnimationCss: string;
   done: boolean;

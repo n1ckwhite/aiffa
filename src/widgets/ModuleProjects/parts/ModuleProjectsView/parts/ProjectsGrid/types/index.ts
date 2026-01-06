@@ -8,3 +8,8 @@ export type ProjectsGridProps = {
 };
 
 
+export type ProjectGridCardProps = {
+  modId: string;
+  project: ProjectItem;
+  colors: ReturnType<typeof useModuleProjectsColors>;
+};

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import MarkdownRenderer from 'shared/ui/MarkdownRenderer';
+import { useLocalStorageFlag } from 'shared/hooks/useLocalStorageFlag';
 import type { MainColumnProps } from './types';
 import { BreadcrumbHeader } from '../BreadcrumbHeader';
 import { AuthorCard } from '../AuthorCard';
@@ -18,30 +19,13 @@ export const MainColumn: React.FC<MainColumnProps> = ({
   const initialStarsCount = Number((lesson as any).ratingCount ?? 0);
   const initialViewsCount = Number((lesson as any).views ?? 0);
   const initialCommentsCount = Number((lesson as any).commentsCount ?? 0);
-  const [starsCount, setStarsCount] = React.useState<number>(initialStarsCount);
-  const [isStarred, setIsStarred] = React.useState<boolean>(false);
-
-  const applyStarChange = (nextStarred: boolean) => {
-    setIsStarred(nextStarred);
-    setStarsCount((prev) => {
-      if (!nextStarred && prev > 0) {
-        return prev - 1;
-      }
-      if (nextStarred) {
-        return prev + 1;
-      }
-      return prev;
-    });
-  };
-
-  const handleToggleStar = () => {
-    applyStarChange(!isStarred);
-  };
+  const lessonId = String((lesson as any)?.id ?? "");
+  const { value: isStarred, toggle: handleToggleStar } = useLocalStorageFlag(`lesson-starred:${lessonId}`);
+  const starsCount = initialStarsCount + (isStarred ? 1 : 0);
 
   const handleSupportClick = () => {
-    if (!isStarred) {
-      applyStarChange(true);
-    }
+    if (isStarred) return;
+    handleToggleStar();
   };
 
   return (

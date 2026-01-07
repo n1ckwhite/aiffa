@@ -12,7 +12,7 @@ import {
 import { useUserProfile } from "entities/user";
 import { useAchievementsData } from "../hooks/useAchievementsData";
 import { ProfileSidebar, RangeButtons, SectionCard, StatTile, HelpList, QuickActionsGrid } from "./parts";
-import { useProfileEdit, useProfileScreenViewModel } from "../model/hooks";
+import { useProfileEdit, useProfileScreenViewModel, useStatsRangeQuery } from "../model/hooks";
 import type { StatTileModel, StatsRange } from "../model/types";
 import { contributionStatsByRange, progressStatsByRange } from "../model/constants";
 import { useProfileScreenUiColors } from "../colors/useProfileScreenUiColors";
@@ -24,10 +24,11 @@ const ProfileScreen: React.FC = () => {
   const { items } = useAchievementsData(profile as any);
   const vm = useProfileScreenViewModel({ profile, achievementItems: items });
 
-  // NOTE: По просьбе — без вычислений через хуки. Ставим цифры напрямую (по диапазонам тоже — хардкод).
-  // Each block owns its own range (do NOT sync).
-  const [statsRange, setStatsRange] = React.useState<StatsRange>("week");
-  const [contributionRange, setContributionRange] = React.useState<StatsRange>("week");
+  const [statsRange, setStatsRange] = useStatsRangeQuery({ key: "statsRange", defaultValue: "week" });
+  const [contributionRange, setContributionRange] = useStatsRangeQuery({
+    key: "contributionRange",
+    defaultValue: "week",
+  });
 
   const currentStats = progressStatsByRange[statsRange];
   const currentContribution = contributionStatsByRange[contributionRange];

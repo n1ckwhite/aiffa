@@ -131,7 +131,7 @@ input:focus {
 }
 
 .course-card:hover {
-  transform: translateY(-4px) scale(1.02);
+  transform: none;
 }
 
 @keyframes fadeInUp {

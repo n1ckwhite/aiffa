@@ -11,7 +11,6 @@ export interface CourseCardProps {
   otherAuthorsCount: number;
   level?: string;
   icon?: React.ReactNode;
-  delay?: number;
   forceActive?: boolean;
   to?: string;
 }

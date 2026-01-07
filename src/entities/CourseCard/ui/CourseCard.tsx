@@ -16,7 +16,6 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
   studyTime,
   level,
   icon,
-  delay = 0,
   forceActive = false,
   to,
 }) => {
@@ -42,7 +41,6 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
 
   const commonProps = buildCourseCardContainerProps({
     isActive,
-    delay,
     title,
     to,
     cardBg,

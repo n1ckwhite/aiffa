@@ -1,10 +1,8 @@
 import type { BoxProps } from "@chakra-ui/react";
-import { fadeInUp } from "../../animations";
 import type { CourseCardHoverHandlers } from "../hooks/useCourseCardHoverState";
 
 export type BuildCourseCardContainerPropsArgs = {
   isActive: boolean;
-  delay: number;
   title: string;
   to?: string;
 
@@ -24,7 +22,6 @@ export type BuildCourseCardContainerPropsArgs = {
  */
 export const buildCourseCardContainerProps = ({
   isActive,
-  delay,
   title,
   to,
   cardBg,
@@ -50,7 +47,6 @@ export const buildCourseCardContainerProps = ({
     p: { base: 6, md: 8 },
     cursor: "pointer",
     transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
-    animation: `${fadeInUp} 0.6s ease-out ${delay}ms both`,
     position: "relative",
     overflow: "hidden",
     h: "100%",

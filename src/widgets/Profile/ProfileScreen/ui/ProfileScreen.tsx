@@ -24,9 +24,9 @@ const ProfileScreen: React.FC = () => {
   const { items } = useAchievementsData(profile as any);
   const vm = useProfileScreenViewModel({ profile, achievementItems: items });
 
-  const [statsRange, setStatsRange] = useStatsRangeQuery({ key: "statsrange", defaultValue: "week" });
+  const [statsRange, setStatsRange] = useStatsRangeQuery({ key: "stats", defaultValue: "week" });
   const [contributionRange, setContributionRange] = useStatsRangeQuery({
-    key: "contributionrange",
+    key: "contribution",
     defaultValue: "week",
   });
 

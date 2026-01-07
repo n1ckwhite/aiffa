@@ -1,5 +1,5 @@
 import React from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { StatsRange } from "../types";
 
 const rangeOrder: readonly StatsRange[] = ["week", "month", "all"];
@@ -8,6 +8,10 @@ const parseRange = (raw: string | null, fallback: StatsRange): StatsRange => {
   if (!raw) return fallback;
   if (rangeOrder.includes(raw as StatsRange)) return raw as StatsRange;
   return fallback;
+};
+
+const getParamCaseInsensitive = (sp: ReadonlyURLSearchParams, key: string): string | null => {
+  return sp.get(key) ?? sp.get(key.toLowerCase());
 };
 
 /**
@@ -28,7 +32,7 @@ export const useStatsRangeQuery = ({
   const searchParams = useSearchParams();
 
   const value = React.useMemo(
-    () => parseRange(searchParams.get(key), defaultValue),
+    () => parseRange(getParamCaseInsensitive(searchParams, key), defaultValue),
     [defaultValue, key, searchParams],
   );
 
@@ -41,6 +45,8 @@ export const useStatsRangeQuery = ({
 
       if (method === "set") nextParams.set(key, next);
       if (method === "delete") nextParams.delete(key);
+      // Also remove the lower-cased variant (in case it was produced by a "lower-case everything" normalizer).
+      if (key.toLowerCase() !== key) nextParams.delete(key.toLowerCase());
 
       const nextSearch = nextParams.toString();
       const nextUrl = nextSearch ? `${pathname}?${nextSearch}` : pathname;

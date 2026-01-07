@@ -71,6 +71,12 @@ export const useProfileScreenUiColors = () => {
   const qaSessionsHoverBg = useColorModeValue("cyan.700", "cyan.800");
   const qaSessionsActiveBg = useColorModeValue("cyan.800", "cyan.900");
 
+
+  const invalidBorder = useColorModeValue("red.300", "red.400");
+  const warningBorder = useColorModeValue("red.200", "red.400");
+  const warningBg = useColorModeValue("red.50", "red.900");
+  const warningText = useColorModeValue("red.800", "red.200");
+
   return {
     cardBg,
     cardBorder,
@@ -120,6 +126,10 @@ export const useProfileScreenUiColors = () => {
     qaSessionsBorder,
     qaSessionsHoverBg,
     qaSessionsActiveBg,
+    invalidBorder,
+    warningBorder,
+    warningBg,
+    warningText,
   };
 };
 

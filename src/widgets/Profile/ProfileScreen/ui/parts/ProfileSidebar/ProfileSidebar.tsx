@@ -19,6 +19,7 @@ export const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   displayLinks,
   isEditing,
   editSessionId,
+  hasTriedSave,
   editInitial,
   saveAction,
   isSaving,
@@ -77,6 +78,7 @@ export const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
 
           <LinksSection
             isEditing={isEditing}
+            hasTriedSave={hasTriedSave}
             displayLinks={displayLinks}
             editInitial={linksEditInitial}
             handleStopHotkeys={handleStopHotkeys}

@@ -1,6 +1,6 @@
 import React from "react";
 import type { ProfileLink } from "entities/user";
-import { normalizeCustomLinkValue } from "../helpers/normalizeCustomLinkValue";
+import { normalizeCustomLinkValue, validateCustomLinkValue } from "../helpers/normalizeCustomLinkValue";
 import { UseProfileEditArgs, UseProfileEditResult } from "./types";
 import type { ProfileEditInitial } from "../types";
 
@@ -13,18 +13,35 @@ export const useProfileEdit = ({
   const [isEditing, setIsEditing] = React.useState<boolean>(false);
   const [editSessionId, setEditSessionId] = React.useState<number>(0);
   const [editInitial, setEditInitial] = React.useState<ProfileEditInitial | null>(null);
+  const [hasTriedSave, setHasTriedSave] = React.useState<boolean>(false);
 
   const [saveState, saveAction, isSaving] = React.useActionState(
     async (_prev: { ok: boolean; error?: string } | null, formData: FormData) => {
       try {
+        setHasTriedSave(true);
         const nextName = String(formData.get("profileName") ?? "").trim();
         const nextBio = String(formData.get("profileBio") ?? "").trim();
         const nextWorkplace = String(formData.get("profileWorkplace") ?? "").trim();
         const nextLocation = String(formData.get("profileLocation") ?? "").trim();
-        const link1 = normalizeCustomLinkValue(String(formData.get("profileLink1") ?? ""));
-        const link2 = normalizeCustomLinkValue(String(formData.get("profileLink2") ?? ""));
-        const link3 = normalizeCustomLinkValue(String(formData.get("profileLink3") ?? ""));
-        const link4 = normalizeCustomLinkValue(String(formData.get("profileLink4") ?? ""));
+        const rawLinks = [
+          String(formData.get("profileLink1") ?? ""),
+          String(formData.get("profileLink2") ?? ""),
+          String(formData.get("profileLink3") ?? ""),
+          String(formData.get("profileLink4") ?? ""),
+        ] as const;
+
+        const validations = rawLinks.map((v) => validateCustomLinkValue(v));
+        const hasAnyError = validations.some((r) => Boolean(r.error));
+        if (hasAnyError) {
+          return { ok: false, error: "Проверьте ссылки: есть запрещённые или некорректные значения." };
+        }
+
+        const [link1, link2, link3, link4] = validations.map((v) => v.normalized) as [
+          string,
+          string,
+          string,
+          string,
+        ];
 
         const nextLinks: ProfileLink[] = [];
         const trimmedEmail = String(emailValue || "").trim();
@@ -45,6 +62,7 @@ export const useProfileEdit = ({
           links: nextLinks,
         });
 
+        setHasTriedSave(false);
         setIsEditing(false);
         return { ok: true };
       } catch (e: any) {
@@ -55,6 +73,7 @@ export const useProfileEdit = ({
   );
 
   const handleStartEdit = React.useCallback(() => {
+    setHasTriedSave(false);
     const nonEmail = displayLinks
       .filter((l) => String((l as any)?.kind ?? "") !== "email")
       .map((l) => normalizeCustomLinkValue(String((l as any)?.value ?? "")))
@@ -71,7 +90,10 @@ export const useProfileEdit = ({
     setIsEditing(true);
   }, [displayLinks, profile]);
 
-  const handleCancelEdit = React.useCallback(() => setIsEditing(false), []);
+  const handleCancelEdit = React.useCallback(() => {
+    setHasTriedSave(false);
+    setIsEditing(false);
+  }, []);
 
   // Prevent global hotkeys / document keydown handlers from stealing focus while typing.
   const handleStopHotkeys = React.useCallback((e: React.KeyboardEvent) => {
@@ -84,6 +106,7 @@ export const useProfileEdit = ({
     editInitial,
     isSaving,
     saveState,
+    hasTriedSave,
     saveAction,
     handleStartEdit,
     handleCancelEdit,

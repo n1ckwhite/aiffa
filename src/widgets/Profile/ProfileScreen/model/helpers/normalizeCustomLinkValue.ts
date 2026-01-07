@@ -1,74 +1,93 @@
-export const normalizeCustomLinkValue = (raw: string): string => {
-  const trimmed = String(raw ?? "").trim();
-  if (!trimmed) return "";
+type LinkValidationError =
+  | "invalid_format"
+  | "invalid_domain"
+  | "unsupported_scheme"
+  | "forbidden_localhost";
 
-  const lower = (value: string): string => value.toLowerCase();
+export type LinkValidationResult = {
+  normalized: string;
+  error: LinkValidationError | null;
+};
 
-  const isValidHostname = (hostname: string): boolean => {
-    const h = hostname.toLowerCase();
-    if (!h) return false;
-    if (h === "localhost") return true;
-    if (/^\d{1,3}(\.\d{1,3}){3}$/.test(h)) return true; // ipv4 (best-effort)
-    if (!h.includes(".")) return false;
-    if (!/^[a-z0-9.-]+$/.test(h)) return false;
-    if (/^\./.test(h) || /\.$/.test(h)) return false;
-    if (h.includes("..")) return false;
-    // No empty labels, no leading/trailing hyphens per label
-    const labels = h.split(".");
-    if (labels.some((p) => !p || p.startsWith("-") || p.endsWith("-"))) return false;
-    return true;
-  };
+const lower = (value: string): string => value.toLowerCase();
 
-  const normalizeAndValidateHttpUrl = (urlString: string): string => {
-    try {
-      const url = new URL(urlString);
-      const protocol = url.protocol.toLowerCase();
-      if (protocol !== "http:" && protocol !== "https:") return "";
-      if (!isValidHostname(url.hostname)) return "";
-      // User request: lower-case everything, always.
-      return lower(urlString);
-    } catch {
-      return "";
-    }
-  };
+const isForbiddenHost = (hostname: string): boolean => {
+  const h = hostname.toLowerCase();
+  return h === "localhost" || h === "127.0.0.1" || h === "0.0.0.0";
+};
 
-  const normalizeAllowedHttpUrl = (scheme: "http" | "https", restRaw: string): string => {
-    const rest = restRaw.replace(/^\/+/, ""); // remove any amount of leading slashes
-    if (!rest) return "";
-    const withTwoSlashes = `${scheme}://${rest}`;
+const isValidHostname = (hostname: string): boolean => {
+  const h = hostname.toLowerCase();
+  if (!h) return false;
+  if (/^\d{1,3}(\.\d{1,3}){3}$/.test(h)) return true; // ipv4 (best-effort)
+  if (!h.includes(".")) return false;
+  if (!/^[a-z0-9.-]+$/.test(h)) return false;
+  if (/^\./.test(h) || /\.$/.test(h)) return false;
+  if (h.includes("..")) return false;
+  const labels = h.split(".");
+  if (labels.some((p) => !p || p.startsWith("-") || p.endsWith("-"))) return false;
+  return true;
+};
 
-    return normalizeAndValidateHttpUrl(withTwoSlashes);
-  };
+const normalizeAllowedHttpUrl = (scheme: "http" | "https", restRaw: string): LinkValidationResult => {
+  const rest = String(restRaw ?? "").replace(/^\/+/, "");
+  if (!rest) return { normalized: "", error: "invalid_format" };
 
-  // Only allow http/https. Any other scheme is treated as "custom" and normalized to https://
-  // Also: always lower-case the entire URL string.
-  //
-  // Examples:
-  // - HTTP://GitHub.com/N1ckWhite -> http://github.com/n1ckwhite
-  // - https:///Example.com -> https://example.com
-  // - ht://Example.com -> https://example.com
-  if (/^https?:/i.test(trimmed)) {
-    const schemeEnd = trimmed.indexOf(":");
-    const schemeRaw = trimmed.slice(0, schemeEnd).toLowerCase();
-    const scheme = schemeRaw === "http" ? "http" : "https";
-    const restRaw = trimmed.slice(schemeEnd + 1);
-    return normalizeAllowedHttpUrl(scheme, restRaw);
+  const candidate = `${scheme}://${rest}`;
+  try {
+    const url = new URL(candidate);
+    const protocol = url.protocol.toLowerCase();
+    if (protocol !== "http:" && protocol !== "https:") return { normalized: "", error: "unsupported_scheme" };
+    if (isForbiddenHost(url.hostname)) return { normalized: "", error: "forbidden_localhost" };
+    if (!isValidHostname(url.hostname)) return { normalized: "", error: "invalid_domain" };
+
+    // User request: lower-case everything, always.
+    const normalized = lower(`${url.protocol}//${url.host}${url.pathname}${url.search}${url.hash}`);
+    return { normalized, error: null };
+  } catch {
+    return { normalized: "", error: "invalid_format" };
   }
+};
 
-  // Has an unsupported scheme (mailto:, tg:, ftp:, ht:, etc.) — drop it and force https://
-  if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) {
-    const schemeEnd = trimmed.indexOf(":");
-    const restRaw = trimmed.slice(schemeEnd + 1);
-    return normalizeAllowedHttpUrl("https", restRaw);
+export const validateCustomLinkValue = (raw: string): LinkValidationResult => {
+  const trimmed = String(raw ?? "").trim();
+  if (!trimmed) return { normalized: "", error: null };
+
+  // If user starts with symbols (____, ...., ====) — treat as invalid.
+  if (!/^[a-z0-9]/i.test(trimmed) && !trimmed.startsWith("//") && !/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) {
+    return { normalized: "", error: "invalid_format" };
   }
 
   // Scheme-relative URLs like //example.com
   if (trimmed.startsWith("//")) return normalizeAllowedHttpUrl("https", trimmed);
 
-  // If user starts with symbols (____, ...., ====) — treat as invalid (don't save/show).
-  if (!/^[a-z0-9]/i.test(trimmed)) return "";
+  // Explicit scheme present
+  if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) {
+    const schemeEnd = trimmed.indexOf(":");
+    const schemeRaw = trimmed.slice(0, schemeEnd).toLowerCase();
+    if (schemeRaw !== "http" && schemeRaw !== "https") {
+      return { normalized: "", error: "unsupported_scheme" };
+    }
+    const scheme = schemeRaw === "http" ? "http" : "https";
+    const restRaw = trimmed.slice(schemeEnd + 1);
+    return normalizeAllowedHttpUrl(scheme, restRaw);
+  }
 
+  // No scheme: assume https://
   return normalizeAllowedHttpUrl("https", `//${trimmed}`);
+};
+
+export const linkErrorMessageByCode: Record<LinkValidationError, string> = {
+  forbidden_localhost: "Локальные адреса (localhost, 127.0.0.1) запрещены.",
+  unsupported_scheme: "Разрешены только ссылки с http:// или https://",
+  invalid_domain: "Некорректный домен. Пример: https://github.com/username",
+  invalid_format: "Некорректная ссылка.",
+};
+
+export const normalizeCustomLinkValue = (raw: string): string => {
+  const { normalized, error } = validateCustomLinkValue(raw);
+  if (error) return "";
+  return normalized;
 };
 
 

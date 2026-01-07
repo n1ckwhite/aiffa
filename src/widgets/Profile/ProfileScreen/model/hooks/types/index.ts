@@ -15,6 +15,7 @@ export type UseProfileEditResult = {
   editInitial: ProfileEditInitial | null;
   isSaving: boolean;
   saveState: { ok: boolean; error?: string } | null;
+  hasTriedSave: boolean;
   saveAction: (formData: FormData) => void;
   handleStartEdit: () => void;
   handleCancelEdit: () => void;

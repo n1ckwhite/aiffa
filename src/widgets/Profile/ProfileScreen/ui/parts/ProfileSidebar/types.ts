@@ -1,5 +1,6 @@
 import type { KeyboardEvent } from "react";
 import type { ProfileLink } from "entities/user";
+import { AchievementItem } from "@/widgets/AchievementsGrid";
 
 export type ProfileBadgeModel = {
   label: string;
@@ -30,6 +31,7 @@ export type ProfileSidebarProps = {
 
   isEditing: boolean;
   editSessionId: number;
+  hasTriedSave: boolean;
   editInitial: {
     name: string;
     bio: string;
@@ -43,9 +45,7 @@ export type ProfileSidebarProps = {
   handleCancelEdit: () => void;
   handleStopHotkeys: (e: KeyboardEvent) => void;
 
-  // Achievements
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  achievedItems: any[];
+  achievedItems: AchievementItem[];
 };
 
 

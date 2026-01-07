@@ -13,7 +13,7 @@ import { useUserProfile } from "entities/user";
 import { useAchievementsData } from "../hooks/useAchievementsData";
 import { ProfileSidebar, RangeButtons, SectionCard, StatTile, HelpList, QuickActionsGrid } from "./parts";
 import { useProfileEdit, useProfileScreenViewModel, useStatsRangeQuery } from "../model/hooks";
-import type { StatTileModel, StatsRange } from "../model/types";
+import type { StatTileModel } from "../model/types";
 import { contributionStatsByRange, progressStatsByRange } from "../model/constants";
 import { useProfileScreenUiColors } from "../colors/useProfileScreenUiColors";
 import { FiAward, FiBarChart2, FiUsers } from "react-icons/fi";
@@ -24,9 +24,9 @@ const ProfileScreen: React.FC = () => {
   const { items } = useAchievementsData(profile as any);
   const vm = useProfileScreenViewModel({ profile, achievementItems: items });
 
-  const [statsRange, setStatsRange] = useStatsRangeQuery({ key: "statsRange", defaultValue: "week" });
+  const [statsRange, setStatsRange] = useStatsRangeQuery({ key: "statsrange", defaultValue: "week" });
   const [contributionRange, setContributionRange] = useStatsRangeQuery({
-    key: "contributionRange",
+    key: "contributionrange",
     defaultValue: "week",
   });
 
@@ -52,6 +52,7 @@ const ProfileScreen: React.FC = () => {
     editInitial,
     isSaving,
     saveState,
+    hasTriedSave,
     saveAction,
     handleStartEdit,
     handleCancelEdit,
@@ -62,7 +63,6 @@ const ProfileScreen: React.FC = () => {
     emailValue: vm.emailValue,
     updateProfile,
   });
-
 
   return (
     <Box
@@ -98,6 +98,7 @@ const ProfileScreen: React.FC = () => {
               displayLinks={vm.displayLinks}
               isEditing={isEditing}
               editSessionId={editSessionId}
+              hasTriedSave={hasTriedSave}
               editInitial={editInitial}
               saveAction={saveAction}
               isSaving={isSaving}
@@ -114,7 +115,7 @@ const ProfileScreen: React.FC = () => {
             <SectionCard
               title="Статистика"
               description="Короткий срез по вашему прогрессу и активности."
-              icon={FiBarChart2 as any}
+              icon={FiBarChart2}
               actions={
                 <RangeButtons
                   value={statsRange}

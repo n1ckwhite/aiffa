@@ -57,7 +57,7 @@ export const useProfileEdit = ({
   const handleStartEdit = React.useCallback(() => {
     const nonEmail = displayLinks
       .filter((l) => String((l as any)?.kind ?? "") !== "email")
-      .map((l) => String((l as any)?.value ?? "").trim())
+      .map((l) => normalizeCustomLinkValue(String((l as any)?.value ?? "")))
       .filter(Boolean);
 
     setEditSessionId((s) => s + 1);

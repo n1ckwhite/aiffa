@@ -10,6 +10,7 @@ import { SmoothCollapse } from '../SmoothCollapse';
 
 export const DetailsBlock: React.FC<DetailsBlockProps> = ({ summary, body, bodyNode, idx, open, onToggle }) => {
   const colors = useDetailsBlockColors();
+  const contentId = `details-block-${idx}`;
   let badge: string | undefined;
   let titleText = summary;
   const m1 = /^\s*\[(.+?)\]\s*(.*)$/.exec(summary);
@@ -57,14 +58,20 @@ export const DetailsBlock: React.FC<DetailsBlockProps> = ({ summary, body, bodyN
           _hover={{ bg: 'blue.700', boxShadow: 'none' }}
           _active={{ bg: 'blue.800', boxShadow: 'none' }}
           aria-expanded={open}
-          sx={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'flex-start', gap: '4px' }}
+          aria-controls={contentId}
+          sx={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'flex-start', gap: '10px' }}
         >
-          <Icon as={ChevronDownIcon} color="white" transform={open ? 'rotate(180deg)' : 'rotate(0deg)'} transition="transform 300ms cubic-bezier(0.22, 1, 0.36, 1)" />
-          <Text as="span">{open ? 'Скрыть' : 'Подробнее'}</Text>
+          <Icon
+            as={ChevronDownIcon}
+            color="white"
+            transform={open ? 'rotate(180deg)' : 'rotate(0deg)'}
+            transition="transform 300ms cubic-bezier(0.22, 1, 0.36, 1)"
+          />
+          <Text as="span">{open ? 'Закрыть' : 'Открыть'}</Text>
         </Button>
       </Box>
       <SmoothCollapse open={open}>
-        <Box px={{ base: 0, md: 1 }} pt={4}>
+        <Box id={contentId} px={{ base: 0, md: 1 }} pt={4}>
           {bodyNode}
         </Box>
       </SmoothCollapse>

@@ -22,6 +22,8 @@ export type ProfileSidebarProps = {
   name: string;
   bio: string;
   xp: number;
+  followersCount: number;
+  followingCount: number;
   profileBadge: ProfileBadgeModel;
 
   workplace: string;

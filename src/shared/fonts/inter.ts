@@ -6,7 +6,7 @@ export const interRegularPreloadHref = interRegularWoff2;
 export const interFont = localFont({
   variable: "--font-inter",
   display: "swap",
-  preload: false,
+  preload: true,
   fallback: [
     "ui-sans-serif",
     "system-ui",

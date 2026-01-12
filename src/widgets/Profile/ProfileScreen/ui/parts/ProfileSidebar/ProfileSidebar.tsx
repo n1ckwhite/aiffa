@@ -12,6 +12,8 @@ export const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   name,
   bio,
   xp,
+  followersCount,
+  followingCount,
   profileBadge,
   workplace,
   locationLabel,
@@ -55,6 +57,8 @@ export const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
           name={name}
           bio={bio}
           xp={xp}
+          followersCount={followersCount}
+          followingCount={followingCount}
           profileBadge={profileBadge}
           isEditing={isEditing}
           editSessionId={editSessionId}

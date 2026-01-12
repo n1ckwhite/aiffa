@@ -71,6 +71,23 @@ export const useProfileScreenUiColors = () => {
   const qaSessionsHoverBg = useColorModeValue("cyan.700", "cyan.800");
   const qaSessionsActiveBg = useColorModeValue("cyan.800", "cyan.900");
 
+  // People panel (followers / following)
+  const peoplePanelIconBg = useColorModeValue("blue.50", "whiteAlpha.100");
+  const peoplePanelIconColor = useColorModeValue("blue.700", "blue.300");
+  const peoplePanelGhostHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
+  const peoplePanelGhostActiveBg = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
+
+  // Range pills (stats/contribution)
+  const rangeActiveBg = useColorModeValue("gray.900", "whiteAlpha.200");
+  const rangeActiveHoverBg = useColorModeValue("gray.800", "whiteAlpha.300");
+  const rangeActiveActiveBg = useColorModeValue("gray.700", "whiteAlpha.200");
+  const rangeActiveText = useColorModeValue("white", "whiteAlpha.900");
+  const rangeActiveIcon = useColorModeValue("white", "whiteAlpha.900");
+
+  const rangeInactiveText = useColorModeValue("gray.800", "whiteAlpha.800");
+  const rangeInactiveHoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.100");
+  const rangeInactiveActiveBg = useColorModeValue("blackAlpha.100", "whiteAlpha.200");
+
 
   const invalidBorder = useColorModeValue("red.300", "red.400");
   const warningBorder = useColorModeValue("red.200", "red.400");
@@ -126,6 +143,18 @@ export const useProfileScreenUiColors = () => {
     qaSessionsBorder,
     qaSessionsHoverBg,
     qaSessionsActiveBg,
+    peoplePanelIconBg,
+    peoplePanelIconColor,
+    peoplePanelGhostHoverBg,
+    peoplePanelGhostActiveBg,
+    rangeActiveBg,
+    rangeActiveHoverBg,
+    rangeActiveActiveBg,
+    rangeActiveText,
+    rangeActiveIcon,
+    rangeInactiveText,
+    rangeInactiveHoverBg,
+    rangeInactiveActiveBg,
     invalidBorder,
     warningBorder,
     warningBg,

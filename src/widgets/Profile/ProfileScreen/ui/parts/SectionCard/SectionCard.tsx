@@ -12,23 +12,21 @@ export const SectionCard: React.FC<SectionCardProps> = ({
   children,
 }) => {
   const { muted: mutedColor } = useProfileScreenUiColors();
-  const { glassBorder, glassBg, accent, headerIconBg } = useSectionCardColors();
+  const { accent, headerIconBg } = useSectionCardColors();
+
+  let actionsBlock: React.ReactNode = null;
+  if (actions) actionsBlock = <Box>{actions}</Box>;
 
   return (
     <Box
-      borderWidth="1px"
-      borderColor={glassBorder}
+      borderWidth="0px"
       borderRadius="24px"
-      bg={glassBg}
+      bg="transparent"
       p={{ base: 4, md: 7 }}
       position="relative"
       overflow="hidden"
       boxShadow="none"
       transition="none"
-      sx={{
-        backdropFilter: "blur(12px) saturate(160%)",
-        WebkitBackdropFilter: "blur(12px) saturate(160%)",
-      }}
     >
       <Box position="relative">
         <HStack
@@ -59,7 +57,7 @@ export const SectionCard: React.FC<SectionCardProps> = ({
             </Text>
           </HStack>
 
-          {!!actions ? <Box>{actions}</Box> : null}
+          {actionsBlock}
         </HStack>
 
         <Text color={mutedColor} mb={4}>

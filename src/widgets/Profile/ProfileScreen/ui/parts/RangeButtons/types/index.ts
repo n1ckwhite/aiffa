@@ -1,8 +1,9 @@
 import type { StatsRange } from "../../../../model/types";
 
 export type RangeButtonsProps = {
+  paramKey: "stats" | "contribution";
   value: StatsRange;
-  onChange: (next: StatsRange) => void;
+  defaultValue?: StatsRange;
   justify?: "flex-start" | "flex-end" | "center";
 };
 

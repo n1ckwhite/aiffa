@@ -9,6 +9,8 @@ export type ProfileHeaderProps = {
   name: string;
   bio: string;
   xp: number;
+  followersCount: number;
+  followingCount: number;
   profileBadge: ProfileBadgeModel;
 
   isEditing: boolean;

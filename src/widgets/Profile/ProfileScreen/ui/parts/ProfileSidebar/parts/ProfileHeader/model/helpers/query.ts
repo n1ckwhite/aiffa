@@ -1,5 +1,5 @@
+import { ProfilePeopleMode } from "@/widgets/Profile/ProfileScreen/model/types";
 import type { ReadonlyURLSearchParams } from "next/navigation";
-import type { ProfilePeopleMode } from "../../../../../../model/types";
 
 type QueryEntry = readonly [key: string, value: string | null];
 

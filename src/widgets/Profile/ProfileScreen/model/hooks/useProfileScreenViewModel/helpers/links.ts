@@ -18,7 +18,7 @@ export const safeProfileLinks = (raw: unknown): ProfileLink[] => {
     if (!id || !value) continue;
 
     const rawKind = safeTrim(record?.kind) || "custom";
-    const kind = PROFILE_LINK_KINDS.has(rawKind) ? (rawKind as ProfileLink["kind"]) : "custom";
+    const kind = PROFILE_LINK_KINDS.has(rawKind as ProfileLink["kind"]) ? (rawKind as ProfileLink["kind"]) : "custom";
     const label = safeTrim(record?.label);
 
     result.push({

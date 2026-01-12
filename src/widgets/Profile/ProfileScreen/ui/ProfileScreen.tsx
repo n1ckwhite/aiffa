@@ -227,13 +227,13 @@ const ProfileScreen: React.FC = () => {
     >
       <Box maxW={{ base: "100%", md: "1000px", lg: "1180px" }} mx="auto">
         <Grid
-          templateColumns={{ base: "1fr", lg: "minmax(320px, 420px) 1fr" }}
-          gap={{ base: 4, md: 6 }}
+          templateColumns={{ base: "1fr", lg: "minmax(320px, 340px) 1fr" }}
+          gap={4}
           alignItems={{ base: "start", lg: "stretch" }}
         >
           <GridItem>
             <Box
-              py={{ base: 0, lg: 4 }}
+              py={{base: 0, lg: 7}}
               h={{ base: "auto", lg: "full" }}
             >
               <ProfileSidebar

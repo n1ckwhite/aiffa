@@ -3,7 +3,7 @@ import type { ProfilePeopleMode } from "../../../types";
 import type { QueryEntry } from "../types";
 import { serializeQuery } from "./serializeQuery";
 
-const PEOPLE_QUERY_KEYS = new Set(["followers", "following"]);
+const PEOPLE_QUERY_KEYS = new Set(["followers", "following", "achievements"]);
 
 export const buildPeopleUrl = (args: {
   pathname: string;
@@ -23,6 +23,7 @@ export const buildPeopleUrl = (args: {
 
   if (nextMode === "followers") nextEntries.push(["followers", null]);
   if (nextMode === "following") nextEntries.push(["following", null]);
+  if (nextMode === "achievements") nextEntries.push(["achievements", null]);
 
   const nextSearch = serializeQuery(nextEntries);
   return nextSearch ? `${pathname}?${nextSearch}` : pathname;

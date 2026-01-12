@@ -2,7 +2,7 @@ import type { ComponentType, ReactNode } from "react";
 
 export type StatsRange = "week" | "month" | "all";
 
-export type ProfilePeopleMode = "stats" | "followers" | "following";
+export type ProfilePeopleMode = "stats" | "followers" | "following" | "achievements";
 
 export type StatTileModel = {
   label: string;

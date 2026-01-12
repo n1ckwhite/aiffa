@@ -2,6 +2,7 @@ import React from "react";
 import { Box, HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import { FiStar } from "react-icons/fi";
 import { formatCount } from "shared/functions/formatCount";
+import { AppLink } from "shared/ui/AppLink";
 import { CompactAchievement } from "../../../CompactAchievement";
 import type { AchievementsSectionProps } from "./types";
 import { useProfileScreenUiColors } from "../../../../../colors/useProfileScreenUiColors";
@@ -35,9 +36,24 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
           >
             <Icon as={FiStar} boxSize="15px" />
           </Box>
-          <Text fontWeight="bold" textAlign="left" w="full">
-            Достижения
-          </Text>
+          <AppLink
+            to="/profile?achievements"
+            prefetch={false}
+            scroll={false}
+            replace
+            aria-label="Открыть достижения"
+            display="inline-flex"
+            w="fit-content"
+            maxW="100%"
+            textDecoration="none"
+            borderBottom="0"
+            _hover={{ textDecoration: "underline", borderBottom: "0" }}
+            _focusVisible={{ boxShadow: "none", outline: "2px solid", outlineOffset: "2px" }}
+          >
+            <Text fontWeight="bold" textAlign="left" w="full">
+              Достижения
+            </Text>
+          </AppLink>
         </HStack>
 
         <Box

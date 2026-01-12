@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useUserProfile } from "entities/user";
 import { useAchievementsData } from "../hooks/useAchievementsData";
-import { ProfileSidebar, RangeButtons, SectionCard, StatTile, HelpList, QuickActionsGrid, PeoplePanel } from "./parts";
+import { ProfileSidebar, RangeButtons, SectionCard, StatTile, HelpList, QuickActionsGrid, PeoplePanel, AchievementsPanel } from "./parts";
 import { useProfileEdit, useProfilePeopleQuery, useProfileScreenViewModel, useStatsRangeQuery } from "../model/hooks";
 import type { ProfilePeopleMode, StatTileModel } from "../model/types";
 import { contributionStatsByRange, progressStatsByRange } from "../model/constants";
@@ -202,15 +202,23 @@ const ProfileScreen: React.FC = () => {
     </VStack>
   );
 
-  const peoplePanelByMode: Record<Exclude<ProfilePeopleMode, "stats">, React.ReactNode> = {
-    followers: <PeoplePanel mode="followers" />,
-    following: <PeoplePanel mode="following" />,
-  };
-
   const rightColumnByMode: Record<ProfilePeopleMode, React.ReactNode> = {
     stats: statsPanel,
-    followers: <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>{peoplePanelByMode.followers}</VStack>,
-    following: <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>{peoplePanelByMode.following}</VStack>,
+    followers: (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <PeoplePanel mode="followers" />
+      </VStack>
+    ),
+    following: (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <PeoplePanel mode="following" />
+      </VStack>
+    ),
+    achievements: (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <AchievementsPanel items={items as any} />
+      </VStack>
+    ),
   };
 
   const rightColumn = rightColumnByMode[peopleMode];

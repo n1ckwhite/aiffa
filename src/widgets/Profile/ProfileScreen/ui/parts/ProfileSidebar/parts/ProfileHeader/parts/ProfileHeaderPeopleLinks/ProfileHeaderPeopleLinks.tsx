@@ -20,12 +20,13 @@ export const ProfileHeaderPeopleLinks: React.FC<ProfileHeaderPeopleLinksProps> =
         <AppLink
           to={followersLinkProps.to}
           aria-label="Открыть список подписчиков"
-          color={followersLinkProps.color}
+          color={mutedColor}
           fontWeight="semibold"
-          textDecoration={followersLinkProps.textDecoration}
+          textDecoration="none"
+          borderBottom="0"
           display="inline-flex"
           alignItems="center"
-          _hover={{ textDecoration: "underline", color: hoverColor }}
+          _hover={{ textDecoration: "underline", borderBottom: "0", color: hoverColor }}
           _active={{ opacity: 0.9 }}
         >
           <HStack spacing={1.5} align="center">
@@ -41,12 +42,13 @@ export const ProfileHeaderPeopleLinks: React.FC<ProfileHeaderPeopleLinksProps> =
         <AppLink
           to={followingLinkProps.to}
           aria-label="Открыть список подписок"
-          color={followingLinkProps.color}
+          color={mutedColor}
           fontWeight="semibold"
-          textDecoration={followingLinkProps.textDecoration}
+          textDecoration="none"
+          borderBottom="0"
           display="inline-flex"
           alignItems="center"
-          _hover={{ textDecoration: "underline", color: hoverColor }}
+          _hover={{ textDecoration: "underline", borderBottom: "0", color: hoverColor }}
           _active={{ opacity: 0.9 }}
         >
           <Text as="span">{followingLinkProps.label}</Text>

@@ -48,8 +48,6 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = (props) => {
 
   const { followersLinkProps, followingLinkProps } = useProfileHeaderPeopleLinks({
     activeMode: mode,
-    mutedColor: muted,
-    activeColor: linkTextColor,
     followersCount: followersCountToShow,
     followingCount: followingCountToShow,
   });

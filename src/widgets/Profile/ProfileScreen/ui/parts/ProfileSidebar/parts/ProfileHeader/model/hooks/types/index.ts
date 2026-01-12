@@ -1,16 +1,12 @@
 import { ProfilePeopleMode } from "@/widgets/Profile/ProfileScreen/model/types";
 
 export type ProfileHeaderPeopleLinkProps = {
-    to: string;
-    label: string;
-    color: string;
-    textDecoration: "none" | "underline";
-  };
+  to: string;
+  label: string;
+};
   
   export type UseProfileHeaderPeopleLinksArgs = {
     activeMode: ProfilePeopleMode;
-    mutedColor: string;
-    activeColor: string;
     followersCount: number;
     followingCount: number;
   };

@@ -8,5 +8,6 @@ export * from "./RangeButtons";
 export * from "./HelpList";
 export * from "./QuickActionsGrid";
 export * from "./PeoplePanel";
+export * from "./AchievementsPanel";
 
 

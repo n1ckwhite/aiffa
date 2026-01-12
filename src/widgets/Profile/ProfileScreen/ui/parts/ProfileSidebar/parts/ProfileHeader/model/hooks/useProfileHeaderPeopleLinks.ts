@@ -9,7 +9,7 @@ import { ProfileHeaderPeopleLinkProps } from "./types";
 export const useProfileHeaderPeopleLinks = (
   args: UseProfileHeaderPeopleLinksArgs,
 ): UseProfileHeaderPeopleLinksResult => {
-  const { activeMode, mutedColor, activeColor, followersCount, followingCount } = args;
+  const { activeMode, followersCount, followingCount } = args;
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -40,19 +40,15 @@ export const useProfileHeaderPeopleLinks = (
     return {
       to: followersHref,
       label: `${formatCount(followersCount)} подписчики`,
-      color: isFollowersOpen ? activeColor : mutedColor,
-      textDecoration: isFollowersOpen ? "underline" : "none",
     };
-  }, [activeColor, followersCount, followersHref, isFollowersOpen, mutedColor]);
+  }, [followersCount, followersHref]);
 
   const followingLinkProps: ProfileHeaderPeopleLinkProps = React.useMemo(() => {
     return {
       to: followingHref,
       label: `${formatCount(followingCount)} подписан`,
-      color: isFollowingOpen ? activeColor : mutedColor,
-      textDecoration: isFollowingOpen ? "underline" : "none",
     };
-  }, [activeColor, followingCount, followingHref, isFollowingOpen, mutedColor]);
+  }, [followingCount, followingHref]);
 
   return { followersLinkProps, followingLinkProps };
 };

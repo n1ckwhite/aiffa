@@ -11,6 +11,8 @@ export type AchievementItem = {
 
 export type AchievementsGridProps = {
   items: AchievementItem[];
+  showHeader?: boolean;
+  showBackground?: boolean;
 };
 
 

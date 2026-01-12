@@ -13,12 +13,17 @@ export const SectionCard: React.FC<SectionCardProps> = ({
 }) => {
   const { muted: mutedColor } = useProfileScreenUiColors();
   const { accent, headerIconBg } = useSectionCardColors();
+  const headerId = React.useId();
+  const descriptionId = React.useId();
 
   let actionsBlock: React.ReactNode = null;
   if (actions) actionsBlock = <Box>{actions}</Box>;
 
   return (
     <Box
+      as="section"
+      aria-labelledby={headerId}
+      aria-describedby={descriptionId}
       borderWidth="0px"
       borderRadius="24px"
       bg="transparent"
@@ -52,7 +57,7 @@ export const SectionCard: React.FC<SectionCardProps> = ({
             >
               <Icon as={icon} boxSize="18px" />
             </Box>
-            <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }}>
+            <Text as="h2" id={headerId} fontWeight="bold" fontSize={{ base: "lg", md: "xl" }}>
               {title}
             </Text>
           </HStack>
@@ -60,7 +65,7 @@ export const SectionCard: React.FC<SectionCardProps> = ({
           {actionsBlock}
         </HStack>
 
-        <Text color={mutedColor} mb={4}>
+        <Text as="p" id={descriptionId} color={mutedColor} mb={4}>
           {description}
         </Text>
 

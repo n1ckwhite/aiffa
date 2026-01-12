@@ -54,10 +54,11 @@ export const PeopleListRow: React.FC<PeopleListRowProps> = ({ item, isFollowing,
 
   return (
     <Box
+      as="li"
       bg="transparent"
       px={{ base: 3, md: 4 }}
       py={{ base: 3, md: 3.5 }}
-      role="group"
+      listStyleType="none"
     >
       <HStack spacing={4} align="flex-start" justify="space-between">
         <Avatar name={item.name} src={item.avatarUrl} boxSize="56px" />

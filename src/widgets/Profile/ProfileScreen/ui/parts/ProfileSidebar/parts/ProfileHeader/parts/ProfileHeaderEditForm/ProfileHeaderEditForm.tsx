@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Input, Textarea, VStack } from "@chakra-ui/react";
+import { Box, Input, Text, Textarea, VStack, VisuallyHidden } from "@chakra-ui/react";
 import { ProfileHeaderEditFormProps } from "./types";
 
 export const ProfileHeaderEditForm: React.FC<ProfileHeaderEditFormProps> = (props) => {
@@ -14,6 +14,11 @@ export const ProfileHeaderEditForm: React.FC<ProfileHeaderEditFormProps> = (prop
       align={{ base: "center", md: "start" }}
       alignSelf={{ base: "center", md: "flex-start" }}
     >
+      <VisuallyHidden>
+        <Text as="h1" id="profile-page-title">
+          Профиль
+        </Text>
+      </VisuallyHidden>
       <Box as="form" id="profile-edit-form" action={saveAction} display="none" />
       <Input
         id="profile-name"

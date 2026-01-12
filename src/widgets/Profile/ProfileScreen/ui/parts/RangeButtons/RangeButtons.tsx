@@ -16,9 +16,13 @@ export const RangeButtons: React.FC<RangeButtonsProps> = ({
   const { headerNavIconColor } = useProfileScreenUiColors();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const ariaLabelByKey: Record<RangeButtonsProps["paramKey"], string> = {
+    stats: "Период статистики",
+    contribution: "Период вклада в сообщество",
+  };
 
   return (
-    <HStack spacing={2} flexWrap="wrap" justify={justify}>
+    <HStack as="nav" aria-label={ariaLabelByKey[paramKey]} spacing={2} flexWrap="wrap" justify={justify}>
       {rangeOrder.map((r) => {
         const style = getRangeButtonStyle({ value, current: r, headerNavIconColor });
         const leftIcon = <Icon as={iconByRange[r]} color={style.iconColor} />;
@@ -34,6 +38,7 @@ export const RangeButtons: React.FC<RangeButtonsProps> = ({
             size="sm"
             variant={style.variant}
             colorScheme={style.colorScheme as any}
+            bg={style.bg}
             color={style.color}
             borderRadius="full"
             leftIcon={leftIcon}

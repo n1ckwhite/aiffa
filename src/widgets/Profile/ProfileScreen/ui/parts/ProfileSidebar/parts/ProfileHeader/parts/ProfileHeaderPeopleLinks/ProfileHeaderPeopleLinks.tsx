@@ -8,7 +8,14 @@ export const ProfileHeaderPeopleLinks: React.FC<ProfileHeaderPeopleLinksProps> =
   const { followersLinkProps, followingLinkProps, hoverColor, mutedColor } = props;
 
   return (
-    <HStack spacing={2} justify={{ base: "center", md: "flex-start" }} w="full" flexWrap="wrap">
+    <HStack
+      as="nav"
+      aria-label="Подписки и подписчики"
+      spacing={2}
+      justify={{ base: "center", md: "flex-start" }}
+      w="full"
+      flexWrap="wrap"
+    >
       <HStack spacing={1.5} flexWrap="wrap">
         <AppLink
           to={followersLinkProps.to}

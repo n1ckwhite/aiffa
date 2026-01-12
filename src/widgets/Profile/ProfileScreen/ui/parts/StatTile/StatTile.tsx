@@ -34,13 +34,14 @@ export const StatTile: React.FC<StatTileProps> = ({
   const focusVisibleByHasTooltip = buildFocusVisibleByHasTooltip(focusRing);
   const hintNode = [
     null,
-    <Text key="hint" fontSize="sm" color={mutedColor}>
+    <Text key="hint" as="dd" m={0} fontSize="sm" color={mutedColor}>
       {hint}
     </Text>,
   ][Number(Boolean(hint))];
 
   const tile = (
     <Box
+      as="dl"
       borderWidth="1px"
       borderColor={cardBorder}
       borderRadius={tileBorderRadius}
@@ -62,6 +63,7 @@ export const StatTile: React.FC<StatTileProps> = ({
 
       <Box pr={tileContentPr}>
         <Text
+          as="dt"
           fontSize="sm"
           color={mutedColor}
           lineHeight="1.25"
@@ -74,7 +76,7 @@ export const StatTile: React.FC<StatTileProps> = ({
       </Box>
 
       <Box display="flex" alignItems="center" pr={tileContentPr}>
-        <Text fontWeight="bold" fontSize={valueFontSize} lineHeight="1.1">
+        <Text as="dd" fontWeight="bold" fontSize={valueFontSize} lineHeight="1.1" m={0}>
           {formattedValue}
         </Text>
       </Box>

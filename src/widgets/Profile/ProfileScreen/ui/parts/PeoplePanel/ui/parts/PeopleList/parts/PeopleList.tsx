@@ -5,7 +5,7 @@ import { PeopleListRow } from "./PeopleListRow";
 
 export const PeopleList: React.FC<PeopleListProps> = ({ items, isFollowingById, onToggleFollowById }) => {
   return (
-    <VStack align="stretch" spacing={0}>
+    <VStack as="ul" role="list" listStyleType="none" m={0} p={0} align="stretch" spacing={0}>
       {items.map((item) => (
         <PeopleListRow
           key={item.id}

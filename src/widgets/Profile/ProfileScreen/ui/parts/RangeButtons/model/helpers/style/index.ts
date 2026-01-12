@@ -19,6 +19,7 @@ export const getRangeButtonStyle = (args: {
     inactive: {
       variant: variantByState.inactive,
       colorScheme: undefined,
+      bg: undefined,
       color: undefined,
       iconColor: headerNavIconColor,
       hoverBg: "blackAlpha.50",
@@ -27,10 +28,12 @@ export const getRangeButtonStyle = (args: {
     active: {
       variant: variantByState.active,
       colorScheme: "blue",
+      // Enforce a darker base background so white text/icon pass contrast checks (WCAG).
+      bg: "blue.700",
       color: "white",
       iconColor: "white",
-      hoverBg: "blue.600",
-      activeBg: "blue.700",
+      hoverBg: "blue.800",
+      activeBg: "blue.900",
     },
   };
 

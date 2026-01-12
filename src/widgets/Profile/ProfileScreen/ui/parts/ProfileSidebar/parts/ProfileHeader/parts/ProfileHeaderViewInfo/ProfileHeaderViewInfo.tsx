@@ -10,6 +10,8 @@ export const ProfileHeaderViewInfo: React.FC<ProfileHeaderViewInfoProps> = (prop
   return (
     <>
       <Text
+        as="h1"
+        id="profile-page-title"
         fontWeight="bold"
         fontSize={{ base: "2xl", md: "3xl" }}
         lineHeight="1.15"

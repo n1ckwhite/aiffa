@@ -41,6 +41,8 @@ export const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
 
   return (
     <Grid
+      as="aside"
+      aria-label="Панель профиля"
       w="full"
       templateColumns={{
         base: "1fr",

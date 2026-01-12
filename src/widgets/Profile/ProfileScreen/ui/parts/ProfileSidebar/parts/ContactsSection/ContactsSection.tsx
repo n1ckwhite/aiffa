@@ -85,8 +85,10 @@ export const ContactsSection: React.FC<ContactsSectionProps> = (props) => {
         href={`mailto:${emailValue}`}
         color={linkTextColor}
         fontWeight="semibold"
-        maxW="360px"
-        noOfLines={1}
+        display="inline-flex"
+        w="fit-content"
+        maxW="100%"
+        isTruncated
         sx={{ overflowWrap: "anywhere" }}
         aria-label={`Email: ${emailValue}`}
       >

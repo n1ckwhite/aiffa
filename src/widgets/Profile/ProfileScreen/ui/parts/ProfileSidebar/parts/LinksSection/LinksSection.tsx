@@ -124,8 +124,9 @@ export const LinksSection: React.FC<LinksSectionProps> = (props) => {
               fontSize="md"
               color={warningText}
               fontWeight="semibold"
-              flex={1}
-              minW={0}
+              w="fit-content"
+              maxW="100%"
+              flex="0 0 auto"
               whiteSpace="normal"
               sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}
             >
@@ -138,9 +139,10 @@ export const LinksSection: React.FC<LinksSectionProps> = (props) => {
               color={linkTextColor}
               fontWeight="semibold"
               fontSize="md"
-              flex={1}
-              minW={0}
-              display="block"
+              w="fit-content"
+              maxW="100%"
+              flex="0 0 auto"
+              display="inline-flex"
               whiteSpace="normal"
               sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}
               aria-label={`Открыть ссылку: ${l.value}`}

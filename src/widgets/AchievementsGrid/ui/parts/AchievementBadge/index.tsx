@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, HStack, Icon, Text, Tooltip, VStack, useColorModeValue } from '@chakra-ui/react';
+import { Box, HStack, Icon, Text, Tooltip, VStack } from '@chakra-ui/react';
 import { FaCircleInfo } from 'react-icons/fa6';
 import { useAchievementsGridColors } from '../../../colors';
 import { achievementDescriptions } from '../../../model/data';
@@ -20,13 +20,13 @@ export const AchievementBadge: React.FC<AchievementBadgeProps> = ({ item }) => {
   const description = item.desc || achievementDescriptions[item.id] || 'Откройте за активность на платформе';
 
   return (
-    <Box as="li" listStyleType="none" minW={0}>
+    <Box as="li" minW={0}>
       <Tooltip
         hasArrow
         openDelay={220}
         placement="top"
         label={
-          <HStack spacing={2} maxW="220px">
+          <HStack spacing={2} maxW={{ base: "260px", md: "320px" }}>
             <Icon as={FaCircleInfoElement} />
             <Text fontSize="xs">{description}</Text>
           </HStack>
@@ -40,7 +40,7 @@ export const AchievementBadge: React.FC<AchievementBadgeProps> = ({ item }) => {
           tabIndex={item.achieved ? 0 : -1}
           w="full"
           minW={0}
-          minH={{ base: "96px", sm: "104px" }}
+          minH={{ base: "104px", sm: "112px" }}
           px={{ base: 4, sm: 5 }}
           py={{ base: 3.5, sm: 4 }}
           borderRadius={{ base: "16px", md: "18px" }}
@@ -49,7 +49,7 @@ export const AchievementBadge: React.FC<AchievementBadgeProps> = ({ item }) => {
           bg={cardBg}
           display="flex"
           flexDirection="row"
-          alignItems="center"
+          alignItems="flex-start"
           justifyContent="flex-start"
           gap={{ base: 3, sm: 4 }}
           textAlign="left"
@@ -101,21 +101,23 @@ export const AchievementBadge: React.FC<AchievementBadgeProps> = ({ item }) => {
             </Box>
           </Box>
 
-          <VStack align="start" spacing={1} minW={0} flex={1}>
+          <VStack align="start" spacing={1} minW={0} flex={1} pt={{ base: 0.5, sm: 1 }}>
             <Text
               fontSize={{ base: "sm", sm: "md" }}
               fontWeight="semibold"
-              noOfLines={2}
+              whiteSpace="normal"
+              wordBreak="break-word"
               color={item.achieved ? labelColor : mutedLabelColor}
               opacity={item.achieved ? 1 : 0.9}
             >
               {item.label}
             </Text>
             <Text
-              fontSize="xs"
+              fontSize={{ base: "xs", sm: "sm" }}
               color={mutedLabelColor}
               opacity={item.achieved ? 0.9 : 0.75}
-              noOfLines={1}
+              whiteSpace="normal"
+              wordBreak="break-word"
             >
               {description}
             </Text>

@@ -233,7 +233,6 @@ const ProfileScreen: React.FC = () => {
         >
           <GridItem>
             <Box
-              px={{ base: 0, lg: 4 }}
               py={{ base: 0, lg: 4 }}
               h={{ base: "auto", lg: "full" }}
             >

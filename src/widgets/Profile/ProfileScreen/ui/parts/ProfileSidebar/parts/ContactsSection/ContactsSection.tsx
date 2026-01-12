@@ -24,7 +24,7 @@ export const ContactsSection: React.FC<ContactsSectionProps> = (props) => {
   const fields: FieldDef[] = [
     {
       key: "workplace",
-      icon: FiBriefcase as any,
+      icon: FiBriefcase,
       iconColor: leftIconColors.work,
       viewValue: workplace,
       edit: {
@@ -37,7 +37,7 @@ export const ContactsSection: React.FC<ContactsSectionProps> = (props) => {
     },
     {
       key: "location",
-      icon: FiMapPin as any,
+      icon: FiMapPin,
       iconColor: leftIconColors.location,
       viewValue: locationLabel,
       edit: {

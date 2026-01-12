@@ -39,6 +39,18 @@ export const usePeoplePagination = (items: PeopleListItem[]): UsePeoplePaginatio
   const prevHrefRaw = buildPageHref({ pathname, searchParams, nextPage: page - 1 });
   const nextHrefRaw = buildPageHref({ pathname, searchParams, nextPage: page + 1 });
 
+  const pageLinks = React.useMemo(() => {
+    const links = Array.from({ length: totalPages }, (_, index) => {
+      const pageNumber = index + 1;
+      return {
+        page: pageNumber,
+        href: buildPageHref({ pathname, searchParams, nextPage: pageNumber }),
+        isCurrent: pageNumber === page,
+      };
+    });
+    return links;
+  }, [page, pathname, searchParams, totalPages]);
+
   const prevHrefByDisabled: Record<number, string> = {
     0: prevHrefRaw,
     1: currentHref,
@@ -58,6 +70,7 @@ export const usePeoplePagination = (items: PeopleListItem[]): UsePeoplePaginatio
     isNextDisabled,
     prevHref: prevHrefByDisabled[Number(isPrevDisabled)],
     nextHref: nextHrefByDisabled[Number(isNextDisabled)],
+    pageLinks,
   };
 };
 

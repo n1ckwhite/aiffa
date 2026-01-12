@@ -1,5 +1,11 @@
 import { PeopleListItem } from "../../../../types";
 
+export type PeoplePageLinkItem = {
+  page: number;
+  href: string;
+  isCurrent: boolean;
+};
+
 export type UsePeoplePaginationResult = {
     page: number;
     totalPages: number;
@@ -9,4 +15,5 @@ export type UsePeoplePaginationResult = {
     isNextDisabled: boolean;
     prevHref: string;
     nextHref: string;
+    pageLinks: PeoplePageLinkItem[];
   };

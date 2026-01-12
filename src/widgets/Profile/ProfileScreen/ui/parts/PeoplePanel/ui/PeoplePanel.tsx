@@ -1,5 +1,5 @@
 import React from "react";
-import { HStack, Icon, VStack } from "@chakra-ui/react";
+import { HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import { FiArrowLeft, FiChevronLeft, FiChevronRight, FiUsers } from "react-icons/fi";
 import { AppButtonLink } from "shared/ui/AppLink";
 import { useProfileScreenUiColors } from "../../../../colors/useProfileScreenUiColors";
@@ -20,14 +20,14 @@ export const PeoplePanel: React.FC<PeoplePanelProps> = ({ mode }) => {
     primaryBtnActiveBg,
     linkTextColor,
     cardBorder,
+    muted,
   } = useProfileScreenUiColors();
   const copy = copyByMode[mode as PeoplePanelMode];
 
   const items = peopleMockByMode[mode];
 
-  const { pageItems, shouldShowPagination, isPrevDisabled, isNextDisabled, prevHref, nextHref } = usePeoplePagination(
-    items,
-  );
+  const { pageItems, shouldShowPagination, isPrevDisabled, isNextDisabled, prevHref, nextHref, page, totalPages } =
+    usePeoplePagination(items);
   const { isFollowingById, onToggleFollowById } = usePeopleFollowState(items);
 
   const hasItems = items.length > 0;
@@ -35,7 +35,7 @@ export const PeoplePanel: React.FC<PeoplePanelProps> = ({ mode }) => {
   const paginationByShouldShow: Record<number, React.ReactNode> = {
     0: null,
     1: (
-      <HStack justify="center" spacing={3} pt={1}>
+      <HStack as="nav" aria-label="Пагинация" justify="center" spacing={3} pt={1}>
         <AppButtonLink
           to={prevHref}
           prefetch={false}

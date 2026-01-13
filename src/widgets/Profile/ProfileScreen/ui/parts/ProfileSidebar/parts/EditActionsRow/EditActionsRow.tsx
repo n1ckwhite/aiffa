@@ -20,7 +20,7 @@ export const EditActionsRow: React.FC<EditActionsRowProps> = ({
         size="sm"
         h="36px"
         px={5}
-        borderRadius="md"
+        borderRadius="full"
         fontWeight="semibold"
         bg={primaryBtnBg}
         color="white"
@@ -38,7 +38,7 @@ export const EditActionsRow: React.FC<EditActionsRowProps> = ({
         size="sm"
         h="36px"
         px={5}
-        borderRadius="md"
+        borderRadius="full"
         variant="outline"
         isDisabled={isSaving}
       >

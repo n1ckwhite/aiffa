@@ -18,7 +18,7 @@ export const QuickActionsGrid: React.FC<QuickActionsGridProps> = ({ kind }) => {
             key={item.id}
             to={item.to}
             size="sm"
-            borderRadius="md"
+            borderRadius="full"
             fontWeight="semibold"
             bg={style.bg}
             color="white"

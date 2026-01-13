@@ -98,7 +98,7 @@ export const PeoplePanel: React.FC<PeoplePanelProps> = ({ mode }) => {
           color="white"
           h="40px"
           px={4}
-          borderRadius="md"
+          borderRadius="full"
           fontWeight="semibold"
           _hover={{ bg: primaryBtnHoverBg, transform: "translateY(-1px)", boxShadow: "md" }}
           _active={{ bg: primaryBtnActiveBg, transform: "translateY(0px)", boxShadow: "sm" }}

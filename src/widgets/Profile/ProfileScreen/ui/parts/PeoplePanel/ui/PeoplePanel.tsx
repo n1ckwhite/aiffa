@@ -39,8 +39,6 @@ export const PeoplePanel: React.FC<PeoplePanelProps> = ({ mode }) => {
         <AppButtonLink
           to={prevHref}
           prefetch={false}
-          scroll={false}
-          replace
           isDisabled={isPrevDisabled}
           aria-label="Предыдущая страница"
           size="sm"
@@ -59,8 +57,6 @@ export const PeoplePanel: React.FC<PeoplePanelProps> = ({ mode }) => {
         <AppButtonLink
           to={nextHref}
           prefetch={false}
-          scroll={false}
-          replace
           isDisabled={isNextDisabled}
           aria-label="Следующая страница"
           size="sm"
@@ -126,7 +122,7 @@ export const PeoplePanel: React.FC<PeoplePanelProps> = ({ mode }) => {
           leftIcon={<Icon as={FiArrowLeft} />}
           aria-label="Вернуться в профиль"
           h="40px"
-          borderRadius="md"
+          borderRadius="full"
           _hover={{ bg: peoplePanelGhostHoverBg }}
           _active={{ bg: peoplePanelGhostActiveBg }}
         >

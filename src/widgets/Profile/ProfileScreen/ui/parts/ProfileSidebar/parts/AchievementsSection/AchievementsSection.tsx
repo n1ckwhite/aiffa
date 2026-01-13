@@ -39,8 +39,6 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
           <AppLink
             to="/profile?achievements"
             prefetch={false}
-            scroll={false}
-            replace
             aria-label="Открыть достижения"
             display="inline-flex"
             w="fit-content"

@@ -16,7 +16,7 @@ export const useProfilePeopleQuery = (): UseProfilePeopleQueryResult => {
   const setMode = React.useCallback(
     (next: ProfilePeopleMode) => {
       const nextUrl = buildPeopleUrl({ pathname, searchParams, nextMode: next });
-      router.replace(nextUrl, { scroll: false });
+      router.push(nextUrl);
     },
     [pathname, router, searchParams],
   );

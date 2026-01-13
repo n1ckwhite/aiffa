@@ -27,13 +27,11 @@ export const AchievementsPanel: React.FC<AchievementsPanelProps> = ({ items }) =
         <AppButtonLink
           to="/profile"
           prefetch={false}
-          scroll={false}
-          replace
           variant="ghost"
           leftIcon={<Icon as={FiArrowLeft} />}
           aria-label="Вернуться в профиль"
           h="40px"
-          borderRadius="md"
+          borderRadius="full"
           _hover={{ bg: peoplePanelGhostHoverBg }}
           _active={{ bg: peoplePanelGhostActiveBg }}
         >

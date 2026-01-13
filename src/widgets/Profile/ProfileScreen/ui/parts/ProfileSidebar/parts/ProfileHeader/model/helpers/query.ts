@@ -27,6 +27,8 @@ export const buildPeopleHref = (args: {
     if (normalizedKey === "following") continue;
     if (normalizedKey === "achievements") continue;
     if (normalizedKey === "page") continue;
+    if (normalizedKey === "stats") continue;
+    if (normalizedKey === "contribution") continue;
     baseEntries.push([key, value]);
   }
 

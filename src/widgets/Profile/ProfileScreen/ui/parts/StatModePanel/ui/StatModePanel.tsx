@@ -10,7 +10,7 @@ import { SectionCard } from "../../SectionCard";
 import { PaginationNav } from "../../PaginationNav";
 import type { StatModePanelProps } from "../model";
 import { usePanelPagination } from "../model";
-import { PlainListItem, WeeklyCardItem } from "./parts";
+import { MaterialCardItem, PlainListItem, WeeklyCardItem } from "./parts";
 
 export const StatModePanel: React.FC<StatModePanelProps> = ({ title, description, icon, items, pagination, actions }) => {
   const { peoplePanelGhostHoverBg, peoplePanelGhostActiveBg, cardBorder, muted } = useProfileScreenUiColors();
@@ -59,6 +59,15 @@ export const StatModePanel: React.FC<StatModePanelProps> = ({ title, description
 
               if (it.cardVariant === "weekly") {
                 return <WeeklyCardItem key={`${titleDomId}-${it.title}`} item={it} titleDomId={titleDomId} mutedColor={muted} />;
+              }
+
+              if (it.cardVariant === "material") {
+                return (
+                  <MaterialCardItem
+                    key={`${titleDomId}-${it.title}`}
+                    item={it}
+                  />
+                );
               }
 
               return (

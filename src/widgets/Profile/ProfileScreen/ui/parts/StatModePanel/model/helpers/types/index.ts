@@ -18,6 +18,19 @@ export type WeeklyStatModePanelItem = {
   solvedCount: number;
 };
 
+export type MaterialStatModePanelItem = {
+  cardVariant: "material";
+  title: string;
+  to: string;
+  starsCount: number;
+  viewsCount: number;
+  commentsCount: number;
+  tasksCount: number;
+  authorUsername: string;
+  authorName?: string;
+  dateIso?: string;
+};
+
 export type PlainStatModePanelItem = {
   cardVariant?: undefined;
   title: string;
@@ -27,7 +40,7 @@ export type PlainStatModePanelItem = {
   authorHref: string;
 };
 
-export type StatModePanelItem = WeeklyStatModePanelItem | PlainStatModePanelItem;
+export type StatModePanelItem = WeeklyStatModePanelItem | MaterialStatModePanelItem | PlainStatModePanelItem;
 
 export type StatModePanelPaginationConfig = {
   pageSize: number;

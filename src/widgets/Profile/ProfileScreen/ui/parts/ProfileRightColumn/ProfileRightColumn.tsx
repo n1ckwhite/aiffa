@@ -55,7 +55,13 @@ export const ProfileRightColumn: React.FC<ProfileRightColumnProps> = ({ mode, ac
 
   return (
     <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
-      <StatModePanel title={config.title} description={config.description} icon={config.icon} items={config.items} />
+      <StatModePanel
+        title={config.title}
+        description={config.description}
+        icon={config.icon}
+        items={config.items}
+        pagination={config.pagination}
+      />
     </VStack>
   );
 };

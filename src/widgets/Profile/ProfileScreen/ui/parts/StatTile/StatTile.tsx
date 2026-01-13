@@ -5,8 +5,8 @@ import { useProfileScreenUiColors } from "../../../colors/useProfileScreenUiColo
 import type { StatTileProps } from "./types";
 import { useStatTileColors } from "./colors/useStatTileColors";
 import { WatermarkIcon } from "./parts";
+import { AppBoxLink } from "shared/ui/AppLink";
 import {
-  buildWatermarkSx,
   buildFocusVisibleByHasTooltip,
   tabIndexByHasTooltip,
   tileBorderRadius,
@@ -24,6 +24,7 @@ export const StatTile: React.FC<StatTileProps> = ({
   tooltip,
   accentColor,
   emphasis,
+  to,
 }) => {
   const { watermarkColor, hoverBorder, focusRing, baseColor } = useStatTileColors();
   const { cardBg, cardBorder, muted: mutedColor } = useProfileScreenUiColors();
@@ -31,6 +32,7 @@ export const StatTile: React.FC<StatTileProps> = ({
   const formattedValue = typeof value === "number" ? formatCount(value) : value;
   const valueFontSize = valueFontSizeByEmphasis[Number(!!emphasis)];
   const hasTooltip = Boolean(tooltip);
+  const isClickable = Boolean(to);
   const focusVisibleByHasTooltip = buildFocusVisibleByHasTooltip(focusRing);
   const hintNode = [
     null,
@@ -42,6 +44,7 @@ export const StatTile: React.FC<StatTileProps> = ({
   const tile = (
     <Box
       as="dl"
+      data-stat-tile
       borderWidth="1px"
       borderColor={cardBorder}
       borderRadius={tileBorderRadius}
@@ -53,13 +56,15 @@ export const StatTile: React.FC<StatTileProps> = ({
       overflow="hidden"
       display="grid"
       gridTemplateRows="auto 1fr auto"
-      tabIndex={tabIndexByHasTooltip[Number(hasTooltip)]}
-      _focusVisible={focusVisibleByHasTooltip[Number(hasTooltip)]}
+      tabIndex={isClickable ? -1 : tabIndexByHasTooltip[Number(hasTooltip)]}
+      _focusVisible={isClickable ? undefined : focusVisibleByHasTooltip[Number(hasTooltip)]}
       transition="border-color 160ms ease, transform 160ms ease"
-      _hover={{ borderColor: hoverBorder, transform: "translateY(-1px)" }}
-      sx={buildWatermarkSx(watermarkColor)}
+      _hover={isClickable ? undefined : { borderColor: hoverBorder, transform: "translateY(-1px)" }}
+      _groupHover={isClickable ? { borderColor: hoverBorder, transform: "translateY(-1px)" } : undefined}
+      _groupActive={isClickable ? { transform: "translateY(0px)" } : undefined}
+      _groupFocusVisible={isClickable ? { boxShadow: focusRing } : undefined}
     >
-      <WatermarkIcon icon={icon} color={baseAccent} />
+      <WatermarkIcon icon={icon} color={baseAccent} hoverColor={watermarkColor} />
 
       <Box pr={tileContentPr}>
         <Text
@@ -87,13 +92,31 @@ export const StatTile: React.FC<StatTileProps> = ({
     </Box>
   );
 
-  if (!tooltip) return tile;
+  const wrapWithTooltip = (node: React.ReactNode) => {
+    if (!tooltip) return node;
+    return (
+      <Tooltip hasArrow openDelay={240} placement="top" label={tooltip} shouldWrapChildren>
+        {node}
+      </Tooltip>
+    );
+  };
 
-  return (
-    <Tooltip hasArrow openDelay={240} placement="top" label={tooltip} shouldWrapChildren>
+  if (!to) return wrapWithTooltip(tile);
+
+  const link = (
+    <AppBoxLink
+      to={to}
+      aria-label={label}
+      role="group"
+      display="block"
+      prefetch={false}
+      _focusVisible={{ boxShadow: "none" }}
+    >
       {tile}
-    </Tooltip>
+    </AppBoxLink>
   );
+
+  return wrapWithTooltip(link);
 };
 
 

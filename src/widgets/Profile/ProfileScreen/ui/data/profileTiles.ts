@@ -22,6 +22,7 @@ export const buildProgressTiles = (stats: ProgressStats): StatTileModel[] => {
       icon: FiBookOpen,
       accentColor: "blue.400",
       tooltip: "Сколько материалов вы уже изучили на платформе.",
+      mode: "materials",
     },
     {
       label: "Задач недели решено",
@@ -30,6 +31,7 @@ export const buildProgressTiles = (stats: ProgressStats): StatTileModel[] => {
       accentColor: "green.400",
       tooltip: "Сколько задач недели вы решили всего",
       emphasis: true,
+      mode: "weekly",
     },
     {
       label: "Пройдено проектов",
@@ -37,6 +39,7 @@ export const buildProgressTiles = (stats: ProgressStats): StatTileModel[] => {
       icon: FiCode,
       accentColor: "purple.400",
       tooltip: "Сколько проектов вы завершили на платформе.",
+      mode: "projects",
     },
     {
       label: "Прочтено статей",
@@ -44,6 +47,7 @@ export const buildProgressTiles = (stats: ProgressStats): StatTileModel[] => {
       icon: FiFileText,
       accentColor: "orange.400",
       tooltip: "Сколько статей из блога вы прочитали (по вашему прогрессу).",
+      mode: "articles",
     },
     {
       label: "Участие в хакатонах",
@@ -51,6 +55,7 @@ export const buildProgressTiles = (stats: ProgressStats): StatTileModel[] => {
       icon: FiAward,
       accentColor: "pink.400",
       tooltip: "Ваше участие в хакатонах",
+      mode: "hackathons",
     },
     {
       label: "Участие на сессиях",
@@ -58,6 +63,7 @@ export const buildProgressTiles = (stats: ProgressStats): StatTileModel[] => {
       icon: FiVideo,
       accentColor: "cyan.400",
       tooltip: "Сколько сессий вы посетили (созвоны/разборы/встречи).",
+      mode: "sessions",
     },
   ];
 };
@@ -70,6 +76,7 @@ export const buildContributionTiles = (stats: ContributionStats): StatTileModel[
       icon: FiBookOpen,
       accentColor: "blue.400",
       tooltip: "Сколько материалов вы вложили в базу AIFFA (по авторству).",
+      mode: "contrib-materials",
     },
     {
       label: "Вложено проектов",
@@ -77,6 +84,7 @@ export const buildContributionTiles = (stats: ContributionStats): StatTileModel[
       icon: FiPackage,
       accentColor: "purple.400",
       tooltip: "Сколько проектов вы добавили или улучшили (по авторству).",
+      mode: "contrib-projects",
     },
     {
       label: "Вложено задач недели",
@@ -84,6 +92,7 @@ export const buildContributionTiles = (stats: ContributionStats): StatTileModel[
       icon: FiTarget,
       accentColor: "green.400",
       tooltip: "Сколько задач недели вы выложили (по авторству)",
+      mode: "contrib-weekly",
     },
     {
       label: "Написано статей",
@@ -91,6 +100,7 @@ export const buildContributionTiles = (stats: ContributionStats): StatTileModel[
       icon: FiEdit3,
       accentColor: "orange.400",
       tooltip: "Сколько статей вы опубликовали в блоге AIFFA.",
+      mode: "contrib-articles",
     },
   ];
 };

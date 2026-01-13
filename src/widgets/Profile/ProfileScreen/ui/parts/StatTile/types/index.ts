@@ -8,6 +8,7 @@ export type StatTileProps = {
   tooltip?: string;
   accentColor?: string;
   emphasis?: boolean;
+  to?: string;
 };
 
 

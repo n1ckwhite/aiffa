@@ -9,15 +9,27 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useUserProfile } from "entities/user";
 import { useAchievementsData } from "../hooks/useAchievementsData";
-import { ProfileSidebar, RangeButtons, SectionCard, StatTile, HelpList, QuickActionsGrid, PeoplePanel, AchievementsPanel } from "./parts";
+import {
+  ProfileSidebar,
+  RangeButtons,
+  SectionCard,
+  StatTile,
+  HelpList,
+  QuickActionsGrid,
+  PeoplePanel,
+  AchievementsPanel,
+  StatModePanel,
+} from "./parts";
 import { useProfileEdit, useProfilePeopleQuery, useProfileScreenViewModel, useStatsRangeQuery } from "../model/hooks";
 import type { ProfilePeopleMode, StatTileModel } from "../model/types";
 import { contributionStatsByRange, progressStatsByRange } from "../model/constants";
 import { useProfileScreenUiColors } from "../colors/useProfileScreenUiColors";
-import { FiAward, FiBarChart2, FiUsers } from "react-icons/fi";
-import { buildContributionTiles, buildProgressTiles, CONTRIBUTION_HINT, contributionHelpList, progressHelpList } from "./data";
+import { FiAward, FiBarChart2, FiBookOpen, FiCheckCircle, FiCode, FiEdit3, FiFileText, FiPackage, FiTarget, FiUsers, FiVideo } from "react-icons/fi";
+import { buildContributionTiles, buildProgressTiles, CONTRIBUTION_HINT, contributionHelpList, progressHelpList, weeklyTasksMock } from "./data";
+import { buildPeopleUrl } from "../model/hooks/useProfilePeopleQuery/helpers";
 
 const ProfileScreen: React.FC = () => {
   const { profile, updateProfile } = useUserProfile();
@@ -64,6 +76,13 @@ const ProfileScreen: React.FC = () => {
   });
 
   const { mode: peopleMode } = useProfilePeopleQuery();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const getModeHref = React.useCallback(
+    (mode: ProfilePeopleMode) => buildPeopleUrl({ pathname, searchParams, nextMode: mode }),
+    [pathname, searchParams],
+  );
 
   const statsPanel = (
     <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
@@ -83,6 +102,7 @@ const ProfileScreen: React.FC = () => {
               tooltip={(t as any).tooltip}
               accentColor={(t as any).accentColor}
               emphasis={(t as any).emphasis}
+              to={t.mode ? getModeHref(t.mode) : undefined}
             />
           ))}
         </SimpleGrid>
@@ -151,6 +171,7 @@ const ProfileScreen: React.FC = () => {
               icon={(t as any).icon}
               tooltip={(t as any).tooltip}
               accentColor={(t as any).accentColor}
+              to={t.mode ? getModeHref(t.mode) : undefined}
             />
           ))}
         </SimpleGrid>
@@ -217,6 +238,126 @@ const ProfileScreen: React.FC = () => {
     achievements: (
       <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
         <AchievementsPanel items={items as any} />
+      </VStack>
+    ),
+    materials: (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <StatModePanel
+          title="Материалы"
+          description="Подборка ваших пройденных материалов."
+          icon={FiBookOpen}
+          items={[
+            { title: "CSS Grid — шпаргалка", description: "Материал · Пройдено", authorLabel: "AIFFA", authorHref: "/creators" },
+          ]}
+        />
+      </VStack>
+    ),
+    weekly: (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <StatModePanel
+          title="Задачи недели"
+          description="Список решённых задач недели."
+          icon={FiCheckCircle}
+          pagination={{ pageSize: 3, ariaLabel: "Пагинация задач недели" }}
+          items={weeklyTasksMock}
+        />
+      </VStack>
+    ),
+    projects: (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <StatModePanel
+          title="Проекты"
+          description="Подборка ваших завершённых проектов."
+          icon={FiCode}
+          items={[
+            { title: "Проект: UI Kit", description: "Завершено", authorLabel: "AIFFA", authorHref: "/creators" },
+          ]}
+        />
+      </VStack>
+    ),
+    articles: (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <StatModePanel
+          title="Статьи"
+          description="Прочитанные статьи."
+          icon={FiFileText}
+          items={[
+            { title: "React memo: когда и зачем", description: "Прочитано · 6 минут", authorLabel: "AIFFA", authorHref: "/creators" },
+            { title: "CSS Grid: шпаргалка", description: "Прочитано · 4 минуты", authorLabel: "AIFFA", authorHref: "/creators" },
+          ]}
+        />
+      </VStack>
+    ),
+    hackathons: (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <StatModePanel
+          title="Хакатоны"
+          description="Ваше участие в хакатонах."
+          icon={FiAward}
+          items={[{ title: "Hackathon #1", description: "Участвовал · 2025", authorLabel: "AIFFA", authorHref: "/creators" }]}
+        />
+      </VStack>
+    ),
+    sessions: (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <StatModePanel
+          title="Сессии"
+          description="Посещённые сессии."
+          icon={FiVideo}
+          items={[
+            { title: "Сессия: разбор задач недели", description: "Посещено · 45 минут", authorLabel: "AIFFA", authorHref: "/creators" },
+            { title: "Сессия: ревью проектов", description: "Посещено · 60 минут", authorLabel: "AIFFA", authorHref: "/creators" },
+          ]}
+        />
+      </VStack>
+    ),
+    "contrib-materials": (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <StatModePanel
+          title="Вложено материалов"
+          description="Материалы, добавленные/улучшенные вами."
+          icon={FiBookOpen}
+          items={[
+            { title: "Материал: Accessibility basics", description: "Авторство подтверждено", authorLabel: "AIFFA", authorHref: "/creators" },
+            { title: "Материал: Docker dev setup", description: "Авторство подтверждено", authorLabel: "AIFFA", authorHref: "/creators" },
+          ]}
+        />
+      </VStack>
+    ),
+    "contrib-projects": (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <StatModePanel
+          title="Вложено проектов"
+          description="Проекты по вашему авторству."
+          icon={FiPackage}
+          items={[{ title: "Проект: базовый шаблон", description: "Авторство подтверждено", authorLabel: "AIFFA", authorHref: "/creators" }]}
+        />
+      </VStack>
+    ),
+    "contrib-weekly": (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <StatModePanel
+          title="Вложено задач недели"
+          description="Задачи недели, опубликованные вами."
+          icon={FiTarget}
+          items={[
+            { title: "Задача недели: замыкания", description: "Опубликовано", authorLabel: "AIFFA", authorHref: "/creators" },
+            { title: "Задача недели: промисы", description: "Опубликовано", authorLabel: "AIFFA", authorHref: "/creators" },
+          ]}
+        />
+      </VStack>
+    ),
+    "contrib-articles": (
+      <VStack align="stretch" spacing={{ base: 4, md: 6 }} minW={0}>
+        <StatModePanel
+          title="Написано статей"
+          description="Опубликованные вами статьи."
+          icon={FiEdit3}
+          items={[
+            { title: "Как писать полезные статьи", description: "Опубликовано · 2025", authorLabel: "AIFFA", authorHref: "/creators" },
+            { title: "Next.js metadata SEO", description: "Опубликовано · 2025", authorLabel: "AIFFA", authorHref: "/creators" },
+          ]}
+        />
       </VStack>
     ),
   };

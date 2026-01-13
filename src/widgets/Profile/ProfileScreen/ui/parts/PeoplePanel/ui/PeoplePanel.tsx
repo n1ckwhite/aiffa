@@ -1,6 +1,6 @@
 import React from "react";
-import { HStack, Icon, Text, VStack } from "@chakra-ui/react";
-import { FiArrowLeft, FiChevronLeft, FiChevronRight, FiUsers } from "react-icons/fi";
+import { Icon, Text, VStack } from "@chakra-ui/react";
+import { FiArrowLeft, FiUsers } from "react-icons/fi";
 import { AppButtonLink } from "shared/ui/AppLink";
 import { useProfileScreenUiColors } from "../../../../colors/useProfileScreenUiColors";
 import { SectionCard } from "../../SectionCard";
@@ -10,6 +10,7 @@ import { PeopleList } from "./parts/PeopleList";
 import { peopleMockByMode } from "../data/peopleMockByMode";
 import { copyByMode } from "../data/copyByMode";
 import { usePeopleFollowState, usePeoplePagination } from "../model/hooks";
+import { PaginationNav } from "../../PaginationNav";
 
 export const PeoplePanel: React.FC<PeoplePanelProps> = ({ mode }) => {
   const {
@@ -35,44 +36,12 @@ export const PeoplePanel: React.FC<PeoplePanelProps> = ({ mode }) => {
   const paginationByShouldShow: Record<number, React.ReactNode> = {
     0: null,
     1: (
-      <HStack as="nav" aria-label="Пагинация" justify="center" spacing={3} pt={1}>
-        <AppButtonLink
-          to={prevHref}
-          prefetch={false}
-          isDisabled={isPrevDisabled}
-          aria-label="Предыдущая страница"
-          size="sm"
-          variant="outline"
-          color={linkTextColor}
-          borderColor={cardBorder}
-          _hover={{ bg: peoplePanelGhostHoverBg }}
-          _active={{ bg: peoplePanelGhostActiveBg }}
-          minW="32px"
-          w="32px"
-          h="32px"
-          px={0}
-        >
-          <Icon as={FiChevronLeft} />
-        </AppButtonLink>
-        <AppButtonLink
-          to={nextHref}
-          prefetch={false}
-          isDisabled={isNextDisabled}
-          aria-label="Следующая страница"
-          size="sm"
-          variant="outline"
-          color={linkTextColor}
-          borderColor={cardBorder}
-          _hover={{ bg: peoplePanelGhostHoverBg }}
-          _active={{ bg: peoplePanelGhostActiveBg }}
-          minW="32px"
-          w="32px"
-          h="32px"
-          px={0}
-        >
-          <Icon as={FiChevronRight} />
-        </AppButtonLink>
-      </HStack>
+      <PaginationNav
+        prevHref={prevHref}
+        nextHref={nextHref}
+        isPrevDisabled={isPrevDisabled}
+        isNextDisabled={isNextDisabled}
+      />
     ),
   };
 

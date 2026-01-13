@@ -2,7 +2,21 @@ import type { ComponentType, ReactNode } from "react";
 
 export type StatsRange = "week" | "month" | "all";
 
-export type ProfilePeopleMode = "stats" | "followers" | "following" | "achievements";
+export type ProfilePeopleMode =
+  | "stats"
+  | "followers"
+  | "following"
+  | "achievements"
+  | "materials"
+  | "weekly"
+  | "projects"
+  | "articles"
+  | "hackathons"
+  | "sessions"
+  | "contrib-materials"
+  | "contrib-projects"
+  | "contrib-weekly"
+  | "contrib-articles";
 
 export type StatTileModel = {
   label: string;
@@ -12,6 +26,7 @@ export type StatTileModel = {
   tooltip?: string;
   accentColor?: string;
   emphasis?: boolean;
+  mode?: ProfilePeopleMode;
 };
 
 export type ProfileEditInitial = {

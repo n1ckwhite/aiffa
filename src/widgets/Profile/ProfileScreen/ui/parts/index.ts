@@ -9,5 +9,7 @@ export * from "./HelpList";
 export * from "./QuickActionsGrid";
 export * from "./PeoplePanel";
 export * from "./AchievementsPanel";
+export * from "./StatModePanel";
+export * from "./PaginationNav";
 
 

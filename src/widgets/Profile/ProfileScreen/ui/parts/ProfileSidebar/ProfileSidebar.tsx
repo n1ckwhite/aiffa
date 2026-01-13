@@ -46,7 +46,7 @@ export const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
       w="full"
       templateColumns={{
         base: "1fr",
-        md: "minmax(260px, 320px) 1fr",
+        md: "1fr 1fr",
         lg: "1fr",
       }}
       columnGap={{ base: 0, md: 10, lg: 0 }}

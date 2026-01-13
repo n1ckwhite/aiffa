@@ -11,5 +11,7 @@ export * from "./PeoplePanel";
 export * from "./AchievementsPanel";
 export * from "./StatModePanel";
 export * from "./PaginationNav";
+export * from "./ProfileRightColumn/ProfileRightColumn";
+export * from "./StatsModeColumn/StatsModeColumn";
 
 

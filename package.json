@@ -8,7 +8,10 @@
     "build": "next build",
     "build:turbo": "next build --turbo",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "analyze:unused": "knip",
+    "analyze:deps": "depcheck",
+    "analyze:cycles": "madge --circular --extensions ts,tsx src"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
@@ -35,8 +38,11 @@
     "@types/node": "24.10.1",
     "@types/react": "19.2.6",
     "autoprefixer": "^10.4.23",
+    "depcheck": "^1.4.7",
     "eslint": "^9.0.0",
     "eslint-config-next": "16.1.0",
+    "knip": "^5.63.1",
+    "madge": "^8.0.0",
     "postcss": "^8.5.6",
     "postcss-viewport-height-correction": "^1.1.1",
     "typescript": "^5.6.3"

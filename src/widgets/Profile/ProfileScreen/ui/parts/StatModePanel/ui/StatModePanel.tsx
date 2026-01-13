@@ -26,6 +26,17 @@ export const StatModePanel: React.FC<StatModePanelProps> = ({ title, description
   });
 
   const hasItems = pageItems.length > 0;
+  const getVariantKey = (it: (typeof pageItems)[number]) => (it as any).cardVariant ?? "plain";
+
+  const renderByVariant = {
+    weekly: (it: (typeof pageItems)[number], key: string, titleDomId: string) => (
+      <WeeklyCardItem key={key} item={it as any} titleDomId={titleDomId} mutedColor={muted} />
+    ),
+    material: (it: (typeof pageItems)[number], key: string) => <MaterialCardItem key={key} item={it as any} />,
+    plain: (it: (typeof pageItems)[number], key: string, titleDomId: string) => (
+      <PlainListItem key={key} item={it as any} titleDomId={titleDomId} cardBorder={cardBorder} mutedColor={muted} />
+    ),
+  } as const satisfies Record<string, (...args: any[]) => React.ReactNode>;
 
   return (
     <SectionCard
@@ -56,29 +67,11 @@ export const StatModePanel: React.FC<StatModePanelProps> = ({ title, description
             {pageItems.map((it, idx) => {
               const absoluteIdx = (page - 1) * (pagination?.pageSize ?? items.length) + idx;
               const titleDomId = `${listDomId}-item-${absoluteIdx}-title`;
+              const key = `${titleDomId}-${it.title}`;
 
-              if (it.cardVariant === "weekly") {
-                return <WeeklyCardItem key={`${titleDomId}-${it.title}`} item={it} titleDomId={titleDomId} mutedColor={muted} />;
-              }
-
-              if (it.cardVariant === "material") {
-                return (
-                  <MaterialCardItem
-                    key={`${titleDomId}-${it.title}`}
-                    item={it}
-                  />
-                );
-              }
-
-              return (
-                <PlainListItem
-                  key={`${titleDomId}-${it.title}`}
-                  item={it}
-                  titleDomId={titleDomId}
-                  cardBorder={cardBorder}
-                  mutedColor={muted}
-                />
-              );
+              const variant = getVariantKey(it);
+              const renderer = (renderByVariant as any)[variant] ?? renderByVariant.plain;
+              return renderer(it, key, titleDomId);
             })}
           </Box>
         ) : (

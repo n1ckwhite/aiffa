@@ -3,6 +3,7 @@
 import React from "react";
 import { Box, HStack, Icon, Image, Text, VStack, VisuallyHidden } from "@chakra-ui/react";
 import { FiCalendar, FiMessageCircle, FiStar, FiUserCheck } from "react-icons/fi";
+import { FaCircleCheck } from "react-icons/fa6";
 import { AppBoxLink, AppLink } from "shared/ui/AppLink";
 import { useWeeklyTaskCardColors } from "widgets/WeeklyTaskCard/colors";
 import { getRing } from "widgets/WeeklyTaskCard/model/ring";
@@ -20,7 +21,7 @@ export const WeeklyCardItem: React.FC<WeeklyTaskCardItemProps> = ({ item, titleD
     <Box as="li">
       <Box
         borderWidth="1px"
-        borderColor="transparent"
+        borderColor="green.300"
         borderRadius="20px"
         px={5}
         py={5}
@@ -31,6 +32,43 @@ export const WeeklyCardItem: React.FC<WeeklyTaskCardItemProps> = ({ item, titleD
         transition="all 0.25s ease"
         _hover={{ transform: "translateY(-2px)" }}
       >
+            <Box
+              position="absolute"
+              inset={0}
+              borderRadius="20px"
+              bg="green.500"
+              opacity={0.06}
+              pointerEvents="none"
+              zIndex={0}
+              sx={{ mixBlendMode: "multiply" }}
+            />
+            <Box
+              aria-hidden
+              position="absolute"
+              inset={0}
+              pointerEvents="none"
+              zIndex={0}
+              _before={{
+                content: '""',
+                position: "absolute",
+                inset: 0,
+                backgroundImage: `radial-gradient(520px 200px at 0% 0%, ${ring.from}26, transparent 60%), radial-gradient(520px 200px at 100% 100%, ${ring.to}26, transparent 60%)`,
+              }}
+            />
+            <Box
+              aria-hidden
+              position="absolute"
+              top="50%"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              opacity={0.14}
+              pointerEvents="none"
+              zIndex={3}
+              filter="drop-shadow(0 8px 22px rgba(16,185,129,0.35))"
+            >
+              <Icon as={FaCircleCheck} boxSize={{ base: 24, md: 28 }} color="green.400" />
+            </Box>
+
         <BackgroundDeco ring={ring} />
 
         {/* Overlay link to make the whole card a real <a href> without nesting links inside links. */}

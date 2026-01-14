@@ -12,7 +12,7 @@ import { useLocalStorageFlag } from "shared/hooks/useLocalStorageFlag";
 import { formatRuDate } from "shared/functions/formatRuDate";
 import { useModuleProjectsColors } from "widgets/ModuleProjects/colors";
 import { arrowLoop } from "widgets/ModuleProjects/parts/ModuleProjectsView/parts/ProjectsGrid/animations";
-import { ProjectCardItemProps } from "./types/types";
+import { ProjectCardItemProps } from "./types";
 import { AuthorBadgeLink } from "../MaterialCardItem/ui/AuthorBadgeLink/AuthorBadgeLink";
 import { IndexChip } from "widgets/ModuleLessons/parts/LessonCard/parts/IndexChip";
 

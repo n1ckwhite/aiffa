@@ -1,7 +1,7 @@
-import { StatModePanelItem } from "../../../../model";
+import type { PlainStatModePanelItem } from "../../../../model";
 
 export type PlainListItemProps = {
-  item: StatModePanelItem;
+  item: PlainStatModePanelItem;
   titleDomId: string;
   cardBorder: string;
   mutedColor: string;

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Box, Icon } from "@chakra-ui/react";
+import { Box, Icon, Text, VisuallyHidden } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { FiEye, FiMessageCircle } from "react-icons/fi";
 import { AppBoxLink } from "shared/ui/AppLink";
@@ -22,6 +22,7 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item }) => {
 
   const done = true;
   const topBefore = buildTopBefore(levelAccent);
+  const titleId = React.useId();
 
   const { dateLabel, cardIndexLabel, isStarred } = useMaterialCardItemMeta({
     to: item.to,
@@ -82,10 +83,23 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item }) => {
           {cardIndexLabel}
         </IndexChip>
 
-        <Box position="relative" zIndex={2} pointerEvents="none" flex={1} minW={0} display="flex" flexDirection="column" height="100%" justifyContent="space-between">
+        <Box
+          as="article"
+          aria-labelledby={titleId}
+          position="relative"
+          zIndex={2}
+          pointerEvents="none"
+          flex={1}
+          minW={0}
+          display="flex"
+          flexDirection="column"
+          height="100%"
+          justifyContent="space-between"
+        >
           <Box display="flex" alignItems="flex-start" justifyContent="space-between" gap={3} minW={0}>
-            <Box
-              as="div"
+            <Text
+              as="h3"
+              id={titleId}
               fontWeight="semibold"
               noOfLines={2}
               wordBreak="break-word"
@@ -94,24 +108,54 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item }) => {
               style={{ hyphens: "auto" }}
               flex={1}
               minW={0}
+              m={0}
             >
               {item.title}
-            </Box>
+            </Text>
           </Box>
 
-          <Box mt={1} display="flex" alignItems="center" gap={3} fontSize="xs" color={metaColor}>
-            <Box display="inline-flex" alignItems="center" gap={3} rowGap={1} flexWrap="wrap" minW={0}>
-              <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
-                <Box as="span">{formatCount(item.starsCount)}</Box>
-                <StarRatingIcon isActive={isStarred} activeBoxSize={3} inactiveBoxSize={3.5} />
+          <Box mt={1} fontSize="xs" color={metaColor}>
+            <Box
+              as="dl"
+              m={0}
+              display="inline-flex"
+              alignItems="center"
+              gap={3}
+              rowGap={1}
+              flexWrap="wrap"
+              minW={0}
+              aria-label="Статистика материала"
+            >
+              <Box as="div" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
+                <Text as="dt" m={0} display="inline-flex" alignItems="center" lineHeight="1" order={1}>
+                  <VisuallyHidden>Звёзды</VisuallyHidden>
+                  <Box aria-hidden="true" display="inline-flex" alignItems="center">
+                    <StarRatingIcon isActive={isStarred} activeBoxSize={3} inactiveBoxSize={3.5} />
+                  </Box>
+                </Text>
+                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1" order={0}>
+                  {formatCount(item.starsCount)}
+                </Text>
               </Box>
-              <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
-                <Box as="span">{formatCount(item.viewsCount)}</Box>
-                <Icon as={FiEye} boxSize={3.5} flexShrink={0} />
+
+              <Box as="div" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
+                <Text as="dt" m={0} display="inline-flex" alignItems="center" gap={1} lineHeight="1" order={1}>
+                  <Icon as={FiEye} boxSize={3.5} flexShrink={0} aria-hidden="true" />
+                  <VisuallyHidden>Просмотры</VisuallyHidden>
+                </Text>
+                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1" order={0}>
+                  {formatCount(item.viewsCount)}
+                </Text>
               </Box>
-              <Box as="span" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
-                <Box as="span">{formatCount(item.commentsCount)}</Box>
-                <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} />
+
+              <Box as="div" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
+                <Text as="dt" m={0} display="inline-flex" alignItems="center" gap={1} lineHeight="1" order={1}>
+                  <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} aria-hidden="true" />
+                  <VisuallyHidden>Комментарии</VisuallyHidden>
+                </Text>
+                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1" order={0}>
+                  {formatCount(item.commentsCount)}
+                </Text>
               </Box>
             </Box>
           </Box>
@@ -132,6 +176,11 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item }) => {
               {dateLabel ? (
                 <Box as="span" display="inline-flex" alignItems="center" minW={0}>
                   <OpenLinkBadge accentColor={accentColor} chipBorder={chipBorder} dateLabel={dateLabel} />
+                  <VisuallyHidden>
+                    <Box as="time" dateTime={item.dateIso}>
+                      {dateLabel}
+                    </Box>
+                  </VisuallyHidden>
                 </Box>
               ) : null}
             </Box>

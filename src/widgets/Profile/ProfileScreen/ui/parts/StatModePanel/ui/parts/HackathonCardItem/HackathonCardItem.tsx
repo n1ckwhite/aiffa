@@ -141,9 +141,9 @@ export const HackathonCardItem: React.FC<HackathonCardItemProps> = ({ item }) =>
                 </Text>
               </HStack>
               <AvatarGroup size={{ base: "sm", md: "md" }}>
-                {item.members.map((m) => (
+                {item.members.map((m, idx) => (
                   <Avatar
-                    key={m.href}
+                    key={`${m.href}-${m.name}-${idx}`}
                     as="a"
                     href={m.href}
                     aria-label={`Открыть участника: ${m.name}`}

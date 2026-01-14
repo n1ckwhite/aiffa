@@ -125,7 +125,8 @@ export const WeeklyCardItem: React.FC<WeeklyTaskCardItemProps> = ({ item, titleD
             >
               <Image
                 src={item.authorAvatarUrl}
-                alt={item.authorLabel}
+                alt=""
+                aria-hidden="true"
                 boxSize="16px"
                 borderRadius="full"
                 borderWidth="1px"
@@ -140,6 +141,11 @@ export const WeeklyCardItem: React.FC<WeeklyTaskCardItemProps> = ({ item, titleD
                 display="inline-flex"
                 w="fit-content"
                 maxW="100%"
+                minH="44px"
+                px={2}
+                py={2}
+                m={-2}
+                borderRadius="md"
                 color={weeklyColors.authorLink}
                 fontSize="sm"
                 textDecoration="none"
@@ -153,28 +159,36 @@ export const WeeklyCardItem: React.FC<WeeklyTaskCardItemProps> = ({ item, titleD
               </AppLink>
             </Text>
 
-            <Box as="dl" m={0} display="flex" gap={3} color={mutedColor} fontSize="sm" aria-label="Статистика задачи">
-              <HStack as="div" spacing={1}>
-                <VisuallyHidden as="dt">Звёзды</VisuallyHidden>
-                <Text as="dd" m={0} fontWeight="semibold">
+            <Box as="dl" m={0} display="flex" gap={4} color={mutedColor} fontSize="sm" aria-label="Статистика задачи">
+              <Box as="div" display="inline-flex" alignItems="center" gap={1}>
+                <Text as="dt" m={0} display="inline-flex" alignItems="center" gap={1} lineHeight="1">
+                  <Icon as={FiStar} boxSize="14px" aria-hidden="true" />
+                  <VisuallyHidden>Звёзды</VisuallyHidden>
+                </Text>
+                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1">
                   {formatCount(item.starsCount)}
                 </Text>
-                <Icon as={FiStar} boxSize="14px" />
-              </HStack>
-              <HStack as="div" spacing={1}>
-                <VisuallyHidden as="dt">Комментарии</VisuallyHidden>
-                <Text as="dd" m={0} fontWeight="semibold">
+              </Box>
+
+              <Box as="div" display="inline-flex" alignItems="center" gap={1}>
+                <Text as="dt" m={0} display="inline-flex" alignItems="center" gap={1} lineHeight="1">
+                  <Icon as={FiMessageCircle} boxSize="14px" aria-hidden="true" />
+                  <VisuallyHidden>Комментарии</VisuallyHidden>
+                </Text>
+                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1">
                   {formatCount(item.commentsCount)}
                 </Text>
-                <Icon as={FiMessageCircle} boxSize="14px" />
-              </HStack>
-              <HStack as="div" spacing={1}>
-                <VisuallyHidden as="dt">Решили</VisuallyHidden>
-                <Text as="dd" m={0} fontWeight="semibold">
+              </Box>
+
+              <Box as="div" display="inline-flex" alignItems="center" gap={1}>
+                <Text as="dt" m={0} display="inline-flex" alignItems="center" gap={1} lineHeight="1">
+                  <Icon as={FiUserCheck} boxSize="14px" aria-hidden="true" color={weeklyColors.solvedIconColor} />
+                  <VisuallyHidden>Решили</VisuallyHidden>
+                </Text>
+                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1">
                   {formatCount(item.solvedCount)}
                 </Text>
-                <Icon as={FiUserCheck} boxSize="14px" color={weeklyColors.solvedIconColor} />
-              </HStack>
+              </Box>
             </Box>
 
             <Text as="p" m={0} color={mutedColor} fontSize="sm" display="inline-flex" alignItems="center" gap={2}>

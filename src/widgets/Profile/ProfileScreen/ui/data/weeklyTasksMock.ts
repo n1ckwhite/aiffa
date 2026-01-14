@@ -20,7 +20,7 @@ export const weeklyTasksMock: readonly StatModePanelItem[] = [
   },
   {
     cardVariant: "weekly",
-    colorScheme: "cyan",
+    colorScheme: "blue",
     title: "Центрирование карточки Flexbox-ом",
     leftIcon: FiCheckCircle,
     tag: "CSS",

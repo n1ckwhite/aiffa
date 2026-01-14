@@ -18,7 +18,7 @@ export const WeeklyCardItem: React.FC<WeeklyTaskCardItemProps> = ({ item, titleD
   const to = item.to;
 
   return (
-    <Box as="li">
+    <Box as="li" role="listitem" listStyleType="none">
       <Box
         borderWidth="1px"
         borderColor="green.300"

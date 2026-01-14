@@ -31,6 +31,18 @@ export type MaterialStatModePanelItem = {
   dateIso?: string;
 };
 
+export type ProjectStatModePanelItem = {
+  cardVariant: "project";
+  title: string;
+  to: string;
+  starsCount: number;
+  viewsCount: number;
+  commentsCount: number;
+  authorUsername: string;
+  authorName: string;
+  dateIso: string;
+};
+
 export type PlainStatModePanelItem = {
   cardVariant?: undefined;
   title: string;
@@ -40,7 +52,11 @@ export type PlainStatModePanelItem = {
   authorHref: string;
 };
 
-export type StatModePanelItem = WeeklyStatModePanelItem | MaterialStatModePanelItem | PlainStatModePanelItem;
+export type StatModePanelItem =
+  | WeeklyStatModePanelItem
+  | MaterialStatModePanelItem
+  | ProjectStatModePanelItem
+  | PlainStatModePanelItem;
 
 export type StatModePanelPaginationConfig = {
   pageSize: number;

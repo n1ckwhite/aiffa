@@ -4,7 +4,6 @@ import {
   FiAward,
   FiBookOpen,
   FiCheckCircle,
-  FiCode,
   FiEdit3,
   FiFileText,
   FiPackage,
@@ -36,7 +35,7 @@ export const buildProgressTiles = (stats: ProgressStats): StatTileModel[] => {
     {
       label: "Пройдено проектов",
       value: stats.solvedProjectsCount,
-      icon: FiCode,
+      icon: FiPackage,
       accentColor: "purple.400",
       tooltip: "Сколько проектов вы завершили на платформе.",
       mode: "projects",

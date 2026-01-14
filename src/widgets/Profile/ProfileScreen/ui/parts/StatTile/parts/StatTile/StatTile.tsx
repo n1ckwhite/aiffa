@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Text, Tooltip } from "@chakra-ui/react";
 import { formatCount } from "shared/functions/formatCount";
-import { useProfileScreenUiColors } from "../../../colors/useProfileScreenUiColors";
+import { useProfileScreenUiColors } from "../../../../../colors/useProfileScreenUiColors";
 import type { StatTileProps } from "./types";
-import { useStatTileColors } from "./colors/useStatTileColors";
-import { WatermarkIcon } from "./parts";
+import { useStatTileColors } from "../../colors/useStatTileColors";
+import { WatermarkIcon } from "..";
 import { AppBoxLink } from "shared/ui/AppLink";
 import {
   buildFocusVisibleByHasTooltip,
@@ -14,7 +14,7 @@ import {
   tileMinHeight,
   tilePadding,
   valueFontSizeByEmphasis,
-} from "./model";
+} from "../../model";
 
 export const StatTile: React.FC<StatTileProps> = ({
   label,
@@ -26,7 +26,7 @@ export const StatTile: React.FC<StatTileProps> = ({
   emphasis,
   to,
 }) => {
-  const { watermarkColor, hoverBorder, focusRing, baseColor } = useStatTileColors();
+  const { hoverBorder, focusRing, baseColor } = useStatTileColors();
   const { cardBg, cardBorder, muted: mutedColor } = useProfileScreenUiColors();
   const baseAccent = accentColor ?? baseColor;
   const formattedValue = typeof value === "number" ? formatCount(value) : value;
@@ -64,7 +64,7 @@ export const StatTile: React.FC<StatTileProps> = ({
       _groupActive={isClickable ? { transform: "translateY(0px)" } : undefined}
       _groupFocusVisible={isClickable ? { boxShadow: focusRing } : undefined}
     >
-      <WatermarkIcon icon={icon} color={baseAccent} hoverColor={watermarkColor} />
+      <WatermarkIcon icon={icon} color={baseAccent} />
 
       <Box pr={tileContentPr}>
         <Text

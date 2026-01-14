@@ -1,4 +1,4 @@
-export * from "./StatTile";
-export type * from "./types";
+export * from "./parts/StatTile/StatTile";
+export type * from "./parts/StatTile/types";
 
 

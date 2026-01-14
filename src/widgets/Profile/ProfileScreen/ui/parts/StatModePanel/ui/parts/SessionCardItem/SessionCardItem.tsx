@@ -11,6 +11,7 @@ import type { SessionCardItemProps } from "./types";
 export const SessionCardItem: React.FC<SessionCardItemProps> = ({ item }) => {
   const { mutedTextColor, cardBg, cardBorderColor, scheduleMarkerColor, scheduleChipBg, scheduleChipColor } = useSessionsColors();
   const dateLabel = formatRuDate(item.dateTime);
+  const titleId = React.useId();
 
   return (
     <Box
@@ -37,8 +38,8 @@ export const SessionCardItem: React.FC<SessionCardItemProps> = ({ item }) => {
       boxSizing="border-box"
       flexShrink={0}
     >
-      <Stack spacing={3} position="relative" zIndex={1} w="full" minW={0}>
-        <HStack spacing={3} align="flex-start" w="full" minW={0}>
+      <Stack as="article" aria-labelledby={titleId} spacing={3} position="relative" zIndex={1} w="full" minW={0}>
+        <HStack as="header" spacing={3} align="flex-start" w="full" minW={0}>
           <Box
             borderRadius="full"
             boxSize={8}
@@ -58,6 +59,7 @@ export const SessionCardItem: React.FC<SessionCardItemProps> = ({ item }) => {
           <VStack align="flex-start" spacing={2} minW={0} flex={1}>
             <Text
               as="h3"
+              id={titleId}
               m={0}
               fontSize={{ base: "lg", md: "xl" }}
               fontWeight="semibold"
@@ -89,7 +91,15 @@ export const SessionCardItem: React.FC<SessionCardItemProps> = ({ item }) => {
           </VStack>
         </HStack>
 
-        <Text fontSize={{ base: "sm", md: "sm" }} color={mutedTextColor} wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal">
+        <Text
+          as="p"
+          m={0}
+          fontSize={{ base: "sm", md: "sm" }}
+          color={mutedTextColor}
+          wordBreak="break-word"
+          overflowWrap="anywhere"
+          whiteSpace="normal"
+        >
           {item.description}
         </Text>
 

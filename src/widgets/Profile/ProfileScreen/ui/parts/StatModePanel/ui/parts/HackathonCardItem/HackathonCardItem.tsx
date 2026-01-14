@@ -41,6 +41,7 @@ export const HackathonCardItem: React.FC<HackathonCardItemProps> = ({ item }) =>
   const dateLabel = formatRuDate(item.dateIso);
   const hackathonIconColor = accentColor;
   const dateIconColor = purpleColor;
+  const titleId = React.useId();
 
   return (
     <Box as="li" listStyleType="none">
@@ -82,7 +83,7 @@ export const HackathonCardItem: React.FC<HackathonCardItemProps> = ({ item }) =>
           />
         </Box>
 
-        <Box position="relative" zIndex={2} p={{ base: 3, md: 4 }}>
+        <Box as="article" aria-labelledby={titleId} position="relative" zIndex={2} p={{ base: 3, md: 4 }}>
           <VStack align="flex-start" spacing={3} w="full" minW={0} flex="1">
             {typeof place === "number" ? (
               <Box
@@ -105,17 +106,21 @@ export const HackathonCardItem: React.FC<HackathonCardItemProps> = ({ item }) =>
               </Box>
             ) : null}
 
-            <HStack spacing={2} color={metaColor} fontSize={{ base: "xs", md: "sm" }} minW={0} w="full">
+            <HStack as="header" spacing={2} color={metaColor} fontSize={{ base: "xs", md: "sm" }} minW={0} w="full">
               <Icon as={FiCode} boxSize={{ base: 3.5, md: 4 }} aria-hidden="true" color={hackathonIconColor} />
               <Text as="span" whiteSpace="nowrap">
                 Хакатон:
               </Text>
               <Text as="span" fontWeight="semibold" wordBreak="break-word" overflowWrap="anywhere" whiteSpace="normal" minW={0}>
-                {item.title}
+                <Box as="h3" id={titleId} m={0} fontWeight="inherit">
+                  {item.title}
+                </Box>
               </Text>
             </HStack>
 
             <Text
+              as="p"
+              m={0}
               fontSize={{ base: "sm", md: "md" }}
               color={metaColor}
               wordBreak="break-word"
@@ -125,10 +130,11 @@ export const HackathonCardItem: React.FC<HackathonCardItemProps> = ({ item }) =>
               {item.taskDescription}
             </Text>
 
-            <VStack align="flex-start" spacing={2} w="full" minW={0}>
+            <VStack as="section" aria-label="Команда и участники" align="flex-start" spacing={2} w="full" minW={0}>
               <HStack spacing={2} minW={0} w="full" flexWrap="wrap" rowGap={2}>
                 <Text
-                  as="h3"
+                  as="h4"
+                  m={0}
                   fontSize={{ base: "md", md: "lg" }}
                   fontWeight="semibold"
                   letterSpacing="-0.02em"
@@ -140,7 +146,7 @@ export const HackathonCardItem: React.FC<HackathonCardItemProps> = ({ item }) =>
                   {item.teamName}
                 </Text>
               </HStack>
-              <AvatarGroup size={{ base: "sm", md: "md" }}>
+              <AvatarGroup size={{ base: "sm", md: "md" }} role="list" aria-label="Участники команды">
                 {item.members.map((m, idx) => (
                   <Avatar
                     key={`${m.href}-${m.name}-${idx}`}
@@ -155,6 +161,7 @@ export const HackathonCardItem: React.FC<HackathonCardItemProps> = ({ item }) =>
                     boxSize={{ base: 9, md: 10 }}
                     _hover={{ transform: "translateY(-1px)" }}
                     _active={{ transform: "translateY(0)" }}
+                    role="listitem"
                   />
                 ))}
               </AvatarGroup>
@@ -162,7 +169,9 @@ export const HackathonCardItem: React.FC<HackathonCardItemProps> = ({ item }) =>
 
             <HStack spacing={2} color={metaColor} fontSize={{ base: "xs", md: "sm" }} pt={1}>
               <Icon as={FiCalendar} boxSize={{ base: 3.5, md: 4 }} aria-hidden="true" color={dateIconColor} />
-              <Text as="span">{dateLabel}</Text>
+              <Text as="time" dateTime={item.dateIso} m={0}>
+                {dateLabel}
+              </Text>
             </HStack>
           </VStack>
         </Box>

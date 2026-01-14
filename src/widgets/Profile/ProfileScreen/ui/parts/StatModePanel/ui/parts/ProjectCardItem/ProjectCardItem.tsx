@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Box, HStack, Icon, Text } from "@chakra-ui/react";
+import { Box, Icon, Text, VisuallyHidden } from "@chakra-ui/react";
 import { CheckIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { FiEye, FiMessageCircle } from "react-icons/fi";
 import { AppBoxLink } from "shared/ui/AppLink";
@@ -20,6 +20,7 @@ export const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ item }) => {
   const colors = useModuleProjectsColors();
   const dateLabel = formatRuDate(item.dateIso);
   const { value: isStarred } = useLocalStorageFlag(`project-starred:${item.to}`);
+  const titleId = React.useId();
 
   return (
     <Box as="li" listStyleType="none">
@@ -78,36 +79,79 @@ export const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ item }) => {
           </IndexChip>
         </Box>
 
-        <Box position="relative" zIndex={2} pointerEvents="none" flex="1" minW={0} display="flex" flexDirection="column" h="100%">
+        <Box
+          as="article"
+          aria-labelledby={titleId}
+          position="relative"
+          zIndex={2}
+          pointerEvents="none"
+          flex="1"
+          minW={0}
+          display="flex"
+          flexDirection="column"
+          h="100%"
+        >
           <Text
+            as="h3"
+            id={titleId}
             fontWeight="semibold"
             noOfLines={2}
             wordBreak="break-word"
             overflowWrap="anywhere"
             style={{ hyphens: "auto" }}
+            m={0}
           >
             {item.title}
           </Text>
 
-          <HStack spacing={3} rowGap={1} flexWrap="wrap" fontSize="xs" color={colors.descColor} mt={1} minW={0}>
-            <HStack spacing={1} flexShrink={0}>
-              <Box as="span">{formatCount(item.starsCount)}</Box>
-              <StarRatingIcon isActive={isStarred} activeBoxSize={3} inactiveBoxSize={3.5} />
-            </HStack>
+          <Box mt={1} fontSize="xs" color={colors.descColor} minW={0}>
+            <Box
+              as="dl"
+              m={0}
+              display="inline-flex"
+              alignItems="center"
+              gap={3}
+              rowGap={1}
+              flexWrap="wrap"
+              minW={0}
+              aria-label="Статистика проекта"
+            >
+              <Box as="div" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
+                <Text as="dt" m={0} display="inline-flex" alignItems="center" gap={1} lineHeight="1">
+                  <VisuallyHidden>Звёзды</VisuallyHidden>
+                  <Box aria-hidden="true" display="inline-flex" alignItems="center">
+                    <StarRatingIcon isActive={Boolean(isStarred)} activeBoxSize={3} inactiveBoxSize={3.5} />
+                  </Box>
+                </Text>
+                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1">
+                  {formatCount(item.starsCount)}
+                </Text>
+              </Box>
 
-            <HStack spacing={1} flexShrink={0}>
-              <Box as="span">{formatCount(item.viewsCount)}</Box>
-              <Icon as={FiEye} boxSize={3.5} flexShrink={0} />
-            </HStack>
+              <Box as="div" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
+                <Text as="dt" m={0} display="inline-flex" alignItems="center" gap={1} lineHeight="1">
+                  <Icon as={FiEye} boxSize={3.5} flexShrink={0} aria-hidden="true" />
+                  <VisuallyHidden>Просмотры</VisuallyHidden>
+                </Text>
+                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1">
+                  {formatCount(item.viewsCount)}
+                </Text>
+              </Box>
 
-            <HStack spacing={1} flexShrink={0}>
-              <Box as="span">{formatCount(item.commentsCount)}</Box>
-              <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} />
-            </HStack>
-          </HStack>
+              <Box as="div" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
+                <Text as="dt" m={0} display="inline-flex" alignItems="center" gap={1} lineHeight="1">
+                  <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} aria-hidden="true" />
+                  <VisuallyHidden>Комментарии</VisuallyHidden>
+                </Text>
+                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1">
+                  {formatCount(item.commentsCount)}
+                </Text>
+              </Box>
+            </Box>
+          </Box>
 
           <Box mt="auto" pt={1} display="flex" flexDirection="column" gap={2} minW={0}>
-            <HStack spacing={2} flexWrap="wrap" minW={0}>
+            <Box as="div" display="inline-flex" alignItems="center" gap={2} flexWrap="wrap" minW={0}>
               <AuthorBadgeLink
                 accentColor={colors.accent}
                 chipBorder={colors.chipBorder}
@@ -115,10 +159,15 @@ export const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ item }) => {
                 authorName={item.authorName}
                 to="/creators"
               />
-            </HStack>
+            </Box>
 
             <Box as="span" display="inline-flex" alignItems="center" minW={0}>
               <OpenLinkBadge accentColor={colors.accent} chipBorder={colors.chipBorder} dateLabel={dateLabel} />
+              <VisuallyHidden>
+                <Box as="time" dateTime={item.dateIso}>
+                  {dateLabel}
+                </Box>
+              </VisuallyHidden>
             </Box>
           </Box>
         </Box>

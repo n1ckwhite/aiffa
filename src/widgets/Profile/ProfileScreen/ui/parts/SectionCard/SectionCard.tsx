@@ -27,7 +27,7 @@ export const SectionCard: React.FC<SectionCardProps> = ({
       bg="transparent"
       py={{ base: 4, md: 7 }}
       position="relative"
-      overflow="hidden"
+      overflow="visible"
       boxShadow="none"
       transition="none"
     >

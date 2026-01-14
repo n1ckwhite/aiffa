@@ -45,6 +45,14 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item }) => {
         position="relative"
         overflow="hidden"
         boxShadow="none"
+        role="group"
+        _hover={{
+          background: colors.cardHoverBg,
+          textDecoration: "none",
+          transform: "translateY(-4px)",
+          borderColor: done ? "green.400" : levelAccent,
+          boxShadow: "0 12px 30px rgba(0, 0, 0, 0.15)",
+        }}
         sx={{
           "@media (hover: hover) and (pointer: fine)": {
             "&:hover": {

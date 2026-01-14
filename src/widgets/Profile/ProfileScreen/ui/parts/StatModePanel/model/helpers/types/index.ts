@@ -43,6 +43,31 @@ export type ProjectStatModePanelItem = {
   dateIso: string;
 };
 
+export type HackathonTeamMember = {
+  name: string;
+  href: string;
+  avatarUrl: string;
+};
+
+export type HackathonStatModePanelItem = {
+  cardVariant: "hackathon";
+  title: string;
+  teamName: string;
+  place?: 1 | 2 | 3;
+  dateIso: string;
+  taskDescription: string;
+  members: readonly HackathonTeamMember[];
+};
+
+export type SessionStatModePanelItem = {
+  cardVariant: "session";
+  title: string;
+  description: string;
+  dateTime: string;
+  timeLabel: string;
+  icon: ComponentType<any>;
+};
+
 export type PlainStatModePanelItem = {
   cardVariant?: undefined;
   title: string;
@@ -56,6 +81,8 @@ export type StatModePanelItem =
   | WeeklyStatModePanelItem
   | MaterialStatModePanelItem
   | ProjectStatModePanelItem
+  | HackathonStatModePanelItem
+  | SessionStatModePanelItem
   | PlainStatModePanelItem;
 
 export type StatModePanelPaginationConfig = {

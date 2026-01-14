@@ -10,7 +10,6 @@ const PEOPLE_QUERY_KEYS = new Set([
   "materials",
   "weekly",
   "projects",
-  "articles",
   "hackathons",
   "sessions",
   "contrib-materials",
@@ -37,7 +36,6 @@ const PEOPLE_QUERY_KEYS = new Set([
   if (nextMode === "materials") nextEntries.push(["materials", null]);
   if (nextMode === "weekly") nextEntries.push(["weekly", null]);
   if (nextMode === "projects") nextEntries.push(["projects", null]);
-  if (nextMode === "articles") nextEntries.push(["articles", null]);
   if (nextMode === "hackathons") nextEntries.push(["hackathons", null]);
   if (nextMode === "sessions") nextEntries.push(["sessions", null]);
   if (nextMode === "contrib-materials") nextEntries.push(["contrib-materials", null]);

@@ -21,9 +21,6 @@ export const getPeopleMode = (searchParams: ReadonlyURLSearchParams): ProfilePeo
   const isProjects = hasParamCaseInsensitive(searchParams, "projects");
   if (isProjects) return "projects";
 
-  const isArticles = hasParamCaseInsensitive(searchParams, "articles");
-  if (isArticles) return "articles";
-
   const isHackathons = hasParamCaseInsensitive(searchParams, "hackathons");
   if (isHackathons) return "hackathons";
 

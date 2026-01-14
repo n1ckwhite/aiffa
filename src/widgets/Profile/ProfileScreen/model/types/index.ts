@@ -10,7 +10,6 @@ export type ProfilePeopleMode =
   | "materials"
   | "weekly"
   | "projects"
-  | "articles"
   | "hackathons"
   | "sessions"
   | "contrib-materials"

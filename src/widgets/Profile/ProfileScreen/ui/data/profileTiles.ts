@@ -5,7 +5,6 @@ import {
   FiBookOpen,
   FiCheckCircle,
   FiEdit3,
-  FiFileText,
   FiPackage,
   FiTarget,
   FiVideo,
@@ -39,14 +38,6 @@ export const buildProgressTiles = (stats: ProgressStats): StatTileModel[] => {
       accentColor: "purple.400",
       tooltip: "Сколько проектов вы завершили на платформе.",
       mode: "projects",
-    },
-    {
-      label: "Прочтено статей",
-      value: stats.readArticlesCount,
-      icon: FiFileText,
-      accentColor: "orange.400",
-      tooltip: "Сколько статей из блога вы прочитали (по вашему прогрессу).",
-      mode: "articles",
     },
     {
       label: "Участие в хакатонах",

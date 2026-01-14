@@ -1,0 +1,67 @@
+import { FiPackage } from "react-icons/fi";
+import type { StatModePanelConfig } from "../shared/types";
+
+export const projectsPanel: StatModePanelConfig = {
+  title: "Проекты",
+  description: "Подборка ваших завершённых проектов.",
+  icon: FiPackage,
+  pagination: { pageSize: 4, ariaLabel: "Пагинация проектов" },
+  items: [
+    {
+      cardVariant: "project",
+      title: "Рабочий процесс Git",
+      to: "/learn/bazovye-komandy/projects/git-mini-project",
+      starsCount: 0,
+      viewsCount: 0,
+      commentsCount: 0,
+      authorUsername: "aiffa",
+      authorName: "AIFFA",
+      dateIso: "2026-01-07T00:00:00.000Z",
+    },
+    {
+      cardVariant: "project",
+      title: "Мини‑проект: конфликты и rebase",
+      to: "/learn/bazovye-komandy/projects/git-rebase-mini-project",
+      starsCount: 12,
+      viewsCount: 420,
+      commentsCount: 1,
+      authorUsername: "aiffa",
+      authorName: "AIFFA",
+      dateIso: "2026-01-06T00:00:00.000Z",
+    },
+    {
+      cardVariant: "project",
+      title: "Мини‑проект: fetch vs pull",
+      to: "/learn/bazovye-komandy/projects/git-pull-vs-fetch-mini-project",
+      starsCount: 7,
+      viewsCount: 310,
+      commentsCount: 0,
+      authorUsername: "aiffa",
+      authorName: "AIFFA",
+      dateIso: "2026-01-05T00:00:00.000Z",
+    },
+    {
+      cardVariant: "project",
+      title: "Мини‑проект: настройка репозитория",
+      to: "/learn/bazovye-komandy/projects/git-repo-setup-mini-project",
+      starsCount: 18,
+      viewsCount: 900,
+      commentsCount: 3,
+      authorUsername: "aiffa",
+      authorName: "AIFFA",
+      dateIso: "2026-01-04T00:00:00.000Z",
+    },
+    {
+      cardVariant: "project",
+      title: "Мини‑проект: ветки и merge",
+      to: "/learn/bazovye-komandy/projects/git-branches-mini-project",
+      starsCount: 9,
+      viewsCount: 510,
+      commentsCount: 2,
+      authorUsername: "aiffa",
+      authorName: "AIFFA",
+      dateIso: "2026-01-03T00:00:00.000Z",
+    },
+  ],
+};
+

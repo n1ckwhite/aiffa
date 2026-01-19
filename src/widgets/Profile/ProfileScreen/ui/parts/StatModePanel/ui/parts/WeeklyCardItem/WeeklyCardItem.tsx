@@ -16,58 +16,66 @@ export const WeeklyCardItem: React.FC<WeeklyTaskCardItemProps> = ({ item, titleD
   const weeklyColors = useWeeklyTaskCardColors();
   const ring = getRing(item.colorScheme);
   const to = item.to;
+  const showStatusBadge = item.status === "pending";
+  const showSolvedDecor = item.status === "success";
 
   return (
     <Box as="li" role="listitem" listStyleType="none">
       <Box
-        borderWidth="1px"
-        borderColor="green.300"
+        borderWidth={showSolvedDecor ? "1px" : "0"}
+        borderColor={showSolvedDecor ? "green.300" : "transparent"}
         borderRadius="20px"
         px={5}
         py={5}
         bg={weeklyColors.cardBg}
-        boxShadow="none"
+        boxShadow={weeklyColors.taskCardShadow}
         position="relative"
         overflow="hidden"
         transition="all 0.25s ease"
-        _hover={{ transform: "translateY(-2px)" }}
+        _hover={{ transform: "translateY(-2px)", boxShadow: weeklyColors.taskCardShadowHover }}
       >
-            <Box
-              position="absolute"
-              inset={0}
-              borderRadius="20px"
-              bg="green.500"
-              opacity={0.06}
-              pointerEvents="none"
-              zIndex={0}
-              sx={{ mixBlendMode: "multiply" }}
-            />
-            <Box
-              aria-hidden
-              position="absolute"
-              inset={0}
-              pointerEvents="none"
-              zIndex={0}
-              _before={{
-                content: '""',
-                position: "absolute",
-                inset: 0,
-                backgroundImage: `radial-gradient(520px 200px at 0% 0%, ${ring.from}26, transparent 60%), radial-gradient(520px 200px at 100% 100%, ${ring.to}26, transparent 60%)`,
-              }}
-            />
-            <Box
-              aria-hidden
-              position="absolute"
-              top="50%"
-              left="50%"
-              transform="translate(-50%, -50%)"
-              opacity={0.14}
-              pointerEvents="none"
-              zIndex={3}
-              filter="drop-shadow(0 8px 22px rgba(16,185,129,0.35))"
-            >
-              <Icon as={FaCircleCheck} boxSize={{ base: 24, md: 28 }} color="green.400" />
-            </Box>
+            {showSolvedDecor ? (
+              <Box
+                position="absolute"
+                inset={0}
+                borderRadius="20px"
+                bg="green.500"
+                opacity={0.06}
+                pointerEvents="none"
+                zIndex={0}
+                sx={{ mixBlendMode: "multiply" }}
+              />
+            ) : null}
+            {showSolvedDecor ? (
+              <Box
+                aria-hidden
+                position="absolute"
+                inset={0}
+                pointerEvents="none"
+                zIndex={0}
+                _before={{
+                  content: '""',
+                  position: "absolute",
+                  inset: 0,
+                  backgroundImage: `radial-gradient(520px 200px at 0% 0%, ${ring.from}26, transparent 60%), radial-gradient(520px 200px at 100% 100%, ${ring.to}26, transparent 60%)`,
+                }}
+              />
+            ) : null}
+            {showSolvedDecor ? (
+              <Box
+                aria-hidden
+                position="absolute"
+                top="50%"
+                left="50%"
+                transform="translate(-50%, -50%)"
+                opacity={0.14}
+                pointerEvents="none"
+                zIndex={3}
+                filter="drop-shadow(0 8px 22px rgba(16,185,129,0.35))"
+              >
+                <Icon as={FaCircleCheck} boxSize={{ base: 24, md: 28 }} color="green.400" />
+              </Box>
+            ) : null}
 
         <BackgroundDeco ring={ring} />
 
@@ -86,9 +94,26 @@ export const WeeklyCardItem: React.FC<WeeklyTaskCardItemProps> = ({ item, titleD
 
         <Box as="article" aria-labelledby={titleDomId} position="relative" zIndex={2} pointerEvents="none">
           <VStack align="start" spacing={2} minW={0} w="full">
-            <Box>
+            <HStack spacing={2} flexWrap="wrap">
               <TagBadge tag={item.tag} colorScheme={item.colorScheme} />
-            </Box>
+              {showStatusBadge ? (
+                <Box
+                  as="span"
+                  fontSize="xs"
+                  fontWeight="semibold"
+                  color="yellow.700"
+                  bg="yellow.100"
+                  borderWidth="1px"
+                  borderColor="yellow.300"
+                  px={2.5}
+                  py={1}
+                  borderRadius="full"
+                  whiteSpace="nowrap"
+                >
+                  В обработке
+                </Box>
+              ) : null}
+            </HStack>
 
             <Text
               as="h3"

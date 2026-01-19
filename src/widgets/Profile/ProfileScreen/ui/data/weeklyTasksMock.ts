@@ -17,6 +17,7 @@ export const weeklyTasksMock: readonly StatModePanelItem[] = [
     commentsCount: 12,
     solvedCount: 128,
     dateLabel: "07 янв. 2026 г.",
+    status: "success",
   },
   {
     cardVariant: "weekly",
@@ -33,6 +34,7 @@ export const weeklyTasksMock: readonly StatModePanelItem[] = [
     commentsCount: 4,
     solvedCount: 64,
     dateLabel: "05 янв. 2026 г.",
+    status: "success",
   },
   {
     cardVariant: "weekly",
@@ -49,6 +51,7 @@ export const weeklyTasksMock: readonly StatModePanelItem[] = [
     commentsCount: 2,
     solvedCount: 41,
     dateLabel: "03 янв. 2026 г.",
+    status: "success",
   },
   {
     cardVariant: "weekly",
@@ -65,6 +68,7 @@ export const weeklyTasksMock: readonly StatModePanelItem[] = [
     commentsCount: 5,
     solvedCount: 72,
     dateLabel: "02 янв. 2026 г.",
+    status: "success",
   },
   {
     cardVariant: "weekly",
@@ -81,6 +85,7 @@ export const weeklyTasksMock: readonly StatModePanelItem[] = [
     commentsCount: 3,
     solvedCount: 58,
     dateLabel: "01 янв. 2026 г.",
+    status: "success",
   },
   {
     cardVariant: "weekly",
@@ -97,6 +102,7 @@ export const weeklyTasksMock: readonly StatModePanelItem[] = [
     commentsCount: 1,
     solvedCount: 33,
     dateLabel: "31 дек. 2025 г.",
+    status: "success",
   },
 ];
 

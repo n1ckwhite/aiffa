@@ -16,6 +16,7 @@ export type WeeklyStatModePanelItem = {
   starsCount: number;
   commentsCount: number;
   solvedCount: number;
+  status?: "pending" | "success";
 };
 
 export type MaterialStatModePanelItem = {

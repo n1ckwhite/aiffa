@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Avatar } from "@chakra-ui/react";
+import { Avatar, Box } from "@chakra-ui/react";
 import { AppLink } from "shared/ui/AppLink";
 import type { AuthorBadgeLinkProps } from "./types";
 
@@ -15,8 +15,43 @@ export const AuthorBadgeLink: React.FC<AuthorBadgeLinkProps> = ({
   authorUsername,
   authorName,
   to = "/creators",
+  isLink = true,
 }) => {
   const label = authorName ?? authorUsername;
+
+  const content = (
+    <>
+      <Avatar
+        name={authorName}
+        src={`https://avatars.githubusercontent.com/${authorUsername}?s=40`}
+        boxSize="24px"
+        aria-hidden="true"
+      />
+      Автор
+    </>
+  );
+
+  if (!isLink) {
+    return (
+      <Box
+        as="span"
+        display="inline-flex"
+        alignItems="center"
+        gap={2}
+        fontSize="xs"
+        color={accentColor}
+        bg="transparent"
+        px={2.5}
+        py={1}
+        borderRadius="full"
+        borderWidth="1px"
+        borderStyle="dashed"
+        borderColor={chipBorder}
+      >
+        {content}
+      </Box>
+    );
+  }
 
   return (
     <AppLink
@@ -44,13 +79,7 @@ export const AuthorBadgeLink: React.FC<AuthorBadgeLinkProps> = ({
       onMouseDown={stop}
       onTouchStart={stop}
     >
-      <Avatar
-        name={authorName}
-        src={`https://avatars.githubusercontent.com/${authorUsername}?s=40`}
-        boxSize="24px"
-        aria-hidden="true"
-      />
-      Автор
+      {content}
     </AppLink>
   );
 };

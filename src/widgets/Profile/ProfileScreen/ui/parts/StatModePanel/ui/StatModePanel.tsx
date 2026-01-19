@@ -57,6 +57,7 @@ export const StatModePanel: React.FC<StatModePanelProps> = ({ title, description
                 titleDomId={vm.titleDomId}
                 mutedColor={muted}
                 cardBorder={cardBorder}
+                listIndex={vm.listIndex}
               />
             ))}
           </Box>

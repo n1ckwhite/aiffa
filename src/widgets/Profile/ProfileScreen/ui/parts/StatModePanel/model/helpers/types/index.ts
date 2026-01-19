@@ -29,6 +29,8 @@ export type MaterialStatModePanelItem = {
   authorUsername: string;
   authorName?: string;
   dateIso?: string;
+  status?: "pending" | "success";
+  level?: "beginner" | "middle" | "advanced";
 };
 
 export type ProjectStatModePanelItem = {

@@ -6,5 +6,6 @@ export type AuthorBadgeLinkProps = {
   authorUsername: string;
   authorName?: string;
   to?: string;
+  isLink?: boolean;
 };
 

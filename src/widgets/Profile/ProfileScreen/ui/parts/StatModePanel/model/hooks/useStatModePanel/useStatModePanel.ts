@@ -37,6 +37,7 @@ export const useStatModePanel = (args: {
         item: it,
         titleDomId,
         key: `${titleDomId}-${it.title}`,
+        listIndex: absoluteIdx,
       };
     });
   }, [items.length, listDomId, page, pageItems, pagination?.pageSize]);

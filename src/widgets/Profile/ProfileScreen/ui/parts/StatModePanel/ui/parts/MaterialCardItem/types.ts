@@ -4,5 +4,6 @@ import type { MaterialStatModePanelItem } from "../../../model";
 
 export type MaterialCardItemProps = {
   item: MaterialStatModePanelItem;
+  listIndex?: number;
 };
 

@@ -7,4 +7,5 @@ export type RenderStatModePanelItemProps = {
     titleDomId: string;
     mutedColor: string;
     cardBorder: string;
+    listIndex: number;
   };

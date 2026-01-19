@@ -4,6 +4,7 @@ export type StatModePanelVmItem = {
     item: StatModePanelItem;
     key: string;
     titleDomId: string;
+    listIndex: number;
   };
   
   export type StatModePanelPaginationVm = {

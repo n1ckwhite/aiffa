@@ -5,6 +5,7 @@ import { Box, Icon, Text, VisuallyHidden } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { FiEye, FiMessageCircle } from "react-icons/fi";
 import { AppBoxLink } from "shared/ui/AppLink";
+import PillBadge from "shared/ui/PillBadge";
 import { formatCount } from "shared/functions/formatCount";
 import { StarRatingIcon } from "shared/ui/StarRatingIcon";
 import { arrowAnimCss } from "widgets/ModuleLessons/parts/ModuleLessonsView/animations";
@@ -17,10 +18,29 @@ import { useMaterialCardItemColors } from "./colors/useMaterialCardItemColors";
 import { useMaterialCardItemMeta } from "./hooks/useMaterialCardItemMeta";
 import { AuthorBadgeLink } from "./ui/AuthorBadgeLink/AuthorBadgeLink";
 
-export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item }) => {
-  const { colors, levelAccent, metaColor, accentColor, chipBorder } = useMaterialCardItemColors();
+export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item, listIndex }) => {
+  const { colors, metaColor, accentColor, chipBorder } = useMaterialCardItemColors();
 
-  const done = true;
+  const status = item.status ?? "success";
+  const level = item.level ?? "beginner";
+  const levelLabel = level === "beginner" ? "Начальный" : level === "middle" ? "Средний" : "Продвинутый";
+  const levelScheme = level === "beginner" ? "green" : level === "middle" ? "yellow" : "red";
+  const levelAccent =
+    level === "beginner"
+      ? colors?.beginnerBorder ?? "green.400"
+      : level === "middle"
+        ? colors?.intermediateBorder ?? "yellow.400"
+        : colors?.advancedBorder ?? "red.400";
+  const showIndexChip = item.status === undefined;
+  const showIndexNumber = item.status !== undefined && typeof listIndex === "number";
+  const indexLabel = typeof listIndex === "number" ? listIndex + 1 : null;
+  const showStatusBadge = item.status === "pending";
+  const statusLabel = "В обработке";
+  const statusBg = "yellow.100";
+  const statusBorderColor = "yellow.300";
+  const statusTextColor = "yellow.700";
+  const statusBorder = colors.borderColor;
+  const statusBorderHover = levelAccent;
   const topBefore = buildTopBefore(levelAccent);
   const titleId = React.useId();
 
@@ -31,9 +51,14 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item }) => {
 
   return (
     <Box as="li" listStyleType="none">
-      <Box
+      <AppBoxLink
+        to={item.to}
+        prefetch={false}
+        aria-label={item.title ? `Открыть материал: ${item.title}` : "Открыть материал"}
+        w="full"
+        minW={0}
         borderWidth="2px"
-        borderColor={done ? "green.300" : colors.borderColor}
+        borderColor={statusBorder}
         bg={colors.cardBg}
         transition="all 180ms ease"
         p={5}
@@ -45,58 +70,46 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item }) => {
         position="relative"
         overflow="hidden"
         boxShadow="none"
-        role="group"
-        _hover={{
-          background: colors.cardHoverBg,
-          textDecoration: "none",
-          transform: "translateY(-4px)",
-          borderColor: done ? "green.400" : levelAccent,
-          boxShadow: "0 12px 30px rgba(0, 0, 0, 0.15)",
-        }}
+        _focusVisible={{ outline: "2px solid", outlineColor: "blue.300", outlineOffset: "2px" }}
         sx={{
           "@media (hover: hover) and (pointer: fine)": {
             "&:hover": {
               background: colors.cardHoverBg,
               textDecoration: "none",
               transform: "translateY(-4px)",
-              borderColor: done ? "green.400" : levelAccent,
+              borderColor: statusBorderHover,
               boxShadow: "0 12px 30px rgba(0, 0, 0, 0.15)",
               "&::before": { transform: "scaleX(1)" },
             },
           },
         }}
-        _before={done ? undefined : topBefore}
+        _before={topBefore}
       >
-        {done && (
-          <Box position="absolute" inset={0} borderRadius="16px" bg="green.500" opacity={0.06} pointerEvents="none" zIndex={0} />
-        )}
-        
-        <AppBoxLink
-          to={item.to}
-          prefetch={false}
-          aria-label={item.title ? `Открыть материал: ${item.title}` : "Открыть материал"}
-          position="absolute"
-          inset={0}
-          zIndex={1}
-          borderRadius="xl"
-          _focusVisible={{ outline: "2px solid", outlineColor: "blue.300", outlineOffset: "2px" }}
-          style={{ textDecoration: "none" }}
-        />
 
-        <IndexChip
-          done={done}
-          indexBg={colors?.indexBg ?? colors?.blue?.indexBg ?? "blue.50"}
-          accentColor={accentColor}
-        >
-          {cardIndexLabel}
-        </IndexChip>
+        <Box display="flex" alignItems="center" gap={2}>
+          {showIndexChip ? (
+            <IndexChip
+              done={status === "success"}
+              indexBg={colors?.indexBg ?? colors?.blue?.indexBg ?? "blue.50"}
+              accentColor={accentColor}
+            >
+              {cardIndexLabel}
+            </IndexChip>
+          ) : null}
+          {showIndexNumber ? (
+            <IndexChip
+              done={false}
+              indexBg={colors?.indexBg ?? colors?.blue?.indexBg ?? "blue.50"}
+              accentColor={accentColor}
+            >
+              {indexLabel}
+            </IndexChip>
+          ) : null}
+        </Box>
 
         <Box
           as="article"
           aria-labelledby={titleId}
-          position="relative"
-          zIndex={2}
-          pointerEvents="none"
           flex={1}
           minW={0}
           display="flex"
@@ -172,12 +185,36 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item }) => {
             <Box mt="auto" pt={1} display="flex" flexDirection="column" gap={1} minW={0}>
               <Box as="span" display="inline-flex" alignItems="center" gap={2} flexWrap="wrap" minW={0}>
                 <TasksBadge total={item.tasksCount} accentColor={accentColor} chipBorder={chipBorder} />
+                {item.level ? (
+                  <PillBadge colorScheme={levelScheme as any} variant="outline">
+                    {levelLabel}
+                  </PillBadge>
+                ) : null}
+                {showStatusBadge ? (
+                  <Box
+                    as="span"
+                    fontSize="xs"
+                    fontWeight="semibold"
+                    color={statusTextColor}
+                    bg={statusBg}
+                    borderWidth="1px"
+                    borderColor={statusBorderColor}
+                    px={2.5}
+                    py={1}
+                    borderRadius="full"
+                    whiteSpace="nowrap"
+                    flexShrink={0}
+                  >
+                    {statusLabel}
+                  </Box>
+                ) : null}
                 <AuthorBadgeLink
                   accentColor={accentColor}
                   chipBorder={chipBorder}
                   authorUsername={item.authorUsername}
                   authorName={item.authorName}
                   to="/creators"
+                  isLink={false}
                 />
               </Box>
 
@@ -204,11 +241,8 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item }) => {
           display={{ base: "none", md: "block" }}
           animation={arrowAnimCss}
           aria-hidden="true"
-          position="relative"
-          zIndex={2}
-          pointerEvents="none"
         />
-      </Box>
+      </AppBoxLink>
     </Box>
   );
 };

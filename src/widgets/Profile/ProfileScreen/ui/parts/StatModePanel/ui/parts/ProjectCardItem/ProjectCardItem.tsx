@@ -21,6 +21,9 @@ export const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ item }) => {
   const dateLabel = formatRuDate(item.dateIso);
   const { value: isStarred } = useLocalStorageFlag(`project-starred:${item.to}`);
   const titleId = React.useId();
+  const showArrow = item.showArrow ?? true;
+  const indexLabel = item.indexLabel ?? null;
+  const showStatusBadge = item.status === "pending";
 
   return (
     <Box as="li" listStyleType="none">
@@ -74,8 +77,8 @@ export const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ item }) => {
         />
 
         <Box position="relative" zIndex={2} pointerEvents="none">
-          <IndexChip done indexBg={colors.indexBg} accentColor={colors.accent}>
-            <CheckIcon boxSize={3.5} />
+          <IndexChip done={indexLabel == null} indexBg={colors.indexBg} accentColor={colors.accent}>
+            {indexLabel ? indexLabel : <CheckIcon boxSize={3.5} />}
           </IndexChip>
         </Box>
 
@@ -152,6 +155,24 @@ export const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ item }) => {
 
           <Box mt="auto" pt={1} display="flex" flexDirection="column" gap={2} minW={0}>
             <Box as="div" display="inline-flex" alignItems="center" gap={2} flexWrap="wrap" minW={0}>
+              {showStatusBadge ? (
+                <Box
+                  as="span"
+                  fontSize="xs"
+                  fontWeight="semibold"
+                  color="yellow.700"
+                  bg="yellow.100"
+                  borderWidth="1px"
+                  borderColor="yellow.300"
+                  px={2.5}
+                  py={1}
+                  borderRadius="full"
+                  whiteSpace="nowrap"
+                  flexShrink={0}
+                >
+                  В обработке
+                </Box>
+              ) : null}
               <AuthorBadgeLink
                 accentColor={colors.accent}
                 chipBorder={colors.chipBorder}
@@ -172,20 +193,22 @@ export const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ item }) => {
           </Box>
         </Box>
 
-        <Box
-          as={ChevronRightIcon}
-          boxSize={5}
-          color={colors.accent}
-          opacity={0.7}
-          ml={2}
-          alignSelf="start"
-          animation={`${arrowLoop} 1200ms ease-in-out infinite`}
-          display={{ base: "none", md: "block" }}
-          aria-hidden="true"
-          position="relative"
-          zIndex={2}
-          pointerEvents="none"
-        />
+        {showArrow ? (
+          <Box
+            as={ChevronRightIcon}
+            boxSize={5}
+            color={colors.accent}
+            opacity={0.7}
+            ml={2}
+            alignSelf="start"
+            animation={`${arrowLoop} 1200ms ease-in-out infinite`}
+            display={{ base: "none", md: "block" }}
+            aria-hidden="true"
+            position="relative"
+            zIndex={2}
+            pointerEvents="none"
+          />
+        ) : null}
       </Box>
     </Box>
   );

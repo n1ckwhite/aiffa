@@ -43,6 +43,9 @@ export type ProjectStatModePanelItem = {
   authorUsername: string;
   authorName: string;
   dateIso: string;
+  indexLabel?: string;
+  showArrow?: boolean;
+  status?: "pending" | "success";
 };
 
 export type HackathonTeamMember = {

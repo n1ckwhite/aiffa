@@ -1,44 +1,36 @@
 "use client";
 
 import React from "react";
-import { Box, Icon, Text, VisuallyHidden } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { FiEye, FiMessageCircle } from "react-icons/fi";
 import { AppBoxLink } from "shared/ui/AppLink";
-import PillBadge from "shared/ui/PillBadge";
-import { formatCount } from "shared/functions/formatCount";
-import { StarRatingIcon } from "shared/ui/StarRatingIcon";
 import { arrowAnimCss } from "widgets/ModuleLessons/parts/ModuleLessonsView/animations";
 import { buildTopBefore } from "widgets/ModuleLessons/parts/ModuleLessonsView/parts/LessonsGrid/parts/ItemCard/helpers";
 import { IndexChip } from "widgets/ModuleLessons/parts/LessonCard/parts/IndexChip";
-import { TasksBadge } from "widgets/ModuleLessons/parts/LessonCard/parts/Badges/TasksBadge";
-import { OpenLinkBadge } from "widgets/ModuleLessons/parts/LessonCard/parts/Badges/OpenLinkBadge";
 import { MaterialCardItemProps } from "./types";
 import { useMaterialCardItemColors } from "./colors/useMaterialCardItemColors";
 import { useMaterialCardItemMeta } from "./hooks/useMaterialCardItemMeta";
-import { AuthorBadgeLink } from "./ui/AuthorBadgeLink/AuthorBadgeLink";
+import { MaterialCardHeader } from "./ui/MaterialCardHeader/MaterialCardHeader";
+import { MaterialCardStats } from "./ui/MaterialCardStats/MaterialCardStats";
+import { MaterialCardBadges } from "./ui/MaterialCardBadges/MaterialCardBadges";
 
 export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item, listIndex }) => {
-  const { colors, metaColor, accentColor, chipBorder } = useMaterialCardItemColors();
+  const { colors, metaColor, accentColor, chipBorder, getLevelAccent, getLevelScheme, statusBadgeColors } =
+    useMaterialCardItemColors();
 
   const status = item.status ?? "success";
   const level = item.level ?? "beginner";
   const levelLabel = level === "beginner" ? "Начальный" : level === "middle" ? "Средний" : "Продвинутый";
-  const levelScheme = level === "beginner" ? "green" : level === "middle" ? "yellow" : "red";
-  const levelAccent =
-    level === "beginner"
-      ? colors?.beginnerBorder ?? "green.400"
-      : level === "middle"
-        ? colors?.intermediateBorder ?? "yellow.400"
-        : colors?.advancedBorder ?? "red.400";
+  const levelScheme = getLevelScheme(level);
+  const levelAccent = getLevelAccent(level);
   const showIndexChip = item.status === undefined;
   const showIndexNumber = item.status !== undefined && typeof listIndex === "number";
   const indexLabel = typeof listIndex === "number" ? listIndex + 1 : null;
   const showStatusBadge = item.status === "pending";
   const statusLabel = "В обработке";
-  const statusBg = "yellow.100";
-  const statusBorderColor = "yellow.300";
-  const statusTextColor = "yellow.700";
+  const statusBg = statusBadgeColors.bg;
+  const statusBorderColor = statusBadgeColors.border;
+  const statusTextColor = statusBadgeColors.text;
   const statusBorder = colors.borderColor;
   const statusBorderHover = levelAccent;
   const topBefore = buildTopBefore(levelAccent);
@@ -117,119 +109,30 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item, listIn
           height="100%"
           justifyContent="space-between"
         >
-          <Box display="flex" alignItems="flex-start" justifyContent="space-between" gap={3} minW={0}>
-            <Text
-              as="h3"
-              id={titleId}
-              fontWeight="semibold"
-              noOfLines={2}
-              wordBreak="break-word"
-              overflowWrap="anywhere"
-              whiteSpace="normal"
-              style={{ hyphens: "auto" }}
-              flex={1}
-              minW={0}
-              m={0}
-            >
-              {item.title}
-            </Text>
-          </Box>
-
-          <Box mt={1} fontSize="xs" color={metaColor}>
-            <Box
-              as="dl"
-              m={0}
-              display="inline-flex"
-              alignItems="center"
-              gap={3}
-              rowGap={1}
-              flexWrap="wrap"
-              minW={0}
-              aria-label="Статистика материала"
-            >
-              <Box as="div" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
-                <Text as="dt" m={0} display="inline-flex" alignItems="center" lineHeight="1" order={1}>
-                  <VisuallyHidden>Звёзды</VisuallyHidden>
-                  <Box aria-hidden="true" display="inline-flex" alignItems="center">
-                    <StarRatingIcon isActive={isStarred} activeBoxSize={3} inactiveBoxSize={3.5} />
-                  </Box>
-                </Text>
-                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1" order={0}>
-                  {formatCount(item.starsCount)}
-                </Text>
-              </Box>
-
-              <Box as="div" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
-                <Text as="dt" m={0} display="inline-flex" alignItems="center" gap={1} lineHeight="1" order={1}>
-                  <Icon as={FiEye} boxSize={3.5} flexShrink={0} aria-hidden="true" />
-                  <VisuallyHidden>Просмотры</VisuallyHidden>
-                </Text>
-                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1" order={0}>
-                  {formatCount(item.viewsCount)}
-                </Text>
-              </Box>
-
-              <Box as="div" display="inline-flex" alignItems="center" gap={1} flexShrink={0}>
-                <Text as="dt" m={0} display="inline-flex" alignItems="center" gap={1} lineHeight="1" order={1}>
-                  <Icon as={FiMessageCircle} boxSize={3.5} flexShrink={0} aria-hidden="true" />
-                  <VisuallyHidden>Комментарии</VisuallyHidden>
-                </Text>
-                <Text as="dd" m={0} fontWeight="semibold" lineHeight="1" order={0}>
-                  {formatCount(item.commentsCount)}
-                </Text>
-              </Box>
-            </Box>
-          </Box>
-
-          <Box as="div" className="badges-row">
-            <Box mt="auto" pt={1} display="flex" flexDirection="column" gap={1} minW={0}>
-              <Box as="span" display="inline-flex" alignItems="center" gap={2} flexWrap="wrap" minW={0}>
-                <TasksBadge total={item.tasksCount} accentColor={accentColor} chipBorder={chipBorder} />
-                {item.level ? (
-                  <PillBadge colorScheme={levelScheme as any} variant="outline">
-                    {levelLabel}
-                  </PillBadge>
-                ) : null}
-                {showStatusBadge ? (
-                  <Box
-                    as="span"
-                    fontSize="xs"
-                    fontWeight="semibold"
-                    color={statusTextColor}
-                    bg={statusBg}
-                    borderWidth="1px"
-                    borderColor={statusBorderColor}
-                    px={2.5}
-                    py={1}
-                    borderRadius="full"
-                    whiteSpace="nowrap"
-                    flexShrink={0}
-                  >
-                    {statusLabel}
-                  </Box>
-                ) : null}
-                <AuthorBadgeLink
-                  accentColor={accentColor}
-                  chipBorder={chipBorder}
-                  authorUsername={item.authorUsername}
-                  authorName={item.authorName}
-                  to="/creators"
-                  isLink={false}
-                />
-              </Box>
-
-              {dateLabel ? (
-                <Box as="span" display="inline-flex" alignItems="center" minW={0}>
-                  <OpenLinkBadge accentColor={accentColor} chipBorder={chipBorder} dateLabel={dateLabel} />
-                  <VisuallyHidden>
-                    <Box as="time" dateTime={item.dateIso}>
-                      {dateLabel}
-                    </Box>
-                  </VisuallyHidden>
-                </Box>
-              ) : null}
-            </Box>
-          </Box>
+          <MaterialCardHeader title={item.title} titleId={titleId} />
+          <MaterialCardStats
+            starsCount={item.starsCount}
+            viewsCount={item.viewsCount}
+            commentsCount={item.commentsCount}
+            isStarred={isStarred}
+            metaColor={metaColor}
+          />
+          <MaterialCardBadges
+            tasksCount={item.tasksCount}
+            accentColor={accentColor}
+            chipBorder={chipBorder}
+            levelLabel={item.level ? levelLabel : undefined}
+            levelScheme={item.level ? levelScheme : undefined}
+            showStatusBadge={showStatusBadge}
+            statusLabel={statusLabel}
+            statusBg={statusBg}
+            statusBorderColor={statusBorderColor}
+            statusTextColor={statusTextColor}
+            authorUsername={item.authorUsername}
+            authorName={item.authorName}
+            dateLabel={dateLabel}
+            dateIso={item.dateIso}
+          />
         </Box>
 
         <Box

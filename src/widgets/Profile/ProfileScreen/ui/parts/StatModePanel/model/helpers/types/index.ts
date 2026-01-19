@@ -81,6 +81,13 @@ export type PlainStatModePanelItem = {
   leftIcon?: ComponentType<any>;
   authorLabel: string;
   authorHref: string;
+  status?: "pending" | "success";
+};
+
+export type ArticleStatModePanelItem = {
+  cardVariant: "article";
+  article: import("@/shared/articles/manifest/types").BlogArticleMeta;
+  status?: "pending" | "success";
 };
 
 export type StatModePanelItem =
@@ -89,6 +96,7 @@ export type StatModePanelItem =
   | ProjectStatModePanelItem
   | HackathonStatModePanelItem
   | SessionStatModePanelItem
+  | ArticleStatModePanelItem
   | PlainStatModePanelItem;
 
 export type StatModePanelPaginationConfig = {

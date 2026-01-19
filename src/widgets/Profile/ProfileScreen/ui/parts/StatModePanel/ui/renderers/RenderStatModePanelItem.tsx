@@ -2,12 +2,13 @@
 import React from "react";
 
 import {
-  HackathonCardItem, 
-  MaterialCardItem, 
-  PlainListItem, 
-  ProjectCardItem, 
-  SessionCardItem, 
-  WeeklyCardItem 
+  ArticleCardItem,
+  HackathonCardItem,
+  MaterialCardItem,
+  PlainListItem,
+  ProjectCardItem,
+  SessionCardItem,
+  WeeklyCardItem,
 } from "../parts";
 import { CardVariant, RenderStatModePanelItemProps } from "./types";
 
@@ -20,6 +21,7 @@ export const RenderStatModePanelItem: React.FC<RenderStatModePanelItemProps> = (
     project: ProjectCardItem,
     hackathon: HackathonCardItem,
     session: SessionCardItem,
+    article: ArticleCardItem,
     plain: PlainListItem,
   };
 

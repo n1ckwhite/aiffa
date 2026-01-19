@@ -23,6 +23,7 @@ export const StatModePanel: React.FC<StatModePanelProps> = ({ title, description
     pathname,
     searchParams,
   });
+  const isArticlesGrid = vmItems.some((vm) => vm.item.cardVariant === "article");
 
   return (
     <SectionCard
@@ -49,7 +50,15 @@ export const StatModePanel: React.FC<StatModePanelProps> = ({ title, description
     >
       <VStack align="stretch" spacing={3} minW={0}>
         {hasItems ? (
-          <Box as="ul" listStyleType="none" m={0} p={0} display="grid" gap={3}>
+          <Box
+            as="ul"
+            listStyleType="none"
+            m={0}
+            p={0}
+            display="grid"
+            gap={{ base: 4, md: 5 }}
+            gridTemplateColumns={isArticlesGrid ? { base: "1fr", lg: "repeat(2, minmax(0, 1fr))" } : "1fr"}
+          >
             {vmItems.map((vm) => (
               <RenderStatModePanelItem
                 key={vm.key}

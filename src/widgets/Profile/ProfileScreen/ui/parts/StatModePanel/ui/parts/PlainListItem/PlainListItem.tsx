@@ -7,6 +7,8 @@ import { AppLink } from "shared/ui/AppLink";
 import { PlainListItemProps } from "./types";
 
 export const PlainListItem: React.FC<PlainListItemProps> = ({ item, titleDomId, cardBorder, mutedColor, titleColor }) => {
+  const isPending = item.status === "pending";
+
   return (
     <Box
       as="li"
@@ -37,6 +39,24 @@ export const PlainListItem: React.FC<PlainListItemProps> = ({ item, titleDomId, 
           gap={2}
           flexWrap="wrap"
         >
+          {isPending ? (
+            <Box
+              as="span"
+              fontSize="xs"
+              fontWeight="semibold"
+              color="yellow.700"
+              bg="yellow.100"
+              borderWidth="1px"
+              borderColor="yellow.300"
+              px={2.5}
+              py={1}
+              borderRadius="full"
+              whiteSpace="nowrap"
+              flexShrink={0}
+            >
+              В обработке
+            </Box>
+          ) : null}
           <Icon as={FiUser} boxSize="14px" aria-hidden="true" />
           <AppLink
             to={item.authorHref}

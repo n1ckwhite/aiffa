@@ -33,10 +33,11 @@ export const useStatModePanel = (args: {
     return pageItems.map((it, idx) => {
       const absoluteIdx = (page - 1) * pageSize + idx;
       const titleDomId = `${listDomId}-item-${absoluteIdx}-title`;
+      const itemTitle = "article" in it ? it.article.title : it.title;
       return {
         item: it,
         titleDomId,
-        key: `${titleDomId}-${it.title}`,
+        key: `${titleDomId}-${itemTitle}`,
         listIndex: absoluteIdx,
       };
     });

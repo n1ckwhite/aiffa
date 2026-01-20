@@ -164,6 +164,7 @@ export const WeeklyCardItem: React.FC<WeeklyTaskCardItemProps> = ({ item, titleD
                 to={item.authorHref}
                 prefetch={false}
                 display="inline-flex"
+                alignItems="center"
                 w="fit-content"
                 maxW="100%"
                 minH="44px"

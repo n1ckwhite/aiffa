@@ -4,7 +4,7 @@ import React from "react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { formatRuDate } from "shared/functions/formatRuDate";
 import { useLocalStorageFlag } from "shared/hooks/useLocalStorageFlag";
-import { UseMaterialCardItemMetaArgs, UseMaterialCardItemMetaResult } from "./types";
+import { UseMaterialCardItemMetaArgs, UseMaterialCardItemMetaResult } from "../types";
 
 export const useMaterialCardItemMeta = ({
   to,

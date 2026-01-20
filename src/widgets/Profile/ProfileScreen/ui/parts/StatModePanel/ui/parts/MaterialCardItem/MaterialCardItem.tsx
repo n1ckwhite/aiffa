@@ -5,11 +5,13 @@ import { Box } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { AppBoxLink } from "shared/ui/AppLink";
 import { arrowAnimCss } from "widgets/ModuleLessons/parts/ModuleLessonsView/animations";
-import { buildTopBefore } from "widgets/ModuleLessons/parts/ModuleLessonsView/parts/LessonsGrid/parts/ItemCard/helpers";
 import { IndexChip } from "widgets/ModuleLessons/parts/LessonCard/parts/IndexChip";
 import { MaterialCardItemProps } from "./types";
 import { useMaterialCardItemColors } from "./colors/useMaterialCardItemColors";
-import { useMaterialCardItemMeta } from "./hooks/useMaterialCardItemMeta";
+import { useMaterialCardItemMeta } from "./hooks/useMaterialCardItemMeta/useMaterialCardItemMeta";
+import { useMaterialCardItemLevel } from "./hooks/useMaterialCardItemLevel/useMaterialCardItemLevel";
+import { useMaterialCardItemStatus } from "./hooks/useMaterialCardItemStatus/useMaterialCardItemStatus";
+import { useMaterialCardItemIndex } from "./hooks/useMaterialCardItemIndex/useMaterialCardItemIndex";
 import { MaterialCardHeader } from "./ui/MaterialCardHeader/MaterialCardHeader";
 import { MaterialCardStats } from "./ui/MaterialCardStats/MaterialCardStats";
 import { MaterialCardBadges } from "./ui/MaterialCardBadges/MaterialCardBadges";
@@ -18,23 +20,33 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item, listIn
   const { colors, metaColor, accentColor, chipBorder, getLevelAccent, getLevelScheme, statusBadgeColors } =
     useMaterialCardItemColors();
 
-  const status = item.status ?? "success";
-  const level = item.level ?? "beginner";
-  const levelLabel = level === "beginner" ? "Начальный" : level === "middle" ? "Средний" : "Продвинутый";
-  const levelScheme = getLevelScheme(level);
-  const levelAccent = getLevelAccent(level);
-  const showIndexChip = item.status === undefined;
-  const showIndexNumber = item.status !== undefined && typeof listIndex === "number";
-  const indexLabel = typeof listIndex === "number" ? listIndex + 1 : null;
-  const showStatusBadge = item.status === "pending";
-  const statusLabel = "В обработке";
-  const statusBg = statusBadgeColors.bg;
-  const statusBorderColor = statusBadgeColors.border;
-  const statusTextColor = statusBadgeColors.text;
-  const statusBorder = colors.borderColor;
-  const statusBorderHover = levelAccent;
-  const topBefore = buildTopBefore(levelAccent);
   const titleId = React.useId();
+  const { levelLabel, levelScheme, levelAccent } = useMaterialCardItemLevel({
+    level: item.level,
+    getLevelAccent,
+    getLevelScheme,
+  });
+  const {
+    isCompletedMaterial,
+    isSuccess,
+    showStatusBadge,
+    statusLabel,
+    statusBg,
+    statusBorderColor,
+    statusTextColor,
+    statusBorder,
+    statusBorderHover,
+    topBefore,
+  } = useMaterialCardItemStatus({
+    status: item.status,
+    colors,
+    levelAccent,
+    statusBadgeColors,
+  });
+  const { showIndexChip, showIndexNumber, indexLabel } = useMaterialCardItemIndex({
+    listIndex,
+    isCompletedMaterial,
+  });
 
   const { dateLabel, cardIndexLabel, isStarred } = useMaterialCardItemMeta({
     to: item.to,
@@ -77,11 +89,22 @@ export const MaterialCardItem: React.FC<MaterialCardItemProps> = ({ item, listIn
         }}
         _before={topBefore}
       >
+        {isCompletedMaterial && (
+          <Box
+            position="absolute"
+            inset={0}
+            borderRadius="16px"
+            bg="green.500"
+            opacity={0.06}
+            pointerEvents="none"
+            zIndex={0}
+          />
+        )}
 
         <Box display="flex" alignItems="center" gap={2}>
           {showIndexChip ? (
             <IndexChip
-              done={status === "success"}
+              done={isCompletedMaterial || isSuccess}
               indexBg={colors?.indexBg ?? colors?.blue?.indexBg ?? "blue.50"}
               accentColor={accentColor}
             >

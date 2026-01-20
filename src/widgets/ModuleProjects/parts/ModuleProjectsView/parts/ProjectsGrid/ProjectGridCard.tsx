@@ -72,12 +72,24 @@ export const ProjectGridCard: React.FC<ProjectGridCardProps> = ({ modId, project
         background: colors.headerAccent,
         opacity: 0.9,
       }}
-      _hover={{
-        background: colors.cardHoverBg,
-        textDecoration: "none",
-        transform: "translateY(-4px)",
-        borderColor: colors.heroBorder,
-        boxShadow: "0 12px 30px rgba(0, 0, 0, 0.15)",
+      sx={{
+        "@media (hover: hover) and (pointer: fine)": {
+          "&:hover": {
+            background: colors.cardHoverBg,
+            textDecoration: "none",
+            transform: "translateY(-4px)",
+            borderColor: colors.heroBorder,
+            boxShadow: "0 12px 30px rgba(0, 0, 0, 0.15)",
+          },
+        },
+        "@media (pointer: coarse)": {
+          "&:hover": {
+            background: colors.cardBg,
+            transform: "none",
+            borderColor: colors.borderColor,
+            boxShadow: "none",
+          },
+        },
       }}
     >
       <Box position="relative" minW="28px" h="28px" display="flex" alignItems="center" justifyContent="center">

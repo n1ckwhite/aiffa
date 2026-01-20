@@ -3,6 +3,8 @@ import { HStack, Button, Link, Icon } from '@chakra-ui/react';
 import { ArrowForwardIcon, ChatIcon } from '@chakra-ui/icons';
 import { useStartCTAColors } from '../../../colors/useStartCTAColors';
 import type { ActionsProps } from './types';
+import { AppButtonLink } from '@/shared/ui/AppLink';
+import { telegramHref } from '@/widgets/Footer/model/links';
 
 const Actions: React.FC<ActionsProps> = () => {
   const {
@@ -14,16 +16,12 @@ const Actions: React.FC<ActionsProps> = () => {
     communityBtnHoverBg,
     communityBtnBorder,
     communityBtnText,
-    donateBtnBg,
-    donateBtnHoverBg,
-    donateBtnBorder,
-    donateBtnText,
-    heartIconColor,
   } = useStartCTAColors();
 
   return (
     <HStack spacing={4} flexWrap="wrap" justify="center" w="full" maxW="720px">
-      <Button
+      <AppButtonLink
+        to="/weekly"
         bg={startBtnBg}
         color={startBtnText}
         borderWidth="1px"
@@ -34,12 +32,13 @@ const Actions: React.FC<ActionsProps> = () => {
         fontWeight="bold"
         _hover={{ bg: startBtnHoverBg }}
         w={{ base: '100%', sm: 'auto' }}
+        aria-label="Начать с weekly-задачи"
       >
         <ArrowForwardIcon boxSize="1em" mr={2} aria-hidden />
-        Начать изучение
-      </Button>
+        Начать с weekly
+      </AppButtonLink>
       <Link
-        href="https://t.me/nickwhite_web"
+        href={telegramHref}
         target="_blank"
         rel="noopener noreferrer"
         display="inline-flex"
@@ -59,26 +58,24 @@ const Actions: React.FC<ActionsProps> = () => {
         <ChatIcon boxSize="1em" mr={2} aria-hidden />
         К сообществу
       </Link>
-      <Button
-        bg={donateBtnBg}
-        color={donateBtnText}
+      <AppButtonLink
+        to="/creators"
+        variant="outline"
         borderRadius="full"
         px={{ base: 4, md: 6 }}
         h={{ base: 12, md: 12 }}
         fontWeight="bold"
-        borderWidth="1px"
-        borderColor={donateBtnBorder}
-        _hover={{ bg: donateBtnHoverBg }}
         w={{ base: '100%', sm: 'auto' }}
+        aria-label="Открыть страницу создателей"
       >
-        <Icon viewBox="0 0 24 24" boxSize="20px" mr={2} aria-hidden color={heartIconColor}>
+        <Icon viewBox="0 0 24 24" boxSize="20px" mr={2} aria-hidden>
           <path
             fill="currentColor"
-            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41 1.01 4.22 2.53C11.09 5.01 12.76 4 14.5 4 17 4 19 6 19 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+            d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4Zm2 5V6a2 2 0 1 0-4 0v1h4Z"
           />
         </Icon>
-        Поддержать проект
-      </Button>
+        Стать создателем
+      </AppButtonLink>
     </HStack>
   );
 };

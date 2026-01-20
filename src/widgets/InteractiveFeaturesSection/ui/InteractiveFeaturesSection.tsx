@@ -1,112 +1,112 @@
-import React from 'react';
-import { Box, Container, VStack, Text, SimpleGrid } from '@chakra-ui/react';
-import { useInteractiveColors } from '../colors/useInteractiveColors';
-import { colorRgbMap } from '../data/colors';
-import { features } from '../data/features';
-import { LottieHeroIcon } from "@/shared/icons/components-icon";
+import React from "react";
+import { Box, Container, Heading, HStack, Text, VStack, SimpleGrid } from "@chakra-ui/react";
+import { useInteractiveColors } from "../colors/useInteractiveColors";
+import { AppButtonLink } from "@/shared/ui/AppLink";
 
 
 const InteractiveFeaturesSection: React.FC = () => {
-  const { cardBg, textColor, titleColor, spotlightAlpha } = useInteractiveColors();
+  const { cardBg, textColor, titleColor } = useInteractiveColors();
+
+  const steps = [
+    {
+      number: 1,
+      title: "Выбираешь задачу",
+      description: "Начни с Weekly или задач внутри материалов — выбери то, что понятно и интересно прямо сейчас.",
+    },
+    {
+      number: 2,
+      title: "Пишешь код в IDE на сайте",
+      description: "Открываешь VS Code прямо на платформе: решаешь задачу, закрепляешь тему и переходишь к проектам по направлению.",
+    },
+    {
+      number: 3,
+      title: "Проверяешь и получаешь фидбек",
+      description: "Проверка решения, разборы и поддержка. ИИ‑помощник ускоряет понимание ошибок и помогает не застревать.",
+    },
+    {
+      number: 4,
+      title: "Фиксируешь прогресс в профиле",
+      description: "XP и достижения растут вместе с тобой: за решения и вклад открываются уровни, бейджи и доверие к твоему прогрессу.",
+    },
+    {
+      number: 5,
+      title: "Растёшь дальше",
+      description: "Собираешь команду, участвуешь в хакатонах, приходишь на сессии, создаёшь своё и помогаешь другим.",
+    },
+  ] as const;
 
   return (
-    <Box px={0}>
-        <LottieHeroIcon />
+    <Box px={0} as="section" aria-labelledby="home-how-it-works-title" id="home-how-it-works" scrollMarginTop="96px">
       <Container maxW="1200px">
-        <VStack spacing={12} align="center">
-          <VStack
-            spacing={5}
-            textAlign="center"
-            maxW="600px"
-            data-index={0}
-            opacity={1}
-            transform={'none'}
-            willChange={undefined}
-          >
-            <Text
-              fontSize={{ base: '2xl', md: '3xl' }}
+        <VStack spacing={10} align="center">
+          <VStack spacing={4} textAlign="center" maxW="720px">
+            <Heading
+              id="home-how-it-works-title"
+              as="h2"
+              fontSize={{ base: "2xl", md: "3xl" }}
               fontWeight="bold"
               color={titleColor}
             >
-              Особенности экосистемы
+              Как это работает
+            </Heading>
+            <Text fontSize={{ base: "md", md: "lg" }} color={textColor} lineHeight="1.7">
+              Простая логика: сделал — значит вырос. Любая активность превращается в опыт и вклад.
             </Text>
-            <Text
-              fontSize="lg"
-              color={textColor}
-              lineHeight="1.6"
-            >
-              Это не курс — это открытая экосистема IT. Каждый может вносить вклад в материалы, задачи,
-              хакатоны и проекты. Ваш вклад виден (GitHub-профиль) и ценится. Обучаясь и помогая другим,
-              вы развиваетесь быстрее.
-            </Text>
-
           </VStack>
 
-          <SimpleGrid
-            // Safari tends to "squeeze" cards when columns are forced.
-            // Using `minChildWidth` makes cards wrap instead of shrinking below the minimum.
-            minChildWidth={{ base: "100%", sm: "360px" }}
-            spacing={6}
-            w="full"
-            alignItems="stretch"
-          >
-            {features.map((feature, index) => {
-              const rgb = colorRgbMap[feature.color] ?? '59, 130, 246';
-              const spotlight = `radial-gradient(420px 160px at 0% 0%, rgba(${rgb}, ${spotlightAlpha}), transparent 60%), radial-gradient(420px 160px at 100% 100%, rgba(${rgb}, ${spotlightAlpha}), transparent 60%)`;
-              return (
-                <Box
-                  data-index={index}
-                  textAlign="center"
-                  key={index}
-                  bg={cardBg}
-                  border="1px"
-                  borderColor={`${feature.color}.300`}
-                  borderRadius="16px"
-                  p={8}
-                  h="100%"
-                  display="flex"
-                  flexDirection="column"
-                  position="relative"
-                  overflow="hidden"
-                  opacity={1}
-                  transform={'none'}
-                  sx={{ animation: 'none' }}
-                  willChange={undefined}
-                  boxShadow={'0 8px 24px rgba(0, 0, 0, 0.08)'}
-                  transition="all 0.2s ease"
-                  _hover={{ transform: 'translateY(-2px)', boxShadow: '0 12px 28px rgba(0, 0, 0, 0.12)' }}
-                  _before={{
-                    content: '""',
-                    position: 'absolute',
-                    inset: 0,
-                    backgroundImage: spotlight,
-                    zIndex: 0,
-                    pointerEvents: 'none',
-                  }}
-                >
-                  <VStack spacing={4} align="center" flex={1} position="relative" zIndex={1}>
-                    <Box
-                      p={3}
-                      borderRadius="full"
-                      bg={`${feature.color}.50`}
-                      color={`${feature.color}.600`}
-                      boxShadow={'0 6px 14px rgba(0, 0, 0, 0.08)'}
-                    >
-                      {feature.icon}
-                    </Box>
-                    <VStack spacing={2} align="center">
-                      <Text fontSize="xl" fontWeight="bold" color={titleColor}>
-                        {feature.title}
-                      </Text>
-                      <Text fontSize="sm" color={textColor} textAlign="center">
-                        {feature.description}
-                      </Text>
-                    </VStack>
-                  </VStack>
-                </Box>
-              );
-            })}
+          <SimpleGrid minChildWidth={{ base: "100%", md: "360px" }} spacing={5} w="full" alignItems="stretch">
+            {steps.map((s) => (
+              <Box
+                key={s.number}
+                bg={cardBg}
+                borderWidth="1px"
+                borderColor="blackAlpha.200"
+                _dark={{ borderColor: "whiteAlpha.200" }}
+                borderRadius="2xl"
+                p={{ base: 5, md: 6 }}
+                h="100%"
+              >
+                <HStack spacing={3} align="flex-start">
+                  <Box
+                    w="36px"
+                    h="36px"
+                    borderRadius="xl"
+                    bg="blue.50"
+                    color="blue.700"
+                    _dark={{ bg: "whiteAlpha.200", color: "blue.200" }}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    fontWeight="bold"
+                    flexShrink={0}
+                    aria-hidden="true"
+                  >
+                    {s.number}
+                  </Box>
+                  <Box minW={0}>
+                    <Text fontWeight="bold" color={titleColor}>
+                      {s.title}
+                    </Text>
+                    <Text mt={2} fontSize="sm" color={textColor} lineHeight="1.7">
+                      {s.description}
+                    </Text>
+                  </Box>
+                </HStack>
+              </Box>
+            ))}
           </SimpleGrid>
+
+          <HStack spacing={{ base: 3, md: 4 }} flexWrap="wrap" justify="center" pt={1}>
+            <AppButtonLink to="/weekly" colorScheme="blue" borderRadius="full" px={{ base: 6, md: 7 }}>
+              Начать с weekly
+            </AppButtonLink>
+            <AppButtonLink to="/profile?achievements" variant="outline" borderRadius="full" px={{ base: 6, md: 7 }}>
+              Достижения
+            </AppButtonLink>
+            <AppButtonLink to="/learn" variant="outline" borderRadius="full" px={{ base: 6, md: 7 }}>
+              Построить роудмэп
+            </AppButtonLink>
+          </HStack>
         </VStack>
       </Container>
     </Box>

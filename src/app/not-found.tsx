@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import {
   Box,
   Heading,
@@ -10,6 +13,15 @@ import { ErrorIcon } from "@/shared/icons/components-icon";
 import { AppButtonLink } from "@/shared/ui/AppLink";
 
 const NotFound = () => {
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Box
       as="section"

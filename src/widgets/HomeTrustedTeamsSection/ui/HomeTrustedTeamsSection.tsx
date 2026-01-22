@@ -155,6 +155,7 @@ const HomeTrustedTeamsSection: React.FC = () => {
   const ctaBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.50");
   const labelColor = useColorModeValue("gray.600", "whiteAlpha.700");
   const actionColor = isDark ? "blue.200" : "blue.700";
+  const quoteMarkColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
 
   return (
     <Box as="section" px={0} py={{ base: 12, md: 16 }} bg={sectionBg}>
@@ -185,25 +186,27 @@ const HomeTrustedTeamsSection: React.FC = () => {
                   Всё в одном месте
                 </Text>
                 <Text
-                  fontSize={{ base: "2xl", md: "3xl" }}
+                  as="blockquote"
+                  fontSize={{ base: "xl", md: "2xl" }}
                   fontWeight="semibold"
                   color={titleColor}
-                  lineHeight="1.25"
+                  lineHeight="1.35"
                   letterSpacing="-0.02em"
+                  position="relative"
+                  pl={{ base: 7, md: 8 }}
+                  _before={{
+                    content: '"“"',
+                    position: "absolute",
+                    left: 0,
+                    top: { base: -3, md: -4 },
+                    fontSize: { base: "52px", md: "72px" },
+                    lineHeight: "1",
+                    color: quoteMarkColor,
+                    pointerEvents: "none",
+                  }}
                 >
-                  “Практика → фидбек → следующий шаг. Прогресс виден по действиям, а рост ускоряется, когда помогаешь другим.”
+                  Практика → фидбек → следующий шаг. Прогресс виден по действиям, а рост ускоряется, когда помогаешь другим.
                 </Text>
-                <HStack>
-                  <AppLink
-                    to="/weekly"
-                    aria-label="Открыть weekly-задачу"
-                    fontWeight="semibold"
-                    color={storyLinkColor}
-                    _hover={{ textDecoration: "none", opacity: 0.9 }}
-                  >
-                    Открыть weekly‑задачу →
-                  </AppLink>
-                </HStack>
               </Stack>
 
               <Box

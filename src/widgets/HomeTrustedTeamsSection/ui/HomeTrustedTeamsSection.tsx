@@ -15,7 +15,7 @@ import {
   useColorModeValue,
   usePrefersReducedMotion,
 } from "@chakra-ui/react";
-import { FiBookOpen, FiBriefcase, FiCode, FiFeather, FiMessageCircle, FiTarget } from "react-icons/fi";
+import { FaBookOpen, FaBriefcase, FaClipboardList, FaCode, FaComments, FaFeatherAlt } from "react-icons/fa";
 import { AppLink } from "@/shared/ui/AppLink";
 import { AppBoxLink } from "@/shared/ui/AppLink";
 import { BusinessAnatyticsIcon } from "@/shared/icons/components-icon";
@@ -27,56 +27,112 @@ type MiniCase = {
   title: string;
   desc: string;
   to: string;
+  accent: {
+    bgLight: string;
+    bgDark: string;
+    fgLight: string;
+    fgDark: string;
+    borderLight: string;
+    borderDark: string;
+  };
 };
 
 const miniCases: MiniCase[] = [
   {
     id: "materials",
     label: "Материалы",
-    icon: FiBookOpen,
+    icon: FaBookOpen,
     title: "Маршрут и практика",
     desc: "Понятный путь по темам и навыкам — внутри шагов есть практика и задания.",
     to: "/learn",
+    accent: {
+      bgLight: "blue.50",
+      bgDark: "rgba(59, 130, 246, 0.14)",
+      fgLight: "blue.700",
+      fgDark: "blue.200",
+      borderLight: "blue.200",
+      borderDark: "rgba(96, 165, 250, 0.35)",
+    },
   },
   {
     id: "blog",
     label: "Блог",
-    icon: FiFeather,
+    icon: FaFeatherAlt,
     title: "Статьи сообщества",
     desc: "Пиши статьи, делись находками, получай отклик и расти вместе с экосистемой.",
     to: "/blog",
+    accent: {
+      bgLight: "purple.50",
+      bgDark: "rgba(168, 85, 247, 0.14)",
+      fgLight: "purple.700",
+      fgDark: "purple.200",
+      borderLight: "purple.200",
+      borderDark: "rgba(216, 180, 254, 0.30)",
+    },
   },
   {
     id: "weekly",
     label: "Задачи недели",
-    icon: FiTarget,
+    icon: FaClipboardList,
     title: "Weekly‑задачи",
     desc: "Быстрый старт и ритм: сделал → получил фидбек → зафиксировал прогресс.",
     to: "/weekly",
+    accent: {
+      bgLight: "green.50",
+      bgDark: "rgba(16, 185, 129, 0.14)",
+      fgLight: "green.700",
+      fgDark: "green.200",
+      borderLight: "green.200",
+      borderDark: "rgba(52, 211, 153, 0.32)",
+    },
   },
   {
     id: "sessions",
     label: "Сессии",
-    icon: FiMessageCircle,
+    icon: FaComments,
     title: "Разборы и помощь",
     desc: "Когда застрял — приходишь на разбор и снимаешь блокер. Дальше продолжаешь движение.",
     to: "/sessions",
+    accent: {
+      bgLight: "orange.50",
+      bgDark: "rgba(249, 115, 22, 0.14)",
+      fgLight: "orange.700",
+      fgDark: "orange.200",
+      borderLight: "orange.200",
+      borderDark: "rgba(253, 186, 116, 0.30)",
+    },
   },
   {
     id: "projects",
     label: "Проекты",
-    icon: FiBriefcase,
+    icon: FaBriefcase,
     title: "Проекты в модулях",
     desc: "Кейсы для портфолио внутри обучения: задачи → решение → оформление результата.",
     to: "/learn/bazovye-komandy/projects",
+    accent: {
+      bgLight: "cyan.50",
+      bgDark: "rgba(34, 211, 238, 0.10)",
+      fgLight: "cyan.700",
+      fgDark: "cyan.200",
+      borderLight: "cyan.200",
+      borderDark: "rgba(103, 232, 249, 0.24)",
+    },
   },
   {
     id: "hackathons",
     label: "Хакатоны",
-    icon: FiCode,
+    icon: FaCode,
     title: "Командная практика",
     desc: "Дедлайны, роли и результат. Быстрый способ прокачать командную работу и получить фидбек.",
     to: "/hackathons",
+    accent: {
+      bgLight: "teal.50",
+      bgDark: "rgba(20, 184, 166, 0.12)",
+      fgLight: "teal.700",
+      fgDark: "teal.200",
+      borderLight: "teal.200",
+      borderDark: "rgba(94, 234, 212, 0.24)",
+    },
   },
 ];
 
@@ -97,7 +153,8 @@ const HomeTrustedTeamsSection: React.FC = () => {
 
   const storyLinkColor = isDark ? "blue.200" : "blue.700";
   const ctaBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.50");
-  const smallIconColor = useColorModeValue("blackAlpha.600", "whiteAlpha.600");
+  const labelColor = useColorModeValue("gray.600", "whiteAlpha.700");
+  const actionColor = isDark ? "blue.200" : "blue.700";
 
   return (
     <Box as="section" px={0} py={{ base: 12, md: 16 }} bg={sectionBg}>
@@ -165,6 +222,7 @@ const HomeTrustedTeamsSection: React.FC = () => {
 
           <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 4, md: 5 }}>
             {miniCases.map((c) => (
+              // derived colors must not use hooks here; use isDark flag
               <AppBoxLink
                 key={c.id}
                 to={c.to}
@@ -177,6 +235,9 @@ const HomeTrustedTeamsSection: React.FC = () => {
                 bg={cardBg}
                 boxShadow={baseShadow}
                 p={{ base: 5, md: 6 }}
+                minH={{ base: "auto", md: "220px" }}
+                position="relative"
+                overflow="hidden"
                 transition={prefersReducedMotion ? undefined : "transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease"}
                 _hover={{
                   textDecoration: "none",
@@ -185,22 +246,58 @@ const HomeTrustedTeamsSection: React.FC = () => {
                   transform: prefersReducedMotion ? undefined : "translateY(-2px)",
                 }}
               >
-                <Stack spacing={2}>
-                  <HStack spacing={2}>
-                    <Icon as={c.icon} boxSize={4} aria-hidden="true" color={smallIconColor} />
-                    <Text fontSize="sm" fontWeight="bold" letterSpacing="0.06em" textTransform="uppercase" color={textColor}>
+                <Box
+                  aria-hidden="true"
+                  position="absolute"
+                  inset="-1px"
+                  borderRadius="2xl"
+                  borderWidth="1px"
+                  borderColor={isDark ? c.accent.borderDark : c.accent.borderLight}
+                  opacity={0.45}
+                  pointerEvents="none"
+                />
+
+                <Stack spacing={3} position="relative" zIndex={1} h="full">
+                  <HStack spacing={3} align="center">
+                    <Box
+                      w="40px"
+                      h="40px"
+                      borderRadius="xl"
+                      bg={isDark ? c.accent.bgDark : c.accent.bgLight}
+                      color={isDark ? c.accent.fgDark : c.accent.fgLight}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                      transition={prefersReducedMotion ? undefined : "transform 180ms ease"}
+                      _groupHover={{ transform: prefersReducedMotion ? undefined : "scale(1.04)" }}
+                    >
+                      <Icon as={c.icon} boxSize={5} aria-hidden="true" />
+                    </Box>
+                    <Text fontSize="sm" fontWeight="bold" letterSpacing="0.06em" textTransform="uppercase" color={labelColor}>
                       {c.label}
                     </Text>
                   </HStack>
-                  <Text color={titleColor} fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" letterSpacing="-0.02em" lineHeight="1.25">
+
+                  <Text
+                    color={titleColor}
+                    fontSize={{ base: "lg", md: "xl" }}
+                    fontWeight="bold"
+                    letterSpacing="-0.02em"
+                    lineHeight="1.25"
+                  >
                     {c.title}
                   </Text>
+
                   <Text color={textColor} fontSize={{ base: "sm", md: "md" }} lineHeight="1.7">
                     {c.desc}
                   </Text>
-                  <Text pt={1} fontWeight="semibold" color={storyLinkColor}>
-                    Открыть →
-                  </Text>
+
+                  <Box pt={1} mt="auto">
+                    <Text fontWeight="semibold" color={actionColor}>
+                      Открыть →
+                    </Text>
+                  </Box>
                 </Stack>
               </AppBoxLink>
             ))}

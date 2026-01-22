@@ -15,7 +15,17 @@ import {
   useColorModeValue,
   usePrefersReducedMotion,
 } from "@chakra-ui/react";
-import { FaBookOpen, FaBriefcase, FaClipboardList, FaCode, FaComments, FaFeatherAlt } from "react-icons/fa";
+import {
+  FaBookOpen,
+  FaBriefcase,
+  FaChartLine,
+  FaClipboardList,
+  FaCode,
+  FaComments,
+  FaFeatherAlt,
+  FaLayerGroup,
+  FaUsers,
+} from "react-icons/fa";
 import { AppLink } from "@/shared/ui/AppLink";
 import { AppBoxLink } from "@/shared/ui/AppLink";
 import { BusinessAnatyticsIcon } from "@/shared/icons/components-icon";
@@ -158,7 +168,7 @@ const HomeTrustedTeamsSection: React.FC = () => {
   const quoteMarkColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
 
   return (
-    <Box as="section" px={0} py={{ base: 12, md: 16 }} bg={sectionBg}>
+    <Box as="section" px={0} py={{ base: 12, md: 16 }}>
       <Container maxW="1200px">
         <VStack spacing={{ base: 6, md: 8 }} align="stretch">
           <VStack spacing={3} align="flex-start" maxW="980px">
@@ -181,32 +191,57 @@ const HomeTrustedTeamsSection: React.FC = () => {
             p={{ base: 5, md: 7 }}
           >
             <Stack direction={{ base: "column", md: "row" }} spacing={{ base: 5, md: 7 }} align="stretch">
-              <Stack spacing={4} flex="1 1 0" minW={0}>
-                <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" color={titleColor}>
-                  Всё в одном месте
-                </Text>
-                <Text
-                  as="blockquote"
-                  fontSize={{ base: "xl", md: "2xl" }}
-                  fontWeight="semibold"
-                  color={titleColor}
-                  lineHeight="1.35"
-                  letterSpacing="-0.02em"
-                  position="relative"
-                  pl={{ base: 7, md: 8 }}
-                  _before={{
-                    content: '"“"',
-                    position: "absolute",
-                    left: 0,
-                    top: { base: -3, md: -4 },
-                    fontSize: { base: "52px", md: "72px" },
-                    lineHeight: "1",
-                    color: quoteMarkColor,
-                    pointerEvents: "none",
-                  }}
-                >
-                  Практика → фидбек → следующий шаг. Прогресс виден по действиям, а рост ускоряется, когда помогаешь другим.
-                </Text>
+              <Stack spacing={0} flex="1 1 0" minW={0} h="full" justify="space-between" align="flex-start">
+                <Stack spacing={4} w="full">
+                  <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" color={titleColor}>
+                    Всё в одном месте
+                  </Text>
+                  <Text
+                    as="blockquote"
+                    fontSize={{ base: "xl", md: "2xl" }}
+                    fontWeight="semibold"
+                    color={titleColor}
+                    lineHeight="1.35"
+                    letterSpacing="-0.02em"
+                    position="relative"
+                    pl={{ base: 7, md: 8 }}
+                    _before={{
+                      content: '"“"',
+                      position: "absolute",
+                      left: 0,
+                      top: { base: -3, md: -4 },
+                      fontSize: { base: "52px", md: "72px" },
+                      lineHeight: "1",
+                      color: quoteMarkColor,
+                      pointerEvents: "none",
+                    }}
+                  >
+                    Практика → фидбек → следующий шаг. Прогресс виден по действиям, а рост ускоряется, когда помогаешь другим.
+                  </Text>
+                </Stack>
+
+                <Box pt={6} w="full">
+                  <Stack spacing={1.5}>
+                    <HStack spacing={2} align="flex-start">
+                      <Icon as={FaLayerGroup} boxSize={4} aria-hidden="true" color={labelColor} mt="2px" />
+                      <Text fontSize="sm" color={textColor} lineHeight="1.6">
+                        6 разделов в одном месте: материалы, блог, weekly, сессии, проекты, хакатоны.
+                      </Text>
+                    </HStack>
+                    <HStack spacing={2} align="flex-start">
+                      <Icon as={FaChartLine} boxSize={4} aria-hidden="true" color={labelColor} mt="2px" />
+                      <Text fontSize="sm" color={textColor} lineHeight="1.6">
+                        Рост фиксируется в профиле: решения, фидбек, вклад и достижения.
+                      </Text>
+                    </HStack>
+                    <HStack spacing={2} align="flex-start">
+                      <Icon as={FaUsers} boxSize={4} aria-hidden="true" color={labelColor} mt="2px" />
+                      <Text fontSize="sm" color={textColor} lineHeight="1.6">
+                        Командная практика ускоряет развитие: разборы, совместные проекты и хакатоны.
+                      </Text>
+                    </HStack>
+                  </Stack>
+                </Box>
               </Stack>
 
               <Box

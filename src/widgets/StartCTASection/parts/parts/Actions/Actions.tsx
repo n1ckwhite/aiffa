@@ -39,7 +39,7 @@ const Actions: React.FC<ActionsProps> = () => {
         aria-label="Начать с weekly-задачи"
       >
         <ArrowForwardIcon boxSize="1em" mr={2} aria-hidden />
-        Начать с weekly
+        Начать с задачи
       </AppButtonLink>
       <Link
         href={telegramHref}

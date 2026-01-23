@@ -261,105 +261,24 @@ const HomeProgressMechanicsSection: React.FC = () => {
               </Box>
             </Stack>
 
-            <Box
-              bg={panelBg}
-              borderRadius="3xl"
-              p={{ base: 5, md: 6 }}
-              position="relative"
-              overflow="hidden"
-            >
-              <Box
-                aria-hidden="true"
-                position="absolute"
-                inset={0}
-                bgImage={panelGlow}
-                pointerEvents="none"
-                opacity={0.9}
-              />
-
-              <Stack spacing={4} position="relative" zIndex={1}>
-                <HStack spacing={2}>
-                  <Box
-                    px={2.5}
-                    py={1}
-                    fontSize="xs"
-                    fontWeight="bold"
-                    letterSpacing="0.16em"
-                    textTransform="uppercase"
-                    color={chipText}
-                  >
-                    Почему это работает
-                  </Box>
-                </HStack>
-
+            <Stack spacing={4} h="full" justify="space-between">
+              <Stack spacing={3}>
+                <Text fontSize="xs" fontWeight="bold" letterSpacing="0.16em" textTransform="uppercase" color={accentLabel}>
+                  Почему это работает
+                </Text>
                 <Text color={titleColor} fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" lineHeight="1.35">
                   Сильное резюме и рост как разработчика
                 </Text>
                 <Text color={textColor} fontSize={{ base: "sm", md: "md" }} lineHeight="1.7">
-                  Практика, вклад и командная работа формируют опыт, который реально читается работодателем и усиливает твою позицию на рынке.
+                  Реальный рост, практика и результаты видны работодателю — поэтому тебя быстрее замечают и забирают в команду.
                 </Text>
 
-                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 2.5, md: 3 }}>
+                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 2.5, md: 3 }} pt={1}>
                   {[
-                    {
-                      id: "focus",
-                      title: "Фокус направления",
-                      text: "Практика в выбранном направлении — без распыления.",
-                      icon: FiTarget,
-                      tone: "blue" as ToneKey,
-                    },
-                    {
-                      id: "cases",
-                      title: "Кейсы и вклад",
-                      text: "Хакатоны, командные задачи и статьи — то, что видит работодатель.",
-                      icon: FiBriefcase,
-                      tone: "green" as ToneKey,
-                    },
-                  ].map((item) => (
-                    <Box
-                      key={item.id}
-                      borderRadius="2xl"
-                      bg={item.tone === "blue" ? tone.blue.bg : tone.green.bg}
-                      borderWidth="1px"
-                      borderColor={item.tone === "blue" ? tone.blue.fg : tone.green.fg}
-                      boxShadow={baseShadow}
-                      px={{ base: 3.5, md: 4 }}
-                      py={{ base: 3, md: 3.5 }}
-                      _hover={{ boxShadow: hoverShadow }}
-                    >
-                      <HStack spacing={2} align="flex-start">
-                        <Box
-                          w="28px"
-                          h="28px"
-                          borderRadius="full"
-                          bg={item.tone === "blue" ? tone.blue.bg : tone.green.bg}
-                          color={item.tone === "blue" ? tone.blue.fg : tone.green.fg}
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="center"
-                          flexShrink={0}
-                        >
-                          <Icon as={item.icon} boxSize={3.5} aria-hidden="true" />
-                        </Box>
-                        <Box>
-                          <Text fontSize="sm" fontWeight="semibold" color={titleColor}>
-                            {item.title}
-                          </Text>
-                          <Text fontSize="sm" color={textColor} lineHeight="1.6">
-                            {item.text}
-                          </Text>
-                        </Box>
-                      </HStack>
-                    </Box>
-                  ))}
-                </SimpleGrid>
-
-                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 2.5, md: 3 }}>
-                  {[
+                    { id: "focus", title: "Фокус направления", text: "Практика в выбранном направлении — без распыления.", tone: "blue" as ToneKey },
+                    { id: "cases", title: "Кейсы и вклад", text: "Хакатоны, командные задачи и статьи — то, что видит работодатель.", tone: "green" as ToneKey },
                     { id: "profile", title: "Профиль", text: "Чёткая история действий и результатов.", tone: "purple" as ToneKey },
                     { id: "growth", title: "Рост", text: "Опыт превращается в следующий уровень навыков.", tone: "orange" as ToneKey },
-                    { id: "level", title: "Уровень", text: "Быстрее растёт ответственность и роль.", tone: "blue" as ToneKey },
-                    { id: "team", title: "Команда", text: "Помощь другим укрепляет знания и навыки коммуникации.", tone: "green" as ToneKey },
                   ].map((item) => (
                     <HStack key={item.id} spacing={2} align="flex-start">
                       <Box
@@ -385,31 +304,31 @@ const HomeProgressMechanicsSection: React.FC = () => {
                     </HStack>
                   ))}
                 </SimpleGrid>
+              </Stack>
 
               <HStack spacing={3} flexWrap="wrap">
-                  <AppButtonLink to="/profile" colorScheme="blue" borderRadius="full" px={{ base: 6, md: 7 }}>
-                    Открыть профиль
-                  </AppButtonLink>
-                  <AppLink
-                    to="/weekly"
-                    aria-label="Решить задачу"
-                    fontWeight="semibold"
+                <AppButtonLink to="/profile" colorScheme="blue" borderRadius="full" px={{ base: 6, md: 7 }}>
+                  Открыть профиль
+                </AppButtonLink>
+                <AppLink
+                  to="/weekly"
+                  aria-label="Решить задачу"
+                  fontWeight="semibold"
                   color={ctaSecondaryText}
-                    px={4}
-                    py={2}
-                    borderRadius="full"
+                  px={4}
+                  py={2}
+                  borderRadius="full"
                   bg={ctaSecondaryBg}
                   borderWidth="1px"
                   borderColor={ctaSecondaryBorder}
-                    display="inline-flex"
-                    alignItems="center"
+                  display="inline-flex"
+                  alignItems="center"
                   _hover={{ textDecoration: "none", bg: ctaSecondaryHover }}
-                  >
-                    Решить задачу →
-                  </AppLink>
-                </HStack>
-              </Stack>
-            </Box>
+                >
+                  Решить задачу →
+                </AppLink>
+              </HStack>
+            </Stack>
           </SimpleGrid>
         </VStack>
       </Container>

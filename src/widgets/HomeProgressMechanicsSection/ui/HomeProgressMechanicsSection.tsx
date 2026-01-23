@@ -204,8 +204,7 @@ const HomeProgressMechanicsSection: React.FC = () => {
 
             <Box
               aria-hidden="true"
-              w={{ base: "180px", md: "220px" }}
-              h={{ base: "180px", md: "220px" }}
+              w="350px"
               flexShrink={0}
               display="flex"
               alignItems="center"

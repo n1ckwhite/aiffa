@@ -14,7 +14,7 @@ import {
   useColorModeValue,
   usePrefersReducedMotion,
 } from "@chakra-ui/react";
-import { FiAward, FiTrendingUp, FiUser } from "react-icons/fi";
+import { FiAward, FiBriefcase, FiEdit3, FiTarget, FiTrendingUp, FiUsers } from "react-icons/fi";
 import { FaBookOpen, FaCalendarCheck, FaCircleCheck, FaListCheck, FaMessage } from "react-icons/fa6";
 import { AppButtonLink } from "@/shared/ui/AppLink";
 import { RewardsLottieIcon } from "@/shared/icons/components-icon";
@@ -35,10 +35,10 @@ type ProgressItem = {
 
 const progressItems: ProgressItem[] = [
   {
-    id: "profile",
-    title: "Профиль прогресса",
-    desc: "Видно, что ты реально сделал: решения, вклад, участие и ритм. Это история действий, а не слова.",
-    icon: FiUser,
+    id: "practice",
+    title: "Практика и опыт",
+    desc: "Регулярные задачи и разборы дают реальный опыт — не “учёба”, а практика как в работе.",
+    icon: FiTarget,
     accent: {
       bgLight: "blue.50",
       bgDark: "rgba(59, 130, 246, 0.14)",
@@ -47,10 +47,10 @@ const progressItems: ProgressItem[] = [
     },
   },
   {
-    id: "xp",
-    title: "XP и уровни",
-    desc: "Опыт начисляется за практику и вклад. Чем больше действий — тем выше уровень и сложнее задачи.",
-    icon: FiTrendingUp,
+    id: "hackathons",
+    title: "Хакатоны и первые проекты бизнеса",
+    desc: "Участие в хакатонах — это первые проекты от бизнеса и опыт работы в команде.",
+    icon: FiBriefcase,
     accent: {
       bgLight: "green.50",
       bgDark: "rgba(16, 185, 129, 0.14)",
@@ -59,15 +59,39 @@ const progressItems: ProgressItem[] = [
     },
   },
   {
-    id: "achievements",
-    title: "Достижения",
-    desc: "Награды за регулярность, качество и помощь другим. Они делают рост заметным и честным.",
-    icon: FiAward,
+    id: "teamwork",
+    title: "Командная работа",
+    desc: "Планирование, роли, ответственность и дедлайны — формируются привычки взрослой разработки.",
+    icon: FiUsers,
+    accent: {
+      bgLight: "teal.50",
+      bgDark: "rgba(20, 184, 166, 0.12)",
+      fgLight: "teal.700",
+      fgDark: "teal.200",
+    },
+  },
+  {
+    id: "content",
+    title: "Статьи и вклад",
+    desc: "Пишешь статьи, улучшаешь материалы и задачи — это видно и усиливает профиль.",
+    icon: FiEdit3,
     accent: {
       bgLight: "purple.50",
       bgDark: "rgba(168, 85, 247, 0.14)",
       fgLight: "purple.700",
       fgDark: "purple.200",
+    },
+  },
+  {
+    id: "achievements",
+    title: "XP и достижения",
+    desc: "Награды и рост XP показывают стабильность и качество действий.",
+    icon: FiTrendingUp,
+    accent: {
+      bgLight: "orange.50",
+      bgDark: "rgba(249, 115, 22, 0.14)",
+      fgLight: "orange.700",
+      fgDark: "orange.200",
     },
   },
 ];
@@ -197,17 +221,17 @@ const HomeProgressMechanicsSection: React.FC = () => {
                 Почему это работает
               </Text>
               <Text color={textColor} fontSize={{ base: "sm", md: "md" }} lineHeight="1.7">
-                Ты видишь прогресс по действиям, понимаешь, что делать дальше, и получаешь подтверждение роста через достижения.
+                Это усиливает резюме и повышает шансы на работу: виден реальный опыт, вклад и практика в выбранном направлении.
               </Text>
               <Stack spacing={2} pt={1}>
                 <Text fontSize="sm" color={textColor}>
-                  • Профиль показывает историю активности и вклад.
+                  • Профиль = доказательство опыта, а не просто список технологий.
                 </Text>
                 <Text fontSize="sm" color={textColor}>
-                  • XP растёт за практику и вклад в экосистему.
+                  • Ты получаешь практику именно в том направлении, которое выбрал.
                 </Text>
                 <Text fontSize="sm" color={textColor}>
-                  • Достижения фиксируют регулярность и качество.
+                  • Хакатоны, командные задачи и статьи усиливают кейсы в резюме.
                 </Text>
               </Stack>
               <HStack pt={2} spacing={3} flexWrap="wrap">

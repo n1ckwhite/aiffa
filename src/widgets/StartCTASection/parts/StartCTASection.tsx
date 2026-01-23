@@ -8,7 +8,7 @@ const StartCTASection: React.FC<StartCTASectionProps> = () => {
   const { bg } = useStartCTAColors();
 
   return (
-    <Box bg={bg} pt={16} pb={8} px={0}>
+    <Box bg={bg} pb={8} px={0}>
       <Container maxW="1200px">
         <VStack spacing={8} align="center" textAlign="center">
           <Header />

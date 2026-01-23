@@ -16,6 +16,10 @@ const Actions: React.FC<ActionsProps> = () => {
     communityBtnHoverBg,
     communityBtnBorder,
     communityBtnText,
+    creatorBtnBg,
+    creatorBtnHoverBg,
+    creatorBtnBorder,
+    creatorBtnText,
   } = useStartCTAColors();
 
   return (
@@ -60,11 +64,15 @@ const Actions: React.FC<ActionsProps> = () => {
       </Link>
       <AppButtonLink
         to="/creators"
-        variant="outline"
+        bg={creatorBtnBg}
+        color={creatorBtnText}
+        borderWidth="1px"
+        borderColor={creatorBtnBorder}
         borderRadius="full"
         px={{ base: 4, md: 6 }}
         h={{ base: 12, md: 12 }}
         fontWeight="bold"
+        _hover={{ bg: creatorBtnHoverBg }}
         w={{ base: '100%', sm: 'auto' }}
         aria-label="Открыть страницу создателей"
       >

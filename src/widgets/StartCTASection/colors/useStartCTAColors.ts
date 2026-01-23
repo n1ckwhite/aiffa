@@ -18,6 +18,11 @@ export const useStartCTAColors = () => {
   const communityBtnBorder = theme.purple.chipBorder;
   const communityBtnText = useColorModeValue('purple.700', 'purple.200');
 
+  const creatorBtnBg = useColorModeValue('yellow.100', 'yellow.900');
+  const creatorBtnHoverBg = useColorModeValue('yellow.200', 'yellow.800');
+  const creatorBtnBorder = useColorModeValue('yellow.300', 'yellow.700');
+  const creatorBtnText = useColorModeValue('yellow.800', 'yellow.200');
+
   const donateBtnBg = useColorModeValue('red.50', 'whiteAlpha.100');
   const donateBtnHoverBg = useColorModeValue('red.100', 'whiteAlpha.200');
   const donateBtnBorder = useColorModeValue('red.200', 'whiteAlpha.300');
@@ -54,6 +59,10 @@ export const useStartCTAColors = () => {
     communityBtnHoverBg,
     communityBtnBorder,
     communityBtnText,
+    creatorBtnBg,
+    creatorBtnHoverBg,
+    creatorBtnBorder,
+    creatorBtnText,
     donateBtnBg,
     donateBtnHoverBg,
     donateBtnBorder,

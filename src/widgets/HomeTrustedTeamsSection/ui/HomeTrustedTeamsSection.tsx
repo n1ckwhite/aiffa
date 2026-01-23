@@ -26,7 +26,7 @@ import {
   FaLayerGroup,
   FaUsers,
 } from "react-icons/fa";
-import { AppLink } from "@/shared/ui/AppLink";
+import { AppButtonLink, AppLink } from "@/shared/ui/AppLink";
 import { AppBoxLink } from "@/shared/ui/AppLink";
 import { BusinessAnatyticsIcon } from "@/shared/icons/components-icon";
 
@@ -163,6 +163,8 @@ const HomeTrustedTeamsSection: React.FC = () => {
 
   const storyLinkColor = isDark ? "blue.200" : "blue.700";
   const ctaBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.50");
+  const ctaBadgeBg = useColorModeValue("white", "whiteAlpha.100");
+  const ctaBadgeBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const labelColor = useColorModeValue("gray.600", "whiteAlpha.700");
   const actionColor = isDark ? "blue.200" : "blue.700";
   const quoteMarkColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
@@ -342,18 +344,35 @@ const HomeTrustedTeamsSection: React.FC = () => {
           </SimpleGrid>
 
           <Box
-            borderWidth="1px"
-            borderColor={borderColor}
             borderRadius="2xl"
             bg={ctaBg}
-            px={{ base: 4, md: 6 }}
-            py={{ base: 4, md: 5 }}
+            px={{ base: 5, md: 7 }}
+            py={{ base: 5, md: 6 }}
+            position="relative"
+            overflow="hidden"
           >
-            <HStack justify="space-between" align={{ base: "flex-start", md: "center" }} spacing={4} flexWrap="wrap">
-              <Text color={textColor} fontSize={{ base: "sm", md: "md" }} lineHeight="1.7">
-                Хочешь усиливать экосистему? Добавляй материалы, задачи и статьи — вклад виден и ценится.
+            <Box
+              aria-hidden="true"
+              position="absolute"
+              inset={0}
+              bgImage={useColorModeValue(
+                "radial-gradient(420px 180px at 10% 0%, rgba(59,130,246,0.10), transparent 60%), radial-gradient(420px 180px at 90% 20%, rgba(168,85,247,0.10), transparent 60%)",
+                "radial-gradient(420px 180px at 10% 0%, rgba(96,165,250,0.14), transparent 60%), radial-gradient(420px 180px at 90% 20%, rgba(216,180,254,0.14), transparent 60%)"
+              )}
+              pointerEvents="none"
+            />
+            <Stack spacing={3} position="relative" zIndex={1}>
+              <Text fontSize="xs" fontWeight="bold" letterSpacing="0.16em" textTransform="uppercase" color={textColor}>
+                Рост через вклад
               </Text>
-              <HStack spacing={3} flexWrap="wrap">
+              <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" color={titleColor} letterSpacing="-0.02em">
+                Попади в топ и закрепи результат
+              </Text>
+              <Text color={textColor} fontSize={{ base: "sm", md: "md" }} lineHeight="1.7">
+                Делай шаги — и тебя будут видеть: практика, статьи, участие в разборах и командных форматах превращаются в сильный профиль и
+                выводят в топ.
+              </Text>
+              <HStack pt={1}>
                 <AppLink
                   to="/creators"
                   aria-label="Открыть создателей"
@@ -364,7 +383,8 @@ const HomeTrustedTeamsSection: React.FC = () => {
                   Открыть создателей →
                 </AppLink>
               </HStack>
-            </HStack>
+              
+            </Stack>
           </Box>
         </VStack>
       </Container>

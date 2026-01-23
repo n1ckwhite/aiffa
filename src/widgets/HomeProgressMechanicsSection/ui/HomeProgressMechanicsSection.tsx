@@ -14,10 +14,10 @@ import {
   useColorModeValue,
   usePrefersReducedMotion,
 } from "@chakra-ui/react";
-import { FiAward, FiBriefcase, FiEdit3, FiTarget, FiTrendingUp, FiUsers } from "react-icons/fi";
+import { FiAward, FiBriefcase, FiCheckCircle, FiEdit3, FiTarget, FiTrendingUp, FiUsers } from "react-icons/fi";
 import { FaBookOpen, FaCalendarCheck, FaCircleCheck, FaListCheck, FaMessage } from "react-icons/fa6";
-import { AppButtonLink } from "@/shared/ui/AppLink";
-import { RewardsLottieIcon } from "@/shared/icons/components-icon";
+import { AppButtonLink, AppLink } from "@/shared/ui/AppLink";
+import { BusinessTeamLottieIcon } from "@/shared/icons/components-icon";
 import { CompactAchievement } from "@/widgets/Profile/ProfileScreen/ui/parts/CompactAchievement/CompactAchievement";
 
 type ProgressItem = {
@@ -153,13 +153,44 @@ const HomeProgressMechanicsSection: React.FC = () => {
   const baseShadow = useColorModeValue("0 1px 0 rgba(16, 24, 40, 0.04)", "0 1px 0 rgba(0, 0, 0, 0.20)");
   const hoverShadow = useColorModeValue("0 16px 40px rgba(16, 24, 40, 0.12)", "0 20px 60px rgba(0, 0, 0, 0.45)");
   const accentLabel = useColorModeValue("gray.500", "whiteAlpha.700");
+  const chipBg = useColorModeValue("white", "whiteAlpha.100");
+  const chipText = useColorModeValue("gray.800", "whiteAlpha.900");
+  const ghostBg = useColorModeValue("blue.50", "rgba(59,130,246,0.18)");
+  const panelBg = useColorModeValue("rgba(239,246,255,0.75)", "rgba(30, 41, 59, 0.85)");
+  const ctaSecondaryBg = useColorModeValue("white", "whiteAlpha.100");
+  const ctaSecondaryBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
+  const ctaSecondaryText = useColorModeValue("gray.800", "whiteAlpha.900");
+  const ctaSecondaryHover = useColorModeValue("blackAlpha.50", "whiteAlpha.200");
+  const panelGlow = useColorModeValue(
+    "radial-gradient(420px 180px at 20% 0%, rgba(59,130,246,0.10), transparent 60%), radial-gradient(420px 180px at 90% 20%, rgba(16,185,129,0.10), transparent 60%)",
+    "radial-gradient(420px 180px at 20% 0%, rgba(96,165,250,0.14), transparent 60%), radial-gradient(420px 180px at 90% 20%, rgba(52,211,153,0.12), transparent 60%)"
+  );
+  const tone = {
+    blue: {
+      bg: useColorModeValue("blue.50", "rgba(59,130,246,0.18)"),
+      fg: useColorModeValue("blue.700", "blue.200"),
+    },
+    green: {
+      bg: useColorModeValue("green.50", "rgba(16,185,129,0.18)"),
+      fg: useColorModeValue("green.700", "green.200"),
+    },
+    purple: {
+      bg: useColorModeValue("purple.50", "rgba(168,85,247,0.18)"),
+      fg: useColorModeValue("purple.700", "purple.200"),
+    },
+    orange: {
+      bg: useColorModeValue("orange.50", "rgba(249,115,22,0.18)"),
+      fg: useColorModeValue("orange.700", "orange.200"),
+    },
+  } as const;
+  type ToneKey = keyof typeof tone;
 
   return (
     <Box as="section" px={0} py={{ base: 12, md: 16 }}>
       <Container maxW="1200px">
         <VStack spacing={{ base: 6, md: 8 }} align="stretch">
-          <Stack direction={{ base: "column", md: "row" }} spacing={{ base: 4, md: 8 }} align="stretch" justify="space-between">
-            <VStack spacing={2} align="flex-start" maxW={{ base: "100%", md: "760px" }}>
+          <Stack direction={{ base: "column", md: "row" }} spacing={{ base: 4, md: 8 }} align="center" justify="space-between">
+            <VStack spacing={2} align="flex-start" maxW={{ base: "100%", md: "760px" }} flex="1 1 auto">
               <Text fontSize={{ base: "sm", md: "sm" }} fontWeight="bold" color={accentLabel} letterSpacing="0.16em" textTransform="uppercase">
                 Механика прогресса
               </Text>
@@ -171,13 +202,27 @@ const HomeProgressMechanicsSection: React.FC = () => {
               </Text>
             </VStack>
 
-            <Box aria-hidden="true" alignSelf={{ base: "flex-start", md: "center" }} w={{ base: "180px", md: "240px" }}>
-              <RewardsLottieIcon />
+            <Box
+              aria-hidden="true"
+              w={{ base: "180px", md: "220px" }}
+              h={{ base: "180px", md: "220px" }}
+              flexShrink={0}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              sx={{
+                "& svg, & canvas": {
+                  width: "100% !important",
+                  height: "100% !important",
+                },
+              }}
+            >
+              <BusinessTeamLottieIcon />
             </Box>
           </Stack>
 
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 6, md: 8 }}>
-            <Stack spacing={5}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 6, md: 8 }} alignItems="stretch">
+            <Stack spacing={5} h="full">
               {progressItems.map((item) => (
                 <HStack key={item.id} spacing={4} align="flex-start">
                   <Box
@@ -216,33 +261,155 @@ const HomeProgressMechanicsSection: React.FC = () => {
               </Box>
             </Stack>
 
-            <Stack spacing={3}>
-              <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" color={titleColor}>
-                Почему это работает
-              </Text>
-              <Text color={textColor} fontSize={{ base: "sm", md: "md" }} lineHeight="1.7">
-                Это усиливает резюме и повышает шансы на работу: виден реальный опыт, вклад и практика в выбранном направлении.
-              </Text>
-              <Stack spacing={2} pt={1}>
-                <Text fontSize="sm" color={textColor}>
-                  • Профиль = доказательство опыта, а не просто список технологий.
+            <Box
+              bg={panelBg}
+              borderRadius="3xl"
+              p={{ base: 5, md: 6 }}
+              position="relative"
+              overflow="hidden"
+            >
+              <Box
+                aria-hidden="true"
+                position="absolute"
+                inset={0}
+                bgImage={panelGlow}
+                pointerEvents="none"
+                opacity={0.9}
+              />
+
+              <Stack spacing={4} position="relative" zIndex={1}>
+                <HStack spacing={2}>
+                  <Box
+                    px={2.5}
+                    py={1}
+                    fontSize="xs"
+                    fontWeight="bold"
+                    letterSpacing="0.16em"
+                    textTransform="uppercase"
+                    color={chipText}
+                  >
+                    Почему это работает
+                  </Box>
+                </HStack>
+
+                <Text color={titleColor} fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" lineHeight="1.35">
+                  Сильное резюме и рост как разработчика
                 </Text>
-                <Text fontSize="sm" color={textColor}>
-                  • Ты получаешь практику именно в том направлении, которое выбрал.
+                <Text color={textColor} fontSize={{ base: "sm", md: "md" }} lineHeight="1.7">
+                  Практика, вклад и командная работа формируют опыт, который реально читается работодателем и усиливает твою позицию на рынке.
                 </Text>
-                <Text fontSize="sm" color={textColor}>
-                  • Хакатоны, командные задачи и статьи усиливают кейсы в резюме.
-                </Text>
+
+                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 2.5, md: 3 }}>
+                  {[
+                    {
+                      id: "focus",
+                      title: "Фокус направления",
+                      text: "Практика в выбранном направлении — без распыления.",
+                      icon: FiTarget,
+                      tone: "blue" as ToneKey,
+                    },
+                    {
+                      id: "cases",
+                      title: "Кейсы и вклад",
+                      text: "Хакатоны, командные задачи и статьи — то, что видит работодатель.",
+                      icon: FiBriefcase,
+                      tone: "green" as ToneKey,
+                    },
+                  ].map((item) => (
+                    <Box
+                      key={item.id}
+                      borderRadius="2xl"
+                      bg={item.tone === "blue" ? tone.blue.bg : tone.green.bg}
+                      borderWidth="1px"
+                      borderColor={item.tone === "blue" ? tone.blue.fg : tone.green.fg}
+                      boxShadow={baseShadow}
+                      px={{ base: 3.5, md: 4 }}
+                      py={{ base: 3, md: 3.5 }}
+                      _hover={{ boxShadow: hoverShadow }}
+                    >
+                      <HStack spacing={2} align="flex-start">
+                        <Box
+                          w="28px"
+                          h="28px"
+                          borderRadius="full"
+                          bg={item.tone === "blue" ? tone.blue.bg : tone.green.bg}
+                          color={item.tone === "blue" ? tone.blue.fg : tone.green.fg}
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          flexShrink={0}
+                        >
+                          <Icon as={item.icon} boxSize={3.5} aria-hidden="true" />
+                        </Box>
+                        <Box>
+                          <Text fontSize="sm" fontWeight="semibold" color={titleColor}>
+                            {item.title}
+                          </Text>
+                          <Text fontSize="sm" color={textColor} lineHeight="1.6">
+                            {item.text}
+                          </Text>
+                        </Box>
+                      </HStack>
+                    </Box>
+                  ))}
+                </SimpleGrid>
+
+                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 2.5, md: 3 }}>
+                  {[
+                    { id: "profile", title: "Профиль", text: "Чёткая история действий и результатов.", tone: "purple" as ToneKey },
+                    { id: "growth", title: "Рост", text: "Опыт превращается в следующий уровень навыков.", tone: "orange" as ToneKey },
+                    { id: "level", title: "Уровень", text: "Быстрее растёт ответственность и роль.", tone: "blue" as ToneKey },
+                    { id: "team", title: "Команда", text: "Помощь другим укрепляет знания и навыки коммуникации.", tone: "green" as ToneKey },
+                  ].map((item) => (
+                    <HStack key={item.id} spacing={2} align="flex-start">
+                      <Box
+                        w="20px"
+                        h="20px"
+                        borderRadius="full"
+                        bg={tone[item.tone].bg}
+                        color={tone[item.tone].fg}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        flexShrink={0}
+                        mt="2px"
+                      >
+                        <Icon as={FiCheckCircle} boxSize={3.5} aria-hidden="true" />
+                      </Box>
+                      <Text fontSize="sm" color={textColor}>
+                        <Box as="span" fontWeight="semibold" color={titleColor}>
+                          {item.title}
+                        </Box>{" "}
+                        — {item.text}
+                      </Text>
+                    </HStack>
+                  ))}
+                </SimpleGrid>
+
+              <HStack spacing={3} flexWrap="wrap">
+                  <AppButtonLink to="/profile" colorScheme="blue" borderRadius="full" px={{ base: 6, md: 7 }}>
+                    Открыть профиль
+                  </AppButtonLink>
+                  <AppLink
+                    to="/weekly"
+                    aria-label="Решить задачу"
+                    fontWeight="semibold"
+                  color={ctaSecondaryText}
+                    px={4}
+                    py={2}
+                    borderRadius="full"
+                  bg={ctaSecondaryBg}
+                  borderWidth="1px"
+                  borderColor={ctaSecondaryBorder}
+                    display="inline-flex"
+                    alignItems="center"
+                  _hover={{ textDecoration: "none", bg: ctaSecondaryHover }}
+                  >
+                    Решить задачу →
+                  </AppLink>
+                </HStack>
               </Stack>
-              <HStack pt={2} spacing={3} flexWrap="wrap">
-                <AppButtonLink to="/profile" colorScheme="blue" borderRadius="full" px={{ base: 6, md: 7 }}>
-                  Открыть профиль
-                </AppButtonLink>
-                <AppButtonLink to="/weekly" variant="outline" borderRadius="full" px={{ base: 6, md: 7 }}>
-                  Решить задачу
-                </AppButtonLink>
-              </HStack>
-            </Stack>
+            </Box>
           </SimpleGrid>
         </VStack>
       </Container>

@@ -264,21 +264,35 @@ const HomeProgressMechanicsSection: React.FC = () => {
             <Stack spacing={4} h="full" justify="space-between">
               <Stack spacing={3}>
                 <Text fontSize="xs" fontWeight="bold" letterSpacing="0.16em" textTransform="uppercase" color={accentLabel}>
-                  Почему это работает
+                  Механика прогресса
                 </Text>
                 <Text color={titleColor} fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" lineHeight="1.35">
-                  Сильное резюме и рост как разработчика
+                  Прогресс → профиль → работодатели
                 </Text>
                 <Text color={textColor} fontSize={{ base: "sm", md: "md" }} lineHeight="1.7">
-                  Реальный рост, практика и результаты видны работодателю — поэтому тебя быстрее замечают и забирают в команду.
+                  Когда рост стабилен и подтверждён действиями — это видно и становится сильным аргументом при найме.
                 </Text>
 
-                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 2.5, md: 3 }} pt={1}>
+                <Stack spacing={2.5} pt={1}>
                   {[
-                    { id: "focus", title: "Фокус направления", text: "Практика в выбранном направлении — без распыления.", tone: "blue" as ToneKey },
-                    { id: "cases", title: "Кейсы и вклад", text: "Хакатоны, командные задачи и статьи — то, что видит работодатель.", tone: "green" as ToneKey },
-                    { id: "profile", title: "Профиль", text: "Чёткая история действий и результатов.", tone: "purple" as ToneKey },
-                    { id: "growth", title: "Рост", text: "Опыт превращается в следующий уровень навыков.", tone: "orange" as ToneKey },
+                    {
+                      id: "progress",
+                      title: "Прогресс",
+                      text: "Практика и результаты фиксируются автоматически.",
+                      tone: "blue" as ToneKey,
+                    },
+                    {
+                      id: "profile",
+                      title: "Профиль",
+                      text: "История действий превращается в понятное резюме.",
+                      tone: "purple" as ToneKey,
+                    },
+                    {
+                      id: "employer",
+                      title: "Работодатели",
+                      text: "Сильные кейсы повышают шанс быстрого оффера.",
+                      tone: "green" as ToneKey,
+                    },
                   ].map((item) => (
                     <HStack key={item.id} spacing={2} align="flex-start">
                       <Box
@@ -303,31 +317,8 @@ const HomeProgressMechanicsSection: React.FC = () => {
                       </Text>
                     </HStack>
                   ))}
-                </SimpleGrid>
+                </Stack>
               </Stack>
-
-              <HStack spacing={3} flexWrap="wrap">
-                <AppButtonLink to="/profile" colorScheme="blue" borderRadius="full" px={{ base: 6, md: 7 }}>
-                  Открыть профиль
-                </AppButtonLink>
-                <AppLink
-                  to="/weekly"
-                  aria-label="Решить задачу"
-                  fontWeight="semibold"
-                  color={ctaSecondaryText}
-                  px={4}
-                  py={2}
-                  borderRadius="full"
-                  bg={ctaSecondaryBg}
-                  borderWidth="1px"
-                  borderColor={ctaSecondaryBorder}
-                  display="inline-flex"
-                  alignItems="center"
-                  _hover={{ textDecoration: "none", bg: ctaSecondaryHover }}
-                >
-                  Решить задачу →
-                </AppLink>
-              </HStack>
             </Stack>
           </SimpleGrid>
         </VStack>

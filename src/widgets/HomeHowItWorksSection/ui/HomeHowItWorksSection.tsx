@@ -66,24 +66,32 @@ const HomeHowItWorksSection: React.FC = () => {
   ] as const;
 
   return (
-    <Box as="section" px={0} pb={{ base: 10, md: 12 }}>
+    <Box as="section" px={0} pb={{ base: 10, md: 12 }} aria-labelledby="home-how-title" aria-describedby="home-how-desc">
       <Container maxW="1200px">
         <VStack spacing={{ base: 4, md: 6 }} align="stretch">
-          <VStack spacing={3} textAlign="center">
+          <VStack spacing={3} textAlign="center" as="header">
             <Box aria-hidden="true">
               <ForSessionsLottieIcon />
             </Box>
-            <Text fontSize={{ base: "xl", md: "2xl" }} fontWeight="bold" color={titleColor} letterSpacing="-0.02em">
+            <Text id="home-how-title" fontSize={{ base: "xl", md: "2xl" }} fontWeight="bold" color={titleColor} letterSpacing="-0.02em">
               Как это работает
             </Text>
-            <Text color={textColor} fontSize={{ base: "md", md: "lg" }} lineHeight="1.7" maxW="760px" mx="auto">
+            <Text id="home-how-desc" color={textColor} fontSize={{ base: "md", md: "lg" }} lineHeight="1.7" maxW="760px" mx="auto">
               Пять простых шагов, чтобы у тебя был понятный старт и видимый прогресс.
             </Text>
           </VStack>
 
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 3, md: 5 }}>
+          <SimpleGrid
+            as="ul"
+            minChildWidth={{ base: "100%", md: "320px" }}
+            spacing={{ base: 4, md: 5 }}
+            m={0}
+            p={0}
+            listStyleType="none"
+          >
             {steps.map((s, idx) => (
               <Box
+                as="li"
                 key={s.title}
                 position="relative"
                 overflow="hidden"

@@ -170,14 +170,20 @@ const HomeTrustedTeamsSection: React.FC = () => {
   const quoteMarkColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
 
   return (
-    <Box as="section" px={0} py={{ base: 12, md: 16 }}>
+    <Box as="section" px={0} py={{ base: 12, md: 16 }} aria-labelledby="home-trusted-title" aria-describedby="home-trusted-desc">
       <Container maxW="1200px">
         <VStack spacing={{ base: 6, md: 8 }} align="stretch">
-          <VStack spacing={3} align="flex-start" maxW="980px">
-            <Heading as="h2" fontSize={{ base: "3xl", md: "5xl" }} letterSpacing="-0.03em" color={titleColor} lineHeight="1.05">
+          <VStack
+            spacing={3}
+            align={{ base: "center", md: "flex-start" }}
+            textAlign={{ base: "center", md: "left" }}
+            maxW="980px"
+            as="header"
+          >
+            <Heading id="home-trusted-title" as="h2" fontSize={{ base: "3xl", md: "5xl" }} letterSpacing="-0.03em" color={titleColor} lineHeight="1.05">
               Что внутри AIFFA.
             </Heading>
-            <Text color={textColor} fontSize={{ base: "md", md: "lg" }} lineHeight="1.7" maxW="820px">
+            <Text id="home-trusted-desc" color={textColor} fontSize={{ base: "md", md: "lg" }} lineHeight="1.7" maxW="820px">
               Это экосистема роста через действие: практика, путь развития, фидбек и вклад. Всё собрано так, чтобы было понятно “что делать
               дальше” — и чтобы прогресс был видимым.
             </Text>

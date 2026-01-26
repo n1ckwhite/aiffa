@@ -233,7 +233,7 @@ const HomeProgressMechanicsSection: React.FC = () => {
             </Box>
           </Stack>
 
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 6, md: 8 }} alignItems="stretch">
+          <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 6, md: 8 }} alignItems="stretch">
             <Stack spacing={5} h="full" as="ul" m={0} p={0} listStyleType="none">
               {progressItems.map((item) => (
                 <HStack key={item.id} spacing={4} align="flex-start" as="li">

@@ -50,7 +50,7 @@ const HomeBusinessSection: React.FC = () => {
   const showcaseIcons = [FiLayers, FiMessageCircle, FiZap, FiUsers, FiBookOpen];
 
   return (
-    <Box as="section" px={0} py={{ base: 12, md: 18 }}>
+    <Box as="section" px={0} pt={{ base: 10, md: 14 }}>
       <Container maxW="1200px">
         <Box
           borderWidth="0"

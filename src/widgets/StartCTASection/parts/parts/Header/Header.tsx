@@ -7,7 +7,7 @@ import { PersonLottieIcon } from "@/shared/icons/components-icon";
 const Header: React.FC<HeaderProps> = () => {
   const { titleColor, textColor } = useStartCTAColors();
   return (
-    <VStack spacing={4} maxW="760px">
+    <VStack spacing={3} maxW="760px" pt={{ base: 10, md: 14 }}>
         <Box>
             <PersonLottieIcon />
         </Box>

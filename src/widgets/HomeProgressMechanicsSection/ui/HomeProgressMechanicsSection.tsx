@@ -186,18 +186,31 @@ const HomeProgressMechanicsSection: React.FC = () => {
   type ToneKey = keyof typeof tone;
 
   return (
-    <Box as="section" px={0} py={{ base: 12, md: 16 }}>
+    <Box
+      as="section"
+      px={0}
+      pt={{ base: 10, md: 14 }}
+      aria-labelledby="home-progress-title"
+      aria-describedby="home-progress-desc"
+    >
       <Container maxW="1200px">
         <VStack spacing={{ base: 6, md: 8 }} align="stretch">
-          <Stack direction={{ base: "column", md: "row" }} spacing={{ base: 4, md: 8 }} align="center" justify="space-between">
-            <VStack spacing={2} align="flex-start" maxW={{ base: "100%", md: "760px" }} flex="1 1 auto">
+          <Stack direction={{ base: "column", lg: "row" }} spacing={{ base: 4, md: 8 }} align="center" justify="space-between">
+            <VStack
+              spacing={2}
+              align={{ base: "center", lg: "flex-start" }}
+              textAlign={{ base: "center", lg: "left" }}
+              w="full"
+              flex="1 1 auto"
+              as="header"
+            >
               <Text fontSize={{ base: "sm", md: "sm" }} fontWeight="bold" color={accentLabel} letterSpacing="0.16em" textTransform="uppercase">
                 Механика прогресса
               </Text>
-              <Text fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold" color={titleColor} letterSpacing="-0.02em">
+              <Text id="home-progress-title" fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold" color={titleColor} letterSpacing="-0.02em">
                 Рост фиксируется в действиях
               </Text>
-              <Text color={textColor} fontSize={{ base: "md", md: "lg" }} lineHeight="1.7">
+              <Text id="home-progress-desc" color={textColor} fontSize={{ base: "md", md: "lg" }} lineHeight="1.7">
                 Профиль, XP и достижения показывают не “что ты знаешь”, а что ты реально сделал и как стабильно растёшь.
               </Text>
             </VStack>
@@ -221,9 +234,9 @@ const HomeProgressMechanicsSection: React.FC = () => {
           </Stack>
 
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 6, md: 8 }} alignItems="stretch">
-            <Stack spacing={5} h="full">
+            <Stack spacing={5} h="full" as="ul" m={0} p={0} listStyleType="none">
               {progressItems.map((item) => (
-                <HStack key={item.id} spacing={4} align="flex-start">
+                <HStack key={item.id} spacing={4} align="flex-start" as="li">
                   <Box
                     w="44px"
                     h="44px"
@@ -252,9 +265,11 @@ const HomeProgressMechanicsSection: React.FC = () => {
                 <Text fontSize="sm" fontWeight="bold" color={accentLabel} letterSpacing="0.14em" textTransform="uppercase" mb={2}>
                   Примеры достижений
                 </Text>
-                <HStack spacing={2} flexWrap="wrap">
+                <HStack as="ul" spacing={2} flexWrap="wrap" m={0} p={0} listStyleType="none">
                   {achievements.map((item) => (
-                    <CompactAchievement key={item.id} item={item} />
+                    <Box as="li" key={item.id}>
+                      <CompactAchievement item={item} />
+                    </Box>
                   ))}
                 </HStack>
               </Box>
@@ -263,7 +278,7 @@ const HomeProgressMechanicsSection: React.FC = () => {
             <Stack spacing={4} h="full" justify="space-between">
               <Stack spacing={3}>
                 <Text fontSize="xs" fontWeight="bold" letterSpacing="0.16em" textTransform="uppercase" color={accentLabel}>
-                  Механика прогресса
+                  Прогресс в профиле
                 </Text>
                 <Text color={titleColor} fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" lineHeight="1.35">
                   Прогресс → профиль → работодатели
@@ -272,7 +287,7 @@ const HomeProgressMechanicsSection: React.FC = () => {
                   Когда рост стабилен и подтверждён действиями — это видно и становится сильным аргументом при найме.
                 </Text>
 
-                <Stack spacing={2.5} pt={1}>
+                <Stack spacing={2.5} pt={1} as="ul" m={0} p={0} listStyleType="none">
                   {[
                     {
                       id: "progress",
@@ -293,7 +308,7 @@ const HomeProgressMechanicsSection: React.FC = () => {
                       tone: "green" as ToneKey,
                     },
                   ].map((item) => (
-                    <HStack key={item.id} spacing={2} align="flex-start">
+                    <HStack key={item.id} spacing={2} align="flex-start" as="li">
                       <Box
                         w="20px"
                         h="20px"

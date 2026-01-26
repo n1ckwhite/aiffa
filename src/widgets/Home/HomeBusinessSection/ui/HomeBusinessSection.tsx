@@ -1,52 +1,16 @@
 "use client";
 
 import React from "react";
-import { Box, Container, Heading, HStack, Icon, SimpleGrid, Stack, Text, useColorModeValue } from "@chakra-ui/react";
-import { FiBarChart2, FiLayers, FiMessageCircle, FiTrendingUp, FiUsers, FiZap } from "react-icons/fi";
+import { Box, Container, Stack } from "@chakra-ui/react";
 import { PartnersLottieIcon } from "@/shared/icons/components-icon";
-import { AppLink } from "@/shared/ui/AppLink";
+import { businessContent } from "../data/content";
+import { useHomeBusinessColors } from "../colors";
+import BusinessHeader from "../components/BusinessHeader";
+import HighlightsList from "../components/HighlightsList";
 
 const HomeBusinessSection: React.FC = () => {
-  const titleColor = useColorModeValue("gray.900", "whiteAlpha.900");
-  const textColor = useColorModeValue("gray.600", "gray.300");
-  const badgeBg = useColorModeValue("blue.100", "blue.900");
-  const badgeColor = useColorModeValue("blue.700", "blue.200");
-  const iconColor = useColorModeValue("blue.600", "blue.300");
-  const iconColors = ["#3B82F6", "#8B5CF6", "#F59E0B", "#22C55E", "#EF4444", "#06B6D4"];
-
-  const highlights = [
-    {
-      title: "Тестовые задания под ваш стек",
-      desc: "Weekly‑задачи и хакатоны на React/Next.js/ИИ — код пишется прямо на платформе, а не в вакууме.",
-      icon: FiLayers,
-    },
-    {
-      title: "Топ‑кандидаты по действиям",
-      desc: "Сортировка по XP, решениям и ревью. Профили = резюме с живым кодом и историей роста.",
-      icon: FiTrendingUp,
-    },
-    {
-      title: "Аналитика команд",
-      desc: "Отчёты: completion rate, retention, active users. Видно, кто растёт, а кто стоит.",
-      icon: FiBarChart2,
-    },
-    {
-      title: "Скорость подбора",
-      desc: "Задачи закрываются за 2–3 дня — вы быстрее выходите на собеседования и офферы.",
-      icon: FiZap,
-    },
-    {
-      title: "Пул разработчиков",
-      desc: "120+ активных участников и растущая база — можно запускать регулярные наборы.",
-      icon: FiUsers,
-    },
-    {
-      title: "Гибкие форматы",
-      desc: "Пилоты, челленджи, хакатоны и спец‑проекты — собираем формат под вашу цель.",
-      icon: FiMessageCircle,
-    },
-  ];
-
+  const { titleColor, textColor, badgeBg, badgeColor, linkColor, iconColors, iconFallback } = useHomeBusinessColors();
+  const { header, highlights } = businessContent;
 
   return (
     <Box as="section" px={0} pt={{ base: 10, md: 14 }} aria-labelledby="home-business-title" aria-describedby="home-business-desc">
@@ -58,38 +22,21 @@ const HomeBusinessSection: React.FC = () => {
           boxShadow="none"
         >
           <Stack spacing={{ base: 6, md: 10 }}>
-            <Stack
-              direction={{ base: "column", lg: "row" }}
-              spacing={{ base: 6, md: 10 }}
-              align={{ base: "flex-start", md: "center" }}
-            >
-              <Stack spacing={3} align="flex-start" flex={{ base: "none", lg: 1.2 }} as="header" textAlign={{ base: "center", lg: "left" }} justifyContent={{ base: "center", lg: "flex-start" }} alignItems={{ base: "center", lg: "flex-start" }}>
-                <HStack spacing={2}>
-                  <Text fontSize="xs" textTransform="uppercase" letterSpacing="0.14em" color={badgeColor} bg={badgeBg} px={2.5} py={1} borderRadius="full">
-                    Партнёрство для компаний
-                  </Text>
-                </HStack>
-                <Heading id="home-business-title" as="h2" size={{ base: "md", md: "lg" }} letterSpacing="-0.02em" color={titleColor}>
-                  AIFFA помогает нанимать быстрее и точнее
-                </Heading>
-                <Text id="home-business-desc" color={textColor} fontSize={{ base: "md", md: "lg" }} lineHeight="1.7">
-                  Подключите реальную практику и получите поток кандидатов с живым кодом и понятными метриками.
-                  Видно, кто решает, как растёт и насколько стабилен — без догадок и долгих тестов.
-                </Text>
-                <AppLink
-                  to="/partners"
-                  color={useColorModeValue("blue.600", "blue.200")}
-                  fontWeight="semibold"
-                  display="inline-flex"
-                  alignItems="center"
-                  gap={2}
-                >
-                  Стать партнёром
-                  <Box as="span" aria-hidden>
-                    →
-                  </Box>
-                </AppLink>
-              </Stack>
+            <Stack direction={{ base: "column", lg: "row" }} spacing={{ base: 6, md: 10 }} align={{ base: "flex-start", md: "center" }}>
+              <BusinessHeader
+                badge={header.badge}
+                title={header.title}
+                description={header.description}
+                linkLabel={header.linkLabel}
+                linkTo={header.linkTo}
+                titleId="home-business-title"
+                descriptionId="home-business-desc"
+                badgeBg={badgeBg}
+                badgeColor={badgeColor}
+                titleColor={titleColor}
+                textColor={textColor}
+                linkColor={linkColor}
+              />
 
               <Box
                 w="full"
@@ -102,42 +49,7 @@ const HomeBusinessSection: React.FC = () => {
               </Box>
             </Stack>
 
-            <SimpleGrid
-              as="ul"
-              columns={{ base: 1, md: 2, lg: 3 }}
-              spacing={8}
-              w="full"
-              m={0}
-              p={0}
-              listStyleType="none"
-            >
-              {highlights.map((item, idx) => (
-                <Box as="li" key={item.title} w="full">
-                  <HStack spacing={3} align="flex-start">
-                    <Box
-                      w="36px"
-                      h="36px"
-                      borderRadius="lg"
-                      color={iconColors[idx % iconColors.length] ?? iconColor}
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      flexShrink={0}
-                    >
-                      <Icon as={item.icon} boxSize={5} aria-hidden />
-                    </Box>
-                    <Box>
-                      <Text fontWeight="bold" color={titleColor} fontSize={{ base: "sm", md: "md" }}>
-                        {item.title}
-                      </Text>
-                      <Text color={textColor} fontSize={{ base: "sm", md: "md" }} lineHeight="1.6" mt={1}>
-                        {item.desc}
-                      </Text>
-                    </Box>
-                  </HStack>
-                </Box>
-              ))}
-            </SimpleGrid>
+            <HighlightsList items={highlights} titleColor={titleColor} textColor={textColor} iconColors={iconColors} iconFallback={iconFallback} />
           </Stack>
         </Box>
       </Container>

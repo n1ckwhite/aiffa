@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Box, Container, Heading, HStack, Icon, SimpleGrid, Stack, Text, VStack, useColorModeValue } from "@chakra-ui/react";
-import { FiBarChart2, FiBookOpen, FiLayers, FiMessageCircle, FiTrendingUp, FiUsers, FiZap } from "react-icons/fi";
+import { Box, Container, Heading, HStack, Icon, SimpleGrid, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import { FiBarChart2, FiLayers, FiMessageCircle, FiTrendingUp, FiUsers, FiZap } from "react-icons/fi";
 import { PartnersLottieIcon } from "@/shared/icons/components-icon";
 import { AppLink } from "@/shared/ui/AppLink";
 

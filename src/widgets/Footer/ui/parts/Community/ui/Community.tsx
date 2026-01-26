@@ -1,5 +1,5 @@
 import React from 'react';
-import { VStack, Text, Link, HStack, IconButton } from '@chakra-ui/react';
+import { VStack, Text, Link, HStack } from '@chakra-ui/react';
 import { useFooterColors } from '../../../colors/useFooterColors';
 import type { CommunityProps } from '../types/Community.types';
 import { GitHubIcon } from '../../../../icons/GitHub';
@@ -66,11 +66,33 @@ export const Community: React.FC<CommunityProps> = ({
       </VStack>
 
       <HStack spacing={3} pt={1}>
-        <Link href={githubHref} isExternal>
-          <IconButton aria-label="GitHub" icon={<GitHubIcon />} variant="ghost" size="sm" color={colors.textColor} _hover={{ color: colors.linkHover }} />
+        <Link
+          href={githubHref}
+          isExternal
+          aria-label="GitHub"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
+          boxSize="32px"
+          borderRadius="full"
+          color={colors.textColor}
+          _hover={{ color: colors.linkHover }}
+        >
+          <GitHubIcon />
         </Link>
-        <Link href={telegramHref} isExternal>
-          <IconButton aria-label="Telegram" icon={<TelegramIcon />} variant="ghost" size="sm" color={colors.textColor} _hover={{ color: colors.linkHover }} />
+        <Link
+          href={telegramHref}
+          isExternal
+          aria-label="Telegram"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
+          boxSize="32px"
+          borderRadius="full"
+          color={colors.textColor}
+          _hover={{ color: colors.linkHover }}
+        >
+          <TelegramIcon />
         </Link>
       </HStack>
     </VStack>

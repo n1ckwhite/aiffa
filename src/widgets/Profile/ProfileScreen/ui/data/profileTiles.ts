@@ -4,12 +4,9 @@ import {
   FiAward,
   FiBookOpen,
   FiCheckCircle,
-  FiEdit3,
   FiPackage,
-  FiTarget,
-  FiVideo,
 } from "react-icons/fi";
-import { FaClipboardList, FaFeatherAlt } from "react-icons/fa";
+import { FaClipboardList, FaComments, FaFeatherAlt } from "react-icons/fa";
 
 export const CONTRIBUTION_HINT = "По авторству в базе AIFFA";
 
@@ -51,7 +48,7 @@ export const buildProgressTiles = (stats: ProgressStats): StatTileModel[] => {
     {
       label: "Участие на сессиях",
       value: stats.sessionsParticipationCount,
-      icon: FiVideo,
+      icon: FaComments,
       accentColor: "cyan.400",
       tooltip: "Сколько сессий вы посетили (созвоны/разборы/встречи).",
       mode: "sessions",

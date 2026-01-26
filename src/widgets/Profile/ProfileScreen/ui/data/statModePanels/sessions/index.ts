@@ -1,11 +1,10 @@
-import { FiVideo } from "react-icons/fi";
 import { FaComments, FaMicrophoneAlt, FaProjectDiagram, FaHandshake } from "react-icons/fa";
 import type { StatModePanelConfig } from "../shared/types";
 
 export const sessionsPanel: StatModePanelConfig = {
   title: "Сессии",
   description: "Посещённые сессии.",
-  icon: FiVideo,
+  icon: FaComments,
   pagination: { pageSize: 3, ariaLabel: "Пагинация сессий" },
   items: [
     {

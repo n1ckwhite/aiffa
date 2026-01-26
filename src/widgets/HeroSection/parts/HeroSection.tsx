@@ -142,6 +142,10 @@ const HeroSection: React.FC = () => {
               <AppButtonLink
                 to="/weekly"
                 colorScheme="blue"
+                bg="blue.600"
+                _hover={{ bg: "blue.700" }}
+                _active={{ bg: "blue.800" }}
+                color="white"
                 borderRadius="full"
                 px={{ base: 6, md: 7 }}
                 h={{ base: 12, md: 12 }}

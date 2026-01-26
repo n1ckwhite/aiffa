@@ -152,7 +152,7 @@ const HomeProgressMechanicsSection: React.FC = () => {
 
   const baseShadow = useColorModeValue("0 1px 0 rgba(16, 24, 40, 0.04)", "0 1px 0 rgba(0, 0, 0, 0.20)");
   const hoverShadow = useColorModeValue("0 16px 40px rgba(16, 24, 40, 0.12)", "0 20px 60px rgba(0, 0, 0, 0.45)");
-  const accentLabel = useColorModeValue("gray.500", "whiteAlpha.700");
+  const accentLabel = useColorModeValue("gray.700", "whiteAlpha.900");
   const chipBg = useColorModeValue("white", "whiteAlpha.100");
   const chipText = useColorModeValue("gray.800", "whiteAlpha.900");
   const ghostBg = useColorModeValue("blue.50", "rgba(59,130,246,0.18)");

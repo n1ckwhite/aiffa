@@ -30,7 +30,7 @@ const HomeExamplesShowcaseSection: React.FC = () => {
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.200");
   const titleColor = useColorModeValue("gray.900", "whiteAlpha.900");
   const textColor = useColorModeValue("gray.600", "gray.300");
-  const mutedColor = useColorModeValue("gray.500", "whiteAlpha.700");
+  const mutedColor = useColorModeValue("gray.700", "whiteAlpha.900");
   const surfaceBg = useColorModeValue("whiteAlpha.900", "rgba(15, 23, 42, 0.45)");
   const cardBg = useColorModeValue("white", "rgba(2, 6, 23, 0.25)");
   const subCardBg = useColorModeValue("whiteAlpha.800", "whiteAlpha.100");

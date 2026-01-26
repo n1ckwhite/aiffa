@@ -47,34 +47,32 @@ const HomeBusinessSection: React.FC = () => {
     },
   ];
 
-  const showcaseIcons = [FiLayers, FiMessageCircle, FiZap, FiUsers, FiBookOpen];
 
   return (
-    <Box as="section" px={0} pt={{ base: 10, md: 14 }}>
+    <Box as="section" px={0} pt={{ base: 10, md: 14 }} aria-labelledby="home-business-title" aria-describedby="home-business-desc">
       <Container maxW="1200px">
         <Box
           borderWidth="0"
           borderRadius="0"
           bg="transparent"
-          p={{ base: 0, md: 0 }}
           boxShadow="none"
         >
           <Stack spacing={{ base: 6, md: 10 }}>
             <Stack
-              direction={{ base: "column", md: "row" }}
+              direction={{ base: "column", lg: "row" }}
               spacing={{ base: 6, md: 10 }}
               align={{ base: "flex-start", md: "center" }}
             >
-              <Stack spacing={4} align="flex-start" flex={{ base: "none", md: 1.2 }}>
+              <Stack spacing={3} align="flex-start" flex={{ base: "none", lg: 1.2 }} as="header" textAlign={{ base: "center", lg: "left" }} justifyContent={{ base: "center", lg: "flex-start" }} alignItems={{ base: "center", lg: "flex-start" }}>
                 <HStack spacing={2}>
                   <Text fontSize="xs" textTransform="uppercase" letterSpacing="0.14em" color={badgeColor} bg={badgeBg} px={2.5} py={1} borderRadius="full">
                     Партнёрство для компаний
                   </Text>
                 </HStack>
-                <Heading as="h2" size={{ base: "md", md: "lg" }} letterSpacing="-0.02em" color={titleColor}>
+                <Heading id="home-business-title" as="h2" size={{ base: "md", md: "lg" }} letterSpacing="-0.02em" color={titleColor}>
                   AIFFA помогает нанимать быстрее и точнее
                 </Heading>
-                <Text color={textColor} fontSize={{ base: "md", md: "lg" }} lineHeight="1.7">
+                <Text id="home-business-desc" color={textColor} fontSize={{ base: "md", md: "lg" }} lineHeight="1.7">
                   Подключите реальную практику и получите поток кандидатов с живым кодом и понятными метриками.
                   Видно, кто решает, как растёт и насколько стабилен — без догадок и долгих тестов.
                 </Text>
@@ -96,16 +94,25 @@ const HomeBusinessSection: React.FC = () => {
               <Box
                 w="full"
                 maxW={{ base: "420px", md: "520px" }}
-                ml={{ base: 0, md: "auto" }}
+                ml={{ base: 0, lg: "auto" }}
+                mx={{ base: "auto", lg: 0 }}
                 flex={{ base: "none", md: 1 }}
               >
                 <PartnersLottieIcon />
               </Box>
             </Stack>
 
-            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} w="full">
+            <SimpleGrid
+              as="ul"
+              columns={{ base: 1, md: 2, lg: 3 }}
+              spacing={8}
+              w="full"
+              m={0}
+              p={0}
+              listStyleType="none"
+            >
               {highlights.map((item, idx) => (
-                <Box key={item.title}>
+                <Box as="li" key={item.title} w="full">
                   <HStack spacing={3} align="flex-start">
                     <Box
                       w="36px"

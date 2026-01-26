@@ -30,6 +30,14 @@ const OptimizedIconImage: React.FC<OptimizedIconImageProps> = ({
   fetchPriority = 'auto',
   style,
 }) => {
+  const normalizedStyle: CSSProperties = { ...(style ?? {}) };
+  if (normalizedStyle.width && !normalizedStyle.height) {
+    normalizedStyle.height = "auto";
+  }
+  if (normalizedStyle.height && !normalizedStyle.width) {
+    normalizedStyle.width = "auto";
+  }
+
   return (
     <NextImage
       src={src}
@@ -43,7 +51,7 @@ const OptimizedIconImage: React.FC<OptimizedIconImageProps> = ({
         width: "100%",
         height: "auto",
         objectFit: "contain",
-        ...style,
+        ...normalizedStyle,
       }}
     />
   );

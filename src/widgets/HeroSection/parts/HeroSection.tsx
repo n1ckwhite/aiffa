@@ -110,7 +110,7 @@ const HeroSection: React.FC = () => {
     <Box
       as="section"
       bg={bg}
-      py={{ base: 8, md: 16 }}
+      pt={{ base: 8, md: 16 }}
       px={4}
       aria-labelledby="homepage-hero-title"
       aria-describedby="homepage-hero-description"

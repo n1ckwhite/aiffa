@@ -66,7 +66,7 @@ const HomeHowItWorksSection: React.FC = () => {
   ] as const;
 
   return (
-    <Box as="section" px={0} pb={{ base: 10, md: 12 }} aria-labelledby="home-how-title" aria-describedby="home-how-desc">
+    <Box as="section" px={0} pt={{ base: 10, md: 14 }} aria-labelledby="home-how-title" aria-describedby="home-how-desc">
       <Container maxW="1200px">
         <VStack spacing={{ base: 4, md: 6 }} align="stretch">
           <VStack spacing={3} textAlign="center" as="header">

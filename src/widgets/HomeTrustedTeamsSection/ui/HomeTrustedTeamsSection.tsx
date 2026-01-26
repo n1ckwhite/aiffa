@@ -157,26 +157,23 @@ const HomeTrustedTeamsSection: React.FC = () => {
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.200");
   const borderHoverColor = useColorModeValue("gray.300", "whiteAlpha.300");
 
-  const sectionBg = useColorModeValue("blackAlpha.50", "rgba(255, 255, 255, 0.04)");
   const baseShadow = useColorModeValue("0 1px 0 rgba(16, 24, 40, 0.04)", "0 1px 0 rgba(0, 0, 0, 0.20)");
   const hoverShadow = useColorModeValue("0 16px 40px rgba(16, 24, 40, 0.12)", "0 20px 60px rgba(0, 0, 0, 0.45)");
 
   const storyLinkColor = isDark ? "blue.200" : "blue.700";
   const ctaBg = useColorModeValue("whiteAlpha.900", "whiteAlpha.50");
-  const ctaBadgeBg = useColorModeValue("white", "whiteAlpha.100");
-  const ctaBadgeBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
   const labelColor = useColorModeValue("gray.600", "whiteAlpha.700");
   const actionColor = isDark ? "blue.200" : "blue.700";
   const quoteMarkColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
 
   return (
-    <Box as="section" px={0} py={{ base: 12, md: 16 }} aria-labelledby="home-trusted-title" aria-describedby="home-trusted-desc">
+    <Box as="section" px={0} aria-labelledby="home-trusted-title" aria-describedby="home-trusted-desc" pt={{ base: 10, md: 14 }}>
       <Container maxW="1200px">
         <VStack spacing={{ base: 6, md: 8 }} align="stretch">
           <VStack
             spacing={3}
-            align={{ base: "center", md: "flex-start" }}
-            textAlign={{ base: "center", md: "left" }}
+            align={{ base: "center", lg: "flex-start" }}
+            textAlign={{ base: "center", lg: "left" }}
             maxW="980px"
             as="header"
           >
@@ -198,8 +195,8 @@ const HomeTrustedTeamsSection: React.FC = () => {
             overflow="hidden"
             p={{ base: 5, md: 7 }}
           >
-            <Stack direction={{ base: "column", md: "row" }} spacing={{ base: 5, md: 7 }} align="stretch">
-              <Stack spacing={0} flex="1 1 0" minW={0} h="full" justify="space-between" align="flex-start">
+            <Stack direction={{ base: "column", lg: "row" }} spacing={{ base: 5, md: 7 }} align="stretch">
+              <Stack spacing={0} flex="1 1 0" minW={0} h="full" justify="space-between" align="stretch">
                 <Stack spacing={4} w="full">
                   <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" color={titleColor}>
                     Всё в одном месте
@@ -223,13 +220,14 @@ const HomeTrustedTeamsSection: React.FC = () => {
                       color: quoteMarkColor,
                       pointerEvents: "none",
                     }}
+                    maxW="none"
                   >
                     Практика → фидбек → следующий шаг. Прогресс виден по действиям, а рост ускоряется, когда помогаешь другим.
                   </Text>
                 </Stack>
 
-                <Box pt={6} w="full">
-                  <Stack spacing={1.5}>
+                <Box pt={{ base: 5, md: 6 }} w="full">
+                  <Stack spacing={2}>
                     <HStack spacing={2} align="flex-start">
                       <Icon as={FaLayerGroup} boxSize={4} aria-hidden="true" color={labelColor} mt="2px" />
                       <Text fontSize="sm" color={textColor} lineHeight="1.6">
@@ -254,19 +252,31 @@ const HomeTrustedTeamsSection: React.FC = () => {
 
               <Box
                 flex="0 0 auto"
-                w={{ base: "100%", md: "420px" }}
+                w={{ base: "100%", lg: "420px" }}
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
                 aria-hidden="true"
                 pointerEvents="none"
               >
-                <BusinessAnatyticsIcon />
+                <Box
+                  w="full"
+                  maxW={{ base: "320px", md: "420px" }}
+                  mx="auto"
+                  sx={{
+                    "& svg, & canvas": {
+                      width: "100% !important",
+                      height: "auto !important",
+                    },
+                  }}
+                >
+                  <BusinessAnatyticsIcon />
+                </Box>
               </Box>
             </Stack>
           </Box>
 
-          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 4, md: 5 }}>
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 4, md: 5 }}>
             {miniCases.map((c) => (
               // derived colors must not use hooks here; use isDark flag
               <AppBoxLink

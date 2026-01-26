@@ -9,6 +9,7 @@ import {
   FiTarget,
   FiVideo,
 } from "react-icons/fi";
+import { FaClipboardList, FaFeatherAlt } from "react-icons/fa";
 
 export const CONTRIBUTION_HINT = "По авторству в базе AIFFA";
 
@@ -79,7 +80,7 @@ export const buildContributionTiles = (stats: ContributionStats): StatTileModel[
     {
       label: "Вложено задач недели",
       value: stats.totalSolvedEver,
-      icon: FiTarget,
+      icon: FaClipboardList,
       accentColor: "green.400",
       tooltip: "Сколько задач недели вы выложили (по авторству)",
       mode: "contrib-weekly",
@@ -87,7 +88,7 @@ export const buildContributionTiles = (stats: ContributionStats): StatTileModel[
     {
       label: "Написано статей",
       value: stats.authoredArticlesCount,
-      icon: FiEdit3,
+      icon: FaFeatherAlt,
       accentColor: "orange.400",
       tooltip: "Сколько статей вы опубликовали в блоге AIFFA.",
       mode: "contrib-articles",

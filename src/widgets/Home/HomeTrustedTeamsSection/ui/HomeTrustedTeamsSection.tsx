@@ -26,7 +26,7 @@ import {
   FaLayerGroup,
   FaUsers,
 } from "react-icons/fa";
-import { AppButtonLink, AppLink } from "@/shared/ui/AppLink";
+import { AppLink } from "@/shared/ui/AppLink";
 import { AppBoxLink } from "@/shared/ui/AppLink";
 import { BusinessAnatyticsIcon } from "@/shared/icons/components-icon";
 

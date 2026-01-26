@@ -69,7 +69,7 @@ const HomeHowItWorksSection: React.FC = () => {
     <Box as="section" px={0} pb={{ base: 10, md: 12 }}>
       <Container maxW="1200px">
         <VStack spacing={{ base: 4, md: 6 }} align="stretch">
-          <VStack spacing={2} textAlign="center">
+          <VStack spacing={3} textAlign="center">
             <Box aria-hidden="true">
               <ForSessionsLottieIcon />
             </Box>
@@ -81,7 +81,7 @@ const HomeHowItWorksSection: React.FC = () => {
             </Text>
           </VStack>
 
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 4, md: 5 }}>
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 3, md: 5 }}>
             {steps.map((s, idx) => (
               <Box
                 key={s.title}

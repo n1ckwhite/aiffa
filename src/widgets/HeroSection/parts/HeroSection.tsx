@@ -25,9 +25,15 @@ const SocialProofMarquee: React.FC<{ items: SocialProofItem[] }> = ({ items }) =
   const dotColor = useColorModeValue('blackAlpha.400', 'whiteAlpha.500');
 
   const renderItem = (it: SocialProofItem) => (
-    <HStack key={it.id} spacing={2} flex="0 0 auto">
+    <HStack key={it.id} spacing={{ base: 1.5, md: 2 }} flex="0 0 auto">
       <Icon as={it.icon} boxSize={4} aria-hidden="true" color={dotColor} />
-      <Text as="span" fontSize="sm" color={textColor} whiteSpace="nowrap">
+      <Text
+        as="span"
+        fontSize={{ base: "xs", md: "sm" }}
+        color={textColor}
+        whiteSpace={{ base: "normal", md: "nowrap" }}
+        textAlign={{ base: "center", md: "left" }}
+      >
         {it.value ? (
           <>
             <Box as="span" fontWeight="bold" color={strongColor}>
@@ -50,7 +56,7 @@ const SocialProofMarquee: React.FC<{ items: SocialProofItem[] }> = ({ items }) =
 
   if (prefersReducedMotion) {
     return (
-      <HStack spacing={3} flexWrap="wrap" justify="center" pt={1}>
+      <HStack spacing={{ base: 2, md: 3 }} flexWrap="wrap" justify="center" pt={1}>
         {items.map(renderItem)}
       </HStack>
     );
@@ -59,7 +65,8 @@ const SocialProofMarquee: React.FC<{ items: SocialProofItem[] }> = ({ items }) =
   return (
     <Box
       w="full"
-      maxW={{ base: "100%", md: "760px" }}
+      maxW={{ base: "280px", sm: "520px", md: "720px", lg: "900px" }}
+      px={{ base: 2, md: 0 }}
       mx="auto"
       pt={1}
       overflow="hidden"
@@ -100,10 +107,17 @@ const HeroSection: React.FC = () => {
   ];
 
   return (
-    <Box as="section" bg={bg} py={16} px={4} aria-labelledby="homepage-hero-title">
+    <Box
+      as="section"
+      bg={bg}
+      py={{ base: 8, md: 16 }}
+      px={4}
+      aria-labelledby="homepage-hero-title"
+      aria-describedby="homepage-hero-description"
+    >
       <Box maxW="1200px" mx="auto">
         <VStack align="center">
-          <VStack spacing={5} textAlign="center">
+          <VStack spacing={{ base: 3, md: 5 }} textAlign="center">
             <VStack as="header" align="center" spacing={2}>
               <Text
                 as="p"
@@ -118,7 +132,7 @@ const HeroSection: React.FC = () => {
               <Text
                 as="h1"
                 id="homepage-hero-title"
-                fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
+                fontSize={{ base: '3xl', md: '5xl', lg: '6xl' }}
                 fontWeight="black"
                 color={titleColor}
                 lineHeight="1.05"
@@ -133,12 +147,12 @@ const HeroSection: React.FC = () => {
               </Text>
             </VStack>
 
-            <Text fontSize={{ base: 'md', md: 'lg' }} color={textColor} lineHeight="1.7">
+            <Text id="homepage-hero-description" fontSize={{ base: 'md', md: 'lg' }} color={textColor} lineHeight="1.7">
               AIFFA — платформа, где ты растёшь через практику: решаешь задачи, получаешь фидбек и видишь прогресс в профиле.
               Без “когда‑нибудь начну” — только следующий шаг.
             </Text>
 
-            <HStack spacing={{ base: 3, md: 4 }} flexWrap="wrap" justify="center" pt={1}>
+            <HStack spacing={{ base: 3, md: 4 }} flexWrap="wrap" justify="center" aria-label="Основные действия">
               <AppButtonLink
                 to="/weekly"
                 colorScheme="blue"
@@ -147,10 +161,12 @@ const HeroSection: React.FC = () => {
                 _active={{ bg: "blue.800" }}
                 color="white"
                 borderRadius="full"
+                w={{ base: "100%", sm: "240px" }}
                 px={{ base: 6, md: 7 }}
                 h={{ base: 12, md: 12 }}
                 fontWeight="bold"
                 boxShadow="0 10px 26px rgba(15, 23, 42, 0.10)"
+                aria-label="Решить первую задачу"
               >
                 Решить первую задачу
               </AppButtonLink>
@@ -158,9 +174,11 @@ const HeroSection: React.FC = () => {
                 to="/learn"
                 variant="outline"
                 borderRadius="full"
+                w={{ base: "100%", sm: "240px" }}
                 px={{ base: 6, md: 7 }}
                 h={{ base: 12, md: 12 }}
                 fontWeight="bold"
+                aria-label="Построить роудмэп"
               >
                 Построить роудмэп
               </AppButtonLink>

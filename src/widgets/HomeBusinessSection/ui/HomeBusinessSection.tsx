@@ -9,25 +9,20 @@ import { AppLink } from "@/shared/ui/AppLink";
 const HomeBusinessSection: React.FC = () => {
   const titleColor = useColorModeValue("gray.900", "whiteAlpha.900");
   const textColor = useColorModeValue("gray.600", "gray.300");
-  const borderColor = useColorModeValue("gray.200", "whiteAlpha.200");
-  const surfaceBg = useColorModeValue("white", "gray.900");
-  const surfaceShadow = useColorModeValue("0 1px 0 rgba(15, 23, 42, 0.04)", "0 1px 0 rgba(0, 0, 0, 0.35)");
-  const cardBg = useColorModeValue("white", "whiteAlpha.100");
-  const badgeBg = useColorModeValue("gray.100", "whiteAlpha.200");
-  const badgeColor = useColorModeValue("gray.700", "gray.200");
-  const iconBg = useColorModeValue("gray.50", "whiteAlpha.200");
-  const iconColor = useColorModeValue("gray.700", "whiteAlpha.900");
-  const cardShadow = useColorModeValue("0 1px 0 rgba(15, 23, 42, 0.06)", "0 1px 0 rgba(0, 0, 0, 0.25)");
+  const badgeBg = useColorModeValue("blue.100", "blue.900");
+  const badgeColor = useColorModeValue("blue.700", "blue.200");
+  const iconColor = useColorModeValue("blue.600", "blue.300");
+  const iconColors = ["#3B82F6", "#8B5CF6", "#F59E0B", "#22C55E", "#EF4444", "#06B6D4"];
 
   const highlights = [
     {
       title: "Тестовые задания под ваш стек",
-      desc: "Weekly‑задачи и хакатоны на React/Next.js/ИИ — код пишется прямо на платформе.",
+      desc: "Weekly‑задачи и хакатоны на React/Next.js/ИИ — код пишется прямо на платформе, а не в вакууме.",
       icon: FiLayers,
     },
     {
       title: "Топ‑кандидаты по действиям",
-      desc: "Сортировка по XP, решениям, ревью. Профили = резюме с живым кодом.",
+      desc: "Сортировка по XP, решениям и ревью. Профили = резюме с живым кодом и историей роста.",
       icon: FiTrendingUp,
     },
     {
@@ -36,9 +31,19 @@ const HomeBusinessSection: React.FC = () => {
       icon: FiBarChart2,
     },
     {
-      title: "120+ активных разработчиков",
-      desc: "Уже используют платформу — ваши задачи решают за 2–3 дня.",
+      title: "Скорость подбора",
+      desc: "Задачи закрываются за 2–3 дня — вы быстрее выходите на собеседования и офферы.",
+      icon: FiZap,
+    },
+    {
+      title: "Пул разработчиков",
+      desc: "120+ активных участников и растущая база — можно запускать регулярные наборы.",
       icon: FiUsers,
+    },
+    {
+      title: "Гибкие форматы",
+      desc: "Пилоты, челленджи, хакатоны и спец‑проекты — собираем формат под вашу цель.",
+      icon: FiMessageCircle,
     },
   ];
 
@@ -48,18 +53,20 @@ const HomeBusinessSection: React.FC = () => {
     <Box as="section" px={0} py={{ base: 12, md: 18 }}>
       <Container maxW="1200px">
         <Box
-          borderWidth="1px"
-          borderColor={borderColor}
-          borderRadius="28px"
-          bg={surfaceBg}
-          p={{ base: 6, md: 10 }}
-          boxShadow={surfaceShadow}
+          borderWidth="0"
+          borderRadius="0"
+          bg="transparent"
+          p={{ base: 0, md: 0 }}
+          boxShadow="none"
         >
           <Stack spacing={{ base: 6, md: 10 }}>
-            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 6, md: 10 }} alignItems="center">
-              <Stack spacing={4} align="flex-start">
+            <Stack
+              direction={{ base: "column", md: "row" }}
+              spacing={{ base: 6, md: 10 }}
+              align={{ base: "flex-start", md: "center" }}
+            >
+              <Stack spacing={4} align="flex-start" flex={{ base: "none", md: 1.2 }}>
                 <HStack spacing={2}>
-                  <Box w={2} h={2} borderRadius="full" bg={badgeColor} />
                   <Text fontSize="xs" textTransform="uppercase" letterSpacing="0.14em" color={badgeColor} bg={badgeBg} px={2.5} py={1} borderRadius="full">
                     Партнёрство для компаний
                   </Text>
@@ -68,8 +75,8 @@ const HomeBusinessSection: React.FC = () => {
                   AIFFA помогает нанимать быстрее и точнее
                 </Heading>
                 <Text color={textColor} fontSize={{ base: "md", md: "lg" }} lineHeight="1.7">
-                  Мы превращаем практику в прозрачные метрики: видно, кто решает, как растёт и
-                  насколько стабилен. Вы получаете кандидатов с живым кодом, а не с обещаниями.
+                  Подключите реальную практику и получите поток кандидатов с живым кодом и понятными метриками.
+                  Видно, кто решает, как растёт и насколько стабилен — без догадок и долгих тестов.
                 </Text>
                 <AppLink
                   to="/partners"
@@ -79,42 +86,36 @@ const HomeBusinessSection: React.FC = () => {
                   alignItems="center"
                   gap={2}
                 >
-                  Перейти в раздел "Партнёрство"
+                  Стать партнёром
                   <Box as="span" aria-hidden>
                     →
                   </Box>
                 </AppLink>
               </Stack>
 
-              <Box w="full" maxW={{ base: "420px", md: "520px" }} ml={{ base: 0, md: "auto" }}>
+              <Box
+                w="full"
+                maxW={{ base: "420px", md: "520px" }}
+                ml={{ base: 0, md: "auto" }}
+                flex={{ base: "none", md: 1 }}
+              >
                 <PartnersLottieIcon />
               </Box>
-            </SimpleGrid>
+            </Stack>
 
-            <SimpleGrid minChildWidth={{ base: "260px", md: "280px" }} spacing={4} w="full">
-              {highlights.map((item) => (
-                <Box
-                  key={item.title}
-                  borderWidth="1px"
-                  borderColor={borderColor}
-                  borderRadius="xl"
-                  bg={cardBg}
-                  p={{ base: 4, md: 5 }}
-                  boxShadow={cardShadow}
-                >
+            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} w="full">
+              {highlights.map((item, idx) => (
+                <Box key={item.title}>
                   <HStack spacing={3} align="flex-start">
                     <Box
                       w="36px"
                       h="36px"
                       borderRadius="lg"
-                      bg={iconBg}
-                      color={iconColor}
+                      color={iconColors[idx % iconColors.length] ?? iconColor}
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                       flexShrink={0}
-                      borderWidth="1px"
-                      borderColor={borderColor}
                     >
                       <Icon as={item.icon} boxSize={5} aria-hidden />
                     </Box>

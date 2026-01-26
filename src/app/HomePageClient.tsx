@@ -1,12 +1,12 @@
 "use client";
 
-import { Box } from "@chakra-ui/react";
 import HeroSection from "@/widgets/HeroSection";
-import HomeHowItWorksSection from "@/widgets/HomeHowItWorksSection";
-import HomeTrustedTeamsSection from "@/widgets/HomeTrustedTeamsSection";
-import HomeProgressMechanicsSection from "@/widgets/HomeProgressMechanicsSection";
-import HomeBusinessSection from "@/widgets/HomeBusinessSection";
+import HomeBusinessSection from "@/widgets/Home/HomeBusinessSection";
+import HomeHowItWorksSection from "@/widgets/Home/HomeHowItWorksSection";
+import HomeProgressMechanicsSection from "@/widgets/Home/HomeProgressMechanicsSection";
+import HomeTrustedTeamsSection from "@/widgets/Home/HomeTrustedTeamsSection";
 import StartCTASection from "@/widgets/StartCTASection";
+import { Box } from "@chakra-ui/react";
 
 const HomePageClient = () => {
   return (

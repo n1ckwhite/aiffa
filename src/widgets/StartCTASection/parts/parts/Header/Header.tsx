@@ -11,10 +11,10 @@ const Header: React.FC<HeaderProps> = () => {
         <Box>
             <PersonLottieIcon />
         </Box>
-      <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="bold" color={titleColor}>
+      <Text id="start-cta-title" fontSize={{ base: '2xl', md: '3xl' }} fontWeight="bold" color={titleColor}>
         Начинайте сейчас
       </Text>
-      <Text fontSize={{ base: 'md', md: 'lg' }} color={textColor} lineHeight="1.6">
+      <Text id="start-cta-desc" fontSize={{ base: 'md', md: 'lg' }} color={textColor} lineHeight="1.6">
         Выберите Weekly задачу и превратите усилия в измеримый результат. Здесь рост виден по действиям:
         решения, прогресс и практика складываются в сильный профиль. Подключайтесь к сообществу,
         делитесь материалами, задачами, статьями и проектами. Ваш вклад усиливает других и ускоряет

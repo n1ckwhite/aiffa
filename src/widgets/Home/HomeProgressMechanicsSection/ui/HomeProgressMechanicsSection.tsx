@@ -12,11 +12,9 @@ import {
   VStack,
   useColorMode,
   useColorModeValue,
-  usePrefersReducedMotion,
 } from "@chakra-ui/react";
-import { FiAward, FiBriefcase, FiCheckCircle, FiEdit3, FiTarget, FiTrendingUp, FiUsers } from "react-icons/fi";
+import { FiBriefcase, FiCheckCircle, FiEdit3, FiTarget, FiTrendingUp, FiUsers } from "react-icons/fi";
 import { FaBookOpen, FaCalendarCheck, FaCircleCheck, FaListCheck, FaMessage } from "react-icons/fa6";
-import { AppButtonLink, AppLink } from "@/shared/ui/AppLink";
 import { BusinessTeamLottieIcon } from "@/shared/icons/components-icon";
 import { CompactAchievement } from "@/widgets/Profile/ProfileScreen/ui/parts/CompactAchievement/CompactAchievement";
 

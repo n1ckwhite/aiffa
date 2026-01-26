@@ -57,7 +57,9 @@ export const StatModePanel: React.FC<StatModePanelProps> = ({ title, description
             p={0}
             display="grid"
             gap={{ base: 4, md: 5 }}
-            gridTemplateColumns={isArticlesGrid ? { base: "1fr", md: "repeat(2, minmax(0, 1fr))" } : "1fr"}
+            gridTemplateColumns={
+              isArticlesGrid ? { base: "1fr", md: "repeat(2, minmax(0, 1fr))", xl: "repeat(2, minmax(0, 1fr))" } : "1fr"
+            }
           >
             {vmItems.map((vm) => (
               <RenderStatModePanelItem

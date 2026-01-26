@@ -234,7 +234,15 @@ const HomeProgressMechanicsSection: React.FC = () => {
           </Stack>
 
           <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 6, md: 8 }} alignItems="stretch">
-            <Stack spacing={5} h="full" as="ul" m={0} p={0} listStyleType="none">
+            <Stack
+              spacing={4}
+              h="full"
+              as="ul"
+              m={0}
+              p={0}
+              listStyleType="none"
+              align="flex-start"
+            >
               {progressItems.map((item) => (
                 <HStack key={item.id} spacing={4} align="flex-start" as="li">
                   <Box
@@ -261,11 +269,28 @@ const HomeProgressMechanicsSection: React.FC = () => {
                 </HStack>
               ))}
 
-              <Box>
-                <Text fontSize="sm" fontWeight="bold" color={accentLabel} letterSpacing="0.14em" textTransform="uppercase" mb={2}>
+              <Box textAlign={{ base: "center", md: "left" }} margin={{ base: "0 auto", md: "0" }}>
+                <Text
+                  fontSize="sm"
+                  fontWeight="bold"
+                  color={accentLabel}
+                  letterSpacing="0.14em"
+                  textTransform="uppercase"
+                  mb={2}
+                  w="full"
+                  textAlign={{ base: "center", md: "left" }}
+                >
                   Примеры достижений
                 </Text>
-                <HStack as="ul" spacing={2} flexWrap="wrap" m={0} p={0} listStyleType="none">
+                <HStack
+                  as="ul"
+                  spacing={2}
+                  flexWrap="wrap"
+                  m={0}
+                  p={0}
+                  listStyleType="none"
+                  justify={{ base: "center", md: "flex-start" }}
+                >
                   {achievements.map((item) => (
                     <Box as="li" key={item.id}>
                       <CompactAchievement item={item} />

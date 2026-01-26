@@ -23,6 +23,7 @@ const ForSessionsLottieIcon: React.FC = () => {
           height={224}
           sizes="438px"
           priority
+          fetchPriority="high"
         />
       }
     />

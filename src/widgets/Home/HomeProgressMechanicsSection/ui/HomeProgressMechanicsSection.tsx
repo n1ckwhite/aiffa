@@ -216,42 +216,36 @@ const HomeProgressMechanicsSection: React.FC = () => {
           </Stack>
 
           <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 6, md: 8 }} alignItems="stretch">
-            <Stack
-              spacing={4}
-              h="full"
-              as="ul"
-              m={0}
-              p={0}
-              listStyleType="none"
-              align="flex-start"
-            >
-              {progressItems.map((item) => (
-                <HStack key={item.id} spacing={4} align="flex-start" as="li">
-                  <Box
-                    w="44px"
-                    h="44px"
-                    borderRadius="xl"
-                    bg={isDark ? item.accent.bgDark : item.accent.bgLight}
-                    color={isDark ? item.accent.fgDark : item.accent.fgLight}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    flexShrink={0}
-                  >
-                    <Icon as={item.icon} boxSize={5} aria-hidden="true" />
-                  </Box>
-                  <Box>
-                    <Text fontWeight="bold" color={titleColor}>
-                      {item.title}
-                    </Text>
-                    <Text fontSize="sm" color={textColor} lineHeight="1.7">
-                      {item.desc}
-                    </Text>
-                  </Box>
-                </HStack>
-              ))}
+            <Stack spacing={4} h="full" align="flex-start">
+              <Stack as="ul" m={0} p={0} listStyleType="none" spacing={4} w="full">
+                {progressItems.map((item) => (
+                  <HStack key={item.id} spacing={4} align="flex-start" as="li">
+                    <Box
+                      w="44px"
+                      h="44px"
+                      borderRadius="xl"
+                      bg={isDark ? item.accent.bgDark : item.accent.bgLight}
+                      color={isDark ? item.accent.fgDark : item.accent.fgLight}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexShrink={0}
+                    >
+                      <Icon as={item.icon} boxSize={5} aria-hidden="true" />
+                    </Box>
+                    <Box>
+                      <Text fontWeight="bold" color={titleColor}>
+                        {item.title}
+                      </Text>
+                      <Text fontSize="sm" color={textColor} lineHeight="1.7">
+                        {item.desc}
+                      </Text>
+                    </Box>
+                  </HStack>
+                ))}
+              </Stack>
 
-              <Box textAlign={{ base: "center", md: "left" }} margin={{ base: "0 auto", md: "0" }}>
+              <Box textAlign={{ base: "center", md: "left" }} margin={{ base: "0 auto", md: "0" }} w="full">
                 <Text
                   fontSize="sm"
                   fontWeight="bold"

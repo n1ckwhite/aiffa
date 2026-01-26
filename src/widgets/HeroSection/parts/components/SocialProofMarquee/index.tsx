@@ -5,10 +5,12 @@ import { useSocialProofMarqueeColors } from "./colors";
 import type { SocialProofMarqueeProps } from "./types";
 import MarqueeRow from "./parts/MarqueeRow/MarqueeRow";
 import StaticList from "./parts/StaticList/StaticList";
+import { useMarqueeHoverPause } from "./hooks/useMarqueeHoverPause";
 
 const SocialProofMarquee: React.FC<SocialProofMarqueeProps> = ({ items }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
   const colors = useSocialProofMarqueeColors();
+  const { isPaused, handleMouseEnter, handleMouseLeave } = useMarqueeHoverPause();
 
   if (prefersReducedMotion) {
     return <StaticList items={items} colors={colors} />;
@@ -17,19 +19,21 @@ const SocialProofMarquee: React.FC<SocialProofMarqueeProps> = ({ items }) => {
   return (
     <Box
       w="full"
-      maxW={{ base: "280px", sm: "520px", md: "720px", lg: "900px" }}
+      maxW={{ base: "280", sm: "520px", md: "720px", lg: "900px" }}
       px={{ base: 2, md: 0 }}
       mx="auto"
       pt={1}
       overflow="hidden"
       position="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       sx={{
         maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
         WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
       }}
       aria-label="Факты о платформе"
     >
-      <Box display="flex" w="max-content" animation={`${marquee} 30s linear infinite`}>
+      <Box display="flex" w="max-content" animation={`${marquee} 30s linear infinite`} style={{ animationPlayState: isPaused ? "paused" : "running" }}>
         <MarqueeRow items={items} rowKey="a" colors={colors} />
         <MarqueeRow items={items} rowKey="b" colors={colors} />
       </Box>

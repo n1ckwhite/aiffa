@@ -51,7 +51,7 @@ export const BlogArticlesSection: React.FC<BlogArticlesSectionProps> = ({
 
       <SimpleGrid
         as="ul"
-        minChildWidth={{ base: "100%", sm: "360px" }}
+        columns={{ base: 1, md: 2, xl: 3 }}
         spacing={{ base: 6, md: 7 }}
         listStyleType="none"
         m={0}

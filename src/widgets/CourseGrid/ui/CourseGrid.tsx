@@ -275,7 +275,7 @@ const CourseGrid: React.FC<CourseGridProps> = ({ category = 'all', showHeader = 
             <ResultsEmptyState colors={theme} query={rawQueryFromUrl} variant="search" allItemsLabel="материалы" />
           ) : (
             <SimpleGrid
-              minChildWidth={{ base: "100%", md: "360px", xl: "384px" }}
+              columns={{ base: 1, md: 2, xl: 3 }}
               spacing={{ base: 5, md: 6 }}
               w="full"
               minW={0}

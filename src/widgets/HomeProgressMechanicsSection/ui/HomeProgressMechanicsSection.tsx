@@ -142,29 +142,11 @@ const achievements = [
 const HomeProgressMechanicsSection: React.FC = () => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
-  const prefersReducedMotion = usePrefersReducedMotion();
 
   const titleColor = useColorModeValue("gray.900", "whiteAlpha.900");
   const textColor = useColorModeValue("gray.600", "gray.300");
-  const cardBg = useColorModeValue("white", "whiteAlpha.100");
-  const borderColor = useColorModeValue("gray.200", "whiteAlpha.200");
-  const borderHoverColor = useColorModeValue("gray.300", "whiteAlpha.300");
 
-  const baseShadow = useColorModeValue("0 1px 0 rgba(16, 24, 40, 0.04)", "0 1px 0 rgba(0, 0, 0, 0.20)");
-  const hoverShadow = useColorModeValue("0 16px 40px rgba(16, 24, 40, 0.12)", "0 20px 60px rgba(0, 0, 0, 0.45)");
   const accentLabel = useColorModeValue("gray.700", "whiteAlpha.900");
-  const chipBg = useColorModeValue("white", "whiteAlpha.100");
-  const chipText = useColorModeValue("gray.800", "whiteAlpha.900");
-  const ghostBg = useColorModeValue("blue.50", "rgba(59,130,246,0.18)");
-  const panelBg = useColorModeValue("rgba(239,246,255,0.75)", "rgba(30, 41, 59, 0.85)");
-  const ctaSecondaryBg = useColorModeValue("white", "whiteAlpha.100");
-  const ctaSecondaryBorder = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
-  const ctaSecondaryText = useColorModeValue("gray.800", "whiteAlpha.900");
-  const ctaSecondaryHover = useColorModeValue("blackAlpha.50", "whiteAlpha.200");
-  const panelGlow = useColorModeValue(
-    "radial-gradient(420px 180px at 20% 0%, rgba(59,130,246,0.10), transparent 60%), radial-gradient(420px 180px at 90% 20%, rgba(16,185,129,0.10), transparent 60%)",
-    "radial-gradient(420px 180px at 20% 0%, rgba(96,165,250,0.14), transparent 60%), radial-gradient(420px 180px at 90% 20%, rgba(52,211,153,0.12), transparent 60%)"
-  );
   const tone = {
     blue: {
       bg: useColorModeValue("blue.50", "rgba(59,130,246,0.18)"),
@@ -300,7 +282,7 @@ const HomeProgressMechanicsSection: React.FC = () => {
               </Box>
             </Stack>
 
-            <Stack spacing={4} h="full" justify="space-between">
+            <Stack spacing={4} h="full" justify="space-between" mt={{ base: 6, md: 0 }}>
               <Stack spacing={3}>
                 <Text fontSize="xs" fontWeight="bold" letterSpacing="0.16em" textTransform="uppercase" color={accentLabel}>
                   Прогресс в профиле

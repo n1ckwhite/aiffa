@@ -9,9 +9,6 @@ const HeroSection: React.FC = () => {
   const {
     primaryTextColor,
     secondaryTextColor,
-    accentColor,
-    pillBorderColor,
-    pillHoverBg,
     bulletPalettes,
   } = useHeroColors();
 
@@ -32,7 +29,7 @@ const HeroSection: React.FC = () => {
             <Text fontSize={{ base: "sm", sm: "md", md: "lg" }} fontWeight="semibold" color={primaryTextColor} lineHeight={1.5}>
               Люди, которые делают AIFFA лучше каждый день.
             </Text>
-            <Text fontSize="sm" color={secondaryTextColor} lineHeight={1.9} maxW={{ base: "full", sm: "420px", md: "520px" }}>
+            <Text fontSize="sm" color={secondaryTextColor} lineHeight={1.9} maxW="720px">
               AIFFA — это экосистема, которую создают авторы материалов и задач недели, мейнтейнеры проектов, авторы статей, участники хакатонов и те, кто поддерживает идею. Здесь можно найти людей, с которыми вы будете расти, запускать проекты и усиливать комьюнити.
             </Text>
             <Stack as="ul" aria-label="Чем занимаются создатели AIFFA" direction="column" spacing={{ base: 3, md: 5 }} pt={3} w="full" textAlign="left">

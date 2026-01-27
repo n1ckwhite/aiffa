@@ -12,14 +12,12 @@ const HeroSection: React.FC = () => {
     accentColor,
     pillBorderColor,
     pillHoverBg,
-    cardBgGradient,
-    cardBorderColor,
     bulletPalettes,
   } = useHeroColors();
 
   return (
     <Box as="section" aria-label="Создатели AIFFA">
-      <Box position="relative" overflow="hidden" bgGradient={cardBgGradient} borderRadius="3xl" borderWidth="1px" borderColor={cardBorderColor} px={{ base: 4, md: 7 }} py={{ base: 5, md: 7 }}>
+      <Box position="relative" overflow="hidden"  px={{ base: 4, md: 7 }} py={{ base: 5, md: 7 }}>
 
         <Stack direction={{ base: "column", xl: "row" }} spacing={{ base: 5, md: 8 }} align={{ base: "center", xl: "center" }} position="relative" zIndex={1}>
           <VStack align={{ base: "center", xl: "flex-start" }} spacing={3} flex={1} textAlign={{ base: "center", xl: "left" }}>
@@ -37,7 +35,7 @@ const HeroSection: React.FC = () => {
             <Text fontSize="sm" color={secondaryTextColor} lineHeight={1.9} maxW={{ base: "full", sm: "420px", md: "520px" }}>
               AIFFA — это экосистема, которую создают авторы материалов и задач недели, мейнтейнеры проектов, авторы статей, участники хакатонов и те, кто поддерживает идею. Здесь можно найти людей, с которыми вы будете расти, запускать проекты и усиливать комьюнити.
             </Text>
-            <Stack as="ul" aria-label="Чем занимаются создатели AIFFA" direction="column" spacing={{ base: 3, md: 4 }} pt={2} w="full" textAlign="left">
+            <Stack as="ul" aria-label="Чем занимаются создатели AIFFA" direction="column" spacing={{ base: 3, md: 5 }} pt={3} w="full" textAlign="left">
               {heroBullets.map((bullet: HeroBullet) => {
                 const palette = bulletPalettes[bullet.paletteIndex];
                 return (
@@ -46,21 +44,7 @@ const HeroSection: React.FC = () => {
                     as="li"
                     spacing={3}
                     align="flex-start"
-                    bg={palette.pillBg}
-                    borderRadius="xl"
-                    borderWidth="1px"
-                    borderColor={pillBorderColor}
-                    px={3.5}
-                    py={3}
                     w="full"
-                    boxShadow="sm"
-                    transition="background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease"
-                    _hover={{
-                      bg: pillHoverBg,
-                      boxShadow: "md",
-                      borderColor: accentColor,
-                      transform: "translateY(-1px)",
-                    }}
                   >
                     <Box
                       w={{ base: 8, md: 9 }}

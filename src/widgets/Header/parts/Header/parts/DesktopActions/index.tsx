@@ -1,6 +1,6 @@
 import React from 'react';
-import { HStack, Text, Tooltip, Icon } from '@chakra-ui/react';
-import { FaBookOpen } from 'react-icons/fa';
+import { HStack, Text, Tooltip, Icon, Box } from '@chakra-ui/react';
+import { FaBookOpen, FaHeart } from 'react-icons/fa';
 import { AppLink } from '@/shared/ui/AppLink';
 import ThemeToggleButton from '../../../ThemeToggleButton';
 import type { DesktopActionsProps } from './types';
@@ -8,6 +8,7 @@ import { useDesktopActionsColors } from './colors/useDeskopActionsColors';
 
 export const DesktopActions: React.FC<DesktopActionsProps> = ({
   hoverBg,
+  onDonate,
   setIsMobileMenuOpen,
 }) => {
   const { fillIcon } = useDesktopActionsColors();
@@ -36,6 +37,28 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
             Материалы
           </Text>
         </AppLink>
+      </Tooltip>
+
+      <Tooltip label="Поддержать проект" openDelay={250} hasArrow>
+        <Box
+          as="button"
+          type="button"
+          onClick={onDonate}
+          aria-label="Поддержать проект"
+          _hover={{ bg: hoverBg }}
+          px={2}
+          py={1.5}
+          borderRadius="md"
+          display="inline-flex"
+          alignItems="center"
+          fontSize="sm"
+          fontWeight="semibold"
+        >
+          <Icon as={FaHeart} boxSize={4} aria-hidden="true" color={fillIcon} />
+          <Text ml={2} display="inline">
+            Поддержать
+          </Text>
+        </Box>
       </Tooltip>
 
       <ThemeToggleButton />

@@ -2,9 +2,13 @@ import React from 'react';
 import { Box, Container, Heading, Icon, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import { useHomeAdvantagesColors } from '../colors/useHomeAdvantagesColors';
 import { advantagesItems } from '../data/advantages';
+import { cardFadeInUp, iconScaleIn } from '../animations';
+
+const CARD_ANIMATION_DURATION = 0.4;
+const STAGGER_DELAY = 0.08;
 
 const HomeAdvantagesSection: React.FC = () => {
-  const { titleColor, descColor, cardBg, cardBorder, iconBg, iconColor } = useHomeAdvantagesColors();
+  const { titleColor, descColor, cardBg, cardBorder, iconColorsByKey } = useHomeAdvantagesColors();
 
   return (
     <Box
@@ -33,39 +37,51 @@ const HomeAdvantagesSection: React.FC = () => {
             maxW="880px"
             mx="auto"
           >
-            {advantagesItems.map((item, idx) => (
-              <Box
-                key={idx}
-                bg={cardBg}
-                borderWidth="1px"
-                borderColor={cardBorder}
-                borderRadius="xl"
-                p={{ base: 4, md: 5 }}
-                _hover={{ borderColor: 'blue.200' }}
-                transition="border-color 0.2s"
-              >
-                <VStack align="stretch" spacing={2} textAlign="left">
-                  <Box
-                    bg={iconBg}
-                    color={iconColor}
-                    borderRadius="lg"
-                    p={2.5}
-                    w="fit-content"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <Icon as={item.icon} boxSize={5} aria-hidden />
-                  </Box>
-                  <Text fontWeight="semibold" color={titleColor} fontSize="md">
-                    {item.title}
-                  </Text>
-                  <Text fontSize="sm" color={descColor} lineHeight="1.5">
-                    {item.description}
-                  </Text>
-                </VStack>
-              </Box>
-            ))}
+            {advantagesItems.map((item, idx) => {
+              const iconColors = iconColorsByKey[item.iconColorKey];
+              return (
+                <Box
+                  key={idx}
+                  role="group"
+                  bg={cardBg}
+                  borderWidth="1px"
+                  borderColor={cardBorder}
+                  borderRadius="xl"
+                  p={{ base: 4, md: 5 }}
+                  transition="border-color 0.2s, transform 0.2s"
+                  _hover={{ transform: 'translateY(-2px)', borderColor: 'blue.200' }}
+                  sx={{
+                    animation: `${cardFadeInUp} ${CARD_ANIMATION_DURATION}s ease-out ${idx * STAGGER_DELAY}s both`,
+                  }}
+                >
+                  <VStack align="stretch" spacing={2} textAlign="left">
+                    <Box
+                      bg={iconColors.bg}
+                      color={iconColors.color}
+                      borderRadius="lg"
+                      p={2.5}
+                      w="fit-content"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      transition="transform 0.2s"
+                      _groupHover={{ transform: 'scale(1.05)' }}
+                      sx={{
+                        animation: `${iconScaleIn} 0.35s ease-out ${idx * STAGGER_DELAY + 0.05}s both`,
+                      }}
+                    >
+                      <Icon as={item.icon} boxSize={5} aria-hidden />
+                    </Box>
+                    <Text fontWeight="semibold" color={titleColor} fontSize="md">
+                      {item.title}
+                    </Text>
+                    <Text fontSize="sm" color={descColor} lineHeight="1.5">
+                      {item.description}
+                    </Text>
+                  </VStack>
+                </Box>
+              );
+            })}
           </SimpleGrid>
         </VStack>
       </Container>

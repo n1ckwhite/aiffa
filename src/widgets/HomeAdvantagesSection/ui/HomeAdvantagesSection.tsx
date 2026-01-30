@@ -15,11 +15,10 @@ const HomeAdvantagesSection: React.FC = () => {
       as="section"
       bg="transparent"
       py={{ base: 10, md: 14 }}
-      px={4}
       aria-labelledby="advantages-title"
     >
       <Container maxW="1200px">
-        <VStack spacing={{ base: 8, md: 10 }} align="stretch" w="full">
+        <VStack spacing="4" align="stretch" w="full">
           <Heading
             id="advantages-title"
             as="h2"
@@ -30,6 +29,17 @@ const HomeAdvantagesSection: React.FC = () => {
           >
             Преимущества AIFFA
           </Heading>
+          <Text
+            as="p"
+            color={descColor}
+            textAlign="center"
+            fontSize={{ base: 'sm', md: 'md' }}
+            lineHeight="1.6"
+            maxW="640px"
+            mx="auto"
+          >
+            Короткие блоки по ключевым темам фронтенда: повторяйте базу, закрывайте пробелы и готовьтесь к собеседованиям без лишней воды.
+          </Text>
           <SimpleGrid
             columns={{ base: 1, sm: 2 }}
             spacing={{ base: 4, md: 6 }}

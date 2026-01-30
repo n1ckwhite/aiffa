@@ -5,6 +5,7 @@ import { heroContent } from './data/heroContent';
 import HeroHeader from './components/HeroHeader';
 import HeroDescription from './components/HeroDescription';
 import HeroActions from './components/HeroActions';
+import { PeopleLottieIcon } from '@/shared/icons/components-icon';
 
 const HeroSection: React.FC = () => {
 
@@ -33,6 +34,8 @@ const HeroSection: React.FC = () => {
             />
 
             <HeroDescription descriptionId="homepage-hero-description" description={description} textColor={textColor} />
+
+            <PeopleLottieIcon />
 
             <HeroActions actions={actions} />
 

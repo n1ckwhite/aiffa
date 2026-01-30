@@ -23,11 +23,9 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({ overline, titleLines, titleId, 
       lineHeight="1.05"
       letterSpacing="-0.03em"
     >
-      {titleLines.map((line) => (
-        <Box as="span" display="block" key={line}>
-          {line}
+        <Box as="span" display="block">
+        Материалы для собеседований.
         </Box>
-      ))}
     </Text>
   </VStack>
 );

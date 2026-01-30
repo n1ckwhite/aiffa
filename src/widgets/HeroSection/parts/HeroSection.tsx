@@ -32,7 +32,6 @@ const HeroSection: React.FC = () => {
               mutedColor={mutedColor}
               titleColor={titleColor}
             />
-
             <HeroDescription descriptionId="homepage-hero-description" description={description} textColor={textColor} />
 
             <PeopleLottieIcon />

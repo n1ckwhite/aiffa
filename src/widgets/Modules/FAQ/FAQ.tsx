@@ -13,7 +13,6 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
   const key = variant ?? 'materials';
   const { items: list, title: defaultHeading } = modulesFaqConfig[key];
   const heading = title || defaultHeading;
-  const supportVariant = key === 'blog' ? 'blog' : 'modules';
   const sectionTitleId = getFaqSectionTitleId(key);
 
   const { openIdx, toggleIdx } = useModulesFaqController({
@@ -130,7 +129,7 @@ const FAQ: React.FC<ModulesFAQProps> = ({ title, variant, showSupportBlock = tru
             })}
           </VStack>
         </Box>
-        {showSupportBlock && <SupportBlock variant={supportVariant} />}
+        {showSupportBlock && <SupportBlock variant="modules" />}
       </VStack>
   );
 };

@@ -40,7 +40,6 @@ export const ModuleProjectsView: React.FC<ModuleProjectsViewProps> = ({ mod, cur
               colors={colors as any}
             />
           )}
-          <ContributionInvite variant="projects" />
         </VStack>
       </Box>
     </Box>

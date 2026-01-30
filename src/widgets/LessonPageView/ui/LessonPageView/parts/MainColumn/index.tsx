@@ -3,7 +3,6 @@ import { Box } from '@chakra-ui/react';
 import MarkdownRenderer from 'shared/ui/MarkdownRenderer';
 import type { MainColumnProps } from './types';
 import { BreadcrumbHeader } from '../BreadcrumbHeader';
-import { FeedbackSection } from '../FeedbackSection';
 
 export const MainColumn: React.FC<MainColumnProps> = ({
   headerAnchorRef,
@@ -22,7 +21,6 @@ export const MainColumn: React.FC<MainColumnProps> = ({
           lessonTitle={lesson.title}
         />
         <MarkdownRenderer content={md} />
-        <FeedbackSection moduleId={mod.id} lessonId={lesson.id} />
       </Box>
     </Box>
   );

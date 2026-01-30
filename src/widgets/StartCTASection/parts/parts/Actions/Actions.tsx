@@ -1,5 +1,5 @@
 import React from 'react';
-import { HStack, Button, Link, Icon } from '@chakra-ui/react';
+import { HStack, Link } from '@chakra-ui/react';
 import { ArrowForwardIcon, ChatIcon } from '@chakra-ui/icons';
 import { useStartCTAColors } from '../../../colors/useStartCTAColors';
 import type { ActionsProps } from './types';
@@ -16,16 +16,12 @@ const Actions: React.FC<ActionsProps> = () => {
     communityBtnHoverBg,
     communityBtnBorder,
     communityBtnText,
-    creatorBtnBg,
-    creatorBtnHoverBg,
-    creatorBtnBorder,
-    creatorBtnText,
   } = useStartCTAColors();
 
   return (
     <HStack spacing={4} flexWrap="wrap" justify="center" w="full" maxW="720px">
       <AppButtonLink
-        to="/weekly"
+        to="/learn"
         bg={startBtnBg}
         color={startBtnText}
         borderWidth="1px"
@@ -36,10 +32,10 @@ const Actions: React.FC<ActionsProps> = () => {
         fontWeight="bold"
         _hover={{ bg: startBtnHoverBg }}
         w={{ base: '100%', sm: 'auto' }}
-        aria-label="Начать с weekly-задачи"
+        aria-label="Начать с материалов"
       >
         <ArrowForwardIcon boxSize="1em" mr={2} aria-hidden />
-        Начать с задачи
+        Начать с материалов
       </AppButtonLink>
       <Link
         href={telegramHref}

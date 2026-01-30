@@ -15,7 +15,7 @@ export const Panel: React.FC<PanelProps> = ({ isOpen, onClose, onSubmit, panelRe
             ref={panelRef as unknown as React.RefObject<HTMLDivElement>}
             role="dialog"
             aria-modal="true"
-            aria-label="Помогите улучшить экосистему"
+            aria-label="Обратная связь"
             bg={colors.cardBg}
             border="1px"
             borderColor={colors.borderColor}
@@ -32,7 +32,7 @@ export const Panel: React.FC<PanelProps> = ({ isOpen, onClose, onSubmit, panelRe
             <VStack spacing={3} align="stretch">
               <HStack justify="space-between">
                 <Text fontSize="md" fontWeight="bold" color={colors.titleColor}>
-                  Помогите улучшить экосистему
+                  Обратная связь
                 </Text>
                 <IconButton
                   aria-label="Закрыть"

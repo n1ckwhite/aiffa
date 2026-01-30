@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import { iconBounce } from '../../../../../CourseCard/animations';
+import { iconBounce } from 'entities/CourseCard/animations';
 import { useHeaderIconColors } from '../colors/useHeaderIconColors';
 import type { HeaderIconProps } from '../types/HeaderIcon.types';
 

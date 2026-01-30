@@ -1,5 +1,5 @@
 import { useColorModeValue } from '@chakra-ui/react';
-import { useAppColors } from '../../../../shared/theme/colors';
+import { useAppColors } from 'shared/theme/colors';
 
 export const useCourseCardColors = () => {
   const theme = useAppColors();

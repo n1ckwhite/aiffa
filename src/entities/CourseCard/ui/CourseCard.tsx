@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, useColorModeValue } from "@chakra-ui/react";
-import { type CourseCardProps } from './types/CourseCard.types';
+import { type CourseCardProps } from 'entities/CourseCard';
 import { useCourseCardColors } from './colors/useCourseCardColors';
 import { useCourseProgress } from './hooks/useCourseProgress';
 import { AppBoxLink } from 'shared/ui/AppLink';
@@ -8,7 +8,7 @@ import { buildCourseCardContainerProps } from "./helpers/buildCourseCardContaine
 import { useCourseCardHoverState } from "./hooks/useCourseCardHoverState";
 import { CourseCardContent } from "./parts";
 
-const CourseCard: React.FC<CourseCardProps> = React.memo(({
+const CourseCard: React.FC<CourseCardProps> = ({
   moduleId,
   title,
   description,
@@ -83,7 +83,7 @@ const CourseCard: React.FC<CourseCardProps> = React.memo(({
   }
 
   return <Box {...commonProps}>{content}</Box>;
-});
+}
 
 export default CourseCard;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, HStack, Text } from '@chakra-ui/react';
-import { ClockIcon } from '../../../../../CourseCard/icons';
+import { ClockIcon } from 'entities/CourseCard';
 import { useStudyTimePillColors } from '../colors/useStudyTimePillColors';
 import type { StudyTimePillProps } from '../types/StudyTimePill.types';
 

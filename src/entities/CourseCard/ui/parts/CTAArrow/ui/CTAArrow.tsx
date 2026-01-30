@@ -1,11 +1,9 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { arrowSlide } from '../../../../../CourseCard/animations';
-import { useCTAArrowColors } from '../colors/useCTAArrowColors';
 import type { CTAArrowProps } from '../types/CTAArrow.types';
 
 export const CTAArrow: React.FC<CTAArrowProps> = ({ isActive, accentColor, arrowHoverColor, hoverShadowColor }) => {
-  useCTAArrowColors();
   return (
   <Box position="absolute" bottom={5} right={5} bg="transparent" display="flex" alignItems="center" justifyContent="center" pointerEvents="none">
     <Box

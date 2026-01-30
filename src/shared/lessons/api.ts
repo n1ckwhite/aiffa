@@ -10,11 +10,6 @@ export const loadManifest = async (): Promise<CourseManifest> => {
   });
 };
 
-export const loadModules = async (): Promise<Module[]> => {
-  const m = await loadManifest();
-  return (m.modules || []) as Module[];
-};
-
 export const loadLesson = async (moduleId?: string, lessonId?: string): Promise<Lesson> => {
   const mod = await import('./manifest');
   return mod.findLesson(moduleId, lessonId) as Lesson;

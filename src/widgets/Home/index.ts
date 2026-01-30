@@ -1,4 +1,1 @@
-export * from './HomeHowItWorksSection';
-export * from './HomeTrustedTeamsSection';
-export * from './HomeProgressMechanicsSection';
-export * from './HomeBusinessSection';
+// Home widget exports — sections removed; use HeroSection and StartCTASection on the homepage.

@@ -64,7 +64,7 @@ const SupportBlock: React.FC<SupportBlockProps> = ({ borderColor, containerBg, a
           >
             <TelegramLink
               colors={colors}
-              label='Telegram'
+              label='Telegram-чат'
               ariaLabel='Редакция в Telegram (откроется в новой вкладке)'
             />
             <DonateButton />

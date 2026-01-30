@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import React from "react";
 import { cookies, headers } from "next/headers";
-import { ChakraRootProvider } from "../providers/ChakraRootProvider";
+import { ChakraRootProvider } from "@/providers/ChakraRootProvider";
 import MainLayout from "@/widgets/MainLayout";
 import { ViewportHeightFix } from "@/shared/ui/ViewportHeightFix/ViewportHeightFix";
 import { interFont } from "@/shared/fonts/inter";
-import "@/shared/ui/CodeExample/styles/hljs.css";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ?? "http://localhost:3000";

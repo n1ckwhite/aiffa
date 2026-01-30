@@ -21,7 +21,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { Pagination } from 'shared/ui/Pagination';
 import { ResultsEmptyState } from 'shared/ui/ResultsEmptyState';
 import { useAppColors } from 'shared/theme/colors';
-import { type CourseGridProps } from './types/CourseGrid.types';
+import { type CourseGridProps } from 'widgets/CourseGrid';
 import { HeaderBlock } from './parts';
 import { useCourseGridData } from './hooks/useCourseGridData';
 

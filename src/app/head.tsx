@@ -20,7 +20,9 @@ const Head = () => {
             "@context": "https://schema.org",
             "@type": "WebSite",
             url: SITE_URL,
-            name: "AIFFA — платформа для роста разработчиков",
+            name: "AIFFA — материалы для собеседований по фронтенду",
+            description:
+              "Материалы по фронтенду для подготовки к собеседованиям: ключевые темы, краткие конспекты и удобная структура.",
             potentialAction: {
               "@type": "SearchAction",
               target: `${SITE_URL}/search?q={search_term_string}`,
@@ -38,6 +40,8 @@ const Head = () => {
             "@type": "Organization",
             url: SITE_URL,
             name: "AIFFA",
+            description:
+              "Материалы по фронтенду для подготовки к собеседованиям.",
             logo: `${SITE_URL}/icons/icon.svg`,
           }),
         }}

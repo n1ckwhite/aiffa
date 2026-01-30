@@ -4,8 +4,9 @@ import { loadManifest } from "shared/lessons/api";
 import ModulesPageClient from "./ModulesPageClient";
 
 export const metadata: Metadata = {
-  title: "Материалы",
-  description: "Список материалов платформы AIFFA"
+  title: "Материалы для собеседований",
+  description:
+    "Подборка материалов по фронтенду для подготовки к собеседованиям: темы, уровни и удобная навигация."
 };
 
 const LearnRootRoute = async () => {

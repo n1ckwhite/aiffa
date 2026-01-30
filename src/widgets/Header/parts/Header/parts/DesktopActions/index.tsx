@@ -29,7 +29,7 @@ export const DesktopActions: React.FC<DesktopActionsProps> = ({
           <Icon as={FaBookOpen} boxSize={4} aria-hidden="true" color={fillIcon} />
           <Text
             ml={2}
-            display={{ base: "none", xl: "inline" }}
+            display="inline"
             fontSize="sm"
             fontWeight="semibold"
           >

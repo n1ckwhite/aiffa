@@ -8,9 +8,9 @@ export const heroContent = {
   actions: [
     {
       id: "primary",
-      label: "Решить первую задачу",
-      to: "/weekly",
-      ariaLabel: "Решить первую задачу",
+      label: "Начать с материалов",
+      to: "/learn",
+      ariaLabel: "Начать с материалов",
       kind: "primary",
     },
   ] satisfies HeroAction[],

@@ -9,7 +9,7 @@ export async function handleDonate(options: DonateOptions): Promise<void> {
     cardNumber = '2200 1545 4739 2810',
     cardHolderName = 'NIKITA KHIRYANOV',
     bankName = 'Альфа-Банк',
-    successDescription = 'Спасибо за поддержку! ❤️ Ваша помощь усиливает сообщество и ускоряет появление новых материалов. Пожалуйста, укажите свой GitHub в комментарии к переводу — так мы сможем отметить ваш вклад.',
+    successDescription = 'Спасибо за поддержку! ❤️ Мы делаем материалы для собеседований — ваша помощь помогает выпускать новые темы быстрее.',
     infoTitle = 'Реквизиты',
   } = options;
 

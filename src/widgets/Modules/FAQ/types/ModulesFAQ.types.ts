@@ -5,14 +5,6 @@ export type ModulesFaqItem = {
 
 export type ModulesFaqVariant =
   | 'materials'
-  | 'blog'
-  | 'tasks'
-  | 'xp'
-  | 'partners'
-  | 'hackathons'
-  | 'sessions'
-  | 'creators'
-  | 'home';
   
 export type ModulesFAQProps = {
   title?: string;

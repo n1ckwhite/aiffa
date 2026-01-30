@@ -4,8 +4,10 @@ import type { IconColorKey } from '../data/advantages';
 
 export const useHomeAdvantagesColors = () => {
   const theme = useAppColors();
-  const cardBg = useColorModeValue('white', 'whiteAlpha.50');
+  const cardBg = useColorModeValue('white', 'whiteAlpha.100');
   const cardBorder = useColorModeValue('blackAlpha.100', 'whiteAlpha.200');
+  const cardShadow = useColorModeValue('sm', '0 2px 8px rgba(0,0,0,0.15)');
+  const cardHoverShadow = useColorModeValue('md', '0 4px 16px rgba(0,0,0,0.2)');
 
   const blueBg = useColorModeValue('blue.50', 'whiteAlpha.200');
   const blueColor = useColorModeValue('blue.600', 'blue.300');
@@ -28,6 +30,8 @@ export const useHomeAdvantagesColors = () => {
     descColor: theme.descColor,
     cardBg,
     cardBorder,
+    cardShadow,
+    cardHoverShadow,
     iconColorsByKey,
   };
 };

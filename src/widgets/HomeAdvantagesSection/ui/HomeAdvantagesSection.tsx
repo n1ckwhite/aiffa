@@ -8,7 +8,7 @@ const CARD_ANIMATION_DURATION = 0.4;
 const STAGGER_DELAY = 0.08;
 
 const HomeAdvantagesSection: React.FC = () => {
-  const { titleColor, descColor, cardBg, cardBorder, iconColorsByKey } = useHomeAdvantagesColors();
+  const { titleColor, descColor, cardBg, cardBorder, cardShadow, cardHoverShadow, iconColorsByKey } = useHomeAdvantagesColors();
 
   return (
     <Box
@@ -58,8 +58,13 @@ const HomeAdvantagesSection: React.FC = () => {
                   borderColor={cardBorder}
                   borderRadius="xl"
                   p={{ base: 4, md: 5 }}
-                  transition="border-color 0.2s, transform 0.2s"
-                  _hover={{ transform: 'translateY(-2px)', borderColor: 'blue.200' }}
+                  boxShadow={cardShadow}
+                  transition="border-color 0.2s, transform 0.2s, box-shadow 0.2s"
+                  _hover={{
+                    transform: 'translateY(-2px)',
+                    borderColor: 'blue.200',
+                    boxShadow: cardHoverShadow,
+                  }}
                   sx={{
                     animation: `${cardFadeInUp} ${CARD_ANIMATION_DURATION}s ease-out ${idx * STAGGER_DELAY}s both`,
                   }}

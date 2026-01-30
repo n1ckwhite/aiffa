@@ -1,1 +1,0 @@
-export { default as BlogScreen } from "./parts/Screen/BlogScreen";

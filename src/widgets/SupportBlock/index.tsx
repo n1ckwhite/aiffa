@@ -41,7 +41,7 @@ const SupportBlock: React.FC<SupportBlockProps> = ({ borderColor, containerBg, a
           )}
           {variant === 'modules' && (
             <Text fontSize={{ base: 'sm', md: 'md' }} color={colors.descColor} lineHeight={1.8}>
-              Вопросы по материалам, правки и идеи — в Telegram.
+              Вопросы по материалам, уточнения и правки — в Telegram. Пишите, если нашли неточность, хотите подсказать источник или предложить тему для собеседований.
             </Text>
           )}
           {variant === 'blog' && (

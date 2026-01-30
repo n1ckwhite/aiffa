@@ -5,7 +5,6 @@ import { useSupportBlockColors } from './colors';
 import type { SupportBlockProps } from './types';
 import { IconBadge } from './parts/IconBadge';
 import { TelegramLink } from './parts/TelegramLink';
-import { HubLink } from './parts/HubLink';
 import { DonateButton } from './parts/DonateButton';
 
 const SupportBlock: React.FC<SupportBlockProps> = ({ borderColor, containerBg, accentScheme = 'blue', variant = 'modules' }) => {
@@ -42,7 +41,7 @@ const SupportBlock: React.FC<SupportBlockProps> = ({ borderColor, containerBg, a
           )}
           {variant === 'modules' && (
             <Text fontSize={{ base: 'sm', md: 'md' }} color={colors.descColor} lineHeight={1.8}>
-              Если по материалам, задачам что‑то непонятно — пишите в Telegram. Обсуждайте идеи и предлагайте улучшения в JS HUB — обратная связь помогает делать материалы лучше.
+              Вопросы по материалам, правки и идеи — в Telegram.
             </Text>
           )}
           {variant === 'blog' && (
@@ -65,15 +64,10 @@ const SupportBlock: React.FC<SupportBlockProps> = ({ borderColor, containerBg, a
           >
             <TelegramLink
               colors={colors}
-              label={variant === 'blog' ? 'Редакция в Telegram' : undefined}
-              ariaLabel={variant === 'blog' ? 'Редакция в Telegram (откроется в новой вкладке)' : undefined}
+              label='Telegram'
+              ariaLabel='Редакция в Telegram (откроется в новой вкладке)'
             />
-            <HubLink
-              colors={colors}
-              label={variant === 'blog' ? 'Предложить статью' : undefined}
-              ariaLabel={variant === 'blog' ? 'Предложить статью (откроется в новой вкладке)' : undefined}
-            />
-            {variant === 'weekly' && <DonateButton />}
+            <DonateButton />
           </Stack>
         </VStack>
       </Stack>

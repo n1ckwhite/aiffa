@@ -20,28 +20,6 @@ export const Community: React.FC<CommunityProps> = ({
       </Text>
       <VStack align="start" spacing={2}>
         <Link
-          href={telegramHref}
-          fontSize="sm"
-          color={colors.textColor}
-          _hover={{ color: colors.linkHover }}
-          transition="color 0.2s"
-          textAlign="left"
-          isExternal
-        >
-          JS HUB
-        </Link>
-        <Link
-          href={emailHref}
-          fontSize="sm"
-          color={colors.textColor}
-          _hover={{ color: colors.linkHover }}
-          transition="color 0.2s"
-          textAlign="left"
-          isExternal
-        >
-          Email поддержка
-        </Link>
-        <Link
           href={habrHref}
           fontSize="sm"
           color={colors.textColor}

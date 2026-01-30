@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, Text, VStack } from '@chakra-ui/react';
 import { useHeroColors } from '../colors/useHeroColors';
 import { heroContent } from './data/heroContent';
 import HeroHeader from './components/HeroHeader';
@@ -35,6 +35,16 @@ const HeroSection: React.FC = () => {
             <HeroDescription descriptionId="homepage-hero-description" description={description} textColor={textColor} />
 
             <PeopleLottieIcon />
+
+            <Text
+              fontSize={{ base: "sm", md: "md" }}
+              color={textColor}
+              lineHeight="1.6"
+              maxW={{ base: "520px", md: "720px" }}
+              mx="auto"
+            >
+              Короткий путь к собеседованию: без воды, только ключевые темы и формулировки.
+            </Text>
 
             <HeroActions actions={actions} />
 

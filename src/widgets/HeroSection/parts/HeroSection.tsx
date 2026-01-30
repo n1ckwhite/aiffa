@@ -24,7 +24,7 @@ const HeroSection: React.FC = () => {
     >
       <Box maxW="1200px" mx="auto">
         <VStack align="center">
-          <VStack spacing={{ base: 3, md: 5 }} textAlign="center">
+          <VStack spacing="4" textAlign="center">
             <HeroHeader
               overline={overline}
               titleLines={titleLines}

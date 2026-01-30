@@ -93,6 +93,18 @@ const HomeAdvantagesSection: React.FC = () => {
               );
             })}
           </SimpleGrid>
+          <Text
+            as="p"
+            color={descColor}
+            textAlign="center"
+            fontSize={{ base: 'sm', md: 'md' }}
+            lineHeight="1.6"
+            maxW="560px"
+            mx="auto"
+            pt={2}
+          >
+            Удобно читать в метро, в очереди или за чашкой кофе — короткие блоки, без воды, тихо по своей теме. Повторил базу, закрыл пробелы, пошёл дальше.
+          </Text>
         </VStack>
       </Container>
     </Box>

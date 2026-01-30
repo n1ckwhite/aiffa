@@ -17,7 +17,6 @@ const Footer: React.FC = () => {
       <Container maxW="1200px" pt={6} pb={3}>
         <SimpleGrid minChildWidth={{ base: "100%", sm: "240px" }} spacing={6} w="full">
           <Branding />
-          <Sections />
           <Support onDonate={handleDonate} />
           <Community
             telegramHref={telegramHref}

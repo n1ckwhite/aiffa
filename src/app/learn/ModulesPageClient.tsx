@@ -20,10 +20,8 @@ const ModulesPageClient = () => {
       </Box>
 
       <Box mt={{ base: 6, md: 8 }} mb={{ base: 10, md: 12 }}>
-        <ModulesRoadmapCta />
-      </Box>
-
       <CourseGrid category="all" showHeader={false} />
+      </Box>
       <ModulesFAQ />
     </Box>
   );

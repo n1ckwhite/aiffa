@@ -12,10 +12,6 @@ const HomePageClient = () => {
   return (
     <Box position="relative" overflow="hidden" bg="transparent">
       <HeroSection />
-      <HomeHowItWorksSection />
-      <HomeTrustedTeamsSection />
-      <HomeProgressMechanicsSection />
-      <HomeBusinessSection />
       <StartCTASection />
     </Box>
   );

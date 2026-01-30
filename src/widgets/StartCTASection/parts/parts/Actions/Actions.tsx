@@ -62,28 +62,6 @@ const Actions: React.FC<ActionsProps> = () => {
         <ChatIcon boxSize="1em" mr={2} aria-hidden />
         К сообществу
       </Link>
-      <AppButtonLink
-        to="/creators"
-        bg={creatorBtnBg}
-        color={creatorBtnText}
-        borderWidth="1px"
-        borderColor={creatorBtnBorder}
-        borderRadius="full"
-        px={{ base: 4, md: 6 }}
-        h={{ base: 12, md: 12 }}
-        fontWeight="bold"
-        _hover={{ bg: creatorBtnHoverBg }}
-        w={{ base: '100%', sm: 'auto' }}
-        aria-label="Открыть страницу создателей"
-      >
-        <Icon viewBox="0 0 24 24" boxSize="20px" mr={2} aria-hidden>
-          <path
-            fill="currentColor"
-            d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4Zm2 5V6a2 2 0 1 0-4 0v1h4Z"
-          />
-        </Icon>
-        Стать создателем
-      </AppButtonLink>
     </HStack>
   );
 };

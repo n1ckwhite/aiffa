@@ -94,18 +94,6 @@ export const HeaderCard: React.FC<HeaderCardProps> = ({ mod, projectsCount, proj
           <AppButtonLink to={`/learn/${mod.id}`} variant="outline" borderRadius="full">
             К материалам
           </AppButtonLink>
-          <Button
-            as="a"
-            href="https://github.com/n1ckwhite/JavaScript-Universe"
-            target="_blank"
-            rel="noopener noreferrer"
-            borderRadius="full"
-            bg="purple.200"
-            color="gray.900"
-            _hover={{ bg: 'purple.300' }}
-          >
-            Предложить проект
-          </Button>
         </Stack>
       </Box>
     </Box>

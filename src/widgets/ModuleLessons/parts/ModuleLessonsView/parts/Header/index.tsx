@@ -81,18 +81,6 @@ export const Header: React.FC<HeaderProps> = ({ mod, colors }) => {
           <AppButtonLink to="/learn" variant="outline" borderRadius="full">
             К материалам
           </AppButtonLink>
-          <Button
-            as="a"
-            href="https://github.com/n1ckwhite/JavaScript-Universe"
-            target="_blank"
-            rel="noopener noreferrer"
-            borderRadius="full"
-            bg="blue.500"
-            color="white"
-            _hover={{ bg: 'blue.600' }}
-          >
-            Предложить материал
-          </Button>
         </Stack>
       </Box>
     </Box>

@@ -13,12 +13,5 @@ export const heroContent = {
       ariaLabel: "Решить первую задачу",
       kind: "primary",
     },
-    {
-      id: "secondary",
-      label: "Построить роудмэп",
-      to: "/learn",
-      ariaLabel: "Построить роудмэп",
-      kind: "secondary",
-    },
   ] satisfies HeroAction[],
 };

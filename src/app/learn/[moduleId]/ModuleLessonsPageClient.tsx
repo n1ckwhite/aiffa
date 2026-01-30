@@ -1,8 +1,6 @@
 "use client";
 
-import React from "react";
 import { ModuleLessonsView } from "widgets/ModuleLessons";
-import ModuleLessonsSkeleton from "pages/ModuleLessonsPage/Skeleton";
 import type { Module } from "shared/lessons/manifest";
 import { useModuleLessonsPageClient } from "./hooks/useModuleLessonsPageClient";
 
@@ -19,8 +17,8 @@ const ModuleLessonsPageClient = ({ moduleId, initialMod, initialPage }: ModuleLe
     initialPage,
   });
 
-  if (isLoading || !mod) {
-    return <ModuleLessonsSkeleton />;
+  if (!mod) {
+    return null;
   }
 
   return (

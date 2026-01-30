@@ -9,19 +9,15 @@ import {
 } from "@chakra-ui/react";
 import { CacheProvider as EmotionCacheProvider } from "@emotion/react";
 import theme from "shared/theme/theme";
-import { UserProfileProvider } from "entities/user";
-import type { UserProfile } from "entities/user/model/types";
 
 type ChakraRootProviderProps = {
   children: React.ReactNode;
   cookies: string;
-  initialProfile: UserProfile;
 };
 
 export const ChakraRootProvider = ({
   children,
   cookies,
-  initialProfile
 }: ChakraRootProviderProps) => {
   const emotionCache = useEmotionCache();
 
@@ -57,9 +53,7 @@ export const ChakraRootProvider = ({
         theme={theme}
         colorModeManager={colorModeManager}
       >
-        <UserProfileProvider initialProfile={initialProfile}>
-          {children}
-        </UserProfileProvider>
+        {children}
       </ChakraProvider>
     </EmotionCacheProvider>
   );

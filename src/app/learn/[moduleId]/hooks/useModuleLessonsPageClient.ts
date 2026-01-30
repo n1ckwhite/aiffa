@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useMemo } from "react";
-import { useUserProfile } from "entities/user";
 import { useModuleLessonsLoad } from "widgets/ModuleLessons/hooks/useModuleLessonsLoad";
 import { UseModuleLessonsPageClientParams, UseModuleLessonsPageClientResult } from "./types";
 
@@ -10,13 +9,12 @@ export const useModuleLessonsPageClient = ({
   initialMod,
   initialPage,
 }: UseModuleLessonsPageClientParams): UseModuleLessonsPageClientResult => {
-  const { profile } = useUserProfile();
 
   const shouldLoadOnClient = !initialMod;
   const { mod: loadedMod, loading } = useModuleLessonsLoad(moduleId, shouldLoadOnClient);
   const mod = initialMod ?? loadedMod;
 
-  const solvedMap = useMemo(() => (profile as any)?.solvedTaskIds || {}, [profile]);
+  const solvedMap = useMemo(() => ({}), []);
 
   const currentPage = useMemo(() => {
     const n = Number(initialPage ?? 1);
@@ -33,7 +31,7 @@ export const useModuleLessonsPageClient = ({
   return {
     mod,
     isLoading,
-    solvedMap,
+    solvedMap: {},
     currentPage,
     getPageHref,
   };

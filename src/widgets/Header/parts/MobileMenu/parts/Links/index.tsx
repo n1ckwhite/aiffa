@@ -3,12 +3,10 @@ import { Button, HStack, Icon, Text, Tooltip, VStack } from '@chakra-ui/react';
 import type { MenuLinksProps } from './types';
 import { FaBookOpen, FaHeart, FaNewspaper, FaBriefcase, FaTelegram } from 'react-icons/fa';
 import { useDesktopActionsColors } from '../../../Header/parts/DesktopActions/colors/useDeskopActionsColors';
-import { useMobileMenuLogout } from './hooks/useMobileMenuLogout';
 import { AppLink } from 'shared/ui/AppLink';
 
 export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, onDonate }) => {
   const { fillIcon } = useDesktopActionsColors();
-  const handleLogout = useMobileMenuLogout({ onClose });
   return (
     <VStack gap={2} align="stretch">
       <Button variant="ghost" justifyContent="flex-start" _hover={{ bg: hoverBg }} px={1} py={2}>

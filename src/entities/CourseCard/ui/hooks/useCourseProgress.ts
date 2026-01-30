@@ -1,5 +1,4 @@
 import React from 'react';
-import { useUserProfile } from 'entities/user';
 import { loadManifest } from 'shared/lessons/api';
 
 type UseCourseProgressArgs = {
@@ -8,9 +7,6 @@ type UseCourseProgressArgs = {
 };
 
 export const useCourseProgress = ({ moduleId, lessonsCount }: UseCourseProgressArgs) => {
-  const { profile } = useUserProfile();
-  const solvedTaskIds = (profile?.solvedTaskIds || {}) as Record<string, true>;
-
   const [taskIdsByLessonId, setTaskIdsByLessonId] = React.useState<Record<string, string[]>>({});
 
   React.useEffect(() => {
@@ -55,7 +51,7 @@ export const useCourseProgress = ({ moduleId, lessonsCount }: UseCourseProgressA
 
       const isLessonCompleted = taskIds.every((taskId) => {
         const key = `${moduleId}/${lessonId}/${taskId}`;
-        return !!solvedTaskIds[key];
+        return false;
       });
 
       if (isLessonCompleted) {
@@ -67,7 +63,7 @@ export const useCourseProgress = ({ moduleId, lessonsCount }: UseCourseProgressA
       return completed;
     }
     return Math.min(completed, lessonsCount);
-  }, [moduleId, solvedTaskIds, lessonsCount, taskIdsByLessonId]);
+  }, [moduleId, lessonsCount, taskIdsByLessonId]);
 
   const hasProgress = completedLessonsCount > 0 && lessonsCount > 0;
 

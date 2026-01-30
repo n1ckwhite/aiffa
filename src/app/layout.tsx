@@ -3,9 +3,6 @@ import React from "react";
 import { cookies, headers } from "next/headers";
 import { ChakraRootProvider } from "../providers/ChakraRootProvider";
 import MainLayout from "@/widgets/MainLayout";
-import { PROFILE_COOKIE_KEY, DEFAULT_PROFILE } from "@/entities/user/model/constants";
-import type { UserProfile } from "@/entities/user/model/types";
-import { sanitizeProfileFromUnknown } from "@/entities/user/model/storage";
 import { ViewportHeightFix } from "@/shared/ui/ViewportHeightFix/ViewportHeightFix";
 import { interFont } from "@/shared/fonts/inter";
 import "@/shared/ui/CodeExample/styles/hljs.css";
@@ -60,22 +57,10 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
   const cookieHeader = headersList.get("cookie") ?? "";
   const cookieStore = await cookies();
 
-  let initialProfile: UserProfile = DEFAULT_PROFILE;
-  const profileCookie = cookieStore.get(PROFILE_COOKIE_KEY)?.value;
-  if (profileCookie) {
-    try {
-      const decoded = decodeURIComponent(profileCookie);
-      const parsed = JSON.parse(decoded);
-      initialProfile = sanitizeProfileFromUnknown(parsed);
-    } catch {
-      initialProfile = DEFAULT_PROFILE;
-    }
-  }
-
   return (
     <html lang="ru" suppressHydrationWarning>
       <body className={`${interFont.variable} ${interFont.className}`}>
-        <ChakraRootProvider cookies={cookieHeader} initialProfile={initialProfile}>
+        <ChakraRootProvider cookies={cookieHeader}>
           <ViewportHeightFix />
           <MainLayout>{children}</MainLayout>
         </ChakraRootProvider>

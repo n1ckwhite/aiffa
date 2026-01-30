@@ -17,7 +17,7 @@ const MobileMenu: React.FC<MobileMenuProps> = (props) => {
   } = props;
 
   const { colorMode } = useColorMode();
-  const { resultActiveBg, resultHoverBg, donateBg, donateHoverBg, scrollbarStyles, mobileMenuShadow } = useMobileMenuColors();
+  const { resultActiveBg, resultHoverBg, scrollbarStyles, mobileMenuShadow } = useMobileMenuColors();
 
   return (
     <Collapse
@@ -77,8 +77,6 @@ const MobileMenu: React.FC<MobileMenuProps> = (props) => {
           <MenuLinks
             hoverBg={hoverBg}
             onClose={onClose}
-            donateBg={donateBg}
-            donateHoverBg={donateHoverBg}
             onDonate={onDonate}
           />
         </VStack>

@@ -42,23 +42,6 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ hoverBg, onClose, onDonate
           </HStack>
         </AppLink>
       </Button>
-      <Tooltip label="Поддержать проект" openDelay={250} hasArrow>
-        <Button
-          variant="ghost"
-          justifyContent="flex-start"
-          _hover={{ bg: hoverBg }}
-          px={1}
-          py={2}
-          w="100%"
-          onClick={() => { onDonate(); onClose(); }}
-          aria-label="Поддержать проект"
-        >
-          <HStack spacing={3} align="center">
-            <Icon as={FaHeart} boxSize={4} aria-hidden="true" color={fillIcon} />
-            <Text>Поддержать проект</Text>
-          </HStack>
-        </Button>
-      </Tooltip>
     </VStack>
   );
 };

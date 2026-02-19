@@ -11,18 +11,6 @@ export const Support: React.FC<SupportProps> = ({ onDonate }) => {
         Поддержка
       </Text>
       <VStack align="start" spacing={2}>
-        <Box
-          as="button"
-          onClick={onDonate}
-          fontSize="sm"
-          color={colors.donateColor}
-          _hover={{ color: colors.donateColor, opacity: 0.9 }}
-          transition="color 0.2s"
-          textAlign="left"
-          fontWeight="semibold"
-        >
-          Поддержать проект
-        </Box>
         <Link
           href="https://t.me/iamceob1tch"
           fontSize="sm"

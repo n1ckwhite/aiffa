@@ -144,7 +144,6 @@ const Header: React.FC = React.memo(() => {
             <DesktopActions
               hoverBg={hoverBg}
               scrollTop={scrollTop}
-              onDonate={handleDonate}
               setIsMobileMenuOpen={setIsMobileMenuOpen}
               isMobileMenuOpen={isMobileMenuOpen}
             />
